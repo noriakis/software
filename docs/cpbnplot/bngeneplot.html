@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 bngeneplot | cpbnplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 bngeneplot | cpbnplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 <link rel="prev" href="bootstrap-based-inference.html"/>
 <link rel="next" href="bnpathplot.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -351,36 +351,45 @@ By default, the intersection of two directed network is shown with the number of
 <span id="cb16-6"><a href="bngeneplot.html#cb16-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T, <span class="at">pathDb =</span> <span class="st">&quot;reactome&quot;</span>, <span class="at">compareRefType =</span> <span class="st">&quot;intersection&quot;</span>,</span>
 <span id="cb16-7"><a href="bngeneplot.html#cb16-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> dep)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/geneplot_depmap-1.png" width="1920" /></p>
-<p>Additionally, we can plot the dependency scores of interested genes across the lineage by specifying <code>showLineage=TRUE</code>. We must provide metadata from <code>depmap::depmap_metadata()</code> to <code>depMeta</code>.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="bngeneplot.html#cb17-1" aria-hidden="true" tabindex="-1"></a>depMeta <span class="ot">=</span> depmap<span class="sc">::</span><span class="fu">depmap_metadata</span>()</span>
+<p>It can be the RNA interference based score.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="bngeneplot.html#cb17-1" aria-hidden="true" tabindex="-1"></a>rnai <span class="ot">=</span> depmap<span class="sc">::</span><span class="fu">depmap_rnai</span>()</span>
 <span id="cb17-2"><a href="bngeneplot.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
 <span id="cb17-3"><a href="bngeneplot.html#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
 <span id="cb17-4"><a href="bngeneplot.html#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb17-5"><a href="bngeneplot.html#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">10</span>, <span class="at">compareRef =</span> T,</span>
+<span id="cb17-5"><a href="bngeneplot.html#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="dv">3</span>, <span class="at">R =</span> <span class="dv">5</span>,<span class="at">compareRef =</span> T,</span>
 <span id="cb17-6"><a href="bngeneplot.html#cb17-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T, <span class="at">pathDb =</span> <span class="st">&quot;reactome&quot;</span>, <span class="at">compareRefType =</span> <span class="st">&quot;intersection&quot;</span>,</span>
-<span id="cb17-7"><a href="bngeneplot.html#cb17-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> dep, <span class="at">showLineage =</span> T, <span class="at">depMeta =</span> depMeta)</span></code></pre></div>
+<span id="cb17-7"><a href="bngeneplot.html#cb17-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> rnai, <span class="at">cellLineName =</span> <span class="st">&quot;UMUC3_URINARY_TRACT&quot;</span>)</span></code></pre></div>
+<p><img src="cpbnplot_doc_files/figure-html/geneplot_depmap_rnai-1.png" width="1920" /></p>
+<p>Additionally, we can plot the dependency scores of interested genes across the lineage by specifying <code>showLineage=TRUE</code>. We must provide metadata from <code>depmap::depmap_metadata()</code> to <code>depMeta</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="bngeneplot.html#cb18-1" aria-hidden="true" tabindex="-1"></a>depMeta <span class="ot">=</span> depmap<span class="sc">::</span><span class="fu">depmap_metadata</span>()</span>
+<span id="cb18-2"><a href="bngeneplot.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
+<span id="cb18-3"><a href="bngeneplot.html#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
+<span id="cb18-4"><a href="bngeneplot.html#cb18-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb18-5"><a href="bngeneplot.html#cb18-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">10</span>, <span class="at">compareRef =</span> T,</span>
+<span id="cb18-6"><a href="bngeneplot.html#cb18-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T, <span class="at">pathDb =</span> <span class="st">&quot;reactome&quot;</span>, <span class="at">compareRefType =</span> <span class="st">&quot;intersection&quot;</span>,</span>
+<span id="cb18-7"><a href="bngeneplot.html#cb18-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> dep, <span class="at">showLineage =</span> T, <span class="at">depMeta =</span> depMeta)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/geneplot_lineage-1.png" width="1920" /></p>
 </div>
 <div id="plotting-edge-strengths" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Plotting edge strengths</h2>
 <p>We can add a barplot depicting the edge strength and direction (probability), by specifying <code>strengthPlot=TRUE</code> and <code>nStrength</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="bngeneplot.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
-<span id="cb18-2"><a href="bngeneplot.html#cb18-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb18-3"><a href="bngeneplot.html#cb18-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb18-4"><a href="bngeneplot.html#cb18-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">10</span>, <span class="at">compareRef =</span> T,</span>
-<span id="cb18-5"><a href="bngeneplot.html#cb18-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T, <span class="at">pathDb =</span> <span class="st">&quot;reactome&quot;</span>, <span class="at">compareRefType =</span> <span class="st">&quot;intersection&quot;</span>,</span>
-<span id="cb18-6"><a href="bngeneplot.html#cb18-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> dep, <span class="at">strengthPlot =</span> T, <span class="at">nStrength =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="bngeneplot.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
+<span id="cb19-2"><a href="bngeneplot.html#cb19-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
+<span id="cb19-3"><a href="bngeneplot.html#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb19-4"><a href="bngeneplot.html#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">10</span>, <span class="at">compareRef =</span> T,</span>
+<span id="cb19-5"><a href="bngeneplot.html#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T, <span class="at">pathDb =</span> <span class="st">&quot;reactome&quot;</span>, <span class="at">compareRefType =</span> <span class="st">&quot;intersection&quot;</span>,</span>
+<span id="cb19-6"><a href="bngeneplot.html#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">sizeDep =</span> T, <span class="at">dep =</span> dep, <span class="at">strengthPlot =</span> T, <span class="at">nStrength =</span> <span class="dv">10</span>)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/geneplot_edgestrength-1.png" width="1920" /></p>
 </div>
 <div id="plotting-genes-in-multiple-pathways" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plotting genes in multiple pathways</h2>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="bngeneplot.html#cb19-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">8</span>)</span>
-<span id="cb19-2"><a href="bngeneplot.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
-<span id="cb19-3"><a href="bngeneplot.html#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb19-4"><a href="bngeneplot.html#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb19-5"><a href="bngeneplot.html#cb19-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">16</span>), <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb19-6"><a href="bngeneplot.html#cb19-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T,</span>
-<span id="cb19-7"><a href="bngeneplot.html#cb19-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="bngeneplot.html#cb20-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">8</span>)</span>
+<span id="cb20-2"><a href="bngeneplot.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
+<span id="cb20-3"><a href="bngeneplot.html#cb20-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
+<span id="cb20-4"><a href="bngeneplot.html#cb20-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb20-5"><a href="bngeneplot.html#cb20-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pathNum =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">16</span>), <span class="at">R =</span> <span class="dv">10</span>,</span>
+<span id="cb20-6"><a href="bngeneplot.html#cb20-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">convertSymbol =</span> T,</span>
+<span id="cb20-7"><a href="bngeneplot.html#cb20-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/geneplot_mult-1.png" width="1920" /></p>
 
 </div>
@@ -435,10 +444,6 @@ gitbook.start({
 "text": null
 },
 "download": ["cpbnplot_doc.pdf", "cpbnplot_doc.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "subsection"
 }
