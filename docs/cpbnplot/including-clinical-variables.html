@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Including clinical variables | cpbnplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Including clinical variables | cpbnplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 <link rel="prev" href="bnpathplot.html"/>
 <link rel="next" href="the-other-options.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -358,7 +358,7 @@ difference
 M Phase
 </td>
 <td style="text-align:right;">
-24.26930
+23.32271
 </td>
 </tr>
 <tr>
@@ -366,7 +366,7 @@ M Phase
 Mitotic Prometaphase
 </td>
 <td style="text-align:right;">
-21.86249
+21.09167
 </td>
 </tr>
 <tr>
@@ -374,7 +374,7 @@ Mitotic Prometaphase
 Mitotic Metaphase and Anaphase
 </td>
 <td style="text-align:right;">
-21.77967
+20.76638
 </td>
 </tr>
 <tr>
@@ -382,15 +382,7 @@ Mitotic Metaphase and Anaphase
 Mitotic Anaphase
 </td>
 <td style="text-align:right;">
-21.62561
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-RHO GTPase Effectors
-</td>
-<td style="text-align:right;">
-20.45974
+20.63476
 </td>
 </tr>
 <tr>
@@ -398,7 +390,15 @@ RHO GTPase Effectors
 Separation of Sister Chromatids
 </td>
 <td style="text-align:right;">
-20.33709
+19.43617
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Resolution of Sister Chromatid Cohesion
+</td>
+<td style="text-align:right;">
+19.20767
 </td>
 </tr>
 </tbody>
@@ -416,7 +416,7 @@ Separation of Sister Chromatids
 </div>
 <div id="gene-relationship-with-variables" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Gene relationship with variables</h2>
-<p>For the genes in interesting pathway, clinical variables can be incorporated too. We investigated the genes involved in the reactome “Molecules associated with elastic fibres”.</p>
+<p>For the genes in interesting pathway, clinical variables can be incorporated too. We investigated the genes involved in the reactome “Molecules associated with elastic fibres.”</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="including-clinical-variables.html#cb39-1" aria-hidden="true" tabindex="-1"></a>bnGeneCov <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway,</span>
 <span id="cb39-2"><a href="including-clinical-variables.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                vstedTCGA, <span class="at">pathNum=</span><span class="dv">43</span>,</span>
 <span id="cb39-3"><a href="including-clinical-variables.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">expSample=</span><span class="fu">rownames</span>(metadata),</span>
@@ -590,21 +590,10 @@ name
 <tbody>
 <tr>
 <td style="text-align:left;">
-COL11A1
-</td>
-<td style="text-align:right;">
-0.4514195
-</td>
-<td style="text-align:left;">
-COL11A1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 PCOLCE
 </td>
 <td style="text-align:right;">
-0.3860236
+0.3511844
 </td>
 <td style="text-align:left;">
 PCOLCE
@@ -612,35 +601,46 @@ PCOLCE
 </tr>
 <tr>
 <td style="text-align:left;">
-IBSP
+ADAMTS8
 </td>
 <td style="text-align:right;">
-0.3219886
+-0.1952817
 </td>
 <td style="text-align:left;">
-IBSP
+ADAMTS8
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-MFAP5
+COL11A1
 </td>
 <td style="text-align:right;">
-0.2058910
+0.1914131
 </td>
 <td style="text-align:left;">
-MFAP5
+COL11A1
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-COL10A1
+COL25A1
 </td>
 <td style="text-align:right;">
-0.1753596
+0.1877005
 </td>
 <td style="text-align:left;">
-COL10A1
+COL25A1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ELN
+</td>
+<td style="text-align:right;">
+-0.1367145
+</td>
+<td style="text-align:left;">
+ELN
 </td>
 </tr>
 </tbody>
@@ -770,13 +770,24 @@ Sd
 <tbody>
 <tr>
 <td style="text-align:left;">
+Synthesis.of.DNA
+</td>
+<td style="text-align:right;">
+0.7702640
+</td>
+<td style="text-align:right;">
+0.0483161
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 S.Phase
 </td>
 <td style="text-align:right;">
-0.7600305
+0.7564041
 </td>
 <td style="text-align:right;">
-0.0681110
+0.0606541
 </td>
 </tr>
 <tr>
@@ -784,10 +795,10 @@ S.Phase
 DNA.strand.elongation
 </td>
 <td style="text-align:right;">
-0.7539926
+0.7558024
 </td>
 <td style="text-align:right;">
-0.0526331
+0.0515143
 </td>
 </tr>
 <tr>
@@ -795,131 +806,10 @@ DNA.strand.elongation
 DNA.Replication
 </td>
 <td style="text-align:right;">
-0.7512501
+0.7418214
 </td>
 <td style="text-align:right;">
-0.0496008
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-RHO.GTPases.Activate.Formins
-</td>
-<td style="text-align:right;">
-0.7401962
-</td>
-<td style="text-align:right;">
-0.0486970
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-HDR.through.Homologous.Recombination..HRR.
-</td>
-<td style="text-align:right;">
-0.7376425
-</td>
-<td style="text-align:right;">
-0.0433299
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Synthesis.of.DNA
-</td>
-<td style="text-align:right;">
-0.7360679
-</td>
-<td style="text-align:right;">
-0.0499416
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Amplification.of.signal.from.the.kinetochores
-</td>
-<td style="text-align:right;">
-0.7255085
-</td>
-<td style="text-align:right;">
-0.0399156
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mitotic.Anaphase
-</td>
-<td style="text-align:right;">
-0.7236356
-</td>
-<td style="text-align:right;">
-0.0870432
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Homologous.DNA.Pairing.and.Strand.Exchange
-</td>
-<td style="text-align:right;">
-0.7227745
-</td>
-<td style="text-align:right;">
-0.0305151
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Cell.Cycle.Checkpoints
-</td>
-<td style="text-align:right;">
-0.7221062
-</td>
-<td style="text-align:right;">
-0.0585257
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Activation.of.ATR.in.response.to.replication.stress
-</td>
-<td style="text-align:right;">
-0.7137285
-</td>
-<td style="text-align:right;">
-0.0571550
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mitotic.Prometaphase
-</td>
-<td style="text-align:right;">
-0.7073437
-</td>
-<td style="text-align:right;">
-0.0189711
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mitotic.Metaphase.and.Anaphase
-</td>
-<td style="text-align:right;">
-0.6931517
-</td>
-<td style="text-align:right;">
-0.0618393
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-EML4.and.NUDC.in.mitotic.spindle.formation
-</td>
-<td style="text-align:right;">
-0.6911508
-</td>
-<td style="text-align:right;">
-0.0803672
+0.0724349
 </td>
 </tr>
 <tr>
@@ -927,32 +817,21 @@ EML4.and.NUDC.in.mitotic.spindle.formation
 Mitotic.Spindle.Checkpoint
 </td>
 <td style="text-align:right;">
-0.6771271
+0.7385408
 </td>
 <td style="text-align:right;">
-0.0958697
+0.0384938
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Amplification..of.signal.from.unattached..kinetochores.via.a.MAD2..inhibitory.signal
+Mitotic.Anaphase
 </td>
 <td style="text-align:right;">
-0.6710773
+0.7359661
 </td>
 <td style="text-align:right;">
-0.0709170
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Separation.of.Sister.Chromatids
-</td>
-<td style="text-align:right;">
-0.6707674
-</td>
-<td style="text-align:right;">
-0.1138543
+0.0436257
 </td>
 </tr>
 <tr>
@@ -960,10 +839,131 @@ Separation.of.Sister.Chromatids
 Resolution.of.Sister.Chromatid.Cohesion
 </td>
 <td style="text-align:right;">
-0.6609217
+0.7338589
 </td>
 <td style="text-align:right;">
-0.0900780
+0.0296269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic.Metaphase.and.Anaphase
+</td>
+<td style="text-align:right;">
+0.7305106
+</td>
+<td style="text-align:right;">
+0.0879798
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Homologous.DNA.Pairing.and.Strand.Exchange
+</td>
+<td style="text-align:right;">
+0.7290159
+</td>
+<td style="text-align:right;">
+0.0428621
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Activation.of.ATR.in.response.to.replication.stress
+</td>
+<td style="text-align:right;">
+0.7269121
+</td>
+<td style="text-align:right;">
+0.0367326
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Amplification.of.signal.from.the.kinetochores
+</td>
+<td style="text-align:right;">
+0.7195224
+</td>
+<td style="text-align:right;">
+0.0399094
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HDR.through.Homologous.Recombination..HRR.
+</td>
+<td style="text-align:right;">
+0.7185543
+</td>
+<td style="text-align:right;">
+0.0289043
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RHO.GTPases.Activate.Formins
+</td>
+<td style="text-align:right;">
+0.7082054
+</td>
+<td style="text-align:right;">
+0.0360879
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cell.Cycle.Checkpoints
+</td>
+<td style="text-align:right;">
+0.7065901
+</td>
+<td style="text-align:right;">
+0.0451219
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic.Prometaphase
+</td>
+<td style="text-align:right;">
+0.7053514
+</td>
+<td style="text-align:right;">
+0.0573109
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Amplification..of.signal.from.unattached..kinetochores.via.a.MAD2..inhibitory.signal
+</td>
+<td style="text-align:right;">
+0.6991004
+</td>
+<td style="text-align:right;">
+0.0965263
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Separation.of.Sister.Chromatids
+</td>
+<td style="text-align:right;">
+0.6986134
+</td>
+<td style="text-align:right;">
+0.0845527
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EML4.and.NUDC.in.mitotic.spindle.formation
+</td>
+<td style="text-align:right;">
+0.6749238
+</td>
+<td style="text-align:right;">
+0.0708973
 </td>
 </tr>
 </tbody>
@@ -998,10 +998,10 @@ Resolution.of.Sister.Chromatid.Cohesion
 <span id="cb58-5"><a href="including-clinical-variables.html#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb58-6"><a href="including-clinical-variables.html#cb58-6" aria-hidden="true" tabindex="-1"></a>tp53low <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&lt;</span> <span class="fl">0.5</span>))</span>
 <span id="cb58-7"><a href="including-clinical-variables.html#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53low)</span></code></pre></div>
-<pre><code>FALSE [1] 5208   54</code></pre>
+<pre><code>FALSE [1] 5207   43</code></pre>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="including-clinical-variables.html#cb60-1" aria-hidden="true" tabindex="-1"></a>tp53high <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&gt;</span> <span class="fl">0.5</span>))</span>
 <span id="cb60-2"><a href="including-clinical-variables.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53high)</span></code></pre></div>
-<pre><code>FALSE [1] 4737   54</code></pre>
+<pre><code>FALSE [1] 4753   43</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="including-clinical-variables.html#cb62-1" aria-hidden="true" tabindex="-1"></a>difMeanTp53 <span class="ot">&lt;-</span> <span class="fu">apply</span>(tp53high, <span class="dv">2</span>, mean) <span class="sc">-</span> <span class="fu">apply</span>(tp53low, <span class="dv">2</span>, mean)</span>
 <span id="cb62-2"><a href="including-clinical-variables.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(difMeanTp53[<span class="fu">order</span>(<span class="fu">abs</span>(difMeanTp53), <span class="at">decreasing=</span>T)]), <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">&quot;difference&quot;</span>))</span></code></pre></div>
 <table>
@@ -1017,34 +1017,10 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
-CDCA5
-</td>
-<td style="text-align:right;">
-0.5166238
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CKS1B
-</td>
-<td style="text-align:right;">
-0.5090005
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 MCM2
 </td>
 <td style="text-align:right;">
-0.4956613
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CDT1
-</td>
-<td style="text-align:right;">
-0.4540156
+0.4732629
 </td>
 </tr>
 <tr>
@@ -1052,15 +1028,39 @@ CDT1
 RFC4
 </td>
 <td style="text-align:right;">
-0.4522288
+0.4666554
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-E2F1
+ORC1
 </td>
 <td style="text-align:right;">
-0.4507572
+0.4331116
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCM8
+</td>
+<td style="text-align:right;">
+0.4323734
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GINS1
+</td>
+<td style="text-align:right;">
+0.4120761
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CCNE2
+</td>
+<td style="text-align:right;">
+0.3795090
 </td>
 </tr>
 </tbody>
@@ -1082,10 +1082,10 @@ E2F1
 <span id="cb64-5"><a href="including-clinical-variables.html#cb64-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-6"><a href="including-clinical-variables.html#cb64-6" aria-hidden="true" tabindex="-1"></a>tp53low <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&lt;</span> <span class="fl">0.01</span>))</span>
 <span id="cb64-7"><a href="including-clinical-variables.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53low)</span></code></pre></div>
-<pre><code>FALSE [1] 1762   54</code></pre>
+<pre><code>FALSE [1] 1814   43</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="including-clinical-variables.html#cb66-1" aria-hidden="true" tabindex="-1"></a>tp53high <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&gt;</span> <span class="fl">0.99</span>))</span>
 <span id="cb66-2"><a href="including-clinical-variables.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53high)</span></code></pre></div>
-<pre><code>FALSE [1] 1461   54</code></pre>
+<pre><code>FALSE [1] 1448   43</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="including-clinical-variables.html#cb68-1" aria-hidden="true" tabindex="-1"></a>difMeanTp53 <span class="ot">&lt;-</span> <span class="fu">apply</span>(tp53high, <span class="dv">2</span>, mean) <span class="sc">-</span> <span class="fu">apply</span>(tp53low, <span class="dv">2</span>, mean)</span>
 <span id="cb68-2"><a href="including-clinical-variables.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(difMeanTp53[<span class="fu">order</span>(<span class="fu">abs</span>(difMeanTp53), <span class="at">decreasing=</span>T)]), <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">&quot;difference&quot;</span>))</span></code></pre></div>
 <table>
@@ -1101,34 +1101,10 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
-CKS1B
-</td>
-<td style="text-align:right;">
-0.9210709
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CDCA5
-</td>
-<td style="text-align:right;">
-0.9156819
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 MCM2
 </td>
 <td style="text-align:right;">
-0.8945691
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-E2F1
-</td>
-<td style="text-align:right;">
-0.8143212
+0.9259180
 </td>
 </tr>
 <tr>
@@ -1136,15 +1112,39 @@ E2F1
 RFC4
 </td>
 <td style="text-align:right;">
-0.8124898
+0.8718847
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CDT1
+ORC1
 </td>
 <td style="text-align:right;">
-0.7801117
+0.8373246
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GINS1
+</td>
+<td style="text-align:right;">
+0.8137102
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCM8
+</td>
+<td style="text-align:right;">
+0.8044904
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PRIM1
+</td>
+<td style="text-align:right;">
+0.7336477
 </td>
 </tr>
 </tbody>
@@ -1184,23 +1184,7 @@ difference
 MCM2
 </td>
 <td style="text-align:right;">
-0.6062530
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CDCA5
-</td>
-<td style="text-align:right;">
-0.5979683
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CKS1B
-</td>
-<td style="text-align:right;">
-0.5927807
+0.5981190
 </td>
 </tr>
 <tr>
@@ -1208,23 +1192,39 @@ CKS1B
 RFC4
 </td>
 <td style="text-align:right;">
-0.5452236
+0.5856990
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CDT1
+ORC1
 </td>
 <td style="text-align:right;">
-0.5377375
+0.5484684
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-E2F1
+GINS1
 </td>
 <td style="text-align:right;">
-0.5312000
+0.5112619
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCM8
+</td>
+<td style="text-align:right;">
+0.5072800
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CCNA2
+</td>
+<td style="text-align:right;">
+0.4784021
 </td>
 </tr>
 </tbody>
@@ -1239,7 +1239,7 @@ E2F1
 <p><code>queryCpDistLw</code> function performs sampling by <em>likelihood weighting</em> using cpdist, and returns the data.frame with weights. It just performs <code>cpdist</code> on the queried level and produce a plot. <code>queryCpDistLs</code> performs <em>logic sampling</em>.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="including-clinical-variables.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Only likelihood weighting is supported in queryCpDist.</span></span>
 <span id="cb72-2"><a href="including-clinical-variables.html#cb72-2" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">queryCpDistLw</span>(topFit, <span class="fu">names</span>(difMeanTp53)[<span class="dv">1</span>], <span class="at">evidence=</span><span class="st">&quot;TP53&quot;</span>, <span class="at">level=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">1</span>))</span></code></pre></div>
-<pre><code>FALSE # A tibble: 3 x 2
+<pre><code>FALSE # A tibble: 3 × 2
 FALSE   level  RFC2
 FALSE   &lt;fct&gt; &lt;dbl&gt;
 FALSE 1 0      10.9
@@ -1260,50 +1260,50 @@ weights
 <tbody>
 <tr>
 <td style="text-align:right;">
-11.032248
+10.99188
 </td>
 <td style="text-align:right;">
-0.3095453
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-9.420981
-</td>
-<td style="text-align:right;">
-0.9947378
+0.8078536
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-11.306496
+10.16224
 </td>
 <td style="text-align:right;">
-0.9875113
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-10.140365
-</td>
-<td style="text-align:right;">
-0.9996782
+0.9962997
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-8.897455
+11.63254
 </td>
 <td style="text-align:right;">
-0.8806361
+0.1592045
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-11.926931
+10.83047
 </td>
 <td style="text-align:right;">
-0.6264568
+0.9999093
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11.16883
+</td>
+<td style="text-align:right;">
+0.9024512
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10.14470
+</td>
+<td style="text-align:right;">
+0.7950615
 </td>
 </tr>
 </tbody>
@@ -1388,10 +1388,6 @@ gitbook.start({
 "text": null
 },
 "download": ["cpbnplot_doc.pdf", "cpbnplot_doc.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "subsection"
 }
