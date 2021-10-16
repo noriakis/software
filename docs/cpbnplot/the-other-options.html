@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 The other options | cpbnplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 The other options | cpbnplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 <link rel="prev" href="including-clinical-variables.html"/>
 <link rel="next" href="testing-the-score-inside-the-pathway.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -208,6 +208,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="the-other-options.html"><a href="the-other-options.html#the-glowing-nodes-and-edges"><i class="fa fa-check"></i><b>6.3.1</b> The glowing nodes and edges</a></li>
 </ul></li>
+<li class="chapter" data-level="6.4" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.4</b> Comparing multi scale and standard bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="testing-the-score-inside-the-pathway.html"><a href="testing-the-score-inside-the-pathway.html"><i class="fa fa-check"></i><b>7</b> Testing the score inside the pathway</a></li>
 <li class="chapter" data-level="8" data-path="testing-r.html"><a href="testing-r.html"><i class="fa fa-check"></i><b>8</b> Testing R</a></li>
@@ -390,7 +391,7 @@ NUP107
 </div>
 <div id="discretization" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Discretization</h2>
-<p>If passed an option <code>disc=TRUE</code>, the continuous variables are discretized using <code>arules::discretize</code> function <span class="citation">(<a href="#ref-Hahsler2011-rc" role="doc-biblioref">Hahsler et al. 2011</a>)</span>. The discretization of the gene expression data is discussed in <span class="citation"><a href="#ref-Gallo2016-yo" role="doc-biblioref">Gallo et al.</a> (<a href="#ref-Gallo2016-yo" role="doc-biblioref">2016</a>)</span>. If the same discretization is to be applied on the other data like the training and test dataset, you can pass the training samples to <code>tr</code> option, and if some variables are not intended to be discretized, you should pass the column name to <code>remainCont</code>.</p>
+<p>If passed an option <code>disc=TRUE</code>, the continuous variables are discretized using <code>arules::discretize</code> function <span class="citation">(<a href="#ref-Hahsler2011-rc" role="doc-biblioref">Hahsler et al. 2011</a>)</span>. The discretization of the gene expression data is discussed in <span class="citation">Gallo et al. (<a href="#ref-Gallo2016-yo" role="doc-biblioref">2016</a>)</span>. If the same discretization is to be applied on the other data like the training and test dataset, you can pass the training samples to <code>tr</code> option, and if some variables are not intended to be discretized, you should pass the column name to <code>remainCont</code>.</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="the-other-options.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway, <span class="at">exp =</span> vsted, <span class="at">pathNum =</span> <span class="dv">1</span>, <span class="at">disc=</span><span class="cn">TRUE</span>, <span class="at">layout=</span><span class="st">&quot;sugiyama&quot;</span>)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/disc-1.png" width="960" /></p>
 </div>
@@ -432,8 +433,237 @@ NUP107
 <span id="cb78-22"><a href="the-other-options.html#cb78-22" aria-hidden="true" tabindex="-1"></a>                        <span class="at">titleSize=</span><span class="dv">14</span></span>
 <span id="cb78-23"><a href="the-other-options.html#cb78-23" aria-hidden="true" tabindex="-1"></a>                        )</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/unnamed-chunk-4-1.png" width="960" /></p>
-
 </div>
+</div>
+<div id="comparing-multi-scale-and-standard-bootstrapping" class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Comparing multi scale and standard bootstrapping</h2>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="the-other-options.html#cb79-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
+<span id="cb79-2"><a href="the-other-options.html#cb79-2" aria-hidden="true" tabindex="-1"></a>comparePlot <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
+<span id="cb79-3"><a href="the-other-options.html#cb79-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">exp =</span> vsted, <span class="at">cl=</span>cl, <span class="at">strType=</span><span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb79-4"><a href="the-other-options.html#cb79-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">50</span>, <span class="at">returnNet=</span>T,</span>
+<span id="cb79-5"><a href="the-other-options.html#cb79-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">shadowText =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb79-6"><a href="the-other-options.html#cb79-6" aria-hidden="true" tabindex="-1"></a>comparePlotMS <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
+<span id="cb79-7"><a href="the-other-options.html#cb79-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">exp =</span> vsted, <span class="at">cl=</span>cl, <span class="at">strType=</span><span class="st">&quot;ms&quot;</span>,</span>
+<span id="cb79-8"><a href="the-other-options.html#cb79-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">pathNum =</span> <span class="dv">15</span>, <span class="at">R =</span> <span class="dv">50</span>, <span class="at">returnNet=</span>T,</span>
+<span id="cb79-9"><a href="the-other-options.html#cb79-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">shadowText =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb79-10"><a href="the-other-options.html#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="the-other-options.html#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(comparePlot<span class="sc">$</span>str <span class="sc">%&gt;%</span></span>
+<span id="cb79-12"><a href="the-other-options.html#cb79-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(direction<span class="sc">&gt;</span><span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb79-13"><a href="the-other-options.html#cb79-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(strength)) <span class="sc">%&gt;%</span></span>
+<span id="cb79-14"><a href="the-other-options.html#cb79-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>())</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+from
+</th>
+<th style="text-align:left;">
+to
+</th>
+<th style="text-align:right;">
+strength
+</th>
+<th style="text-align:right;">
+direction
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+RAD51AP1
+</td>
+<td style="text-align:left;">
+BRCA1
+</td>
+<td style="text-align:right;">
+0.9814815
+</td>
+<td style="text-align:right;">
+0.5659722
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RFC2
+</td>
+<td style="text-align:left;">
+ATR
+</td>
+<td style="text-align:right;">
+0.9444444
+</td>
+<td style="text-align:right;">
+0.5277778
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+XRCC3
+</td>
+<td style="text-align:left;">
+RFC5
+</td>
+<td style="text-align:right;">
+0.9444444
+</td>
+<td style="text-align:right;">
+0.5160384
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TOPBP1
+</td>
+<td style="text-align:left;">
+ATR
+</td>
+<td style="text-align:right;">
+0.9259259
+</td>
+<td style="text-align:right;">
+0.8587963
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RAD51AP1
+</td>
+<td style="text-align:left;">
+CHEK1
+</td>
+<td style="text-align:right;">
+0.9074074
+</td>
+<td style="text-align:right;">
+0.7208995
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EXO1
+</td>
+<td style="text-align:left;">
+DNA2
+</td>
+<td style="text-align:right;">
+0.8518519
+</td>
+<td style="text-align:right;">
+0.5535714
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="the-other-options.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(comparePlotMS<span class="sc">$</span>str <span class="sc">%&gt;%</span></span>
+<span id="cb80-2"><a href="the-other-options.html#cb80-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(direction<span class="sc">&gt;</span><span class="fl">0.5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-3"><a href="the-other-options.html#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(strength)) <span class="sc">%&gt;%</span></span>
+<span id="cb80-4"><a href="the-other-options.html#cb80-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>())</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+from
+</th>
+<th style="text-align:left;">
+to
+</th>
+<th style="text-align:right;">
+strength
+</th>
+<th style="text-align:right;">
+direction
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CHEK1
+</td>
+<td style="text-align:left;">
+RMI1
+</td>
+<td style="text-align:right;">
+0.9953452
+</td>
+<td style="text-align:right;">
+0.9902411
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+XRCC3
+</td>
+<td style="text-align:left;">
+RFC5
+</td>
+<td style="text-align:right;">
+0.9887144
+</td>
+<td style="text-align:right;">
+0.7306035
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RAD51AP1
+</td>
+<td style="text-align:left;">
+BRCA1
+</td>
+<td style="text-align:right;">
+0.9885634
+</td>
+<td style="text-align:right;">
+0.5331138
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRCA2
+</td>
+<td style="text-align:left;">
+XRCC2
+</td>
+<td style="text-align:right;">
+0.9878324
+</td>
+<td style="text-align:right;">
+0.6173757
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MRE11
+</td>
+<td style="text-align:left;">
+BRCA2
+</td>
+<td style="text-align:right;">
+0.9877469
+</td>
+<td style="text-align:right;">
+0.5331526
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRCA2
+</td>
+<td style="text-align:left;">
+MRE11
+</td>
+<td style="text-align:right;">
+0.9877469
+</td>
+<td style="text-align:right;">
+0.9781336
+</td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 <h3>References</h3>
@@ -495,6 +725,10 @@ gitbook.start({
 "text": null
 },
 "download": ["cpbnplot_doc.pdf", "cpbnplot_doc.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

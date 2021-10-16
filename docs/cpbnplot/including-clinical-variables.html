@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Including clinical variables | cpbnplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Including clinical variables | cpbnplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 <link rel="prev" href="bnpathplot.html"/>
 <link rel="next" href="the-other-options.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -208,6 +208,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="the-other-options.html"><a href="the-other-options.html#the-glowing-nodes-and-edges"><i class="fa fa-check"></i><b>6.3.1</b> The glowing nodes and edges</a></li>
 </ul></li>
+<li class="chapter" data-level="6.4" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.4</b> Comparing multi scale and standard bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="testing-the-score-inside-the-pathway.html"><a href="testing-the-score-inside-the-pathway.html"><i class="fa fa-check"></i><b>7</b> Testing the score inside the pathway</a></li>
 <li class="chapter" data-level="8" data-path="testing-r.html"><a href="testing-r.html"><i class="fa fa-check"></i><b>8</b> Testing R</a></li>
@@ -354,26 +355,34 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
-Mitotic Prometaphase
-</td>
-<td style="text-align:right;">
-23.50630
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 M Phase
 </td>
 <td style="text-align:right;">
-20.99188
+24.26930
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Resolution of Sister Chromatid Cohesion
+Mitotic Prometaphase
 </td>
 <td style="text-align:right;">
-20.29127
+21.86249
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic Metaphase and Anaphase
+</td>
+<td style="text-align:right;">
+21.77967
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic Anaphase
+</td>
+<td style="text-align:right;">
+21.62561
 </td>
 </tr>
 <tr>
@@ -381,23 +390,15 @@ Resolution of Sister Chromatid Cohesion
 RHO GTPase Effectors
 </td>
 <td style="text-align:right;">
-19.91141
+20.45974
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Mitotic Spindle Checkpoint
+Separation of Sister Chromatids
 </td>
 <td style="text-align:right;">
-19.69021
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Amplification of signal from unattached kinetochores via a MAD2 inhibitory signal
-</td>
-<td style="text-align:right;">
-19.27693
+20.33709
 </td>
 </tr>
 </tbody>
@@ -415,7 +416,7 @@ Amplification of signal from unattached kinetochores via a MAD2 inhibitory signa
 </div>
 <div id="gene-relationship-with-variables" class="section level2" number="5.4">
 <h2><span class="header-section-number">5.4</span> Gene relationship with variables</h2>
-<p>For the genes in interesting pathway, clinical variables can be incorporated too. We investigated the genes involved in the reactome “Molecules associated with elastic fibres.”</p>
+<p>For the genes in interesting pathway, clinical variables can be incorporated too. We investigated the genes involved in the reactome “Molecules associated with elastic fibres”.</p>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="including-clinical-variables.html#cb39-1" aria-hidden="true" tabindex="-1"></a>bnGeneCov <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway,</span>
 <span id="cb39-2"><a href="including-clinical-variables.html#cb39-2" aria-hidden="true" tabindex="-1"></a>                vstedTCGA, <span class="at">pathNum=</span><span class="dv">43</span>,</span>
 <span id="cb39-3"><a href="including-clinical-variables.html#cb39-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">expSample=</span><span class="fu">rownames</span>(metadata),</span>
@@ -1238,7 +1239,7 @@ E2F1
 <p><code>queryCpDistLw</code> function performs sampling by <em>likelihood weighting</em> using cpdist, and returns the data.frame with weights. It just performs <code>cpdist</code> on the queried level and produce a plot. <code>queryCpDistLs</code> performs <em>logic sampling</em>.</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="including-clinical-variables.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Only likelihood weighting is supported in queryCpDist.</span></span>
 <span id="cb72-2"><a href="including-clinical-variables.html#cb72-2" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">queryCpDistLw</span>(topFit, <span class="fu">names</span>(difMeanTp53)[<span class="dv">1</span>], <span class="at">evidence=</span><span class="st">&quot;TP53&quot;</span>, <span class="at">level=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.5</span>,<span class="dv">1</span>))</span></code></pre></div>
-<pre><code>FALSE # A tibble: 3 × 2
+<pre><code>FALSE # A tibble: 3 x 2
 FALSE   level  RFC2
 FALSE   &lt;fct&gt; &lt;dbl&gt;
 FALSE 1 0      10.9
@@ -1387,6 +1388,10 @@ gitbook.start({
 "text": null
 },
 "download": ["cpbnplot_doc.pdf", "cpbnplot_doc.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

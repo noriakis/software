@@ -31,5 +31,6 @@ bootstrap-reasoning
 discretization
 custom-visualization
 the-glowing-nodes-and-edges
+comparing-multi-scale-and-standard-bootstrapping
 testing-the-score-inside-the-pathway
 testing-r

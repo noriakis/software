@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Testing R | cpbnplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Testing R | cpbnplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 <link rel="prev" href="testing-the-score-inside-the-pathway.html"/>
 <link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -208,6 +208,7 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="6.3.1" data-path="the-other-options.html"><a href="the-other-options.html#the-glowing-nodes-and-edges"><i class="fa fa-check"></i><b>6.3.1</b> The glowing nodes and edges</a></li>
 </ul></li>
+<li class="chapter" data-level="6.4" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.4</b> Comparing multi scale and standard bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="testing-the-score-inside-the-pathway.html"><a href="testing-the-score-inside-the-pathway.html"><i class="fa fa-check"></i><b>7</b> Testing the score inside the pathway</a></li>
 <li class="chapter" data-level="8" data-path="testing-r.html"><a href="testing-r.html"><i class="fa fa-check"></i><b>8</b> Testing R</a></li>
@@ -235,41 +236,41 @@ div.csl-indent {
 <div id="testing-r" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Testing R</h1>
 <p>We provide the diagnostic function of inferred network across multiple bootstrap numbers. We can test how R values affect the resulting network. It is very time consuming to test many genes, thus the setting up <code>cl</code> argument using library <code>parallel</code> is suggested. We can specify which scoring function to use by <code>scoreType</code>. Additionaly, returned strength data frame as well as raw data frame can be used to assess various metrics and thresholds like structural hamming distance.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="testing-r.html#cb81-1" aria-hidden="true" tabindex="-1"></a>pathTest <span class="ot">&lt;-</span> <span class="fu">bnpathtest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;tabu&quot;</span>,</span>
-<span id="cb81-2"><a href="testing-r.html#cb81-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">300</span>, <span class="dv">10</span>), <span class="at">nCategory =</span> <span class="dv">15</span>,</span>
-<span id="cb81-3"><a href="testing-r.html#cb81-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb81-4"><a href="testing-r.html#cb81-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
-<span id="cb81-5"><a href="testing-r.html#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb81-6"><a href="testing-r.html#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb81-7"><a href="testing-r.html#cb81-7" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">length</span>(<span class="fu">E</span>(<span class="fu">difference</span>(<span class="fu">as.igraph</span>(x), <span class="fu">as.igraph</span>(y))))))</span>
-<span id="cb81-8"><a href="testing-r.html#cb81-8" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difEdges[<span class="fu">dim</span>(difEdges)[<span class="dv">1</span>], <span class="fu">colnames</span>(difEdges)])</span>
-<span id="cb81-9"><a href="testing-r.html#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difEdges) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NumDif&quot;</span>)</span>
-<span id="cb81-10"><a href="testing-r.html#cb81-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difEdges, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difEdges), <span class="dv">2</span>)), <span class="at">y=</span>NumDif)) <span class="sc">+</span></span>
-<span id="cb81-11"><a href="testing-r.html#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb81-12"><a href="testing-r.html#cb81-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>NumDif), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb81-13"><a href="testing-r.html#cb81-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;Number of different edges&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
-<span id="cb81-14"><a href="testing-r.html#cb81-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;Number of different edges&quot;</span>)<span class="sc">+</span></span>
-<span id="cb81-15"><a href="testing-r.html#cb81-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="testing-r.html#cb83-1" aria-hidden="true" tabindex="-1"></a>pathTest <span class="ot">&lt;-</span> <span class="fu">bnpathtest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;tabu&quot;</span>,</span>
+<span id="cb83-2"><a href="testing-r.html#cb83-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">300</span>, <span class="dv">10</span>), <span class="at">nCategory =</span> <span class="dv">15</span>,</span>
+<span id="cb83-3"><a href="testing-r.html#cb83-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb83-4"><a href="testing-r.html#cb83-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
+<span id="cb83-5"><a href="testing-r.html#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="testing-r.html#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb83-7"><a href="testing-r.html#cb83-7" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">length</span>(<span class="fu">E</span>(<span class="fu">difference</span>(<span class="fu">as.igraph</span>(x), <span class="fu">as.igraph</span>(y))))))</span>
+<span id="cb83-8"><a href="testing-r.html#cb83-8" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difEdges[<span class="fu">dim</span>(difEdges)[<span class="dv">1</span>], <span class="fu">colnames</span>(difEdges)])</span>
+<span id="cb83-9"><a href="testing-r.html#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difEdges) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NumDif&quot;</span>)</span>
+<span id="cb83-10"><a href="testing-r.html#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difEdges, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difEdges), <span class="dv">2</span>)), <span class="at">y=</span>NumDif)) <span class="sc">+</span></span>
+<span id="cb83-11"><a href="testing-r.html#cb83-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb83-12"><a href="testing-r.html#cb83-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>NumDif), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb83-13"><a href="testing-r.html#cb83-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;Number of different edges&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
+<span id="cb83-14"><a href="testing-r.html#cb83-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;Number of different edges&quot;</span>)<span class="sc">+</span></span>
+<span id="cb83-15"><a href="testing-r.html#cb83-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/testrp-1.png" width="960" /></p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="testing-r.html#cb82-1" aria-hidden="true" tabindex="-1"></a>pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Count</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="testing-r.html#cb84-1" aria-hidden="true" tabindex="-1"></a>pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Count</span></code></pre></div>
 <pre><code>FALSE [1] 22</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="testing-r.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb84-2"><a href="testing-r.html#cb84-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
-<span id="cb84-3"><a href="testing-r.html#cb84-3" aria-hidden="true" tabindex="-1"></a>geneTest <span class="ot">&lt;-</span> <span class="fu">bngenetest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">pathNum=</span><span class="dv">15</span>,</span>
-<span id="cb84-4"><a href="testing-r.html#cb84-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange=</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">200</span>, <span class="dv">10</span>),</span>
-<span id="cb84-5"><a href="testing-r.html#cb84-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb84-6"><a href="testing-r.html#cb84-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
-<span id="cb84-7"><a href="testing-r.html#cb84-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-8"><a href="testing-r.html#cb84-8" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">shd</span>(x, y)))</span>
-<span id="cb84-9"><a href="testing-r.html#cb84-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot SHD compared to the highest R network</span></span>
-<span id="cb84-10"><a href="testing-r.html#cb84-10" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difSHD[<span class="fu">dim</span>(difSHD)[<span class="dv">1</span>], <span class="fu">colnames</span>(difSHD)])</span>
-<span id="cb84-11"><a href="testing-r.html#cb84-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difSHD) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SHD&quot;</span>)</span>
-<span id="cb84-12"><a href="testing-r.html#cb84-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difSHD, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difSHD), <span class="dv">2</span>)), <span class="at">y=</span>SHD)) <span class="sc">+</span></span>
-<span id="cb84-13"><a href="testing-r.html#cb84-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb84-14"><a href="testing-r.html#cb84-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>SHD), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb84-15"><a href="testing-r.html#cb84-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;SHD&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
-<span id="cb84-16"><a href="testing-r.html#cb84-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;structural hamming distance&quot;</span>)<span class="sc">+</span></span>
-<span id="cb84-17"><a href="testing-r.html#cb84-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="testing-r.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb86-2"><a href="testing-r.html#cb86-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
+<span id="cb86-3"><a href="testing-r.html#cb86-3" aria-hidden="true" tabindex="-1"></a>geneTest <span class="ot">&lt;-</span> <span class="fu">bngenetest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">pathNum=</span><span class="dv">15</span>,</span>
+<span id="cb86-4"><a href="testing-r.html#cb86-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange=</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">200</span>, <span class="dv">10</span>),</span>
+<span id="cb86-5"><a href="testing-r.html#cb86-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb86-6"><a href="testing-r.html#cb86-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
+<span id="cb86-7"><a href="testing-r.html#cb86-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-8"><a href="testing-r.html#cb86-8" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">shd</span>(x, y)))</span>
+<span id="cb86-9"><a href="testing-r.html#cb86-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot SHD compared to the highest R network</span></span>
+<span id="cb86-10"><a href="testing-r.html#cb86-10" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difSHD[<span class="fu">dim</span>(difSHD)[<span class="dv">1</span>], <span class="fu">colnames</span>(difSHD)])</span>
+<span id="cb86-11"><a href="testing-r.html#cb86-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difSHD) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SHD&quot;</span>)</span>
+<span id="cb86-12"><a href="testing-r.html#cb86-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difSHD, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difSHD), <span class="dv">2</span>)), <span class="at">y=</span>SHD)) <span class="sc">+</span></span>
+<span id="cb86-13"><a href="testing-r.html#cb86-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb86-14"><a href="testing-r.html#cb86-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>SHD), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb86-15"><a href="testing-r.html#cb86-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;SHD&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
+<span id="cb86-16"><a href="testing-r.html#cb86-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;structural hamming distance&quot;</span>)<span class="sc">+</span></span>
+<span id="cb86-17"><a href="testing-r.html#cb86-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="cpbnplot_doc_files/figure-html/testrg-1.png" width="960" /></p>
 
 </div>
@@ -323,6 +324,10 @@ gitbook.start({
 "text": null
 },
 "download": ["cpbnplot_doc.pdf", "cpbnplot_doc.epub"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
