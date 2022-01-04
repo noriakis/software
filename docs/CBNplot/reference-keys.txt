@@ -34,5 +34,5 @@ the-glowing-nodes-and-edges
 comparing-multi-scale-and-standard-bootstrapping
 testing-the-score-inside-the-pathway
 comparing-networks
-testing-r
 comparing-multiple-networks
+testing-r
