@@ -27,7 +27,6 @@ confirming-the-existing-knowledge
 investigating-the-network-based-on-the-clinical-question
 classification-using-bn
 the-other-options
-bootstrap-reasoning
 discretization
 custom-visualization
 the-glowing-nodes-and-edges
