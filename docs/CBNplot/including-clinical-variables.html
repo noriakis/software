@@ -705,44 +705,46 @@ FALSE 184 163</code></pre>
 <span id="cb57-3"><a href="including-clinical-variables.html#cb57-3" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>age_at_diagnosis <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(metadata<span class="sc">$</span>age_at_diagnosis))</span>
 <span id="cb57-4"><a href="including-clinical-variables.html#cb57-4" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>paper_Combined.T.and.LN.category <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(metadata<span class="sc">$</span>paper_Combined.T.and.LN.category)</span>
 <span id="cb57-5"><a href="including-clinical-variables.html#cb57-5" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>gender <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(metadata<span class="sc">$</span>gender)</span></code></pre></div>
-<p>Split the data to train/test according to TP53 mutation status using <code>caret</code> <span class="citation">(<a href="#ref-Kuhn2008-cc" role="doc-biblioref">Kuhn 2008</a>)</span>. In this analysis, the five-fold cross validation (stratified) is performed. Fit the model using the expression of genes in the pathway. This time the classification performance of significant pathways (corrected p &lt; <code>1e-5</code>) are to be compared. <code>onlyDf</code> option can be enabled to return only the data.frame containing data for prediction, useful for testing purpose.</p>
+<p>Split the data to train/test according to TP53 mutation status using <code>caret</code> <span class="citation">(<a href="#ref-Kuhn2008-cc" role="doc-biblioref">Kuhn 2008</a>)</span>. In this analysis, the five-fold cross validation (stratified) is performed. Fit the model using the expression of genes in the pathway. This time the classification performance of significant pathways (corrected p &lt; <code>1e-5</code>) are to be compared. <code>onlyDf</code> option can be enabled to return only the data.frame containing data for prediction, useful for testing purpose, and using the resulting data for the other <a href="https://sign.hgc.jp/">softwares</a>.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="including-clinical-variables.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">53</span>) <span class="co"># Seed for split</span></span>
 <span id="cb58-2"><a href="including-clinical-variables.html#cb58-2" aria-hidden="true" tabindex="-1"></a>trainIndex <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">createFolds</span>(<span class="fu">factor</span>(metadata<span class="sc">$</span>paper_mutation.in.TP53), <span class="at">k =</span> <span class="dv">5</span>, <span class="at">list =</span> <span class="cn">TRUE</span>, <span class="at">returnTrain=</span><span class="cn">TRUE</span>)</span>
 <span id="cb58-3"><a href="including-clinical-variables.html#cb58-3" aria-hidden="true" tabindex="-1"></a>allnets <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="do">## Store network in the list</span></span>
 <span id="cb58-4"><a href="including-clinical-variables.html#cb58-4" aria-hidden="true" tabindex="-1"></a>allClassRes <span class="ot">&lt;-</span> <span class="fu">list</span>() <span class="do">## Store prediction in the list</span></span>
-<span id="cb58-5"><a href="including-clinical-variables.html#cb58-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-6"><a href="including-clinical-variables.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="dv">5</span>)) {</span>
-<span id="cb58-7"><a href="including-clinical-variables.html#cb58-7" aria-hidden="true" tabindex="-1"></a>  nets <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb58-8"><a href="including-clinical-variables.html#cb58-8" aria-hidden="true" tabindex="-1"></a>  classRes <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb58-9"><a href="including-clinical-variables.html#cb58-9" aria-hidden="true" tabindex="-1"></a>  foldTrainIndex <span class="ot">&lt;-</span> trainIndex[[f]]</span>
-<span id="cb58-10"><a href="including-clinical-variables.html#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Recursively fit and test for significant pathways</span></span>
-<span id="cb58-11"><a href="including-clinical-variables.html#cb58-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (pnum <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(<span class="fu">subset</span>(pway<span class="sc">@</span>result, p.adjust<span class="sc">&lt;</span><span class="fl">1e-5</span>))[<span class="dv">1</span>], <span class="dv">1</span>)) {</span>
-<span id="cb58-12"><a href="including-clinical-variables.html#cb58-12" aria-hidden="true" tabindex="-1"></a>      cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">12</span>)</span>
-<span id="cb58-13"><a href="including-clinical-variables.html#cb58-13" aria-hidden="true" tabindex="-1"></a>      bnCovTrain <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway, vstedTCGA[,<span class="fu">rownames</span>(metadata)][, foldTrainIndex], <span class="at">pathNum=</span>pnum, <span class="at">layout=</span><span class="st">&quot;sugiyama&quot;</span>,</span>
-<span id="cb58-14"><a href="including-clinical-variables.html#cb58-14" aria-hidden="true" tabindex="-1"></a>                               <span class="at">expSample=</span><span class="fu">rownames</span>(metadata[foldTrainIndex,]), <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">strType=</span><span class="st">&quot;normal&quot;</span>,</span>
-<span id="cb58-15"><a href="including-clinical-variables.html#cb58-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">otherVar=</span>metadata[foldTrainIndex,], <span class="at">otherVarName=</span><span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;Category&quot;</span>),</span>
-<span id="cb58-16"><a href="including-clinical-variables.html#cb58-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">R=</span><span class="dv">50</span>, <span class="at">cl=</span>cl, <span class="at">returnNet=</span>T)</span>
-<span id="cb58-17"><a href="including-clinical-variables.html#cb58-17" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Return only DF for testing</span></span>
-<span id="cb58-18"><a href="including-clinical-variables.html#cb58-18" aria-hidden="true" tabindex="-1"></a>      bnCovTest <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway, vstedTCGA[,<span class="fu">rownames</span>(metadata)][, <span class="sc">-</span>foldTrainIndex], <span class="at">pathNum=</span>pnum,</span>
-<span id="cb58-19"><a href="including-clinical-variables.html#cb58-19" aria-hidden="true" tabindex="-1"></a>                               <span class="at">expSample=</span><span class="fu">rownames</span>(metadata[<span class="sc">-</span>foldTrainIndex,]),</span>
-<span id="cb58-20"><a href="including-clinical-variables.html#cb58-20" aria-hidden="true" tabindex="-1"></a>                               <span class="at">otherVar=</span>metadata[<span class="sc">-</span>foldTrainIndex,],  <span class="at">otherVarName=</span><span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;Category&quot;</span>),</span>
-<span id="cb58-21"><a href="including-clinical-variables.html#cb58-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">onlyDf=</span>T)</span>
-<span id="cb58-22"><a href="including-clinical-variables.html#cb58-22" aria-hidden="true" tabindex="-1"></a>      bnCovTrain<span class="sc">$</span>av <span class="ot">&lt;-</span> <span class="fu">chooseEdgeDir</span>(bnCovTrain<span class="sc">$</span>av, bnCovTrain<span class="sc">$</span>df, <span class="at">scoreType=</span><span class="st">&quot;mi-cg&quot;</span>, <span class="at">debug=</span><span class="cn">FALSE</span>)</span>
-<span id="cb58-23"><a href="including-clinical-variables.html#cb58-23" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb58-24"><a href="including-clinical-variables.html#cb58-24" aria-hidden="true" tabindex="-1"></a>      <span class="do">## If DAG and TP53 have parents</span></span>
-<span id="cb58-25"><a href="including-clinical-variables.html#cb58-25" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ( igraph<span class="sc">::</span><span class="fu">is.dag</span>(bnlearn<span class="sc">::</span><span class="fu">as.igraph</span>(bnCovTrain<span class="sc">$</span>av)) <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(bnCovTrain<span class="sc">$</span>av<span class="sc">$</span>nodes<span class="sc">$</span>TP53<span class="sc">$</span>parents) <span class="sc">&gt;=</span> <span class="dv">1</span> ){</span>
-<span id="cb58-26"><a href="including-clinical-variables.html#cb58-26" aria-hidden="true" tabindex="-1"></a>        bnCovLargeFit <span class="ot">&lt;-</span> bnlearn<span class="sc">::</span><span class="fu">bn.fit</span>(bnCovTrain<span class="sc">$</span>av, bnCovTrain<span class="sc">$</span>df)</span>
-<span id="cb58-27"><a href="including-clinical-variables.html#cb58-27" aria-hidden="true" tabindex="-1"></a>        pred <span class="ot">&lt;-</span> sigmoid<span class="sc">::</span><span class="fu">sigmoid</span>(<span class="fu">predict</span>(bnCovLargeFit, <span class="at">node=</span><span class="st">&quot;TP53&quot;</span>, <span class="at">data=</span>bnCovTest, <span class="at">method =</span> <span class="st">&quot;bayes-lw&quot;</span>)) <span class="co"># Use sigmoid function</span></span>
-<span id="cb58-28"><a href="including-clinical-variables.html#cb58-28" aria-hidden="true" tabindex="-1"></a>        classRes[[pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum]]] <span class="ot">&lt;-</span> pred</span>
-<span id="cb58-29"><a href="including-clinical-variables.html#cb58-29" aria-hidden="true" tabindex="-1"></a>        nets[[pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum]]] <span class="ot">&lt;-</span> bnCovTrain</span>
-<span id="cb58-30"><a href="including-clinical-variables.html#cb58-30" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
-<span id="cb58-31"><a href="including-clinical-variables.html#cb58-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">message</span>(<span class="fu">paste0</span>(<span class="st">&quot;Among pathway &quot;</span>, pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum], <span class="st">&quot;, no parent node of TP53 is found, or inferred network is not dag.&quot;</span>))</span>
-<span id="cb58-32"><a href="including-clinical-variables.html#cb58-32" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb58-33"><a href="including-clinical-variables.html#cb58-33" aria-hidden="true" tabindex="-1"></a>      parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)    </span>
-<span id="cb58-34"><a href="including-clinical-variables.html#cb58-34" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb58-35"><a href="including-clinical-variables.html#cb58-35" aria-hidden="true" tabindex="-1"></a>  allnets[[f]] <span class="ot">&lt;-</span> nets</span>
-<span id="cb58-36"><a href="including-clinical-variables.html#cb58-36" aria-hidden="true" tabindex="-1"></a>  allClassRes[[f]] <span class="ot">&lt;-</span> classRes</span>
-<span id="cb58-37"><a href="including-clinical-variables.html#cb58-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<span id="cb58-5"><a href="including-clinical-variables.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;trainDf.rda&quot;</span>)</span>
+<span id="cb58-6"><a href="including-clinical-variables.html#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;testDf.rda&quot;</span>)</span>
+<span id="cb58-7"><a href="including-clinical-variables.html#cb58-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-8"><a href="including-clinical-variables.html#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (f <span class="cf">in</span> <span class="fu">seq_len</span>(<span class="dv">5</span>)) {</span>
+<span id="cb58-9"><a href="including-clinical-variables.html#cb58-9" aria-hidden="true" tabindex="-1"></a>  nets <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb58-10"><a href="including-clinical-variables.html#cb58-10" aria-hidden="true" tabindex="-1"></a>  classRes <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb58-11"><a href="including-clinical-variables.html#cb58-11" aria-hidden="true" tabindex="-1"></a>  foldTrainIndex <span class="ot">&lt;-</span> trainIndex[[f]]</span>
+<span id="cb58-12"><a href="including-clinical-variables.html#cb58-12" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Recursively fit and test for significant pathways</span></span>
+<span id="cb58-13"><a href="including-clinical-variables.html#cb58-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (pnum <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">dim</span>(<span class="fu">subset</span>(pway<span class="sc">@</span>result, p.adjust<span class="sc">&lt;</span><span class="fl">1e-5</span>))[<span class="dv">1</span>], <span class="dv">1</span>)) {</span>
+<span id="cb58-14"><a href="including-clinical-variables.html#cb58-14" aria-hidden="true" tabindex="-1"></a>      cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">12</span>)</span>
+<span id="cb58-15"><a href="including-clinical-variables.html#cb58-15" aria-hidden="true" tabindex="-1"></a>      bnCovTrain <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway, <span class="fu">assay</span>(trainDf[[f]]), <span class="at">pathNum=</span>pnum, <span class="at">layout=</span><span class="st">&quot;sugiyama&quot;</span>,</span>
+<span id="cb58-16"><a href="including-clinical-variables.html#cb58-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">expSample=</span><span class="fu">rownames</span>(metadata[foldTrainIndex,]), <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">strType=</span><span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb58-17"><a href="including-clinical-variables.html#cb58-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">otherVar=</span>metadata[foldTrainIndex,], <span class="at">otherVarName=</span><span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;Category&quot;</span>),</span>
+<span id="cb58-18"><a href="including-clinical-variables.html#cb58-18" aria-hidden="true" tabindex="-1"></a>                               <span class="at">R=</span><span class="dv">50</span>, <span class="at">cl=</span>cl, <span class="at">returnNet=</span>T)</span>
+<span id="cb58-19"><a href="including-clinical-variables.html#cb58-19" aria-hidden="true" tabindex="-1"></a>      <span class="do">## Return only DF for testing</span></span>
+<span id="cb58-20"><a href="including-clinical-variables.html#cb58-20" aria-hidden="true" tabindex="-1"></a>      bnCovTest <span class="ot">&lt;-</span> <span class="fu">bngeneplot</span>(pway, <span class="fu">assay</span>(testDf[[f]]), <span class="at">pathNum=</span>pnum,</span>
+<span id="cb58-21"><a href="including-clinical-variables.html#cb58-21" aria-hidden="true" tabindex="-1"></a>                               <span class="at">expSample=</span><span class="fu">rownames</span>(metadata[<span class="sc">-</span>foldTrainIndex,]),</span>
+<span id="cb58-22"><a href="including-clinical-variables.html#cb58-22" aria-hidden="true" tabindex="-1"></a>                               <span class="at">otherVar=</span>metadata[<span class="sc">-</span>foldTrainIndex,],  <span class="at">otherVarName=</span><span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>,<span class="st">&quot;Gender&quot;</span>,<span class="st">&quot;TP53&quot;</span>,<span class="st">&quot;Category&quot;</span>),</span>
+<span id="cb58-23"><a href="including-clinical-variables.html#cb58-23" aria-hidden="true" tabindex="-1"></a>                               <span class="at">onlyDf=</span>T)</span>
+<span id="cb58-24"><a href="including-clinical-variables.html#cb58-24" aria-hidden="true" tabindex="-1"></a>      bnCovTrain<span class="sc">$</span>av <span class="ot">&lt;-</span> <span class="fu">chooseEdgeDir</span>(bnCovTrain<span class="sc">$</span>av, bnCovTrain<span class="sc">$</span>df, <span class="at">scoreType=</span><span class="st">&quot;mi-cg&quot;</span>, <span class="at">debug=</span><span class="cn">FALSE</span>)</span>
+<span id="cb58-25"><a href="including-clinical-variables.html#cb58-25" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb58-26"><a href="including-clinical-variables.html#cb58-26" aria-hidden="true" tabindex="-1"></a>      <span class="do">## If DAG and TP53 have parents</span></span>
+<span id="cb58-27"><a href="including-clinical-variables.html#cb58-27" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> ( igraph<span class="sc">::</span><span class="fu">is.dag</span>(bnlearn<span class="sc">::</span><span class="fu">as.igraph</span>(bnCovTrain<span class="sc">$</span>av)) <span class="sc">&amp;&amp;</span> <span class="fu">length</span>(bnCovTrain<span class="sc">$</span>av<span class="sc">$</span>nodes<span class="sc">$</span>TP53<span class="sc">$</span>parents) <span class="sc">&gt;=</span> <span class="dv">1</span> ){</span>
+<span id="cb58-28"><a href="including-clinical-variables.html#cb58-28" aria-hidden="true" tabindex="-1"></a>        bnCovLargeFit <span class="ot">&lt;-</span> bnlearn<span class="sc">::</span><span class="fu">bn.fit</span>(bnCovTrain<span class="sc">$</span>av, bnCovTrain<span class="sc">$</span>df)</span>
+<span id="cb58-29"><a href="including-clinical-variables.html#cb58-29" aria-hidden="true" tabindex="-1"></a>        pred <span class="ot">&lt;-</span> sigmoid<span class="sc">::</span><span class="fu">sigmoid</span>(<span class="fu">predict</span>(bnCovLargeFit, <span class="at">node=</span><span class="st">&quot;TP53&quot;</span>, <span class="at">data=</span>bnCovTest, <span class="at">method =</span> <span class="st">&quot;bayes-lw&quot;</span>)) <span class="co"># Use sigmoid function</span></span>
+<span id="cb58-30"><a href="including-clinical-variables.html#cb58-30" aria-hidden="true" tabindex="-1"></a>        classRes[[pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum]]] <span class="ot">&lt;-</span> pred</span>
+<span id="cb58-31"><a href="including-clinical-variables.html#cb58-31" aria-hidden="true" tabindex="-1"></a>        nets[[pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum]]] <span class="ot">&lt;-</span> bnCovTrain</span>
+<span id="cb58-32"><a href="including-clinical-variables.html#cb58-32" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb58-33"><a href="including-clinical-variables.html#cb58-33" aria-hidden="true" tabindex="-1"></a>        <span class="fu">message</span>(<span class="fu">paste0</span>(<span class="st">&quot;Among pathway &quot;</span>, pway<span class="sc">@</span>result<span class="sc">$</span>Description[pnum], <span class="st">&quot;, no parent node of TP53 is found, or inferred network is not dag.&quot;</span>))</span>
+<span id="cb58-34"><a href="including-clinical-variables.html#cb58-34" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb58-35"><a href="including-clinical-variables.html#cb58-35" aria-hidden="true" tabindex="-1"></a>      parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)    </span>
+<span id="cb58-36"><a href="including-clinical-variables.html#cb58-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb58-37"><a href="including-clinical-variables.html#cb58-37" aria-hidden="true" tabindex="-1"></a>  allnets[[f]] <span class="ot">&lt;-</span> nets</span>
+<span id="cb58-38"><a href="including-clinical-variables.html#cb58-38" aria-hidden="true" tabindex="-1"></a>  allClassRes[[f]] <span class="ot">&lt;-</span> classRes</span>
+<span id="cb58-39"><a href="including-clinical-variables.html#cb58-39" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Using the library <code>pROC</code>, calculate the area under ROC (auROC) <span class="citation">(<a href="#ref-Robin2011-mk" role="doc-biblioref">Robin et al. 2011</a>)</span>.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="including-clinical-variables.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pROC)</span>
 <span id="cb59-2"><a href="including-clinical-variables.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplotify)</span>
@@ -795,101 +797,24 @@ Sd
 <tbody>
 <tr>
 <td style="text-align:left;">
-DNA.strand.elongation
-</td>
-<td style="text-align:right;">
-0.7588412
-</td>
-<td style="text-align:right;">
-0.0508267
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 DNA.Replication
 </td>
 <td style="text-align:right;">
-0.7524678
+0.7609257
 </td>
 <td style="text-align:right;">
-0.0440225
+0.0383133
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-EML4.and.NUDC.in.mitotic.spindle.formation
+DNA.strand.elongation
 </td>
 <td style="text-align:right;">
-0.7518177
+0.7565509
 </td>
 <td style="text-align:right;">
-0.0497212
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Synthesis.of.DNA
-</td>
-<td style="text-align:right;">
-0.7451014
-</td>
-<td style="text-align:right;">
-0.0551972
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-S.Phase
-</td>
-<td style="text-align:right;">
-0.7408261
-</td>
-<td style="text-align:right;">
-0.0525206
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mitotic.Anaphase
-</td>
-<td style="text-align:right;">
-0.7356504
-</td>
-<td style="text-align:right;">
-0.0908257
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Amplification..of.signal.from.unattached..kinetochores.via.a.MAD2..inhibitory.signal
-</td>
-<td style="text-align:right;">
-0.7318830
-</td>
-<td style="text-align:right;">
-0.0360886
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-HDR.through.Homologous.Recombination..HRR.
-</td>
-<td style="text-align:right;">
-0.7243249
-</td>
-<td style="text-align:right;">
-0.0215953
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mitotic.Metaphase.and.Anaphase
-</td>
-<td style="text-align:right;">
-0.7226147
-</td>
-<td style="text-align:right;">
-0.0842764
+0.0490171
 </td>
 </tr>
 <tr>
@@ -897,43 +822,32 @@ Mitotic.Metaphase.and.Anaphase
 Homologous.DNA.Pairing.and.Strand.Exchange
 </td>
 <td style="text-align:right;">
-0.7225930
+0.7420540
 </td>
 <td style="text-align:right;">
-0.0308873
+0.0386394
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Activation.of.ATR.in.response.to.replication.stress
+Synthesis.of.DNA
 </td>
 <td style="text-align:right;">
-0.7198187
+0.7378731
 </td>
 <td style="text-align:right;">
-0.0268747
+0.0637475
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Cell.Cycle.Checkpoints
+S.Phase
 </td>
 <td style="text-align:right;">
-0.7099327
+0.7285564
 </td>
 <td style="text-align:right;">
-0.1033017
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-RHO.GTPases.Activate.Formins
-</td>
-<td style="text-align:right;">
-0.6909682
-</td>
-<td style="text-align:right;">
-0.0663368
+0.0576509
 </td>
 </tr>
 <tr>
@@ -941,32 +855,43 @@ RHO.GTPases.Activate.Formins
 Amplification.of.signal.from.the.kinetochores
 </td>
 <td style="text-align:right;">
-0.6883793
+0.7282299
 </td>
 <td style="text-align:right;">
-0.0713915
+0.0308616
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Resolution.of.Sister.Chromatid.Cohesion
+Amplification..of.signal.from.unattached..kinetochores.via.a.MAD2..inhibitory.signal
 </td>
 <td style="text-align:right;">
-0.6768012
+0.7257576
 </td>
 <td style="text-align:right;">
-0.1351854
+0.0647935
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Mitotic.Spindle.Checkpoint
+HDR.through.Homologous.Recombination..HRR.
 </td>
 <td style="text-align:right;">
-0.6258742
+0.7237311
 </td>
 <td style="text-align:right;">
-0.1463367
+0.0391381
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cell.Cycle.Checkpoints
+</td>
+<td style="text-align:right;">
+0.7139952
+</td>
+<td style="text-align:right;">
+0.0684734
 </td>
 </tr>
 <tr>
@@ -974,10 +899,65 @@ Mitotic.Spindle.Checkpoint
 Mitotic.Prometaphase
 </td>
 <td style="text-align:right;">
-0.6174379
+0.7111572
 </td>
 <td style="text-align:right;">
-0.1506369
+0.0340195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic.Spindle.Checkpoint
+</td>
+<td style="text-align:right;">
+0.7107136
+</td>
+<td style="text-align:right;">
+0.0868095
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EML4.and.NUDC.in.mitotic.spindle.formation
+</td>
+<td style="text-align:right;">
+0.7070974
+</td>
+<td style="text-align:right;">
+0.0362885
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RHO.GTPases.Activate.Formins
+</td>
+<td style="text-align:right;">
+0.7057068
+</td>
+<td style="text-align:right;">
+0.0969213
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mitotic.Metaphase.and.Anaphase
+</td>
+<td style="text-align:right;">
+0.7043964
+</td>
+<td style="text-align:right;">
+0.0817095
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Resolution.of.Sister.Chromatid.Cohesion
+</td>
+<td style="text-align:right;">
+0.7029717
+</td>
+<td style="text-align:right;">
+0.0664612
 </td>
 </tr>
 <tr>
@@ -985,10 +965,10 @@ Mitotic.Prometaphase
 Separation.of.Sister.Chromatids
 </td>
 <td style="text-align:right;">
-0.5977728
+0.6453789
 </td>
 <td style="text-align:right;">
-0.1095747
+0.1235229
 </td>
 </tr>
 </tbody>
@@ -1023,10 +1003,10 @@ Separation.of.Sister.Chromatids
 <span id="cb61-5"><a href="including-clinical-variables.html#cb61-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-6"><a href="including-clinical-variables.html#cb61-6" aria-hidden="true" tabindex="-1"></a>tp53low <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&lt;</span> <span class="fl">0.5</span>))</span>
 <span id="cb61-7"><a href="including-clinical-variables.html#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53low)</span></code></pre></div>
-<pre><code>FALSE [1] 5192   21</code></pre>
+<pre><code>FALSE [1] 5161   47</code></pre>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="including-clinical-variables.html#cb63-1" aria-hidden="true" tabindex="-1"></a>tp53high <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&gt;</span> <span class="fl">0.5</span>))</span>
 <span id="cb63-2"><a href="including-clinical-variables.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53high)</span></code></pre></div>
-<pre><code>FALSE [1] 4823   21</code></pre>
+<pre><code>FALSE [1] 4748   47</code></pre>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="including-clinical-variables.html#cb65-1" aria-hidden="true" tabindex="-1"></a>difMeanTp53 <span class="ot">&lt;-</span> <span class="fu">apply</span>(tp53high, <span class="dv">2</span>, mean) <span class="sc">-</span> <span class="fu">apply</span>(tp53low, <span class="dv">2</span>, mean)</span>
 <span id="cb65-2"><a href="including-clinical-variables.html#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(difMeanTp53[<span class="fu">order</span>(<span class="fu">abs</span>(difMeanTp53), <span class="at">decreasing=</span>T)]), <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">&quot;difference&quot;</span>))</span></code></pre></div>
 <table>
@@ -1042,10 +1022,26 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
+MCM10
+</td>
+<td style="text-align:right;">
+0.4832193
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ORC1
+</td>
+<td style="text-align:right;">
+0.4383629
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 RFC4
 </td>
 <td style="text-align:right;">
-0.4812663
+0.4289354
 </td>
 </tr>
 <tr>
@@ -1053,39 +1049,23 @@ RFC4
 MCM2
 </td>
 <td style="text-align:right;">
-0.4718431
+0.4251968
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CDC45
+E2F3
 </td>
 <td style="text-align:right;">
-0.4129495
+0.4033136
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-FEN1
+CCNA2
 </td>
 <td style="text-align:right;">
-0.3663326
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PRIM1
-</td>
-<td style="text-align:right;">
-0.3624641
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-GINS2
-</td>
-<td style="text-align:right;">
-0.3452378
+0.3763328
 </td>
 </tr>
 </tbody>
@@ -1107,10 +1087,10 @@ GINS2
 <span id="cb67-5"><a href="including-clinical-variables.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-6"><a href="including-clinical-variables.html#cb67-6" aria-hidden="true" tabindex="-1"></a>tp53low <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&lt;</span> <span class="fl">0.01</span>))</span>
 <span id="cb67-7"><a href="including-clinical-variables.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53low)</span></code></pre></div>
-<pre><code>FALSE [1] 1789   21</code></pre>
+<pre><code>FALSE [1] 1824   47</code></pre>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="including-clinical-variables.html#cb69-1" aria-hidden="true" tabindex="-1"></a>tp53high <span class="ot">&lt;-</span> <span class="fu">cpdist</span>(topFit, <span class="at">nodes=</span>candNodes, <span class="at">evidence=</span>(TP53 <span class="sc">&gt;</span> <span class="fl">0.99</span>))</span>
 <span id="cb69-2"><a href="including-clinical-variables.html#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(tp53high)</span></code></pre></div>
-<pre><code>FALSE [1] 1438   21</code></pre>
+<pre><code>FALSE [1] 1461   47</code></pre>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="including-clinical-variables.html#cb71-1" aria-hidden="true" tabindex="-1"></a>difMeanTp53 <span class="ot">&lt;-</span> <span class="fu">apply</span>(tp53high, <span class="dv">2</span>, mean) <span class="sc">-</span> <span class="fu">apply</span>(tp53low, <span class="dv">2</span>, mean)</span>
 <span id="cb71-2"><a href="including-clinical-variables.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(difMeanTp53[<span class="fu">order</span>(<span class="fu">abs</span>(difMeanTp53), <span class="at">decreasing=</span>T)]), <span class="at">col.names=</span><span class="fu">c</span>(<span class="st">&quot;difference&quot;</span>))</span></code></pre></div>
 <table>
@@ -1126,10 +1106,18 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
-RFC4
+MCM10
 </td>
 <td style="text-align:right;">
-0.8723096
+0.9593010
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ORC1
+</td>
+<td style="text-align:right;">
+0.8898352
 </td>
 </tr>
 <tr>
@@ -1137,7 +1125,23 @@ RFC4
 MCM2
 </td>
 <td style="text-align:right;">
-0.8147077
+0.8878537
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RFC4
+</td>
+<td style="text-align:right;">
+0.8669377
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E2F3
+</td>
+<td style="text-align:right;">
+0.7613678
 </td>
 </tr>
 <tr>
@@ -1145,31 +1149,7 @@ MCM2
 CDC45
 </td>
 <td style="text-align:right;">
-0.7402244
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-FEN1
-</td>
-<td style="text-align:right;">
-0.6454499
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-PRIM1
-</td>
-<td style="text-align:right;">
-0.6270896
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-GINS2
-</td>
-<td style="text-align:right;">
-0.6064366
+0.7414354
 </td>
 </tr>
 </tbody>
@@ -1206,10 +1186,10 @@ difference
 <tbody>
 <tr>
 <td style="text-align:left;">
-RFC4
+MCM10
 </td>
 <td style="text-align:right;">
-0.5741641
+0.6676299
 </td>
 </tr>
 <tr>
@@ -1217,39 +1197,39 @@ RFC4
 MCM2
 </td>
 <td style="text-align:right;">
-0.5474093
+0.5995978
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-CDC45
+ORC1
 </td>
 <td style="text-align:right;">
-0.4929598
+0.5963222
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-FEN1
+RFC4
 </td>
 <td style="text-align:right;">
-0.4299743
+0.5633561
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-PRIM1
+CCNA2
 </td>
 <td style="text-align:right;">
-0.4167484
+0.5150587
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-GINS1
+E2F3
 </td>
 <td style="text-align:right;">
-0.4092903
+0.4987642
 </td>
 </tr>
 </tbody>
@@ -1269,7 +1249,7 @@ GINS1
 <thead>
 <tr>
 <th style="text-align:right;">
-RFC2
+DBF4
 </th>
 <th style="text-align:right;">
 weights
@@ -1279,50 +1259,50 @@ weights
 <tbody>
 <tr>
 <td style="text-align:right;">
-11.112145
+9.673024
 </td>
 <td style="text-align:right;">
-0.3151505
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-10.639350
-</td>
-<td style="text-align:right;">
-0.5793816
+0.7896740
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-11.063695
+10.265972
 </td>
 <td style="text-align:right;">
-0.4583887
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-9.494361
-</td>
-<td style="text-align:right;">
-0.9799395
+0.7225084
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-11.593488
+9.010230
 </td>
 <td style="text-align:right;">
-0.3257930
+0.8671744
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-11.316921
+6.949460
 </td>
 <td style="text-align:right;">
-0.3817784
+0.9847168
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10.197650
+</td>
+<td style="text-align:right;">
+0.1381825
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10.846223
+</td>
+<td style="text-align:right;">
+0.3223060
 </td>
 </tr>
 </tbody>
