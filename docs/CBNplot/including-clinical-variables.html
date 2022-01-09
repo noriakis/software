@@ -288,9 +288,10 @@ div.csl-indent {
 <span id="cb31-7"><a href="including-clinical-variables.html#cb31-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">otherVar=</span>metadata,</span>
 <span id="cb31-8"><a href="including-clinical-variables.html#cb31-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">otherVarName=</span><span class="fu">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Category&quot;</span>),</span>
 <span id="cb31-9"><a href="including-clinical-variables.html#cb31-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">R=</span><span class="dv">50</span>, <span class="at">cl=</span>parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">10</span>),</span>
-<span id="cb31-10"><a href="including-clinical-variables.html#cb31-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">returnNet=</span>T)</span>
-<span id="cb31-11"><a href="including-clinical-variables.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Check DAG</span></span>
-<span id="cb31-12"><a href="including-clinical-variables.html#cb31-12" aria-hidden="true" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">is.dag</span>(<span class="fu">as.igraph</span>(bnCov<span class="sc">$</span>av))</span></code></pre></div>
+<span id="cb31-10"><a href="including-clinical-variables.html#cb31-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">returnNet=</span>T,</span>
+<span id="cb31-11"><a href="including-clinical-variables.html#cb31-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">shadowText=</span>T)</span>
+<span id="cb31-12"><a href="including-clinical-variables.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Check DAG</span></span>
+<span id="cb31-13"><a href="including-clinical-variables.html#cb31-13" aria-hidden="true" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">is.dag</span>(<span class="fu">as.igraph</span>(bnCov<span class="sc">$</span>av))</span></code></pre></div>
 <pre><code>FALSE [1] TRUE</code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="including-clinical-variables.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Fit the parameter to network based on the data</span></span>
 <span id="cb33-2"><a href="including-clinical-variables.html#cb33-2" aria-hidden="true" tabindex="-1"></a>bnFit <span class="ot">&lt;-</span> <span class="fu">bn.fit</span>(bnCov<span class="sc">$</span>av, bnCov<span class="sc">$</span>df)</span></code></pre></div>
@@ -361,7 +362,7 @@ difference
 M Phase
 </td>
 <td style="text-align:right;">
-23.34542
+23.38221
 </td>
 </tr>
 <tr>
@@ -369,7 +370,7 @@ M Phase
 Mitotic Prometaphase
 </td>
 <td style="text-align:right;">
-21.11944
+21.10984
 </td>
 </tr>
 <tr>
@@ -377,7 +378,7 @@ Mitotic Prometaphase
 Mitotic Metaphase and Anaphase
 </td>
 <td style="text-align:right;">
-20.76569
+20.77589
 </td>
 </tr>
 <tr>
@@ -385,7 +386,7 @@ Mitotic Metaphase and Anaphase
 Mitotic Anaphase
 </td>
 <td style="text-align:right;">
-20.62871
+20.64902
 </td>
 </tr>
 <tr>
@@ -393,7 +394,7 @@ Mitotic Anaphase
 RHO GTPase Effectors
 </td>
 <td style="text-align:right;">
-19.45905
+19.65585
 </td>
 </tr>
 <tr>
@@ -401,7 +402,7 @@ RHO GTPase Effectors
 Separation of Sister Chromatids
 </td>
 <td style="text-align:right;">
-19.40454
+19.37688
 </td>
 </tr>
 </tbody>

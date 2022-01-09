@@ -272,7 +272,7 @@ div.csl-indent {
 <span id="cb84-29"><a href="comparing-networks.html#cb84-29" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resDF) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dataset&quot;</span>,<span class="st">&quot;path_number&quot;</span>,<span class="st">&quot;gene_number&quot;</span>,<span class="st">&quot;R&quot;</span>,<span class="st">&quot;threshold&quot;</span>,<span class="st">&quot;mean&quot;</span>,<span class="st">&quot;sd&quot;</span>)</span>
 <span id="cb84-30"><a href="comparing-networks.html#cb84-30" aria-hidden="true" tabindex="-1"></a>pathway_name <span class="ot">&lt;-</span> <span class="fu">sapply</span>(resDF<span class="sc">$</span>path_number, <span class="cf">function</span>(x) pway<span class="sc">@</span>result<span class="sc">$</span>Description[<span class="fu">as.numeric</span>(x)])</span>
 <span id="cb84-31"><a href="comparing-networks.html#cb84-31" aria-hidden="true" tabindex="-1"></a>resDF<span class="sc">$</span>label <span class="ot">&lt;-</span> <span class="fu">paste0</span>(resDF<span class="sc">$</span>gene_number, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">(&quot;</span>, stringr<span class="sc">::</span><span class="fu">str_wrap</span>(pathway_name,<span class="dv">10</span>),<span class="st">&quot;)&quot;</span>)</span>
-<span id="cb84-32"><a href="comparing-networks.html#cb84-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-32"><a href="comparing-networks.html#cb84-32" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span>
 <span id="cb84-33"><a href="comparing-networks.html#cb84-33" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(resDF)</span></code></pre></div>
 <table>
 <thead>
@@ -321,10 +321,10 @@ TCGA
 default
 </td>
 <td style="text-align:left;">
-0.853403795842686
+0.867600288091004
 </td>
 <td style="text-align:left;">
-0.0251470800061369
+0.0115275569347726
 </td>
 <td style="text-align:left;">
 46
@@ -349,10 +349,10 @@ TCGA
 0.8
 </td>
 <td style="text-align:left;">
-0.916561280908391
+0.909591409865451
 </td>
 <td style="text-align:left;">
-0.0226807737686349
+0.0230213223701622
 </td>
 <td style="text-align:left;">
 46
@@ -377,10 +377,10 @@ TCGA
 default
 </td>
 <td style="text-align:left;">
-0.908741158927365
+0.887403892692476
 </td>
 <td style="text-align:left;">
-0.00848137615741657
+0.02253529062327
 </td>
 <td style="text-align:left;">
 46
@@ -405,10 +405,10 @@ TCGA
 0.8
 </td>
 <td style="text-align:left;">
-0.950468055786369
+0.953584990241036
 </td>
 <td style="text-align:left;">
-0.0110066613604452
+0.0195505593125417
 </td>
 <td style="text-align:left;">
 46
@@ -469,80 +469,89 @@ Replication)
 FALSE   Random/Generated Bayesian network
 FALSE 
 FALSE   model:
-FALSE    [ORC2][GINS2][CDT1|GINS2][GINS3|GINS2][RFC2|CDT1][CDC45|GINS2:CDT1]
-FALSE    [ORC1|CDC45:CDT1][PSMD4|RFC2][MCM7|RFC2:CDT1][UBE2C|CDC45:CDT1]
-FALSE    [MCM10|CDC45:UBE2C][E2F1|CDC45:CDT1:UBE2C][POLD2|RFC2:ORC1:CDC45]
-FALSE    [MCM8|ORC1:PSMD4:CDT1:UBE2C][ORC6|RFC2:CDC45:E2F1:GINS2:UBE2C]
-FALSE    [CDC6|MCM10:ORC1:CDC45:UBE2C][GINS1|MCM10:UBE2C][MCM4|ORC1:POLD2]
-FALSE    [PCNA|RFC2:MCM8][RFC3|ORC1:MCM8][CCNA2|MCM10:ORC1:UBE2C]
-FALSE    [MCM2|ORC1:GINS2:PCNA][CCNE1|CDC6:PSMD4:UBE2C][UBE2S|GINS1:MCM7:UBE2C]
-FALSE    [ANAPC1|ORC1:MCM4:MCM8:CCNA2][RFC4|MCM4:PSMD4]
-FALSE    [DBF4|RFC2:CCNE1:ORC2:GINS2:CCNA2][PSMB5|RFC2:POLD2:UBE2S][ORC4|ORC2:ANAPC1]
-FALSE    [PRIM1|MCM2:MCM8:PCNA][PSMA7|PSMB5:UBE2S:CCNA2:UBE2C]
-FALSE    [POLE2|RFC2:GINS1:PSMA7:POLD2:UBE2S]
-FALSE    [PSMA2|DBF4:MCM2:PSMA7:POLD2:ORC4:ANAPC1:UBE2C][PSMD14|ORC1:PSMB5:PSMA7:ORC4]
-FALSE    [DNA2|DBF4:MCM10:CDC6:PSMA7:POLD2:MCM8][SKP2|GINS1:PSMA7:CCNE1]
+FALSE    [ORC2][ORC4][GINS2][CDT1|GINS2][RFC2|CDT1][CDC45|GINS2:CDT1][ORC1|CDC45:CDT1]
+FALSE    [PSMD4|RFC2][MCM7|RFC2:CDT1][UBE2C|CDC45:CDT1][MCM10|CDC45:UBE2C]
+FALSE    [MCM2|ORC1:GINS2][E2F1|CDC45:CDT1:UBE2C][MCM4|ORC1]
+FALSE    [MCM8|ORC1:PSMD4:CDT1:UBE2C][RFC4|PSMD4][ORC6|RFC2:CDC45:E2F1:GINS2:UBE2C]
+FALSE    [CDC6|MCM10:ORC1:CDC45:UBE2C][GINS1|MCM10:UBE2C][PCNA|RFC2:MCM8]
+FALSE    [RFC3|ORC1:MCM8][CCNA2|MCM10:ORC1:UBE2C][FEN1|ORC1:E2F1:GINS2]
+FALSE    [DBF4|RFC2:GINS2:CCNA2:MCM7][CCNE1|CDC6:ORC4:PSMD4:UBE2C]
+FALSE    [POLD2|RFC2:ORC1:CDC45:CDC6][UBE2S|GINS1:MCM7:UBE2C][ANAPC1|ORC1:MCM4:CCNA2]
+FALSE    [CCNE2|E2F1:MCM4:MCM8:GINS2:PCNA:CCNA2][POLE|E2F1:PCNA:PSMD4:MCM7]
+FALSE    [PRIM1|MCM2:MCM8:PCNA][POLE2|RFC2:GINS1:POLD2:UBE2S][PSMB5|RFC2:POLD2]
+FALSE    [PSMA2|DBF4:MCM2:POLD2:ORC4:ANAPC1:UBE2C][PSMA7|PSMB5:UBE2S:CCNA2:UBE2C]
+FALSE    [LIG1|CDC6:PSMB5:MCM4:ORC2:MCM8:PSMD4:CCNE2:POLE:PRIM1]
+FALSE    [E2F3|MCM2:ORC6:PSMB5:CCNE1:UBE2S:ORC4:GINS2:PSMD4:MCM7]
+FALSE    [GINS4|MCM10:ORC1:PSMA2][RFC5|ORC6:CDC6:LIG1:POLE:PRIM1]
+FALSE    [PSMD14|ORC1:PSMB5:PSMA7:ORC4][DNA2|DBF4:MCM10:CDC6:PSMA7:POLD2:MCM8]
+FALSE    [SKP2|GINS1:PSMA7:CCNE1][ORC5|DBF4:RFC2:E2F1:E2F3:ANAPC1:POLE]
 FALSE    [PSMA6|POLE2:PSMB5:PSMA7:E2F1:MCM4:UBE2S:PSMD14:GINS2:CCNA2:ANAPC1:PSMD4:PRIM1]
-FALSE    [GINS4|MCM10:ORC1:PSMA2]
-FALSE    [CCNE2|POLE2:PSMA7:E2F1:MCM4:MCM8:GINS2:PCNA:DNA2:CCNA2]
-FALSE    [POLE|E2F1:PCNA:DNA2:PSMD4:MCM7]
-FALSE    [LIG1|CDC6:PSMB5:MCM4:UBE2S:ORC2:MCM8:PSMD4:CCNE2:POLE:PRIM1]
-FALSE    [E2F3|MCM2:ORC6:PSMB5:CCNE1:UBE2S:ORC4:GINS2:PSMD4:MCM7:CCNE2]
-FALSE    [RFC5|ORC6:CDC6:LIG1:POLE:PRIM1][PRIM2|PSMA6:E2F3:SKP2:RFC4:PRIM1]
-FALSE    [ORC5|DBF4:RFC2:E2F1:E2F3:ANAPC1:POLE][FEN1|ORC1:E2F1:LIG1:GINS2]
+FALSE    [GINS3|E2F1:RFC5:GINS2:FEN1][PRIM2|PSMA6:E2F3:SKP2:RFC4:PRIM1]
 FALSE   nodes:                                 46 
-FALSE   arcs:                                  170 
+FALSE   arcs:                                  158 
 FALSE     undirected arcs:                     0 
-FALSE     directed arcs:                       170 
-FALSE   average markov blanket size:           17.43 
-FALSE   average neighbourhood size:            7.39 
-FALSE   average branching factor:              3.70 
+FALSE     directed arcs:                       158 
+FALSE   average markov blanket size:           15.78 
+FALSE   average neighbourhood size:            6.87 
+FALSE   average branching factor:              3.43 
 FALSE 
 FALSE   generation algorithm:                  Empty</code></pre>
+<p>The same can be done for <code>bnpathplot</code>.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="comparing-networks.html#cb88-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">12</span>)</span>
+<span id="cb88-2"><a href="comparing-networks.html#cb88-2" aria-hidden="true" tabindex="-1"></a>n1 <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway, vstedTCGA, <span class="at">nCategory =</span> <span class="dv">15</span>, <span class="at">returnNet=</span>T, <span class="at">R=</span><span class="dv">200</span>, <span class="at">cl=</span>cl)</span>
+<span id="cb88-3"><a href="comparing-networks.html#cb88-3" aria-hidden="true" tabindex="-1"></a>n2 <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway, vstedTCGA, <span class="at">nCategory =</span> <span class="dv">15</span>, <span class="at">returnNet=</span>T, <span class="at">R=</span><span class="dv">200</span>, <span class="at">cl=</span>cl)</span>
+<span id="cb88-4"><a href="comparing-networks.html#cb88-4" aria-hidden="true" tabindex="-1"></a>n3 <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway, vstedTCGA, <span class="at">nCategory =</span> <span class="dv">15</span>, <span class="at">returnNet=</span>T, <span class="at">R=</span><span class="dv">200</span>, <span class="at">cl=</span>cl)</span>
+<span id="cb88-5"><a href="comparing-networks.html#cb88-5" aria-hidden="true" tabindex="-1"></a>n4 <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway, vstedTCGA, <span class="at">nCategory =</span> <span class="dv">15</span>, <span class="at">returnNet=</span>T, <span class="at">R=</span><span class="dv">200</span>, <span class="at">cl=</span>cl)</span>
+<span id="cb88-6"><a href="comparing-networks.html#cb88-6" aria-hidden="true" tabindex="-1"></a>n5 <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway, vstedTCGA, <span class="at">nCategory =</span> <span class="dv">15</span>, <span class="at">returnNet=</span>T, <span class="at">R=</span><span class="dv">200</span>, <span class="at">cl=</span>cl)</span>
+<span id="cb88-7"><a href="comparing-networks.html#cb88-7" aria-hidden="true" tabindex="-1"></a>nets <span class="ot">&lt;-</span> <span class="fu">list</span>(n1<span class="sc">$</span>av, n2<span class="sc">$</span>av, n3<span class="sc">$</span>av, n4<span class="sc">$</span>av, n5<span class="sc">$</span>av)</span>
+<span id="cb88-8"><a href="comparing-networks.html#cb88-8" aria-hidden="true" tabindex="-1"></a>fvalues <span class="ot">&lt;-</span> <span class="fu">compareBNs</span>(nets)</span>
+<span id="cb88-9"><a href="comparing-networks.html#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(fvalues)</span></code></pre></div>
+<pre><code>FALSE [1] 0.9663173</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="comparing-networks.html#cb90-1" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
 </div>
 <div id="testing-r" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Testing R</h2>
 <p>We provide the diagnostic function of inferred network across multiple bootstrap numbers. We can test how R values affect the resulting network. It is very time consuming to test many genes, thus the setting up <code>cl</code> argument using library <code>parallel</code> is suggested. We can specify which scoring function to use by <code>scoreType</code>. Additionally, returned strength data frame as well as raw data frame can be used to assess various metrics and thresholds like structural hamming distance.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="comparing-networks.html#cb88-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
-<span id="cb88-2"><a href="comparing-networks.html#cb88-2" aria-hidden="true" tabindex="-1"></a>pathTest <span class="ot">&lt;-</span> <span class="fu">bnpathtest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>,</span>
-<span id="cb88-3"><a href="comparing-networks.html#cb88-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">300</span>, <span class="dv">10</span>), <span class="at">nCategory =</span> <span class="dv">15</span>,</span>
-<span id="cb88-4"><a href="comparing-networks.html#cb88-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb88-5"><a href="comparing-networks.html#cb88-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
-<span id="cb88-6"><a href="comparing-networks.html#cb88-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb88-7"><a href="comparing-networks.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb88-8"><a href="comparing-networks.html#cb88-8" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">length</span>(<span class="fu">E</span>(<span class="fu">difference</span>(<span class="fu">as.igraph</span>(x), <span class="fu">as.igraph</span>(y))))))</span>
-<span id="cb88-9"><a href="comparing-networks.html#cb88-9" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difEdges[<span class="fu">dim</span>(difEdges)[<span class="dv">1</span>], <span class="fu">colnames</span>(difEdges)])</span>
-<span id="cb88-10"><a href="comparing-networks.html#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difEdges) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NumDif&quot;</span>)</span>
-<span id="cb88-11"><a href="comparing-networks.html#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difEdges, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difEdges), <span class="dv">2</span>)), <span class="at">y=</span>NumDif)) <span class="sc">+</span></span>
-<span id="cb88-12"><a href="comparing-networks.html#cb88-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb88-13"><a href="comparing-networks.html#cb88-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>NumDif), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb88-14"><a href="comparing-networks.html#cb88-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;Number of different edges&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
-<span id="cb88-15"><a href="comparing-networks.html#cb88-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;Number of different edges&quot;</span>)<span class="sc">+</span></span>
-<span id="cb88-16"><a href="comparing-networks.html#cb88-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="comparing-networks.html#cb91-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
+<span id="cb91-2"><a href="comparing-networks.html#cb91-2" aria-hidden="true" tabindex="-1"></a>pathTest <span class="ot">&lt;-</span> <span class="fu">bnpathtest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>,</span>
+<span id="cb91-3"><a href="comparing-networks.html#cb91-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">300</span>, <span class="dv">10</span>), <span class="at">nCategory =</span> <span class="dv">15</span>,</span>
+<span id="cb91-4"><a href="comparing-networks.html#cb91-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb91-5"><a href="comparing-networks.html#cb91-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
+<span id="cb91-6"><a href="comparing-networks.html#cb91-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-7"><a href="comparing-networks.html#cb91-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb91-8"><a href="comparing-networks.html#cb91-8" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(pathTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">length</span>(<span class="fu">E</span>(<span class="fu">difference</span>(<span class="fu">as.igraph</span>(x), <span class="fu">as.igraph</span>(y))))))</span>
+<span id="cb91-9"><a href="comparing-networks.html#cb91-9" aria-hidden="true" tabindex="-1"></a>difEdges <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difEdges[<span class="fu">dim</span>(difEdges)[<span class="dv">1</span>], <span class="fu">colnames</span>(difEdges)])</span>
+<span id="cb91-10"><a href="comparing-networks.html#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difEdges) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;NumDif&quot;</span>)</span>
+<span id="cb91-11"><a href="comparing-networks.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difEdges, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difEdges), <span class="dv">2</span>)), <span class="at">y=</span>NumDif)) <span class="sc">+</span></span>
+<span id="cb91-12"><a href="comparing-networks.html#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb91-13"><a href="comparing-networks.html#cb91-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>NumDif), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb91-14"><a href="comparing-networks.html#cb91-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;Number of different edges&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
+<span id="cb91-15"><a href="comparing-networks.html#cb91-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;Number of different edges&quot;</span>)<span class="sc">+</span></span>
+<span id="cb91-16"><a href="comparing-networks.html#cb91-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="CBNplot_doc_files/figure-html/testrp-1.png" width="960" /></p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="comparing-networks.html#cb89-1" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="comparing-networks.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Which pathway?</span></span>
-<span id="cb90-2"><a href="comparing-networks.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Description, pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Count)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="comparing-networks.html#cb92-1" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="comparing-networks.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Which pathway?</span></span>
+<span id="cb93-2"><a href="comparing-networks.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Description, pway<span class="sc">@</span>result[<span class="dv">15</span>,]<span class="sc">$</span>Count)</span></code></pre></div>
 <pre><code>FALSE [1] &quot;Homologous DNA Pairing and Strand Exchange 22&quot;</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="comparing-networks.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From 10 to 200</span></span>
-<span id="cb92-2"><a href="comparing-networks.html#cb92-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
-<span id="cb92-3"><a href="comparing-networks.html#cb92-3" aria-hidden="true" tabindex="-1"></a>geneTest <span class="ot">&lt;-</span> <span class="fu">bngenetest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">pathNum=</span><span class="dv">15</span>,</span>
-<span id="cb92-4"><a href="comparing-networks.html#cb92-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange=</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">200</span>, <span class="dv">10</span>),</span>
-<span id="cb92-5"><a href="comparing-networks.html#cb92-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb92-6"><a href="comparing-networks.html#cb92-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
-<span id="cb92-7"><a href="comparing-networks.html#cb92-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb92-8"><a href="comparing-networks.html#cb92-8" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">shd</span>(x, y)))</span>
-<span id="cb92-9"><a href="comparing-networks.html#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot SHD compared to the highest R network</span></span>
-<span id="cb92-10"><a href="comparing-networks.html#cb92-10" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difSHD[<span class="fu">dim</span>(difSHD)[<span class="dv">1</span>], <span class="fu">colnames</span>(difSHD)])</span>
-<span id="cb92-11"><a href="comparing-networks.html#cb92-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difSHD) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SHD&quot;</span>)</span>
-<span id="cb92-12"><a href="comparing-networks.html#cb92-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difSHD, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difSHD), <span class="dv">2</span>)), <span class="at">y=</span>SHD)) <span class="sc">+</span></span>
-<span id="cb92-13"><a href="comparing-networks.html#cb92-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb92-14"><a href="comparing-networks.html#cb92-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>SHD), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
-<span id="cb92-15"><a href="comparing-networks.html#cb92-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;SHD&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
-<span id="cb92-16"><a href="comparing-networks.html#cb92-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;structural hamming distance&quot;</span>)<span class="sc">+</span></span>
-<span id="cb92-17"><a href="comparing-networks.html#cb92-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="comparing-networks.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="do">## From 10 to 200</span></span>
+<span id="cb95-2"><a href="comparing-networks.html#cb95-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">6</span>)</span>
+<span id="cb95-3"><a href="comparing-networks.html#cb95-3" aria-hidden="true" tabindex="-1"></a>geneTest <span class="ot">&lt;-</span> <span class="fu">bngenetest</span>(<span class="at">results =</span> pway, <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">pathNum=</span><span class="dv">15</span>,</span>
+<span id="cb95-4"><a href="comparing-networks.html#cb95-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted, <span class="at">Rrange=</span><span class="fu">seq</span>(<span class="dv">10</span>, <span class="dv">200</span>, <span class="dv">10</span>),</span>
+<span id="cb95-5"><a href="comparing-networks.html#cb95-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
+<span id="cb95-6"><a href="comparing-networks.html#cb95-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>, <span class="at">cl =</span> cl)</span>
+<span id="cb95-7"><a href="comparing-networks.html#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="comparing-networks.html#cb95-8" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(x) <span class="fu">sapply</span>(geneTest<span class="sc">$</span>graph, <span class="cf">function</span>(y) <span class="fu">shd</span>(x, y)))</span>
+<span id="cb95-9"><a href="comparing-networks.html#cb95-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot SHD compared to the highest R network</span></span>
+<span id="cb95-10"><a href="comparing-networks.html#cb95-10" aria-hidden="true" tabindex="-1"></a>difSHD <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(difSHD[<span class="fu">dim</span>(difSHD)[<span class="dv">1</span>], <span class="fu">colnames</span>(difSHD)])</span>
+<span id="cb95-11"><a href="comparing-networks.html#cb95-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(difSHD) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;SHD&quot;</span>)</span>
+<span id="cb95-12"><a href="comparing-networks.html#cb95-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(difSHD, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">as.numeric</span>(<span class="fu">substring</span>(<span class="fu">rownames</span>(difSHD), <span class="dv">2</span>)), <span class="at">y=</span>SHD)) <span class="sc">+</span></span>
+<span id="cb95-13"><a href="comparing-networks.html#cb95-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb95-14"><a href="comparing-networks.html#cb95-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color=</span>SHD), <span class="at">size=</span><span class="dv">5</span>)<span class="sc">+</span></span>
+<span id="cb95-15"><a href="comparing-networks.html#cb95-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">name=</span><span class="st">&quot;SHD&quot;</span>, <span class="at">guide =</span> <span class="fu">guide_legend</span>())<span class="sc">+</span></span>
+<span id="cb95-16"><a href="comparing-networks.html#cb95-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">&quot;R&quot;</span>)<span class="sc">+</span><span class="fu">ylab</span>(<span class="st">&quot;structural hamming distance&quot;</span>)<span class="sc">+</span></span>
+<span id="cb95-17"><a href="comparing-networks.html#cb95-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
 <p><img src="CBNplot_doc_files/figure-html/testrg-1.png" width="960" /></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="comparing-networks.html#cb93-1" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="comparing-networks.html#cb96-1" aria-hidden="true" tabindex="-1"></a>parallel<span class="sc">::</span><span class="fu">stopCluster</span>(cl)</span></code></pre></div>
 
 </div>
 </div>
