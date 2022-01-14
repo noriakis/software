@@ -209,11 +209,10 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.3</b> Comparing multi scale and standard bootstrapping</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="testing-the-score-inside-the-pathway.html"><a href="testing-the-score-inside-the-pathway.html"><i class="fa fa-check"></i><b>7</b> Testing the score inside the pathway</a></li>
-<li class="chapter" data-level="8" data-path="comparing-networks.html"><a href="comparing-networks.html"><i class="fa fa-check"></i><b>8</b> Comparing networks</a>
+<li class="chapter" data-level="7" data-path="comparing-networks.html"><a href="comparing-networks.html"><i class="fa fa-check"></i><b>7</b> Comparing networks</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="comparing-networks.html"><a href="comparing-networks.html#comparing-multiple-networks"><i class="fa fa-check"></i><b>8.1</b> Comparing multiple networks</a></li>
-<li class="chapter" data-level="8.2" data-path="comparing-networks.html"><a href="comparing-networks.html#testing-r"><i class="fa fa-check"></i><b>8.2</b> Testing R</a></li>
+<li class="chapter" data-level="7.1" data-path="comparing-networks.html"><a href="comparing-networks.html#comparing-multiple-networks"><i class="fa fa-check"></i><b>7.1</b> Comparing multiple networks</a></li>
+<li class="chapter" data-level="7.2" data-path="comparing-networks.html"><a href="comparing-networks.html#testing-r"><i class="fa fa-check"></i><b>7.2</b> Testing R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -282,7 +281,7 @@ div.csl-indent {
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="including-clinical-variables.html#cb31-1" aria-hidden="true" tabindex="-1"></a>bnCov <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(pway,</span>
 <span id="cb31-2"><a href="including-clinical-variables.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                    vstedTCGA,</span>
 <span id="cb31-3"><a href="including-clinical-variables.html#cb31-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">nCategory =</span> <span class="dv">1000</span>,</span>
-<span id="cb31-4"><a href="including-clinical-variables.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">adjpCutOff =</span> <span class="fl">0.05</span>,</span>
+<span id="cb31-4"><a href="including-clinical-variables.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">adjpCutOff =</span> <span class="fl">0.01</span>,</span>
 <span id="cb31-5"><a href="including-clinical-variables.html#cb31-5" aria-hidden="true" tabindex="-1"></a>                    <span class="at">expSample=</span><span class="fu">rownames</span>(metadata),</span>
 <span id="cb31-6"><a href="including-clinical-variables.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">algo=</span><span class="st">&quot;hc&quot;</span>, <span class="at">strType=</span><span class="st">&quot;normal&quot;</span>,</span>
 <span id="cb31-7"><a href="including-clinical-variables.html#cb31-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">otherVar=</span>metadata,</span>
@@ -362,7 +361,7 @@ difference
 M Phase
 </td>
 <td style="text-align:right;">
-23.38221
+23.41588
 </td>
 </tr>
 <tr>
@@ -370,7 +369,7 @@ M Phase
 Mitotic Prometaphase
 </td>
 <td style="text-align:right;">
-21.10984
+21.15918
 </td>
 </tr>
 <tr>
@@ -378,7 +377,7 @@ Mitotic Prometaphase
 Mitotic Metaphase and Anaphase
 </td>
 <td style="text-align:right;">
-20.77589
+20.86176
 </td>
 </tr>
 <tr>
@@ -386,15 +385,7 @@ Mitotic Metaphase and Anaphase
 Mitotic Anaphase
 </td>
 <td style="text-align:right;">
-20.64902
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-RHO GTPase Effectors
-</td>
-<td style="text-align:right;">
-19.65585
+20.71352
 </td>
 </tr>
 <tr>
@@ -402,7 +393,15 @@ RHO GTPase Effectors
 Separation of Sister Chromatids
 </td>
 <td style="text-align:right;">
-19.37688
+19.49190
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Resolution of Sister Chromatid Cohesion
+</td>
+<td style="text-align:right;">
+19.31491
 </td>
 </tr>
 </tbody>
