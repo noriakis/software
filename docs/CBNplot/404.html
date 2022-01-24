@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 bnpathplot | CBNplot</title>
+  <title>Page not found | CBNplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 bnpathplot | CBNplot" />
+  <meta property="og:title" content="Page not found | CBNplot" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://noriakis.github.io/software/CBNplot/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="noriakis/CBNplot" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 bnpathplot | CBNplot" />
+  <meta name="twitter:title" content="Page not found | CBNplot" />
   
   <meta name="twitter:description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bngeneplot.html"/>
-<link rel="next" href="including-clinical-variables.html"/>
+
+
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -235,98 +235,19 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bnpathplot" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> <code>bnpathplot</code></h1>
-<div id="emapplot" class="section level2" number="4.1">
-<h2><span class="header-section-number">4.1</span> <code>emapplot</code></h2>
-<p>The default <code>emapplot</code> from <code>clusterProfiler</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="bnpathplot.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">emapplot</span>(pway)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/emapplot-1.png" width="960" /></p>
-</div>
-<div id="the-vanilla-plot-1" class="section level2" number="4.2">
-<h2><span class="header-section-number">4.2</span> The vanilla plot</h2>
-<p>This function plots inferred relationship between pathways, with the boot-strapped strength between pathways. The normal plot can be plotted by <code>bnpathplot</code>, passing the results of clusterProfiler or ReactomePA, (normalized) expression values, and candidate rows to be included in the inference. <code>nCategory</code> specifies the number of categories (1:nCategory) to be plotted, sorted by the p-value. <code>expRow</code> indicates what identifiers are used in row names of expression matrix.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="bnpathplot.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pway,</span>
-<span id="cb22-2"><a href="bnpathplot.html#cb22-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb22-3"><a href="bnpathplot.html#cb22-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb22-4"><a href="bnpathplot.html#cb22-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb22-5"><a href="bnpathplot.html#cb22-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb22-6"><a href="bnpathplot.html#cb22-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">labelSize=</span><span class="dv">5</span>,</span>
-<span id="cb22-7"><a href="bnpathplot.html#cb22-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathwayplot_reac-1.png" width="960" /></p>
-<p>For the messy plot, the label can be modified using <code>shadowText=TRUE</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="bnpathplot.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pway,</span>
-<span id="cb23-2"><a href="bnpathplot.html#cb23-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb23-3"><a href="bnpathplot.html#cb23-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb23-4"><a href="bnpathplot.html#cb23-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb23-5"><a href="bnpathplot.html#cb23-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb23-6"><a href="bnpathplot.html#cb23-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">labelSize=</span><span class="dv">3</span>,</span>
-<span id="cb23-7"><a href="bnpathplot.html#cb23-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">shadowText=</span><span class="cn">TRUE</span>,</span>
-<span id="cb23-8"><a href="bnpathplot.html#cb23-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathwayplot_reac_2-1.png" width="960" /></p>
-<p>It can be KEGG or GO pathway results using <code>enrichKEGG</code> and <code>enrichGO</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="bnpathplot.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pwayGO,</span>
-<span id="cb24-2"><a href="bnpathplot.html#cb24-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb24-3"><a href="bnpathplot.html#cb24-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb24-4"><a href="bnpathplot.html#cb24-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb24-5"><a href="bnpathplot.html#cb24-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb24-6"><a href="bnpathplot.html#cb24-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathwayplot_go-1.png" width="960" /></p>
-<p>Or it can be the GSEA result.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="bnpathplot.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pwayGSE,</span>
-<span id="cb25-2"><a href="bnpathplot.html#cb25-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb25-3"><a href="bnpathplot.html#cb25-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb25-4"><a href="bnpathplot.html#cb25-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb25-5"><a href="bnpathplot.html#cb25-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb25-6"><a href="bnpathplot.html#cb25-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>,</span>
-<span id="cb25-7"><a href="bnpathplot.html#cb25-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">shadowText =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb25-8"><a href="bnpathplot.html#cb25-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">&quot;enrichmentScore&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathplotgse-1.png" width="960" /></p>
-</div>
-<div id="compare-with-the-reference" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Compare with the reference</h2>
-<p>For Reactome, the relationship between pathways can also be plotted by specifying <code>compareRef=TRUE</code>. Here, dotted lines indicate relationship not in the reference, and solid lines indicate those in the reference.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="bnpathplot.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pway,</span>
-<span id="cb26-2"><a href="bnpathplot.html#cb26-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb26-3"><a href="bnpathplot.html#cb26-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb26-4"><a href="bnpathplot.html#cb26-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb26-5"><a href="bnpathplot.html#cb26-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">10</span>,</span>
-<span id="cb26-6"><a href="bnpathplot.html#cb26-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">compareRef=</span>T,</span>
-<span id="cb26-7"><a href="bnpathplot.html#cb26-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathwayplot_withref-1.png" width="960" /></p>
-</div>
-<div id="reflect-depmap-information-to-pathways" class="section level2" number="4.4">
-<h2><span class="header-section-number">4.4</span> Reflect DepMap information to pathways</h2>
-<p>We can reflect overall dependency scores for the genes within the pathway by specifying <code>sizeDep=TRUE</code>. You must provide <code>depmap::depmap_crispr</code> or the other data describing the dependency score to <code>dep</code> variable. The average score of the genes in the pathway is used.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="bnpathplot.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bnpathplot</span>(<span class="at">results =</span> pwayGO,</span>
-<span id="cb27-2"><a href="bnpathplot.html#cb27-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
-<span id="cb27-3"><a href="bnpathplot.html#cb27-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
-<span id="cb27-4"><a href="bnpathplot.html#cb27-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="dv">30</span>,</span>
-<span id="cb27-5"><a href="bnpathplot.html#cb27-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">R =</span> <span class="dv">50</span>,</span>
-<span id="cb27-6"><a href="bnpathplot.html#cb27-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">sizeDep =</span> T,</span>
-<span id="cb27-7"><a href="bnpathplot.html#cb27-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">dep =</span> dep,</span>
-<span id="cb27-8"><a href="bnpathplot.html#cb27-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">expRow =</span> <span class="st">&quot;ENSEMBL&quot;</span>)</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/pathwayplot_depmap-1.png" width="960" /></p>
-</div>
-<div id="aggregating-the-pathway-databases" class="section level2" number="4.5">
-<h2><span class="header-section-number">4.5</span> Aggregating the pathway databases</h2>
-<p>The multiple GSEA results can be aggregated, by just passing the multiple results like as follows. When choosing the number of categories (<code>nCategory</code>), the order of the results and the numbers should be same.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="bnpathplot.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DOSE)</span>
-<span id="cb28-2"><a href="bnpathplot.html#cb28-2" aria-hidden="true" tabindex="-1"></a>pwayDO <span class="ot">&lt;-</span> <span class="fu">enrichDO</span>(<span class="at">gene =</span> cand.entrez)</span>
-<span id="cb28-3"><a href="bnpathplot.html#cb28-3" aria-hidden="true" tabindex="-1"></a>ReaAndDO <span class="ot">&lt;-</span> <span class="fu">bnpathplot</span>(<span class="at">results =</span> <span class="fu">c</span>(pway, pwayDO), <span class="at">exp =</span> vsted, <span class="at">expSample =</span> incSample,</span>
-<span id="cb28-4"><a href="bnpathplot.html#cb28-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">nCategory =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>), <span class="at">R =</span> <span class="dv">50</span>)</span>
-<span id="cb28-5"><a href="bnpathplot.html#cb28-5" aria-hidden="true" tabindex="-1"></a>ReaAndDO</span></code></pre></div>
-<p><img src="CBNplot_doc_files/figure-html/multidatabases-1.png" width="960" /></p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bngeneplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="including-clinical-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
