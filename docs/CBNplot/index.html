@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>CBNplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="CBNplot" />
   <meta property="og:type" content="book" />
@@ -33,7 +33,7 @@
 
 <link rel="next" href="bootstrap-based-inference.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -297,6 +297,10 @@ div.csl-indent {
 <span id="cb4-6"><a href="index.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(geneList) <span class="ot">&lt;-</span> lfc<span class="sc">$</span>ENTREZID</span>
 <span id="cb4-7"><a href="index.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a href="index.html#cb4-8" aria-hidden="true" tabindex="-1"></a>pwayGSE <span class="ot">&lt;-</span> ReactomePA<span class="sc">::</span><span class="fu">gsePathway</span>(geneList)</span></code></pre></div>
+<p>The mean gene count in the pathway, which is used in the inference.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a>sigpway <span class="ot">&lt;-</span> <span class="fu">subset</span>(pway<span class="sc">@</span>result, p.adjust<span class="sc">&lt;</span><span class="fl">0.05</span>)</span>
+<span id="cb5-2"><a href="index.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="fu">mean</span>(sigpway<span class="sc">$</span>Count), <span class="fu">sd</span>(sigpway<span class="sc">$</span>Count))</span></code></pre></div>
+<pre><code>FALSE [1] &quot;31.4605263157895 22.7493242621834&quot;</code></pre>
 
 </div>
 </div>
@@ -374,10 +378,6 @@ gitbook.start({
 "text": null
 },
 "download": ["CBNplot_doc.pdf", "CBNplot_doc.epub"],
-"search": {
-"engine": "lunr",
-"options": null
-},
 "toc": {
 "collapse": "subsection"
 }
