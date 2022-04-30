@@ -596,7 +596,7 @@ makeWC &lt;- function(i){
     entre &lt;- AnnotationDbi::select(org.Hs.eg.db, keytype=&quot;ENSEMBL&quot;, keys = ensg[bwmod$colors==i], columns = &quot;ENTREZID&quot;)$ENTREZID
     wc &lt;- wcGeneSummary(entre, max.words=200, random.order=FALSE,excludeFreq = 10000,
                         colors=pokepal(palNum),
-                        shape=&quot;circle&quot;, rot.per=0.4)
+                        rot.per=0.4)
     print(paste(&quot;Used palette:&quot;, palNum))
     wc$wc
 }
