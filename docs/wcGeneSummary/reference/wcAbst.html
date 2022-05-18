@@ -66,7 +66,9 @@
   colorText <span class="op">=</span> <span class="cn">FALSE</span>,
   corThresh <span class="op">=</span> <span class="fl">0.6</span>,
   layout <span class="op">=</span> <span class="st">"nicely"</span>,
+  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,
   edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,
+  ngram <span class="op">=</span> <span class="cn">NA</span>,
   deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,
   additionalRemove <span class="op">=</span> <span class="cn">NA</span>,
   <span class="va">...</span>
@@ -97,8 +99,12 @@
 <dd><p>the correlation threshold</p></dd>
 <dt>layout</dt>
 <dd><p>the layout for correlation network, defaul to "nicely"</p></dd>
+<dt>edgeLabel</dt>
+<dd><p>if TRUE, plot the edge label (default: FALSE)</p></dd>
 <dt>edgeLink</dt>
 <dd><p>if FALSE, use geom_edge_diagonal</p></dd>
+<dt>ngram</dt>
+<dd><p>default to NA (1)</p></dd>
 <dt>deleteZeroDeg</dt>
 <dd><p>delete zero degree node from plot in correlation network</p></dd>
 <dt>additionalRemove</dt>

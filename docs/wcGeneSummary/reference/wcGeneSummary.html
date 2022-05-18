@@ -66,6 +66,8 @@
   scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,
   showLegend <span class="op">=</span> <span class="cn">FALSE</span>,
   orgDb <span class="op">=</span> <span class="va">org.Hs.eg.db</span>,
+  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,
+  ngram <span class="op">=</span> <span class="cn">NA</span>,
   plotType <span class="op">=</span> <span class="st">"wc"</span>,
   colorText <span class="op">=</span> <span class="cn">FALSE</span>,
   corThresh <span class="op">=</span> <span class="fl">0.6</span>,
@@ -104,6 +106,10 @@ default to 5000</p></dd>
 <dd><p>whether to show legend in correlation network</p></dd>
 <dt>orgDb</dt>
 <dd><p>default to org.Hs.eg.db</p></dd>
+<dt>edgeLabel</dt>
+<dd><p>if TRUE, plot the edge label (default: FALSE)</p></dd>
+<dt>ngram</dt>
+<dd><p>default to NA (1)</p></dd>
 <dt>plotType</dt>
 <dd><p>"wc" or "network"</p></dd>
 <dt>colorText</dt>
