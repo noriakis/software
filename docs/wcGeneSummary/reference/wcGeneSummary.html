@@ -57,7 +57,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">wcGeneSummary</span><span class="op">(</span>
   <span class="va">geneList</span>,
   keyType <span class="op">=</span> <span class="st">"SYMBOL"</span>,
-  excludeFreq <span class="op">=</span> <span class="fl">5000</span>,
+  excludeFreq <span class="op">=</span> <span class="fl">2000</span>,
   additionalRemove <span class="op">=</span> <span class="cn">NA</span>,
   madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,
   organism <span class="op">=</span> <span class="fl">9606</span>,
@@ -144,50 +144,56 @@ default to 5000</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Converted input genes: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> filtered 62 words (frequency) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $rawtext</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   RefSeq_accession     Organism Taxon_ID Gene_ID   Review_status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      NM_016222.4 Homo sapiens     9606   51428 REVIEWED REFSEQ</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Gene_summary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 DEAD box proteins, characterized by the conserved motif Asp-Glu-Ala-Asp (DEAD), are putative RNA helicases. They are implicated in a number of cellular processes involving alteration of RNA secondary structure, such as translation initiation, nuclear and mitochondrial splicing, and ribosome and spliceosome assembly. Based on their distribution patterns, some members of the DEAD box protein family are believed to be involved in embryogenesis, spermatogenesis, and cellular growth and division. The protein encoded by this gene is a member of the DEAD box protein family and interacts with several spliceosomal proteins. In addition, the encoded protein may recognize the bacterial second messengers cyclic di-GMP and cyclic di-AMP, resulting in the induction of genes involved in the innate immune response.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawfrequency</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            dead             box        cellular          cyclic        addition </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              12               9               6               6               3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               4               3               2               2               1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      alteration    aspglualaasp        assembly       bacterial           based </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        believed   characterized       conserved           diamp           digmp </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    distribution        division   embryogenesis       helicases          immune </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      implicated       induction      initiation          innate       interacts </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       involving      messengers   mitochondrial           motif        patterns </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       processes        putative       recognize        response        ribosome </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       secondary spermatogenesis    spliceosomal     spliceosome       structure </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3               3               3               3               3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     translation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    distribution        division   embryogenesis          growth       helicases </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          immune      implicated       induction      initiation          innate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       interacts       involving      messengers   mitochondrial           motif </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         nuclear        patterns       processes        putative       recognize </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        response        ribosome       secondary spermatogenesis    spliceosomal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1               1               1               1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     spliceosome       structure </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               1               1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $TDM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;&lt;TermDocumentMatrix (terms: 41, documents: 3)&gt;&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Non-/sparse entries: 123/0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;&lt;TermDocumentMatrix (terms: 42, documents: 1)&gt;&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Non-/sparse entries: 42/0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sparsity           : 0%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximal term length: 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Weighting          : term frequency (tf)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $df</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                        word freq</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dead                   dead   12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> box                     box    9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cellular           cellular    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> cyclic               cyclic    6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> addition           addition    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alteration       alteration    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> aspglualaasp   aspglualaasp    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> assembly           assembly    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> bacterial         bacterial    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> based                 based    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> believed           believed    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> characterized characterized    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> conserved         conserved    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> diamp                 diamp    3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> digmp                 digmp    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dead                   dead    4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> box                     box    3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cellular           cellular    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> cyclic               cyclic    2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> addition           addition    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alteration       alteration    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> aspglualaasp   aspglualaasp    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> assembly           assembly    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> bacterial         bacterial    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> based                 based    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> believed           believed    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> characterized characterized    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conserved         conserved    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> diamp                 diamp    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> digmp                 digmp    1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $wc</span>
 <span class="r-plt img"><img src="wcGeneSummary-1.png" alt="" width="700" height="433"></span>

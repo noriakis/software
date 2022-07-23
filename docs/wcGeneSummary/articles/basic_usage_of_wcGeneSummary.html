@@ -141,27 +141,27 @@ term.</p>
 <tbody>
 <tr class="odd">
 <td align="left">repair</td>
-<td align="right">89</td>
+<td align="right">16</td>
 </tr>
 <tr class="even">
-<td align="left">endonuclease</td>
-<td align="right">47</td>
+<td align="left">DNA</td>
+<td align="right">11</td>
 </tr>
 <tr class="odd">
+<td align="left">syndrome</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
 <td align="left">excision</td>
-<td align="right">32</td>
-</tr>
-<tr class="even">
-<td align="left">heterodimeric</td>
-<td align="right">30</td>
+<td align="right">8</td>
 </tr>
 <tr class="odd">
-<td align="left">nucleotide</td>
-<td align="right">23</td>
+<td align="left">transcription</td>
+<td align="right">7</td>
 </tr>
 <tr class="even">
-<td align="left">product</td>
-<td align="right">21</td>
+<td align="left">cockayne</td>
+<td align="right">6</td>
 </tr>
 </tbody>
 </table>
@@ -226,9 +226,9 @@ A correlation network of gene summaries
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##            lipoic              step              acid lipoateactivating </span>
-<span class="co">##      1.846015e-84      1.931492e-43      3.776591e-32      4.153428e-25 </span>
-<span class="co">##            lipoyl         lipoylamp </span>
-<span class="co">##      4.153428e-25      4.153428e-25</span></code></pre>
+<span class="co">##      1.701356e-14      8.782627e-08      5.708708e-07      1.507684e-04 </span>
+<span class="co">##  lipoatedependent            lipoyl </span>
+<span class="co">##      1.507684e-04      1.507684e-04</span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="va">keggList</span><span class="op">$</span><span class="va">`05150`</span> <span class="co"># Staphylococcus aureus infection</span>
 <span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>
@@ -236,10 +236,8 @@ A correlation network of gene summaries
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ora-2.png" width="700"></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##    complement         chain        immune      antibody      anchored </span>
-<span class="co">## 1.506730e-256 3.156398e-122  3.103388e-79  7.299271e-63  5.109515e-56 </span>
-<span class="co">##  phagocytosis </span>
-<span class="co">##  1.353472e-53</span></code></pre>
+<pre><code><span class="co">##        chain   complement        class         exon      peptide         beta </span>
+<span class="co">## 1.982266e-81 6.443621e-74 1.233313e-45 1.278631e-38 8.506250e-34 9.352422e-33</span></code></pre>
 <p>Filter words using ORA threshold and frequency threshold by setting
 <code>ora=TRUE</code>.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -248,7 +246,7 @@ A correlation network of gene summaries
 <span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 62 words (frequency) ...</span>
 <span class="co">## performing ORA</span>
-<span class="co">## filtered 91 words (ORA) ...</span></code></pre>
+<span class="co">## filtered 147 words (ORA) ...</span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <div class="figure">
@@ -272,19 +270,19 @@ A correlation network of gene summaries (ORA)
 <span class="co">## Converted input genes: 12</span>
 <span class="co">## filtered 62 words (frequency) ...</span>
 <span class="co">## performing ORA</span>
-<span class="co">## filtered 88 words (ORA) ...</span>
+<span class="co">## filtered 109 words (ORA) ...</span>
 <span class="co">## 2</span>
 <span class="co">## Input genes: 13</span>
 <span class="co">## Converted input genes: 13</span>
 <span class="co">## filtered 62 words (frequency) ...</span>
 <span class="co">## performing ORA</span>
-<span class="co">## filtered 188 words (ORA) ...</span>
+<span class="co">## filtered 237 words (ORA) ...</span>
 <span class="co">## 3</span>
 <span class="co">## Input genes: 7</span>
 <span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 62 words (frequency) ...</span>
 <span class="co">## performing ORA</span>
-<span class="co">## filtered 91 words (ORA) ...</span></code></pre>
+<span class="co">## filtered 147 words (ORA) ...</span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap</a></span><span class="op">(</span><span class="va">simExample</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/textclus-1.png" width="700"></p>
@@ -440,7 +438,7 @@ A ME dendrogram with words
 </div>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## R Under development (unstable) (2022-02-20 r81781 ucrt)</span>
+<pre><code><span class="co">## R version 4.2.0 (2022-04-22 ucrt)</span>
 <span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
 <span class="co">## Running under: Windows 10 x64 (build 19044)</span>
 <span class="co">## </span>
@@ -470,7 +468,7 @@ A ME dendrogram with words
 <span class="co">##  [16] fansi_1.0.2            GeneSummary_0.99.3     checkmate_2.0.0       </span>
 <span class="co">##  [19] magrittr_2.0.2         memoise_2.0.1          tm_0.7-8              </span>
 <span class="co">##  [22] Biostrings_2.63.1      graphlayouts_0.8.0     pvclust_2.2-0         </span>
-<span class="co">##  [25] wordcloud_2.6          pkgdown_2.0.3          enrichplot_1.15.2     </span>
+<span class="co">##  [25] wordcloud_2.6          pkgdown_2.0.3          enrichplot_1.16.1     </span>
 <span class="co">##  [28] colorspace_2.0-3       rappdirs_0.3.3         blob_1.2.2            </span>
 <span class="co">##  [31] ggrepel_0.9.1          textshaping_0.3.6      xfun_0.30             </span>
 <span class="co">##  [34] dplyr_1.0.8            crayon_1.5.0           RCurl_1.98-1.6        </span>
@@ -480,7 +478,7 @@ A ME dendrogram with words
 <span class="co">##  [46] XVector_0.35.0         GetoptLong_1.0.5       graphite_1.41.0       </span>
 <span class="co">##  [49] scales_1.1.1           DOSE_3.21.2            DBI_1.1.2             </span>
 <span class="co">##  [52] Rcpp_1.0.8             xtable_1.8-4           viridisLite_0.4.0     </span>
-<span class="co">##  [55] gridGraphics_0.5-1     tidytree_0.3.8         reactome.db_1.77.0    </span>
+<span class="co">##  [55] gridGraphics_0.5-1     tidytree_0.3.8         reactome.db_1.79.0    </span>
 <span class="co">##  [58] bit_4.0.4              htmlwidgets_1.5.4      httr_1.4.2            </span>
 <span class="co">##  [61] fgsea_1.21.0           RColorBrewer_1.1-2     ellipsis_0.3.2        </span>
 <span class="co">##  [64] pkgconfig_2.0.3        farver_2.1.0           sass_0.4.0            </span>
@@ -493,20 +491,20 @@ A ME dendrogram with words
 <span class="co">##  [85] yaml_2.3.5             ragg_1.2.2             ggtree_3.3.1          </span>
 <span class="co">##  [88] knitr_1.37             bit64_4.0.5            fs_1.5.2              </span>
 <span class="co">##  [91] tidygraph_1.2.0        purrr_0.3.4            dendextend_1.15.2     </span>
-<span class="co">##  [94] KEGGREST_1.36.0        ReactomePA_1.39.0      nlme_3.1-155          </span>
+<span class="co">##  [94] KEGGREST_1.36.0        ReactomePA_1.40.0      nlme_3.1-157          </span>
 <span class="co">##  [97] mime_0.12              slam_0.1-50            aplot_0.1.2           </span>
 <span class="co">## [100] DO.db_2.9              xml2_1.3.3             compiler_4.2.0        </span>
 <span class="co">## [103] rstudioapi_0.13        png_0.1-7              treeio_1.19.1         </span>
 <span class="co">## [106] tibble_3.1.6           tweenr_1.0.2           cyjShiny_1.0.34       </span>
 <span class="co">## [109] bslib_0.3.1            stringi_1.7.6          highr_0.9             </span>
 <span class="co">## [112] desc_1.4.0             easyPubMed_2.13        lattice_0.20-45       </span>
-<span class="co">## [115] Matrix_1.4-0           vctrs_0.3.8            pillar_1.7.0          </span>
+<span class="co">## [115] Matrix_1.4-1           vctrs_0.3.8            pillar_1.7.0          </span>
 <span class="co">## [118] lifecycle_1.0.1        BiocManager_1.30.16    jquerylib_0.1.4       </span>
 <span class="co">## [121] GlobalOptions_0.1.2    cowplot_1.1.1          data.table_1.14.2     </span>
 <span class="co">## [124] bitops_1.0-7           httpuv_1.6.5           patchwork_1.1.1       </span>
 <span class="co">## [127] qvalue_2.27.0          R6_2.5.1               promises_1.2.0.1      </span>
 <span class="co">## [130] bookdown_0.26          gridExtra_2.3          codetools_0.2-18      </span>
-<span class="co">## [133] MASS_7.3-55            assertthat_0.2.1       rprojroot_2.0.2       </span>
+<span class="co">## [133] MASS_7.3-56            assertthat_0.2.1       rprojroot_2.0.2       </span>
 <span class="co">## [136] rjson_0.2.21           withr_2.4.3            GenomeInfoDbData_1.2.7</span>
 <span class="co">## [139] parallel_4.2.0         ISOcodes_2022.01.10    clusterProfiler_4.3.2 </span>
 <span class="co">## [142] grid_4.2.0             ggfun_0.0.5            tidyr_1.2.0           </span>
