@@ -19,6 +19,9 @@
     <loc>/LICENSE-text.html</loc>
   </url>
   <url>
+    <loc>/reference/compareWordNet.html</loc>
+  </url>
+  <url>
     <loc>/reference/exportCyjs.html</loc>
   </url>
   <url>
@@ -56,6 +59,9 @@
   </url>
   <url>
     <loc>/reference/wcAbst.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wcBSDB.html</loc>
   </url>
   <url>
     <loc>/reference/wcGeneSummary.html</loc>
