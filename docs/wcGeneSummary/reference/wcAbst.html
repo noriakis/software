@@ -56,6 +56,7 @@
   usefil <span class="op">=</span> <span class="cn">NA</span>,
   filnum <span class="op">=</span> <span class="fl">0</span>,
   geneUpper <span class="op">=</span> <span class="cn">FALSE</span>,
+  apiKey <span class="op">=</span> <span class="cn">NULL</span>,
   pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,
   numWords <span class="op">=</span> <span class="fl">30</span>,
   scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,
@@ -91,6 +92,8 @@
 <dd><p>specify filter tfidf</p></dd>
 <dt>geneUpper</dt>
 <dd><p>make queries uppercase</p></dd>
+<dt>apiKey</dt>
+<dd><p>api key for eutilities</p></dd>
 <dt>pal</dt>
 <dd><p>palette for color gradient in correlation network</p></dd>
 <dt>numWords</dt>
@@ -132,7 +135,6 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">wcAbst</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> querying pubmed for DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> querying pubmed for DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converting to a data frame ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawdf</span>
@@ -1080,9 +1082,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 96      &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 97      &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 98      &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99      &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99      &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 100     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 102     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 103     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 104     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
@@ -1094,7 +1096,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 110     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 111     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 112     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 114     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 115     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 116     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
@@ -1112,7 +1114,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 128     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 129     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 130     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 132     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 133     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 134     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
@@ -1129,16 +1131,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 145     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 146     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 147     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 149     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 150     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 151     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 152     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 153     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 155     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 156     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 157     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 158     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 159     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 160     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
@@ -1148,8 +1150,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 164     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 165     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 166     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 167     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 168     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt; DDX41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168     &lt;NA&gt;     &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawfrequency</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               ddx                          patients </span>
