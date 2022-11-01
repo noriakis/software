@@ -176,13 +176,26 @@ specifying <code>2</code> is shown below.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gwc2</span><span class="op">$</span><span class="va">wc</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ngramwc-1.png" width="576"></p>
+<p>Using <code>clusterProfiler</code> functions, one can use enriched
+pathway names for visualization. The <code>enrich</code> option can be
+specified, this time <code>'reactome'</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gwc3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, enrich<span class="op">=</span><span class="st">"reactome"</span>, tfidf<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">50</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Input genes: 7</span></code></pre>
+<pre><code><span class="co">## 'select()' returned 1:1 mapping between keys and columns</span></code></pre>
+<pre><code><span class="co">## Converted input genes: 7</span>
+<span class="co">## filtered 64 words (frequency | tfidf) ...</span>
+<span class="co">## performing enrichment analysis ...</span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gwc3</span><span class="op">$</span><span class="va">wc</span></code></pre></div>
+<p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ngrampath-1.png" width="576"></p>
 <p>One of the main questions is which words can be clustered together
 among the words contained in the queried gene cluster. Word clustering
 (<code>pvclust</code>) and identified significant clusters based on the
 occurrence in the text can be visualized by specifying
 <code>tag=TRUE</code>. For the significance threshold,
 <code>pvclAlpha</code> can be specified.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gwcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>,
                      numWords<span class="op">=</span><span class="fl">30</span>,
                      tag<span class="op">=</span><span class="cn">TRUE</span>,
@@ -202,10 +215,10 @@ occurrence in the text can be visualized by specifying
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gwcl</span><span class="op">$</span><span class="va">wc</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/tagging-1.png" width="700"></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gwcl</span><span class="op">$</span><span class="va">pvcl</span></code></pre></div>
 <pre><code><span class="co">## $clusters</span>
 <span class="co">## $clusters[[1]]</span>
@@ -227,12 +240,9 @@ occurrence in the text can be visualized by specifying
 <span class="co">## $clusters[[3]]</span>
 <span class="co">## [1] "dna"    "repair"</span>
 <span class="co">## </span>
-<span class="co">## $clusters[[4]]</span>
-<span class="co">## [1] "cockayne"      "excision"      "syndrome"      "transcription"</span>
-<span class="co">## </span>
 <span class="co">## </span>
 <span class="co">## $edges</span>
-<span class="co">## [1]  6 22 23 25</span></code></pre>
+<span class="co">## [1]  6 22 23</span></code></pre>
 <p>In this example showing ERCC genes, the term <code>DNA repair</code>
 is clustered as expected.</p>
 </div>
@@ -241,28 +251,28 @@ is clustered as expected.</p>
 </h3>
 <p>The next main function is producing correlation networks between
 words based on the co-occurrence of the words in the text.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
 <span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/basic3-1.png" width="700"></p>
 <p>The edge label can be shown by <code>edgeLabel=TRUE</code>.<br>
 The threhsold of correlation can be specified by <code>corThresh</code>.
 The text color can be changed by <code>colorText=TRUE</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, edgeLabel<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>, numWords<span class="op">=</span><span class="fl">20</span>, colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
 <span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ngramnet-1.png" width="700"></p>
 <p>The clustering results based on <code>pvclust</code> can be shown
 also on the correlation network, by the node color.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>,
                      numWords<span class="op">=</span><span class="fl">20</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
@@ -278,10 +288,10 @@ also on the correlation network, by the node color.</p>
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/tagnet-1.png" width="700"></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">pvcl</span></code></pre></div>
 <pre><code><span class="co">## $clusters</span>
 <span class="co">## $clusters[[1]]</span>
@@ -303,7 +313,7 @@ also on the correlation network, by the node color.</p>
 specifying <code>genePlot=TRUE</code>, useful for assessing which words
 is associated with interesting genes. The edges connecting words to
 corresponding genes are shown.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,
                      numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
@@ -319,7 +329,7 @@ corresponding genes are shown.</p>
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/gplot-1.png" width="700"></p>
 <p>The associated enriched pathways (if present) can be shown by
@@ -329,7 +339,7 @@ the whole gene set, and plot enriched terms for included genes in the
 plot. Enrichment analysis here is performed by the library
 <code>clusterProfiler</code> or <code>ReactomePA</code>, and one can
 control which pathways to plot by <code>geePathPlotSig</code> value.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, genePathPlot<span class="op">=</span><span class="st">"kegg"</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,
                      tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>, genePathPlotSig<span class="op">=</span><span class="fl">0.05</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
@@ -346,7 +356,7 @@ control which pathways to plot by <code>geePathPlotSig</code> value.</p>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span>
 <span class="co">## found 3 enriched term ...</span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/gpplot-1.png" width="700"></p>
 </div>
@@ -356,17 +366,17 @@ control which pathways to plot by <code>geePathPlotSig</code> value.</p>
 <p>Using <code>easyPubMed</code>, one can perform the same analysis on
 PubMed text like the article title and abstract. The function queries
 for the input gene symbols (or microbes) and visualize.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcAbst.html">wcAbst</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## querying pubmed for ERCC1 OR ERCC2 OR ERCC3</span>
 <span class="co">## converting to a data frame ...</span></code></pre>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ab</span><span class="op">$</span><span class="va">wc</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc-1.png" width="700"></p>
 <p>As fetching the same information is not desiable and time consuming,
 the same object can be passed to <code>redo</code> option and reperform
 the analysis like tagging, or changing the visualization options.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Resuming from the previous results ...</span>
 <span class="co">## Bootstrap (r = 0.5)... Done.</span>
@@ -379,23 +389,27 @@ the analysis like tagging, or changing the visualization options.</p>
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Resuming from the previous results ...</span>
 <span class="co">## Using previous pvclust results ...</span></code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abtag</span><span class="op">$</span><span class="va">wc</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc_2-1.png" width="700"></p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">abtag2</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <pre><code><span class="co">## Warning: Removed 3 rows containing missing values (geom_point).</span></code></pre>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc_2-2.png" width="700"></p>
-<div class="section level4">
-<h4 id="comparing-two-or-more-networks">Comparing two or more networks<a class="anchor" aria-label="anchor" href="#comparing-two-or-more-networks"></a>
-</h4>
-<p>One can compare two networks by providing two objects produced by wc*
-functions, like <code>wcGeneSummary</code> and <code>wcAbst</code>.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+</div>
+<div class="section level3">
+<h3 id="comparing-two-or-more-networks">Comparing two or more networks<a class="anchor" aria-label="anchor" href="#comparing-two-or-more-networks"></a>
+</h3>
+<p>One can compare two or more networks by providing list of objects
+produced by wc* functions, like <code>wcGeneSummary</code> and
+<code>wcAbst</code>. This can be useful for assessing the similarity and
+dissimilarity of the various text sources, like PubMed, RefSeq, and
+Reactome pathway names.</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
     <span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">cxcls</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"CXCL"</span>,<span class="va">i</span><span class="op">)</span><span class="op">)</span>
@@ -406,28 +420,28 @@ functions, like <code>wcGeneSummary</code> and <code>wcAbst</code>.</p>
 <pre><code><span class="co">## 'select()' returned 1:1 mapping between keys and columns</span></code></pre>
 <pre><code><span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span></code></pre>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">cxcls</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 13</span></code></pre>
 <pre><code><span class="co">## 'select()' returned 1:1 mapping between keys and columns</span></code></pre>
 <pre><code><span class="co">## Converted input genes: 13</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span></code></pre>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Resuming from the previous results ...</span></code></pre>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## Not having meaningful overlaps</span>
 <span class="fu"><a href="../reference/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>, titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/compare-1.png" width="700"></p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net3</span><span class="op">)</span>, titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/compare-2.png" width="700"></p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span>, <span class="va">net3</span><span class="op">)</span>, titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span>, <span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/compare-3.png" width="700"></p>
 <p>If <code>tag</code> information is available in both gene clusters,
 combined tags can be visualized by <code>tag=TRUE</code>.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">keggPathways</span> <span class="op">&lt;-</span> <span class="va">org.Hs.egPATH2EG</span>
 <span class="va">mappedKeys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-keys.html" class="external-link">mappedkeys</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">)</span>
 <span class="va">keggList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/BimapFormatting.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">[</span><span class="va">mappedKeys</span><span class="op">]</span><span class="op">)</span>
@@ -446,7 +460,7 @@ combined tags can be visualized by <code>tag=TRUE</code>.</p>
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`05211`</span>,
                       keyType<span class="op">=</span><span class="st">"ENTREZID"</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.3</span>, numWords<span class="op">=</span><span class="fl">30</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, excludeTfIdf<span class="op">=</span><span class="fl">150</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 70</span>
@@ -461,44 +475,48 @@ combined tags can be visualized by <code>tag=TRUE</code>.</p>
 <span class="co">## Bootstrap (r = 1.2)... Done.</span>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/tagcomp-1.png" width="700"></p>
 </div>
+<div class="section level3">
+<h3 id="query-words-across-clusters">Query words across clusters<a class="anchor" aria-label="anchor" href="#query-words-across-clusters"></a>
+</h3>
 </div>
 <div class="section level3">
 <h3 id="text-over-represenatation-analysis-experimental">Text over represenatation analysis (experimental)<a class="anchor" aria-label="anchor" href="#text-over-represenatation-analysis-experimental"></a>
 </h3>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="va">keggList</span><span class="op">$</span><span class="va">`00785`</span> <span class="co"># Lipoic acid metabolism</span>
 <span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ora-1.png" width="700"></p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##            lipoic              step              acid lipoateactivating </span>
 <span class="co">##      1.701356e-14      8.782627e-08      5.708708e-07      1.507684e-04 </span>
 <span class="co">##  lipoatedependent            lipoyl </span>
 <span class="co">##      1.507684e-04      1.507684e-04</span></code></pre>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="va">keggList</span><span class="op">$</span><span class="va">`05150`</span> <span class="co"># Staphylococcus aureus infection</span>
 <span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/ora-2.png" width="700"></p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##        chain   complement        class         exon      peptide         beta </span>
 <span class="co">## 1.982266e-81 6.443621e-74 1.233313e-45 1.278631e-38 8.506250e-34 9.352422e-33</span></code></pre>
-<p>Filter words using ORA threshold and frequency threshold by setting
+<p>This thresholding can be used in RefSeq visualization. Filter words
+using ORA threshold and frequency threshold by setting
 <code>ora=TRUE</code>.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, ora<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Input genes: 7</span>
 <span class="co">## Converted input genes: 7</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span>
 <span class="co">## performing ORA</span>
 <span class="co">## filtered 147 words (ORA) ...</span></code></pre>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">net</span><span class="op">$</span><span class="va">net</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/oranet-1.png" width="700"></p>
 </div>
@@ -509,7 +527,7 @@ combined tags can be visualized by <code>tag=TRUE</code>.</p>
 <div class="section level3">
 <h3 id="recluster-the-cluster-using-word-information">Recluster the cluster using word information<a class="anchor" aria-label="anchor" href="#recluster-the-cluster-using-word-information"></a>
 </h3>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">simExample</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/returnSim.html">returnSim</a></span><span class="op">(</span><span class="fu"><a href="../reference/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">color</span>, keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>, ora<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Number of clusters: 3</span>
 <span class="co">## 1</span>
@@ -530,7 +548,7 @@ combined tags can be visualized by <code>tag=TRUE</code>.</p>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span>
 <span class="co">## performing ORA</span>
 <span class="co">## filtered 147 words (ORA) ...</span></code></pre>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html" class="external-link">heatmap</a></span><span class="op">(</span><span class="va">simExample</span><span class="op">)</span></code></pre></div>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/textclus-1.png" width="700"></p>
 </div>
@@ -545,7 +563,7 @@ relationship are inferred using <code>boot.strength</code> function in
 <code>Cytoscape.js</code> or <code>vis.js</code>. In this way, module
 relationship can be interactively inspected with the functional
 implications.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## In this example, we simulate WGCNA results.</span>
 <span class="co">## you can just use results from WGCNA.</span>
 <span class="co">## Assuming WGCNA results are stored in `mod`</span>
@@ -633,7 +651,7 @@ implications.</p>
 <pre><code><span class="co">## [1] "ME3"</span>
 <span class="co">## Input genes: 7</span>
 <span class="co">## filtered 64 words (frequency | tfidf) ...</span></code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">image</span> <span class="op">&lt;-</span> <span class="va">images</span>
 
 <span class="co">## Node shape</span>
@@ -669,7 +687,7 @@ with word information.</p>
 eigengenes using <code>plotEigengeneNetworks</code>, it is useful to
 combine with wcGeneSummary, which plot additional word information on a
 dendrogram with one line.</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># WGCNA::plotEigengeneNetworks(mod$MEs, mod$colors, plotHeatmaps = FALSE)</span>
 <span class="fu"><a href="../reference/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Bootstrap (r = 0.5)... Done.</span>
@@ -683,7 +701,7 @@ dendrogram with one line.</p>
 <span class="co">## Bootstrap (r = 1.3)... Done.</span>
 <span class="co">## Bootstrap (r = 1.4)... Done.</span></code></pre>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/wgcna-1.png" width="700"></p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## R version 4.2.0 (2022-04-22 ucrt)</span>
 <span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span>
@@ -707,58 +725,56 @@ dendrogram with one line.</p>
 <span class="co">## [10] wcGeneSummary_0.99.0 BiocStyle_2.24.0    </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
-<span class="co">##   [1] utf8_1.2.2             tidyselect_1.1.2       RSQLite_2.2.10        </span>
-<span class="co">##   [4] htmlwidgets_1.5.4      grid_4.2.0             BiocParallel_1.29.15  </span>
-<span class="co">##   [7] scatterpie_0.1.7       munsell_0.5.0          codetools_0.2-18      </span>
-<span class="co">##  [10] ragg_1.2.2             withr_2.4.3            colorspace_2.0-3      </span>
-<span class="co">##  [13] GOSemSim_2.21.1        NLP_0.2-1              highr_0.9             </span>
-<span class="co">##  [16] knitr_1.37             rstudioapi_0.13        DOSE_3.21.2           </span>
-<span class="co">##  [19] GeneSummary_0.99.3     labeling_0.4.2         slam_0.1-50           </span>
-<span class="co">##  [22] GenomeInfoDbData_1.2.7 polyclip_1.10-0        bit64_4.0.5           </span>
-<span class="co">##  [25] farver_2.1.0           rprojroot_2.0.2        downloader_0.4        </span>
-<span class="co">##  [28] vctrs_0.4.1            treeio_1.19.1          generics_0.1.2        </span>
-<span class="co">##  [31] xfun_0.30              R6_2.5.1               GenomeInfoDb_1.31.4   </span>
-<span class="co">##  [34] graphlayouts_0.8.0     concaveman_1.1.0       ISOcodes_2022.01.10   </span>
-<span class="co">##  [37] bitops_1.0-7           cachem_1.0.6           fgsea_1.21.0          </span>
-<span class="co">##  [40] gridGraphics_0.5-1     assertthat_0.2.1       promises_1.2.0.1      </span>
-<span class="co">##  [43] scales_1.1.1           enrichplot_1.16.1      gtable_0.3.0          </span>
-<span class="co">##  [46] tidygraph_1.2.0        rlang_1.0.4            systemfonts_1.0.4     </span>
-<span class="co">##  [49] GlobalOptions_0.1.2    splines_4.2.0          lazyeval_0.2.2        </span>
-<span class="co">##  [52] stopwords_2.3          wordcloud_2.6          checkmate_2.0.0       </span>
-<span class="co">##  [55] BiocManager_1.30.16    yaml_2.3.5             reshape2_1.4.4        </span>
-<span class="co">##  [58] backports_1.4.1        httpuv_1.6.5           pvclust_2.2-0         </span>
-<span class="co">##  [61] qvalue_2.27.0          clusterProfiler_4.3.2  tools_4.2.0           </span>
-<span class="co">##  [64] bookdown_0.26          ggplotify_0.1.0        ellipsis_0.3.2        </span>
-<span class="co">##  [67] jquerylib_0.1.4        RColorBrewer_1.1-2     ggdendro_0.1.23       </span>
-<span class="co">##  [70] Rcpp_1.0.8             plyr_1.8.6             base64enc_0.1-3       </span>
-<span class="co">##  [73] zlibbioc_1.41.0        purrr_0.3.4            RCurl_1.98-1.6        </span>
-<span class="co">##  [76] GetoptLong_1.0.5       viridis_0.6.2          cowplot_1.1.1         </span>
-<span class="co">##  [79] ggrepel_0.9.1          fs_1.5.2               magrittr_2.0.2        </span>
-<span class="co">##  [82] data.table_1.14.2      DO.db_2.9              reactome.db_1.79.0    </span>
-<span class="co">##  [85] patchwork_1.1.1        mime_0.12              evaluate_0.15         </span>
-<span class="co">##  [88] xtable_1.8-4           XML_3.99-0.9           gridExtra_2.3         </span>
-<span class="co">##  [91] compiler_4.2.0         bugsigdbr_1.2.2        tibble_3.1.8          </span>
-<span class="co">##  [94] V8_4.1.0               crayon_1.5.0           shadowtext_0.1.1      </span>
-<span class="co">##  [97] htmltools_0.5.2        ggfun_0.0.5            later_1.3.0           </span>
-<span class="co">## [100] tidyr_1.2.0            aplot_0.1.2            ReactomePA_1.40.0     </span>
-<span class="co">## [103] DBI_1.1.2              tweenr_1.0.2           MASS_7.3-56           </span>
-<span class="co">## [106] rappdirs_0.3.3         Matrix_1.4-1           cli_3.2.0             </span>
-<span class="co">## [109] parallel_4.2.0         pkgconfig_2.0.3        pkgdown_2.0.3         </span>
-<span class="co">## [112] xml2_1.3.3             ggtree_3.3.1           bslib_0.3.1           </span>
-<span class="co">## [115] XVector_0.35.0         yulab.utils_0.0.4      stringr_1.4.0         </span>
-<span class="co">## [118] digest_0.6.29          graph_1.73.0           Biostrings_2.63.1     </span>
-<span class="co">## [121] tm_0.7-8               rmarkdown_2.14         fastmatch_1.1-3       </span>
-<span class="co">## [124] tidytree_0.3.8         easyPubMed_2.13        dendextend_1.15.2     </span>
-<span class="co">## [127] cyjShiny_1.0.34        curl_4.3.2             shiny_1.7.1           </span>
-<span class="co">## [130] graphite_1.41.0        rjson_0.2.21           lifecycle_1.0.1       </span>
-<span class="co">## [133] nlme_3.1-157           jsonlite_1.8.0         desc_1.4.0            </span>
-<span class="co">## [136] viridisLite_0.4.0      fansi_1.0.2            pillar_1.7.0          </span>
-<span class="co">## [139] lattice_0.20-45        KEGGREST_1.36.0        fastmap_1.1.0         </span>
-<span class="co">## [142] httr_1.4.2             GO.db_3.14.0           glue_1.6.2            </span>
-<span class="co">## [145] png_0.1-7              bit_4.0.4              ggforce_0.3.3         </span>
-<span class="co">## [148] stringi_1.7.6          sass_0.4.0             blob_1.2.2            </span>
-<span class="co">## [151] textshaping_0.3.6      memoise_2.0.1          dplyr_1.0.9           </span>
-<span class="co">## [154] ape_5.6-1</span></code></pre>
+<span class="co">##   [1] backports_1.4.1        shadowtext_0.1.1       fastmatch_1.1-3       </span>
+<span class="co">##   [4] systemfonts_1.0.4      plyr_1.8.6             lazyeval_0.2.2        </span>
+<span class="co">##   [7] splines_4.2.0          BiocParallel_1.29.15   GenomeInfoDb_1.31.4   </span>
+<span class="co">##  [10] digest_0.6.29          yulab.utils_0.0.4      htmltools_0.5.2       </span>
+<span class="co">##  [13] bugsigdbr_1.2.2        GOSemSim_2.21.1        viridis_0.6.2         </span>
+<span class="co">##  [16] GO.db_3.14.0           fansi_1.0.2            GeneSummary_0.99.3    </span>
+<span class="co">##  [19] checkmate_2.0.0        magrittr_2.0.2         memoise_2.0.1         </span>
+<span class="co">##  [22] tm_0.7-8               Biostrings_2.63.1      graphlayouts_0.8.0    </span>
+<span class="co">##  [25] pvclust_2.2-0          wordcloud_2.6          pkgdown_2.0.3         </span>
+<span class="co">##  [28] enrichplot_1.16.1      colorspace_2.0-3       rappdirs_0.3.3        </span>
+<span class="co">##  [31] blob_1.2.2             ggrepel_0.9.1          textshaping_0.3.6     </span>
+<span class="co">##  [34] xfun_0.30              dplyr_1.0.9            crayon_1.5.0          </span>
+<span class="co">##  [37] RCurl_1.98-1.6         jsonlite_1.8.0         graph_1.73.0          </span>
+<span class="co">##  [40] scatterpie_0.1.7       ape_5.6-1              glue_1.6.2            </span>
+<span class="co">##  [43] polyclip_1.10-0        stopwords_2.3          gtable_0.3.0          </span>
+<span class="co">##  [46] zlibbioc_1.41.0        XVector_0.35.0         GetoptLong_1.0.5      </span>
+<span class="co">##  [49] graphite_1.41.0        scales_1.1.1           DOSE_3.21.2           </span>
+<span class="co">##  [52] DBI_1.1.2              Rcpp_1.0.8             xtable_1.8-4          </span>
+<span class="co">##  [55] viridisLite_0.4.0      gridGraphics_0.5-1     tidytree_0.3.8        </span>
+<span class="co">##  [58] reactome.db_1.79.0     bit_4.0.4              htmlwidgets_1.5.4     </span>
+<span class="co">##  [61] httr_1.4.2             fgsea_1.21.0           RColorBrewer_1.1-2    </span>
+<span class="co">##  [64] ellipsis_0.3.2         pkgconfig_2.0.3        XML_3.99-0.9          </span>
+<span class="co">##  [67] farver_2.1.0           sass_0.4.0             utf8_1.2.2            </span>
+<span class="co">##  [70] labeling_0.4.2         later_1.3.0            ggplotify_0.1.0       </span>
+<span class="co">##  [73] tidyselect_1.1.2       rlang_1.0.4            reshape2_1.4.4        </span>
+<span class="co">##  [76] munsell_0.5.0          tools_4.2.0            cachem_1.0.6          </span>
+<span class="co">##  [79] downloader_0.4         cli_3.2.0              generics_0.1.2        </span>
+<span class="co">##  [82] RSQLite_2.2.10         ggdendro_0.1.23        evaluate_0.15         </span>
+<span class="co">##  [85] stringr_1.4.0          fastmap_1.1.0          yaml_2.3.5            </span>
+<span class="co">##  [88] ragg_1.2.2             ggtree_3.3.1           knitr_1.37            </span>
+<span class="co">##  [91] bit64_4.0.5            fs_1.5.2               tidygraph_1.2.0       </span>
+<span class="co">##  [94] purrr_0.3.4            dendextend_1.15.2      KEGGREST_1.36.0       </span>
+<span class="co">##  [97] ReactomePA_1.40.0      nlme_3.1-157           mime_0.12             </span>
+<span class="co">## [100] slam_0.1-50            aplot_0.1.2            DO.db_2.9             </span>
+<span class="co">## [103] xml2_1.3.3             compiler_4.2.0         rstudioapi_0.13       </span>
+<span class="co">## [106] png_0.1-7              treeio_1.19.1          tibble_3.1.8          </span>
+<span class="co">## [109] tweenr_1.0.2           cyjShiny_1.0.34        bslib_0.3.1           </span>
+<span class="co">## [112] stringi_1.7.6          highr_0.9              desc_1.4.0            </span>
+<span class="co">## [115] easyPubMed_2.13        lattice_0.20-45        Matrix_1.4-1          </span>
+<span class="co">## [118] vctrs_0.4.1            pillar_1.7.0           lifecycle_1.0.1       </span>
+<span class="co">## [121] BiocManager_1.30.16    jquerylib_0.1.4        GlobalOptions_0.1.2   </span>
+<span class="co">## [124] cowplot_1.1.1          data.table_1.14.2      bitops_1.0-7          </span>
+<span class="co">## [127] httpuv_1.6.5           patchwork_1.1.1        qvalue_2.27.0         </span>
+<span class="co">## [130] R6_2.5.1               promises_1.2.0.1       bookdown_0.26         </span>
+<span class="co">## [133] gridExtra_2.3          MASS_7.3-56            assertthat_0.2.1      </span>
+<span class="co">## [136] rprojroot_2.0.2        rjson_0.2.21           withr_2.4.3           </span>
+<span class="co">## [139] GenomeInfoDbData_1.2.7 parallel_4.2.0         ISOcodes_2022.01.10   </span>
+<span class="co">## [142] clusterProfiler_4.3.2  grid_4.2.0             ggfun_0.0.5           </span>
+<span class="co">## [145] tidyr_1.2.0            rmarkdown_2.14         ggforce_0.3.3         </span>
+<span class="co">## [148] base64enc_0.1-3        shiny_1.7.1            NLP_0.2-1</span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
