@@ -1,7 +1,7 @@
 pandoc: '2.18'
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   basic_usage_of_wcGeneSummary: basic_usage_of_wcGeneSummary.html
-last_built: 2022-11-01T09:18Z
+last_built: 2022-11-12T07:23Z
 

@@ -43,7 +43,13 @@
     <loc>/reference/makeCorpus.html</loc>
   </url>
   <url>
+    <loc>/reference/plotDynamic.html</loc>
+  </url>
+  <url>
     <loc>/reference/plotEigengeneNetworksWithWords.html</loc>
+  </url>
+  <url>
+    <loc>/reference/removeAloneNumbers.html</loc>
   </url>
   <url>
     <loc>/reference/returnExample.html</loc>
