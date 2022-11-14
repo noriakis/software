@@ -48,187 +48,127 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcAbst</span><span class="op">(</span></span>
-<span>  <span class="va">queries</span>,</span>
-<span>  redo <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,</span>
-<span>  target <span class="op">=</span> <span class="st">"abstract"</span>,</span>
-<span>  usefil <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  filnum <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  geneUpper <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  apiKey <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
-<span>  numWords <span class="op">=</span> <span class="fl">30</span>,</span>
-<span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  plotType <span class="op">=</span> <span class="st">"wc"</span>,</span>
-<span>  colorText <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  corThresh <span class="op">=</span> <span class="fl">0.2</span>,</span>
-<span>  layout <span class="op">=</span> <span class="st">"nicely"</span>,</span>
-<span>  tag <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  tagWhole <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  onlyCorpus <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  bn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  R <span class="op">=</span> <span class="fl">20</span>,</span>
-<span>  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  genePlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  preset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  <span class="va">...</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">wcAbst</span><span class="op">(</span>
+  <span class="va">queries</span>,
+  redo <span class="op">=</span> <span class="cn">NA</span>,
+  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,
+  target <span class="op">=</span> <span class="st">"abstract"</span>,
+  usefil <span class="op">=</span> <span class="cn">NA</span>,
+  filnum <span class="op">=</span> <span class="fl">0</span>,
+  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,
+  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,
+  geneUpper <span class="op">=</span> <span class="cn">TRUE</span>,
+  apiKey <span class="op">=</span> <span class="cn">NULL</span>,
+  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,
+  pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,
+  numWords <span class="op">=</span> <span class="fl">30</span>,
+  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,
+  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,
+  plotType <span class="op">=</span> <span class="st">"wc"</span>,
+  colorText <span class="op">=</span> <span class="cn">FALSE</span>,
+  corThresh <span class="op">=</span> <span class="fl">0.2</span>,
+  layout <span class="op">=</span> <span class="st">"nicely"</span>,
+  tag <span class="op">=</span> <span class="cn">FALSE</span>,
+  tagWhole <span class="op">=</span> <span class="cn">FALSE</span>,
+  onlyCorpus <span class="op">=</span> <span class="cn">FALSE</span>,
+  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,
+  bn <span class="op">=</span> <span class="cn">FALSE</span>,
+  R <span class="op">=</span> <span class="fl">20</span>,
+  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,
+  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,
+  ngram <span class="op">=</span> <span class="cn">NA</span>,
+  genePlot <span class="op">=</span> <span class="cn">FALSE</span>,
+  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,
+  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,
+  preset <span class="op">=</span> <span class="cn">FALSE</span>,
+  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,
+  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,
+  <span class="va">...</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>queries</dt>
 <dd><p>gene symbols (max: 5)</p></dd>
-
-
 <dt>redo</dt>
 <dd><p>if plot in other parameters, input the previous list</p></dd>
-
-
 <dt>madeUpper</dt>
 <dd><p>make the words uppercase in resulting plot</p></dd>
-
-
 <dt>target</dt>
 <dd><p>"abstract" or "title"</p></dd>
-
-
 <dt>usefil</dt>
 <dd><p>filter based on "gstfidf" or "bsdbtfidf"</p></dd>
-
-
 <dt>filnum</dt>
 <dd><p>specify filter tfidf</p></dd>
-
-
 <dt>pvclAlpha</dt>
 <dd><p>alpha for pvpick()</p></dd>
-
-
 <dt>numOnly</dt>
 <dd><p>delete number only</p></dd>
-
-
 <dt>geneUpper</dt>
 <dd><p>make queries uppercase</p></dd>
-
-
 <dt>apiKey</dt>
 <dd><p>api key for eutilities</p></dd>
-
-
 <dt>tfidf</dt>
 <dd><p>use TfIdf when making TDM</p></dd>
-
-
 <dt>pal</dt>
 <dd><p>palette for color gradient in correlation network</p></dd>
-
-
 <dt>numWords</dt>
 <dd><p>the number of words to be shown</p></dd>
-
-
 <dt>scaleRange</dt>
 <dd><p>scale for label and node size in correlation network</p></dd>
-
-
 <dt>showLegend</dt>
 <dd><p>whether to show legend in correlation network</p></dd>
-
-
 <dt>plotType</dt>
 <dd><p>"wc" or "network"</p></dd>
-
-
 <dt>colorText</dt>
 <dd><p>color text label based on frequency in correlation network</p></dd>
-
-
 <dt>corThresh</dt>
 <dd><p>the correlation threshold</p></dd>
-
-
 <dt>layout</dt>
 <dd><p>the layout for correlation network, defaul to "nicely"</p></dd>
-
-
 <dt>tag</dt>
 <dd><p>cluster the words based on text</p></dd>
-
-
 <dt>tagWhole</dt>
 <dd><p>tag based on whole data or subset</p></dd>
-
-
 <dt>onlyCorpus</dt>
 <dd><p>return only corpus</p></dd>
-
-
 <dt>onlyTDM</dt>
 <dd><p>return only TDM</p></dd>
-
-
 <dt>bn</dt>
 <dd><p>perform bootstrap-based Bayesian network inference instead of correlation</p></dd>
-
-
 <dt>R</dt>
 <dd><p>how many bootstrap when bn is stated</p></dd>
-
-
 <dt>edgeLabel</dt>
 <dd><p>if TRUE, plot the edge label (default: FALSE)</p></dd>
-
-
 <dt>edgeLink</dt>
 <dd><p>if FALSE, use geom_edge_diagonal</p></dd>
-
-
 <dt>ngram</dt>
 <dd><p>default to NA (1)</p></dd>
-
-
 <dt>genePlot</dt>
 <dd><p>plot associated genes (default: FALSE)</p></dd>
-
-
 <dt>deleteZeroDeg</dt>
 <dd><p>delete zero degree node from plot in correlation network</p></dd>
-
-
 <dt>additionalRemove</dt>
 <dd><p>specific words to be excluded</p></dd>
-
-
 <dt>preset</dt>
 <dd><p>filter preset words</p></dd>
-
-
+<dt>onWholeDTM</dt>
+<dd><p>calculate correlation network
+on whole dataset or top-words specified by numWords</p></dd>
+<dt>madeUpperGenes</dt>
+<dd><p>make genes upper case automatically (default to TRUE)</p></dd>
 <dt>...</dt>
 <dd><p>parameters to pass to wordcloud()</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    
-
-<p>list of data frame and ggplot2 object</p>
+    <p>list of data frame and ggplot2 object</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">wcAbst</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">wcAbst</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> querying pubmed for DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converting to a data frame ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawdf</span>
@@ -654,7 +594,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           We screened 47 subjects with DDX41 variants among 1529 subjects with myeloid neoplasms. The most common germline variants included Splice c.935 + 4A&amp;gt;T, p.T360Ifs*33, p.V152G, p.S217Ifs*4, p.R311* and p.R369*. Except for the p.R369*, no other variants have been previously reported. Clinical covariates of subjects with simple DDX41 somatic variants and germline/somatic biallelic variants are similar. The two-year overall survival (OS) of subjects with DDX41 variants was 85%. Overall response rate to demethylation therapy in subjects with DDX41 variants was 69%. The response did not correlate with the presence of a germline variant.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 78                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Studies of DNA vaccines have shown that understanding the mechanism of DNA vaccine-mediated action is the key for vaccine development. Current knowledge has shown the presence of antigen presenting cells (APCs) involving in B and T cells at the muscle injection site and the upregulation of type I interferon (IFN-I) that initiates antiviral response and benefits adaptive immunity in fish DNA vaccines. IFN-I may be triggered by expressed antigen such as the rhabdovirus G protein encoded DNA vaccine or by plasmid DNA itself through cytosolic DNA sensing. The investigating of Toll-like receptor 9, and 21 are the CpG-motif sensors in many fish species, and the cytosolic DNA receptors DDX41 and downstream STING signaling revealed the mechanisms for IFN-I production. This review article describes the recent finding of receptors for cytosolic DNA, the STING-TBK1-IRF signaling, and the possibility of turning these findings into strategies for the future development of DNA vaccines.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 79                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            DEAD-box helicase 41 (DDX41) is a key cytosolic DNA sensor playing critical roles in the regulation of type I IFN responses, and their functions have been well-characterized in mammals. However, little information is available regarding the function of fish DDX41. In this study, a DDX41 gene, named On-DDX41, was identified in Nile tilapia, Oreochromis niloticus. The predicted protein of On-DDX41 contains several structural features known in DDX41, including conserved DEADc and HELICc domains, and a conserved sequence "Asp-Glu-Ala-Asp (D-E-A-D)". On-DDX41 gene was constitutively expressed in all tissues examined, with the highest expression level observed in liver and muscle, and was inducible after poly(I:C) stimulation. Moreover, the overexpression of On-DDX41 can elicit a strong activation of both zebrafish IFN1 and IFN3 promoter in fish cells treated with poly(dA:dT). The present study thus contributes to a better understanding of the functional properties of DDX41 in fish.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Mutations affecting spliceosomal proteins are frequently found in hematological malignancies, including myelodysplastic syndromes and acute myeloid leukemia (AML). DDX41/Abstrakt is a metazoan-specific spliceosomal DEAD-box RNA helicase that is recurrently mutated in inherited myelodysplastic syndromes and in relapsing cases of AML. The genetic properties and genomic impacts of disease-causing missense mutations in DDX41 and other spliceosomal proteins have been uncertain. Here, we conduct a comprehensive analysis of the &lt;i&gt;Caenorhabditis elegans&lt;/i&gt; DDX41 ortholog, SACY-1 Biochemical analyses defined SACY-1 as a component of the &lt;i&gt;C. elegans&lt;/i&gt; spliceosome, and genetic analyses revealed synthetic lethal interactions with spliceosomal components. We used the auxin-inducible degradation system to analyze the consequence of SACY-1 depletion on the transcriptome using RNA sequencing. SACY-1 depletion impacts the transcriptome through splicing-dependent and splicing-independent mechanisms. Altered 3' splice site usage represents the predominant splicing defect observed upon SACY-1 depletion, consistent with a role for SACY-1 in the second step of splicing. Missplicing events appear more prevalent in the soma than the germline, suggesting that surveillance mechanisms protect the germline from aberrant splicing. The transcriptome changes observed after SACY-1 depletion suggest that disruption of the spliceosome induces a stress response, which could contribute to the cellular phenotypes conferred by &lt;i&gt;sacy-1&lt;/i&gt; mutant alleles. Multiple &lt;i&gt;sacy-1&lt;/i&gt; &lt;i&gt;/ddx41&lt;/i&gt; missense mutations, including the R525H human oncogenic variant, confer antimorphic activity, suggesting that their incorporation into the spliceosome is detrimental. Antagonistic variants that perturb the function of the spliceosome may be relevant to the disease-causing mutations, including DDX41, affecting highly conserved components of the spliceosome in humans.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Mutations affecting spliceosomal proteins are frequently found in hematological malignancies, including myelodysplastic syndromes and acute myeloid leukemia (AML). DDX41/Abstrakt is a metazoan-specific spliceosomal DEAD-box RNA helicase that is recurrently mutated in inherited myelodysplastic syndromes and in relapsing cases of AML. The genetic properties and genomic impacts of disease-causing missense mutations in DDX41 and other spliceosomal proteins have been uncertain. Here, we conduct a comprehensive analysis of the &lt;i&gt;Caenorhabditis elegans&lt;/i&gt; DDX41 ortholog, SACY-1 Biochemical analyses defined SACY-1 as a component of the &lt;i&gt;C. elegans&lt;/i&gt; spliceosome, and genetic analyses revealed synthetic lethal interactions with spliceosomal components. We used the auxin-inducible degradation system to analyze the consequence of SACY-1 depletion on the transcriptome using RNA sequencing. SACY-1 depletion impacts the transcriptome through splicing-dependent and splicing-independent mechanisms. Altered 3' splice site usage represents the predominant splicing defect observed upon SACY-1 depletion, consistent with a role for SACY-1 in the second step of splicing. Missplicing events appear more prevalent in the soma than the germline, suggesting that surveillance mechanisms protect the germline from aberrant splicing. The transcriptome changes observed after SACY-1 depletion suggest that disruption of the spliceosome induces a stress response, which could contribute to the cellular phenotypes conferred by &lt;i&gt;sacy-1&lt;/i&gt; mutant alleles. Multiple &lt;i&gt;sacy-1&lt;/i&gt;&lt;i&gt;/ddx41&lt;/i&gt; missense mutations, including the R525H human oncogenic variant, confer antimorphic activity, suggesting that their incorporation into the spliceosome is detrimental. Antagonistic variants that perturb the function of the spliceosome may be relevant to the disease-causing mutations, including DDX41, affecting highly conserved components of the spliceosome in humans.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Common variable immunodeficiency (CVID) is a primary immunodeficiency characterized by recurrent bacterial infections and defined by reduced levels of IgG, IgA, and/or IgM, insufficient response to polysaccharide vaccination, and an abnormal B-cell immunophenotype with a significantly reduced fraction of isotype-switched memory B cells. In addition to this infectious phenotype, at least one third of the patients experience autoimmune, autoinflammatory, granulomatous, and/or malignant complications. The very heterogeneous presentation strongly suggests a collection of different disease entities with somewhat different pathogeneses and most likely diverse genetic etiologies. Major progress has been made during recent years with the advent and introduction of next-generation sequencing, initially for research purposes, but more recently in clinical practice. In the present study, we performed whole exome sequencing on 20 CVID patients with autoimmunity, autoinflammation, and/or malignancy from the Danish CVID cohort with the aim to identify gene variants with a certain, possible, or potential disease-causing role in CVID. Through bioinformatics analyses, we identified variants with possible/probable disease-causing potential in nine of the patients. Of these, three patients had four variants in three different genes classified as likely pathogenic (&lt;i&gt;NFKB1, TNFAIP3&lt;/i&gt;, and &lt;i&gt;TTC37&lt;/i&gt;), whereas in six patients, we identified seven variants of possible pathogenic potential classified as variants of unknown significance (&lt;i&gt;STAT3, IL17F, IRAK4, DDX41, NLRC3, TNFRSF1A&lt;/i&gt;, and &lt;i&gt;PLCG2&lt;/i&gt;). In the remaining 11 patients, we did not identify possible genetic causes. Genetic findings were correlated to clinical disease presentation, clinical immunological phenotype, and disease complications. We suggest that the variants identified in the present work should lay the ground for future studies to functionally validate their disease-causing potential and to investigate at the mechanistic and molecular level their precise role in CVID pathogenesis. Overall, we believe that the present work contributes important new insights into the genetic basis of CVID and particular in the subset of CVID patients with a complex phenotype involving not only infection, but also autoimmunity, autoinflammation, and malignancy.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    The innate immune system recognizes conserved pathogen-associated molecular patterns and produces inflammatory cytokines that direct downstream immune responses. The inappropriate localization of DNA within the cell cytosol or endosomal compartments indicates that a cell may either be infected by a DNA virus or bacterium, or has problems with its own nuclear integrity. This DNA is sensed by certain receptors that mediate cytokine production and, in some cases, initiate an inflammatory and lytic form of cell death called pyroptosis. Dysregulation of these DNA-sensing pathways is thought to contribute to autoimmune diseases and the development of cancer. In this review, we will discuss the DNA sensors Toll-like receptor 9 (TLR9), cyclic GMP-AMP synthase (cGAS), stimulator of interferon genes (STING), absent in melanoma 2 (AIM2), and interferon gamma-inducible 16 (IFI16), their ligands, and their physiological significance. We will also examine the less-well-understood DEAH- and DEAD-box helicases DHX9, DHX36, DDX41, and RNA polymerase III, each of which may play an important role in DNA-mediated innate immunity.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 83                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 &lt;b&gt;Background:&lt;/b&gt; DNA sensors are innate immune receptors that detect intracellular endogenous or exogenous DNA. They are critical to trigger immune response against DNA viral and intracellular bacterial infection, and are involved in inflammatory diseases and tumorigenesis. Recent accumulating evidences indicated that DNA sensors are also crucial for controlling the development of colorectal cancer (CRC). However, a systematic study on the expression profile of DNA sensors in CRC and their clinical significance are still lacking. &lt;b&gt;Methods:&lt;/b&gt; We investigated the expression profile of DNA sensors in CRC and their clinical significance by taking advantage of clinical CRC samples, mouse AOM/DSS treatment model, and Oncomine ® bioinformatics platform. &lt;b&gt;Results:&lt;/b&gt; Our study identified that the expression of DNA sensors, including &lt;i&gt;AIM2, DAI,&lt;/i&gt; as well as inflammasome molecules &lt;i&gt;ASC/IL-18&lt;/i&gt;, &lt;i&gt;TLR9&lt;/i&gt; and adaptor &lt;i&gt;MyD88&lt;/i&gt;, and &lt;i&gt;DDX60&lt;/i&gt; decreased in human CRC, whereas the expression of &lt;i&gt;DHX9&lt;/i&gt;, &lt;i&gt;DHX36&lt;/i&gt;, and &lt;i&gt;DDX41&lt;/i&gt; significantly increased. Among them, the expression of &lt;i&gt;AIM2/ASC/IL-18&lt;/i&gt;, &lt;i&gt;MyD88&lt;/i&gt;, &lt;i&gt;DAI&lt;/i&gt;, &lt;i&gt;DHX36&lt;/i&gt;, and &lt;i&gt;DDX60&lt;/i&gt; were associated with cancer stages. In addition, we also performed correlation analysis between DNA sensors and their main signaling molecules to explore the possible mechanisms. The results showed that there were positive correlations between &lt;i&gt;AIM2&lt;/i&gt; and &lt;i&gt;ASC/IL-18&lt;/i&gt;, &lt;i&gt;DHX9&lt;/i&gt; and &lt;i&gt;MAVS&lt;/i&gt;, and &lt;i&gt;TLR9&lt;/i&gt; and &lt;i&gt;MyD88&lt;/i&gt; expression. In addition, the gene expression patterns of some DNA sensors were confirmed by Western-blot analysis. &lt;b&gt;Conclusions:&lt;/b&gt; Our study revealed that the expression of multiple DNA sensors was deregulated in CRC and might be involved in tumor development. More importantly, the study identified that, among all these DNA sensors, AIM2, DAI, and DDX60 could be potentially critical for diagnosis, prognosis, and therapy of CRC and deserve further investigation.</span>
@@ -1261,7 +1201,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawfrequency</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             ddx41                          patients </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               439                               234 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               438                               234 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         mutations                               dna </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                               231                               194 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          germline                             cells </span>
@@ -1634,49 +1574,49 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 9 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          required                            result </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             sacy1                             short </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             short                            target </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            target                          telomere </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          telomere                             yield </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             yield                         zebrafish </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      aspglualaasp                            assays </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         zebrafish                      aspglualaasp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 9                                 8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            assays                         biallelic </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         biallelic                           chicken </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           chicken                          contrast </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          contrast                              core </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              core                            ddx41m </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            ddx41m                             ddx60 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             ddx60                        deficiency </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        deficiency                           defined </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           defined                           diverse </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           diverse                       established </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       established                               ild </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               ild                        implicated </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        implicated                      increasingly </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      increasingly                        inhibition </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        inhibition                         involving </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         involving                         leukemias </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         leukemias                             major </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             major                         malignant </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         malignant                           mammals </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           mammals                             mtdna </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             mtdna                             onset </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             onset                          patterns </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          patterns                             pbmcs </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             pbmcs                         pediatric </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         pediatric                               pef </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               pef                        peripheral </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        peripheral                          personal </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          personal                        phenotypes </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        phenotypes                        phenotypic </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        phenotypic                        population </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        population                          positive </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          positive                              rate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              rate                         recognize </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         recognize                        regulating </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        regulating                           reverse </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           reverse                            signal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             sacy1                            signal </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                       spliceosome                             srp72 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 8                                 8 </span>
@@ -4624,371 +4564,373 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                           s217ifs                        s21fsr525h </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              safe                       salidroside </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        sacy1ddx41                              safe </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           salient                    salineinjected </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       salidroside                           salient </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         salmonids                             samd9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    salineinjected                         salmonids </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            samd9l                           sapiens </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             samd9                            samd9l </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       sarcoidosis                             sars2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           sapiens                       sarcoidosis </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           satisfy                               sbs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             sars2                           satisfy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          scanning                 schwachmandiamond </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               sbs                          scanning </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         sclerosis                            screen </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 schwachmandiamond                         sclerosis </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             screeningsurveillance                           seabass </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            screen             screeningsurveillance </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            search                          secreted </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           seabass                            search </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         secretion                         secretory </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          secreted                         secretion </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           seeking                             seeks </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         secretory                           seeking </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          segments                         senescent </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             seeks                          segments </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             senp7                       sensitively </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         senescent                             senp7 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       sensitivity             sensorstinginterferon </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       sensitively                       sensitivity </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         separated                         sequenced </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             sensorstinginterferon                         separated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         sequencer                         sequences </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         sequenced                         sequencer </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   sequencingbased                        sequential </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         sequences                   sequencingbased </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            serial                       serological </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        sequential                            serial </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             serum                      seruminduced </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       serological                             serum </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           session                           seventh </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      seruminduced                           session </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               sex                             sh2b3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           seventh                               sex </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            sh3sh2                            shaped </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             sh2b3                            sh3sh2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            shared                           sharing </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            shaped                            shared </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      shortcomings                           shuttle </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           sharing                      shortcomings </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         shuttling                            silica </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           shuttle                         shuttling </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            silico                            simple </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            silica                            silico </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      simultaneous                         singapore </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            simple                      simultaneous </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        singlecell                  singlenucleotide </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         singapore                        singlecell </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  sinocyclocheilus                              situ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  singlenucleotide                  sinocyclocheilus </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           sixteen                              size </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              situ                           sixteen </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            sledai                             slide </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              size                            sledai </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            slight                              slow </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             slide                            slight </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            slowed                              slu7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              slow                            slowed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              smc3                             smoke </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              slu7                              smc3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              snps                   snx2interacting </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             smoke                              snps </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           society                        sod1driven </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   snx2interacting                           society </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    sod1mutcausing                             solid </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        sod1driven                    sod1mutcausing </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              soma                       somatically </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             solid                              soma </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             space                             spans </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       somatically                             space </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         specimens                           spindle </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             spans                         specimens </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   splicingcoupled                 splicingdependent </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           spindle                   splicingcoupled </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               splicingindependent                             spots </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 splicingdependent               splicingindependent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           spotted                           sprypry </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             spots                           spotted </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               src                            srebf2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           sprypry                               src </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             srp14                            ssdnas </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            srebf2                             srp14 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             ssrna                             stag2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            ssdnas                             ssrna </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          staining                      standardized </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             stag2                          staining </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             start                         startloss </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      standardized                             start </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        stat1stat2                       statistical </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         startloss                        stat1stat2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            steady                          stemcell </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       statistical                            steady </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           sterile                          stigmata </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          stemcell                           sterile </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                stimulationinduced                         stingirf7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          stigmata                stimulationinduced </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     stingmediated                         stingtbk1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         stingirf7                     stingmediated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      stingtbk1irf                            strain </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         stingtbk1                      stingtbk1irf </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            strand                          stranded </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            strain                            strand </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    stratification                   stratifications </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          stranded                    stratification </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            stream                       strengthens </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   stratifications                            stream </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          strictly                   strongpotential </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       strengthens                          strictly </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   structureguided                          subacute </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   strongpotential                   structureguided </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          subclone                        subdivided </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          subacute                          subclone </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         subjected                        submitting </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        subdivided                         subjected </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           subsets                        succession </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        submitting                           subsets </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        sufficient                         summarize </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        succession                        sufficient </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            summed                             super </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         summarize                            summed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      supernatants                        supporting </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             super                      supernatants </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          supports                          supposed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        supporting                          supports </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       suppression                       suppressive </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          supposed                       suppression </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           surface                        surgically </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       suppressive                           surface </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            survey                           survive </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        surgically                            survey </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          survived                       susceptible </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           survive                          survived </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           suspect                        suspicious </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       susceptible                           suspect </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        sustaining                             swabs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        suspicious                        sustaining </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             swine                         syndrome5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             swabs                             swine </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     syndromeacute                    syndromesacute </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         syndrome5                     syndromeacute </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   synergistically                synthasestimulator </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    syndromesacute                   synergistically </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         synthesis                           t360ifs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                synthasestimulator                         synthesis </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               tag                            tandem </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           t360ifs                               tag </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             tapes                             tarda </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            tandem                             tapes </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        targetable                    targetspecific </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tarda                        targetable </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          taxonomy                     tbk1dependent </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    targetspecific                          taxonomy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       tbk1induced                     tbk1irf3ifnβ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     tbk1dependent                       tbk1induced </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      tbk1specific                              tcga </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     tbk1irf3ifnβ                      tbk1specific </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              tcid                             tdp43 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              tcga                              tcid </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         technique                        technology </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tdp43                         technique </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   telangiectasia7                           teleost </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        technology                   telangiectasia7 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          teleosts                         telomeres </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           teleost                          teleosts </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         telomeric                            tended </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         telomeres                         telomeric </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          terminus                          tertiary </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            tended                          terminus </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          tertterc                   therapeutically </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          tertiary                          tertterc </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      therapeutics                         thousands </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   therapeutically                      therapeutics </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              thp1                            threat </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         thousands                              thp1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         threonine                 thrombocytopenias </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            threat                         threonine </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              tier                             tiger </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 thrombocytopenias                              tier </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             tight                           tilapia </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tiger                             tight </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     timedependent                            titers </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           tilapia                     timedependent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               tkd                              tlr1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            titers                               tkd </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             tlr15                             tlr21 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              tlr1                             tlr15 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              tlr5                              tlr7 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tlr21                              tlr5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       tlrmediated                              tlrs </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              tlr7                       tlrmediated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           tnfaip3                             tnfr1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              tlrs                           tnfaip3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          tnfrsf1a                        topography </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tnfr1                          tnfrsf1a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           totally                             tp532 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        topography                           totally </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       traditional                     traditionally </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             tp532                       traditional </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          training                            traits </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     traditionally                          training </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         transcriptionquantitative          transcriptionreplication </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            traits         transcriptionquantitative </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    transcriptomes                      transduction </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          transcriptionreplication                    transcriptomes </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         transfect                          transfer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      transduction                         transfect </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      transforming                        transgolgi </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          transfer                      transforming </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         transient                        transition </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        transgolgi                         transient </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      transitional                       translocase </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        transition                      transitional </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      translocates                     transmembrane </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       translocase                      translocates </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          transmit                      transplanted </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     transmembrane                          transmit </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         transport                       transported </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      transplanted                         transport </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     transversions                          treating </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       transported                     transversions </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              tree                             trend </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          treating                              tree </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             trex1                            trials </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             trend                             trex1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        trilineage                    trim21mediated </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            trials                        trilineage </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            trim38                            trim56 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    trim21mediated                            trim38 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           trisomy                               trk </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            trim56                           trisomy </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           tropism                              true </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               trk                           tropism </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         truncated                        truncating </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              true                         truncated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             ttc37                        tumorbased </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        truncating                             ttc37 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           tumorigenesisinitiation                 tumorinfiltrating </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        tumorbased           tumorigenesisinitiation </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    tumorpromoting                     tumorspecific </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 tumorinfiltrating                    tumorpromoting </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  tumorsuppressive                           tumours </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     tumorspecific                  tumorsuppressive </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          turnover                             twist </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           tumours                          turnover </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             type5                    typerestricted </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             twist                             type5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            tyr364                             u2af2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    typerestricted                            tyr364 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            ualcan                         ubiquitin </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             u2af2                            ualcan </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      ubiquitously                        ulcerative </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         ubiquitin                      ubiquitously </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          ultimate                              umin </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        ulcerative                          ultimate </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     umin000029879                     umin000031343 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              umin                     umin000029879 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     umin000033144                     umin000034243 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     umin000031343                     umin000033144 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          unbiased                      uncontrolled </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     umin000034243                          unbiased </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           uncover                         uncovered </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      uncontrolled                           uncover </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        uncovering                    underestimated </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         uncovered                        uncovering </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        undergoing                          underlie </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    underestimated                        undergoing </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    underperformed                     underpinnings </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          underlie                    underperformed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      underpowered                       underscores </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     underpinnings                      underpowered </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      understudied                         underwent </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       underscores                      understudied </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      unidentified                             units </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         underwent                      unidentified </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         unraveled                      unrecognized </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             units                         unraveled </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        unresolved                          unstable </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      unrecognized                        unresolved </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      unstimulated                          untested </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          unstable                      unstimulated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            unwind                      upadacitinib </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          untested                            unwind </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            update                      upregulating </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      upadacitinib                            update </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            urgent                             usp18 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                      upregulating                            urgent </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             usual                           utility </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             usp18                             usual </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           utilize                        uvpsoralen </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           utility                           utilize </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       vaccination                   vaccineadjuvant </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        uvpsoralen                       vaccination </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   vaccinemediated                              vacv </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   vaccineadjuvant                   vaccinemediated </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             valid                          validate </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              vacv                             valid </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            values                       variability </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          validate                            values </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         variables                         variants3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       variability                         variables </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              vasa                              vdna </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         variants3                              vasa </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        verifiable                         vesicular </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              vdna                        verifiable </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         viability                            vibrio </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         vesicular                         viability </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              view                           viperin </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            vibrio                              view </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         viroporin                         virtually </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           viperin                         viroporin </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      virusinduced                     virusmediated </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         virtually                      virusinduced </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            visual                               wac </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     virusmediated                            visual </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           warrant                           weinreb </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               wac                           warrant </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           western                       westernblot </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           weinreb                           western </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        widespread                           wiskott </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       westernblot                        widespread </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        withdrawal                             worth </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           wiskott                        withdrawal </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                      wssvinfected                               xpd </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             worth                      wssvinfected </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             xrcc3                             y259c </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               xpd                             xrcc3 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             yeast                            yellow </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             y259c                             yeast </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               yhv                           yielded </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            yellow                               yhv </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             ysk05              ysk05popecholesterol </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           yielded                             ysk05 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    zbp1ripk3casp8                             zebra </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              ysk05popecholesterol                    zbp1ripk3casp8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             zfp36                               aml </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             zebra                             zfp36 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             vitro                              vivo </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               aml                             vitro </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                4a                               ×  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                              vivo                                4a </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                               μg                               μl </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               ×                                μg </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                              αnd                             amino </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                               μl                              αnd </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                 1                                 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                             amino </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $TDM</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;&lt;TermDocumentMatrix (terms: 3718, documents: 170)&gt;&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Non-/sparse entries: 12097/619963</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;&lt;TermDocumentMatrix (terms: 3719, documents: 170)&gt;&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Non-/sparse entries: 12098/620132</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Sparsity           : 98%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximal term length: 33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Weighting          : term frequency (tf)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $df</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          word freq</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ddx41                   ddx41  439</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ddx41                   DDX41  438</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> patients             patients  234</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> mutations           mutations  231</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dna                       DNA  194</span>
@@ -5033,7 +4975,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer></div>
