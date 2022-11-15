@@ -48,58 +48,87 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">returnPyramid</span><span class="op">(</span>
-  <span class="va">L</span>,
-  <span class="va">R</span>,
-  <span class="va">geneVec</span>,
-  <span class="va">geneVecType</span>,
-  <span class="va">filterWords</span>,
-  <span class="va">numberOfWords</span>,
-  <span class="va">orgDb</span>,
-  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,
-  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,
-  widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span><span class="op">)</span>,
-  lowCol <span class="op">=</span> <span class="st">"blue"</span>,
-  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,
-  highCol <span class="op">=</span> <span class="st">"red"</span>,
-  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">returnPyramid</span><span class="op">(</span></span>
+<span>  <span class="va">L</span>,</span>
+<span>  <span class="va">R</span>,</span>
+<span>  <span class="va">geneVec</span>,</span>
+<span>  <span class="va">geneVecType</span>,</span>
+<span>  <span class="va">filterWords</span>,</span>
+<span>  <span class="va">numberOfWords</span>,</span>
+<span>  <span class="va">orgDb</span>,</span>
+<span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span><span class="op">)</span>,</span>
+<span>  lowCol <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  highCol <span class="op">=</span> <span class="st">"red"</span>,</span>
+<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>L</dt>
 <dd><p>genes in the cluster</p></dd>
+
+
 <dt>R</dt>
 <dd><p>genes in the other cluster</p></dd>
+
+
 <dt>geneVec</dt>
 <dd><p>gene-named vector of node names in dendrogram</p></dd>
+
+
 <dt>geneVecType</dt>
 <dd><p>type of the name of geneVec (default: ENSEMBL)</p></dd>
+
+
 <dt>filterWords</dt>
 <dd><p>words to filter based on frequency</p></dd>
+
+
 <dt>numberOfWords</dt>
 <dd><p>the number of words to plot</p></dd>
+
+
 <dt>orgDb</dt>
 <dd><p>database to change the ID to ENTREZ ID</p></dd>
+
+
 <dt>additionalRemove</dt>
 <dd><p>words to filter</p></dd>
+
+
 <dt>numOnly</dt>
 <dd><p>delete number only</p></dd>
+
+
 <dt>widths</dt>
 <dd><p>parameters to pass to patchwork</p></dd>
+
+
 <dt>lowCol</dt>
 <dd><p>gradient low color</p></dd>
+
+
 <dt>tfidf</dt>
 <dd><p>use tfidf</p></dd>
+
+
 <dt>highCol</dt>
 <dd><p>gradient high color</p></dd>
+
+
 <dt>madeUpper</dt>
 <dd><p>words with uppercase</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>list of pyramid plot grobs and its positions</p>
+    
+
+<p>list of pyramid plot grobs and its positions</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -111,7 +140,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>

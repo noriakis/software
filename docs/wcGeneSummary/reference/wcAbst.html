@@ -48,127 +48,198 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">wcAbst</span><span class="op">(</span>
-  <span class="va">queries</span>,
-  redo <span class="op">=</span> <span class="cn">NA</span>,
-  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,
-  target <span class="op">=</span> <span class="st">"abstract"</span>,
-  usefil <span class="op">=</span> <span class="cn">NA</span>,
-  filnum <span class="op">=</span> <span class="fl">0</span>,
-  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,
-  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,
-  geneUpper <span class="op">=</span> <span class="cn">TRUE</span>,
-  apiKey <span class="op">=</span> <span class="cn">NULL</span>,
-  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,
-  pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,
-  numWords <span class="op">=</span> <span class="fl">30</span>,
-  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,
-  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,
-  plotType <span class="op">=</span> <span class="st">"wc"</span>,
-  colorText <span class="op">=</span> <span class="cn">FALSE</span>,
-  corThresh <span class="op">=</span> <span class="fl">0.2</span>,
-  layout <span class="op">=</span> <span class="st">"nicely"</span>,
-  tag <span class="op">=</span> <span class="cn">FALSE</span>,
-  tagWhole <span class="op">=</span> <span class="cn">FALSE</span>,
-  onlyCorpus <span class="op">=</span> <span class="cn">FALSE</span>,
-  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,
-  bn <span class="op">=</span> <span class="cn">FALSE</span>,
-  R <span class="op">=</span> <span class="fl">20</span>,
-  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,
-  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,
-  ngram <span class="op">=</span> <span class="cn">NA</span>,
-  genePlot <span class="op">=</span> <span class="cn">FALSE</span>,
-  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,
-  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,
-  preset <span class="op">=</span> <span class="cn">FALSE</span>,
-  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,
-  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcAbst</span><span class="op">(</span></span>
+<span>  <span class="va">queries</span>,</span>
+<span>  redo <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,</span>
+<span>  target <span class="op">=</span> <span class="st">"abstract"</span>,</span>
+<span>  usefil <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  filnum <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  geneUpper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  apiKey <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  numWords <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  plotType <span class="op">=</span> <span class="st">"wc"</span>,</span>
+<span>  colorText <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  corThresh <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  layout <span class="op">=</span> <span class="st">"nicely"</span>,</span>
+<span>  tag <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tagWhole <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  onlyCorpus <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  R <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  genePlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  preset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>queries</dt>
 <dd><p>gene symbols (max: 5)</p></dd>
+
+
 <dt>redo</dt>
 <dd><p>if plot in other parameters, input the previous list</p></dd>
+
+
 <dt>madeUpper</dt>
 <dd><p>make the words uppercase in resulting plot</p></dd>
+
+
 <dt>target</dt>
 <dd><p>"abstract" or "title"</p></dd>
+
+
 <dt>usefil</dt>
 <dd><p>filter based on "gstfidf" or "bsdbtfidf"</p></dd>
+
+
 <dt>filnum</dt>
 <dd><p>specify filter tfidf</p></dd>
+
+
 <dt>pvclAlpha</dt>
 <dd><p>alpha for pvpick()</p></dd>
+
+
 <dt>numOnly</dt>
 <dd><p>delete number only</p></dd>
+
+
 <dt>geneUpper</dt>
 <dd><p>make queries uppercase</p></dd>
+
+
 <dt>apiKey</dt>
 <dd><p>api key for eutilities</p></dd>
+
+
 <dt>tfidf</dt>
 <dd><p>use TfIdf when making TDM</p></dd>
+
+
 <dt>pal</dt>
 <dd><p>palette for color gradient in correlation network</p></dd>
+
+
 <dt>numWords</dt>
 <dd><p>the number of words to be shown</p></dd>
+
+
 <dt>scaleRange</dt>
 <dd><p>scale for label and node size in correlation network</p></dd>
+
+
 <dt>showLegend</dt>
 <dd><p>whether to show legend in correlation network</p></dd>
+
+
 <dt>plotType</dt>
 <dd><p>"wc" or "network"</p></dd>
+
+
 <dt>colorText</dt>
 <dd><p>color text label based on frequency in correlation network</p></dd>
+
+
 <dt>corThresh</dt>
 <dd><p>the correlation threshold</p></dd>
+
+
 <dt>layout</dt>
 <dd><p>the layout for correlation network, defaul to "nicely"</p></dd>
+
+
 <dt>tag</dt>
 <dd><p>cluster the words based on text</p></dd>
+
+
 <dt>tagWhole</dt>
 <dd><p>tag based on whole data or subset</p></dd>
+
+
 <dt>onlyCorpus</dt>
 <dd><p>return only corpus</p></dd>
+
+
 <dt>onlyTDM</dt>
 <dd><p>return only TDM</p></dd>
+
+
 <dt>bn</dt>
 <dd><p>perform bootstrap-based Bayesian network inference instead of correlation</p></dd>
+
+
 <dt>R</dt>
 <dd><p>how many bootstrap when bn is stated</p></dd>
+
+
 <dt>edgeLabel</dt>
 <dd><p>if TRUE, plot the edge label (default: FALSE)</p></dd>
+
+
 <dt>edgeLink</dt>
 <dd><p>if FALSE, use geom_edge_diagonal</p></dd>
+
+
 <dt>ngram</dt>
 <dd><p>default to NA (1)</p></dd>
+
+
 <dt>genePlot</dt>
 <dd><p>plot associated genes (default: FALSE)</p></dd>
+
+
 <dt>deleteZeroDeg</dt>
 <dd><p>delete zero degree node from plot in correlation network</p></dd>
+
+
 <dt>additionalRemove</dt>
 <dd><p>specific words to be excluded</p></dd>
+
+
 <dt>preset</dt>
 <dd><p>filter preset words</p></dd>
+
+
 <dt>onWholeDTM</dt>
 <dd><p>calculate correlation network
 on whole dataset or top-words specified by numWords</p></dd>
+
+
 <dt>madeUpperGenes</dt>
 <dd><p>make genes upper case automatically (default to TRUE)</p></dd>
+
+
 <dt>...</dt>
 <dd><p>parameters to pass to wordcloud()</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>list of data frame and ggplot2 object</p>
+    
+
+<p>list of data frame and ggplot2 object</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">wcAbst</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">wcAbst</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> querying pubmed for DDX41</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converting to a data frame ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawdf</span>
@@ -4975,7 +5046,7 @@ on whole dataset or top-words specified by numWords</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer></div>
