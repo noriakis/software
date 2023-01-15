@@ -68,6 +68,7 @@
 <span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  bn <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  R <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  cl <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  plotType <span class="op">=</span> <span class="st">"wc"</span>,</span>
 <span>  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -89,6 +90,9 @@
 <span>  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  autoFilter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbPOS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"VBZ"</span><span class="op">)</span>,</span>
+<span>  verb <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  udpipeModel <span class="op">=</span> <span class="st">"english-ewt-ud-2.5-191206.udpipe"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -165,11 +169,15 @@ default to 5000</p></dd>
 
 
 <dt>bn</dt>
-<dd><p>perform bootstrap-based Bayesian network inference instead of correlation</p></dd>
+<dd><p>perform bootstrap-based Bayesian network inference instead of correlation using bnlearn</p></dd>
 
 
 <dt>R</dt>
 <dd><p>how many bootstrap when bn is stated</p></dd>
+
+
+<dt>cl</dt>
+<dd><p>for parPvclust, parallel clustering can be performed</p></dd>
 
 
 <dt>ngram</dt>
@@ -238,11 +246,12 @@ default to 5000</p></dd>
 
 
 <dt>mergeCorpus</dt>
-<dd><p>specify multiple corpus if intend to combine them</p></dd>
+<dd><p>specify multiple corpus if intend to combine them.
+like PubMed information and RefSeq summary</p></dd>
 
 
 <dt>numOnly</dt>
-<dd><p>delete number only</p></dd>
+<dd><p>delete number only (not deleting XXX123)</p></dd>
 
 
 <dt>madeUpperGenes</dt>
@@ -256,6 +265,20 @@ on whole dataset or top-words specified by numWords</p></dd>
 
 <dt>autoFilter</dt>
 <dd><p>remove words "pmids", "geneids"</p></dd>
+
+
+<dt>verbPOS</dt>
+<dd><p>Part of Speech tags in verbs, like "VBN", "VBZ"</p></dd>
+
+
+<dt>verb</dt>
+<dd><p>show verb on edges (using udpipe)
+peform udpipe_download_model(language = "english") beforehand,
+and path udpipe file to udpipeModel</p></dd>
+
+
+<dt>udpipeModel</dt>
+<dd><p>udpipe model file name</p></dd>
 
 
 <dt>...</dt>
@@ -273,9 +296,9 @@ on whole dataset or top-words specified by numWords</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">wcGeneSummary</span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Input genes: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Converted input genes: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency | tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rawtext</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   RefSeq_accession     Organism Taxon_ID Gene_ID   Review_status</span>
