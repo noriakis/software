@@ -57,7 +57,7 @@ correlation network. Need "enzyme.dat" from ExPASy
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcEC</span><span class="op">(</span><span class="va">file</span>, <span class="va">ecnum</span>, onlyTerm <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">wcEC</span><span class="op">(</span><span class="va">file</span>, <span class="va">ecnum</span>, onlyTerm <span class="op">=</span> <span class="cn">FALSE</span>, onlyDf <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,7 +71,12 @@ correlation network. Need "enzyme.dat" from ExPASy
 
 
 <dt>onlyTerm</dt>
-<dd><p>only return quoted queries</p></dd>
+<dd><p>only return quoted queries to wcAbst</p></dd>
+
+
+<dt>onlyDf</dt>
+<dd><p>only return ec description data.frame
+if onlyTerm and onlyDf are both specified, onlyTerm have priority</p></dd>
 
 
 <dt>...</dt>
