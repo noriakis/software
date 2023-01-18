@@ -313,13 +313,9 @@ specified, although it is computationally intensive.</p>
 <span><span class="co">## [1] "incision"  "including" "light"    </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $clusters[[10]]</span></span>
-<span><span class="co">## [1] "cerebrooculofacioskeletal" "exon"                     </span></span>
-<span><span class="co">## [3] "product"                  </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $clusters[[11]]</span></span>
 <span><span class="co">## [1] "transcriptioncoupled" "upstream"            </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## $clusters[[12]]</span></span>
+<span><span class="co">## $clusters[[11]]</span></span>
 <span><span class="co">##  [1] "basic"            "bivm"             "cachexia"         "cancer"          </span></span>
 <span><span class="co">##  [5] "cellular"         "characterized"    "cognitive"        "develop"         </span></span>
 <span><span class="co">##  [9] "development"      "disability"       "disorder"         "exists"          </span></span>
@@ -330,29 +326,38 @@ specified, although it is computationally intensive.</p>
 <span><span class="co">## [29] "susceptibility"   "uvinduced"        "variable"         "vii"             </span></span>
 <span><span class="co">## [33] "xp7"             </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## $clusters[[13]]</span></span>
+<span><span class="co">## $clusters[[12]]</span></span>
 <span><span class="co">##  [1] "atpdependent"        "basal"               "belongs"            </span></span>
 <span><span class="co">##  [4] "btf2tfiih"           "cancerprone"         "disorders"          </span></span>
 <span><span class="co">##  [7] "factor"              "helicase"            "helicases"          </span></span>
 <span><span class="co">## [10] "integral"            "mechanism"           "rad3xpd"            </span></span>
 <span><span class="co">## [13] "subfamily"           "trichothiodystrophy"</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## $clusters[[14]]</span></span>
-<span><span class="co">##  [1] "alter"           "carcinogenesis"  "catalyzes"       "cd3e"           </span></span>
-<span><span class="co">##  [5] "cisplatin"       "compounds"       "crosslinks"      "electrophilic"  </span></span>
-<span><span class="co">##  [9] "epsilon"         "ercc4"           "excising"        "formed"         </span></span>
-<span><span class="co">## [13] "forms"           "heterodimer"     "heterodimeric"   "induced"        </span></span>
-<span><span class="co">## [17] "interstrand"     "lesion"          "lesions"         "molecule"       </span></span>
-<span><span class="co">## [21] "overlaps"        "pathway"         "play"            "polymorphisms"  </span></span>
-<span><span class="co">## [25] "process"         "recombinational" "required"        "result"         </span></span>
-<span><span class="co">## [29] "strand"          "xpf"            </span></span>
+<span><span class="co">## $clusters[[13]]</span></span>
+<span><span class="co">##  [1] "alter"                     "carcinogenesis"           </span></span>
+<span><span class="co">##  [3] "catalyzes"                 "cd3e"                     </span></span>
+<span><span class="co">##  [5] "cerebrooculofacioskeletal" "cisplatin"                </span></span>
+<span><span class="co">##  [7] "compounds"                 "crosslinks"               </span></span>
+<span><span class="co">##  [9] "electrophilic"             "epsilon"                  </span></span>
+<span><span class="co">## [11] "ercc4"                     "excising"                 </span></span>
+<span><span class="co">## [13] "exon"                      "formed"                   </span></span>
+<span><span class="co">## [15] "forms"                     "heterodimer"              </span></span>
+<span><span class="co">## [17] "heterodimeric"             "induced"                  </span></span>
+<span><span class="co">## [19] "interstrand"               "lesion"                   </span></span>
+<span><span class="co">## [21] "lesions"                   "molecule"                 </span></span>
+<span><span class="co">## [23] "overlaps"                  "pathway"                  </span></span>
+<span><span class="co">## [25] "play"                      "polymorphisms"            </span></span>
+<span><span class="co">## [27] "process"                   "product"                  </span></span>
+<span><span class="co">## [29] "recombinational"           "required"                 </span></span>
+<span><span class="co">## [31] "result"                    "strand"                   </span></span>
+<span><span class="co">## [33] "xpf"                      </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## $clusters[[15]]</span></span>
+<span><span class="co">## $clusters[[14]]</span></span>
 <span><span class="co">## [1] "dna"    "repair"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $edges</span></span>
-<span><span class="co">##  [1]  13  31  98  99 102 105 107 108 111 117 118 119 121 122 131</span></span></code></pre>
+<span><span class="co">##  [1]  13  31  98  99 102 105 107 108 111 118 119 121 125 131</span></span></code></pre>
 <p>In this example showing ERCC genes, the term <code>DNA repair</code>
 is clustered as expected.</p>
 </div>
@@ -875,45 +880,45 @@ clusters<a class="anchor" aria-label="anchor" href="#assess-the-occurrence-of-th
 <span>                split<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                keyType<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Finding query in 20 clusters ...</span></span>
-<span><span class="co">## input genes: 76</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 78</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
 <span><span class="co">## input genes: 531</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 92</span></span>
+<span><span class="co">## input genes: 203</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 131</span></span>
+<span><span class="co">## input genes: 40</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 37</span></span>
+<span><span class="co">## input genes: 43</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 119</span></span>
+<span><span class="co">## input genes: 153</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 232</span></span>
+<span><span class="co">## input genes: 168</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 38</span></span>
+<span><span class="co">## input genes: 39</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 8</span></span>
+<span><span class="co">## input genes: 50</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 49</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 77</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 77</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 93</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 113</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 222</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 85</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 63</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
-<span><span class="co">## input genes: 69</span></span>
+<span><span class="co">## input genes: 23</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
 <span><span class="co">## input genes: 8</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 97</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 89</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 143</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 51</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 19</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 104</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 10</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 36</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 132</span></span>
+<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## input genes: 82</span></span>
 <span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span></code></pre>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">frq</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -925,7 +930,7 @@ clusters<a class="anchor" aria-label="anchor" href="#assess-the-occurrence-of-th
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span>bg.color<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"dna"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"repair"</span><span class="op">)</span></span>
 <span><span class="va">p</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: ggrepel: 13 unlabeled data points (too many overlaps). Consider</span></span>
+<pre><code><span><span class="co">## Warning: ggrepel: 15 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">## increasing max.overlaps</span></span></code></pre>
 <p><img src="basic_usage_of_wcGeneSummary_files/figure-html/findterm-1.png" width="480"></p>
 </div>
@@ -1133,8 +1138,8 @@ enrichment analysis.</p>
 <span>                                    <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html" class="external-link">neighbors</a></span><span class="op">(</span><span class="va">conet</span>, <span class="st">"repair"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">$</span><span class="va">SYMBOL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html" class="external-link">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html" class="external-link">keys</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>,<span class="st">"SYMBOL"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html" class="external-link">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">SYMBOL</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html" class="external-link">geom_edge_diagonal2</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html" class="external-link">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">SYMBOL</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html" class="external-link">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, color<span class="op">=</span><span class="va">SYMBOL</span><span class="op">)</span>,check_overlap<span class="op">=</span><span class="cn">TRUE</span>, repel<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                   bg.color <span class="op">=</span> <span class="st">"white"</span>, segment.color<span class="op">=</span><span class="st">"black"</span>,</span>
 <span>                   bg.r <span class="op">=</span> <span class="fl">.15</span><span class="op">)</span><span class="op">+</span></span>
@@ -1167,8 +1172,8 @@ detection.</p>
 <code class="sourceCode R"><span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html" class="external-link">colorRampPalette</a></span><span class="op">(</span><span class="va">pal</span><span class="op">)</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html" class="external-link">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">walktrap</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html" class="external-link">geom_edge_link</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html" class="external-link">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">walktrap</span><span class="op">)</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html" class="external-link">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">walktrap</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                   check_overlap<span class="op">=</span><span class="cn">TRUE</span>, repel<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                   bg.color <span class="op">=</span> <span class="st">"white"</span>, segment.color<span class="op">=</span><span class="st">"black"</span>,</span>
