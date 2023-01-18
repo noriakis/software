@@ -53,15 +53,17 @@
 <span>  titles <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  layout <span class="op">=</span> <span class="st">"nicely"</span>,</span>
 <span>  hull <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  size <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  size <span class="op">=</span> <span class="st">"freq"</span>,</span>
 <span>  conc <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  tag <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tagLevel <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  freq <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  freqMean <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
-<span>  returnNet <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  returnNet <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  colPal <span class="op">=</span> <span class="st">"Pastel1"</span>,</span>
+<span>  colNum <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  colorText <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -84,7 +86,7 @@
 
 
 <dt>size</dt>
-<dd><p>node size</p></dd>
+<dd><p>node size, freq, overlap or numeric number</p></dd>
 
 
 <dt>conc</dt>
@@ -103,10 +105,6 @@
 <dd><p>whether to use link or diagonal</p></dd>
 
 
-<dt>freq</dt>
-<dd><p>concatenate frequency and show it on plot</p></dd>
-
-
 <dt>freqMean</dt>
 <dd><p>how to concatenate frequency (TRUE: mean, FALSE: sum)</p></dd>
 
@@ -117,6 +115,18 @@
 
 <dt>returnNet</dt>
 <dd><p>return only the network (ig)</p></dd>
+
+
+<dt>colPal</dt>
+<dd><p>color palette to be used in RColorBrewer</p></dd>
+
+
+<dt>colNum</dt>
+<dd><p>color number to be used in plot</p></dd>
+
+
+<dt>colorText</dt>
+<dd><p>whether to color text based on category</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -132,15 +142,17 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency | tfidf) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency and/or tfidf) ...</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the standard deviation is zero</span>
 <span class="r-in"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span><span class="op">)</span>, plotType<span class="op">=</span><span class="st">"network"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency | tfidf) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency and/or tfidf) ...</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>the standard deviation is zero</span>
 <span class="r-in"><span><span class="va">compare</span> <span class="op">&lt;-</span> <span class="fu">compareWordNet</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Scale for <span style="color: #00BB00;">colour</span> is already present.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Adding another scale for <span style="color: #00BB00;">colour</span>, which will replace the existing scale.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
