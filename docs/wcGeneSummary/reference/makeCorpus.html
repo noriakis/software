@@ -24,7 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
+    <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -48,7 +50,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">makeCorpus</span><span class="op">(</span><span class="va">docs</span>, <span class="va">filterWords</span>, <span class="va">additionalRemove</span>, <span class="va">numOnly</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">makeCorpus</span><span class="op">(</span><span class="va">docs</span>, <span class="va">filterWords</span>, <span class="va">additionalRemove</span>, <span class="va">numOnly</span>, <span class="va">stem</span>, lower <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,6 +69,14 @@
 
 <dt>numOnly</dt>
 <dd><p>delete number only</p></dd>
+
+
+<dt>stem</dt>
+<dd><p>use stem or not</p></dd>
+
+
+<dt>lower</dt>
+<dd><p>transform lower for corpus</p></dd>
 
 </dl></div>
     <div class="section level2">

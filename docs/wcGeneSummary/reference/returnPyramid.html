@@ -24,7 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
+    <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -62,7 +64,8 @@
 <span>  lowCol <span class="op">=</span> <span class="st">"blue"</span>,</span>
 <span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  highCol <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span></span>
+<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span>,</span>
+<span>  stem <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,6 +125,10 @@
 
 <dt>madeUpper</dt>
 <dd><p>words with uppercase</p></dd>
+
+
+<dt>stem</dt>
+<dd><p>use stemming or not</p></dd>
 
 </dl></div>
     <div class="section level2">

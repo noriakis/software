@@ -4,10 +4,16 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/application_example_BKPyV.html</loc>
+  </url>
+  <url>
     <loc>/articles/basic_usage_of_wcGeneSummary.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/microbiome_usage.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -83,6 +89,9 @@
   </url>
   <url>
     <loc>/reference/wcBSDB.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wcBSDBFast.html</loc>
   </url>
   <url>
     <loc>/reference/wcEC.html</loc>

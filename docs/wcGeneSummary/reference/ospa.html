@@ -24,7 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
+    <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -55,9 +57,11 @@
 <span>  target <span class="op">=</span> <span class="st">"abstract"</span>,</span>
 <span>  usefil <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  filnum <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  sortOrder <span class="op">=</span> <span class="st">"relevance"</span>,</span>
 <span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  delim <span class="op">=</span> <span class="st">"OR"</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  geneUpper <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  apiKey <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -82,12 +86,16 @@
 <span>  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  genePlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  onlyDf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  nodePal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  orgDb <span class="op">=</span> <span class="va">org.Hs.eg.db</span>,</span>
 <span>  preset <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  stem <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,12 +104,11 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ospa</span><span class="op">(</span><span class="st">"DDX41"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> proceeding without API key</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> proceeding without API key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Proceeding without API key</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> type: pubmed_abstract</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of words: 30</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 200.2 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 177.1 Kb</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -24,7 +24,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
+    <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -63,6 +65,12 @@
 <span>  redo <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
 <span>  numWords <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  preserve <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  metab <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  metabThresh <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  curate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  abstArg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  nodePal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -76,6 +84,7 @@
 <span>  corThresh <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>  tag <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tagWhole <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  stem <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  layout <span class="op">=</span> <span class="st">"nicely"</span>,</span>
 <span>  edgeLink <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  deleteZeroDeg <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -143,6 +152,30 @@ default to 0</p></dd>
 <dd><p>the number of words to be shown</p></dd>
 
 
+<dt>preserve</dt>
+<dd><p>try to preserve the original characters</p></dd>
+
+
+<dt>metab</dt>
+<dd><p>tibble of metabolite - taxon association</p></dd>
+
+
+<dt>metabThresh</dt>
+<dd><p>threshold of association</p></dd>
+
+
+<dt>curate</dt>
+<dd><p>include articles in bugsigdb</p></dd>
+
+
+<dt>abstArg</dt>
+<dd><p>passed to PubMed function when using curate=FALSE</p></dd>
+
+
+<dt>nodePal</dt>
+<dd><p>node palette when tag is TRUE</p></dd>
+
+
 <dt>scaleRange</dt>
 <dd><p>scale for label and node size in correlation network</p></dd>
 
@@ -196,6 +229,10 @@ on whole dataset or top-words specified by numWords</p></dd>
 <dd><p>tag whole set or subset</p></dd>
 
 
+<dt>stem</dt>
+<dd><p>whether to use stemming</p></dd>
+
+
 <dt>layout</dt>
 <dd><p>the layout for correlation network, defaul to "nicely"</p></dd>
 
@@ -229,12 +266,13 @@ on whole dataset or top-words specified by numWords</p></dd>
 <span class="r-in"><span><span class="fu">wcBSDB</span><span class="op">(</span><span class="va">mbList</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input microbes: 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2023-01-16 04:57:56</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> including 27 articles ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> filtering 0 words (frequency and/or tfidf) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Found 17 entries for Veillonella dispar</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Including 27 entries ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Filtering 0 words (frequency and/or tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> type: BSDB_title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of words: 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Veillonella dispar</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136.7 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 315.9 Kb</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
