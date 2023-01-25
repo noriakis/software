@@ -29,6 +29,7 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="../articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -56,11 +57,13 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ospb</span><span class="op">(</span></span>
 <span>  <span class="va">mbList</span>,</span>
 <span>  excludeFreq <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  excludeTfIdf <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="st">"frequency"</span>,</span>
+<span>  excludeType <span class="op">=</span> <span class="st">"&gt;"</span>,</span>
 <span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  target <span class="op">=</span> <span class="st">"title"</span>,</span>
 <span>  apiKey <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  takeMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pre <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -74,11 +77,16 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
 <span>  curate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  abstArg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  nodePal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  metCol <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ecPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mbPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ecFile <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  upTaxFile <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filterMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  plotType <span class="op">=</span> <span class="st">"wc"</span>,</span>
 <span>  disPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -98,11 +106,13 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
 <span><span class="fu">ospb</span><span class="op">(</span></span>
 <span>  <span class="va">mbList</span>,</span>
 <span>  excludeFreq <span class="op">=</span> <span class="fl">1000</span>,</span>
-<span>  excludeTfIdf <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="st">"frequency"</span>,</span>
+<span>  excludeType <span class="op">=</span> <span class="st">"&gt;"</span>,</span>
 <span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  target <span class="op">=</span> <span class="st">"title"</span>,</span>
 <span>  apiKey <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  takeMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pre <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pvclAlpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -116,11 +126,16 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
 <span>  curate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  abstArg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  nodePal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  metCol <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  scaleRange <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>,</span>
 <span>  showLegend <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ecPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  edgeLabel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mbPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  onlyTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  ecFile <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  upTaxFile <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  filterMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  ngram <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  plotType <span class="op">=</span> <span class="st">"wc"</span>,</span>
 <span>  disPlot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -143,24 +158,26 @@ alias for wcBSDB"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">ospb</span><span class="op">(</span><span class="st">"Veillonella dispar"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input microbes: 1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2023-01-16 04:57:56</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2023-01-16 00:17:33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Found 17 entries for Veillonella dispar</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Including 27 entries ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filter based on BugSigDB</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Filtering 0 words (frequency and/or tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> type: BSDB_title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of words: 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Veillonella dispar</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 315.9 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342.2 Kb</span>
 <span class="r-in"><span><span class="fu">ospb</span><span class="op">(</span><span class="st">"Veillonella dispar"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input microbes: 1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2023-01-16 04:57:56</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2023-01-16 00:17:33</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Found 17 entries for Veillonella dispar</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Including 27 entries ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filter based on BugSigDB</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Filtering 0 words (frequency and/or tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> type: BSDB_title</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of words: 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Veillonella dispar</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 315.9 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 342.2 Kb</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

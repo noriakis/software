@@ -27,6 +27,7 @@
     <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="../articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -55,13 +56,9 @@
 <span>  <span class="va">geneVec</span>,</span>
 <span>  geneNumLimit <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  geneVecType <span class="op">=</span> <span class="st">"ENSEMBL"</span>,</span>
-<span>  excludeTfIdf <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  numberOfWords <span class="op">=</span> <span class="fl">25</span>,</span>
-<span>  excludeFreq <span class="op">=</span> <span class="fl">5000</span>,</span>
-<span>  orgDb <span class="op">=</span> <span class="va">org.Hs.eg.db</span>,</span>
-<span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span></span>
+<span>  type <span class="op">=</span> <span class="st">"words"</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -84,33 +81,16 @@ pyramid plots are not produced</p></dd>
 <dd><p>type of the name of geneVec (default: ENSEMBL)</p></dd>
 
 
-<dt>excludeTfIdf</dt>
-<dd><p>filter using tfidf</p></dd>
-
-
 <dt>numberOfWords</dt>
 <dd><p>the number of words to plot (default: 25)</p></dd>
 
 
-<dt>excludeFreq</dt>
-<dd><p>words with the frequency above
-this threshold is excluded beforehand</p></dd>
+<dt>type</dt>
+<dd><p>"words" or "enrich"</p></dd>
 
 
-<dt>orgDb</dt>
-<dd><p>organism database</p></dd>
-
-
-<dt>tfidf</dt>
-<dd><p>use tfidf when making TDM</p></dd>
-
-
-<dt>numOnly</dt>
-<dd><p>delete number only</p></dd>
-
-
-<dt>madeUpper</dt>
-<dd><p>words with uppercase</p></dd>
+<dt>...</dt>
+<dd><p>passed to wcGeneSummary</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -133,8 +113,16 @@ this threshold is excluded beforehand</p></dd>
 <span class="r-in"><span><span class="va">geneVec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"ME"</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">geneVec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">getWordsOnDendro</span><span class="op">(</span><span class="va">dhc</span>, <span class="va">geneVec</span>, numberOfWords <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 12</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filter based on GeneSummary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 65 words (frequency and/or tfidf) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 13</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filter based on GeneSummary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 65 words (frequency and/or tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`1`$plot</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> TableGrob (20 x 47) "layout": 52 grobs</span>

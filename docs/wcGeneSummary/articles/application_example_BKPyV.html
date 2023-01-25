@@ -44,6 +44,7 @@
     <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="../articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul>
@@ -202,7 +203,8 @@ downstream analysis.</p>
 <pre><code><span><span class="co">## input genes: 191</span></span></code></pre>
 <pre><code><span><span class="co">## 'select()' returned 1:1 mapping between keys and columns</span></span></code></pre>
 <pre><code><span><span class="co">## converted input genes: 174</span></span>
-<span><span class="co">## filtered 61 words (frequency and/or tfidf) ...</span></span>
+<span><span class="co">## filter based on GeneSummary</span></span>
+<span><span class="co">## filtered 65 words (frequency and/or tfidf) ...</span></span>
 <span><span class="co">## performing enrichment analysis ...</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -384,22 +386,24 @@ detection.</p>
 <span>                         name<span class="op">=</span><span class="st">"Walktrap"</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Using <span style="color: #0000BB;">"stress"</span> as default layout</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Using the `size` aesthetic in this geom was deprecated in ggplot2 3.4.0.</span></span>
+<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` in the `default_aes` field and elsewhere instead.</span></span></code></pre>
 <p><img src="application_example_BKPyV_files/figure-html/combineNet-1.png" width="960"></p>
 <p>Dynamic layout can be also used to compare the networks, by
 <code>graphlayouts</code>, for comparing the multiple graphs, especially
 useful for time-series analysis. See the documentation of <a href="http://graphlayouts.schochastics.net/reference/layout_dynamic.html" class="external-link"><code>layout_as_dynamic</code></a>
 for specifying the alpha, which is default to 0.5.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org" class="external-link">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">dyn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plotDynamic.html">plotDynamic</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">abstnet</span>, <span class="va">titlenet</span><span class="op">)</span>, concat<span class="op">=</span><span class="st">"intersection"</span>,</span>
 <span>                   titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Abstract"</span>,<span class="st">"Title"</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="va">dyn</span></span></code></pre></div>
 <p><img src="application_example_BKPyV_files/figure-html/dyn-1.png" width="1440"></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">## Running under: Windows 10 x64 (build 19044)</span></span>
+<span><span class="co">## Running under: Windows 10 x64 (build 22621)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## </span></span>
@@ -423,14 +427,14 @@ for specifying the alpha, which is default to 0.5.</p>
 <span><span class="co">##   [1] shadowtext_0.1.2       fastmatch_1.1-3        systemfonts_1.0.4     </span></span>
 <span><span class="co">##   [4] plyr_1.8.8             lazyeval_0.2.2         splines_4.2.2         </span></span>
 <span><span class="co">##   [7] BiocParallel_1.32.5    GenomeInfoDb_1.34.6    digest_0.6.31         </span></span>
-<span><span class="co">##  [10] yulab.utils_0.0.6      htmltools_0.5.4        bugsigdbr_1.4.1       </span></span>
+<span><span class="co">##  [10] yulab.utils_0.0.6      htmltools_0.5.4        bugsigdbr_1.5.3       </span></span>
 <span><span class="co">##  [13] GOSemSim_2.24.0        viridis_0.6.2          GO.db_3.16.0          </span></span>
 <span><span class="co">##  [16] fansi_1.0.3            GeneSummary_0.99.4     magrittr_2.0.3        </span></span>
 <span><span class="co">##  [19] memoise_2.0.1          tm_0.7-10              Biostrings_2.66.0     </span></span>
 <span><span class="co">##  [22] graphlayouts_0.8.4     pvclust_2.2-0          wordcloud_2.6         </span></span>
 <span><span class="co">##  [25] pkgdown_2.0.7          enrichplot_1.18.3      colorspace_2.0-3      </span></span>
 <span><span class="co">##  [28] rappdirs_0.3.3         blob_1.2.3             ggrepel_0.9.2         </span></span>
-<span><span class="co">##  [31] textshaping_0.3.6      xfun_0.36              dplyr_1.0.99.9000     </span></span>
+<span><span class="co">##  [31] textshaping_0.3.6      xfun_0.36              dplyr_1.0.10          </span></span>
 <span><span class="co">##  [34] crayon_1.5.2           RCurl_1.98-1.9         jsonlite_1.8.4        </span></span>
 <span><span class="co">##  [37] scatterpie_0.1.8       graph_1.76.0           ape_5.6-2             </span></span>
 <span><span class="co">##  [40] glue_1.6.2             polyclip_1.10-4        stopwords_2.3         </span></span>
@@ -461,14 +465,15 @@ for specifying the alpha, which is default to 0.5.</p>
 <span><span class="co">## [115] Matrix_1.5-3           vctrs_0.5.1            pillar_1.8.1          </span></span>
 <span><span class="co">## [118] lifecycle_1.0.3        BiocManager_1.30.19    jquerylib_0.1.4       </span></span>
 <span><span class="co">## [121] GlobalOptions_0.1.2    data.table_1.14.6      cowplot_1.1.1         </span></span>
-<span><span class="co">## [124] bitops_1.0-7           httpuv_1.6.8           patchwork_1.1.2       </span></span>
-<span><span class="co">## [127] qvalue_2.30.0          R6_2.5.1               bookdown_0.31         </span></span>
+<span><span class="co">## [124] bitops_1.0-7           qvalue_2.30.0          httpuv_1.6.8          </span></span>
+<span><span class="co">## [127] patchwork_1.1.2        R6_2.5.1               bookdown_0.31         </span></span>
 <span><span class="co">## [130] promises_1.2.0.1       gridExtra_2.3          codetools_0.2-18      </span></span>
-<span><span class="co">## [133] MASS_7.3-58.1          rprojroot_2.0.3        rjson_0.2.21          </span></span>
-<span><span class="co">## [136] withr_2.5.0            GenomeInfoDbData_1.2.9 parallel_4.2.2        </span></span>
-<span><span class="co">## [139] ISOcodes_2022.09.29    ggfun_0.0.9            grid_4.2.2            </span></span>
-<span><span class="co">## [142] tidyr_1.2.1            HDO.db_0.99.1          rmarkdown_2.19        </span></span>
-<span><span class="co">## [145] NLP_0.2-1              shiny_1.7.4            base64enc_0.1-3</span></span></code></pre>
+<span><span class="co">## [133] MASS_7.3-58.1          assertthat_0.2.1       rprojroot_2.0.3       </span></span>
+<span><span class="co">## [136] rjson_0.2.21           withr_2.5.0            GenomeInfoDbData_1.2.9</span></span>
+<span><span class="co">## [139] parallel_4.2.2         ISOcodes_2022.09.29    ggfun_0.0.9           </span></span>
+<span><span class="co">## [142] grid_4.2.2             tidyr_1.2.1            HDO.db_0.99.1         </span></span>
+<span><span class="co">## [145] rmarkdown_2.19         NLP_0.2-1              shiny_1.7.4           </span></span>
+<span><span class="co">## [148] base64enc_0.1-3</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

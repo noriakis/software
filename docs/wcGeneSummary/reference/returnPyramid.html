@@ -27,6 +27,7 @@
     <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="../articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -55,17 +56,15 @@
 <span>  <span class="va">R</span>,</span>
 <span>  <span class="va">geneVec</span>,</span>
 <span>  <span class="va">geneVecType</span>,</span>
-<span>  <span class="va">filterWords</span>,</span>
-<span>  <span class="va">numberOfWords</span>,</span>
-<span>  <span class="va">orgDb</span>,</span>
-<span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
-<span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  numberOfWords <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  widths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span><span class="op">)</span>,</span>
 <span>  lowCol <span class="op">=</span> <span class="st">"blue"</span>,</span>
-<span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  highCol <span class="op">=</span> <span class="st">"red"</span>,</span>
-<span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rna"</span>, <span class="st">"dna"</span><span class="op">)</span>,</span>
-<span>  stem <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  type <span class="op">=</span> <span class="st">"words"</span>,</span>
+<span>  wrap <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  enrichID <span class="op">=</span> <span class="st">"ID"</span>,</span>
+<span>  orgDb <span class="op">=</span> <span class="va">org.Hs.eg.db</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -87,24 +86,8 @@
 <dd><p>type of the name of geneVec (default: ENSEMBL)</p></dd>
 
 
-<dt>filterWords</dt>
-<dd><p>words to filter based on frequency</p></dd>
-
-
 <dt>numberOfWords</dt>
 <dd><p>the number of words to plot</p></dd>
-
-
-<dt>orgDb</dt>
-<dd><p>database to change the ID to ENTREZ ID</p></dd>
-
-
-<dt>additionalRemove</dt>
-<dd><p>words to filter</p></dd>
-
-
-<dt>numOnly</dt>
-<dd><p>delete number only</p></dd>
 
 
 <dt>widths</dt>
@@ -115,20 +98,24 @@
 <dd><p>gradient low color</p></dd>
 
 
-<dt>tfidf</dt>
-<dd><p>use tfidf</p></dd>
-
-
 <dt>highCol</dt>
 <dd><p>gradient high color</p></dd>
 
 
-<dt>madeUpper</dt>
-<dd><p>words with uppercase</p></dd>
+<dt>type</dt>
+<dd><p>"words" or "enrich"</p></dd>
 
 
-<dt>stem</dt>
-<dd><p>use stemming or not</p></dd>
+<dt>enrichID</dt>
+<dd><p>"Description" or "ID"</p></dd>
+
+
+<dt>orgDb</dt>
+<dd><p>organism database to use in enrich</p></dd>
+
+
+<dt>...</dt>
+<dd><p>parameters passed to wcGeneSummary()</p></dd>
 
 </dl></div>
     <div class="section level2">

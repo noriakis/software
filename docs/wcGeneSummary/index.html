@@ -44,6 +44,7 @@
     <a class="dropdown-item" href="articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul>
@@ -81,7 +82,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">erccs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ERCC1"</span>,<span class="st">"ERCC2"</span>,<span class="st">"ERCC3"</span>,<span class="st">"ERCC4"</span>,<span class="st">"ERCC5"</span>,<span class="st">"ERCC6"</span>,<span class="st">"ERCC8"</span><span class="op">)</span></span>
 <span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">erccs</span>, excludeFreq <span class="op">=</span> <span class="fl">5000</span>, max.words<span class="op">=</span><span class="fl">200</span>, random.order<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>                     colors<span class="op">=</span><span class="fu">palettetown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palettetown/man/pokepal.html" class="external-link">pokepal</a></span><span class="op">(</span><span class="fl">150</span><span class="op">)</span>, rot.per<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span>                     colors<span class="op">=</span><span class="fu">palettetown</span><span class="fu">::</span><span class="fu">pokepal</span><span class="op">(</span><span class="fl">150</span><span class="op">)</span>, rot.per<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
 <span><span class="co"># ggsave("erccWc.png", gwc@wc, width=8, height=8)</span></span></code></pre></div>
 <p><img src="https://github.com/noriakis/software/blob/main/images/erccWc.png?raw=true" width="800px"></p>
 </div>
@@ -96,7 +97,7 @@
 <span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">cxcls</span>, excludeFreq<span class="op">=</span><span class="fl">14000</span>,</span>
 <span>                     madeUpper<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>,<span class="st">"rna"</span>,<span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="fu">keys</span><span class="op">(</span><span class="va">org.Hs.eg.db</span>, keytype<span class="op">=</span><span class="st">"SYMBOL"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                     max.words<span class="op">=</span><span class="fl">200</span>, random.order<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>                     colors<span class="op">=</span><span class="fu">palettetown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palettetown/man/pokepal.html" class="external-link">pokepal</a></span><span class="op">(</span><span class="fl">151</span><span class="op">)</span>, rot.per<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span>                     colors<span class="op">=</span><span class="fu">palettetown</span><span class="fu">::</span><span class="fu">pokepal</span><span class="op">(</span><span class="fl">151</span><span class="op">)</span>, rot.per<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
 <span><span class="co"># ggsave("cxclWc.png", gwc@wc, width=8, height=8)</span></span></code></pre></div>
 <p><img src="https://github.com/noriakis/software/blob/main/images/cxclWc.png?raw=true" width="800px"></p>
 </div>

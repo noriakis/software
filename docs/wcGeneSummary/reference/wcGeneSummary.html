@@ -29,6 +29,7 @@ Testing function for new class"><!-- mathjax --><script src="https://cdnjs.cloud
     <a class="dropdown-item" href="../articles/application_example_BKPyV.html">Application example</a>
     <a class="dropdown-item" href="../articles/basic_usage_of_wcGeneSummary.html">wcGeneSummary</a>
     <a class="dropdown-item" href="../articles/microbiome_usage.html">Mining microbiome-related literature</a>
+    <a class="dropdown-item" href="../articles/pathview_text.html">Pathview text function</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -57,10 +58,13 @@ Testing function for new class</p>
 <span>  <span class="va">geneList</span>,</span>
 <span>  keyType <span class="op">=</span> <span class="st">"SYMBOL"</span>,</span>
 <span>  excludeFreq <span class="op">=</span> <span class="fl">2000</span>,</span>
-<span>  excludeTfIdf <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  exclude <span class="op">=</span> <span class="st">"frequency"</span>,</span>
+<span>  filterMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  excludeType <span class="op">=</span> <span class="st">"&gt;"</span>,</span>
 <span>  tfidf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  genePlotNum <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  preserve <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  takeMax <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  additionalRemove <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  onlyCorpus <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  madeUpper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"dna"</span>, <span class="st">"rna"</span><span class="op">)</span>,</span>
@@ -95,10 +99,11 @@ Testing function for new class</p>
 <span>  mergeCorpus <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  numOnly <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  madeUpperGenes <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  onWholeDTM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  autoFilter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  onWholeTDM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pre <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  verbPOS <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"VBZ"</span><span class="op">)</span>,</span>
 <span>  nodePal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html" class="external-link">palette</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  collapse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  verb <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  udpipeModel <span class="op">=</span> <span class="st">"english-ewt-ud-2.5-191206.udpipe"</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -116,12 +121,20 @@ Testing function for new class</p>
 
 
 <dt>excludeFreq</dt>
-<dd><p>exclude words with overall frequency above excludeFreq
-default to 5000</p></dd>
+<dd><p>default to 5000</p></dd>
 
 
-<dt>excludeTfIdf</dt>
-<dd><p>exclude based on tfidf (default: NA)</p></dd>
+<dt>exclude</dt>
+<dd><p>"frequency" or "tfidf",</p></dd>
+
+
+<dt>filterMax</dt>
+<dd><p>use pre-calculated filter based on max-values when excluding TfIdf
+Otherwise take sum.</p></dd>
+
+
+<dt>excludeType</dt>
+<dd><p>"&gt;" or "&lt;"</p></dd>
 
 
 <dt>tfidf</dt>
@@ -134,6 +147,10 @@ default to 5000</p></dd>
 
 <dt>preserve</dt>
 <dd><p>preserve original characters</p></dd>
+
+
+<dt>takeMax</dt>
+<dd><p>take max values for each term in term-document matrix</p></dd>
 
 
 <dt>additionalRemove</dt>
@@ -274,12 +291,12 @@ like PubMed information and RefSeq summary</p></dd>
 <dd><p>make genes upper case automatically (default to TRUE)</p></dd>
 
 
-<dt>onWholeDTM</dt>
+<dt>onWholeTDM</dt>
 <dd><p>calculate correlation network
 on whole dataset or top-words specified by numWords</p></dd>
 
 
-<dt>autoFilter</dt>
+<dt>pre</dt>
 <dd><p>remove words "pmids", "geneids"</p></dd>
 
 
@@ -289,6 +306,10 @@ on whole dataset or top-words specified by numWords</p></dd>
 
 <dt>nodePal</dt>
 <dd><p>node palette when tag is TRUE</p></dd>
+
+
+<dt>collapse</dt>
+<dd><p>default to FALSE, collapse all the sentences</p></dd>
 
 
 <dt>verb</dt>
@@ -319,11 +340,12 @@ and path udpipe file to udpipeModel</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> input genes: 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 'select()' returned 1:1 mapping between keys and columns</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> converted input genes: 1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 61 words (frequency and/or tfidf) ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filter based on GeneSummary</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> filtered 65 words (frequency and/or tfidf) ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> type: refseq</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of words: 15</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> DDX41</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69.4 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73.7 Kb</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

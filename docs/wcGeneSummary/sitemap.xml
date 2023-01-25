@@ -16,6 +16,9 @@
     <loc>/articles/microbiome_usage.html</loc>
   </url>
   <url>
+    <loc>/articles/pathview_text.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -35,6 +38,9 @@
   </url>
   <url>
     <loc>/reference/findTerm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getUPtax.html</loc>
   </url>
   <url>
     <loc>/reference/getWordsOnDendro.html</loc>
