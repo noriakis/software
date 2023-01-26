@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 The basic usage for microbiome-related data | wcGeneSummary (OSplot)</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
+<meta property="og:title" content="Chapter 3 The basic usage for microbiome-related data | wcGeneSummary (OSplot)">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/the-basic-usage-for-microbiome-related-data.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 The basic usage for microbiome-related data | wcGeneSummary (OSplot)">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="The general usage for mining the information related to microbiome-related signatures. library(wcGeneSummary) library(ggplot2) library(ggraph) library(RColorBrewer) We use BugSigDB, and its R port...">
+<meta property="og:description" content="The general usage for mining the information related to microbiome-related signatures. library(wcGeneSummary) library(ggplot2) library(ggraph) library(RColorBrewer) We use BugSigDB, and its R port...">
+<meta name="twitter:description" content="The general usage for mining the information related to microbiome-related signatures. library(wcGeneSummary) library(ggplot2) library(ggraph) library(RColorBrewer) We use BugSigDB, and its R port...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">wcGeneSummary (OSplot)</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
+<li><a class="active" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
+<li><a class="" href="custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Custom usage - Interactive inspection of Bayesian network annotated by words</a></li>
+<li><a class="" href="custom-usage---annotating-module-eigengenes-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating module eigengenes dendrogram</a></li>
+<li><a class="" href="custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Custom usage - Assess the occurrence of the speicific words across gene clusters</a></li>
+<li><a class="" href="custom-usage---recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Custom usage - Recluster the cluster using word information</a></li>
+<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">8</span> Custom usage - pathview text</a></li>
+<li><a class="" href="application-examples.html"><span class="header-section-number">9</span> Application examples</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/noriakis/wcGeneSummary">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="the-basic-usage-for-microbiome-related-data" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> The basic usage for microbiome-related data<a class="anchor" aria-label="anchor" href="#the-basic-usage-for-microbiome-related-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>The general usage for mining the information related to microbiome-related signatures.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span></code></pre></div>
+<p>We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases (<a href="https://bugsigdb.org/Main_Page">Geistlinger et al. 2022</a>). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If <code>target="title"</code>, the title of the corresponding articles will be summarized.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span>,argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>min.freq<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 2</span></span>
+<span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
+<span><span class="co">#&gt;   Found 1 entries for Neisseria flava</span></span>
+<span><span class="co">#&gt; Including 28 entries</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="va">basic</span><span class="op">@</span><span class="va">freqDf</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    word freq</span></span>
+<span><span class="co">#&gt; gut                 Gut    8</span></span>
+<span><span class="co">#&gt; oral               Oral    5</span></span>
+<span><span class="co">#&gt; patients       patients    5</span></span>
+<span><span class="co">#&gt; study             study    3</span></span>
+<span><span class="co">#&gt; arthritis     arthritis    2</span></span>
+<span><span class="co">#&gt; association association    2</span></span>
+<span><span class="co">#&gt; bacterial     bacterial    2</span></span>
+<span><span class="co">#&gt; covid19         COVID19    2</span></span>
+<span><span class="co">#&gt; diabetes       diabetes    2</span></span>
+<span><span class="co">#&gt; dysbiosis     Dysbiosis    2</span></span>
+<span><span class="co">#&gt; infant           infant    2</span></span>
+<span><span class="co">#&gt; infection     Infection    2</span></span>
+<span><span class="co">#&gt; obese             obese    2</span></span>
+<span><span class="co">#&gt; respiratory respiratory    2</span></span>
+<span><span class="co">#&gt; sequencing   sequencing    2</span></span>
+<span><span class="co">#&gt; surgery         surgery    2</span></span>
+<span><span class="co">#&gt; tract             tract    2</span></span>
+<span><span class="co">#&gt;  features      features    1</span></span>
+<span><span class="co">#&gt; 16s                 16S    1</span></span>
+<span><span class="co">#&gt; aerosol         Aerosol    1</span></span>
+<span><span class="va">basic</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
+<p><img src="02-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="768">
+If <code>target="abstract"</code>, the corresponding abstract will be fetched and be summarized.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 2</span></span>
+<span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
+<span><span class="co">#&gt;   Found 1 entries for Neisseria flava</span></span>
+<span><span class="co">#&gt; Including 28 entries</span></span>
+<span><span class="co">#&gt; Target is abstract</span></span>
+<span><span class="co">#&gt;   Querying PubMed for 17 pmids</span></span>
+<span><span class="co">#&gt;   Querying without API key</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
+<span><span class="va">basic2</span><span class="op">@</span><span class="va">freqDf</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                word freq</span></span>
+<span><span class="co">#&gt; patients   patients   37</span></span>
+<span><span class="co">#&gt; gut             Gut   30</span></span>
+<span><span class="co">#&gt; oral           Oral   27</span></span>
+<span><span class="co">#&gt; bacterial Bacterial   25</span></span>
+<span><span class="co">#&gt; species     species   24</span></span>
+<span><span class="co">#&gt; microbial Microbial   23</span></span>
+<span><span class="va">basic2</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
+<p><img src="02-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="768">
+For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in <code>wcGeneSummary</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rmwords</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">:::</span><span class="va">allFreqBSDB</span></span>
+<span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="va">rmwords</span><span class="op">[</span><span class="va">rmwords</span><span class="op">$</span><span class="va">freq</span><span class="op">&gt;</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">rmwords</span><span class="op">$</span><span class="va">freq</span>, <span class="fl">0.95</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">filter</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             freq        word</span></span>
+<span><span class="co">#&gt; microbiota   275  microbiota</span></span>
+<span><span class="co">#&gt; gut          242         gut</span></span>
+<span><span class="co">#&gt; microbiome   175  microbiome</span></span>
+<span><span class="co">#&gt; patients     146    patients</span></span>
+<span><span class="co">#&gt; study         69       study</span></span>
+<span><span class="co">#&gt; cancer        64      cancer</span></span>
+<span><span class="co">#&gt; composition   62 composition</span></span>
+<span><span class="co">#&gt; oral          55        oral</span></span>
+<span><span class="co">#&gt; human         49       human</span></span>
+<span><span class="co">#&gt; intestinal    48  intestinal</span></span>
+<span><span class="co">#&gt; children      45    children</span></span>
+<span><span class="co">#&gt; microbial     45   microbial</span></span>
+<span><span class="co">#&gt; disease       43     disease</span></span>
+<span><span class="co">#&gt; fecal         41       fecal</span></span>
+<span><span class="co">#&gt; alterations   36 alterations</span></span>
+<span><span class="co">#&gt; analysis      34    analysis</span></span>
+<span><span class="co">#&gt; association   34 association</span></span>
+<span><span class="co">#&gt; dysbiosis     34   dysbiosis</span></span>
+<span><span class="co">#&gt; infection     34   infection</span></span>
+<span><span class="co">#&gt; risk          33        risk</span></span></code></pre></div>
+<p>The network visualization is possible by enabling <code>plotType="network"</code>.
+The same parameters that can be passed to <code>wcGeneSummary</code> can be used.</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Neisseria"</span>,<span class="st">"Veillonella"</span><span class="op">)</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    numWords<span class="op">=</span><span class="fl">60</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 2</span></span>
+<span><span class="co">#&gt;   Found 76 entries for Neisseria</span></span>
+<span><span class="co">#&gt;   Found 221 entries for Veillonella</span></span>
+<span><span class="co">#&gt; Including 502 entries</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="768"></div>
+<p>The words-to-species relationship can be plotted by <code>mbPlot=TRUE</code>.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
+<span>    <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>, mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
+<span>    numWords<span class="op">=</span><span class="fl">40</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 4</span></span>
+<span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
+<span><span class="co">#&gt;   Found 1 entries for Neisseria flava</span></span>
+<span><span class="co">#&gt;   Found 20 entries for Veillonella parvula</span></span>
+<span><span class="co">#&gt;   Found 21 entries for Akkermansia muciniphila</span></span>
+<span><span class="co">#&gt; Including 90 entries</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="768"></div>
+<p>As the BugSigDB contains the relationship between bacterial taxonomy and disease, disease name can also be plotted. When <code>disPlot=TRUE</code>, the <code>mbPlot</code>
+will be set to <code>TRUE</code> by default.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
+<span>    <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>, mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    numWords<span class="op">=</span><span class="fl">40</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 4</span></span>
+<span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
+<span><span class="co">#&gt;   Found 1 entries for Neisseria flava</span></span>
+<span><span class="co">#&gt;   Found 20 entries for Veillonella parvula</span></span>
+<span><span class="co">#&gt;   Found 21 entries for Akkermansia muciniphila</span></span>
+<span><span class="co">#&gt; Including 90 entries</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net3</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="960"></div>
+<p>Other than curated databases, the PubMed query can also be performed with setting <code>curate=FALSE</code>. This way, the text information of the latest literature for the microbes and diseases can be plotted. The options for use in function obtaining PubMed information can be specified to <code>abstArg</code> in list format.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcBSDB.html">wcBSDB</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
+<span>    <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>, mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">FALSE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    numWords<span class="op">=</span><span class="fl">40</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    abstArg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>retMax<span class="op">=</span><span class="fl">80</span>, sortOrder<span class="op">=</span><span class="st">"pubdate"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input microbes: 4</span></span>
+<span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
+<span><span class="co">#&gt;   Found 1 entries for Neisseria flava</span></span>
+<span><span class="co">#&gt;   Found 20 entries for Veillonella parvula</span></span>
+<span><span class="co">#&gt;   Found 21 entries for Akkermansia muciniphila</span></span>
+<span><span class="co">#&gt; Including 90 entries</span></span>
+<span><span class="co">#&gt; Proceeding without API key</span></span>
+<span><span class="co">#&gt; Filter based on BugSigDB</span></span>
+<span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net4</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/no_curate-1.png" width="960"></div>
+<p>For microbiome analysis, it is often the case that investigating coded enzymes is important. Using <code>wcEC</code> function and <code>getUPtax</code> function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in <code>enzyme.dat</code> are searched, and corresponding UniProt identifiers are obtained, followed by mapping using <code>speclist.txt</code>. This way, the links to microbe - textual information - enzyme can be plotted.</p>
+<ul>
+<li><a href="https://enzyme.expasy.org/">enzyme.dat from Expasy</a></li>
+<li><a href="https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt">UniProt Controlled vocabulary of species</a></li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Not run</span></span>
+<span><span class="co"># vp &lt;- wcBSDB(c("Veillonella parvula"),</span></span>
+<span><span class="co">#                  plotType="network",</span></span>
+<span><span class="co">#                 curate=TRUE, target="title", edgeLink=FALSE,</span></span>
+<span><span class="co">#                 mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag=TRUE,</span></span>
+<span><span class="co">#                 cl=snow::makeCluster(10),colorText=TRUE, pre=TRUE, numWords=30,</span></span>
+<span><span class="co">#                 nodePal=RColorBrewer::brewer.pal(10, "Set2"),</span></span>
+<span><span class="co">#                 ecFile="enzyme.dat",</span></span>
+<span><span class="co">#                 upTaxFile = "speclist.txt")</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; locale:</span></span>
+<span><span class="co">#&gt; [1] LC_COLLATE=Japanese_Japan.utf8 </span></span>
+<span><span class="co">#&gt; [2] LC_CTYPE=Japanese_Japan.utf8   </span></span>
+<span><span class="co">#&gt; [3] LC_MONETARY=Japanese_Japan.utf8</span></span>
+<span><span class="co">#&gt; [4] LC_NUMERIC=C                   </span></span>
+<span><span class="co">#&gt; [5] LC_TIME=Japanese_Japan.utf8    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; attached base packages:</span></span>
+<span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets </span></span>
+<span><span class="co">#&gt; [6] methods   base     </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] RColorBrewer_1.1-3   ggraph_2.1.0        </span></span>
+<span><span class="co">#&gt; [3] ggplot2_3.4.0        wcGeneSummary_0.99.0</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span><span class="co">#&gt;   [1] GeneSummary_0.99.4     colorspace_2.0-3      </span></span>
+<span><span class="co">#&gt;   [3] rjson_0.2.21           ellipsis_0.3.2        </span></span>
+<span><span class="co">#&gt;   [5] XVector_0.38.0         GlobalOptions_0.1.2   </span></span>
+<span><span class="co">#&gt;   [7] base64enc_0.1-3        ggdendro_0.1.23       </span></span>
+<span><span class="co">#&gt;   [9] fs_1.5.2               rstudioapi_0.14       </span></span>
+<span><span class="co">#&gt;  [11] farver_2.1.1           graphlayouts_0.8.4    </span></span>
+<span><span class="co">#&gt;  [13] ggrepel_0.9.2          bit64_4.0.5           </span></span>
+<span><span class="co">#&gt;  [15] AnnotationDbi_1.60.0   fansi_1.0.3           </span></span>
+<span><span class="co">#&gt;  [17] xml2_1.3.3             downlit_0.4.2         </span></span>
+<span><span class="co">#&gt;  [19] cachem_1.0.6           knitr_1.41            </span></span>
+<span><span class="co">#&gt;  [21] polyclip_1.10-4        jsonlite_1.8.4        </span></span>
+<span><span class="co">#&gt;  [23] png_0.1-8              graph_1.76.0          </span></span>
+<span><span class="co">#&gt;  [25] ggforce_0.4.1          shiny_1.7.4           </span></span>
+<span><span class="co">#&gt;  [27] bugsigdbr_1.4.1        rentrez_1.2.3         </span></span>
+<span><span class="co">#&gt;  [29] compiler_4.2.2         httr_1.4.4            </span></span>
+<span><span class="co">#&gt;  [31] fastmap_1.1.0          cli_3.6.0             </span></span>
+<span><span class="co">#&gt;  [33] later_1.3.0            tweenr_2.0.2          </span></span>
+<span><span class="co">#&gt;  [35] htmltools_0.5.4        tools_4.2.2           </span></span>
+<span><span class="co">#&gt;  [37] igraph_1.3.5           NLP_0.2-1             </span></span>
+<span><span class="co">#&gt;  [39] gtable_0.3.1           glue_1.6.2            </span></span>
+<span><span class="co">#&gt;  [41] GenomeInfoDbData_1.2.9 dplyr_1.0.99.9000     </span></span>
+<span><span class="co">#&gt;  [43] Rcpp_1.0.9             slam_0.1-50           </span></span>
+<span><span class="co">#&gt;  [45] Biobase_2.58.0         jquerylib_0.1.4       </span></span>
+<span><span class="co">#&gt;  [47] vctrs_0.5.1            Biostrings_2.66.0     </span></span>
+<span><span class="co">#&gt;  [49] xfun_0.36              stringr_1.5.0         </span></span>
+<span><span class="co">#&gt;  [51] mime_0.12              lifecycle_1.0.3       </span></span>
+<span><span class="co">#&gt;  [53] pvclust_2.2-0          XML_3.99-0.13         </span></span>
+<span><span class="co">#&gt;  [55] dendextend_1.16.0      org.Hs.eg.db_3.16.0   </span></span>
+<span><span class="co">#&gt;  [57] zlibbioc_1.44.0        MASS_7.3-58.1         </span></span>
+<span><span class="co">#&gt;  [59] scales_1.2.1           tidygraph_1.2.2       </span></span>
+<span><span class="co">#&gt;  [61] promises_1.2.0.1       parallel_4.2.2        </span></span>
+<span><span class="co">#&gt;  [63] cyjShiny_1.0.34        yaml_2.3.6            </span></span>
+<span><span class="co">#&gt;  [65] memoise_2.0.1          gridExtra_2.3         </span></span>
+<span><span class="co">#&gt;  [67] yulab.utils_0.0.6      sass_0.4.4            </span></span>
+<span><span class="co">#&gt;  [69] stringi_1.7.12         RSQLite_2.2.20        </span></span>
+<span><span class="co">#&gt;  [71] S4Vectors_0.36.1       BiocGenerics_0.44.0   </span></span>
+<span><span class="co">#&gt;  [73] GenomeInfoDb_1.34.6    rlang_1.0.6           </span></span>
+<span><span class="co">#&gt;  [75] pkgconfig_2.0.3        bitops_1.0-7          </span></span>
+<span><span class="co">#&gt;  [77] evaluate_0.19          purrr_1.0.1           </span></span>
+<span><span class="co">#&gt;  [79] patchwork_1.1.2        htmlwidgets_1.6.1     </span></span>
+<span><span class="co">#&gt;  [81] cowplot_1.1.1          bit_4.0.5             </span></span>
+<span><span class="co">#&gt;  [83] tidyselect_1.2.0       magrittr_2.0.3        </span></span>
+<span><span class="co">#&gt;  [85] bookdown_0.31          R6_2.5.1              </span></span>
+<span><span class="co">#&gt;  [87] IRanges_2.32.0         generics_0.1.3        </span></span>
+<span><span class="co">#&gt;  [89] DBI_1.1.3              pillar_1.8.1          </span></span>
+<span><span class="co">#&gt;  [91] withr_2.5.0            KEGGREST_1.38.0       </span></span>
+<span><span class="co">#&gt;  [93] RCurl_1.98-1.9         tibble_3.1.8          </span></span>
+<span><span class="co">#&gt;  [95] crayon_1.5.2           wordcloud_2.6         </span></span>
+<span><span class="co">#&gt;  [97] utf8_1.2.2             rmarkdown_2.19        </span></span>
+<span><span class="co">#&gt;  [99] viridis_0.6.2          GetoptLong_1.0.5      </span></span>
+<span><span class="co">#&gt; [101] grid_4.2.2             blob_1.2.3            </span></span>
+<span><span class="co">#&gt; [103] digest_0.6.31          xtable_1.8-4          </span></span>
+<span><span class="co">#&gt; [105] tm_0.7-10              tidyr_1.2.1           </span></span>
+<span><span class="co">#&gt; [107] httpuv_1.6.8           gridGraphics_0.5-1    </span></span>
+<span><span class="co">#&gt; [109] stats4_4.2.2           munsell_0.5.0         </span></span>
+<span><span class="co">#&gt; [111] viridisLite_0.4.1      ggplotify_0.1.0       </span></span>
+<span><span class="co">#&gt; [113] bslib_0.4.2</span></span></code></pre></div>
+
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span></code></pre></div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></div>
+<div class="next"><a href="custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Custom usage - Interactive inspection of Bayesian network annotated by words</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#the-basic-usage-for-microbiome-related-data"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/noriakis/wcGeneSummary/blob/master/02-microbiome_usage.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/noriakis/wcGeneSummary/edit/master/02-microbiome_usage.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
