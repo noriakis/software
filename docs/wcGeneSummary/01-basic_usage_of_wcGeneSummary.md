@@ -1,6 +1,3 @@
-
-This package aims to visualize the word and text information contained in the gene or the other omics identifiers such as microbiome, and identify important words among the clusters, and compare the clusters based on those information. It contributes to understanding the gene clusters and aid in easy interpretation and visualization.
-
 # Basic usage
 
 Load the package and the database for converting identifiers.
