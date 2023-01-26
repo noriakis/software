@@ -13,7 +13,8 @@ csl: chicago-fullnote-bibliography.csl
 
 # About
 
-This package aims to visualize the word and text information contained in the gene or the other omics identifiers such as microbiome, and identify important words among the clusters, and compare the clusters based on those information. It contributes to understanding the gene clusters and aid in easy interpretation and visualization.
+This package aims to visualize the word and text information contained in the gene or the other omics identifiers such as microbiome, and identify important words among the clusters, and compare the clusters based on those information. It contributes to understanding the gene clusters and aid in easy interpretation and visualization. The documentation using bookdown is available [here](https://noriakis.github.io/software/wcGeneSummary), and the web server using `shinyapps.io` is [here](https://nsato.shinyapps.io/osplotweb/).
+
 
 
 ```r

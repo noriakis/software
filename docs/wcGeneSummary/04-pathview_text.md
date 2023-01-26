@@ -7,7 +7,8 @@ KEGG mapping plots produced by pathview can be populated with text information (
 
 ```r
 library(wcGeneSummary)
-library(pathview)
+library(dplyr)
+library(pathview);library(png)
 ```
 
 Suppose an example for KEGG Orthology obtained from some microbiome-related experiments.
@@ -28,7 +29,9 @@ Now plot these KOs in the pathview.
 ## As the output is PNG, this script is omitted.
 pvInput <- rep(1,length(kos))
 names(pvInput) <- kos
-# pathview(kos, pathway.id = "00270", species = "ko")
+pathview(kos, pathway.id = "00270", species = "ko")
+grid::rasterGrob(readPNG("ko00270.pathview.png"), interpolate=FALSE)
+#> rastergrob[GRID.rastergrob.93]
 ```
 ![raw pathview plot](https://github.com/noriakis/software/blob/main/images/ko00270.pathview.png?raw=true){width=500px}
 
@@ -37,41 +40,55 @@ The default is "abstract", which fetches information from RefSeq database. In th
 
 
 ```r
-## Again, the codes are commented out.
 
-# ecko <- data.table::fread("https://rest.kegg.jp/link/ko/ec",
-#                             header=FALSE)
-# ecko$EC <- sapply(strsplit(ecko$V1, ":"),"[",2)
-# ecko$KO <- sapply(strsplit(ecko$V2, ":"), "[", 2)
-# filt <- ecko[ ecko$KO %in% kos, ]
-# ecnum <- filt$EC
-# termMap <- filt[,c("KO","EC")] |> `colnames<-`(c("query","number"))
-# ecQuery <- wcEC("enzyme.dat", ecnum = ecnum, onlyTerm =TRUE)
-# ecMap <- wcEC("enzyme.dat", ecnum = ecnum, onlyDf =TRUE)
-# termMap <- merge(termMap, ecMap[,c("number","desc")], by="number") |>
-#   `colnames<-`(c("number","query","description"))
+ecko <- data.table::fread("https://rest.kegg.jp/link/ko/ec",
+                            header=FALSE)
+ecko$EC <- sapply(strsplit(ecko$V1, ":"),"[",2)
+ecko$KO <- sapply(strsplit(ecko$V2, ":"), "[", 2)
+filt <- ecko[ ecko$KO %in% kos, ]
+ecnum <- filt$EC
+termMap <- filt[,c("KO","EC")] |> `colnames<-`(c("query","number"))
+ecQuery <- wcEC("../enzyme.dat", ecnum = ecnum, onlyTerm =TRUE)
+#> Processing EC file
+ecMap <- wcEC("../enzyme.dat", ecnum = ecnum, onlyDf =TRUE)
+#> Processing EC file
+termMap <- merge(termMap, ecMap[,c("number","desc")], by="number") |>
+  `colnames<-`(c("number","query","description"))
 
 ## Main function
 
-# pathviewText(kos, keyType = "KO",
-#      target="abstract",
-#      pid = "00270",
-#      org = "ko", 
-#      searchTerms = ecQuery,
-#      termMap = termMap,
-#      node.types="ortholog")
+hor <- pathviewText(kos, keyType = "KO",
+     target="abstract",
+     pid = "00270",
+     org = "ko", 
+     searchTerms = ecQuery,
+     termMap = termMap,
+     node.types="ortholog")
+#> Proceeding without API key
+
+hor$concat
+```
+
+<img src="04-pathview_text_files/figure-html/pathview2-1.png" width="672" />
+
+```r
 
 ## We can transpose the barplot by trans=TRUE
 
-# pathviewText(kos, keyType = "KO",
-#      target="abstract",
-#      pid = "00270",
-#      org = "ko", 
-#	   trans = TRUE,
-#      searchTerms = ecQuery,
-#      termMap = termMap,
-#      node.types="ortholog")
+ver <- pathviewText(kos, keyType = "KO",
+     target="abstract",
+     pid = "00270",
+     org = "ko", 
+	   trans = TRUE,
+     searchTerms = ecQuery,
+     termMap = termMap,
+     node.types="ortholog")
+#> Proceeding without API key
+
+ver$concat
 ```
+
+<img src="04-pathview_text_files/figure-html/pathview2-2.png" width="672" />
 
 The below picture shows transposed results.
 

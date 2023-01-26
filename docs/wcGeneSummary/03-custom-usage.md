@@ -1,4 +1,7 @@
 
+# Custom usage - Interactive inspection of Bayesian network annotated by words
+
+
 
 ```r
 library(wcGeneSummary)
@@ -8,8 +11,6 @@ library(org.Hs.eg.db)
 library(clusterProfiler)
 library(RColorBrewer)
 ```
-
-# Custom usage - Interactive inspection of Bayesian network annotated by words
 
 In this example, a Bayesian network showing the module eigengenes relationship are inferred using `boot.strength` function in `bnlearn` from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by `wcGeneSummary()`, and can be exported to the format of `Cytoscape.js` or `vis.js`. In this way, module relationship can be interactively inspected with the functional implications.
 
@@ -75,16 +76,20 @@ for (i in V(g)$name){
     if (plotType=="bar"){
         plt <- makeBar(entre, keyType="ENTREZID") # get barplot
     } else { ## If wordcloud
-        # A <- wcGeneSummary(entre,
-        #                    madeUpper=c("dna","rna",
-        #                                tolower(keys(org.Hs.eg.db, keytype="SYMBOL"))))
-        # palNum <- sample(1:151,1) # palettetown
-        # 
-        # ## This time use ggwordcloud()
-        # plt <- ggwordcloud::ggwordcloud(A$df$word, A$df$freq,
-        #                      shape="circle", min.freq = 10,
+        # A <- wcGeneSummary(entre, keyType="ENTREZID",
+        #                    argList=list(rot.per=0.4,
+        #                                 colors=brewer.pal(10,
+        #                                                   sample(row.names(RColorBrewer::brewer.pal.info), 1)),
+        #                                 random.order=FALSE),
+        #                    numWords=80)
+        # # plt <- A@wc
+        # # 
+        # # ## This time use ggwordcloud()
+        # plt <- ggwordcloud::ggwordcloud(A@freqDf$word, A@freqDf$freq,
+        #                      shape="circle", min.freq = 1,max.words = Inf,
         #                      rot.per = 0.5, random.order = FALSE,
-        #                      colors = pokepal(palNum))+
+        #                      colors = brewer.pal(10,
+        #                                          sample(row.names(RColorBrewer::brewer.pal.info), 1)))+
         #          scale_size_area(max_size = 40)
     }
     ## Save images
