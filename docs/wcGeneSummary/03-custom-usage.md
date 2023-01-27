@@ -280,64 +280,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE,
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 170
+#> Input genes: 27
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 67
+#> Input genes: 6
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 36
+#> Input genes: 1541
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 114
+#> Input genes: 65
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 89
+#> Input genes: 47
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 57
+#> Input genes: 512
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 17
+#> Input genes: 148
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 102
+#> Input genes: 121
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 156
+#> Input genes: 50
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 114
+#> Input genes: 26
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 251
+#> Input genes: 154
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 202
+#> Input genes: 34
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 104
+#> Input genes: 232
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 41
+#> Input genes: 37
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 15
+#> Input genes: 75
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 33
+#> Input genes: 8
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 310
+#> Input genes: 152
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 76
+#> Input genes: 147
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 40
+#> Input genes: 72
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 157
+#> Input genes: 23
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -349,7 +349,7 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 8 unlabeled data points (too many
+#> Warning: ggrepel: 11 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 

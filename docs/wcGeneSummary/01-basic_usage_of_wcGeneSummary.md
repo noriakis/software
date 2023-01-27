@@ -82,10 +82,10 @@ It also returns a data frame consisting of frequency of each term in the slot na
 
 ```r
 gwc
-#> type: refseq
+#> Type: refseq
 #> Number of words: 100
 #> ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8
-#> 133.5 Kb
+#> 133.1 Kb
 knitr::kable(
   head(gwc@freqDf), caption = 'Term frequencies.',
   row.names = FALSE
@@ -202,13 +202,9 @@ gwcl@pvpick
 #> $clusters[[3]]
 #> [1] "dna"    "repair"
 #> 
-#> $clusters[[4]]
-#> [1] "cockayne"      "excision"      "syndrome"     
-#> [4] "transcription"
-#> 
 #> 
 #> $edges
-#> [1]  6 22 23 25
+#> [1]  6 22 23
 
 ## Cluster on whole matrix
 
@@ -848,6 +844,7 @@ After obtaining the ORA results, one can plot volcano-plot like plot for the res
 
 
 ```r
+library(ggrepel)
 plotORA(net)
 ```
 
@@ -875,66 +872,65 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggrepel_0.9.2         limma_3.54.0         
-#>  [3] igraph_1.3.5          ggforce_0.4.1        
-#>  [5] concaveman_1.1.0      dplyr_1.0.10         
-#>  [7] dendextend_1.16.0     clusterProfiler_4.6.0
-#>  [9] ReactomePA_1.42.0     RColorBrewer_1.1-3   
-#> [11] ggraph_2.1.0          ggplot2_3.4.0        
-#> [13] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 
-#> [15] IRanges_2.32.0        S4Vectors_0.36.1     
-#> [17] Biobase_2.58.0        BiocGenerics_0.44.0  
-#> [19] wcGeneSummary_0.99.0 
+#>  [1] ggrepel_0.9.2         ggforce_0.4.1        
+#>  [3] concaveman_1.1.0      dplyr_1.0.10         
+#>  [5] dendextend_1.16.0     clusterProfiler_4.6.0
+#>  [7] ReactomePA_1.42.0     RColorBrewer_1.1-3   
+#>  [9] ggraph_2.1.0          ggplot2_3.4.0        
+#> [11] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 
+#> [13] IRanges_2.32.0        S4Vectors_0.36.1     
+#> [15] Biobase_2.58.0        BiocGenerics_0.44.0  
+#> [17] wcGeneSummary_0.99.0 
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
-#>   [3] plyr_1.8.8             lazyeval_0.2.2        
-#>   [5] splines_4.2.2          BiocParallel_1.32.5   
-#>   [7] GenomeInfoDb_1.34.6    digest_0.6.31         
-#>   [9] yulab.utils_0.0.6      htmltools_0.5.4       
-#>  [11] bugsigdbr_1.5.3        GOSemSim_2.24.0       
-#>  [13] viridis_0.6.2          GO.db_3.16.0          
-#>  [15] fansi_1.0.3            GeneSummary_0.99.4    
-#>  [17] magrittr_2.0.3         memoise_2.0.1         
-#>  [19] tm_0.7-10              Biostrings_2.66.0     
-#>  [21] graphlayouts_0.8.4     pvclust_2.2-0         
-#>  [23] wordcloud_2.6          enrichplot_1.18.3     
-#>  [25] colorspace_2.0-3       rappdirs_0.3.3        
-#>  [27] blob_1.2.3             xfun_0.36             
-#>  [29] crayon_1.5.2           RCurl_1.98-1.9        
-#>  [31] jsonlite_1.8.4         scatterpie_0.1.8      
-#>  [33] graph_1.76.0           ape_5.6-2             
-#>  [35] glue_1.6.2             polyclip_1.10-4       
-#>  [37] stopwords_2.3          gtable_0.3.1          
-#>  [39] zlibbioc_1.44.0        XVector_0.38.0        
-#>  [41] GetoptLong_1.0.5       graphite_1.44.0       
-#>  [43] rentrez_1.2.3          scales_1.2.1          
-#>  [45] DOSE_3.24.2            DBI_1.1.3             
-#>  [47] Rcpp_1.0.9             viridisLite_0.4.1     
-#>  [49] xtable_1.8-4           tidytree_0.4.2        
-#>  [51] gridGraphics_0.5-1     reactome.db_1.82.0    
-#>  [53] bit_4.0.5              htmlwidgets_1.6.1     
-#>  [55] httr_1.4.4             fgsea_1.24.0          
-#>  [57] ellipsis_0.3.2         pkgconfig_2.0.3       
-#>  [59] XML_3.99-0.13          farver_2.1.1          
-#>  [61] sass_0.4.4             utf8_1.2.2            
-#>  [63] labeling_0.4.2         ggplotify_0.1.0       
-#>  [65] tidyselect_1.2.0       rlang_1.0.6           
-#>  [67] reshape2_1.4.4         later_1.3.0           
-#>  [69] munsell_0.5.0          tools_4.2.2           
-#>  [71] cachem_1.0.6           downloader_0.4        
-#>  [73] cli_3.6.0              generics_0.1.3        
-#>  [75] RSQLite_2.2.20         gson_0.0.9            
-#>  [77] evaluate_0.19          stringr_1.5.0         
-#>  [79] fastmap_1.1.0          ggdendro_0.1.23       
-#>  [81] yaml_2.3.6             ggtree_3.6.2          
-#>  [83] knitr_1.41             bit64_4.0.5           
-#>  [85] fs_1.5.2               tidygraph_1.2.2       
-#>  [87] purrr_1.0.1            KEGGREST_1.38.0       
-#>  [89] nlme_3.1-161           mime_0.12             
-#>  [91] slam_0.1-50            aplot_0.1.9           
-#>  [93] xml2_1.3.3             compiler_4.2.2        
-#>  [95] rstudioapi_0.14        curl_5.0.0            
+#>   [3] plyr_1.8.8             igraph_1.3.5          
+#>   [5] lazyeval_0.2.2         splines_4.2.2         
+#>   [7] BiocParallel_1.32.5    GenomeInfoDb_1.34.6   
+#>   [9] digest_0.6.31          yulab.utils_0.0.6     
+#>  [11] htmltools_0.5.4        bugsigdbr_1.5.3       
+#>  [13] GOSemSim_2.24.0        viridis_0.6.2         
+#>  [15] GO.db_3.16.0           fansi_1.0.3           
+#>  [17] GeneSummary_0.99.4     magrittr_2.0.3        
+#>  [19] memoise_2.0.1          tm_0.7-10             
+#>  [21] Biostrings_2.66.0      graphlayouts_0.8.4    
+#>  [23] pvclust_2.2-0          wordcloud_2.6         
+#>  [25] enrichplot_1.18.3      colorspace_2.0-3      
+#>  [27] rappdirs_0.3.3         blob_1.2.3            
+#>  [29] xfun_0.36              crayon_1.5.2          
+#>  [31] RCurl_1.98-1.9         jsonlite_1.8.4        
+#>  [33] scatterpie_0.1.8       graph_1.76.0          
+#>  [35] ape_5.6-2              glue_1.6.2            
+#>  [37] polyclip_1.10-4        stopwords_2.3         
+#>  [39] gtable_0.3.1           zlibbioc_1.44.0       
+#>  [41] XVector_0.38.0         GetoptLong_1.0.5      
+#>  [43] graphite_1.44.0        rentrez_1.2.3         
+#>  [45] scales_1.2.1           DOSE_3.24.2           
+#>  [47] DBI_1.1.3              Rcpp_1.0.9            
+#>  [49] viridisLite_0.4.1      xtable_1.8-4          
+#>  [51] tidytree_0.4.2         gridGraphics_0.5-1    
+#>  [53] reactome.db_1.82.0     bit_4.0.5             
+#>  [55] htmlwidgets_1.6.1      httr_1.4.4            
+#>  [57] fgsea_1.24.0           ellipsis_0.3.2        
+#>  [59] pkgconfig_2.0.3        XML_3.99-0.13         
+#>  [61] farver_2.1.1           sass_0.4.4            
+#>  [63] utf8_1.2.2             labeling_0.4.2        
+#>  [65] ggplotify_0.1.0        tidyselect_1.2.0      
+#>  [67] rlang_1.0.6            reshape2_1.4.4        
+#>  [69] later_1.3.0            munsell_0.5.0         
+#>  [71] tools_4.2.2            cachem_1.0.6          
+#>  [73] downloader_0.4         cli_3.6.0             
+#>  [75] generics_0.1.3         RSQLite_2.2.20        
+#>  [77] gson_0.0.9             evaluate_0.19         
+#>  [79] stringr_1.5.0          fastmap_1.1.0         
+#>  [81] ggdendro_0.1.23        yaml_2.3.6            
+#>  [83] ggtree_3.6.2           knitr_1.41            
+#>  [85] bit64_4.0.5            fs_1.5.2              
+#>  [87] tidygraph_1.2.2        purrr_1.0.1           
+#>  [89] KEGGREST_1.38.0        nlme_3.1-161          
+#>  [91] mime_0.12              slam_0.1-50           
+#>  [93] aplot_0.1.9            xml2_1.3.3            
+#>  [95] compiler_4.2.2         rstudioapi_0.14       
 #>  [97] png_0.1-8              treeio_1.22.0         
 #>  [99] tibble_3.1.8           tweenr_2.0.2          
 #> [101] bslib_0.4.2            stringi_1.7.12        
