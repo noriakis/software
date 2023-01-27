@@ -2,6 +2,8 @@
 
 # Custom usage - pathview text
 
+## KO queries
+
 KEGG mapping plots produced by pathview can be populated with text information ([Luo and Brouwer. 2013](https://academic.oup.com/bioinformatics/article/29/14/1830/232698])).
 
 
@@ -90,13 +92,54 @@ ver$concat
 
 <img src="04-pathview_text_files/figure-html/pathview2-2.png" width="672" />
 
-The below picture shows transposed results.
-
-![annotated pathview plot - KO](https://github.com/noriakis/software/blob/main/images/pathviewText.png?raw=true){width=500px}
+## Gene queries
 
 For gene queries, we can obtain the same plot using relatively simple query.
 
 
 ```r
 query <- c("TP53","CDC45","CDC6")
+
+ver <- pathviewText(query,
+     keyType = "SYMBOL",
+     target="abstract",
+     pid = "04110",
+     org = "hsa")
+#> converting to ENTREZID
+#> converted input genes: 3
+#> Proceeding without API key
+
+ver$concat
 ```
+
+<img src="04-pathview_text_files/figure-html/gene-1.png" width="672" />
+
+The returned `osplot` object can be accessed as the name `text` in the list. Note that only the nodes (words) within the final network are to be plotted. If all the words are to be included, path the arguments to `argList` to include all.
+
+
+```r
+ver$text
+#> Type: pubmed_abstract
+#> Number of words: 20
+#> TP53 OR CDC45 OR CDC6
+#> 381.7 Kb
+
+ver <- pathviewText(query,
+     keyType = "SYMBOL",
+     target="abstract",
+     pid = "04110",
+     org = "hsa", argList=list(numWords=Inf, corThresh=0))
+#> converting to ENTREZID
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> converted input genes: 3
+#> Info: Downloading xml files for hsa04110, 1/1 pathways..
+#> Info: Downloading png files for hsa04110, 1/1 pathways..
+#> Info: Working in directory C:/Users/nsato/Dropbox/build_wgcs/book
+#> Info: Writing image file hsa04110.custom.cols.png
+#> Proceeding without API key
+
+ver$concat
+```
+
+<img src="04-pathview_text_files/figure-html/assess-1.png" width="672" />

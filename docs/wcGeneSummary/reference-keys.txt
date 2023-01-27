@@ -12,6 +12,8 @@ custom-usage---annotating-module-eigengenes-dendrogram
 custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 custom-usage---recluster-the-cluster-using-word-information
 custom-usage---pathview-text
+ko-queries
+gene-queries
 application-examples
 load-the-necessary-packages-and-genes
 enrichment-analysis

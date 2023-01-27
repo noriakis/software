@@ -197,7 +197,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="words", argList=list(enrich
 <img src="03-custom-usage_files/figure-html/wgcnapath-1.png" width="576" />
 
 Other than textual information, we can simply annotate the dendrogram using enrichment analysis.
-Useful for inspecting how the branches of dendrogram contains pathway information.
+Useful for inspecting how the branches of dendrogram contains pathway information. 
 
 
 ```r
@@ -215,6 +215,48 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich")
 ```
 
 <img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
+The column names for clusterProfiler results can be specified to `showType`.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs, modColors, type="enrich", showType="Description")
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="576" />
+
+If you have a specifically interested pathway, use `highlight` to highlight the names in the dendrogram.
+
+
+```r
+plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
+                               type="enrich", highlight=c("hsa04060"))
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+```
+
+<img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />
 
 # Custom usage - Assess the occurrence of the speicific words across gene clusters
 
