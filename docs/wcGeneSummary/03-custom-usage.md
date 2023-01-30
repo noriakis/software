@@ -12,7 +12,7 @@ library(clusterProfiler)
 library(RColorBrewer)
 ```
 
-In this example, a Bayesian network showing the module eigengenes relationship are inferred using `boot.strength` function in `bnlearn` from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by `wcGeneSummary()`, and can be exported to the format of `Cytoscape.js` or `vis.js`. In this way, module relationship can be interactively inspected with the functional implications.
+In this example, a Bayesian network showing the module eigengenes relationship are inferred using `boot.strength` function in `bnlearn` from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by `wcGeneSummary()`, and can be exported to the format of `Cytoscape.js` or `vis.js`. In this way, module relationship can be interactively inspected with the functional implications. The other functions like `wcAbst()` can be used, however, you shold specify API keys for the function makes multiple queries.
 
 
 ```r
@@ -138,7 +138,7 @@ The example visualization is shown below (not by the code above).
 
 ![Example visualization of a Bayesian network](https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true)
 
-# Custom usage - Annotating module eigengenes dendrogram
+# Custom usage - Annotating gene cluster dendrogram
 
 The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As users of WGCNA typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
 
@@ -263,11 +263,6 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 
 ```r
 library(limma)
-#> 
-#> Attaching package: 'limma'
-#> The following object is masked from 'package:BiocGenerics':
-#> 
-#>     plotMA
 library(ggrepel)
 query <- "DNA repair"
 tab <- getGeneKEGGLinks(species="hsa")
@@ -277,7 +272,7 @@ for (path in unique(tab$PathwayID)){
 }
 ## Random subset! The results would be different.
 frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
-                split=TRUE,
+                split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
 #> Input genes: 27
@@ -349,11 +344,142 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 11 unlabeled data points (too many
+#> Warning: ggrepel: 7 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
 <img src="03-custom-usage_files/figure-html/findterm-1.png" width="480" />
+
+For clustering analysis like `WGCNA`, making the list and query.
+
+
+```r
+query <- "antiviral response"
+load("./blockwiseModule.rda")
+mecolors <- bwmod$color
+inputList <- names(mecolors)
+names(inputList) <- paste0("ME",bwmod$color)
+
+listOfGenes <- split(inputList, names(inputList))
+
+frq <- findTerm(query, listOfGenes,
+                split=TRUE,calc="highest",
+                keyType="ENSEMBL")
+#> Finding query in 17 clusters ...
+#> Input genes: 12943
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 10001
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 5534
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 4671
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 43
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 42
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 43
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 42
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 41
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 40
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 36
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 39
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 37
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 38
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 38
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 2192
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 2019
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 740
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 573
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 653
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 541
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 621
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 539
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 591
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 476
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 139
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 59
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 112
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 65
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 89
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 87
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
+                  check.names=FALSE)
+plt$name <- row.names(plt)
+
+p <- ggplot(plt, aes(antiviral, response, label = plt[,3])) +
+  geom_point(color = "blue")+ 
+  geom_text_repel(bg.color="white")+theme_minimal()+
+  xlab("antiviral")+ylab("response")
+p
+```
+
+<img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="480" />
 
 
 # Custom usage - Recluster the cluster using word information

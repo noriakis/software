@@ -23,7 +23,7 @@ enriched <- MicrobiomeProfiler::enrichKO(kos)
 clusterProfiler::cnetplot(enriched)
 ```
 
-<img src="04-pathview_text_files/figure-html/micro-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/micro-1.png" width="672" />
 Now plot these KOs in the pathview.
 
 
@@ -71,7 +71,7 @@ hor <- pathviewText(kos, keyType = "KO",
 hor$concat
 ```
 
-<img src="04-pathview_text_files/figure-html/pathview2-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/pathview2-1.png" width="672" />
 
 ```r
 
@@ -90,7 +90,7 @@ ver <- pathviewText(kos, keyType = "KO",
 ver$concat
 ```
 
-<img src="04-pathview_text_files/figure-html/pathview2-2.png" width="672" />
+<img src="05-pathview_text_files/figure-html/pathview2-2.png" width="672" />
 
 ## Gene queries
 
@@ -105,14 +105,14 @@ ver <- pathviewText(query,
      target="abstract",
      pid = "04110",
      org = "hsa")
-#> converting to ENTREZID
-#> converted input genes: 3
+#> Converting to ENTREZID
+#>   Converted input genes: 3
 #> Proceeding without API key
 
 ver$concat
 ```
 
-<img src="04-pathview_text_files/figure-html/gene-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/gene-1.png" width="672" />
 
 The returned `osplot` object can be accessed as the name `text` in the list. Note that only the nodes (words) within the final network are to be plotted. If all the words are to be included, path the arguments to `argList` to include all.
 
@@ -122,17 +122,17 @@ ver$text
 #> Type: pubmed_abstract
 #> Number of words: 20
 #> TP53 OR CDC45 OR CDC6
-#> 381.7 Kb
+#> 383 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",
      target="abstract",
      pid = "04110",
      org = "hsa", argList=list(numWords=Inf, corThresh=0))
-#> converting to ENTREZID
+#> Converting to ENTREZID
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#> converted input genes: 3
+#>   Converted input genes: 3
 #> Info: Downloading xml files for hsa04110, 1/1 pathways..
 #> Info: Downloading png files for hsa04110, 1/1 pathways..
 #> Info: Working in directory C:/Users/nsato/Dropbox/build_wgcs/book
@@ -142,4 +142,4 @@ ver <- pathviewText(query,
 ver$concat
 ```
 
-<img src="04-pathview_text_files/figure-html/assess-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/assess-1.png" width="672" />

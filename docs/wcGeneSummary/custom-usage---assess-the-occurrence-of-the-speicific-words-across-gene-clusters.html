@@ -20,9 +20,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="library(limma) #&gt; #&gt; Attaching package: 'limma' #&gt; The following object is masked from 'package:BiocGenerics': #&gt; #&gt;   plotMA library(ggrepel) query &lt;- &quot;DNA repair&quot; tab &lt;-...">
-<meta property="og:description" content="library(limma) #&gt; #&gt; Attaching package: 'limma' #&gt; The following object is masked from 'package:BiocGenerics': #&gt; #&gt;   plotMA library(ggrepel) query &lt;- &quot;DNA repair&quot; tab &lt;-...">
-<meta name="twitter:description" content="library(limma) #&gt; #&gt; Attaching package: 'limma' #&gt; The following object is masked from 'package:BiocGenerics': #&gt; #&gt;   plotMA library(ggrepel) query &lt;- &quot;DNA repair&quot; tab &lt;-...">
+<meta name="description" content='library(limma) library(ggrepel) query &lt;- "DNA repair" tab &lt;- getGeneKEGGLinks(species="hsa") listOfGenes &lt;- list() for (path in unique(tab$PathwayID)){   listOfGenes[[path]] &lt;- subset(tab,...'>
+<meta property="og:description" content='library(limma) library(ggrepel) query &lt;- "DNA repair" tab &lt;- getGeneKEGGLinks(species="hsa") listOfGenes &lt;- list() for (path in unique(tab$PathwayID)){   listOfGenes[[path]] &lt;- subset(tab,...'>
+<meta name="twitter:description" content='library(limma) library(ggrepel) query &lt;- "DNA repair" tab &lt;- getGeneKEGGLinks(species="hsa") listOfGenes &lt;- list() for (path in unique(tab$PathwayID)){   listOfGenes[[path]] &lt;- subset(tab,...'>
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -48,11 +48,13 @@
 <li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
 <li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
 <li><a class="" href="custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Custom usage - Interactive inspection of Bayesian network annotated by words</a></li>
-<li><a class="" href="custom-usage---annotating-module-eigengenes-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating module eigengenes dendrogram</a></li>
+<li><a class="" href="custom-usage---annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating gene cluster dendrogram</a></li>
 <li><a class="active" href="custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Custom usage - Assess the occurrence of the speicific words across gene clusters</a></li>
 <li><a class="" href="custom-usage---recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Custom usage - Recluster the cluster using word information</a></li>
-<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">8</span> Custom usage - pathview text</a></li>
-<li><a class="" href="application-examples.html"><span class="header-section-number">9</span> Application examples</a></li>
+<li><a class="" href="custom-usage---including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Custom usage - Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">9</span> Custom usage - pathview text</a></li>
+<li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
+<li><a class="" href="parsing.html"><span class="header-section-number">11</span> Parsing</a></li>
 </ul>
 
         <div class="book-extra">
@@ -64,13 +66,8 @@
 <h1>
 <span class="header-section-number">6</span> Custom usage - Assess the occurrence of the speicific words across gene clusters<a class="anchor" aria-label="anchor" href="#custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://bioinf.wehi.edu.au/limma">limma</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'limma'</span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:BiocGenerics':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     plotMA</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
 <span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"DNA repair"</span></span>
 <span><span class="va">tab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/limma/man/goana.html">getGeneKEGGLinks</a></span><span class="op">(</span>species<span class="op">=</span><span class="st">"hsa"</span><span class="op">)</span></span>
@@ -80,7 +77,7 @@
 <span><span class="op">}</span></span>
 <span><span class="co">## Random subset! The results would be different.</span></span>
 <span><span class="va">frq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/findTerm.html">findTerm</a></span><span class="op">(</span><span class="va">query</span>, <span class="va">listOfGenes</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">listOfGenes</span><span class="op">)</span>, <span class="fl">20</span><span class="op">)</span><span class="op">]</span>,</span>
-<span>                split<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                split<span class="op">=</span><span class="cn">TRUE</span>, calc<span class="op">=</span><span class="st">"mean"</span>,</span>
 <span>                keyType<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Finding query in 20 clusters ...</span></span>
 <span><span class="co">#&gt; Input genes: 27</span></span>
@@ -152,12 +149,138 @@
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span>bg.color<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"dna"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"repair"</span><span class="op">)</span></span>
 <span><span class="va">p</span></span>
-<span><span class="co">#&gt; Warning: ggrepel: 11 unlabeled data points (too many</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 7 unlabeled data points (too many</span></span>
 <span><span class="co">#&gt; overlaps). Consider increasing max.overlaps</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/findterm-1.png" width="480"></div>
+<p>For clustering analysis like <code>WGCNA</code>, making the list and query.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"antiviral response"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./blockwiseModule.rda"</span><span class="op">)</span></span>
+<span><span class="va">mecolors</span> <span class="op">&lt;-</span> <span class="va">bwmod</span><span class="op">$</span><span class="va">color</span></span>
+<span><span class="va">inputList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mecolors</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">inputList</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"ME"</span>,<span class="va">bwmod</span><span class="op">$</span><span class="va">color</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">listOfGenes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">inputList</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">inputList</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">frq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/findTerm.html">findTerm</a></span><span class="op">(</span><span class="va">query</span>, <span class="va">listOfGenes</span>,</span>
+<span>                split<span class="op">=</span><span class="cn">TRUE</span>,calc<span class="op">=</span><span class="st">"highest"</span>,</span>
+<span>                keyType<span class="op">=</span><span class="st">"ENSEMBL"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Finding query in 17 clusters ...</span></span>
+<span><span class="co">#&gt; Input genes: 12943</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 10001</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 5534</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4671</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 43</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 42</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 43</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 40</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 42</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 40</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 41</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 40</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 40</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 36</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 39</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 37</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 38</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 38</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 2192</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 2019</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 740</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 573</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 653</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 541</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 621</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 539</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 591</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 476</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 139</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 59</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 112</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 65</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 89</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 87</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">frq</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">plt</span><span class="op">$</span><span class="va">name</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">plt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plt</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">antiviral</span>, <span class="va">response</span>, label <span class="op">=</span> <span class="va">plt</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span>bg.color<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"antiviral"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"response"</span><span class="op">)</span></span>
+<span><span class="va">p</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="480"></div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="custom-usage---annotating-module-eigengenes-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating module eigengenes dendrogram</a></div>
+<div class="prev"><a href="custom-usage---annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating gene cluster dendrogram</a></div>
 <div class="next"><a href="custom-usage---recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Custom usage - Recluster the cluster using word information</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -177,7 +300,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-27.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

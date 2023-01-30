@@ -48,11 +48,13 @@
 <li><a class="active" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
 <li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
 <li><a class="" href="custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Custom usage - Interactive inspection of Bayesian network annotated by words</a></li>
-<li><a class="" href="custom-usage---annotating-module-eigengenes-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating module eigengenes dendrogram</a></li>
+<li><a class="" href="custom-usage---annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating gene cluster dendrogram</a></li>
 <li><a class="" href="custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Custom usage - Assess the occurrence of the speicific words across gene clusters</a></li>
 <li><a class="" href="custom-usage---recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Custom usage - Recluster the cluster using word information</a></li>
-<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">8</span> Custom usage - pathview text</a></li>
-<li><a class="" href="application-examples.html"><span class="header-section-number">9</span> Application examples</a></li>
+<li><a class="" href="custom-usage---including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Custom usage - Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">9</span> Custom usage - pathview text</a></li>
+<li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
+<li><a class="" href="parsing.html"><span class="header-section-number">11</span> Parsing</a></li>
 </ul>
 
         <div class="book-extra">
@@ -818,9 +820,27 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <p>After obtaining the ORA results, one can plot volcano-plot like plot for the results using <code>plotORA</code> function.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
-<span><span class="fu">plotORA</span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotORA.html">plotORA</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/oraplot-1.png" width="672"></div>
+</div>
+<div id="dependency-analyis-using-udpipe" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Dependency analyis using udpipe<a class="anchor" aria-label="anchor" href="#dependency-analyis-using-udpipe"><i class="fas fa-link"></i></a>
+</h2>
+<p>Using <a href="https://github.com/bnosac/udpipe"><code>udpipe</code></a> package (<a href="https://aclanthology.org/K17-3009/">Straka and Straková. 2017</a>), one can performe dependency analysis of texts in various databases. Set <code>useUdpipe</code> to <code>TRUE</code>, and specify downloaded model to be used in <code>udpipeModel</code>.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"ERCC2"</span><span class="op">)</span>,</span>
+<span>                                  plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>                                  useUdpipe<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                  udpipeModel<span class="op">=</span><span class="st">"~/english-ewt-ud-2.5-191206.udpipe"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using udpipe mode</span></span>
+<span><span class="co">#&gt; Input genes: 3</span></span>
+<span><span class="co">#&gt;   Converted input genes: 3</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">p</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/udpipe-1.png" width="864"></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -840,15 +860,13 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt; [6] datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt;  [1] ggrepel_0.9.2         ggforce_0.4.1        </span></span>
-<span><span class="co">#&gt;  [3] concaveman_1.1.0      dplyr_1.0.10         </span></span>
-<span><span class="co">#&gt;  [5] dendextend_1.16.0     clusterProfiler_4.6.0</span></span>
-<span><span class="co">#&gt;  [7] ReactomePA_1.42.0     RColorBrewer_1.1-3   </span></span>
-<span><span class="co">#&gt;  [9] ggraph_2.1.0          ggplot2_3.4.0        </span></span>
-<span><span class="co">#&gt; [11] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 </span></span>
-<span><span class="co">#&gt; [13] IRanges_2.32.0        S4Vectors_0.36.1     </span></span>
-<span><span class="co">#&gt; [15] Biobase_2.58.0        BiocGenerics_0.44.0  </span></span>
-<span><span class="co">#&gt; [17] wcGeneSummary_0.99.0 </span></span>
+<span><span class="co">#&gt;  [1] dplyr_1.0.10          dendextend_1.16.0    </span></span>
+<span><span class="co">#&gt;  [3] clusterProfiler_4.6.0 ReactomePA_1.42.0    </span></span>
+<span><span class="co">#&gt;  [5] RColorBrewer_1.1-3    ggraph_2.1.0         </span></span>
+<span><span class="co">#&gt;  [7] ggplot2_3.4.0         org.Hs.eg.db_3.16.0  </span></span>
+<span><span class="co">#&gt;  [9] AnnotationDbi_1.60.0  IRanges_2.32.0       </span></span>
+<span><span class="co">#&gt; [11] S4Vectors_0.36.1      Biobase_2.58.0       </span></span>
+<span><span class="co">#&gt; [13] BiocGenerics_0.44.0   wcGeneSummary_0.99.0 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] shadowtext_0.1.2       fastmatch_1.1-3       </span></span>
@@ -865,24 +883,24 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt;  [23] pvclust_2.2-0          wordcloud_2.6         </span></span>
 <span><span class="co">#&gt;  [25] enrichplot_1.18.3      colorspace_2.0-3      </span></span>
 <span><span class="co">#&gt;  [27] rappdirs_0.3.3         blob_1.2.3            </span></span>
-<span><span class="co">#&gt;  [29] xfun_0.36              crayon_1.5.2          </span></span>
-<span><span class="co">#&gt;  [31] RCurl_1.98-1.9         jsonlite_1.8.4        </span></span>
-<span><span class="co">#&gt;  [33] scatterpie_0.1.8       graph_1.76.0          </span></span>
-<span><span class="co">#&gt;  [35] ape_5.6-2              glue_1.6.2            </span></span>
-<span><span class="co">#&gt;  [37] polyclip_1.10-4        stopwords_2.3         </span></span>
-<span><span class="co">#&gt;  [39] gtable_0.3.1           zlibbioc_1.44.0       </span></span>
-<span><span class="co">#&gt;  [41] XVector_0.38.0         GetoptLong_1.0.5      </span></span>
-<span><span class="co">#&gt;  [43] graphite_1.44.0        rentrez_1.2.3         </span></span>
-<span><span class="co">#&gt;  [45] scales_1.2.1           DOSE_3.24.2           </span></span>
-<span><span class="co">#&gt;  [47] DBI_1.1.3              Rcpp_1.0.9            </span></span>
-<span><span class="co">#&gt;  [49] viridisLite_0.4.1      xtable_1.8-4          </span></span>
-<span><span class="co">#&gt;  [51] tidytree_0.4.2         gridGraphics_0.5-1    </span></span>
-<span><span class="co">#&gt;  [53] reactome.db_1.82.0     bit_4.0.5             </span></span>
-<span><span class="co">#&gt;  [55] htmlwidgets_1.6.1      httr_1.4.4            </span></span>
-<span><span class="co">#&gt;  [57] fgsea_1.24.0           ellipsis_0.3.2        </span></span>
-<span><span class="co">#&gt;  [59] pkgconfig_2.0.3        XML_3.99-0.13         </span></span>
-<span><span class="co">#&gt;  [61] farver_2.1.1           sass_0.4.4            </span></span>
-<span><span class="co">#&gt;  [63] utf8_1.2.2             labeling_0.4.2        </span></span>
+<span><span class="co">#&gt;  [29] ggrepel_0.9.2          xfun_0.36             </span></span>
+<span><span class="co">#&gt;  [31] crayon_1.5.2           RCurl_1.98-1.9        </span></span>
+<span><span class="co">#&gt;  [33] jsonlite_1.8.4         scatterpie_0.1.8      </span></span>
+<span><span class="co">#&gt;  [35] graph_1.76.0           ape_5.6-2             </span></span>
+<span><span class="co">#&gt;  [37] glue_1.6.2             polyclip_1.10-4       </span></span>
+<span><span class="co">#&gt;  [39] stopwords_2.3          gtable_0.3.1          </span></span>
+<span><span class="co">#&gt;  [41] zlibbioc_1.44.0        XVector_0.38.0        </span></span>
+<span><span class="co">#&gt;  [43] GetoptLong_1.0.5       graphite_1.44.0       </span></span>
+<span><span class="co">#&gt;  [45] rentrez_1.2.3          scales_1.2.1          </span></span>
+<span><span class="co">#&gt;  [47] DOSE_3.24.2            DBI_1.1.3             </span></span>
+<span><span class="co">#&gt;  [49] Rcpp_1.0.9             viridisLite_0.4.1     </span></span>
+<span><span class="co">#&gt;  [51] xtable_1.8-4           tidytree_0.4.2        </span></span>
+<span><span class="co">#&gt;  [53] gridGraphics_0.5-1     reactome.db_1.82.0    </span></span>
+<span><span class="co">#&gt;  [55] bit_4.0.5              htmlwidgets_1.6.1     </span></span>
+<span><span class="co">#&gt;  [57] httr_1.4.4             fgsea_1.24.0          </span></span>
+<span><span class="co">#&gt;  [59] ellipsis_0.3.2         pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt;  [61] XML_3.99-0.13          farver_2.1.1          </span></span>
+<span><span class="co">#&gt;  [63] sass_0.4.4             utf8_1.2.2            </span></span>
 <span><span class="co">#&gt;  [65] ggplotify_0.1.0        tidyselect_1.2.0      </span></span>
 <span><span class="co">#&gt;  [67] rlang_1.0.6            reshape2_1.4.4        </span></span>
 <span><span class="co">#&gt;  [69] later_1.3.0            munsell_0.5.0         </span></span>
@@ -918,8 +936,9 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt; [129] ISOcodes_2022.09.29    ggfun_0.0.9           </span></span>
 <span><span class="co">#&gt; [131] grid_4.2.2             tidyr_1.2.1           </span></span>
 <span><span class="co">#&gt; [133] HDO.db_0.99.1          rmarkdown_2.19        </span></span>
-<span><span class="co">#&gt; [135] downlit_0.4.2          NLP_0.2-1             </span></span>
-<span><span class="co">#&gt; [137] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
+<span><span class="co">#&gt; [135] downlit_0.4.2          ggforce_0.4.1         </span></span>
+<span><span class="co">#&gt; [137] NLP_0.2-1              shiny_1.7.4           </span></span>
+<span><span class="co">#&gt; [139] base64enc_0.1-3</span></span></code></pre></div>
 
 </div>
 </div>
@@ -935,6 +954,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <li><a class="nav-link" href="#visualization-of-pubmed-information."><span class="header-section-number">2.3</span> Visualization of PubMed information.</a></li>
 <li><a class="nav-link" href="#comparing-two-or-more-networks"><span class="header-section-number">2.4</span> Comparing two or more networks</a></li>
 <li><a class="nav-link" href="#text-over-represenatation-analysis-experimental"><span class="header-section-number">2.5</span> Text over represenatation analysis (experimental)</a></li>
+<li><a class="nav-link" href="#dependency-analyis-using-udpipe"><span class="header-section-number">2.6</span> Dependency analyis using udpipe</a></li>
 </ul>
 
       <div class="book-extra">
@@ -951,7 +971,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-27.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

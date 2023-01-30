@@ -202,8 +202,8 @@ net4@net
 
 For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `wcEC` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
 
-- [enzyme.dat from Expasy](https://enzyme.expasy.org/)
-- [UniProt Controlled vocabulary of species](https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt)
+- [enzyme.dat - from Expasy](https://enzyme.expasy.org/)
+- [speclist.txt - UniProt Controlled vocabulary of species](https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt)
 
 
 ```r
@@ -244,7 +244,8 @@ metab <- readxl::read_excel(
   "../41467_2022_33050_MOESM8_ESM.xlsx",skip = 7)
 ```
 
-Pass this tibble, as well as the columns to represent `taxonomy`, `metabolites`, and `quantitative values` to `metabCol`.
+Pass this tibble, as well as the columns to represent `taxonomy`, `metabolites`, and `quantitative values to threshold` to `metCol`. In this case, `metCol <- c("Metagenomic species", "Metabolite", "Spearman's ρ")`.
+
 
 
 ```r
@@ -279,7 +280,7 @@ metabEx@net
 
 <img src="02-microbiome_usage_files/figure-html/metabex-1.png" width="960" />
 
-In this way, we can plot links between microbes - metabolites - textual information.
+In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.
 
 
 
@@ -308,67 +309,60 @@ sessionInfo()
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] GeneSummary_0.99.4     colorspace_2.0-3      
-#>   [3] rjson_0.2.21           ISOcodes_2022.09.29   
-#>   [5] ellipsis_0.3.2         XVector_0.38.0        
-#>   [7] GlobalOptions_0.1.2    base64enc_0.1-3       
-#>   [9] ggdendro_0.1.23        fs_1.5.2              
-#>  [11] rstudioapi_0.14        farver_2.1.1          
-#>  [13] graphlayouts_0.8.4     ggrepel_0.9.2         
-#>  [15] bit64_4.0.5            AnnotationDbi_1.60.0  
-#>  [17] fansi_1.0.3            xml2_1.3.3            
-#>  [19] codetools_0.2-18       downlit_0.4.2         
-#>  [21] cachem_1.0.6           knitr_1.41            
-#>  [23] polyclip_1.10-4        jsonlite_1.8.4        
-#>  [25] dbplyr_2.3.0           png_0.1-8             
-#>  [27] graph_1.76.0           ggforce_0.4.1         
-#>  [29] shiny_1.7.4            bugsigdbr_1.5.3       
-#>  [31] rentrez_1.2.3          compiler_4.2.2        
-#>  [33] httr_1.4.4             assertthat_0.2.1      
-#>  [35] fastmap_1.1.0          cli_3.6.0             
-#>  [37] later_1.3.0            tweenr_2.0.2          
-#>  [39] htmltools_0.5.4        tools_4.2.2           
-#>  [41] igraph_1.3.5           NLP_0.2-1             
-#>  [43] gtable_0.3.1           glue_1.6.2            
-#>  [45] GenomeInfoDbData_1.2.9 dplyr_1.0.10          
-#>  [47] rappdirs_0.3.3         Rcpp_1.0.9            
-#>  [49] slam_0.1-50            Biobase_2.58.0        
-#>  [51] cellranger_1.1.0       jquerylib_0.1.4       
-#>  [53] vctrs_0.5.1            Biostrings_2.66.0     
-#>  [55] xfun_0.36              stringr_1.5.0         
-#>  [57] stopwords_2.3          mime_0.12             
-#>  [59] lifecycle_1.0.3        pvclust_2.2-0         
-#>  [61] XML_3.99-0.13          dendextend_1.16.0     
-#>  [63] org.Hs.eg.db_3.16.0    zlibbioc_1.44.0       
-#>  [65] MASS_7.3-58.1          scales_1.2.1          
-#>  [67] tidygraph_1.2.2        promises_1.2.0.1      
-#>  [69] parallel_4.2.2         cyjShiny_1.0.34       
-#>  [71] curl_5.0.0             yaml_2.3.6            
-#>  [73] memoise_2.0.1          gridExtra_2.3         
-#>  [75] yulab.utils_0.0.6      sass_0.4.4            
-#>  [77] stringi_1.7.12         RSQLite_2.2.20        
-#>  [79] highr_0.10             S4Vectors_0.36.1      
-#>  [81] filelock_1.0.2         BiocGenerics_0.44.0   
-#>  [83] GenomeInfoDb_1.34.6    rlang_1.0.6           
-#>  [85] pkgconfig_2.0.3        bitops_1.0-7          
-#>  [87] evaluate_0.19          purrr_1.0.1           
-#>  [89] labeling_0.4.2         patchwork_1.1.2       
-#>  [91] htmlwidgets_1.6.1      cowplot_1.1.1         
-#>  [93] bit_4.0.5              tidyselect_1.2.0      
-#>  [95] magrittr_2.0.3         bookdown_0.31         
-#>  [97] R6_2.5.1               snow_0.4-4            
-#>  [99] IRanges_2.32.0         generics_0.1.3        
-#> [101] DBI_1.1.3              pillar_1.8.1          
-#> [103] withr_2.5.0            KEGGREST_1.38.0       
-#> [105] RCurl_1.98-1.9         tibble_3.1.8          
-#> [107] crayon_1.5.2           wordcloud_2.6         
-#> [109] utf8_1.2.2             BiocFileCache_2.6.0   
-#> [111] rmarkdown_2.19         viridis_0.6.2         
-#> [113] GetoptLong_1.0.5       readxl_1.4.1          
-#> [115] grid_4.2.2             blob_1.2.3            
-#> [117] digest_0.6.31          xtable_1.8-4          
-#> [119] tm_0.7-10              tidyr_1.2.1           
-#> [121] httpuv_1.6.8           gridGraphics_0.5-1    
-#> [123] stats4_4.2.2           munsell_0.5.0         
-#> [125] ggplotify_0.1.0        viridisLite_0.4.1     
-#> [127] bslib_0.4.2
+#>   [3] rjson_0.2.21           ellipsis_0.3.2        
+#>   [5] XVector_0.38.0         GlobalOptions_0.1.2   
+#>   [7] base64enc_0.1-3        ggdendro_0.1.23       
+#>   [9] fs_1.5.2               rstudioapi_0.14       
+#>  [11] farver_2.1.1           graphlayouts_0.8.4    
+#>  [13] ggrepel_0.9.2          bit64_4.0.5           
+#>  [15] AnnotationDbi_1.60.0   fansi_1.0.3           
+#>  [17] xml2_1.3.3             downlit_0.4.2         
+#>  [19] cachem_1.0.6           knitr_1.41            
+#>  [21] polyclip_1.10-4        jsonlite_1.8.4        
+#>  [23] png_0.1-8              graph_1.76.0          
+#>  [25] ggforce_0.4.1          shiny_1.7.4           
+#>  [27] bugsigdbr_1.5.3        rentrez_1.2.3         
+#>  [29] compiler_4.2.2         httr_1.4.4            
+#>  [31] assertthat_0.2.1       fastmap_1.1.0         
+#>  [33] cli_3.6.0              later_1.3.0           
+#>  [35] tweenr_2.0.2           htmltools_0.5.4       
+#>  [37] tools_4.2.2            igraph_1.3.5          
+#>  [39] NLP_0.2-1              gtable_0.3.1          
+#>  [41] glue_1.6.2             GenomeInfoDbData_1.2.9
+#>  [43] dplyr_1.0.10           Rcpp_1.0.9            
+#>  [45] slam_0.1-50            Biobase_2.58.0        
+#>  [47] jquerylib_0.1.4        vctrs_0.5.1           
+#>  [49] Biostrings_2.66.0      xfun_0.36             
+#>  [51] stringr_1.5.0          mime_0.12             
+#>  [53] lifecycle_1.0.3        pvclust_2.2-0         
+#>  [55] XML_3.99-0.13          dendextend_1.16.0     
+#>  [57] org.Hs.eg.db_3.16.0    zlibbioc_1.44.0       
+#>  [59] MASS_7.3-58.1          scales_1.2.1          
+#>  [61] tidygraph_1.2.2        promises_1.2.0.1      
+#>  [63] parallel_4.2.2         cyjShiny_1.0.34       
+#>  [65] yaml_2.3.6             memoise_2.0.1         
+#>  [67] gridExtra_2.3          yulab.utils_0.0.6     
+#>  [69] sass_0.4.4             stringi_1.7.12        
+#>  [71] RSQLite_2.2.20         S4Vectors_0.36.1      
+#>  [73] BiocGenerics_0.44.0    GenomeInfoDb_1.34.6   
+#>  [75] rlang_1.0.6            pkgconfig_2.0.3       
+#>  [77] bitops_1.0-7           evaluate_0.19         
+#>  [79] purrr_1.0.1            patchwork_1.1.2       
+#>  [81] htmlwidgets_1.6.1      cowplot_1.1.1         
+#>  [83] bit_4.0.5              tidyselect_1.2.0      
+#>  [85] magrittr_2.0.3         bookdown_0.31         
+#>  [87] R6_2.5.1               IRanges_2.32.0        
+#>  [89] generics_0.1.3         DBI_1.1.3             
+#>  [91] pillar_1.8.1           withr_2.5.0           
+#>  [93] KEGGREST_1.38.0        RCurl_1.98-1.9        
+#>  [95] tibble_3.1.8           crayon_1.5.2          
+#>  [97] wordcloud_2.6          utf8_1.2.2            
+#>  [99] rmarkdown_2.19         viridis_0.6.2         
+#> [101] GetoptLong_1.0.5       grid_4.2.2            
+#> [103] blob_1.2.3             digest_0.6.31         
+#> [105] xtable_1.8-4           tm_0.7-10             
+#> [107] tidyr_1.2.1            httpuv_1.6.8          
+#> [109] gridGraphics_0.5-1     stats4_4.2.2          
+#> [111] munsell_0.5.0          ggplotify_0.1.0       
+#> [113] viridisLite_0.4.1      bslib_0.4.2
 ```

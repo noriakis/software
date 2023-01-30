@@ -6,11 +6,13 @@ producing-correlation-networks
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
 text-over-represenatation-analysis-experimental
+dependency-analyis-using-udpipe
 the-basic-usage-for-microbiome-related-data
 custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words
-custom-usage---annotating-module-eigengenes-dendrogram
+custom-usage---annotating-gene-cluster-dendrogram
 custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 custom-usage---recluster-the-cluster-using-word-information
+custom-usage---including-the-other-databases-an-example-in-metacyc
 custom-usage---pathview-text
 ko-queries
 gene-queries
@@ -20,3 +22,6 @@ enrichment-analysis
 text-mining-the-gene-summaries
 text-mining-the-available-literature
 combine-and-compare-networks
+parsing
+parsing-enzyme-comission-numbers-its-description-and-comment.
+parsing-uniprot-organism-identifiers.
