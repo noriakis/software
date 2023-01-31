@@ -122,7 +122,7 @@ ver$text
 #> Type: pubmed_abstract
 #> Number of words: 20
 #> TP53 OR CDC45 OR CDC6
-#> 383 Kb
+#> 377.3 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",

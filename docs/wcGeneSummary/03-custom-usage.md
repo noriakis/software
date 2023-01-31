@@ -263,6 +263,11 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 
 ```r
 library(limma)
+#> 
+#> Attaching package: 'limma'
+#> The following object is masked from 'package:BiocGenerics':
+#> 
+#>     plotMA
 library(ggrepel)
 query <- "DNA repair"
 tab <- getGeneKEGGLinks(species="hsa")
@@ -275,64 +280,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 27
+#> Input genes: 31
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 6
+#> Input genes: 69
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 1541
+#> Input genes: 162
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 65
+#> Input genes: 212
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 47
+#> Input genes: 194
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 512
+#> Input genes: 86
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 148
+#> Input genes: 247
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 121
+#> Input genes: 223
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 50
+#> Input genes: 29
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 26
+#> Input genes: 197
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 154
+#> Input genes: 159
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 34
+#> Input genes: 19
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 232
+#> Input genes: 96
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 37
+#> Input genes: 58
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 75
+#> Input genes: 30
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 8
+#> Input genes: 80
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 152
+#> Input genes: 86
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 15
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 147
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 72
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 23
+#> Input genes: 476
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -344,7 +349,7 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 7 unlabeled data points (too many
+#> Warning: ggrepel: 1 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
@@ -369,13 +374,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 12943
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 10001
+#>   Converted input genes: 9943
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 5534
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4671
+#>   Converted input genes: 4649
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 43
@@ -403,9 +408,9 @@ frq <- findTerm(query, listOfGenes,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 40
-#> 'select()' returned 1:many mapping between keys and
+#> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 36
+#>   Converted input genes: 34
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 39
@@ -429,31 +434,31 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 740
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 573
+#>   Converted input genes: 578
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 653
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 541
+#>   Converted input genes: 536
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 621
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 539
+#>   Converted input genes: 534
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 591
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 476
+#>   Converted input genes: 475
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 139
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 59
+#>   Converted input genes: 55
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 112
@@ -480,7 +485,6 @@ p
 ```
 
 <img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="480" />
-
 
 # Custom usage - Recluster the cluster using word information
 
