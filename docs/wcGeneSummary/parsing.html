@@ -52,7 +52,7 @@
 <li><a class="" href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Assess the occurrence of the speicific words across gene clusters</a></li>
 <li><a class="" href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Recluster the cluster using word information</a></li>
 <li><a class="" href="including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></li>
-<li><a class="" href="custom-usage---pathview-text.html"><span class="header-section-number">9</span> Custom usage - pathview text</a></li>
+<li><a class="" href="pathview-text.html"><span class="header-section-number">9</span> Pathview text</a></li>
 <li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
 <li><a class="active" href="parsing.html"><span class="header-section-number">11</span> Parsing</a></li>
 </ul>
@@ -71,7 +71,7 @@
 <h2>
 <span class="header-section-number">11.1</span> Parsing Enzyme Comission numbers, its description and comment.<a class="anchor" aria-label="anchor" href="#parsing-enzyme-comission-numbers-its-description-and-comment."><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Registered S3 method overwritten by 'pvclust':</span></span>
@@ -107,7 +107,7 @@
 <h2>
 <span class="header-section-number">11.2</span> Parsing UniProt organism identifiers.<a class="anchor" aria-label="anchor" href="#parsing-uniprot-organism-identifiers."><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">updf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/getUPtax.html">getUPtax</a></span><span class="op">(</span><span class="st">"../speclist.txt"</span>,candUP<span class="op">=</span><span class="st">"all"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span><span class="op">(</span><span class="va">updf</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     UPID                                           Taxonomy</span></span>

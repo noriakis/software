@@ -13,7 +13,7 @@ annotating-gene-cluster-dendrogram
 assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 recluster-the-cluster-using-word-information
 including-the-other-databases-an-example-in-metacyc
-custom-usage---pathview-text
+pathview-text
 ko-queries
 gene-queries
 application-examples

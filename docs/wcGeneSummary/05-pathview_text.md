@@ -1,6 +1,6 @@
 
 
-# Custom usage - pathview text
+# Pathview text
 
 ## KO queries
 
