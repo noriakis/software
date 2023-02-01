@@ -38,7 +38,7 @@ grid::rasterGrob(readPNG("ko00270.pathview.png"), interpolate=FALSE)
 ![raw pathview plot](https://github.com/noriakis/software/blob/main/images/ko00270.pathview.png?raw=true){width=500px}
 
 To use the `pathviewText()` one should specify which database to retrieve the text, `"refseq"` or `"abstract"`.
-The default is "abstract", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. We conver the KO number to EC number using KEGG REST API, and fetches the description using `wcEC()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm`, and `termMap`, which map the KO and EC. Also, `node.types="ortholog"` must be passed to `pathview`.
+The default is "refseq", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. We conver the KO number to EC number using KEGG REST API, and fetches the description using `wcEC()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm` obtained by `onlyTerm=TRUE`, and `termMap`, which map the KO and EC. Note that `termMap` must have `query` and `description` columns. Also, `node.types="ortholog"` must be passed to `pathview`.
 
 
 ```r

@@ -8,11 +8,11 @@ comparing-two-or-more-networks
 text-over-represenatation-analysis-experimental
 dependency-analyis-using-udpipe
 the-basic-usage-for-microbiome-related-data
-custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words
-custom-usage---annotating-gene-cluster-dendrogram
-custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters
-custom-usage---recluster-the-cluster-using-word-information
-custom-usage---including-the-other-databases-an-example-in-metacyc
+interactive-inspection-of-bayesian-network-annotated-by-words
+annotating-gene-cluster-dendrogram
+assess-the-occurrence-of-the-speicific-words-across-gene-clusters
+recluster-the-cluster-using-word-information
+including-the-other-databases-an-example-in-metacyc
 custom-usage---pathview-text
 ko-queries
 gene-queries

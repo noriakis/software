@@ -1,5 +1,5 @@
 
-# Custom usage - Interactive inspection of Bayesian network annotated by words
+# Interactive inspection of Bayesian network annotated by words
 
 
 
@@ -138,7 +138,7 @@ The example visualization is shown below (not by the code above).
 
 ![Example visualization of a Bayesian network](https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true)
 
-# Custom usage - Annotating gene cluster dendrogram
+# Annotating gene cluster dendrogram
 
 The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As users of WGCNA typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
 
@@ -215,6 +215,8 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich")
 ```
 
 <img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
+
+
 The column names for clusterProfiler results can be specified to `showType`.
 
 
@@ -258,7 +260,7 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 
 <img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />
 
-# Custom usage - Assess the occurrence of the speicific words across gene clusters
+# Assess the occurrence of the speicific words across gene clusters
 
 
 ```r
@@ -486,7 +488,7 @@ p
 
 <img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="480" />
 
-# Custom usage - Recluster the cluster using word information
+# Recluster the cluster using word information
 
 
 ```r
@@ -544,3 +546,31 @@ heatmap(simExample)
 ```
 
 <img src="03-custom-usage_files/figure-html/textclus2-1.png" width="672" />
+
+
+```r
+simExample <- returnSim(returnExample()$color,
+                        keyType="ENSEMBL",
+                        argList=list(tfidf=FALSE,
+                            normalize=TRUE,
+                            takeMean=TRUE))
+#> Number of clusters: 3
+#> 1
+#> Input genes: 12
+#>   Converted input genes: 12
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> 2
+#> Input genes: 13
+#>   Converted input genes: 13
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> 3
+#> Input genes: 7
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+heatmap(simExample)
+```
+
+<img src="03-custom-usage_files/figure-html/textclus3-1.png" width="672" />

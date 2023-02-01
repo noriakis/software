@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 9 Custom usage - pathview text | wcGeneSummary (OSplot)</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta name="generator" content="bookdown 0.31 with bs4_book()">
 <meta property="og:title" content="Chapter 9 Custom usage - pathview text | wcGeneSummary (OSplot)">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/custom-usage---pathview-text.html">
@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Chapter 9 Custom usage - pathview text | wcGeneSummary (OSplot)">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -47,11 +47,11 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
 <li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
 <li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
-<li><a class="" href="custom-usage---interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Custom usage - Interactive inspection of Bayesian network annotated by words</a></li>
-<li><a class="" href="custom-usage---annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Custom usage - Annotating gene cluster dendrogram</a></li>
-<li><a class="" href="custom-usage---assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Custom usage - Assess the occurrence of the speicific words across gene clusters</a></li>
-<li><a class="" href="custom-usage---recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Custom usage - Recluster the cluster using word information</a></li>
-<li><a class="" href="custom-usage---including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Custom usage - Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="" href="interactive-inspection-of-bayesian-network-annotated-by-words.html"><span class="header-section-number">4</span> Interactive inspection of Bayesian network annotated by words</a></li>
+<li><a class="" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Annotating gene cluster dendrogram</a></li>
+<li><a class="" href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Assess the occurrence of the speicific words across gene clusters</a></li>
+<li><a class="" href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Recluster the cluster using word information</a></li>
+<li><a class="" href="including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></li>
 <li><a class="active" href="custom-usage---pathview-text.html"><span class="header-section-number">9</span> Custom usage - pathview text</a></li>
 <li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
 <li><a class="" href="parsing.html"><span class="header-section-number">11</span> Parsing</a></li>
@@ -71,20 +71,20 @@
 <span class="header-section-number">9.1</span> KO queries<a class="anchor" aria-label="anchor" href="#ko-queries"><i class="fas fa-link"></i></a>
 </h2>
 <p>KEGG mapping plots produced by pathview can be populated with text information (<a href="https://academic.oup.com/bioinformatics/article/29/14/1830/232698%5D">Luo and Brouwer. 2013</a>).</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/datapplab/pathview">pathview</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/png/">png</a></span><span class="op">)</span></span></code></pre></div>
 <p>Suppose an example for KEGG Orthology obtained from some microbiome-related experiments.
 By using <a href="https://github.com/YuLab-SMU/MicrobiomeProfiler">MicrobiomeProfiler</a>, enriched pathway using over-representation analysis can be obtained as follows.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K00640"</span>,<span class="st">"K23304"</span>,<span class="st">"K01760"</span>,<span class="st">"K01697"</span>,<span class="st">"K00549"</span>,<span class="st">"K00899"</span><span class="op">)</span></span>
 <span><span class="va">enriched</span> <span class="op">&lt;-</span> <span class="fu">MicrobiomeProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MicrobiomeProfiler/man/enrichKO.html">enrichKO</a></span><span class="op">(</span><span class="va">kos</span><span class="op">)</span></span>
 <span><span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/cnetplot.html">cnetplot</a></span><span class="op">(</span><span class="va">enriched</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure">
 <img src="05-pathview_text_files/figure-html/micro-1.png" width="672">
 Now plot these KOs in the pathview.</div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## As the output is PNG, this script is omitted.</span></span>
 <span><span class="va">pvInput</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">kos</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">pvInput</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">kos</span></span>
@@ -95,8 +95,8 @@ Now plot these KOs in the pathview.</div>
 <img src="https://github.com/noriakis/software/blob/main/images/ko00270.pathview.png?raw=true" width="500" alt=""><p class="caption">raw pathview plot</p>
 </div>
 <p>To use the <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/pathviewText.html">pathviewText()</a></code> one should specify which database to retrieve the text, <code>"refseq"</code> or <code>"abstract"</code>.
-The default is “abstract”, which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. We conver the KO number to EC number using KEGG REST API, and fetches the description using <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcEC.html">wcEC()</a></code> function, and query the enzyme name in PubMed. In this way, one must provide <code>searchTerm</code>, and <code>termMap</code>, which map the KO and EC. Also, <code>node.types="ortholog"</code> must be passed to <code>pathview</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+The default is “refseq”, which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. We conver the KO number to EC number using KEGG REST API, and fetches the description using <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcEC.html">wcEC()</a></code> function, and query the enzyme name in PubMed. In this way, one must provide <code>searchTerm</code> obtained by <code>onlyTerm=TRUE</code>, and <code>termMap</code>, which map the KO and EC. Note that <code>termMap</code> must have <code>query</code> and <code>description</code> columns. Also, <code>node.types="ortholog"</code> must be passed to <code>pathview</code>.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">ecko</span> <span class="op">&lt;-</span> <span class="fu">data.table</span><span class="fu">::</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="st">"https://rest.kegg.jp/link/ko/ec"</span>,</span>
 <span>                            header<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
@@ -125,7 +125,7 @@ The default is “abstract”, which fetches information from RefSeq database. I
 <span></span>
 <span><span class="va">hor</span><span class="op">$</span><span class="va">concat</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-pathview_text_files/figure-html/pathview2-1.png" width="672"></div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## We can transpose the barplot by trans=TRUE</span></span>
 <span></span>
@@ -147,7 +147,7 @@ The default is “abstract”, which fetches information from RefSeq database. I
 <span class="header-section-number">9.2</span> Gene queries<a class="anchor" aria-label="anchor" href="#gene-queries"><i class="fas fa-link"></i></a>
 </h2>
 <p>For gene queries, we can obtain the same plot using relatively simple query.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TP53"</span>,<span class="st">"CDC45"</span>,<span class="st">"CDC6"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ver</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/pathviewText.html">pathviewText</a></span><span class="op">(</span><span class="va">query</span>,</span>
@@ -162,7 +162,7 @@ The default is “abstract”, which fetches information from RefSeq database. I
 <span><span class="va">ver</span><span class="op">$</span><span class="va">concat</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-pathview_text_files/figure-html/gene-1.png" width="672"></div>
 <p>The returned <code>osplot</code> object can be accessed as the name <code>text</code> in the list. Note that only the nodes (words) within the final network are to be plotted. If all the words are to be included, path the arguments to <code>argList</code> to include all.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ver</span><span class="op">$</span><span class="va">text</span></span>
 <span><span class="co">#&gt; Type: pubmed_abstract</span></span>
 <span><span class="co">#&gt; Number of words: 20</span></span>
@@ -190,7 +190,7 @@ The default is “abstract”, which fetches information from RefSeq database. I
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="custom-usage---including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Custom usage - Including the other databases (an example in MetaCyc)</a></div>
+<div class="prev"><a href="including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></div>
 <div class="next"><a href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -214,7 +214,7 @@ The default is “abstract”, which fetches information from RefSeq database. I
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-01-31.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

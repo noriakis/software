@@ -1,5 +1,5 @@
 
-# Custom usage - Including the other databases (an example in MetaCyc)
+# Including the other databases (an example in MetaCyc)
 
 For mining the pathway information in curated database MetaCyc ([Caspi et al. 2020](https://academic.oup.com/nar/article/48/D1/D445/5581728)), users can prepare `pathways.dat` from MetaCyc flat files. Note that you must have a valid license of using MetaCyc. See [User guides](https://www.metacyc.org/MetaCycUserGuide.shtml) of MetaCyc, and [BioCyc](www.biocyc.org).
 Suppose we would like to know pathway and related information of "Bifidobacterium longum" and "Escherichia coli". The function `parseMetaCycPathway` can be used to parse the summarized comment of pathways using these queries. Note that the function search for `TAXONOMIC-RANGE` or `SPECIES` information in `pathways.dat` if `withTax=TRUE`. The resulting data.frame looks like below.
@@ -170,9 +170,9 @@ Includes BioCycTM pathway/genome databases under license from SRI International.
 
 ```r
 sessionInfo()
-#> R version 4.2.1 (2022-06-23 ucrt)
+#> R version 4.2.2 (2022-10-31 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 22000)
+#> Running under: Windows 10 x64 (build 19044)
 #> 
 #> Matrix products: default
 #> 
@@ -187,69 +187,16 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets 
 #> [6] methods   base     
 #> 
-#> other attached packages:
-#> [1] ggraph_2.0.6         ggplot2_3.4.0       
-#> [3] wcGeneSummary_0.99.0
-#> 
 #> loaded via a namespace (and not attached):
-#>   [1] GeneSummary_0.99.3     colorspace_2.0-3      
-#>   [3] rjson_0.2.21           ISOcodes_2022.01.10   
-#>   [5] ellipsis_0.3.2         XVector_0.36.0        
-#>   [7] GlobalOptions_0.1.2    base64enc_0.1-3       
-#>   [9] ggdendro_0.1.23        fs_1.5.2              
-#>  [11] rstudioapi_0.13        farver_2.1.1          
-#>  [13] graphlayouts_0.8.0     ggrepel_0.9.1         
-#>  [15] bit64_4.0.5            AnnotationDbi_1.58.0  
-#>  [17] fansi_1.0.3            xml2_1.3.3            
-#>  [19] codetools_0.2-18       downlit_0.4.2         
-#>  [21] cachem_1.0.6           knitr_1.39            
-#>  [23] polyclip_1.10-0        jsonlite_1.8.0        
-#>  [25] png_0.1-7              graph_1.74.0          
-#>  [27] ggforce_0.3.3          shiny_1.7.2           
-#>  [29] bugsigdbr_1.2.2        rentrez_1.2.3         
-#>  [31] compiler_4.2.1         httr_1.4.3            
-#>  [33] assertthat_0.2.1       fastmap_1.1.0         
-#>  [35] cli_3.5.0              later_1.3.0           
-#>  [37] tweenr_1.0.2           htmltools_0.5.3       
-#>  [39] tools_4.2.1            igraph_1.3.4          
-#>  [41] NLP_0.2-1              gtable_0.3.0          
-#>  [43] glue_1.6.2             GenomeInfoDbData_1.2.8
-#>  [45] dplyr_1.0.9            Rcpp_1.0.9            
-#>  [47] slam_0.1-50            Biobase_2.56.0        
-#>  [49] jquerylib_0.1.4        vctrs_0.5.1           
-#>  [51] Biostrings_2.64.0      xfun_0.31             
-#>  [53] stringr_1.4.0          stopwords_2.3         
-#>  [55] mime_0.12              lifecycle_1.0.3       
-#>  [57] pvclust_2.2-0          XML_3.99-0.10         
-#>  [59] dendextend_1.16.0      org.Hs.eg.db_3.15.0   
-#>  [61] zlibbioc_1.42.0        MASS_7.3-57           
-#>  [63] scales_1.2.0           tidygraph_1.2.1       
-#>  [65] promises_1.2.0.1       parallel_4.2.1        
-#>  [67] cyjShiny_1.0.34        RColorBrewer_1.1-3    
-#>  [69] yaml_2.3.5             memoise_2.0.1         
-#>  [71] gridExtra_2.3          yulab.utils_0.0.5     
-#>  [73] sass_0.4.2             stringi_1.7.8         
-#>  [75] RSQLite_2.2.15         highr_0.9             
-#>  [77] S4Vectors_0.34.0       BiocGenerics_0.42.0   
-#>  [79] GenomeInfoDb_1.32.2    rlang_1.0.6           
-#>  [81] pkgconfig_2.0.3        bitops_1.0-7          
-#>  [83] evaluate_0.15          purrr_0.3.4           
-#>  [85] labeling_0.4.2         patchwork_1.1.1       
-#>  [87] htmlwidgets_1.5.4      cowplot_1.1.1         
-#>  [89] bit_4.0.4              tidyselect_1.2.0      
-#>  [91] magrittr_2.0.3         bookdown_0.29         
-#>  [93] R6_2.5.1               IRanges_2.30.0        
-#>  [95] generics_0.1.3         DBI_1.1.3             
-#>  [97] pillar_1.8.0           withr_2.5.0           
-#>  [99] KEGGREST_1.36.3        RCurl_1.98-1.7        
-#> [101] tibble_3.1.7           crayon_1.5.1          
-#> [103] wordcloud_2.6          utf8_1.2.2            
-#> [105] rmarkdown_2.14         viridis_0.6.2         
-#> [107] GetoptLong_1.0.5       grid_4.2.1            
-#> [109] blob_1.2.3             digest_0.6.29         
-#> [111] xtable_1.8-4           tm_0.7-8              
-#> [113] tidyr_1.2.0            httpuv_1.6.5          
-#> [115] gridGraphics_0.5-1     stats4_4.2.1          
-#> [117] munsell_0.5.0          ggplotify_0.1.0       
-#> [119] viridisLite_0.4.0      bslib_0.4.0
+#>  [1] rstudioapi_0.14 magrittr_2.0.3  knitr_1.41     
+#>  [4] xml2_1.3.3      downlit_0.4.2   R6_2.5.1       
+#>  [7] rlang_1.0.6     fastmap_1.1.0   stringr_1.5.0  
+#> [10] tools_4.2.2     xfun_0.36       cli_3.6.0      
+#> [13] jquerylib_0.1.4 withr_2.5.0     htmltools_0.5.4
+#> [16] yaml_2.3.6      digest_0.6.31   lifecycle_1.0.3
+#> [19] bookdown_0.31   vctrs_0.5.1     sass_0.4.4     
+#> [22] fs_1.5.2        memoise_2.0.1   glue_1.6.2     
+#> [25] cachem_1.0.6    evaluate_0.19   rmarkdown_2.19 
+#> [28] stringi_1.7.12  compiler_4.2.2  bslib_0.4.2    
+#> [31] jsonlite_1.8.4
 ```
