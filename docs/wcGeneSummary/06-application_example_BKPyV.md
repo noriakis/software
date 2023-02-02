@@ -431,7 +431,7 @@ dyn
 sessionInfo()
 #> R version 4.2.2 (2022-10-31 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 22621)
+#> Running under: Windows 10 x64 (build 19044)
 #> 
 #> Matrix products: default
 #> 
@@ -461,7 +461,7 @@ sessionInfo()
 #>   [5] splines_4.2.2          BiocParallel_1.32.5   
 #>   [7] GenomeInfoDb_1.34.6    digest_0.6.31         
 #>   [9] yulab.utils_0.0.6      htmltools_0.5.4       
-#>  [11] bugsigdbr_1.5.3        GOSemSim_2.24.0       
+#>  [11] bugsigdbr_1.4.1        GOSemSim_2.24.0       
 #>  [13] viridis_0.6.2          GO.db_3.16.0          
 #>  [15] fansi_1.0.3            GeneSummary_0.99.4    
 #>  [17] magrittr_2.0.3         memoise_2.0.1         
@@ -470,7 +470,7 @@ sessionInfo()
 #>  [23] wordcloud_2.6          enrichplot_1.18.3     
 #>  [25] colorspace_2.0-3       rappdirs_0.3.3        
 #>  [27] blob_1.2.3             ggrepel_0.9.2         
-#>  [29] xfun_0.36              dplyr_1.0.10          
+#>  [29] xfun_0.36              dplyr_1.0.99.9000     
 #>  [31] crayon_1.5.2           RCurl_1.98-1.9        
 #>  [33] jsonlite_1.8.4         scatterpie_0.1.8      
 #>  [35] graph_1.76.0           ape_5.6-2             
@@ -517,12 +517,11 @@ sessionInfo()
 #> [117] qvalue_2.30.0          R6_2.5.1              
 #> [119] bookdown_0.31          promises_1.2.0.1      
 #> [121] gridExtra_2.3          codetools_0.2-18      
-#> [123] MASS_7.3-58.1          assertthat_0.2.1      
-#> [125] rjson_0.2.21           withr_2.5.0           
-#> [127] GenomeInfoDbData_1.2.9 parallel_4.2.2        
-#> [129] ggfun_0.0.9            grid_4.2.2            
-#> [131] tidyr_1.2.1            HDO.db_0.99.1         
-#> [133] rmarkdown_2.19         downlit_0.4.2         
-#> [135] NLP_0.2-1              shiny_1.7.4           
-#> [137] base64enc_0.1-3
+#> [123] MASS_7.3-58.1          rjson_0.2.21          
+#> [125] withr_2.5.0            GenomeInfoDbData_1.2.9
+#> [127] parallel_4.2.2         grid_4.2.2            
+#> [129] ggfun_0.0.9            tidyr_1.2.1           
+#> [131] HDO.db_0.99.1          rmarkdown_2.19        
+#> [133] downlit_0.4.2          NLP_0.2-1             
+#> [135] shiny_1.7.4            base64enc_0.1-3
 ```
