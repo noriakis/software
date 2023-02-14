@@ -1,7 +1,7 @@
 --- 
 title: "wcGeneSummary (OSplot)"
 author: "Noriaki Sato"
-date: "2023-02-02"
+date: "2023-02-14"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -23,7 +23,7 @@ library(wcGeneSummary)
 #> Registered S3 method overwritten by 'pvclust':
 #>   method       from      
 #>   text.pvclust dendextend
-knitr::include_url("https://noriakis.github.io/cyjs_test/")
+knitr::include_url("https://noriakis.github.io/cyjs_test/wordcloud")
 ```
 
-<iframe src="https://noriakis.github.io/cyjs_test/" width="672" height="400px" data-external="1"></iframe>
+<iframe src="https://noriakis.github.io/cyjs_test/wordcloud" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
