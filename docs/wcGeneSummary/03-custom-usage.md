@@ -140,7 +140,7 @@ The example visualization is shown below (not by the code above).
 
 # Annotating gene cluster dendrogram
 
-The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As users of WGCNA typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
+The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
 
 
 ```r
@@ -167,6 +167,125 @@ plotEigengeneNetworksWithWords(MEs, modColors)
 ```
 
 <img src="03-custom-usage_files/figure-html/wgcna-1.png" width="576" />
+
+This calculates a dendrogram using `pvclust` internally in default. If you would like to plot segments involving only the specified gene cluster, use `candidateNodes` to specify the nodes.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs, modColors, candidateNodes=c("ME2"))
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 12
+#>   Converted input genes: 12
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 13
+#>   Converted input genes: 13
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+```
+
+<img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
+
+To plot the word cloud instead of pyramid plots, use `useWC` option. For scaling the word size, use `wcScale` option
+
+
+```r
+scale4 <- plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+scale15 <- plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=15)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+scale4 + scale15
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="576" />
+
+This uses `ggwordcloud` and a list specified by `wcArg` is passed to the function.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=15, wcArg=list(rot.per=0))
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnawc3-1.png" width="576" />
+
+
+The horizontal plot can be specified by `horiz=TRUE`.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs,
+                               modColors,
+                               useWC=TRUE,
+                               candidateNodes=c("ME2"),
+                               wcScale=15,
+                               wcArg=list(rot.per=0),
+                               horiz=TRUE)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnawchor-1.png" width="576" />
 
 For examining enriched pathway names in the dendrograms, specify `argList` to `wcGeneSummary`, like `list(enrich="kegg")`.
 
@@ -214,8 +333,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich")
 #> Bootstrap (r = 1.4)... Done.
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
-
+<img src="03-custom-usage_files/figure-html/wgcna4-1.png" width="576" />
 
 The column names for clusterProfiler results can be specified to `showType`.
 
