@@ -133,7 +133,7 @@ exportCyjs(g, rootDir, netDir)
 
 Use like `http-server` in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information. The example visualization is shown below (not by the code above, but Bayesian network of module eigenes inferred from RNA-seq dataset ofbladder cancer).
 
-![Example visualization of a Bayesian network](https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true)
+![Example visualization of a Bayesian network](https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true){width=50%}
 
 
 Interactive inspection is possible using GitHub pages or the other hosting services like below.
@@ -216,7 +216,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, candidateNodes=c("ME2"))
 
 <img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
 
-To plot the word cloud instead of pyramid plots, use `useWC` option. For scaling the word size, use `wcScale` option
+To plot the word cloud instead of pyramid plots, use `useWC` option. For scaling the word size, use `wcScale` option.
 
 
 ```r

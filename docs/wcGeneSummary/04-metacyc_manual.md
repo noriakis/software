@@ -258,7 +258,7 @@ input3Net@net
 
 <img src="04-metacyc_manual_files/figure-html/query2-1.png" width="960" />
 
-Includes BioCycTM pathway/genome databases under license from SRI International.  
+Includes BioCyc (TM) pathway/genome databases under license from SRI International.  
 <img src="https://biocyc.org/graphics2021/BioCyc-logo-color-genome.svg" width=100px>
 
 
