@@ -29,11 +29,10 @@ library(igraph)
 
 ## Replace like boot.strength(mod$MEs, R=500, algorithm = "hc")
 # dag <- model2network("[ME1][ME2|ME1]") # If using bnlearn
-dag <- graph_from_literal( ME1-+ME2, ME1-+ME3 )
+g <- graph_from_literal( ME1-+ME2, ME1-+ME3 )
 
 ## Convert to igraph
 # g <- as.igraph(dag)
-g <- dag
 
 ## Assign edge attributes
 ## Skip, if you perform boot.strength, the edge attributes can be added from the result
@@ -53,7 +52,7 @@ rootDir <- "./"
 netDir <- "visCyjs"
 imageDir <- "images"
 
-dir.create(paste0(rootDir, netDir))
+dir.create(paste0(rootDir, "/", netDir))
 dir.create(paste0(rootDir, netDir, "/", imageDir))
 
 images <- c()
@@ -132,11 +131,33 @@ exportCyjs(g, rootDir, netDir)
 # or, exportVisjs(g, rootDir, netDir)
 ```
 
-Use like `http-server` in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information.
-
-The example visualization is shown below (not by the code above).
+Use like `http-server` in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information. The example visualization is shown below (not by the code above, but Bayesian network of module eigenes inferred from RNA-seq dataset ofbladder cancer).
 
 ![Example visualization of a Bayesian network](https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true)
+
+
+Interactive inspection is possible using GitHub pages or the other hosting services like below.
+
+
+```r
+knitr::include_url("https://noriakis.github.io/cyjs_test/wordcloud")
+```
+
+<iframe src="https://noriakis.github.io/cyjs_test/wordcloud" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
+
+If you specify node attribute named `group`, and set `bubble=TRUE` in `exportCyjs` function, bubble sets will be plotted using [`cytoscape.js-bubblesets`](https://github.com/upsetjs/cytoscape.js-bubblesets), useful for inspecting the similarity betwteen the gene cluster, like the output of `pvclust` and `pvpick` on module eigengenes.
+
+
+```r
+V(g)$group <- c(1, 1, NA)
+exportCyjs(g, rootDir, netDir, bubble=TRUE)
+
+## Example, not by the code above.
+knitr::include_url("https://noriakis.github.io/cyjs_test/wordcloud_bubble")
+```
+
+<iframe src="https://noriakis.github.io/cyjs_test/wordcloud_bubble" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
+
 
 # Annotating gene cluster dendrogram
 
@@ -370,10 +391,6 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-#> 'select()' returned 1:1 mapping between keys and
-#> columns
-#> 'select()' returned 1:1 mapping between keys and
-#> columns
 ```
 
 <img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />

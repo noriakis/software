@@ -88,11 +88,10 @@
 <span></span>
 <span><span class="co">## Replace like boot.strength(mod$MEs, R=500, algorithm = "hc")</span></span>
 <span><span class="co"># dag &lt;- model2network("[ME1][ME2|ME1]") # If using bnlearn</span></span>
-<span><span class="va">dag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span> <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME2</span>, <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME3</span> <span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span> <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME2</span>, <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME3</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Convert to igraph</span></span>
 <span><span class="co"># g &lt;- as.igraph(dag)</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">dag</span></span>
 <span></span>
 <span><span class="co">## Assign edge attributes</span></span>
 <span><span class="co">## Skip, if you perform boot.strength, the edge attributes can be added from the result</span></span>
@@ -112,7 +111,7 @@
 <span><span class="va">netDir</span> <span class="op">&lt;-</span> <span class="st">"visCyjs"</span></span>
 <span><span class="va">imageDir</span> <span class="op">&lt;-</span> <span class="st">"images"</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">rootDir</span>, <span class="va">netDir</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">rootDir</span>, <span class="st">"/"</span>, <span class="va">netDir</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">rootDir</span>, <span class="va">netDir</span>, <span class="st">"/"</span>, <span class="va">imageDir</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -189,11 +188,24 @@
 <span><span class="co">## Export</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/exportCyjs.html">exportCyjs</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">rootDir</span>, <span class="va">netDir</span><span class="op">)</span></span>
 <span><span class="co"># or, exportVisjs(g, rootDir, netDir)</span></span></code></pre></div>
-<p>Use like <code>http-server</code> in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information.</p>
-<p>The example visualization is shown below (not by the code above).</p>
+<p>Use like <code>http-server</code> in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information. The example visualization is shown below (not by the code above, but Bayesian network of module eigenes inferred from RNA-seq dataset ofbladder cancer).</p>
 <div class="figure">
 <img src="https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true" alt=""><p class="caption">Example visualization of a Bayesian network</p>
 </div>
+<p>Interactive inspection is possible using GitHub pages or the other hosting services like below.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://noriakis.github.io/cyjs_test/wordcloud"</span><span class="op">)</span></span></code></pre></div>
+<iframe src="https://noriakis.github.io/cyjs_test/wordcloud" width="100%" height="400px" data-external="1" style="border: none;">
+</iframe>
+<p>If you specify node attribute named <code>group</code>, and set <code>bubble=TRUE</code> in <code>exportCyjs</code> function, bubble sets will be plotted using <a href="https://github.com/upsetjs/cytoscape.js-bubblesets"><code>cytoscape.js-bubblesets</code></a>, useful for inspecting the similarity betwteen the gene cluster, like the output of <code>pvclust</code> and <code>pvpick</code> on module eigengenes.</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/exportCyjs.html">exportCyjs</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">rootDir</span>, <span class="va">netDir</span>, bubble<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Example, not by the code above.</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://noriakis.github.io/cyjs_test/wordcloud_bubble"</span><span class="op">)</span></span></code></pre></div>
+<iframe src="https://noriakis.github.io/cyjs_test/wordcloud_bubble" width="100%" height="400px" data-external="1" style="border: none;">
+</iframe>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></div>
@@ -216,7 +228,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-02-20.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-02-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
