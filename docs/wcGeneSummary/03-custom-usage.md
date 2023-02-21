@@ -150,7 +150,7 @@ If you specify node attribute named `group`, and set `bubble=TRUE` in `exportCyj
 
 ```r
 V(g)$group <- c(1, 1, NA)
-exportCyjs(g, rootDir, netDir, bubble=TRUE)
+# exportCyjs(g, rootDir, netDir, bubble=TRUE)
 
 ## Example, not by the code above.
 knitr::include_url("https://noriakis.github.io/cyjs_test/wordcloud_bubble")
@@ -391,6 +391,10 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
 ```
 
 <img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />
