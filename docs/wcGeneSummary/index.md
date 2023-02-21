@@ -1,7 +1,7 @@
 --- 
 title: "wcGeneSummary (OSplot)"
 author: "Noriaki Sato"
-date: "2023-02-21"
+date: "2023-02-22"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]

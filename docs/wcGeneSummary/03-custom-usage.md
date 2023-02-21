@@ -375,6 +375,26 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich", showType="Descript
 
 <img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="576" />
 
+Text sizing and wrapping can be controlled by `textSize` and `wrap`.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs, modColors, type="enrich", showType="Description",
+    textSize=1.5, wrap=30)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnaDesc2-1.png" width="576" />
+
 If you have a specifically interested pathway, use `highlight` to highlight the names in the dendrogram.
 
 
