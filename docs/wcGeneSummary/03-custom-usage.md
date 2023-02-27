@@ -1,5 +1,5 @@
 
-# Interactive inspection of Bayesian network annotated by words
+# Interactive inspection of gene cluster network annotated by words
 
 
 
@@ -159,6 +159,17 @@ knitr::include_url("https://noriakis.github.io/cyjs_test/wordcloud_bubble")
 <iframe src="https://noriakis.github.io/cyjs_test/wordcloud_bubble" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
 
 
+`vis.js` can be used, by exporting function `exportVisjs`.
+In this example, the barplot of words are shown in the nodes.
+
+
+```r
+knitr::include_url("https://noriakis.github.io/cyjs_test/visjs")
+```
+
+<iframe src="https://noriakis.github.io/cyjs_test/visjs" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
+
+
 # Annotating gene cluster dendrogram
 
 The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
@@ -215,6 +226,36 @@ plotEigengeneNetworksWithWords(MEs, modColors, candidateNodes=c("ME2"))
 ```
 
 <img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
+
+
+By default, the function calculates the frequency of common words across branches and plot the words that the differences between branches are large. By disabling `takeIntersect`, the function plots the frequent words for each branch.
+
+
+```r
+plotEigengeneNetworksWithWords(MEs,
+    modColors, takeIntersect=FALSE, candidateNodes=c("ME2"))
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 12
+#>   Converted input genes: 12
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 13
+#>   Converted input genes: 13
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+```
+
+<img src="03-custom-usage_files/figure-html/wgcnaInt-1.png" width="576" />
+
 
 To plot the word cloud instead of pyramid plots, use `useWC` option. For scaling the word size, use `wcScale` option.
 
@@ -441,64 +482,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 31
+#> Input genes: 157
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 69
+#> Input genes: 57
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 162
+#> Input genes: 92
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 212
+#> Input genes: 36
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 194
+#> Input genes: 131
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 86
+#> Input genes: 132
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 247
+#> Input genes: 98
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 223
+#> Input genes: 33
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 29
+#> Input genes: 67
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 197
+#> Input genes: 57
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 159
+#> Input genes: 27
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 19
+#> Input genes: 85
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 96
+#> Input genes: 90
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 58
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 30
+#> Input genes: 141
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 80
+#> Input genes: 70
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 86
+#> Input genes: 41
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 15
+#> Input genes: 137
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 147
+#> Input genes: 10
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 476
+#> Input genes: 154
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -510,7 +551,7 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 1 unlabeled data points (too many
+#> Warning: ggrepel: 2 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
