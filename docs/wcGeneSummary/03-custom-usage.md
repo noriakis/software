@@ -460,6 +460,218 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 
 <img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />
 
+
+`spacer` can control the gaps above and below the grob on the dendrogram.
+
+
+```r
+plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
+                               type="enrich", highlight=c("hsa04060"), spacer=0.2)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+```
+
+<img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="672" />
+
+Using a popular tree visualization library `ggtree` and `ggimage`, plotting of word cloud on the tip nodes is possible by specifying `tipWC=TRUE` . This saves the word cloud plots in the `imageDir`, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in `tipWCNodes`. In this mode, one must pass object that can be passed to `ggtree()`.
+
+
+```r
+hcl <- hclust(dist(t(mod$MEs)))
+gr <- plotEigengeneNetworksWithWords(mod$MEs,
+                                     mod$colors,
+                                     dendPlot="ggtree",
+                                     dhc=hcl,
+                                     useWC=TRUE,
+                                     tipWC=TRUE,
+                                     tipWCNodes=c("ME3"),
+                                     imageDir="testimage",
+                                     candidateNodes=c("ME2"),
+                                     wcScale=10,
+                                     tipSize = .3,
+                                     offset = .1,
+                                     asp=1.4)
+#> Annotating tip by word cloud
+#>   Producing ME3
+#> Input genes: 7
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Reds is 9
+#> Returning the palette you asked for with that many colors
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Input genes: 25
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+gr
+#> Some words could not fit on page. They have been removed.
+```
+
+<img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672" />
+
+By specifying `returnGlobOnly`, the grobs with the position in the dendrogram can be returned.
+
+
+
+```r
+gro <- plotEigengeneNetworksWithWords(mod$MEs, mod$colors, candidateNodes=c("ME2"),
+                               returnGlobOnly=TRUE)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 12
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 12
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 13
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 13
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+gro[[1]]$plot
+#> TableGrob (20 x 47) "layout": 52 grobs
+#>     z         cells       name
+#> 1   5 ( 9- 9, 7- 7)   spacer-1
+#> 2   7 (11-11, 7- 7)   axis-l-1
+#> 3   3 (13-13, 7- 7)   spacer-1
+#> 4   6 ( 9- 9, 9- 9)   axis-t-1
+#> 5   1 (11-11, 9- 9)    panel-1
+#> 6   9 (13-13, 9- 9)   axis-b-1
+#> 7   4 ( 9- 9,11-11)   spacer-1
+#> 8   8 (11-11,11-11)   axis-r-1
+#> 9   2 (13-13,11-11)   spacer-1
+#> 10 10 ( 8- 8, 9- 9)   xlab-t-1
+#> 11 11 (14-14, 9- 9)   xlab-b-1
+#> 12 12 (11-11, 6- 6)   ylab-l-1
+#> 13 13 (11-11,12-12)   ylab-r-1
+#> 14 14 ( 5- 5, 9- 9) subtitle-1
+#> 15 15 ( 4- 4, 9- 9)    title-1
+#> 16 16 (15-15, 9- 9)  caption-1
+#> 17 17 ( 3- 3, 3- 3)      tag-1
+#> 18 22 ( 9- 9,22-22)   spacer-2
+#> 19 24 (11-11,22-22)   axis-l-2
+#> 20 20 (13-13,22-22)   spacer-2
+#> 21 23 ( 9- 9,24-24)   axis-t-2
+#> 22 18 (11-11,24-24)    panel-2
+#> 23 26 (13-13,24-24)   axis-b-2
+#> 24 21 ( 9- 9,26-26)   spacer-2
+#> 25 25 (11-11,26-26)   axis-r-2
+#> 26 19 (13-13,26-26)   spacer-2
+#> 27 27 ( 8- 8,24-24)   xlab-t-2
+#> 28 28 (14-14,24-24)   xlab-b-2
+#> 29 29 (11-11,21-21)   ylab-l-2
+#> 30 30 (11-11,27-27)   ylab-r-2
+#> 31 31 ( 5- 5,24-24) subtitle-2
+#> 32 32 ( 4- 4,24-24)    title-2
+#> 33 33 (15-15,24-24)  caption-2
+#> 34 34 ( 3- 3,18-18)      tag-2
+#> 35 39 ( 9- 9,37-37)   spacer-3
+#> 36 41 (11-11,37-37)   axis-l-3
+#> 37 37 (13-13,37-37)   spacer-3
+#> 38 40 ( 9- 9,39-39)   axis-t-3
+#> 39 35 (11-11,39-39)    panel-3
+#> 40 43 (13-13,39-39)   axis-b-3
+#> 41 38 ( 9- 9,41-41)   spacer-3
+#> 42 42 (11-11,41-41)   axis-r-3
+#> 43 36 (13-13,41-41)   spacer-3
+#> 44 44 ( 8- 8,39-39)   xlab-t-3
+#> 45 45 (14-14,39-39)   xlab-b-3
+#> 46 46 (11-11,36-36)   ylab-l-3
+#> 47 47 (11-11,42-42)   ylab-r-3
+#> 48 48 ( 5- 5,39-39) subtitle-3
+#> 49 49 ( 4- 4,39-39)    title-3
+#> 50 50 (15-15,39-39)  caption-3
+#> 51 51 ( 3- 3,33-33)      tag-3
+#> 52  0 ( 1-20, 1-47) background
+#>                                           grob
+#> 1                               zeroGrob[NULL]
+#> 2          absoluteGrob[GRID.absoluteGrob.763]
+#> 3                               zeroGrob[NULL]
+#> 4                               zeroGrob[NULL]
+#> 5                     gTree[panel-1.gTree.761]
+#> 6          absoluteGrob[GRID.absoluteGrob.762]
+#> 7                               zeroGrob[NULL]
+#> 8                               zeroGrob[NULL]
+#> 9                               zeroGrob[NULL]
+#> 10                              zeroGrob[NULL]
+#> 11 zeroGrob[axis.title.x.bottom..zeroGrob.764]
+#> 12   zeroGrob[axis.title.y.left..zeroGrob.765]
+#> 13                              zeroGrob[NULL]
+#> 14       zeroGrob[plot.subtitle..zeroGrob.767]
+#> 15          zeroGrob[plot.title..zeroGrob.766]
+#> 16        zeroGrob[plot.caption..zeroGrob.769]
+#> 17            zeroGrob[plot.tag..zeroGrob.768]
+#> 18                              zeroGrob[NULL]
+#> 19         absoluteGrob[GRID.absoluteGrob.781]
+#> 20                              zeroGrob[NULL]
+#> 21                              zeroGrob[NULL]
+#> 22                    gTree[panel-1.gTree.779]
+#> 23         absoluteGrob[GRID.absoluteGrob.780]
+#> 24                              zeroGrob[NULL]
+#> 25                              zeroGrob[NULL]
+#> 26                              zeroGrob[NULL]
+#> 27                              zeroGrob[NULL]
+#> 28 zeroGrob[axis.title.x.bottom..zeroGrob.782]
+#> 29   zeroGrob[axis.title.y.left..zeroGrob.783]
+#> 30                              zeroGrob[NULL]
+#> 31       zeroGrob[plot.subtitle..zeroGrob.785]
+#> 32          zeroGrob[plot.title..zeroGrob.784]
+#> 33        zeroGrob[plot.caption..zeroGrob.787]
+#> 34            zeroGrob[plot.tag..zeroGrob.786]
+#> 35                              zeroGrob[NULL]
+#> 36         absoluteGrob[GRID.absoluteGrob.800]
+#> 37                              zeroGrob[NULL]
+#> 38                              zeroGrob[NULL]
+#> 39                    gTree[panel-1.gTree.798]
+#> 40         absoluteGrob[GRID.absoluteGrob.799]
+#> 41                              zeroGrob[NULL]
+#> 42                              zeroGrob[NULL]
+#> 43                              zeroGrob[NULL]
+#> 44                              zeroGrob[NULL]
+#> 45 zeroGrob[axis.title.x.bottom..zeroGrob.801]
+#> 46   zeroGrob[axis.title.y.left..zeroGrob.802]
+#> 47                              zeroGrob[NULL]
+#> 48       zeroGrob[plot.subtitle..zeroGrob.804]
+#> 49          zeroGrob[plot.title..zeroGrob.803]
+#> 50        zeroGrob[plot.caption..zeroGrob.806]
+#> 51            zeroGrob[plot.tag..zeroGrob.805]
+#> 52             rect[plot.background..rect.821]
+```
+
+
+
 # Assess the occurrence of the speicific words across gene clusters
 
 

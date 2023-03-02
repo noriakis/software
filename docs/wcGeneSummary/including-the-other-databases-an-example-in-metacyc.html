@@ -68,7 +68,7 @@
 </h1>
 <p>For mining the pathway information in curated database MetaCyc (<a href="https://academic.oup.com/nar/article/48/D1/D445/5581728">Caspi et al. 2020</a>), users can prepare <code>pathways.dat</code> from MetaCyc flat files. Note that you must have a valid license of using MetaCyc. See <a href="https://www.metacyc.org/MetaCycUserGuide.shtml">User guides</a> of MetaCyc, and <a href="www.biocyc.org">BioCyc</a>.
 Suppose we would like to know pathway and related information of “Bifidobacterium longum” and “Escherichia coli”. The function <code>parseMetaCycPathway</code> can be used to parse the summarized comment of pathways using these queries. Note that the function search for <code>TAXONOMIC-RANGE</code> or <code>SPECIES</code> information in <code>pathways.dat</code> if <code>withTax=TRUE</code>. The resulting data.frame looks like below.</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span></span>
@@ -152,7 +152,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; 5 Escherichia coli</span></span>
 <span><span class="co">#&gt; 6 Escherichia coli</span></span></code></pre></div>
 <p>You can strip some tags and symbols by <code>clear=TRUE</code>.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span>, clear<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">input3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   pathwayID</span></span>
@@ -198,7 +198,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; 5 Escherichia coli</span></span>
 <span><span class="co">#&gt; 6 Escherichia coli</span></span></code></pre></div>
 <p>These data frames can be passed to <code>wcMan</code> function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have <code>"text"</code> column to make word cloud or a correlation network.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="va">metawc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
@@ -217,7 +217,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="va">metawc</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta-1.png" width="672"></div>
 <p>For plotting the network, query column must be specified if plotting the query with the word information.</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="va">metanet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"query"</span>,<span class="st">"text"</span><span class="op">)</span><span class="op">]</span>, </span>
@@ -231,7 +231,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="va">metanet</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta2-1.png" width="960"></div>
 <p>For column other than the query and text, in this example <code>commonName</code> and <code>pathwayID</code>, the relationship between query and these columns are to be plotted.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">metanet2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
@@ -256,7 +256,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="va">metanet2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta3-1.png" width="960"></div>
 <p>When taxonomy parsing is available, query by the NCBI Taxonomy ID.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set candSp to all and noComma to TRUE</span></span>
 <span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, candSp<span class="op">=</span><span class="st">"all"</span>, withTax <span class="op">=</span> <span class="cn">TRUE</span>,noComma<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -274,7 +274,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <p>Also, if you want to search for the NCBI tax identifiers and want to use species names as queries,
 First you should convert the IDs using <code>convertMetaCyc</code> function using <code>taxonomizr</code>.
 Next you search for converted names for the interested species, and input this data frame to <code>wcMan</code>.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input</span><span class="op">$</span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/convertMetaCyc.html">convertMetaCyc</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Bifidobacterium"</span>,<span class="va">input</span><span class="op">$</span><span class="va">converted</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input3</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">input3</span><span class="op">$</span><span class="va">pathwayID</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -290,7 +290,7 @@ Next you search for converted names for the interested species, and input this d
 <span><span class="va">input3Net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/query2-1.png" width="960"></div>
 <p>Includes BioCyc (TM) pathway/genome databases under license from SRI International.<br><img src="https://biocyc.org/graphics2021/BioCyc-logo-color-genome.svg" width="100px"></p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -344,7 +344,7 @@ Next you search for converted names for the interested species, and input this d
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-02-27.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

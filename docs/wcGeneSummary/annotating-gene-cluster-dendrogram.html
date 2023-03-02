@@ -296,6 +296,200 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
 <span><span class="co">#&gt; columns</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight-1.png" width="672"></div>
+<p><code>spacer</code> can control the gaps above and below the grob on the dendrogram.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
+<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span>, spacer<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="672"></div>
+<p>Using a popular tree visualization library <code>ggtree</code> and <code>ggimage</code>, plotting of word cloud on the tip nodes is possible by specifying <code>tipWC=TRUE</code> . This saves the word cloud plots in the <code>imageDir</code>, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in <code>tipWCNodes</code>. In this mode, one must pass object that can be passed to <code>ggtree()</code>.</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>,</span>
+<span>                                     <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
+<span>                                     dendPlot<span class="op">=</span><span class="st">"ggtree"</span>,</span>
+<span>                                     dhc<span class="op">=</span><span class="va">hcl</span>,</span>
+<span>                                     useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                     tipWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                     tipWCNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME3"</span><span class="op">)</span>,</span>
+<span>                                     imageDir<span class="op">=</span><span class="st">"testimage"</span>,</span>
+<span>                                     candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
+<span>                                     wcScale<span class="op">=</span><span class="fl">10</span>,</span>
+<span>                                     tipSize <span class="op">=</span> <span class="fl">.3</span>,</span>
+<span>                                     offset <span class="op">=</span> <span class="fl">.1</span>,</span>
+<span>                                     asp<span class="op">=</span><span class="fl">1.4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Annotating tip by word cloud</span></span>
+<span><span class="co">#&gt;   Producing ME3</span></span>
+<span><span class="co">#&gt; Input genes: 7</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Reds is 9</span></span>
+<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="va">gr</span></span>
+<span><span class="co">#&gt; Some words could not fit on page. They have been removed.</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672"></div>
+<p>By specifying <code>returnGlobOnly</code>, the grobs with the position in the dendrogram can be returned.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
+<span>                               returnGlobOnly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">gro</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">plot</span></span>
+<span><span class="co">#&gt; TableGrob (20 x 47) "layout": 52 grobs</span></span>
+<span><span class="co">#&gt;     z         cells       name</span></span>
+<span><span class="co">#&gt; 1   5 ( 9- 9, 7- 7)   spacer-1</span></span>
+<span><span class="co">#&gt; 2   7 (11-11, 7- 7)   axis-l-1</span></span>
+<span><span class="co">#&gt; 3   3 (13-13, 7- 7)   spacer-1</span></span>
+<span><span class="co">#&gt; 4   6 ( 9- 9, 9- 9)   axis-t-1</span></span>
+<span><span class="co">#&gt; 5   1 (11-11, 9- 9)    panel-1</span></span>
+<span><span class="co">#&gt; 6   9 (13-13, 9- 9)   axis-b-1</span></span>
+<span><span class="co">#&gt; 7   4 ( 9- 9,11-11)   spacer-1</span></span>
+<span><span class="co">#&gt; 8   8 (11-11,11-11)   axis-r-1</span></span>
+<span><span class="co">#&gt; 9   2 (13-13,11-11)   spacer-1</span></span>
+<span><span class="co">#&gt; 10 10 ( 8- 8, 9- 9)   xlab-t-1</span></span>
+<span><span class="co">#&gt; 11 11 (14-14, 9- 9)   xlab-b-1</span></span>
+<span><span class="co">#&gt; 12 12 (11-11, 6- 6)   ylab-l-1</span></span>
+<span><span class="co">#&gt; 13 13 (11-11,12-12)   ylab-r-1</span></span>
+<span><span class="co">#&gt; 14 14 ( 5- 5, 9- 9) subtitle-1</span></span>
+<span><span class="co">#&gt; 15 15 ( 4- 4, 9- 9)    title-1</span></span>
+<span><span class="co">#&gt; 16 16 (15-15, 9- 9)  caption-1</span></span>
+<span><span class="co">#&gt; 17 17 ( 3- 3, 3- 3)      tag-1</span></span>
+<span><span class="co">#&gt; 18 22 ( 9- 9,22-22)   spacer-2</span></span>
+<span><span class="co">#&gt; 19 24 (11-11,22-22)   axis-l-2</span></span>
+<span><span class="co">#&gt; 20 20 (13-13,22-22)   spacer-2</span></span>
+<span><span class="co">#&gt; 21 23 ( 9- 9,24-24)   axis-t-2</span></span>
+<span><span class="co">#&gt; 22 18 (11-11,24-24)    panel-2</span></span>
+<span><span class="co">#&gt; 23 26 (13-13,24-24)   axis-b-2</span></span>
+<span><span class="co">#&gt; 24 21 ( 9- 9,26-26)   spacer-2</span></span>
+<span><span class="co">#&gt; 25 25 (11-11,26-26)   axis-r-2</span></span>
+<span><span class="co">#&gt; 26 19 (13-13,26-26)   spacer-2</span></span>
+<span><span class="co">#&gt; 27 27 ( 8- 8,24-24)   xlab-t-2</span></span>
+<span><span class="co">#&gt; 28 28 (14-14,24-24)   xlab-b-2</span></span>
+<span><span class="co">#&gt; 29 29 (11-11,21-21)   ylab-l-2</span></span>
+<span><span class="co">#&gt; 30 30 (11-11,27-27)   ylab-r-2</span></span>
+<span><span class="co">#&gt; 31 31 ( 5- 5,24-24) subtitle-2</span></span>
+<span><span class="co">#&gt; 32 32 ( 4- 4,24-24)    title-2</span></span>
+<span><span class="co">#&gt; 33 33 (15-15,24-24)  caption-2</span></span>
+<span><span class="co">#&gt; 34 34 ( 3- 3,18-18)      tag-2</span></span>
+<span><span class="co">#&gt; 35 39 ( 9- 9,37-37)   spacer-3</span></span>
+<span><span class="co">#&gt; 36 41 (11-11,37-37)   axis-l-3</span></span>
+<span><span class="co">#&gt; 37 37 (13-13,37-37)   spacer-3</span></span>
+<span><span class="co">#&gt; 38 40 ( 9- 9,39-39)   axis-t-3</span></span>
+<span><span class="co">#&gt; 39 35 (11-11,39-39)    panel-3</span></span>
+<span><span class="co">#&gt; 40 43 (13-13,39-39)   axis-b-3</span></span>
+<span><span class="co">#&gt; 41 38 ( 9- 9,41-41)   spacer-3</span></span>
+<span><span class="co">#&gt; 42 42 (11-11,41-41)   axis-r-3</span></span>
+<span><span class="co">#&gt; 43 36 (13-13,41-41)   spacer-3</span></span>
+<span><span class="co">#&gt; 44 44 ( 8- 8,39-39)   xlab-t-3</span></span>
+<span><span class="co">#&gt; 45 45 (14-14,39-39)   xlab-b-3</span></span>
+<span><span class="co">#&gt; 46 46 (11-11,36-36)   ylab-l-3</span></span>
+<span><span class="co">#&gt; 47 47 (11-11,42-42)   ylab-r-3</span></span>
+<span><span class="co">#&gt; 48 48 ( 5- 5,39-39) subtitle-3</span></span>
+<span><span class="co">#&gt; 49 49 ( 4- 4,39-39)    title-3</span></span>
+<span><span class="co">#&gt; 50 50 (15-15,39-39)  caption-3</span></span>
+<span><span class="co">#&gt; 51 51 ( 3- 3,33-33)      tag-3</span></span>
+<span><span class="co">#&gt; 52  0 ( 1-20, 1-47) background</span></span>
+<span><span class="co">#&gt;                                           grob</span></span>
+<span><span class="co">#&gt; 1                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 2          absoluteGrob[GRID.absoluteGrob.763]</span></span>
+<span><span class="co">#&gt; 3                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 4                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 5                     gTree[panel-1.gTree.761]</span></span>
+<span><span class="co">#&gt; 6          absoluteGrob[GRID.absoluteGrob.762]</span></span>
+<span><span class="co">#&gt; 7                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 8                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 9                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 10                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 11 zeroGrob[axis.title.x.bottom..zeroGrob.764]</span></span>
+<span><span class="co">#&gt; 12   zeroGrob[axis.title.y.left..zeroGrob.765]</span></span>
+<span><span class="co">#&gt; 13                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 14       zeroGrob[plot.subtitle..zeroGrob.767]</span></span>
+<span><span class="co">#&gt; 15          zeroGrob[plot.title..zeroGrob.766]</span></span>
+<span><span class="co">#&gt; 16        zeroGrob[plot.caption..zeroGrob.769]</span></span>
+<span><span class="co">#&gt; 17            zeroGrob[plot.tag..zeroGrob.768]</span></span>
+<span><span class="co">#&gt; 18                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 19         absoluteGrob[GRID.absoluteGrob.781]</span></span>
+<span><span class="co">#&gt; 20                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 21                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 22                    gTree[panel-1.gTree.779]</span></span>
+<span><span class="co">#&gt; 23         absoluteGrob[GRID.absoluteGrob.780]</span></span>
+<span><span class="co">#&gt; 24                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 25                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 26                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 27                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 28 zeroGrob[axis.title.x.bottom..zeroGrob.782]</span></span>
+<span><span class="co">#&gt; 29   zeroGrob[axis.title.y.left..zeroGrob.783]</span></span>
+<span><span class="co">#&gt; 30                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 31       zeroGrob[plot.subtitle..zeroGrob.785]</span></span>
+<span><span class="co">#&gt; 32          zeroGrob[plot.title..zeroGrob.784]</span></span>
+<span><span class="co">#&gt; 33        zeroGrob[plot.caption..zeroGrob.787]</span></span>
+<span><span class="co">#&gt; 34            zeroGrob[plot.tag..zeroGrob.786]</span></span>
+<span><span class="co">#&gt; 35                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 36         absoluteGrob[GRID.absoluteGrob.800]</span></span>
+<span><span class="co">#&gt; 37                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 38                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 39                    gTree[panel-1.gTree.798]</span></span>
+<span><span class="co">#&gt; 40         absoluteGrob[GRID.absoluteGrob.799]</span></span>
+<span><span class="co">#&gt; 41                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 42                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 43                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 44                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 45 zeroGrob[axis.title.x.bottom..zeroGrob.801]</span></span>
+<span><span class="co">#&gt; 46   zeroGrob[axis.title.y.left..zeroGrob.802]</span></span>
+<span><span class="co">#&gt; 47                              zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 48       zeroGrob[plot.subtitle..zeroGrob.804]</span></span>
+<span><span class="co">#&gt; 49          zeroGrob[plot.title..zeroGrob.803]</span></span>
+<span><span class="co">#&gt; 50        zeroGrob[plot.caption..zeroGrob.806]</span></span>
+<span><span class="co">#&gt; 51            zeroGrob[plot.tag..zeroGrob.805]</span></span>
+<span><span class="co">#&gt; 52             rect[plot.background..rect.821]</span></span></code></pre></div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">4</span> Interactive inspection of gene cluster network annotated by words</a></div>
@@ -318,7 +512,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-02-27.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
