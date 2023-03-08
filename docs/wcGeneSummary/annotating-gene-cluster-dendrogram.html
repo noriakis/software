@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Annotating gene cluster dendrogram | wcGeneSummary (OSplot)</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.31 with bs4_book()">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Annotating gene cluster dendrogram | wcGeneSummary (OSplot)">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/annotating-gene-cluster-dendrogram.html">
@@ -67,7 +67,7 @@
 <span class="header-section-number">5</span> Annotating gene cluster dendrogram<a class="anchor" aria-label="anchor" href="#annotating-gene-cluster-dendrogram"><i class="fas fa-link"></i></a>
 </h1>
 <p>The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using <code>plotEigengeneNetworks</code>, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># WGCNA::plotEigengeneNetworks(mod$MEs, mod$colors, plotHeatmaps = FALSE)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -90,7 +90,7 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna-1.png" width="576"></div>
 <p>This calculates a dendrogram using <code>pvclust</code> internally in default. If you would like to plot segments involving only the specified gene cluster, use <code>candidateNodes</code> to specify the nodes.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -112,7 +112,7 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576"></div>
 <p>By default, the function calculates the frequency of common words across branches and plot the words that the differences between branches are large. By disabling <code>takeIntersect</code>, the function plots the frequent words for each branch.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>,</span>
 <span>    <span class="va">modColors</span>, takeIntersect<span class="op">=</span><span class="cn">FALSE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -135,7 +135,7 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaInt-1.png" width="576"></div>
 <p>To plot the word cloud instead of pyramid plots, use <code>useWC</code> option. For scaling the word size, use <code>wcScale</code> option.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scale4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -169,7 +169,7 @@
 <span><span class="va">scale4</span> <span class="op">+</span> <span class="va">scale15</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="576"></div>
 <p>This uses <code>ggwordcloud</code> and a list specified by <code>wcArg</code> is passed to the function.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">15</span>, wcArg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>rot.per<span class="op">=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -187,7 +187,7 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawc3-1.png" width="576"></div>
 <p>The horizontal plot can be specified by <code>horiz=TRUE</code>.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>,</span>
 <span>                               <span class="va">modColors</span>,</span>
 <span>                               useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -211,7 +211,7 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawchor-1.png" width="576"></div>
 <p>For examining enriched pathway names in the dendrograms, specify <code>argList</code> to <code>wcGeneSummary</code>, like <code>list(enrich="kegg")</code>.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"words"</span>, argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>enrich<span class="op">=</span><span class="st">"kegg"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -235,7 +235,7 @@
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnapath-1.png" width="576"></div>
 <p>Other than textual information, we can simply annotate the dendrogram using enrichment analysis.
 Useful for inspecting how the branches of dendrogram contains pathway information.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -249,7 +249,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna4-1.png" width="576"></div>
 <p>The column names for clusterProfiler results can be specified to <code>showType</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span>, showType<span class="op">=</span><span class="st">"Description"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
@@ -263,7 +263,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="576"></div>
 <p>Text sizing and wrapping can be controlled by <code>textSize</code> and <code>wrap</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span>, showType<span class="op">=</span><span class="st">"Description"</span>,</span>
 <span>    textSize<span class="op">=</span><span class="fl">1.5</span>, wrap<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -278,7 +278,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaDesc2-1.png" width="576"></div>
 <p>If you have a specifically interested pathway, use <code>highlight</code> to highlight the names in the dendrogram.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
 <span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -297,7 +297,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; columns</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight-1.png" width="672"></div>
 <p><code>spacer</code> can control the gaps above and below the grob on the dendrogram.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
 <span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span>, spacer<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -316,7 +316,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; columns</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="672"></div>
 <p>Using a popular tree visualization library <code>ggtree</code> and <code>ggimage</code>, plotting of word cloud on the tip nodes is possible by specifying <code>tipWC=TRUE</code> . This saves the word cloud plots in the <code>imageDir</code>, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in <code>tipWCNodes</code>. In this mode, one must pass object that can be passed to <code>ggtree()</code>.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>,</span>
 <span>                                     <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
@@ -357,7 +357,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Some words could not fit on page. They have been removed.</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672"></div>
 <p>By specifying <code>returnGlobOnly</code>, the grobs with the position in the dendrogram can be returned.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
 <span>                               returnGlobOnly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
@@ -512,7 +512,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-02.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

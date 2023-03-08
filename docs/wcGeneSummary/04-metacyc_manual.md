@@ -282,15 +282,13 @@ sessionInfo()
 #> [6] methods   base     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] rstudioapi_0.14 magrittr_2.0.3  knitr_1.41     
-#>  [4] xml2_1.3.3      downlit_0.4.2   R6_2.5.1       
-#>  [7] rlang_1.0.6     fastmap_1.1.0   stringr_1.5.0  
-#> [10] tools_4.2.2     xfun_0.36       cli_3.6.0      
-#> [13] jquerylib_0.1.4 withr_2.5.0     htmltools_0.5.4
-#> [16] yaml_2.3.6      digest_0.6.31   lifecycle_1.0.3
-#> [19] bookdown_0.31   vctrs_0.5.1     sass_0.4.4     
-#> [22] fs_1.5.2        memoise_2.0.1   glue_1.6.2     
-#> [25] cachem_1.0.6    evaluate_0.19   rmarkdown_2.19 
-#> [28] stringi_1.7.12  compiler_4.2.2  bslib_0.4.2    
-#> [31] jsonlite_1.8.4
+#>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  
+#>  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  
+#>  [7] cachem_1.0.7    rlang_1.0.6     cli_3.6.0      
+#> [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4
+#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 
+#> [16] tools_4.2.2     xfun_0.37       yaml_2.3.7     
+#> [19] fastmap_1.1.1   compiler_4.2.2  memoise_2.0.1  
+#> [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     
+#> [25] sass_0.4.5
 ```
