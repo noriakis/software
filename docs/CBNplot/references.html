@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>References | CBNplot</title>
   <meta name="description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
 
   <meta property="og:title" content="References | CBNplot" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="https://noriakis.github.io/software/CBNplot/" />
   
   <meta property="og:description" content="Plotting Bayesian network based on enrichment analysis including clusterProfiler and ReactomePA" />
   <meta name="github-repo" content="noriakis/CBNplot" />
@@ -32,8 +31,8 @@
   
 <link rel="prev" href="comparing-networks.html"/>
 
-<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,9 +48,9 @@
 
 
 
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
@@ -94,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -107,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -202,12 +201,13 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6" data-path="the-other-options.html"><a href="the-other-options.html"><i class="fa fa-check"></i><b>6</b> The other options</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="the-other-options.html"><a href="the-other-options.html#discretization"><i class="fa fa-check"></i><b>6.1</b> Discretization</a></li>
-<li class="chapter" data-level="6.2" data-path="the-other-options.html"><a href="the-other-options.html#custom-visualization"><i class="fa fa-check"></i><b>6.2</b> Custom visualization</a>
+<li class="chapter" data-level="6.1" data-path="the-other-options.html"><a href="the-other-options.html#using-microbiome-related-data"><i class="fa fa-check"></i><b>6.1</b> Using microbiome-related data</a></li>
+<li class="chapter" data-level="6.2" data-path="the-other-options.html"><a href="the-other-options.html#discretization"><i class="fa fa-check"></i><b>6.2</b> Discretization</a></li>
+<li class="chapter" data-level="6.3" data-path="the-other-options.html"><a href="the-other-options.html#custom-visualization"><i class="fa fa-check"></i><b>6.3</b> Custom visualization</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="the-other-options.html"><a href="the-other-options.html#the-glowing-nodes-and-edges"><i class="fa fa-check"></i><b>6.2.1</b> The glowing nodes and edges</a></li>
+<li class="chapter" data-level="6.3.1" data-path="the-other-options.html"><a href="the-other-options.html#the-glowing-nodes-and-edges"><i class="fa fa-check"></i><b>6.3.1</b> The glowing nodes and edges</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.3</b> Comparing multi scale and standard bootstrapping</a></li>
+<li class="chapter" data-level="6.4" data-path="the-other-options.html"><a href="the-other-options.html#comparing-multi-scale-and-standard-bootstrapping"><i class="fa fa-check"></i><b>6.4</b> Comparing multi scale and standard bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="comparing-networks.html"><a href="comparing-networks.html"><i class="fa fa-check"></i><b>7</b> Comparing networks</a>
 <ul>
@@ -235,8 +235,8 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="references" class="section level1 unnumbered hasAnchor">
+<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
@@ -288,7 +288,7 @@ Scutari, Marco. 2010. <span>“Learning Bayesian Networks with the Bnlearn <span
 Vasala, Kaija, Paavo Pääkkö, and Taina Turpeenniemi-Hujanen. 2003. <span>“Matrix Metalloproteinase-2 Immunoreactive Protein as a Prognostic Marker in Bladder Cancer.”</span> <em>Urology</em> 62 (5): 952–57.
 </div>
 <div class="csl-entry">
-Winerdal, Malin E, David Krantz, Ciputra A Hartana, Ali A Zirakzadeh, Ludvig Linton, Emma A Bergman, Robert Rosenblatt, et al. 2018. <span>“Urinary Bladder Cancer Tregs Suppress <span>Mmp2</span> and Potentially Regulate Invasiveness.”</span> <em>Cancer Immunol Res</em> 6 (5): 528–38.
+Winerdal, Malin E, David Krantz, Ciputra A Hartana, Ali A Zirakzadeh, Ludvig Linton, Emma A Bergman, Robert Rosenblatt, et al. 2018. <span>“Urinary Bladder Cancer Tregs Suppress <span>MMP2</span> and Potentially Regulate Invasiveness.”</span> <em>Cancer Immunol Res</em> 6 (5): 528–38.
 </div>
 <div class="csl-entry">
 Wu, Tianzhi, Erqiang Hu, Shuangbin Xu, Meijun Chen, Pingfan Guo, Zehan Dai, Tingze Feng, et al. 2021. <span>“clusterProfiler 4.0: A Universal Enrichment Tool for Interpreting Omics Data.”</span> <em>Innov. J.</em>, July, 100141.
@@ -308,7 +308,6 @@ Yu, Guangchuang, and Qing-Yu He. 2016. <span>“<span>ReactomePA</span>: An <spa
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -349,7 +348,7 @@ gitbook.start({
 },
 "download": ["CBNplot_doc.pdf", "CBNplot_doc.epub"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
@@ -365,7 +364,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

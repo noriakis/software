@@ -27,6 +27,7 @@ confirming-the-existing-knowledge
 investigating-the-network-based-on-the-clinical-question
 classification-using-bn
 the-other-options
+using-microbiome-related-data
 discretization
 custom-visualization
 the-glowing-nodes-and-edges
