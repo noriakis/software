@@ -348,7 +348,7 @@ net@net
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/basic3-1.png" width="768" />
 
 
-Chaning the layout.
+Changing the layout.
 
 
 ```r
@@ -947,7 +947,7 @@ sessionInfo()
 #>  [27] rappdirs_0.3.3         blob_1.2.3            
 #>  [29] ggrepel_0.9.3          xfun_0.37             
 #>  [31] crayon_1.5.2           RCurl_1.98-1.10       
-#>  [33] jsonlite_1.8.4         scatterpie_0.1.8      
+#>  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  
 #>  [35] graph_1.76.0           ape_5.7               
 #>  [37] glue_1.6.2             polyclip_1.10-4       
 #>  [39] stopwords_2.3          gtable_0.3.1          

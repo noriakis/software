@@ -27,3 +27,6 @@ combine-and-compare-networks
 parsing
 parsing-enzyme-comission-numbers-its-description-and-comment.
 parsing-uniprot-organism-identifiers.
+single-cell-transcriptomic-data
+visualizing-textual-information-for-marker-genes
+findmarkers-in-scran

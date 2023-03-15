@@ -467,7 +467,7 @@ sessionInfo()
 #>  [27] blob_1.2.3             ggrepel_0.9.3         
 #>  [29] xfun_0.37              dplyr_1.1.0           
 #>  [31] crayon_1.5.2           RCurl_1.98-1.10       
-#>  [33] jsonlite_1.8.4         scatterpie_0.1.8      
+#>  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  
 #>  [35] graph_1.76.0           ape_5.7               
 #>  [37] glue_1.6.2             polyclip_1.10-4       
 #>  [39] gtable_0.3.1           zlibbioc_1.44.0       
