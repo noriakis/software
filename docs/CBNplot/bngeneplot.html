@@ -386,7 +386,7 @@ By default, the intersection of two directed network is shown with the number of
 </div>
 <div id="plotting-genes-in-multiple-pathways" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plotting genes in multiple pathways<a href="bngeneplot.html#plotting-genes-in-multiple-pathways" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="bngeneplot.html#cb23-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> <span class="fu">makeCluster</span>(<span class="dv">8</span>)</span>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="bngeneplot.html#cb23-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">=</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(<span class="dv">8</span>)</span>
 <span id="cb23-2"><a href="bngeneplot.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bngeneplot</span>(<span class="at">results =</span> pway,</span>
 <span id="cb23-3"><a href="bngeneplot.html#cb23-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">exp =</span> vsted,</span>
 <span id="cb23-4"><a href="bngeneplot.html#cb23-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">expSample =</span> incSample,</span>
