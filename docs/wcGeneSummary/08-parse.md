@@ -13,8 +13,6 @@ library(wcGeneSummary)
 #>   method       from      
 #>   text.pvclust dendextend
 library(data.table)
-#> Warning: package 'data.table' was built under R version
-#> 4.2.2
 ecdf <- wcEC("../enzyme.dat",ecnum="all", onlyDf=TRUE)
 #> Processing EC file
 data.table(ecdf) |> head()

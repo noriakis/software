@@ -424,9 +424,9 @@ dyn
 
 ```r
 sessionInfo()
-#> R version 4.2.1 (2022-06-23 ucrt)
+#> R version 4.2.2 (2022-10-31 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 22621)
+#> Running under: Windows 10 x64 (build 19044)
 #> 
 #> Matrix products: default
 #> 
@@ -442,65 +442,65 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggforce_0.4.1         igraph_1.4.0         
-#>  [3] ggraph_2.1.0          clusterProfiler_4.4.4
-#>  [5] ReactomePA_1.40.0     ggplot2_3.4.1        
-#>  [7] org.Hs.eg.db_3.15.0   AnnotationDbi_1.58.0 
-#>  [9] IRanges_2.30.1        S4Vectors_0.34.0     
-#> [11] Biobase_2.56.0        BiocGenerics_0.42.0  
+#>  [1] ggforce_0.4.1         igraph_1.4.1         
+#>  [3] ggraph_2.1.0          clusterProfiler_4.6.2
+#>  [5] ReactomePA_1.42.0     ggplot2_3.4.1        
+#>  [7] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 
+#>  [9] IRanges_2.32.0        S4Vectors_0.36.2     
+#> [11] Biobase_2.58.0        BiocGenerics_0.44.0  
 #> [13] wcGeneSummary_0.99.0 
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
 #>   [3] plyr_1.8.8             lazyeval_0.2.2        
-#>   [5] splines_4.2.1          BiocParallel_1.30.4   
-#>   [7] GenomeInfoDb_1.32.4    digest_0.6.31         
+#>   [5] splines_4.2.2          BiocParallel_1.32.5   
+#>   [7] GenomeInfoDb_1.34.9    digest_0.6.31         
 #>   [9] yulab.utils_0.0.6      htmltools_0.5.4       
-#>  [11] bugsigdbr_1.4.3        GOSemSim_2.22.0       
-#>  [13] viridis_0.6.2          GO.db_3.15.0          
+#>  [11] bugsigdbr_1.4.3        GOSemSim_2.24.0       
+#>  [13] viridis_0.6.2          GO.db_3.16.0          
 #>  [15] fansi_1.0.4            GeneSummary_0.99.4    
 #>  [17] magrittr_2.0.3         memoise_2.0.1         
-#>  [19] tm_0.7-11              Biostrings_2.64.1     
+#>  [19] tm_0.7-11              Biostrings_2.66.0     
 #>  [21] graphlayouts_0.8.4     pvclust_2.2-0         
-#>  [23] wordcloud_2.6          enrichplot_1.16.2     
+#>  [23] wordcloud_2.6          enrichplot_1.18.3     
 #>  [25] colorspace_2.1-0       rappdirs_0.3.3        
 #>  [27] blob_1.2.3             ggrepel_0.9.3         
 #>  [29] xfun_0.37              dplyr_1.1.0           
 #>  [31] crayon_1.5.2           RCurl_1.98-1.10       
-#>  [33] jsonlite_1.8.4         scatterpie_0.1.8      
+#>  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  
 #>  [35] graph_1.76.0           ape_5.7               
 #>  [37] glue_1.6.2             polyclip_1.10-4       
-#>  [39] gtable_0.3.1           zlibbioc_1.42.0       
-#>  [41] XVector_0.36.0         GetoptLong_1.0.5      
-#>  [43] graphite_1.42.0        rentrez_1.2.3         
-#>  [45] scales_1.2.1           DOSE_3.22.1           
+#>  [39] gtable_0.3.1           zlibbioc_1.44.0       
+#>  [41] XVector_0.38.0         GetoptLong_1.0.5      
+#>  [43] graphite_1.44.0        rentrez_1.2.3         
+#>  [45] scales_1.2.1           DOSE_3.24.2           
 #>  [47] DBI_1.1.3              Rcpp_1.0.10           
 #>  [49] viridisLite_0.4.1      xtable_1.8-4          
 #>  [51] tidytree_0.4.2         gridGraphics_0.5-1    
-#>  [53] reactome.db_1.81.0     bit_4.0.5             
-#>  [55] htmlwidgets_1.6.1      httr_1.4.4            
-#>  [57] fgsea_1.22.0           RColorBrewer_1.1-3    
+#>  [53] reactome.db_1.82.0     bit_4.0.5             
+#>  [55] htmlwidgets_1.6.1      httr_1.4.5            
+#>  [57] fgsea_1.24.0           RColorBrewer_1.1-3    
 #>  [59] ellipsis_0.3.2         pkgconfig_2.0.3       
 #>  [61] XML_3.99-0.13          farver_2.1.1          
 #>  [63] sass_0.4.5             utf8_1.2.3            
 #>  [65] ggplotify_0.1.0        tidyselect_1.2.0      
 #>  [67] rlang_1.0.6            reshape2_1.4.4        
 #>  [69] later_1.3.0            munsell_0.5.0         
-#>  [71] tools_4.2.1            cachem_1.0.6          
+#>  [71] tools_4.2.2            cachem_1.0.7          
 #>  [73] downloader_0.4         cli_3.6.0             
 #>  [75] generics_0.1.3         RSQLite_2.3.0         
-#>  [77] evaluate_0.20          stringr_1.5.0         
-#>  [79] fastmap_1.1.0          ggdendro_0.1.23       
-#>  [81] yaml_2.3.7             ggtree_3.4.4          
-#>  [83] knitr_1.42             bit64_4.0.5           
-#>  [85] fs_1.6.1               tidygraph_1.2.3       
-#>  [87] purrr_1.0.1            KEGGREST_1.36.3       
-#>  [89] dendextend_1.16.0      nlme_3.1-157          
-#>  [91] mime_0.12              slam_0.1-50           
-#>  [93] aplot_0.1.9            DO.db_2.9             
-#>  [95] xml2_1.3.3             compiler_4.2.1        
+#>  [77] gson_0.0.9             evaluate_0.20         
+#>  [79] stringr_1.5.0          fastmap_1.1.1         
+#>  [81] ggdendro_0.1.23        yaml_2.3.7            
+#>  [83] ggtree_3.6.2           knitr_1.42            
+#>  [85] bit64_4.0.5            fs_1.6.1              
+#>  [87] tidygraph_1.2.3        purrr_1.0.1           
+#>  [89] KEGGREST_1.38.0        dendextend_1.16.0     
+#>  [91] nlme_3.1-161           mime_0.12             
+#>  [93] slam_0.1-50            aplot_0.1.9           
+#>  [95] xml2_1.3.3             compiler_4.2.2        
 #>  [97] rstudioapi_0.14        png_0.1-8             
-#>  [99] treeio_1.20.2          tibble_3.1.8          
+#>  [99] treeio_1.22.0          tibble_3.1.8          
 #> [101] tweenr_2.0.2           bslib_0.4.2           
 #> [103] stringi_1.7.12         cyjShiny_1.0.34       
 #> [105] lattice_0.20-45        Matrix_1.5-3          
@@ -509,14 +509,14 @@ sessionInfo()
 #> [111] GlobalOptions_0.1.2    data.table_1.14.8     
 #> [113] cowplot_1.1.1          bitops_1.0-7          
 #> [115] httpuv_1.6.9           patchwork_1.1.2       
-#> [117] qvalue_2.28.0          R6_2.5.1              
-#> [119] bookdown_0.32          promises_1.2.0.1      
+#> [117] qvalue_2.30.0          R6_2.5.1              
+#> [119] bookdown_0.33          promises_1.2.0.1      
 #> [121] gridExtra_2.3          codetools_0.2-18      
-#> [123] MASS_7.3-57            rjson_0.2.21          
-#> [125] withr_2.5.0            GenomeInfoDbData_1.2.8
-#> [127] parallel_4.2.1         grid_4.2.1            
+#> [123] MASS_7.3-58.1          rjson_0.2.21          
+#> [125] withr_2.5.0            GenomeInfoDbData_1.2.9
+#> [127] parallel_4.2.2         grid_4.2.2            
 #> [129] ggfun_0.0.9            tidyr_1.3.0           
-#> [131] rmarkdown_2.20         downlit_0.4.2         
-#> [133] NLP_0.2-1              shiny_1.7.4           
-#> [135] base64enc_0.1-3
+#> [131] HDO.db_0.99.1          rmarkdown_2.20        
+#> [133] downlit_0.4.2          NLP_0.2-1             
+#> [135] shiny_1.7.4            base64enc_0.1-3
 ```
