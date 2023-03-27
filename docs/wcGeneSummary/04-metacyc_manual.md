@@ -158,7 +158,7 @@ metawc
 #> Type: manual
 #> Number of words: 100
 #> 
-#> 582.1 Kb
+#> 627.4 Kb
 metawc@wc
 ```
 
@@ -177,7 +177,7 @@ metanet
 #> Type: manual
 #> Number of words: 20
 #> 
-#> 625.1 Kb
+#> 625.3 Kb
 metanet@net
 ```
 
@@ -207,7 +207,7 @@ metanet2
 #> Type: manual
 #> Number of words: 20
 #> 
-#> 711 Kb
+#> 711.3 Kb
 metanet2@net
 ```
 

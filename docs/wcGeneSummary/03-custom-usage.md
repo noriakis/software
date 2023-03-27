@@ -368,7 +368,8 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="words", argList=list(enrich
 #>   Converted input genes: 12
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Performing enrichment analysisInput genes: 13
+#> Performing enrichment analysis
+#> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
@@ -511,8 +512,9 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Reds is 9
-#> Returning the palette you asked for with that many colors
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
@@ -525,8 +527,13 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gr
-#> Some words could not fit on page. They have been removed.
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
 ```
 
 <img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672" />
@@ -615,59 +622,59 @@ gro[[1]]$plot
 #> 50 50 (15-15,39-39)  caption-3
 #> 51 51 ( 3- 3,33-33)      tag-3
 #> 52  0 ( 1-20, 1-47) background
-#>                                           grob
-#> 1                               zeroGrob[NULL]
-#> 2          absoluteGrob[GRID.absoluteGrob.763]
-#> 3                               zeroGrob[NULL]
-#> 4                               zeroGrob[NULL]
-#> 5                     gTree[panel-1.gTree.761]
-#> 6          absoluteGrob[GRID.absoluteGrob.762]
-#> 7                               zeroGrob[NULL]
-#> 8                               zeroGrob[NULL]
-#> 9                               zeroGrob[NULL]
-#> 10                              zeroGrob[NULL]
-#> 11 zeroGrob[axis.title.x.bottom..zeroGrob.764]
-#> 12   zeroGrob[axis.title.y.left..zeroGrob.765]
-#> 13                              zeroGrob[NULL]
-#> 14       zeroGrob[plot.subtitle..zeroGrob.767]
-#> 15          zeroGrob[plot.title..zeroGrob.766]
-#> 16        zeroGrob[plot.caption..zeroGrob.769]
-#> 17            zeroGrob[plot.tag..zeroGrob.768]
-#> 18                              zeroGrob[NULL]
-#> 19         absoluteGrob[GRID.absoluteGrob.781]
-#> 20                              zeroGrob[NULL]
-#> 21                              zeroGrob[NULL]
-#> 22                    gTree[panel-1.gTree.779]
-#> 23         absoluteGrob[GRID.absoluteGrob.780]
-#> 24                              zeroGrob[NULL]
-#> 25                              zeroGrob[NULL]
-#> 26                              zeroGrob[NULL]
-#> 27                              zeroGrob[NULL]
-#> 28 zeroGrob[axis.title.x.bottom..zeroGrob.782]
-#> 29   zeroGrob[axis.title.y.left..zeroGrob.783]
-#> 30                              zeroGrob[NULL]
-#> 31       zeroGrob[plot.subtitle..zeroGrob.785]
-#> 32          zeroGrob[plot.title..zeroGrob.784]
-#> 33        zeroGrob[plot.caption..zeroGrob.787]
-#> 34            zeroGrob[plot.tag..zeroGrob.786]
-#> 35                              zeroGrob[NULL]
-#> 36         absoluteGrob[GRID.absoluteGrob.800]
-#> 37                              zeroGrob[NULL]
-#> 38                              zeroGrob[NULL]
-#> 39                    gTree[panel-1.gTree.798]
-#> 40         absoluteGrob[GRID.absoluteGrob.799]
-#> 41                              zeroGrob[NULL]
-#> 42                              zeroGrob[NULL]
-#> 43                              zeroGrob[NULL]
-#> 44                              zeroGrob[NULL]
-#> 45 zeroGrob[axis.title.x.bottom..zeroGrob.801]
-#> 46   zeroGrob[axis.title.y.left..zeroGrob.802]
-#> 47                              zeroGrob[NULL]
-#> 48       zeroGrob[plot.subtitle..zeroGrob.804]
-#> 49          zeroGrob[plot.title..zeroGrob.803]
-#> 50        zeroGrob[plot.caption..zeroGrob.806]
-#> 51            zeroGrob[plot.tag..zeroGrob.805]
-#> 52             rect[plot.background..rect.821]
+#>                                            grob
+#> 1                                zeroGrob[NULL]
+#> 2          absoluteGrob[GRID.absoluteGrob.4105]
+#> 3                                zeroGrob[NULL]
+#> 4                                zeroGrob[NULL]
+#> 5                     gTree[panel-1.gTree.4103]
+#> 6          absoluteGrob[GRID.absoluteGrob.4104]
+#> 7                                zeroGrob[NULL]
+#> 8                                zeroGrob[NULL]
+#> 9                                zeroGrob[NULL]
+#> 10                               zeroGrob[NULL]
+#> 11 zeroGrob[axis.title.x.bottom..zeroGrob.4106]
+#> 12   zeroGrob[axis.title.y.left..zeroGrob.4107]
+#> 13                               zeroGrob[NULL]
+#> 14       zeroGrob[plot.subtitle..zeroGrob.4109]
+#> 15          zeroGrob[plot.title..zeroGrob.4108]
+#> 16        zeroGrob[plot.caption..zeroGrob.4111]
+#> 17            zeroGrob[plot.tag..zeroGrob.4110]
+#> 18                               zeroGrob[NULL]
+#> 19         absoluteGrob[GRID.absoluteGrob.4123]
+#> 20                               zeroGrob[NULL]
+#> 21                               zeroGrob[NULL]
+#> 22                    gTree[panel-1.gTree.4121]
+#> 23         absoluteGrob[GRID.absoluteGrob.4122]
+#> 24                               zeroGrob[NULL]
+#> 25                               zeroGrob[NULL]
+#> 26                               zeroGrob[NULL]
+#> 27                               zeroGrob[NULL]
+#> 28 zeroGrob[axis.title.x.bottom..zeroGrob.4124]
+#> 29   zeroGrob[axis.title.y.left..zeroGrob.4125]
+#> 30                               zeroGrob[NULL]
+#> 31       zeroGrob[plot.subtitle..zeroGrob.4127]
+#> 32          zeroGrob[plot.title..zeroGrob.4126]
+#> 33        zeroGrob[plot.caption..zeroGrob.4129]
+#> 34            zeroGrob[plot.tag..zeroGrob.4128]
+#> 35                               zeroGrob[NULL]
+#> 36         absoluteGrob[GRID.absoluteGrob.4142]
+#> 37                               zeroGrob[NULL]
+#> 38                               zeroGrob[NULL]
+#> 39                    gTree[panel-1.gTree.4140]
+#> 40         absoluteGrob[GRID.absoluteGrob.4141]
+#> 41                               zeroGrob[NULL]
+#> 42                               zeroGrob[NULL]
+#> 43                               zeroGrob[NULL]
+#> 44                               zeroGrob[NULL]
+#> 45 zeroGrob[axis.title.x.bottom..zeroGrob.4143]
+#> 46   zeroGrob[axis.title.y.left..zeroGrob.4144]
+#> 47                               zeroGrob[NULL]
+#> 48       zeroGrob[plot.subtitle..zeroGrob.4146]
+#> 49          zeroGrob[plot.title..zeroGrob.4145]
+#> 50        zeroGrob[plot.caption..zeroGrob.4148]
+#> 51            zeroGrob[plot.tag..zeroGrob.4147]
+#> 52             rect[plot.background..rect.4163]
 ```
 
 
@@ -683,6 +690,7 @@ library(limma)
 #> 
 #>     plotMA
 library(ggrepel)
+#> Warning: package 'ggrepel' was built under R version 4.2.3
 query <- "DNA repair"
 tab <- getGeneKEGGLinks(species="hsa")
 listOfGenes <- list()
@@ -694,64 +702,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 157
+#> Input genes: 96
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 57
+#> Input genes: 24
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 92
+#> Input genes: 93
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 36
+#> Input genes: 82
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 131
+#> Input genes: 205
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 132
+#> Input genes: 106
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 98
+#> Input genes: 167
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 33
+#> Input genes: 531
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 67
+#> Input genes: 21
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 57
+#> Input genes: 79
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 27
+#> Input genes: 104
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 85
+#> Input genes: 192
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 90
+#> Input genes: 76
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 58
+#> Input genes: 31
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 141
+#> Input genes: 120
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 70
+#> Input genes: 30
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 41
+#> Input genes: 121
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 137
+#> Input genes: 21
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 10
+#> Input genes: 100
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 154
+#> Input genes: 6
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -763,7 +771,7 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 2 unlabeled data points (too many
+#> Warning: ggrepel: 10 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
@@ -788,13 +796,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 12943
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 9943
+#>   Converted input genes: 10001
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 5534
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4649
+#>   Converted input genes: 4671
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 43
@@ -822,9 +830,9 @@ frq <- findTerm(query, listOfGenes,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 40
-#> 'select()' returned 1:1 mapping between keys and
+#> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 34
+#>   Converted input genes: 36
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 39
@@ -848,31 +856,31 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 740
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 578
+#>   Converted input genes: 573
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 653
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 536
+#>   Converted input genes: 541
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 621
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 534
+#>   Converted input genes: 539
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 591
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 475
+#>   Converted input genes: 476
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 139
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 55
+#>   Converted input genes: 59
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 112

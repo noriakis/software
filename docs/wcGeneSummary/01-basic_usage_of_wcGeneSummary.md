@@ -88,7 +88,7 @@ gwc
 #> Type: refseq
 #> Number of words: 100
 #> ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8
-#> 163.9 Kb
+#> 201.6 Kb
 knitr::kable(
   head(gwc@freqDf), caption = 'Term frequencies.',
   row.names = FALSE
@@ -122,6 +122,9 @@ gwc2 <- wcGeneSummary(inpSymbol,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwc2@wc
 ```
 
@@ -142,6 +145,9 @@ gwc3 <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwc3@wc
 ```
 
@@ -178,6 +184,9 @@ gwcl <- wcGeneSummary(inpSymbol,
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwcl@wc
 ```
 
@@ -224,6 +233,9 @@ gwclWhole <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Multiscale bootstrap... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwclWhole@wc
 ```
 
@@ -456,6 +468,36 @@ net@net
 
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/gplot-1.png" width="768" />
 
+By default, the associated genes are plotted without colorization (grey). If preferred, set `colorize=TRUE` to colorize the associated genes by `geneColor`. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated gene symbols.
+
+
+```r
+net <- wcGeneSummary(inpSymbol, plotType="network",
+                     genePlot=TRUE, corThresh=0.5,
+                     colorize=TRUE, geneColor="pink",
+                     colorText=TRUE,
+                     tag=TRUE, edgeLink=FALSE,
+                     numWords=20)
+#> Input genes: 7
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+net@net
+```
+
+<img src="01-basic_usage_of_wcGeneSummary_files/figure-html/gplot2-1.png" width="768" />
+
+
 The associated enriched pathways (if present) can be shown by specifying `genePathPlot`, using `ggforce`.
 In this option, the function first performs over-representation analysis on the whole gene set, and plot enriched terms for included genes in the plot. Enrichment analysis here is performed by the library `clusterProfiler` or `ReactomePA`, and one can control which pathways to plot by `genePathPlotSig` value.
 
@@ -495,6 +537,9 @@ Using `rentrez`, one can perform the same analysis on PubMed text like the artic
 
 ```r
 ab <- wcAbst(inpSymbol[1:3], retMax=20, apiKey=apiKey)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 ab@wc
 ```
 
@@ -505,10 +550,10 @@ The returned PubMed IDs are stored in `pmids` slot.
 
 ```r
 ab@pmids
-#>  [1] "20301571" "27051024" "27838878" "31077069" "33746966"
-#>  [6] "32749109" "21278243" "23593158" "34284736" "28088319"
-#> [11] "25867436" "24023723" "27051038" "36472749" "28803404"
-#> [16] "16835333" "25674148" "33125943" "8053936"  "28474168"
+#>  [1] "20301571" "27051024" "27838878" "31077069" "34284736"
+#>  [6] "32749109" "23593158" "24023723" "21278243" "16835333"
+#> [11] "28088319" "25867436" "27051038" "25674148" "28803404"
+#> [16] "30847299" "33125943" "28474168" "8053936"  "26400354"
 ab@pmids |> length()
 #> [1] 20
 ```
@@ -522,6 +567,9 @@ abtag <- wcAbst(redo=ab, tag=TRUE,
                 cl=snow::makeCluster(10), pal=pal, apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 abtag2 <- wcAbst(redo=abtag, tag=TRUE, genePlot=TRUE,
                  plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
 #> Resuming from the previous results
@@ -585,35 +633,35 @@ net3 <- wcAbst(redo=ab, plotType="network",
 compareWordNet(list(net1, net2),
                titles=c("ercc","cxcl"))
 #> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in Windows
-#> font database
+#> as.graphicsAnnot(x$label)): font family not found in
+#> Windows font database
 
 #> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in Windows
-#> font database
+#> as.graphicsAnnot(x$label)): font family not found in
+#> Windows font database
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-1.png" width="1152" />
@@ -622,36 +670,36 @@ compareWordNet(list(net1, net2),
 compareWordNet(list(net1, net3),
                titles=c("ercc","ercc-PubMed"))
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-2.png" width="1152" />
@@ -660,36 +708,36 @@ compareWordNet(list(net1, net3),
 compareWordNet(list(net1, net2, net3),
                titles=c("ercc","cxcl", "ercc-PubMed"))
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-3.png" width="1152" />
@@ -746,52 +794,52 @@ net2 <- wcGeneSummary(keggList$`04210`,
 
 compareWordNet(list(net1, net2), tag=TRUE)
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="01-basic_usage_of_wcGeneSummary_files/figure-html/tagcomp-1.png" width="1440" />
@@ -925,10 +973,10 @@ sessionInfo()
 #>  [1] dplyr_1.1.0           dendextend_1.16.0    
 #>  [3] clusterProfiler_4.6.2 ReactomePA_1.42.0    
 #>  [5] RColorBrewer_1.1-3    ggraph_2.1.0         
-#>  [7] ggplot2_3.4.1         org.Hs.eg.db_3.16.0  
-#>  [9] AnnotationDbi_1.60.0  IRanges_2.32.0       
-#> [11] S4Vectors_0.36.2      Biobase_2.58.0       
-#> [13] BiocGenerics_0.44.0   wcGeneSummary_0.99.0 
+#>  [7] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 
+#>  [9] IRanges_2.32.0        S4Vectors_0.36.2     
+#> [11] Biobase_2.58.0        BiocGenerics_0.44.0  
+#> [13] wcGeneSummary_0.99.0  ggplot2_3.4.1        
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       

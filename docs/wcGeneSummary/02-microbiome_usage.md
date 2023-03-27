@@ -214,7 +214,7 @@ vp <- wcBSDB(c("Veillonella parvula"),
                 curate=TRUE, target="title", edgeLink=FALSE,
                 mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag=TRUE,
                 cl=snow::makeCluster(10),colorText=TRUE, pre=TRUE, numWords=30,
-                nodePal=RColorBrewer::brewer.pal(10, "Set2"),
+                nodePal=colorRampPalette(RColorBrewer::brewer.pal(8, "Set2"))(10),
                 ecFile="../enzyme.dat",
                 upTaxFile = "../speclist.txt")
 #> Input microbes: 1
@@ -284,9 +284,39 @@ metabEx@net
 
 In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.
 
+By default, the category other than words are plotted without colorization (grey). If preferred, set `colorize=TRUE` to colorize the associated information by `catColors`. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated categories.
+
+
+```r
+
+metabEx <- wcBSDB(c("Akkermansia muciniphila"),
+                edgeLink=FALSE,
+                curate=TRUE,
+                corThresh=0.3,
+                colorize=TRUE,
+                nodePal=RColorBrewer::brewer.pal(10, "Dark2"),
+                pre=TRUE,
+                tag=FALSE,
+                additionalRemove = filter$word,
+                colorText=TRUE,
+                plotType="network",
+                numWords=50,
+                mbPlot=TRUE,
+                disPlot=TRUE,
+                preserve = TRUE,
+                cl=snow::makeCluster(10))
+#> Input microbes: 1
+#>   Found 21 entries for Akkermansia muciniphila
+#> Including 31 entries
+#> Filter based on BugSigDB
+#> Filtering 0 words (frequency and/or tfidf)
+metabEx@net
+```
+
+<img src="02-microbiome_usage_files/figure-html/metabex2-1.png" width="960" />
+
 For the complex network, the resulting image might be unreadable.
 `exportCyjsWithoutImage` function can be used to export the graph to readily interactive interface using `Cytoscape.js`. The below chunk shows the output produced by the function, hosted by GitHub Pages.
-
 
 
 ```r
@@ -447,7 +477,7 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] RColorBrewer_1.1-3   ggraph_2.1.0        
-#> [3] ggplot2_3.4.1        wcGeneSummary_0.99.0
+#> [3] wcGeneSummary_0.99.0 ggplot2_3.4.1       
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] GeneSummary_0.99.4     colorspace_2.1-0      

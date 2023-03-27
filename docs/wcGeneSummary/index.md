@@ -1,7 +1,7 @@
 --- 
 title: "wcGeneSummary (OSplot)"
 author: "Noriaki Sato"
-date: "2023-03-21"
+date: "2023-03-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -17,8 +17,11 @@ This package aims to visualize the word and text information contained in the ge
 
 
 
+
+
 ```r
 library(wcGeneSummary)
+#> Loading required package: ggplot2
 #> 
 #> Registered S3 method overwritten by 'pvclust':
 #>   method       from      

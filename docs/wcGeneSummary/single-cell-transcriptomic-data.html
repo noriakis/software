@@ -73,12 +73,14 @@
 <span class="header-section-number">11.1</span> Visualizing textual information for marker genes<a class="anchor" aria-label="anchor" href="#visualizing-textual-information-for-marker-genes"><i class="fas fa-link"></i></a>
 </h2>
 <p>Visualize the network for all the cluster’s marker genes.</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
-<span><span class="va">dir</span> <span class="op">=</span> <span class="st">"filtered_gene_bc_matrices/hg19"</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scplot</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dir</span> <span class="op">=</span> <span class="st">"filtered_gene_bc_matrices/hg19"</span></span>
 <span><span class="va">pbmc.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/Read10X.html">Read10X</a></span><span class="op">(</span>data.dir <span class="op">=</span> <span class="va">dir</span><span class="op">)</span></span>
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/CreateSeuratObject.html">CreateSeuratObject</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="va">pbmc.data</span>, project <span class="op">=</span> <span class="st">"pbmc3k"</span>,</span>
 <span>                           min.cells<span class="op">=</span><span class="fl">3</span>, min.features<span class="op">=</span><span class="fl">200</span><span class="op">)</span></span>
@@ -92,14 +94,13 @@
 <span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>,</span>
 <span>        label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/sc1-1.png" width="480"></div>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Or, use scplot (https://yulab-smu.top/scplot/)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scplot</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim-geom-label.html">sc_dim_geom_label</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="fu">shadowtext</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/shadowtext/man/geom_shadowtext.html">geom_shadowtext</a></span>, </span>
 <span>            color<span class="op">=</span><span class="st">'black'</span>, bg.color<span class="op">=</span><span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/sc1-2.png" width="480"></div>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">markers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindAllMarkers.html">FindAllMarkers</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span></span>
 <span><span class="va">texts</span> <span class="op">&lt;-</span> <span class="va">markers</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/TextMarkers.html">TextMarkers</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">"network"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 0</span></span>
@@ -109,48 +110,48 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 1</span></span>
 <span><span class="co">#&gt; Input genes: 1027</span></span>
-<span><span class="co">#&gt;   Converted input genes: 420</span></span>
+<span><span class="co">#&gt;   Converted input genes: 968</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 2</span></span>
 <span><span class="co">#&gt; Input genes: 409</span></span>
-<span><span class="co">#&gt;   Converted input genes: 50</span></span>
+<span><span class="co">#&gt;   Converted input genes: 387</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 3</span></span>
 <span><span class="co">#&gt; Input genes: 588</span></span>
-<span><span class="co">#&gt;   Converted input genes: 118</span></span>
+<span><span class="co">#&gt;   Converted input genes: 545</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 4</span></span>
 <span><span class="co">#&gt; Input genes: 316</span></span>
-<span><span class="co">#&gt;   Converted input genes: 30</span></span>
+<span><span class="co">#&gt;   Converted input genes: 300</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 5</span></span>
 <span><span class="co">#&gt; Input genes: 920</span></span>
-<span><span class="co">#&gt;   Converted input genes: 226</span></span>
+<span><span class="co">#&gt;   Converted input genes: 869</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 6</span></span>
 <span><span class="co">#&gt; Input genes: 532</span></span>
-<span><span class="co">#&gt;   Converted input genes: 115</span></span>
+<span><span class="co">#&gt;   Converted input genes: 508</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 7</span></span>
 <span><span class="co">#&gt; Input genes: 434</span></span>
-<span><span class="co">#&gt;   Converted input genes: 181</span></span>
+<span><span class="co">#&gt;   Converted input genes: 414</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 8</span></span>
 <span><span class="co">#&gt; Input genes: 336</span></span>
-<span><span class="co">#&gt;   Converted input genes: 170</span></span>
+<span><span class="co">#&gt;   Converted input genes: 293</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">texts</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/sc1_5-1.png" width="1920"></div>
 <p>Word clouds can also be shown.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">texts</span> <span class="op">&lt;-</span> <span class="va">markers</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/TextMarkers.html">TextMarkers</a></span><span class="op">(</span>type<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 0</span></span>
 <span><span class="co">#&gt; Input genes: 753</span></span>
@@ -159,42 +160,42 @@
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 1</span></span>
 <span><span class="co">#&gt; Input genes: 1027</span></span>
-<span><span class="co">#&gt;   Converted input genes: 420</span></span>
+<span><span class="co">#&gt;   Converted input genes: 968</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 2</span></span>
 <span><span class="co">#&gt; Input genes: 409</span></span>
-<span><span class="co">#&gt;   Converted input genes: 50</span></span>
+<span><span class="co">#&gt;   Converted input genes: 387</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 3</span></span>
 <span><span class="co">#&gt; Input genes: 588</span></span>
-<span><span class="co">#&gt;   Converted input genes: 118</span></span>
+<span><span class="co">#&gt;   Converted input genes: 545</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 4</span></span>
 <span><span class="co">#&gt; Input genes: 316</span></span>
-<span><span class="co">#&gt;   Converted input genes: 30</span></span>
+<span><span class="co">#&gt;   Converted input genes: 300</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 5</span></span>
 <span><span class="co">#&gt; Input genes: 920</span></span>
-<span><span class="co">#&gt;   Converted input genes: 225</span></span>
+<span><span class="co">#&gt;   Converted input genes: 869</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 6</span></span>
 <span><span class="co">#&gt; Input genes: 532</span></span>
-<span><span class="co">#&gt;   Converted input genes: 115</span></span>
+<span><span class="co">#&gt;   Converted input genes: 508</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 7</span></span>
 <span><span class="co">#&gt; Input genes: 434</span></span>
-<span><span class="co">#&gt;   Converted input genes: 180</span></span>
+<span><span class="co">#&gt;   Converted input genes: 414</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 8</span></span>
 <span><span class="co">#&gt; Input genes: 336</span></span>
-<span><span class="co">#&gt;   Converted input genes: 170</span></span>
+<span><span class="co">#&gt;   Converted input genes: 293</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">texts</span>, nrow<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -205,18 +206,18 @@
 <span class="header-section-number">11.2</span> <code>findMarkers()</code> in <code>scran</code><a class="anchor" aria-label="anchor" href="#findmarkers-in-scran"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using data from <code>GSE101341</code> as an example input for <code>scran</code>.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">SingleCellExperiment</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://bioconductor.org/packages/scater/">scater</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scran</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"GSE101341_CD14_umis.txt"</span>,</span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scran</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"GSE101341_CD14_umis.txt"</span>,</span>
 <span>                 sep<span class="op">=</span><span class="st">"\t"</span>, row.names<span class="op">=</span><span class="fl">1</span>,</span>
 <span>                 header<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 26121  3655</span></span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/SingleCellExperiment.html">SingleCellExperiment</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>counts<span class="op">=</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">sce</span></span>
+<span><span class="va">sce</span> <span class="co">## Contains some malformed gene names...</span></span>
 <span><span class="co">#&gt; class: SingleCellExperiment </span></span>
 <span><span class="co">#&gt; dim: 26121 3655 </span></span>
 <span><span class="co">#&gt; metadata(0):</span></span>
@@ -230,14 +231,14 @@
 <span><span class="co">#&gt; mainExpName: NULL</span></span>
 <span><span class="co">#&gt; altExpNames(0):</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scran</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">lib.sf.sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/librarySizeFactors.html">librarySizeFactors</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="va">lib.sf.sce</span><span class="op">)</span>,</span>
 <span>     xlab<span class="op">=</span><span class="st">"Log10[Size factor]"</span>,</span>
 <span>     col<span class="op">=</span><span class="st">'grey80'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/sc3-1.png" width="480"></div>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">clust.sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scran/man/quickCluster.html">quickCluster</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span> </span>
 <span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scran/man/computeSumFactors.html">computeSumFactors</a></span><span class="op">(</span><span class="va">sce</span>,</span>
 <span>                         cluster<span class="op">=</span><span class="va">clust.sce</span>,</span>
@@ -252,7 +253,7 @@
 <span><span class="va">plrd</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/sc3-2.png" width="480"></div>
 <p>The function <code>TextMarkersScran</code> performs text fetching recursively for each cluster.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">marker.info</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scran/man/findMarkers.html">findMarkers</a></span><span class="op">(</span><span class="va">sce</span>, <span class="fu"><a href="https://rdrr.io/pkg/SingleCellExperiment/man/colLabels.html">colLabels</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">texts</span> <span class="op">&lt;-</span> <span class="va">marker.info</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/TextMarkersScran.html">TextMarkersScran</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 1</span></span>
@@ -309,7 +310,7 @@
 </h2>
 <p>Single-cell level wordclouds can be plotted on the reduced dimension plot of cells.
 The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE</code>.</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Make text visible</span></span>
@@ -351,8 +352,8 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <span><span class="op">}</span></span>
 <span><span class="va">rawPlot</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/plotdirect-1.png" width="480"></div>
-<p>A function is prepared to generate colors and show word cloud on the reduced dimension plot using the same color as the original plot (<code>plotReducedDimWithTexts</code>). This function can use <code>use_shadowtext</code> in <code><a href="https://lepennec.github.io/ggwordcloud/reference/geom_text_wordcloud.html">ggwordcloud::geom_text_wordcloud</a></code>, which is available from the forked repository (<code>noriakis/ggwordcloud</code>).</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<p>A function is prepared to generate colors and show word cloud on the reduced dimension plot using the same color as the original plot (<code>plotReducedDimWithTexts</code>). This function can use <code>use_shadowtext</code> in <code><a href="https://lepennec.github.io/ggwordcloud/reference/geom_text_wordcloud.html">ggwordcloud::geom_text_wordcloud</a></code>, which is available from the forked repository (<code>noriakis/ggwordcloud</code>). <code>bg.colour</code> is used to specify background color.</p>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotReducedDimWithTexts.html">plotReducedDimWithTexts</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">marker.info</span>, colour_by<span class="op">=</span><span class="st">"label"</span>,point_alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                        use_shadowtext<span class="op">=</span><span class="cn">TRUE</span>, which.label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2"</span>,<span class="st">"4"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 2</span></span>
@@ -366,7 +367,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/formal-1.png" width="480"></div>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Change the bg.colour</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotReducedDimWithTexts.html">plotReducedDimWithTexts</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">marker.info</span>, colour_by<span class="op">=</span><span class="st">"label"</span>,point_alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
@@ -383,7 +384,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/formal-2.png" width="480"></div>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Change the font</span></span>
 <span><span class="co">## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)</span></span>
 <span><span class="fu">sysfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sysfonts/man/font_add.html">font_add</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"alien"</span>,regular<span class="op">=</span><span class="st">"SFAlienEncounters.ttf"</span><span class="op">)</span></span>
@@ -403,43 +404,149 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-sc_files/figure-html/formal-3.png" width="480"></div>
 <p>For the <code>Seurat</code> object, use <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts()</a></code>.</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts</a></span><span class="op">(</span><span class="va">pbmc</span>, <span class="va">markers</span>, label<span class="op">=</span><span class="cn">FALSE</span>, r<span class="op">=</span><span class="va">r</span>, which.label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2"</span>,<span class="st">"4"</span><span class="op">)</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts</a></span><span class="op">(</span><span class="va">pbmc</span>, <span class="va">markers</span>, label<span class="op">=</span><span class="cn">FALSE</span>, rad<span class="op">=</span><span class="va">r</span>, which.label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2"</span>,<span class="st">"4"</span><span class="op">)</span>,</span>
 <span>                 wcScale<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 2</span></span>
 <span><span class="co">#&gt; Input genes: 409</span></span>
-<span><span class="co">#&gt;   Converted input genes: 50</span></span>
+<span><span class="co">#&gt;   Converted input genes: 387</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; 4</span></span>
 <span><span class="co">#&gt; Input genes: 316</span></span>
-<span><span class="co">#&gt;   Converted input genes: 30</span></span>
+<span><span class="co">#&gt;   Converted input genes: 300</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-sc_files/figure-html/formal2-1.png" width="624"></div>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<div class="inline-figure"><img src="07-sc_files/figure-html/formal2-1.png" width="100%"></div>
+<p>Give the function a data frame that is already filtered, like thersholding by adjusted p-values.</p>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
+<span><span class="va">thresh</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">markers</span>, <span class="va">markers</span><span class="op">$</span><span class="va">p_val_adj</span><span class="op">&lt;</span><span class="fl">1e-50</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts</a></span><span class="op">(</span><span class="va">pbmc</span>,</span>
+<span>                 <span class="va">thresh</span>,</span>
+<span>                 label<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>                 rad<span class="op">=</span><span class="va">r</span>,</span>
+<span>                 which.label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2"</span>,<span class="st">"4"</span>,<span class="st">"6"</span><span class="op">)</span>,</span>
+<span>                 args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>numWords<span class="op">=</span><span class="fl">50</span>,scaleLowFreq<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 2</span></span>
+<span><span class="co">#&gt; Input genes: 8</span></span>
+<span><span class="co">#&gt;   Converted input genes: 8</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; 4</span></span>
+<span><span class="co">#&gt; Input genes: 16</span></span>
+<span><span class="co">#&gt;   Converted input genes: 16</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; 6</span></span>
+<span><span class="co">#&gt; Input genes: 40</span></span>
+<span><span class="co">#&gt;   Converted input genes: 39</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/formal3-1.png" width="100%"></div>
+<p><code>geom_sc_wordcloud</code> is prepared to use in conjuction with <code>scplot</code>.</p>
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span>,reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud</a></span><span class="op">(</span><span class="va">markers</span>, show_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                    p_val_adj_threshold <span class="op">=</span> <span class="fl">1e-50</span>, wcScale<span class="op">=</span><span class="fl">7</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim-geom-label.html">sc_dim_geom_label</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="fu">shadowtext</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/shadowtext/man/geom_shadowtext.html">geom_shadowtext</a></span>, </span>
+<span>                  color<span class="op">=</span><span class="st">'black'</span>, bg.color<span class="op">=</span><span class="st">'white'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 3</span></span>
+<span><span class="co">#&gt; Input genes: 64</span></span>
+<span><span class="co">#&gt;   Converted input genes: 60</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; 5</span></span>
+<span><span class="co">#&gt; Input genes: 88</span></span>
+<span><span class="co">#&gt;   Converted input genes: 82</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/scp-1.png" width="100%"></div>
+<p>Some positioning arguments are prepared.</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span>,reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud</a></span><span class="op">(</span><span class="va">markers</span>, show_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">7</span><span class="op">)</span>,</span>
+<span>                    p_val_adj_threshold <span class="op">=</span> <span class="fl">1e-50</span>,</span>
+<span>                    wcScale<span class="op">=</span><span class="fl">7</span>,</span>
+<span>                    base_dens<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 4</span></span>
+<span><span class="co">#&gt; Input genes: 16</span></span>
+<span><span class="co">#&gt;   Converted input genes: 16</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; 7</span></span>
+<span><span class="co">#&gt; Input genes: 9</span></span>
+<span><span class="co">#&gt;   Converted input genes: 8</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/scp2-1.png" width="100%"></div>
+</div>
+<div id="plotting-marker-gene-names-in-plot" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Plotting marker gene names in plot<a class="anchor" aria-label="anchor" href="#plotting-marker-gene-names-in-plot"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can plot gene names instead of gene description by specifying <code>gene_name=TRUE</code> in <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud()</a></code>. Number of genes can be controlled with <code>geneNum</code>. The genes in each cluster are ordered by <code>sort_by</code>, in decreasing order in default (<code>decreasing</code> option).</p>
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span>,reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud</a></span><span class="op">(</span><span class="va">markers</span>, show_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                      gene_name <span class="op">=</span> <span class="cn">TRUE</span>, wcScale<span class="op">=</span><span class="fl">7</span>,</span>
+<span>                      p_val_adj_threshold <span class="op">=</span> <span class="fl">1e-50</span>, base_dens <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/scp3-1.png" width="100%"></div>
+<p>Scaling color should be called before <code><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud()</a></code>.</p>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span>,reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"PuOr"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/geom_sc_wordcloud.html">geom_sc_wordcloud</a></span><span class="op">(</span><span class="va">markers</span>, show_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span><span class="op">)</span>,</span>
+<span>                      gene_name <span class="op">=</span> <span class="cn">TRUE</span>, wcScale<span class="op">=</span><span class="fl">7</span>,</span>
+<span>                      p_val_adj_threshold <span class="op">=</span> <span class="fl">1e-50</span>, base_dens <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/scp4-1.png" width="100%"></div>
+<p>For scran, use <code>plotReducedDimWithTexts</code>.</p>
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotReducedDimWithTexts.html">plotReducedDimWithTexts</a></span><span class="op">(</span><span class="va">sce</span>,</span>
+<span>                        <span class="va">marker.info</span>,</span>
+<span>                        colour_by<span class="op">=</span><span class="st">"label"</span>,</span>
+<span>                        base_dens <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                        point_alpha<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span>                        wcScale<span class="op">=</span><span class="fl">6</span>,</span>
+<span>                        use_shadowtext<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                        bg.colour<span class="op">=</span><span class="st">"grey80"</span>,</span>
+<span>                        gene_name<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                        which.label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"3"</span>,<span class="st">"5"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">scex</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/scp5-1.png" width="100%"></div>
+<div id="plotting-the-enrichment-analysis-results-of-marker-genes" class="section level3" number="11.4.1">
+<h3>
+<span class="header-section-number">11.4.1</span> Plotting the enrichment analysis results of marker genes<a class="anchor" aria-label="anchor" href="#plotting-the-enrichment-analysis-results-of-marker-genes"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">markers</span><span class="op">$</span><span class="va">cluster</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co">## Enrichment analysis</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts</a></span><span class="op">(</span><span class="va">pbmc</span>, <span class="va">markers</span>,label<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/DimPlotWithTexts.html">DimPlotWithTexts</a></span><span class="op">(</span><span class="va">pbmc</span>, <span class="va">thresh</span>, label<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                       point_alpha <span class="op">=</span> <span class="fl">0.8</span>,which.label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span>,</span>
-<span>                       args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>enrich<span class="op">=</span><span class="st">"reactome"</span><span class="op">)</span>,</span>
-<span>                       reduction <span class="op">=</span> <span class="st">"pca"</span>, wcScale<span class="op">=</span><span class="fl">6</span>, r<span class="op">=</span><span class="va">r</span><span class="op">)</span></span>
+<span>                       args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>enrich<span class="op">=</span><span class="st">"reactome"</span>,</span>
+<span>                                 numWords<span class="op">=</span><span class="fl">50</span><span class="op">)</span>,</span>
+<span>                       reduction <span class="op">=</span> <span class="st">"pca"</span>, base_dens<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                       wcScale<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 0</span></span>
-<span><span class="co">#&gt; Input genes: 753</span></span>
-<span><span class="co">#&gt;   Converted input genes: 713</span></span>
+<span><span class="co">#&gt; Input genes: 75</span></span>
+<span><span class="co">#&gt;   Converted input genes: 75</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Performing enrichment analysis</span></span>
 <span><span class="co">#&gt; 6</span></span>
-<span><span class="co">#&gt; Input genes: 532</span></span>
-<span><span class="co">#&gt;   Converted input genes: 115</span></span>
+<span><span class="co">#&gt; Input genes: 40</span></span>
+<span><span class="co">#&gt;   Converted input genes: 39</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Performing enrichment analysis</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-sc_files/figure-html/formal2-2.png" width="624"></div>
+<div class="inline-figure"><img src="07-sc_files/figure-html/formal4-1.png" width="100%"></div>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -452,6 +559,9 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <li><a class="nav-link" href="#visualizing-textual-information-for-marker-genes"><span class="header-section-number">11.1</span> Visualizing textual information for marker genes</a></li>
 <li><a class="nav-link" href="#findmarkers-in-scran"><span class="header-section-number">11.2</span> findMarkers() in scran</a></li>
 <li><a class="nav-link" href="#map-resulting-wordcloud-plots-on-the-reduced-dimension-plot."><span class="header-section-number">11.3</span> Map resulting wordcloud plots on the reduced dimension plot.</a></li>
+<li>
+<a class="nav-link" href="#plotting-marker-gene-names-in-plot"><span class="header-section-number">11.4</span> Plotting marker gene names in plot</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#plotting-the-enrichment-analysis-results-of-marker-genes"><span class="header-section-number">11.4.1</span> Plotting the enrichment analysis results of marker genes</a></li></ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -468,7 +578,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-21.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -134,7 +134,7 @@ In this example, we use mostly human-derived data, and use <code>org.Hs.eg.db</c
 <span><span class="co">#&gt; Type: refseq</span></span>
 <span><span class="co">#&gt; Number of words: 100</span></span>
 <span><span class="co">#&gt; ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8</span></span>
-<span><span class="co">#&gt; 163.9 Kb</span></span>
+<span><span class="co">#&gt; 201.6 Kb</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gwc</span><span class="op">@</span><span class="va">freqDf</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">'Term frequencies.'</span>,</span>
 <span>  row.names <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -185,6 +185,9 @@ Default is <code>1</code>, and the example specifying <code>2</code> is shown be
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">gwc2</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/ngramwc-1.png" width="768"></div>
 <p>Using <code>clusterProfiler</code> functions, one can use enriched pathway names for visualization.
@@ -200,6 +203,9 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Performing enrichment analysis</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">gwc3</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/ngrampath-1.png" width="768"></div>
 <p>One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (<code>pvclust</code>) and identified significant clusters based on the occurrence in the text can be visualized by specifying <code>tag=TRUE</code>. For the significance threshold, <code>pvclAlpha</code> can be specified. The default parameters perform <code>pvclust</code> on the subset of dataset for words with high frequency specified by <code>numWords</code>. If one want to perform on whole matrix (which is a natural way), <code>tagWhole=TRUE</code> can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to <code>pvclust</code> function, by specifying <code>cl</code> as below.</p>
@@ -231,6 +237,9 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">gwcl</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/tagging-1.png" width="768"></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -274,6 +283,9 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/tagging-2.png" width="768"></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -474,9 +486,33 @@ Additionally, one can specify <code>genePlotNum</code> for limiting the genes sh
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/gplot-1.png" width="768"></div>
+<p>By default, the associated genes are plotted without colorization (grey). If preferred, set <code>colorize=TRUE</code> to colorize the associated genes by <code>geneColor</code>. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated gene symbols.</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>                     genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span>                     colorize<span class="op">=</span><span class="cn">TRUE</span>, geneColor<span class="op">=</span><span class="st">"pink"</span>,</span>
+<span>                     colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>                     numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input genes: 7</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/gplot2-1.png" width="768"></div>
 <p>The associated enriched pathways (if present) can be shown by specifying <code>genePathPlot</code>, using <code>ggforce</code>.
 In this option, the function first performs over-representation analysis on the whole gene set, and plot enriched terms for included genes in the plot. Enrichment analysis here is performed by the library <code>clusterProfiler</code> or <code>ReactomePA</code>, and one can control which pathways to plot by <code>genePathPlotSig</code> value.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://joelgombin.github.io/concaveman/">concaveman</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span></span>
 <span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -507,39 +543,45 @@ In this option, the function first performs over-representation analysis on the 
 <span class="header-section-number">2.3</span> Visualization of PubMed information.<a class="anchor" aria-label="anchor" href="#visualization-of-pubmed-information."><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>rentrez</code>, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or microbes) and visualize. For typical use cases, the genes identified by showing <code>genePlot</code>, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by <code>retMax</code> and <code>sortOrder</code>. Be sure to obtain <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">an api key</a> when querying heavily, and specify in <code>apiKey</code> argument.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcAbst.html">wcAbst</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, retMax<span class="op">=</span><span class="fl">20</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">ab</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc-1.png" width="768"></div>
 <p>The returned PubMed IDs are stored in <code>pmids</code> slot.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span><span class="op">@</span><span class="va">pmids</span></span>
-<span><span class="co">#&gt;  [1] "20301571" "27051024" "27838878" "31077069" "33746966"</span></span>
-<span><span class="co">#&gt;  [6] "32749109" "21278243" "23593158" "34284736" "28088319"</span></span>
-<span><span class="co">#&gt; [11] "25867436" "24023723" "27051038" "36472749" "28803404"</span></span>
-<span><span class="co">#&gt; [16] "16835333" "25674148" "33125943" "8053936"  "28474168"</span></span>
+<span><span class="co">#&gt;  [1] "20301571" "27051024" "27838878" "31077069" "34284736"</span></span>
+<span><span class="co">#&gt;  [6] "32749109" "23593158" "24023723" "21278243" "16835333"</span></span>
+<span><span class="co">#&gt; [11] "28088319" "25867436" "27051038" "25674148" "28803404"</span></span>
+<span><span class="co">#&gt; [16] "30847299" "33125943" "28474168" "8053936"  "26400354"</span></span>
 <span><span class="va">ab</span><span class="op">@</span><span class="va">pmids</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 20</span></span></code></pre></div>
 <p>As fetching the same information is not desirable and time consuming, the same object can be passed to <code>redo</code> option and re-perform the analysis like tagging, or changing the visualization options.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">5</span>, <span class="st">"PuOr"</span><span class="op">)</span> </span>
 <span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, pal<span class="op">=</span><span class="va">pal</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                 plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Using previous pvclust results</span></span>
 <span><span class="va">abtag</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc_2-1.png" width="768"></div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abtag2</span><span class="op">@</span><span class="va">net</span></span>
 <span><span class="co">#&gt; Warning: Removed 3 rows containing missing values</span></span>
 <span><span class="co">#&gt; (`geom_point()`).</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/wcabst_wc_2-2.png" width="768"></div>
 <p>If only the gene symbols are to be plotted, specify <code>onlyGene=TRUE</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcAbst.html">wcAbst</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, plotType<span class="op">=</span><span class="st">"network"</span>, onlyGene<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Subsetting to the gene symbol in orgDb</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
@@ -550,7 +592,7 @@ In this option, the function first performs over-representation analysis on the 
 <span class="header-section-number">2.4</span> Comparing two or more networks<a class="anchor" aria-label="anchor" href="#comparing-two-or-more-networks"><i class="fas fa-link"></i></a>
 </h2>
 <p>One can compare two or more networks by providing list of objects produced by wc* functions, like <code>wcGeneSummary</code> and <code>wcAbst</code>. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cxcls</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CXCL"</span>,<span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
@@ -580,108 +622,108 @@ In this option, the function first performs over-representation analysis on the 
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,</span>
 <span>               titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_stringMetric,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label)): font family not found in Windows</span></span>
-<span><span class="co">#&gt; font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label)): font family not found in</span></span>
+<span><span class="co">#&gt; Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_stringMetric,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label)): font family not found in Windows</span></span>
-<span><span class="co">#&gt; font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label)): font family not found in</span></span>
+<span><span class="co">#&gt; Windows font database</span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span></code></pre></div>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-1.png" width="1152"></div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net3</span><span class="op">)</span>,</span>
 <span>               titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span></code></pre></div>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-2.png" width="1152"></div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span>, <span class="va">net3</span><span class="op">)</span>,</span>
 <span>               titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span>, <span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span></code></pre></div>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/compare-3.png" width="1152"></div>
 <p>If <code>tag</code> information is available in both gene clusters, combined tags can be visualized by <code>tag=TRUE</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">keggPathways</span> <span class="op">&lt;-</span> <span class="va">org.Hs.egPATH2EG</span></span>
 <span><span class="va">mappedKeys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-keys.html">mappedkeys</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">)</span></span>
 <span><span class="va">keggList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">[</span><span class="va">mappedKeys</span><span class="op">]</span><span class="op">)</span></span>
@@ -730,64 +772,64 @@ In this option, the function first performs over-representation analysis on the 
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning in grid.Call(C_textBounds,</span></span>
-<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not found</span></span>
-<span><span class="co">#&gt; in Windows font database</span></span></code></pre></div>
+<span><span class="co">#&gt; as.graphicsAnnot(x$label), x$x, x$y, : font family not</span></span>
+<span><span class="co">#&gt; found in Windows font database</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/tagcomp-1.png" width="1440"></div>
 </div>
 <div id="text-over-represenatation-analysis-experimental" class="section level2" number="2.5">
 <h2>
 <span class="header-section-number">2.5</span> Text over represenatation analysis (experimental)<a class="anchor" aria-label="anchor" href="#text-over-represenatation-analysis-experimental"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="va">keggList</span><span class="op">$</span><span class="va">`00785`</span> <span class="co"># Lipoic acid metabolism</span></span>
 <span><span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/ora-1.png" width="480"></div>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            lipoic              step              acid </span></span>
 <span><span class="co">#&gt;      1.600963e-14      8.016934e-08      5.300425e-07 </span></span>
@@ -798,7 +840,7 @@ In this option, the function first performs over-representation analysis on the 
 <span><span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/ora-2.png" width="480"></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          drb        chain   complement        class </span></span>
 <span><span class="co">#&gt; 0.000000e+00 3.669590e-82 3.266180e-74 5.496543e-46 </span></span>
@@ -806,7 +848,7 @@ In this option, the function first performs over-representation analysis on the 
 <span><span class="co">#&gt; 6.851722e-39 1.318324e-34</span></span></code></pre></div>
 <p>This thresholding can be used in RefSeq visualization.
 Filter words using ORA threshold and frequency threshold by setting <code>ora=TRUE</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     ora<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
@@ -818,7 +860,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/oranet-1.png" width="672"></div>
 <p>After obtaining the ORA results, one can plot volcano-plot like plot for the results using <code>plotORA</code> function.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotORA.html">plotORA</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/oraplot-1.png" width="672"></div>
@@ -828,7 +870,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span class="header-section-number">2.6</span> Dependency analyis using udpipe<a class="anchor" aria-label="anchor" href="#dependency-analyis-using-udpipe"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <a href="https://github.com/bnosac/udpipe"><code>udpipe</code></a> package (<a href="https://aclanthology.org/K17-3009/">Straka and Straková. 2017</a>), one can performe dependency analysis of texts in various databases. Set <code>useUdpipe</code> to <code>TRUE</code>, and specify downloaded model to be used in <code>udpipeModel</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"ERCC2"</span><span class="op">)</span>,</span>
 <span>                                  plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                                  useUdpipe<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -846,7 +888,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span class="header-section-number">2.7</span> Changing the font<a class="anchor" aria-label="anchor" href="#changing-the-font"><i class="fas fa-link"></i></a>
 </h2>
 <p>Font can be specified by <code>fontFamily</code>, which affects all the labels including edges and nodes.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"wcGeneSummary"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">degs</span> <span class="op">&lt;-</span> <span class="va">d3degUpAssetta2016</span></span>
 <span><span class="co">## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)</span></span>
@@ -863,7 +905,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="va">p</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_wcGeneSummary_files/figure-html/font-1.png" width="864"></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -886,10 +928,10 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt;  [1] dplyr_1.1.0           dendextend_1.16.0    </span></span>
 <span><span class="co">#&gt;  [3] clusterProfiler_4.6.2 ReactomePA_1.42.0    </span></span>
 <span><span class="co">#&gt;  [5] RColorBrewer_1.1-3    ggraph_2.1.0         </span></span>
-<span><span class="co">#&gt;  [7] ggplot2_3.4.1         org.Hs.eg.db_3.16.0  </span></span>
-<span><span class="co">#&gt;  [9] AnnotationDbi_1.60.0  IRanges_2.32.0       </span></span>
-<span><span class="co">#&gt; [11] S4Vectors_0.36.2      Biobase_2.58.0       </span></span>
-<span><span class="co">#&gt; [13] BiocGenerics_0.44.0   wcGeneSummary_0.99.0 </span></span>
+<span><span class="co">#&gt;  [7] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 </span></span>
+<span><span class="co">#&gt;  [9] IRanges_2.32.0        S4Vectors_0.36.2     </span></span>
+<span><span class="co">#&gt; [11] Biobase_2.58.0        BiocGenerics_0.44.0  </span></span>
+<span><span class="co">#&gt; [13] wcGeneSummary_0.99.0  ggplot2_3.4.1        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] shadowtext_0.1.2       fastmatch_1.1-3       </span></span>
@@ -994,7 +1036,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-21.</p>
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

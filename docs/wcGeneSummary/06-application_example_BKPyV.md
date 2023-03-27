@@ -150,7 +150,7 @@ netreac <- wcGeneSummary(degs,
 #> Input genes: 191
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 175
+#>   Converted input genes: 174
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
@@ -174,7 +174,7 @@ net1 <- wcGeneSummary(excheck,
 #>   Converted input genes: 57
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Found 27 enriched term
+#> Found 28 enriched term
 net1@net
 ```
 
@@ -251,36 +251,38 @@ From the RefSeq summary and articles related to important genes, the cluster cou
 ```r
 compareWordNet(list(abstnet, titlenet, netreac, net1),
                titles=c("Abstract","Title","Reactome","RefSeq"))
+#> Warning in RColorBrewer::brewer.pal(catNum, colPal): n too large, allowed maximum for palette Pastel1 is 9
+#> Returning the palette you asked for with that many colors
 #> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in Windows
-#> font database
+#> as.graphicsAnnot(x$label)): font family not found in
+#> Windows font database
 
 #> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in Windows
-#> font database
+#> as.graphicsAnnot(x$label)): font family not found in
+#> Windows font database
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/combineapp-1.png" width="1920" />
@@ -304,20 +306,20 @@ for (nm in names(V(conet))) {
 ddrNms
 #>  [1] "checkpoint"      "cycle"           "DNA"            
 #>  [4] "phosphorylation" "required"        "response"       
-#>  [7] "SESN1"           "DDB2"            "RAD17"          
-#> [10] "association"     "degradation"     "cellular"       
-#> [13] "checkpoint"      "cycle"           "damage"         
-#> [16] "phosphorylation" "required"        "response"       
-#> [19] "SESN1"           "DDB2"            "RAD17"          
-#> [22] "association"     "degradation"     "protein"        
-#> [25] "regulates"       "CDT2"            "chromatin"      
-#> [28] "complex"         "Damage"          "function"       
-#> [31] "induced"         "repair"          "Excision"       
-#> [34] "Nucleotide"      "regulates"       "cellular"       
-#> [37] "checkpoint"      "DNA"             "response"       
-#> [40] "RAD17"           "Cancer"          "chromatin"      
-#> [43] "function"        "DNA"             "DDB2"           
-#> [46] "protein"         "Knockdown"       "METTL14"
+#>  [7] "DDB2"            "SESN1"           "RAD17"          
+#> [10] "checkpoint"      "cycle"           "damage"         
+#> [13] "phosphorylation" "required"        "response"       
+#> [16] "DDB2"            "SESN1"           "RAD17"          
+#> [19] "Cancer"          "complex"         "degradation"    
+#> [22] "protein"         "regulates"       "CDT2"           
+#> [25] "chromatin"       "Damage"          "function"       
+#> [28] "induced"         "repair"          "Excision"       
+#> [31] "Global"          "Nucleotide"      "Proteins"       
+#> [34] "regulates"       "checkpoint"      "DNA"            
+#> [37] "response"        "DDB2"            "RAD17"          
+#> [40] "Cancer"          "chromatin"       "function"       
+#> [43] "DNA"             "DDB2"            "protein"        
+#> [46] "METTL14"
 
 ddrRelated <- induced.subgraph(conet,
                  names(V(conet)) %in% unique(ddrNms))
@@ -330,26 +332,26 @@ ggraph(ddrRelated)+
                    bg.r = .15)+
     scale_color_manual(values=c("steelblue","tomato"))+
     theme_graph()
-#> Using `stress` as default layout
+#> Using "stress" as default layout
 #> Warning: Using the `size` aesthetic in this geom was deprecated in
 #> ggplot2 3.4.0.
 #> ℹ Please use `linewidth` in the `default_aes` field and
 #>   elsewhere instead.
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/ddr-1.png" width="672" />
@@ -362,12 +364,14 @@ The network can be obtained by `returnNet=TRUE`, which can be used for downstrea
 
 conetDeg <- igraph::degree(conet)
 conetDeg[order(conetDeg, decreasing=TRUE)] |> head(15)
-#>       SESN1         DNA       RAD17     protein  activation 
-#>          25          21          18          18          17 
-#>  checkpoint      Cancer        TP53        DDB2    response 
-#>          15          15          13          13          12 
-#> degradation      damage       Human       model    function 
-#>          12          11          11          11          11
+#>        SESN1          DNA        RAD17      protein 
+#>           25           20           17           16 
+#>   checkpoint       Cancer        Human         DDB2 
+#>           15           15           15           14 
+#>       growth         TP53         TSC1   activation 
+#>           13           12           12           10 
+#>      complex inflammation        Death 
+#>           10           10            9
 
 conet <- induced_subgraph(conet, conetDeg>1)
 
@@ -375,8 +379,6 @@ wt <- igraph::walktrap.community(conet)
 igraph::V(conet)$walktrap <- wt$membership
 pal <- RColorBrewer::brewer.pal(length(unique(wt$membership)),
                                 "Dark2") 
-#> Warning in RColorBrewer::brewer.pal(length(unique(wt$membership)), "Dark2"): n too large, allowed maximum for palette Dark2 is 8
-#> Returning the palette you asked for with that many colors
 pal <- colorRampPalette(pal)(20)
 
 ggraph(conet)+
@@ -389,21 +391,22 @@ ggraph(conet)+
     scale_color_manual(values=pal,
                          name="Walktrap")+
     theme_graph()
-#> Using `stress` as default layout
+#> Using "stress" as default layout
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 
 #> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not found
-#> in Windows font database
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
+
+#> Warning in grid.Call(C_textBounds,
+#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
+#> found in Windows font database
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/combineNet-1.png" width="960" />
@@ -444,11 +447,11 @@ sessionInfo()
 #> other attached packages:
 #>  [1] ggforce_0.4.1         igraph_1.4.1         
 #>  [3] ggraph_2.1.0          clusterProfiler_4.6.2
-#>  [5] ReactomePA_1.42.0     ggplot2_3.4.1        
-#>  [7] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 
-#>  [9] IRanges_2.32.0        S4Vectors_0.36.2     
-#> [11] Biobase_2.58.0        BiocGenerics_0.44.0  
-#> [13] wcGeneSummary_0.99.0 
+#>  [5] ReactomePA_1.42.0     org.Hs.eg.db_3.16.0  
+#>  [7] AnnotationDbi_1.60.0  IRanges_2.32.0       
+#>  [9] S4Vectors_0.36.2      Biobase_2.58.0       
+#> [11] BiocGenerics_0.44.0   wcGeneSummary_0.99.0 
+#> [13] ggplot2_3.4.1        
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       

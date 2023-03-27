@@ -8,6 +8,7 @@ Some functions can be used to the parsing purpose.
 
 ```r
 library(wcGeneSummary)
+#> Loading required package: ggplot2
 #> 
 #> Registered S3 method overwritten by 'pvclust':
 #>   method       from      

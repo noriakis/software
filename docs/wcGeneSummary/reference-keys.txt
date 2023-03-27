@@ -28,6 +28,8 @@ single-cell-transcriptomic-data
 visualizing-textual-information-for-marker-genes
 findmarkers-in-scran
 map-resulting-wordcloud-plots-on-the-reduced-dimension-plot.
+plotting-marker-gene-names-in-plot
+plotting-the-enrichment-analysis-results-of-marker-genes
 parsing
 parsing-enzyme-comission-numbers-its-description-and-comment.
 parsing-uniprot-organism-identifiers.
