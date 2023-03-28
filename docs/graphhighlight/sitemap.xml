@@ -22,7 +22,13 @@
     <loc>/reference/ggplot_add.highlight_node.html</loc>
   </url>
   <url>
+    <loc>/reference/ggplot_add.highlight_node_label.html</loc>
+  </url>
+  <url>
     <loc>/reference/ggplot_add.highlight_node_text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/highlight_node_label.html</loc>
   </url>
   <url>
     <loc>/reference/highlight_node_text.html</loc>
