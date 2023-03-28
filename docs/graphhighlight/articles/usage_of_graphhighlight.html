@@ -163,10 +163,9 @@ Otherwise the same parameters are used for stacking the layers.</p>
 <code>geom_node_text</code> and <code>geom_text_repel</code> can
 highlight the text much better.</p>
 </div>
-</div>
-<div class="section level3">
-<h3 id="highlight_edge">highlight_edge<a class="anchor" aria-label="anchor" href="#highlight_edge"></a>
-</h3>
+<div class="section level4">
+<h4 id="highlight_edge">highlight_edge<a class="anchor" aria-label="anchor" href="#highlight_edge"></a>
+</h4>
 <p>Edges can be highlighted in the same way as
 <code>highlight_node</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -235,9 +234,9 @@ looking.</p>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="usage_of_graphhighlight_files/figure-html/edge5-1.png" width="768"></p>
 </div>
-<div class="section level3">
-<h3 id="highlight_node_text">highlight_node_text<a class="anchor" aria-label="anchor" href="#highlight_node_text"></a>
-</h3>
+<div class="section level4">
+<h4 id="highlight_node_text">highlight_node_text<a class="anchor" aria-label="anchor" href="#highlight_node_text"></a>
+</h4>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"nicely"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html" class="external-link">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, color<span class="op">=</span><span class="va">size</span><span class="op">)</span>, repel<span class="op">=</span><span class="cn">TRUE</span>, bg.colour<span class="op">=</span><span class="st">"grey"</span><span class="op">)</span><span class="op">+</span></span>
@@ -245,9 +244,9 @@ looking.</p>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="usage_of_graphhighlight_files/figure-html/text1-1.png" width="768"></p>
 </div>
-<div class="section level3">
-<h3 id="highlight_node_label">highlight_node_label<a class="anchor" aria-label="anchor" href="#highlight_node_label"></a>
-</h3>
+<div class="section level4">
+<h4 id="highlight_node_label">highlight_node_label<a class="anchor" aria-label="anchor" href="#highlight_node_label"></a>
+</h4>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html" class="external-link">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"nicely"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html" class="external-link">geom_node_label</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, color<span class="op">=</span><span class="va">size</span><span class="op">)</span>, repel<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span></span>
@@ -255,9 +254,9 @@ looking.</p>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html" class="external-link">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="usage_of_graphhighlight_files/figure-html/label1-1.png" width="768"></p>
 </div>
-<div class="section level3">
-<h3 id="combine">Combine<a class="anchor" aria-label="anchor" href="#combine"></a>
-</h3>
+<div class="section level4">
+<h4 id="combine">Combine<a class="anchor" aria-label="anchor" href="#combine"></a>
+</h4>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/erdos.renyi.game.html" class="external-link">random.graph.game</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fl">0.05</span>,directed<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html" class="external-link">E</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -310,6 +309,7 @@ looking.</p>
 <span><span class="co">## [53] magrittr_2.0.3     sass_0.4.5         tibble_3.1.8       tidyr_1.3.0       </span></span>
 <span><span class="co">## [57] pkgconfig_2.0.3    MASS_7.3-58.1      viridis_0.6.2      rmarkdown_2.20    </span></span>
 <span><span class="co">## [61] rstudioapi_0.14    R6_2.5.1           compiler_4.2.2</span></span></code></pre>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
