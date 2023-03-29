@@ -16,6 +16,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/LICENSE-text.html</loc>
+  </url>
+  <url>
     <loc>/reference/ggplot_add.highlight_edge.html</loc>
   </url>
   <url>
@@ -26,6 +29,12 @@
   </url>
   <url>
     <loc>/reference/ggplot_add.highlight_node_text.html</loc>
+  </url>
+  <url>
+    <loc>/reference/highlight_edge.html</loc>
+  </url>
+  <url>
+    <loc>/reference/highlight_node.html</loc>
   </url>
   <url>
     <loc>/reference/highlight_node_label.html</loc>
