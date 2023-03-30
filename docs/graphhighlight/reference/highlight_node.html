@@ -65,8 +65,11 @@ highlight the nodes</p>
 <span>  shape_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shape_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shape_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shape_with_text <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  glow_size <span class="op">=</span> <span class="fl">1.2</span>,</span>
-<span>  override_text <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  override_text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  use_ggfx <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ggfx_params <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -113,12 +116,25 @@ specified by `highlight_color` (default: FALSE, use the raw color of the nodes)<
 <dd><p>shape color</p></dd>
 
 
+<dt>shape_with_text</dt>
+<dd><p>if specified, show text along with shape (21 only)
+using `geomtextpath`</p></dd>
+
+
 <dt>glow_size</dt>
 <dd><p>argument to control how big the glowing will be</p></dd>
 
 
 <dt>override_text</dt>
 <dd><p>after highlighting, stack the last geom_node_text layer</p></dd>
+
+
+<dt>use_ggfx</dt>
+<dd><p>use ggfx geom to highlight, default to NULL</p></dd>
+
+
+<dt>ggfx_params</dt>
+<dd><p>ggfx parameters</p></dd>
 
 </dl></div>
 
