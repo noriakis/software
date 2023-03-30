@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Annotating gene cluster dendrogram | wcGeneSummary (OSplot)</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Annotating gene cluster dendrogram | wcGeneSummary (OSplot)">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/annotating-gene-cluster-dendrogram.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Annotating gene cluster dendrogram | wcGeneSummary (OSplot)">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+<meta name="description" content="The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module...">
+<meta property="og:description" content="The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module...">
+<meta name="twitter:description" content="The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">wcGeneSummary (OSplot)</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
+<li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
+<li><a class="" href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">4</span> Interactive inspection of gene cluster network annotated by words</a></li>
+<li><a class="active" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Annotating gene cluster dendrogram</a></li>
+<li><a class="" href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Assess the occurrence of the speicific words across gene clusters</a></li>
+<li><a class="" href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Recluster the cluster using word information</a></li>
+<li><a class="" href="including-the-other-databases-an-example-in-metacyc.html"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="" href="pathview-text.html"><span class="header-section-number">9</span> Pathview text</a></li>
+<li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
+<li><a class="" href="single-cell-transcriptomic-data.html"><span class="header-section-number">11</span> Single-cell transcriptomic data</a></li>
+<li><a class="" href="parsing.html"><span class="header-section-number">12</span> Parsing</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="annotating-gene-cluster-dendrogram" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Annotating gene cluster dendrogram<a class="anchor" aria-label="anchor" href="#annotating-gene-cluster-dendrogram"><i class="fas fa-link"></i></a>
+</h1>
+<p>The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using <code>plotEigengeneNetworks</code>, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># WGCNA::plotEigengeneNetworks(mod$MEs, mod$colors, plotHeatmaps = FALSE)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna-1.png" width="576"></div>
+<p>This calculates a dendrogram using <code>pvclust</code> internally in default. If you would like to plot segments involving only the specified gene cluster, use <code>candidateNodes</code> to specify the nodes.</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576"></div>
+<p>By default, the function calculates the frequency of common words across branches and plot the words that the differences between branches are large. By disabling <code>takeIntersect</code>, the function plots the frequent words for each branch.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>,</span>
+<span>    <span class="va">modColors</span>, takeIntersect<span class="op">=</span><span class="cn">FALSE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaInt-1.png" width="576"></div>
+<p>To plot the word cloud instead of pyramid plots, use <code>useWC</code> option. For scaling the word size, use <code>wcScale</code> option.</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">scale4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">scale15</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">15</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">scale4</span> <span class="op">+</span> <span class="va">scale15</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="576"></div>
+<p>This uses <code>ggwordcloud</code> and a list specified by <code>wcArg</code> is passed to the function.</p>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">15</span>, wcArg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>rot.per<span class="op">=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawc3-1.png" width="576"></div>
+<p>The horizontal plot can be specified by <code>horiz=TRUE</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>,</span>
+<span>                               <span class="va">modColors</span>,</span>
+<span>                               useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                               candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
+<span>                               wcScale<span class="op">=</span><span class="fl">15</span>,</span>
+<span>                               wcArg<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>rot.per<span class="op">=</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>                               horiz<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnawchor-1.png" width="576"></div>
+<p>For examining enriched pathway names in the dendrograms, specify <code>argList</code> to <code>wcGeneSummary</code>, like <code>list(enrich="kegg")</code>.</p>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"words"</span>, argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>enrich<span class="op">=</span><span class="st">"kegg"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Performing enrichment analysis</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Performing enrichment analysis</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnapath-1.png" width="576"></div>
+<p>Other than textual information, we can simply annotate the dendrogram using enrichment analysis.
+Useful for inspecting how the branches of dendrogram contains pathway information.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcna4-1.png" width="576"></div>
+<p>The column names for clusterProfiler results can be specified to <code>showType</code>.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span>, showType<span class="op">=</span><span class="st">"Description"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="576"></div>
+<p>Text sizing and wrapping can be controlled by <code>textSize</code> and <code>wrap</code>.</p>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, type<span class="op">=</span><span class="st">"enrich"</span>, showType<span class="op">=</span><span class="st">"Description"</span>,</span>
+<span>    textSize<span class="op">=</span><span class="fl">1.5</span>, wrap<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/wgcnaDesc2-1.png" width="576"></div>
+<p>If you have a specifically interested pathway, use <code>highlight</code> to highlight the names in the dendrogram.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
+<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight-1.png" width="672"></div>
+<p><code>spacer</code> can control the gaps above and below the grob on the dendrogram.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
+<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span>, spacer<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="672"></div>
+<p>Using a popular tree visualization library <code>ggtree</code> and <code>ggimage</code>, plotting of word cloud on the tip nodes is possible by specifying <code>tipWC=TRUE</code> . This saves the word cloud plots in the <code>imageDir</code>, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in <code>tipWCNodes</code>. In this mode, one must pass object that can be passed to <code>ggtree()</code>.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hcl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>,</span>
+<span>                                     <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
+<span>                                     dendPlot<span class="op">=</span><span class="st">"ggtree"</span>,</span>
+<span>                                     dhc<span class="op">=</span><span class="va">hcl</span>,</span>
+<span>                                     useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                     tipWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                     tipWCNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME3"</span><span class="op">)</span>,</span>
+<span>                                     imageDir<span class="op">=</span><span class="st">"testimage"</span>,</span>
+<span>                                     candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
+<span>                                     wcScale<span class="op">=</span><span class="fl">10</span>,</span>
+<span>                                     tipSize <span class="op">=</span> <span class="fl">.3</span>,</span>
+<span>                                     offset <span class="op">=</span> <span class="fl">.1</span>,</span>
+<span>                                     asp<span class="op">=</span><span class="fl">1.4</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Annotating tip by word cloud</span></span>
+<span><span class="co">#&gt;   Producing ME3</span></span>
+<span><span class="co">#&gt; Input genes: 7</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Input genes: 25</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 25</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="va">gr</span></span>
+<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
+<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
+<span><span class="co">#&gt; fit on page. They have been removed.</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672"></div>
+<p>By specifying <code>returnGlobOnly</code>, the grobs with the position in the dendrogram can be returned.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>,</span>
+<span>                               returnGlobOnly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 12</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="va">gro</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">plot</span></span>
+<span><span class="co">#&gt; TableGrob (20 x 47) "layout": 52 grobs</span></span>
+<span><span class="co">#&gt;     z         cells       name</span></span>
+<span><span class="co">#&gt; 1   5 ( 9- 9, 7- 7)   spacer-1</span></span>
+<span><span class="co">#&gt; 2   7 (11-11, 7- 7)   axis-l-1</span></span>
+<span><span class="co">#&gt; 3   3 (13-13, 7- 7)   spacer-1</span></span>
+<span><span class="co">#&gt; 4   6 ( 9- 9, 9- 9)   axis-t-1</span></span>
+<span><span class="co">#&gt; 5   1 (11-11, 9- 9)    panel-1</span></span>
+<span><span class="co">#&gt; 6   9 (13-13, 9- 9)   axis-b-1</span></span>
+<span><span class="co">#&gt; 7   4 ( 9- 9,11-11)   spacer-1</span></span>
+<span><span class="co">#&gt; 8   8 (11-11,11-11)   axis-r-1</span></span>
+<span><span class="co">#&gt; 9   2 (13-13,11-11)   spacer-1</span></span>
+<span><span class="co">#&gt; 10 10 ( 8- 8, 9- 9)   xlab-t-1</span></span>
+<span><span class="co">#&gt; 11 11 (14-14, 9- 9)   xlab-b-1</span></span>
+<span><span class="co">#&gt; 12 12 (11-11, 6- 6)   ylab-l-1</span></span>
+<span><span class="co">#&gt; 13 13 (11-11,12-12)   ylab-r-1</span></span>
+<span><span class="co">#&gt; 14 14 ( 5- 5, 9- 9) subtitle-1</span></span>
+<span><span class="co">#&gt; 15 15 ( 4- 4, 9- 9)    title-1</span></span>
+<span><span class="co">#&gt; 16 16 (15-15, 9- 9)  caption-1</span></span>
+<span><span class="co">#&gt; 17 17 ( 3- 3, 3- 3)      tag-1</span></span>
+<span><span class="co">#&gt; 18 22 ( 9- 9,22-22)   spacer-2</span></span>
+<span><span class="co">#&gt; 19 24 (11-11,22-22)   axis-l-2</span></span>
+<span><span class="co">#&gt; 20 20 (13-13,22-22)   spacer-2</span></span>
+<span><span class="co">#&gt; 21 23 ( 9- 9,24-24)   axis-t-2</span></span>
+<span><span class="co">#&gt; 22 18 (11-11,24-24)    panel-2</span></span>
+<span><span class="co">#&gt; 23 26 (13-13,24-24)   axis-b-2</span></span>
+<span><span class="co">#&gt; 24 21 ( 9- 9,26-26)   spacer-2</span></span>
+<span><span class="co">#&gt; 25 25 (11-11,26-26)   axis-r-2</span></span>
+<span><span class="co">#&gt; 26 19 (13-13,26-26)   spacer-2</span></span>
+<span><span class="co">#&gt; 27 27 ( 8- 8,24-24)   xlab-t-2</span></span>
+<span><span class="co">#&gt; 28 28 (14-14,24-24)   xlab-b-2</span></span>
+<span><span class="co">#&gt; 29 29 (11-11,21-21)   ylab-l-2</span></span>
+<span><span class="co">#&gt; 30 30 (11-11,27-27)   ylab-r-2</span></span>
+<span><span class="co">#&gt; 31 31 ( 5- 5,24-24) subtitle-2</span></span>
+<span><span class="co">#&gt; 32 32 ( 4- 4,24-24)    title-2</span></span>
+<span><span class="co">#&gt; 33 33 (15-15,24-24)  caption-2</span></span>
+<span><span class="co">#&gt; 34 34 ( 3- 3,18-18)      tag-2</span></span>
+<span><span class="co">#&gt; 35 39 ( 9- 9,37-37)   spacer-3</span></span>
+<span><span class="co">#&gt; 36 41 (11-11,37-37)   axis-l-3</span></span>
+<span><span class="co">#&gt; 37 37 (13-13,37-37)   spacer-3</span></span>
+<span><span class="co">#&gt; 38 40 ( 9- 9,39-39)   axis-t-3</span></span>
+<span><span class="co">#&gt; 39 35 (11-11,39-39)    panel-3</span></span>
+<span><span class="co">#&gt; 40 43 (13-13,39-39)   axis-b-3</span></span>
+<span><span class="co">#&gt; 41 38 ( 9- 9,41-41)   spacer-3</span></span>
+<span><span class="co">#&gt; 42 42 (11-11,41-41)   axis-r-3</span></span>
+<span><span class="co">#&gt; 43 36 (13-13,41-41)   spacer-3</span></span>
+<span><span class="co">#&gt; 44 44 ( 8- 8,39-39)   xlab-t-3</span></span>
+<span><span class="co">#&gt; 45 45 (14-14,39-39)   xlab-b-3</span></span>
+<span><span class="co">#&gt; 46 46 (11-11,36-36)   ylab-l-3</span></span>
+<span><span class="co">#&gt; 47 47 (11-11,42-42)   ylab-r-3</span></span>
+<span><span class="co">#&gt; 48 48 ( 5- 5,39-39) subtitle-3</span></span>
+<span><span class="co">#&gt; 49 49 ( 4- 4,39-39)    title-3</span></span>
+<span><span class="co">#&gt; 50 50 (15-15,39-39)  caption-3</span></span>
+<span><span class="co">#&gt; 51 51 ( 3- 3,33-33)      tag-3</span></span>
+<span><span class="co">#&gt; 52  0 ( 1-20, 1-47) background</span></span>
+<span><span class="co">#&gt;                                            grob</span></span>
+<span><span class="co">#&gt; 1                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 2          absoluteGrob[GRID.absoluteGrob.4105]</span></span>
+<span><span class="co">#&gt; 3                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 4                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 5                     gTree[panel-1.gTree.4103]</span></span>
+<span><span class="co">#&gt; 6          absoluteGrob[GRID.absoluteGrob.4104]</span></span>
+<span><span class="co">#&gt; 7                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 8                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 9                                zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 10                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 11 zeroGrob[axis.title.x.bottom..zeroGrob.4106]</span></span>
+<span><span class="co">#&gt; 12   zeroGrob[axis.title.y.left..zeroGrob.4107]</span></span>
+<span><span class="co">#&gt; 13                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 14       zeroGrob[plot.subtitle..zeroGrob.4109]</span></span>
+<span><span class="co">#&gt; 15          zeroGrob[plot.title..zeroGrob.4108]</span></span>
+<span><span class="co">#&gt; 16        zeroGrob[plot.caption..zeroGrob.4111]</span></span>
+<span><span class="co">#&gt; 17            zeroGrob[plot.tag..zeroGrob.4110]</span></span>
+<span><span class="co">#&gt; 18                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 19         absoluteGrob[GRID.absoluteGrob.4123]</span></span>
+<span><span class="co">#&gt; 20                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 21                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 22                    gTree[panel-1.gTree.4121]</span></span>
+<span><span class="co">#&gt; 23         absoluteGrob[GRID.absoluteGrob.4122]</span></span>
+<span><span class="co">#&gt; 24                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 25                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 26                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 27                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 28 zeroGrob[axis.title.x.bottom..zeroGrob.4124]</span></span>
+<span><span class="co">#&gt; 29   zeroGrob[axis.title.y.left..zeroGrob.4125]</span></span>
+<span><span class="co">#&gt; 30                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 31       zeroGrob[plot.subtitle..zeroGrob.4127]</span></span>
+<span><span class="co">#&gt; 32          zeroGrob[plot.title..zeroGrob.4126]</span></span>
+<span><span class="co">#&gt; 33        zeroGrob[plot.caption..zeroGrob.4129]</span></span>
+<span><span class="co">#&gt; 34            zeroGrob[plot.tag..zeroGrob.4128]</span></span>
+<span><span class="co">#&gt; 35                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 36         absoluteGrob[GRID.absoluteGrob.4142]</span></span>
+<span><span class="co">#&gt; 37                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 38                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 39                    gTree[panel-1.gTree.4140]</span></span>
+<span><span class="co">#&gt; 40         absoluteGrob[GRID.absoluteGrob.4141]</span></span>
+<span><span class="co">#&gt; 41                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 42                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 43                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 44                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 45 zeroGrob[axis.title.x.bottom..zeroGrob.4143]</span></span>
+<span><span class="co">#&gt; 46   zeroGrob[axis.title.y.left..zeroGrob.4144]</span></span>
+<span><span class="co">#&gt; 47                               zeroGrob[NULL]</span></span>
+<span><span class="co">#&gt; 48       zeroGrob[plot.subtitle..zeroGrob.4146]</span></span>
+<span><span class="co">#&gt; 49          zeroGrob[plot.title..zeroGrob.4145]</span></span>
+<span><span class="co">#&gt; 50        zeroGrob[plot.caption..zeroGrob.4148]</span></span>
+<span><span class="co">#&gt; 51            zeroGrob[plot.tag..zeroGrob.4147]</span></span>
+<span><span class="co">#&gt; 52             rect[plot.background..rect.4163]</span></span></code></pre></div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">4</span> Interactive inspection of gene cluster network annotated by words</a></div>
+<div class="next"><a href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Assess the occurrence of the speicific words across gene clusters</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#annotating-gene-cluster-dendrogram"><span class="header-section-number">5</span> Annotating gene cluster dendrogram</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-03-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
