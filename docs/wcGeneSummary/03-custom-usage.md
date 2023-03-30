@@ -3,6 +3,7 @@
 
 
 
+
 ```r
 library(wcGeneSummary)
 library(ggplot2)
@@ -198,7 +199,7 @@ plotEigengeneNetworksWithWords(MEs, modColors)
 #> Filtered 65 words (frequency and/or tfidf)
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcna-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcna-1.png" width="100%" style="display: block; margin: auto;" />
 
 This calculates a dendrogram using `pvclust` internally in default. If you would like to plot segments involving only the specified gene cluster, use `candidateNodes` to specify the nodes.
 
@@ -225,7 +226,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, candidateNodes=c("ME2"))
 #> Filtered 65 words (frequency and/or tfidf)
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcna2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 By default, the function calculates the frequency of common words across branches and plot the words that the differences between branches are large. By disabling `takeIntersect`, the function plots the frequent words for each branch.
@@ -254,7 +255,7 @@ plotEigengeneNetworksWithWords(MEs,
 #> Filtered 65 words (frequency and/or tfidf)
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnaInt-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnaInt-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 To plot the word cloud instead of pyramid plots, use `useWC` option. For scaling the word size, use `wcScale` option.
@@ -294,7 +295,7 @@ scale15 <- plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateN
 scale4 + scale15
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="100%" style="display: block; margin: auto;" />
 
 This uses `ggwordcloud` and a list specified by `wcArg` is passed to the function.
 
@@ -317,7 +318,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Filtered 65 words (frequency and/or tfidf)
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnawc3-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnawc3-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 The horizontal plot can be specified by `horiz=TRUE`.
@@ -347,7 +348,7 @@ plotEigengeneNetworksWithWords(MEs,
 #> Filtered 65 words (frequency and/or tfidf)
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnawchor-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnawchor-1.png" width="100%" style="display: block; margin: auto;" />
 
 For examining enriched pathway names in the dendrograms, specify `argList` to `wcGeneSummary`, like `list(enrich="kegg")`.
 
@@ -376,7 +377,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="words", argList=list(enrich
 #> Performing enrichment analysis
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnapath-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnapath-1.png" width="100%" style="display: block; margin: auto;" />
 
 Other than textual information, we can simply annotate the dendrogram using enrichment analysis.
 Useful for inspecting how the branches of dendrogram contains pathway information. 
@@ -396,7 +397,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich")
 #> Bootstrap (r = 1.4)... Done.
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcna4-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcna4-1.png" width="100%" style="display: block; margin: auto;" />
 
 The column names for clusterProfiler results can be specified to `showType`.
 
@@ -415,7 +416,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich", showType="Descript
 #> Bootstrap (r = 1.4)... Done.
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnaDesc-1.png" width="100%" style="display: block; margin: auto;" />
 
 Text sizing and wrapping can be controlled by `textSize` and `wrap`.
 
@@ -435,7 +436,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich", showType="Descript
 #> Bootstrap (r = 1.4)... Done.
 ```
 
-<img src="03-custom-usage_files/figure-html/wgcnaDesc2-1.png" width="576" />
+<img src="03-custom-usage_files/figure-html/wgcnaDesc2-1.png" width="100%" style="display: block; margin: auto;" />
 
 If you have a specifically interested pathway, use `highlight` to highlight the names in the dendrogram.
 
@@ -459,7 +460,7 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 #> columns
 ```
 
-<img src="03-custom-usage_files/figure-html/highlight-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/highlight-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 `spacer` can control the gaps above and below the grob on the dendrogram.
@@ -484,7 +485,7 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 #> columns
 ```
 
-<img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/highlight_2-1.png" width="100%" style="display: block; margin: auto;" />
 
 Using a popular tree visualization library `ggtree` and `ggimage`, plotting of word cloud on the tip nodes is possible by specifying `tipWC=TRUE` . This saves the word cloud plots in the `imageDir`, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in `tipWCNodes`. In this mode, one must pass object that can be passed to `ggtree()`.
 
@@ -515,6 +516,8 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel1 is 9
+#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
@@ -531,12 +534,10 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Adding another scale for size, which will replace the
 #> existing scale.
 gr
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
+#> Some words could not fit on page. They have been removed.
 ```
 
-<img src="03-custom-usage_files/figure-html/ggtree-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/ggtree-1.png" width="100%" style="display: block; margin: auto;" />
 
 By specifying `returnGlobOnly`, the grobs with the position in the dendrogram can be returned.
 
@@ -622,59 +623,59 @@ gro[[1]]$plot
 #> 50 50 (15-15,39-39)  caption-3
 #> 51 51 ( 3- 3,33-33)      tag-3
 #> 52  0 ( 1-20, 1-47) background
-#>                                            grob
-#> 1                                zeroGrob[NULL]
-#> 2          absoluteGrob[GRID.absoluteGrob.4105]
-#> 3                                zeroGrob[NULL]
-#> 4                                zeroGrob[NULL]
-#> 5                     gTree[panel-1.gTree.4103]
-#> 6          absoluteGrob[GRID.absoluteGrob.4104]
-#> 7                                zeroGrob[NULL]
-#> 8                                zeroGrob[NULL]
-#> 9                                zeroGrob[NULL]
-#> 10                               zeroGrob[NULL]
-#> 11 zeroGrob[axis.title.x.bottom..zeroGrob.4106]
-#> 12   zeroGrob[axis.title.y.left..zeroGrob.4107]
-#> 13                               zeroGrob[NULL]
-#> 14       zeroGrob[plot.subtitle..zeroGrob.4109]
-#> 15          zeroGrob[plot.title..zeroGrob.4108]
-#> 16        zeroGrob[plot.caption..zeroGrob.4111]
-#> 17            zeroGrob[plot.tag..zeroGrob.4110]
-#> 18                               zeroGrob[NULL]
-#> 19         absoluteGrob[GRID.absoluteGrob.4123]
-#> 20                               zeroGrob[NULL]
-#> 21                               zeroGrob[NULL]
-#> 22                    gTree[panel-1.gTree.4121]
-#> 23         absoluteGrob[GRID.absoluteGrob.4122]
-#> 24                               zeroGrob[NULL]
-#> 25                               zeroGrob[NULL]
-#> 26                               zeroGrob[NULL]
-#> 27                               zeroGrob[NULL]
-#> 28 zeroGrob[axis.title.x.bottom..zeroGrob.4124]
-#> 29   zeroGrob[axis.title.y.left..zeroGrob.4125]
-#> 30                               zeroGrob[NULL]
-#> 31       zeroGrob[plot.subtitle..zeroGrob.4127]
-#> 32          zeroGrob[plot.title..zeroGrob.4126]
-#> 33        zeroGrob[plot.caption..zeroGrob.4129]
-#> 34            zeroGrob[plot.tag..zeroGrob.4128]
-#> 35                               zeroGrob[NULL]
-#> 36         absoluteGrob[GRID.absoluteGrob.4142]
-#> 37                               zeroGrob[NULL]
-#> 38                               zeroGrob[NULL]
-#> 39                    gTree[panel-1.gTree.4140]
-#> 40         absoluteGrob[GRID.absoluteGrob.4141]
-#> 41                               zeroGrob[NULL]
-#> 42                               zeroGrob[NULL]
-#> 43                               zeroGrob[NULL]
-#> 44                               zeroGrob[NULL]
-#> 45 zeroGrob[axis.title.x.bottom..zeroGrob.4143]
-#> 46   zeroGrob[axis.title.y.left..zeroGrob.4144]
-#> 47                               zeroGrob[NULL]
-#> 48       zeroGrob[plot.subtitle..zeroGrob.4146]
-#> 49          zeroGrob[plot.title..zeroGrob.4145]
-#> 50        zeroGrob[plot.caption..zeroGrob.4148]
-#> 51            zeroGrob[plot.tag..zeroGrob.4147]
-#> 52             rect[plot.background..rect.4163]
+#>                                           grob
+#> 1                               zeroGrob[NULL]
+#> 2          absoluteGrob[GRID.absoluteGrob.758]
+#> 3                               zeroGrob[NULL]
+#> 4                               zeroGrob[NULL]
+#> 5                     gTree[panel-1.gTree.756]
+#> 6          absoluteGrob[GRID.absoluteGrob.757]
+#> 7                               zeroGrob[NULL]
+#> 8                               zeroGrob[NULL]
+#> 9                               zeroGrob[NULL]
+#> 10                              zeroGrob[NULL]
+#> 11 zeroGrob[axis.title.x.bottom..zeroGrob.759]
+#> 12   zeroGrob[axis.title.y.left..zeroGrob.760]
+#> 13                              zeroGrob[NULL]
+#> 14       zeroGrob[plot.subtitle..zeroGrob.762]
+#> 15          zeroGrob[plot.title..zeroGrob.761]
+#> 16        zeroGrob[plot.caption..zeroGrob.764]
+#> 17            zeroGrob[plot.tag..zeroGrob.763]
+#> 18                              zeroGrob[NULL]
+#> 19         absoluteGrob[GRID.absoluteGrob.776]
+#> 20                              zeroGrob[NULL]
+#> 21                              zeroGrob[NULL]
+#> 22                    gTree[panel-1.gTree.774]
+#> 23         absoluteGrob[GRID.absoluteGrob.775]
+#> 24                              zeroGrob[NULL]
+#> 25                              zeroGrob[NULL]
+#> 26                              zeroGrob[NULL]
+#> 27                              zeroGrob[NULL]
+#> 28 zeroGrob[axis.title.x.bottom..zeroGrob.777]
+#> 29   zeroGrob[axis.title.y.left..zeroGrob.778]
+#> 30                              zeroGrob[NULL]
+#> 31       zeroGrob[plot.subtitle..zeroGrob.780]
+#> 32          zeroGrob[plot.title..zeroGrob.779]
+#> 33        zeroGrob[plot.caption..zeroGrob.782]
+#> 34            zeroGrob[plot.tag..zeroGrob.781]
+#> 35                              zeroGrob[NULL]
+#> 36         absoluteGrob[GRID.absoluteGrob.795]
+#> 37                              zeroGrob[NULL]
+#> 38                              zeroGrob[NULL]
+#> 39                    gTree[panel-1.gTree.793]
+#> 40         absoluteGrob[GRID.absoluteGrob.794]
+#> 41                              zeroGrob[NULL]
+#> 42                              zeroGrob[NULL]
+#> 43                              zeroGrob[NULL]
+#> 44                              zeroGrob[NULL]
+#> 45 zeroGrob[axis.title.x.bottom..zeroGrob.796]
+#> 46   zeroGrob[axis.title.y.left..zeroGrob.797]
+#> 47                              zeroGrob[NULL]
+#> 48       zeroGrob[plot.subtitle..zeroGrob.799]
+#> 49          zeroGrob[plot.title..zeroGrob.798]
+#> 50        zeroGrob[plot.caption..zeroGrob.801]
+#> 51            zeroGrob[plot.tag..zeroGrob.800]
+#> 52             rect[plot.background..rect.816]
 ```
 
 
@@ -684,13 +685,7 @@ gro[[1]]$plot
 
 ```r
 library(limma)
-#> 
-#> Attaching package: 'limma'
-#> The following object is masked from 'package:BiocGenerics':
-#> 
-#>     plotMA
 library(ggrepel)
-#> Warning: package 'ggrepel' was built under R version 4.2.3
 query <- "DNA repair"
 tab <- getGeneKEGGLinks(species="hsa")
 listOfGenes <- list()
@@ -702,64 +697,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 96
+#> Input genes: 30
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 24
+#> Input genes: 36
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 93
+#> Input genes: 4
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 82
+#> Input genes: 103
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 205
+#> Input genes: 36
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 75
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 86
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 113
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 49
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Input genes: 364
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 106
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 167
+#> Input genes: 155
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 531
+#> Input genes: 50
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 21
+#> Input genes: 166
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 79
+#> Input genes: 137
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 104
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 192
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 76
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 31
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 120
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 30
+#> Input genes: 202
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 121
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 21
+#> Input genes: 4
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 100
+#> Input genes: 43
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Input genes: 6
+#> Input genes: 75
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -771,11 +766,11 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 10 unlabeled data points (too many
+#> Warning: ggrepel: 6 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
-<img src="03-custom-usage_files/figure-html/findterm-1.png" width="480" />
+<img src="03-custom-usage_files/figure-html/findterm-1.png" width="100%" style="display: block; margin: auto;" />
 
 For clustering analysis like `WGCNA`, making the list and query.
 
@@ -796,13 +791,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 12943
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 10001
+#>   Converted input genes: 9943
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 5534
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4671
+#>   Converted input genes: 4649
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 43
@@ -830,9 +825,9 @@ frq <- findTerm(query, listOfGenes,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 40
-#> 'select()' returned 1:many mapping between keys and
+#> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 36
+#>   Converted input genes: 34
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 39
@@ -856,31 +851,31 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 740
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 573
+#>   Converted input genes: 578
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 653
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 541
+#>   Converted input genes: 536
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 621
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 539
+#>   Converted input genes: 534
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 591
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 476
+#>   Converted input genes: 475
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 139
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 59
+#>   Converted input genes: 55
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Input genes: 112
@@ -906,7 +901,7 @@ p <- ggplot(plt, aes(antiviral, response, label = plt[,3])) +
 p
 ```
 
-<img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="480" />
+<img src="03-custom-usage_files/figure-html/findtermWGCNA-1.png" width="100%" style="display: block; margin: auto;" />
 
 # Recluster the cluster using word information
 
@@ -939,7 +934,7 @@ simExample <- returnSim(returnExample()$color,
 heatmap(simExample)
 ```
 
-<img src="03-custom-usage_files/figure-html/textclus-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/textclus-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -965,7 +960,7 @@ simExample <- returnSim(returnExample()$color,
 heatmap(simExample)
 ```
 
-<img src="03-custom-usage_files/figure-html/textclus2-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/textclus2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
@@ -993,4 +988,4 @@ simExample <- returnSim(returnExample()$color,
 heatmap(simExample)
 ```
 
-<img src="03-custom-usage_files/figure-html/textclus3-1.png" width="672" />
+<img src="03-custom-usage_files/figure-html/textclus3-1.png" width="100%" style="display: block; margin: auto;" />

@@ -1,4 +1,5 @@
 
+
 # Application examples
 
 We demonstrate an use case of the package, which investigates transcriptomic changes induced by BK polyomavirus (BKPyV) infection in renal proximal tubular epithelial cells ([Assetta et al. 2016](https://pubmed.ncbi.nlm.nih.gov/27381292/)). Differentially expressed mRNAs in 3 days post-infection were obtained, and down-regulated mRNAs in BKPyV infected cells were examined.
@@ -113,7 +114,7 @@ sigpway$Description
 cnetplot(pway)
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/ea-1.png" width="672" />
+<img src="06-application_example_BKPyV_files/figure-html/ea-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -150,7 +151,7 @@ netreac <- wcGeneSummary(degs,
 #> Input genes: 191
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 174
+#>   Converted input genes: 175
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
@@ -174,11 +175,11 @@ net1 <- wcGeneSummary(excheck,
 #>   Converted input genes: 57
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
-#> Found 28 enriched term
+#> Found 27 enriched term
 net1@net
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/basic2app-1.png" width="960" />
+<img src="06-application_example_BKPyV_files/figure-html/basic2app-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 net1@geneCount
@@ -221,7 +222,7 @@ titlenet <- wcAbst(top,
 titlenet@net
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/absttitleapp-1.png" width="864" />
+<img src="06-application_example_BKPyV_files/figure-html/absttitleapp-1.png" width="100%" style="display: block; margin: auto;" />
 
 Obtain and show the network for the article abstract.
 
@@ -241,7 +242,7 @@ abstnet <- wcAbst(top,
 abstnet@net
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/abstmainapp-1.png" width="864" />
+<img src="06-application_example_BKPyV_files/figure-html/abstmainapp-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Combine and compare networks
 
@@ -285,7 +286,7 @@ compareWordNet(list(abstnet, titlenet, netreac, net1),
 #> found in Windows font database
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/combineapp-1.png" width="1920" />
+<img src="06-application_example_BKPyV_files/figure-html/combineapp-1.png" width="100%" style="display: block; margin: auto;" />
 
 From the network, DNA damage repair pathway, especially nucleotide excision repair related to DDB2, METTL14,and RAD17 might be related to BKPyV infection, which cannot be prioritize based on log2FoldChange or enrichment analysis.
 
@@ -306,13 +307,13 @@ for (nm in names(V(conet))) {
 ddrNms
 #>  [1] "checkpoint"      "cycle"           "DNA"            
 #>  [4] "phosphorylation" "required"        "response"       
-#>  [7] "DDB2"            "SESN1"           "RAD17"          
+#>  [7] "SESN1"           "DDB2"            "RAD17"          
 #> [10] "checkpoint"      "cycle"           "damage"         
 #> [13] "phosphorylation" "required"        "response"       
-#> [16] "DDB2"            "SESN1"           "RAD17"          
-#> [19] "Cancer"          "complex"         "degradation"    
-#> [22] "protein"         "regulates"       "CDT2"           
-#> [25] "chromatin"       "Damage"          "function"       
+#> [16] "SESN1"           "DDB2"            "RAD17"          
+#> [19] "Cancer"          "degradation"     "protein"        
+#> [22] "regulates"       "CDT2"            "chromatin"      
+#> [25] "complex"         "Damage"          "function"       
 #> [28] "induced"         "repair"          "Excision"       
 #> [31] "Global"          "Nucleotide"      "Proteins"       
 #> [34] "regulates"       "checkpoint"      "DNA"            
@@ -337,6 +338,9 @@ ggraph(ddrRelated)+
 #> ggplot2 3.4.0.
 #> ℹ Please use `linewidth` in the `default_aes` field and
 #>   elsewhere instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where
+#> this warning was generated.
 #> Warning in grid.Call(C_textBounds,
 #> as.graphicsAnnot(x$label), x$x, x$y, : font family not
 #> found in Windows font database
@@ -354,7 +358,7 @@ ggraph(ddrRelated)+
 #> found in Windows font database
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/ddr-1.png" width="672" />
+<img src="06-application_example_BKPyV_files/figure-html/ddr-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 The network can be obtained by `returnNet=TRUE`, which can be used for downstream analysis like assessment of degrees and community detection.
@@ -365,12 +369,12 @@ The network can be obtained by `returnNet=TRUE`, which can be used for downstrea
 conetDeg <- igraph::degree(conet)
 conetDeg[order(conetDeg, decreasing=TRUE)] |> head(15)
 #>        SESN1          DNA        RAD17      protein 
-#>           25           20           17           16 
-#>   checkpoint       Cancer        Human         DDB2 
-#>           15           15           15           14 
-#>       growth         TP53         TSC1   activation 
-#>           13           12           12           10 
-#>      complex inflammation        Death 
+#>           26           20           18           16 
+#>   checkpoint       Cancer         DDB2        Human 
+#>           15           15           14           14 
+#>         TP53       growth         TSC1   activation 
+#>           12           12           11           10 
+#>  degradation inflammation        Death 
 #>           10           10            9
 
 conet <- induced_subgraph(conet, conetDeg>1)
@@ -409,7 +413,7 @@ ggraph(conet)+
 #> found in Windows font database
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/combineNet-1.png" width="960" />
+<img src="06-application_example_BKPyV_files/figure-html/combineNet-1.png" width="100%" style="display: block; margin: auto;" />
 
 Dynamic layout can be also used to compare the networks, by `graphlayouts`, for comparing the multiple graphs, especially useful for time-series analysis. See the documentation of [`layout_as_dynamic`](http://graphlayouts.schochastics.net/reference/layout_dynamic.html) for specifying the alpha, which is default to 0.5. 
 
@@ -421,15 +425,15 @@ dyn <- plotDynamic(list(abstnet, titlenet), concat="intersection",
 dyn
 ```
 
-<img src="06-application_example_BKPyV_files/figure-html/dyn-1.png" width="1440" />
+<img src="06-application_example_BKPyV_files/figure-html/dyn-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 
 ```r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31 ucrt)
+#> R version 4.2.1 (2022-06-23 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 19044)
+#> Running under: Windows 10 x64 (build 22621)
 #> 
 #> Matrix products: default
 #> 
@@ -445,81 +449,81 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggforce_0.4.1         igraph_1.4.1         
-#>  [3] ggraph_2.1.0          clusterProfiler_4.6.2
-#>  [5] ReactomePA_1.42.0     org.Hs.eg.db_3.16.0  
-#>  [7] AnnotationDbi_1.60.0  IRanges_2.32.0       
-#>  [9] S4Vectors_0.36.2      Biobase_2.58.0       
-#> [11] BiocGenerics_0.44.0   wcGeneSummary_0.99.0 
-#> [13] ggplot2_3.4.1        
+#>  [1] ggforce_0.4.1             igraph_1.4.1             
+#>  [3] ggraph_2.1.0              clusterProfiler_4.7.1.003
+#>  [5] ReactomePA_1.40.0         org.Hs.eg.db_3.15.0      
+#>  [7] AnnotationDbi_1.58.0      IRanges_2.30.0           
+#>  [9] S4Vectors_0.34.0          Biobase_2.56.0           
+#> [11] BiocGenerics_0.42.0       wcGeneSummary_0.99.0     
+#> [13] ggplot2_3.4.1            
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
 #>   [3] plyr_1.8.8             lazyeval_0.2.2        
-#>   [5] splines_4.2.2          BiocParallel_1.32.5   
-#>   [7] GenomeInfoDb_1.34.9    digest_0.6.31         
-#>   [9] yulab.utils_0.0.6      htmltools_0.5.4       
-#>  [11] bugsigdbr_1.4.3        GOSemSim_2.24.0       
-#>  [13] viridis_0.6.2          GO.db_3.16.0          
-#>  [15] fansi_1.0.4            GeneSummary_0.99.4    
+#>   [5] splines_4.2.1          BiocParallel_1.30.4   
+#>   [7] GenomeInfoDb_1.32.4    digest_0.6.29         
+#>   [9] yulab.utils_0.0.6      htmltools_0.5.5       
+#>  [11] bugsigdbr_1.2.2        GOSemSim_2.25.0       
+#>  [13] viridis_0.6.2          GO.db_3.15.0          
+#>  [15] fansi_1.0.4            GeneSummary_0.99.3    
 #>  [17] magrittr_2.0.3         memoise_2.0.1         
-#>  [19] tm_0.7-11              Biostrings_2.66.0     
+#>  [19] tm_0.7-8               Biostrings_2.64.0     
 #>  [21] graphlayouts_0.8.4     pvclust_2.2-0         
-#>  [23] wordcloud_2.6          enrichplot_1.18.3     
+#>  [23] wordcloud_2.6          enrichplot_1.16.2     
 #>  [25] colorspace_2.1-0       rappdirs_0.3.3        
-#>  [27] blob_1.2.3             ggrepel_0.9.3         
-#>  [29] xfun_0.37              dplyr_1.1.0           
-#>  [31] crayon_1.5.2           RCurl_1.98-1.10       
-#>  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  
-#>  [35] graph_1.76.0           ape_5.7               
+#>  [27] blob_1.2.4             ggrepel_0.9.3         
+#>  [29] xfun_0.38              dplyr_1.1.1           
+#>  [31] crayon_1.5.2           RCurl_1.98-1.7        
+#>  [33] jsonlite_1.8.0         scatterpie_0.1.8      
+#>  [35] graph_1.74.0           ape_5.7-1             
 #>  [37] glue_1.6.2             polyclip_1.10-4       
-#>  [39] gtable_0.3.1           zlibbioc_1.44.0       
-#>  [41] XVector_0.38.0         GetoptLong_1.0.5      
-#>  [43] graphite_1.44.0        rentrez_1.2.3         
-#>  [45] scales_1.2.1           DOSE_3.24.2           
-#>  [47] DBI_1.1.3              Rcpp_1.0.10           
+#>  [39] gtable_0.3.3           zlibbioc_1.42.0       
+#>  [41] XVector_0.36.0         GetoptLong_1.0.5      
+#>  [43] graphite_1.42.0        rentrez_1.2.3         
+#>  [45] scales_1.2.1           DOSE_3.25.0.002       
+#>  [47] DBI_1.1.3              Rcpp_1.0.9            
 #>  [49] viridisLite_0.4.1      xtable_1.8-4          
 #>  [51] tidytree_0.4.2         gridGraphics_0.5-1    
-#>  [53] reactome.db_1.82.0     bit_4.0.5             
-#>  [55] htmlwidgets_1.6.1      httr_1.4.5            
-#>  [57] fgsea_1.24.0           RColorBrewer_1.1-3    
+#>  [53] reactome.db_1.81.0     bit_4.0.4             
+#>  [55] htmlwidgets_1.6.2      httr_1.4.5            
+#>  [57] fgsea_1.22.0           RColorBrewer_1.1-3    
 #>  [59] ellipsis_0.3.2         pkgconfig_2.0.3       
-#>  [61] XML_3.99-0.13          farver_2.1.1          
+#>  [61] XML_3.99-0.10          farver_2.1.1          
 #>  [63] sass_0.4.5             utf8_1.2.3            
 #>  [65] ggplotify_0.1.0        tidyselect_1.2.0      
-#>  [67] rlang_1.0.6            reshape2_1.4.4        
+#>  [67] rlang_1.1.0            reshape2_1.4.4        
 #>  [69] later_1.3.0            munsell_0.5.0         
-#>  [71] tools_4.2.2            cachem_1.0.7          
-#>  [73] downloader_0.4         cli_3.6.0             
-#>  [75] generics_0.1.3         RSQLite_2.3.0         
-#>  [77] gson_0.0.9             evaluate_0.20         
-#>  [79] stringr_1.5.0          fastmap_1.1.1         
-#>  [81] ggdendro_0.1.23        yaml_2.3.7            
-#>  [83] ggtree_3.6.2           knitr_1.42            
-#>  [85] bit64_4.0.5            fs_1.6.1              
+#>  [71] tools_4.2.1            cachem_1.0.6          
+#>  [73] downloader_0.4         cli_3.5.0             
+#>  [75] generics_0.1.3         RSQLite_2.2.15        
+#>  [77] gson_0.1.0             evaluate_0.20         
+#>  [79] stringr_1.5.0          fastmap_1.1.0         
+#>  [81] ggdendro_0.1.23        yaml_2.3.5            
+#>  [83] ggtree_3.7.1.002       knitr_1.42            
+#>  [85] bit64_4.0.5            fs_1.5.2              
 #>  [87] tidygraph_1.2.3        purrr_1.0.1           
-#>  [89] KEGGREST_1.38.0        dendextend_1.16.0     
-#>  [91] nlme_3.1-161           mime_0.12             
-#>  [93] slam_0.1-50            aplot_0.1.9           
-#>  [95] xml2_1.3.3             compiler_4.2.2        
-#>  [97] rstudioapi_0.14        png_0.1-8             
-#>  [99] treeio_1.22.0          tibble_3.1.8          
+#>  [89] KEGGREST_1.36.3        dendextend_1.17.1     
+#>  [91] nlme_3.1-157           mime_0.12             
+#>  [93] slam_0.1-50            aplot_0.1.10          
+#>  [95] xml2_1.3.3             compiler_4.2.1        
+#>  [97] rstudioapi_0.14        png_0.1-7             
+#>  [99] treeio_1.20.2          tibble_3.2.1          
 #> [101] tweenr_2.0.2           bslib_0.4.2           
-#> [103] stringi_1.7.12         cyjShiny_1.0.34       
+#> [103] stringi_1.7.8          cyjShiny_1.0.42       
 #> [105] lattice_0.20-45        Matrix_1.5-3          
-#> [107] vctrs_0.5.2            pillar_1.8.1          
+#> [107] vctrs_0.6.1            pillar_1.9.0          
 #> [109] lifecycle_1.0.3        jquerylib_0.1.4       
-#> [111] GlobalOptions_0.1.2    data.table_1.14.8     
+#> [111] GlobalOptions_0.1.2    data.table_1.14.2     
 #> [113] cowplot_1.1.1          bitops_1.0-7          
-#> [115] httpuv_1.6.9           patchwork_1.1.2       
-#> [117] qvalue_2.30.0          R6_2.5.1              
+#> [115] httpuv_1.6.5           patchwork_1.1.2       
+#> [117] qvalue_2.28.0          R6_2.5.1              
 #> [119] bookdown_0.33          promises_1.2.0.1      
 #> [121] gridExtra_2.3          codetools_0.2-18      
-#> [123] MASS_7.3-58.1          rjson_0.2.21          
-#> [125] withr_2.5.0            GenomeInfoDbData_1.2.9
-#> [127] parallel_4.2.2         grid_4.2.2            
+#> [123] MASS_7.3-57            rjson_0.2.21          
+#> [125] withr_2.5.0            GenomeInfoDbData_1.2.8
+#> [127] parallel_4.2.1         grid_4.2.1            
 #> [129] ggfun_0.0.9            tidyr_1.3.0           
-#> [131] HDO.db_0.99.1          rmarkdown_2.20        
+#> [131] HDO.db_0.99.1          rmarkdown_2.21        
 #> [133] downlit_0.4.2          NLP_0.2-1             
 #> [135] shiny_1.7.4            base64enc_0.1-3
 ```

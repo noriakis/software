@@ -23,7 +23,7 @@ enriched <- MicrobiomeProfiler::enrichKO(kos)
 clusterProfiler::cnetplot(enriched)
 ```
 
-<img src="05-pathview_text_files/figure-html/micro-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/micro-1.png" width="100%" style="display: block; margin: auto;" />
 Now plot these KOs in the pathview.
 
 
@@ -71,7 +71,7 @@ hor <- pathviewText(kos, keyType = "KO",
 hor$concat
 ```
 
-<img src="05-pathview_text_files/figure-html/pathview2-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/pathview2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -90,7 +90,7 @@ ver <- pathviewText(kos, keyType = "KO",
 ver$concat
 ```
 
-<img src="05-pathview_text_files/figure-html/pathview2-2.png" width="672" />
+<img src="05-pathview_text_files/figure-html/pathview2-2.png" width="100%" style="display: block; margin: auto;" />
 
 ## Gene queries
 
@@ -112,7 +112,7 @@ ver <- pathviewText(query,
 ver$concat
 ```
 
-<img src="05-pathview_text_files/figure-html/gene-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/gene-1.png" width="100%" style="display: block; margin: auto;" />
 
 The returned `osplot` object can be accessed as the name `text` in the list. Note that only the nodes (words) within the final network are to be plotted. If all the words are to be included, path the arguments to `argList` to include all.
 
@@ -122,7 +122,7 @@ ver$text
 #> Type: pubmed_abstract
 #> Number of words: 20
 #> TP53 OR CDC45 OR CDC6
-#> 380.3 Kb
+#> 386.3 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",
@@ -142,4 +142,4 @@ ver <- pathviewText(query,
 ver$concat
 ```
 
-<img src="05-pathview_text_files/figure-html/assess-1.png" width="672" />
+<img src="05-pathview_text_files/figure-html/assess-1.png" width="100%" style="display: block; margin: auto;" />

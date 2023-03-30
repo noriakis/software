@@ -5,6 +5,8 @@
 The general usage for mining the information related to microbiome-related signatures.
 
 
+
+
 ```r
 library(wcGeneSummary)
 library(ggplot2)
@@ -51,7 +53,7 @@ basic@freqDf |> head(n=20)
 basic@wc
 ```
 
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="768" />
+<img src="02-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;" />
 
 If `target="abstract"`, the corresponding abstract will be fetched and be summarized.
 
@@ -81,7 +83,7 @@ basic2@freqDf |> head()
 basic2@wc
 ```
 
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="768" />
+<img src="02-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;" />
 
 For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in `wcGeneSummary`.
 
@@ -130,7 +132,7 @@ net <- wcBSDB(c("Neisseria","Veillonella"),
 net@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="768" />
+<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="100%" style="display: block; margin: auto;" />
 
 The words-to-species relationship can be plotted by `mbPlot=TRUE`.
 
@@ -152,7 +154,7 @@ net2 <- wcBSDB(c("Veillonella dispar","Neisseria flava",
 net2@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="768" />
+<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="100%" style="display: block; margin: auto;" />
 
 As the BugSigDB contains the relationship between bacterial taxonomy and disease, disease name can also be plotted. When `disPlot=TRUE`, the `mbPlot`
  will be set to `TRUE` by default.
@@ -175,7 +177,7 @@ net3 <- wcBSDB(c("Veillonella dispar","Neisseria flava",
 net3@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="960" />
+<img src="02-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="100%" style="display: block; margin: auto;" />
 
 Other than curated databases, the PubMed query can also be performed with setting `curate=FALSE`. This way, the text information of the latest literature for the microbes and diseases can be plotted. The options for use in function obtaining PubMed information can be specified to `abstArg` in list format, like `sortOrder="pubdate"`.
 
@@ -199,7 +201,7 @@ net4 <- wcBSDB(c("Veillonella dispar","Neisseria flava",
 net4@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/no_curate-1.png" width="960" />
+<img src="02-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;" />
 
 For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `wcEC` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
 
@@ -228,7 +230,7 @@ vp <- wcBSDB(c("Veillonella parvula"),
 vp@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/enzyme-1.png" width="960" />
+<img src="02-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;" />
 
 Further, the relationship between metabolites and microbiome is of interest. Recent studies have revealed various associations in gut microbiome composition and human plasma metabolites, as well as in the other environments.
 
@@ -280,7 +282,7 @@ metabEx <- wcBSDB(c("Akkermansia muciniphila"),
 metabEx@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/metabex-1.png" width="960" />
+<img src="02-microbiome_usage_files/figure-html/metabex-1.png" width="100%" style="display: block; margin: auto;" />
 
 In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.
 
@@ -313,7 +315,7 @@ metabEx <- wcBSDB(c("Akkermansia muciniphila"),
 metabEx@net
 ```
 
-<img src="02-microbiome_usage_files/figure-html/metabex2-1.png" width="960" />
+<img src="02-microbiome_usage_files/figure-html/metabex2-1.png" width="100%" style="display: block; margin: auto;" />
 
 For the complex network, the resulting image might be unreadable.
 `exportCyjsWithoutImage` function can be used to export the graph to readily interactive interface using `Cytoscape.js`. The below chunk shows the output produced by the function, hosted by GitHub Pages.
@@ -419,7 +421,7 @@ dhc <- as.dendrogram(hclust(dist(data)))
 plot(dhc)
 ```
 
-<img src="02-microbiome_usage_files/figure-html/example-1.png" width="672" />
+<img src="02-microbiome_usage_files/figure-html/example-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -453,14 +455,14 @@ scaled <- micro + scale_y_continuous(expand=c(0,10))
 micro + scaled
 ```
 
-<img src="02-microbiome_usage_files/figure-html/plotDendroWord-1.png" width="1920" />
+<img src="02-microbiome_usage_files/figure-html/plotDendroWord-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31 ucrt)
+#> R version 4.2.1 (2022-06-23 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 19044)
+#> Running under: Windows 10 x64 (build 22621)
 #> 
 #> Matrix products: default
 #> 
@@ -480,62 +482,62 @@ sessionInfo()
 #> [3] wcGeneSummary_0.99.0 ggplot2_3.4.1       
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] GeneSummary_0.99.4     colorspace_2.1-0      
+#>   [1] GeneSummary_0.99.3     colorspace_2.1-0      
 #>   [3] rjson_0.2.21           ellipsis_0.3.2        
-#>   [5] XVector_0.38.0         GlobalOptions_0.1.2   
+#>   [5] XVector_0.36.0         GlobalOptions_0.1.2   
 #>   [7] base64enc_0.1-3        ggdendro_0.1.23       
-#>   [9] fs_1.6.1               rstudioapi_0.14       
+#>   [9] fs_1.5.2               rstudioapi_0.14       
 #>  [11] farver_2.1.1           graphlayouts_0.8.4    
 #>  [13] ggrepel_0.9.3          bit64_4.0.5           
-#>  [15] AnnotationDbi_1.60.0   fansi_1.0.4           
+#>  [15] AnnotationDbi_1.58.0   fansi_1.0.4           
 #>  [17] xml2_1.3.3             downlit_0.4.2         
-#>  [19] cachem_1.0.7           phylogram_2.1.0       
+#>  [19] phylogram_2.1.0        cachem_1.0.6          
 #>  [21] knitr_1.42             polyclip_1.10-4       
-#>  [23] jsonlite_1.8.4         png_0.1-8             
-#>  [25] graph_1.76.0           ggforce_0.4.1         
-#>  [27] shiny_1.7.4            bugsigdbr_1.4.3       
-#>  [29] rentrez_1.2.3          compiler_4.2.2        
-#>  [31] httr_1.4.5             fastmap_1.1.1         
-#>  [33] cli_3.6.0              later_1.3.0           
-#>  [35] tweenr_2.0.2           htmltools_0.5.4       
-#>  [37] tools_4.2.2            igraph_1.4.1          
-#>  [39] NLP_0.2-1              gtable_0.3.1          
-#>  [41] glue_1.6.2             GenomeInfoDbData_1.2.9
-#>  [43] dplyr_1.1.0            Rcpp_1.0.10           
-#>  [45] slam_0.1-50            Biobase_2.58.0        
-#>  [47] jquerylib_0.1.4        vctrs_0.5.2           
-#>  [49] Biostrings_2.66.0      nlme_3.1-161          
-#>  [51] ape_5.7                xfun_0.37             
+#>  [23] jsonlite_1.8.0         png_0.1-7             
+#>  [25] graph_1.74.0           ggforce_0.4.1         
+#>  [27] shiny_1.7.4            bugsigdbr_1.2.2       
+#>  [29] rentrez_1.2.3          compiler_4.2.1        
+#>  [31] httr_1.4.5             fastmap_1.1.0         
+#>  [33] cli_3.5.0              later_1.3.0           
+#>  [35] tweenr_2.0.2           htmltools_0.5.5       
+#>  [37] tools_4.2.1            igraph_1.4.1          
+#>  [39] NLP_0.2-1              gtable_0.3.3          
+#>  [41] glue_1.6.2             GenomeInfoDbData_1.2.8
+#>  [43] dplyr_1.1.1            Rcpp_1.0.9            
+#>  [45] slam_0.1-50            Biobase_2.56.0        
+#>  [47] jquerylib_0.1.4        vctrs_0.6.1           
+#>  [49] Biostrings_2.64.0      nlme_3.1-157          
+#>  [51] ape_5.7-1              xfun_0.38             
 #>  [53] mime_0.12              lifecycle_1.0.3       
-#>  [55] XML_3.99-0.13          pvclust_2.2-0         
-#>  [57] dendextend_1.16.0      org.Hs.eg.db_3.16.0   
-#>  [59] zlibbioc_1.44.0        MASS_7.3-58.1         
+#>  [55] XML_3.99-0.10          pvclust_2.2-0         
+#>  [57] dendextend_1.17.1      org.Hs.eg.db_3.15.0   
+#>  [59] zlibbioc_1.42.0        MASS_7.3-57           
 #>  [61] scales_1.2.1           tidygraph_1.2.3       
-#>  [63] promises_1.2.0.1       parallel_4.2.2        
-#>  [65] cyjShiny_1.0.34        yaml_2.3.7            
+#>  [63] promises_1.2.0.1       parallel_4.2.1        
+#>  [65] cyjShiny_1.0.42        yaml_2.3.5            
 #>  [67] memoise_2.0.1          gridExtra_2.3         
 #>  [69] yulab.utils_0.0.6      sass_0.4.5            
-#>  [71] RSQLite_2.3.0          highr_0.10            
-#>  [73] S4Vectors_0.36.2       BiocGenerics_0.44.0   
-#>  [75] GenomeInfoDb_1.34.9    rlang_1.0.6           
+#>  [71] RSQLite_2.2.15         highr_0.10            
+#>  [73] S4Vectors_0.34.0       BiocGenerics_0.42.0   
+#>  [75] GenomeInfoDb_1.32.4    rlang_1.1.0           
 #>  [77] pkgconfig_2.0.3        bitops_1.0-7          
 #>  [79] lattice_0.20-45        evaluate_0.20         
 #>  [81] purrr_1.0.1            patchwork_1.1.2       
-#>  [83] htmlwidgets_1.6.1      cowplot_1.1.1         
-#>  [85] bit_4.0.5              tidyselect_1.2.0      
+#>  [83] htmlwidgets_1.6.2      cowplot_1.1.1         
+#>  [85] bit_4.0.4              tidyselect_1.2.0      
 #>  [87] magrittr_2.0.3         bookdown_0.33         
-#>  [89] R6_2.5.1               IRanges_2.32.0        
+#>  [89] R6_2.5.1               IRanges_2.30.0        
 #>  [91] generics_0.1.3         DBI_1.1.3             
-#>  [93] pillar_1.8.1           withr_2.5.0           
-#>  [95] KEGGREST_1.38.0        RCurl_1.98-1.10       
-#>  [97] tibble_3.1.8           crayon_1.5.2          
+#>  [93] pillar_1.9.0           withr_2.5.0           
+#>  [95] KEGGREST_1.36.3        RCurl_1.98-1.7        
+#>  [97] tibble_3.2.1           crayon_1.5.2          
 #>  [99] wordcloud_2.6          utf8_1.2.3            
-#> [101] rmarkdown_2.20         viridis_0.6.2         
-#> [103] GetoptLong_1.0.5       grid_4.2.2            
-#> [105] blob_1.2.3             digest_0.6.31         
-#> [107] xtable_1.8-4           tm_0.7-11             
-#> [109] tidyr_1.3.0            httpuv_1.6.9          
-#> [111] gridGraphics_0.5-1     stats4_4.2.2          
+#> [101] rmarkdown_2.21         viridis_0.6.2         
+#> [103] GetoptLong_1.0.5       grid_4.2.1            
+#> [105] blob_1.2.4             digest_0.6.29         
+#> [107] xtable_1.8-4           tm_0.7-8              
+#> [109] tidyr_1.3.0            httpuv_1.6.5          
+#> [111] gridGraphics_0.5-1     stats4_4.2.1          
 #> [113] munsell_0.5.0          viridisLite_0.4.1     
 #> [115] ggplotify_0.1.0        bslib_0.4.2
 ```
