@@ -59,14 +59,14 @@ highlight the nodes</p>
 <span>  highlight_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  filter <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  glow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  glow_fixed_color <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  glow_base_size <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  highlight_by_shape <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  shape_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shape_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shape_color <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  shape_with_text <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  with_text <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text_attribute <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  text_node_color <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  glow_size <span class="op">=</span> <span class="fl">1.2</span>,</span>
 <span>  override_text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_ggfx <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -93,17 +93,8 @@ highlight the nodes</p>
 <dd><p>use glow highlighting</p></dd>
 
 
-<dt>glow_fixed_color</dt>
-<dd><p>use glow highlighting with fixed color,
-specified by `highlight_color` (default: FALSE, use the raw color of the nodes)</p></dd>
-
-
 <dt>glow_base_size</dt>
 <dd><p>use base size of the node for initial size of glowing</p></dd>
-
-
-<dt>highlight_by_shape</dt>
-<dd><p>boolean, use shape highlighting</p></dd>
 
 
 <dt>shape_number</dt>
@@ -125,6 +116,14 @@ using `geomtextpath`</p></dd>
 
 <dt>with_text</dt>
 <dd><p>if specified, show text around the nodes, not the shape</p></dd>
+
+
+<dt>text_attribute</dt>
+<dd><p>if not NULL, graph attributes of this name will be used as text annotation</p></dd>
+
+
+<dt>text_node_color</dt>
+<dd><p>if TRUE, node color will be used as text color</p></dd>
 
 
 <dt>glow_size</dt>
