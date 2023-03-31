@@ -441,12 +441,15 @@ names(sampled) <- sampled
 # Query column (including node names) is specified as query
 input$query <- input$species
 
+library(ggfx) # use ggfx
 micro <- plotEigengeneNetworksWithWords(NA, sampled,
                                useWC = TRUE, # Use wordcloud
                                useFunc = "wcMan", # Use manual function (as the input is custom data.frame)
                                useDf=input,dendPlot="ggplot",dhc=dhc,
+                               useggfx="with_outer_glow",
+                               ggfxParams=list(colour="white",expand=5),
                                argList=list(additionalRemove=deleter,
-                                ngram=1),
+                                ngram=1), horizontalSpacer=0.1,
                                useWGCNA=FALSE, spacer=0.05,
                                horiz=FALSE, wcScale =5)
 scaled <- micro + scale_y_continuous(expand=c(0,10))

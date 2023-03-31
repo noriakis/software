@@ -463,7 +463,8 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 <img src="03-custom-usage_files/figure-html/highlight-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-`spacer` can control the gaps above and below the grob on the dendrogram.
+`spacer` can control the gaps above and below the grob on the dendrogram (y-axis).
+`horizontalSpacer` can be used too for x-axis.
 
 
 ```r
@@ -678,6 +679,70 @@ gro[[1]]$plot
 #> 52             rect[plot.background..rect.816]
 ```
 
+## Decorating wordclouds
+
+If needed, wordclouds can be filtered by `ggfx` or using `shadowtext`. In this case, border is set to `FALSE` and the background will be transparent for resulting grobs. If `shadowtext` is needed, specify `bg.colour` argument. If `ggfx` is needed, specify the filter function in `useggfx` and parameters in `ggfxParams`.
+
+
+```r
+library(ggfx)
+#> Warning: package 'ggfx' was built under R version 4.2.3
+plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
+    bg.colour="grey80")
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+```
+
+<img src="03-custom-usage_files/figure-html/decoword-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
+    useggfx="with_outer_glow", ggfxParams=list(colour="white",expand=5))
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 25
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 25
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+```
+
+<img src="03-custom-usage_files/figure-html/decoword-2.png" width="100%" style="display: block; margin: auto;" />
 
 
 # Assess the occurrence of the speicific words across gene clusters

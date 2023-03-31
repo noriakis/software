@@ -12,6 +12,7 @@ the-basic-usage-for-microbiome-related-data
 annotating-the-dendrogram-of-taxonomy
 interactive-inspection-of-gene-cluster-network-annotated-by-words
 annotating-gene-cluster-dendrogram
+decorating-wordclouds
 assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 recluster-the-cluster-using-word-information
 including-the-other-databases-an-example-in-metacyc
