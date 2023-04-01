@@ -297,11 +297,11 @@ scale4 + scale15
 
 <img src="03-custom-usage_files/figure-html/wgcnawc-1.png" width="100%" style="display: block; margin: auto;" />
 
-This uses `ggwordcloud` and a list specified by `wcArg` is passed to the function.
+This uses `ggwordcloud` and a list specified by `wcArgs` is passed to the function.
 
 
 ```r
-plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=15, wcArg=list(rot.per=0))
+plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=15, wcArgs=list(rot.per=0))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -330,7 +330,7 @@ plotEigengeneNetworksWithWords(MEs,
                                useWC=TRUE,
                                candidateNodes=c("ME2"),
                                wcScale=15,
-                               wcArg=list(rot.per=0),
+                               wcArgs=list(rot.per=0),
                                horiz=TRUE)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
@@ -708,9 +708,12 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGn is 9
+#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> border is set to FALSE as bg.colour is not NULL
 ```
 
 <img src="03-custom-usage_files/figure-html/decoword-1.png" width="100%" style="display: block; margin: auto;" />
@@ -737,12 +740,124 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel1 is 9
+#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
+#> border is set to FALSE as useggfx is not NULL
 ```
 
 <img src="03-custom-usage_files/figure-html/decoword-2.png" width="100%" style="display: block; margin: auto;" />
+
+The below example shows using the other dendrogram like those produced by WGCNA.
+
+
+```r
+load("./blockwiseModule.rda")
+MEs <- bwmod$MEs
+modColors <- bwmod$colors
+plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
+                              modColors, candidateNodes=c("ME11","ME3","ME7","ME6","ME12"),
+                              useggfx="with_outer_glow", useRandomColor=TRUE,
+                              ggfxParams=list(colour="white",expand=3),
+                              wcScale=6, wcArgs=list(shape="square",
+                              min.freq=1, max.words=Inf,rot.per=0.5,random.order=FALSE))
+#> Bootstrap (r = 0.49)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.69)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.89)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.09)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.29)... Done.
+#> Bootstrap (r = 1.4)... Done.
+#> Input genes: 5847
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 4871
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Input genes: 634
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 517
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette GnBu is 9
+#> Returning the palette you asked for with that many colors
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Input genes: 2054
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 1682
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
+#> Returning the palette you asked for with that many colors
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Input genes: 132
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 127
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Input genes: 5673
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#>   Converted input genes: 4704
+#> Filter based on GeneSummary
+#> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel2 is 8
+#> Returning the palette you asked for with that many colors
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> border is set to FALSE as useggfx is not NULL
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : One word could not fit
+#> on page. It has been removed.
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+```
+
+<img src="03-custom-usage_files/figure-html/decoword2-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 
 # Assess the occurrence of the speicific words across gene clusters
