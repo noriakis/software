@@ -9,6 +9,7 @@ KEGG mapping plots produced by pathview can be populated with text information (
 
 ```r
 library(wcGeneSummary)
+library(kableExtra);library(knitr)
 library(dplyr)
 library(pathview);library(png)
 ```
@@ -38,7 +39,7 @@ grid::rasterGrob(readPNG("ko00270.pathview.png"), interpolate=FALSE)
 ![raw pathview plot](https://github.com/noriakis/software/blob/main/images/ko00270.pathview.png?raw=true){width=500px}
 
 To use the `pathviewText()` one should specify which database to retrieve the text, `"refseq"` or `"abstract"`.
-The default is "refseq", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. We conver the KO number to EC number using KEGG REST API, and fetches the description using `wcEC()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm` obtained by `onlyTerm=TRUE`, and `termMap`, which map the KO and EC. Note that `termMap` must have `query` and `description` columns. Also, `node.types="ortholog"` must be passed to `pathview`.
+The default is "refseq", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. Thus, we convert the KO number to EC number using KEGG REST API, and fetches the description using `wcEC()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm` obtained by `onlyTerm=TRUE`, and `termMap`, which map the KO and EC. Note that `termMap` must have `query` and `description` columns when specifying manually (like KO number and its ortholog name). Also, `node.types="ortholog"` must be passed to `pathview`.
 
 
 ```r
@@ -57,17 +58,67 @@ ecMap <- wcEC("../enzyme.dat", ecnum = ecnum, onlyDf =TRUE)
 termMap <- merge(termMap, ecMap[,c("number","desc")], by="number") |>
   `colnames<-`(c("number","query","description"))
 
+kable(head(termMap))
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> number </th>
+   <th style="text-align:left;"> query </th>
+   <th style="text-align:left;"> description </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> 2.1.1.14 </td>
+   <td style="text-align:left;"> K00549 </td>
+   <td style="text-align:left;"> 5-methyltetrahydropteroyltriglutamate--homocysteine S-methyltransferase </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2.3.1.30 </td>
+   <td style="text-align:left;"> K00640 </td>
+   <td style="text-align:left;"> serine O-acetyltransferase </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2.3.1.30 </td>
+   <td style="text-align:left;"> K23304 </td>
+   <td style="text-align:left;"> serine O-acetyltransferase </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 2.7.1.100 </td>
+   <td style="text-align:left;"> K00899 </td>
+   <td style="text-align:left;"> S-methyl-5-thioribose kinase </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4.2.1.22 </td>
+   <td style="text-align:left;"> K01697 </td>
+   <td style="text-align:left;"> cystathionine beta-synthase </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> 4.4.1.13 </td>
+   <td style="text-align:left;"> K01760 </td>
+   <td style="text-align:left;"> cysteine-S-conjugate beta-lyase </td>
+  </tr>
+</tbody>
+</table>
+
+```r
 ## Main function
-
-hor <- pathviewText(kos, keyType = "KO",
-     target="abstract",
-     pid = "00270",
-     org = "ko", 
-     searchTerms = ecQuery,
-     termMap = termMap,
-     node.types="ortholog")
+## Some queries cannot be mapped because of greek characters
+## in the manuscript
+hor <- pathviewText(kos,
+                    keyType = "KO",
+                    target="abstract",
+                    pid = "00270",
+                    org = "ko",
+                    argList = list(numWords=Inf,
+                                   sortOrder="pubdate",
+                                   retMax=20),
+                    searchTerms = ecQuery,
+                    termMap = termMap,
+                    node.types="ortholog")
 #> Proceeding without API key
-
 hor$concat
 ```
 
@@ -76,7 +127,6 @@ hor$concat
 ```r
 
 ## We can transpose the barplot by trans=TRUE
-
 ver <- pathviewText(kos, keyType = "KO",
      target="abstract",
      pid = "00270",

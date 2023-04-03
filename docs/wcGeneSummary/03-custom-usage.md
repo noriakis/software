@@ -706,7 +706,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Input genes: 5847
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4871
+#>   Converted input genes: 4897
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Scale for size is already present.
@@ -718,7 +718,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Input genes: 634
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 517
+#>   Converted input genes: 518
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Scale for size is already present.
@@ -732,7 +732,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Input genes: 2054
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 1682
+#>   Converted input genes: 1689
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Scale for size is already present.
@@ -758,7 +758,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Input genes: 5673
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4704
+#>   Converted input genes: 4730
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Scale for size is already present.
