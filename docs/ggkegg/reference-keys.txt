@@ -3,4 +3,5 @@ ggkegg
 pathway
 visualize-the-result-of-enrichkegg
 module
+visualize-the-result-of-enricher
 usecases
