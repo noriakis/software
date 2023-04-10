@@ -60,7 +60,7 @@
 <span class="header-section-number">4</span> Module<a class="anchor" aria-label="anchor" href="#module"><i class="fas fa-link"></i></a>
 </h1>
 <p>Module information can be obtained and parsed. Parsing <code>DEFINITION</code> and <code>REACTION</code> is supported. For the definition, first the function breaks down the definition to steps, and make graphical representation using <code>ggraph</code> or text itself.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span></span>
 <span><span class="va">mod</span></span>
@@ -82,7 +82,7 @@
 <span><span class="co">#&gt;  [9] "R02740  C05345 -&gt; C00668"                  </span></span>
 <span><span class="co">#&gt; [10] "R02739  C00668 -&gt; C01172"</span></span></code></pre></div>
 <p>Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span></span>
 <span><span class="va">reac</span> <span class="op">&lt;-</span> <span class="fu">parse_module</span><span class="op">(</span><span class="va">mod</span>, <span class="st">"reaction"</span><span class="op">)</span></span>
@@ -106,7 +106,7 @@
 <span class="header-section-number">4.1</span> Visualize the result of <code>enricher</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enricher"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocFileCache</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: package 'BiocFileCache' was built under R version</span></span>
 <span><span class="co">#&gt; 4.2.2</span></span>

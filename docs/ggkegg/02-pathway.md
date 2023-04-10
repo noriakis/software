@@ -5,16 +5,54 @@
 Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` function is used to return `igraph` object.
 
 
+```r
+library(ggkegg)
+library(ggfx)
+library(ggraph)
+library(clusterProfiler)
+```
+
+
+```r
+g <- ggkegg(pid="eco00270",
+            convert_org = c("pathway","eco"),
+            delete_zero_degree = TRUE,
+            return_igraph = TRUE)
+gg <- ggraph(g, layout="stress") 
+gg$data$type |> unique()
+#> [1] "map"      "compound" "gene"
+gg + geom_edge_diagonal(
+  aes(color=subtype,
+      filter=type!="maplink"))+
+  geom_node_point(
+  aes(filter= !type%in%c("map","compound")),
+    fill=gg$data[!gg$data$type%in%c("map","compound"),]$bgcolor,
+    color="black",
+    shape=21, size=4
+  )+
+  geom_node_point(
+    aes(filter= !type%in%c("map","gene")),
+    fill=gg$data[!gg$data$type%in%c("map","gene"),]$bgcolor,
+    color="black",
+    shape=21, size=6
+  )+
+  geom_node_text(
+    aes(label=converted_name,
+        filter=type=="gene"),
+    repel=TRUE,
+    bg.colour="white")+
+  theme_void()
+```
+
+<img src="02-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## Visualize the result of `enrichKEGG`
 
 It can visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` has boolean value whether the investigated gene is in pathway or not.
 
 
 ```r
-library(ggkegg)
-library(ggfx)
-library(ggraph)
-library(clusterProfiler)
 data(geneList, package='DOSE')
 de <- names(geneList)[1:100]
 enrichKEGG(de, pvalueCutoff=0.01) |>
