@@ -1,5 +1,4 @@
 about
-ggkegg
 pathway
 highlighting-set-of-nodes-and-edges
 visualize-the-result-of-enrichkegg

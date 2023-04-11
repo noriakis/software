@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Pathway | ggkegg</title>
+<title>Chapter 2 Pathway | ggkegg</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Pathway | ggkegg">
+<meta property="og:title" content="Chapter 2 Pathway | ggkegg">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Pathway | ggkegg">
+<meta name="twitter:title" content="Chapter 2 Pathway | ggkegg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -44,10 +44,9 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
-<li><a class="" href="ggkegg.html"><span class="header-section-number">2</span> ggkegg</a></li>
-<li><a class="active" href="pathway.html"><span class="header-section-number">3</span> Pathway</a></li>
-<li><a class="" href="module.html"><span class="header-section-number">4</span> Module</a></li>
-<li><a class="" href="usecases.html"><span class="header-section-number">5</span> Usecases</a></li>
+<li><a class="active" href="pathway.html"><span class="header-section-number">2</span> Pathway</a></li>
+<li><a class="" href="module.html"><span class="header-section-number">3</span> Module</a></li>
+<li><a class="" href="usecases.html"><span class="header-section-number">4</span> Usecases</a></li>
 </ul>
 
         <div class="book-extra">
@@ -55,9 +54,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pathway" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="pathway" class="section level1" number="2">
 <h1>
-<span class="header-section-number">3</span> Pathway<a class="anchor" aria-label="anchor" href="#pathway"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Pathway<a class="anchor" aria-label="anchor" href="#pathway"><i class="fas fa-link"></i></a>
 </h1>
 <p>Providing <code>ggkegg</code> a pathway ID, it fetches information, parse them and make <code>ggraph</code> object. Inside, <code>parse_kgml</code> function is used to return <code>igraph</code> or <code>tbl_graph</code> object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -96,10 +95,10 @@
 <span>    repel<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div id="highlighting-set-of-nodes-and-edges" class="section level2" number="3.1">
+<div class="inline-figure"><img src="01-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div id="highlighting-set-of-nodes-and-edges" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">3.1</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you want to obtain <code>ko01230</code>, sand highlight those components
 involved in <code>M00002</code>, and show the corresponding compound names in the map,
@@ -123,11 +122,11 @@ we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">compound</span>, filter<span class="op">=</span><span class="va">M00002</span><span class="op">)</span>, repel<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                 bg.colour<span class="op">=</span><span class="st">"white"</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="visualize-the-result-of-enrichkegg" class="section level2" number="3.2">
+<div id="visualize-the-result-of-enrichkegg" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">3.2</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>It can visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> has boolean value whether the investigated gene is in pathway or not.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -155,19 +154,19 @@ we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
 <span>                    colour<span class="op">=</span><span class="st">"white"</span>,</span>
 <span>                    expand<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ggkegg.html"><span class="header-section-number">2</span> ggkegg</a></div>
-<div class="next"><a href="module.html"><span class="header-section-number">4</span> Module</a></div>
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> About</a></div>
+<div class="next"><a href="module.html"><span class="header-section-number">3</span> Module</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#pathway"><span class="header-section-number">3</span> Pathway</a></li>
-<li><a class="nav-link" href="#highlighting-set-of-nodes-and-edges"><span class="header-section-number">3.1</span> Highlighting set of nodes and edges</a></li>
-<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">3.2</span> Visualize the result of enrichKEGG</a></li>
+<li><a class="nav-link" href="#pathway"><span class="header-section-number">2</span> Pathway</a></li>
+<li><a class="nav-link" href="#highlighting-set-of-nodes-and-edges"><span class="header-section-number">2.1</span> Highlighting set of nodes and edges</a></li>
+<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">2.2</span> Visualize the result of enrichKEGG</a></li>
 </ul>
 
       <div class="book-extra">
