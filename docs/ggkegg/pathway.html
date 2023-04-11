@@ -19,9 +19,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph object. library(ggkegg) library(ggfx) library(ggraph)...">
-<meta property="og:description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph object. library(ggkegg) library(ggfx) library(ggraph)...">
-<meta name="twitter:description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph object. library(ggkegg) library(ggfx) library(ggraph)...">
+<meta name="description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph or tbl_graph object. library(ggkegg) library(ggfx)...">
+<meta property="og:description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph or tbl_graph object. library(ggkegg) library(ggfx)...">
+<meta name="twitter:description" content="Providing ggkegg a pathway ID, it fetches information, parse them and make ggraph object. Inside, parse_kgml function is used to return igraph or tbl_graph object. library(ggkegg) library(ggfx)...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,13 +59,15 @@
 <h1>
 <span class="header-section-number">3</span> Pathway<a class="anchor" aria-label="anchor" href="#pathway"><i class="fas fa-link"></i></a>
 </h1>
-<p>Providing <code>ggkegg</code> a pathway ID, it fetches information, parse them and make <code>ggraph</code> object. Inside, <code>parse_kgml</code> function is used to return <code>igraph</code> object.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<p>Providing <code>ggkegg</code> a pathway ID, it fetches information, parse them and make <code>ggraph</code> object. Inside, <code>parse_kgml</code> function is used to return <code>igraph</code> or <code>tbl_graph</code> object.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/ggkegg.html">ggkegg</a></span><span class="op">(</span>pid<span class="op">=</span><span class="st">"eco00270"</span>,</span>
 <span>            convert_org <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pathway"</span>,<span class="st">"eco"</span><span class="op">)</span>,</span>
 <span>            delete_zero_degree <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -95,12 +97,40 @@
 <span>    bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div id="visualize-the-result-of-enrichkegg" class="section level2" number="3.1">
+<div id="highlighting-set-of-nodes-and-edges" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.1</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you want to obtain <code>ko01230</code>, sand highlight those components
+involved in <code>M00002</code>, and show the corresponding compound names in the map,
+we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">parse_kgml</span><span class="op">(</span><span class="st">"ko01230"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_line.html">process_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    compound<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"compound"</span><span class="op">)</span>,</span>
+<span>    M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_nodes.html">highlight_set_nodes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">$</span><span class="va">components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_edges.html">highlight_set_edges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">$</span><span class="va">components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">M00002</span>, filter<span class="op">=</span><span class="va">M00002</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  colour<span class="op">=</span><span class="st">"pink"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="va">type</span><span class="op">!=</span><span class="st">"line"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="va">M00002</span>, color<span class="op">=</span><span class="va">M00002</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                  colour<span class="op">=</span><span class="st">"pink"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">compound</span>, filter<span class="op">=</span><span class="va">M00002</span><span class="op">)</span>, repel<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                 bg.colour<span class="op">=</span><span class="st">"white"</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="visualize-the-result-of-enrichkegg" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>It can visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> has boolean value whether the investigated gene is in pathway or not.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">'DOSE'</span><span class="op">)</span></span>
 <span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -136,7 +166,8 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#pathway"><span class="header-section-number">3</span> Pathway</a></li>
-<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">3.1</span> Visualize the result of enrichKEGG</a></li>
+<li><a class="nav-link" href="#highlighting-set-of-nodes-and-edges"><span class="header-section-number">3.1</span> Highlighting set of nodes and edges</a></li>
+<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">3.2</span> Visualize the result of enrichKEGG</a></li>
 </ul>
 
       <div class="book-extra">
@@ -153,7 +184,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-10.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -2,7 +2,7 @@
 
 # Pathway
 
-Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` function is used to return `igraph` object.
+Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` function is used to return `igraph` or `tbl_graph` object.
 
 
 ```r
@@ -10,6 +10,8 @@ library(ggkegg)
 library(ggfx)
 library(ggraph)
 library(clusterProfiler)
+library(dplyr)
+library(tidygraph)
 ```
 
 
@@ -46,6 +48,36 @@ gg + geom_edge_diagonal(
 
 <img src="02-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;" />
 
+
+## Highlighting set of nodes and edges
+
+If you want to obtain `ko01230`, sand highlight those components
+involved in `M00002`, and show the corresponding compound names in the map,
+we can write as follows using highligh_set_edges and highlight_set_nodes.
+
+
+```r
+parse_kgml("ko01230") |> 
+  process_line() |>
+  activate(nodes) |>
+  mutate(
+    compound=convert_id("compound"),
+    M00002=highlight_set_nodes(obtain_module("M00002")$components)) |>
+  activate(edges) |>
+  mutate(M00002=highlight_set_edges(obtain_module("M00002")$components)) |>
+  ggraph(x=x, y=y)+
+  geom_edge_link()+
+  with_outer_glow(geom_edge_link(aes(color=M00002, filter=M00002)),
+                  colour="pink")+
+  geom_node_point(shape=21,aes(filter=type!="line"))+
+  with_outer_glow(geom_node_point(shape=21, aes(filter=M00002, color=M00002)),
+                  colour="pink")+
+  geom_node_text(aes(label=compound, filter=M00002), repel=TRUE,
+                 bg.colour="white", size=2)+
+  theme_void()
+```
+
+<img src="02-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Visualize the result of `enrichKEGG`
 

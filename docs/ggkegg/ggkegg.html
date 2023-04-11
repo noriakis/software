@@ -63,6 +63,21 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># devtools::install_github("noriakis/ggkegg")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span></code></pre></div>
+<p>One of the main aims of <code>ggkegg</code> is manupilating KEGG information in tidy ways using <code>tidygraph</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
+<span><span class="fu">parse_kgml</span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Obtain and parse the pathway</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## node manipulation</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>convert_hsa<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"hsa"</span><span class="op">)</span>,</span>
+<span>         convert_map<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## convert IDs for organism hsa and pathway</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span> <span class="co">## ggraph plot</span></span>
+<span>  <span class="fu">geom_node_rect</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"gene"</span>,</span>
+<span>                     fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">bgcolor</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">convert_hsa</span><span class="op">)</span>,</span>
+<span>                 size<span class="op">=</span><span class="fl">2</span>, family<span class="op">=</span><span class="st">"serif"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-intro_files/figure-html/ggkegg-1.png" width="1344"></div>
 
 </div>
   <div class="chapter-nav">
@@ -86,7 +101,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-10.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
