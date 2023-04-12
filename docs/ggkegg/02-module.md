@@ -2,48 +2,17 @@
 
 # Module
 
-Module information can be obtained and parsed. Parsing `DEFINITION` and `REACTION` is supported. For the definition, first the function breaks down the definition to steps, and make graphical representation using `ggraph` or text itself.
+Module information can be obtained and parsed. Parsing `DEFINITION` and `REACTION` is supported. For the definition, first the function breaks down the definition to steps, and make graphical representation using `ggraph` and `tbl_graph` or text itself using `geom_text` and `geom_rect`. By calling `module` function, `kegg_module` class object is created.
 
 
 ```r
 library(ggkegg)
 library(tidygraph)
 library(dplyr)
-mod <- obtain_module("M00004")
+mod <- module("M00004")
 mod
-#> $name
-#> [1] "Pentose phosphate pathway (Pentose phosphate cycle)"
-#> 
-#> $definition
-#> [1] "(K13937,((K00036,K19243) (K01057,K07404))) K00033 K01783 (K01807,K01808) K00615 ((K00616 (K01810,K06859,K15916)),K13810)"
-#> 
-#> $reaction
-#>  [1] "R02736,R10907  C01172 -> C01236"           
-#>  [2] "R02035  C01236 -> C00345"                  
-#>  [3] "R01528,R10221  C00345 -> C00199"           
-#>  [4] "R01529  C00199 -> C00231"                  
-#>  [5] "R01056  C00199 -> C00117"                  
-#>  [6] "R01641  C00117 + C00231 -> C05382 + C00118"
-#>  [7] "R01827  C05382 + C00118 -> C00279 + C05345"
-#>  [8] "R01830  C00279 + C00231 -> C05345 + C00118"
-#>  [9] "R02740  C05345 -> C00668"                  
-#> [10] "R02739  C00668 -> C01172"                  
-#> 
-#> $components
-#>  [1] "ko:K13937"  "ko:K00036"  "ko:K19243"  "ko:K01057" 
-#>  [5] "ko:K07404"  "ko:K00033"  "ko:K01783"  "ko:K01807" 
-#>  [9] "ko:K01808"  "ko:K00615"  "ko:K00616"  "ko:K01810" 
-#> [13] "ko:K06859"  "ko:K15916"  "ko:K13810"  "cpd:C01172"
-#> [17] "cpd:C01236" "cpd:C01236" "cpd:C00345" "cpd:C00345"
-#> [21] "cpd:C00199" "cpd:C00199" "cpd:C00231" "cpd:C00199"
-#> [25] "cpd:C00117" "cpd:C00117" "cpd:C00231" "cpd:C05382"
-#> [29] "cpd:C00118" "cpd:C05382" "cpd:C00118" "cpd:C00279"
-#> [33] "cpd:C05345" "cpd:C00279" "cpd:C00231" "cpd:C05345"
-#> [37] "cpd:C00118" "cpd:C05345" "cpd:C00668" "cpd:C00668"
-#> [41] "cpd:C01172" "rn:R02736"  "rn:R10907"  "rn:R02035" 
-#> [45] "rn:R01528"  "rn:R10221"  "rn:R01529"  "rn:R01056" 
-#> [49] "rn:R01641"  "rn:R01827"  "rn:R01830"  "rn:R02740" 
-#> [53] "rn:R02739"
+#> M00004
+#> Pentose phosphate pathway (Pentose phosphate cycle)
 ```
 
 Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.
@@ -51,14 +20,11 @@ Visualizing the reactions in the module. Please report any reaction that cannot 
 
 ```r
 library(igraph)
-mod <- obtain_module("M00004")
-
-## return the tbl_graph
-reac <- parse_module(mod, "reaction")
+mod <- module("M00004")
 
 ## Some edges are duplicate and have different reactions,
 ## so simplify
-reac |> 
+mod@reaction_graph |> 
   convert(to_simple) |>
   activate(edges) |> 
   mutate(reaction=lapply(.orig_data,
@@ -81,6 +47,82 @@ reac |>
 
 <img src="02-module_files/figure-html/module_reaction-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Module completeness
+
+Given a vector of interesting KOs, module completeness can be calculated using boolean expression.
+
+
+```r
+mod <- module("M00009")
+query <- sample(mod@definition_components,5) |>
+  strsplit(":") |>
+  sapply("[",2)
+mod |>
+  module_completeness(query) |>
+  kableExtra::kable()
+```
+
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> block </th>
+   <th style="text-align:right;"> present_num </th>
+   <th style="text-align:right;"> ratio </th>
+   <th style="text-align:left;"> complete </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> (K01647,K05942) </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K01681,K01682) </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K00031,K00030) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+   <td style="text-align:left;"> TRUE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K01902+K01903,K01899+K01900,K18118) </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.4000000 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0666667 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K01676,K01679,K01677+K01678) </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:left;"> TRUE </td>
+  </tr>
+</tbody>
+</table>
+
 ## Visualize the result of `enricher`
 
 If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship.
@@ -88,10 +130,7 @@ If you performed some experiments involving KEGG Orthology, and performed enrich
 
 ```r
 library(BiocFileCache)
-#> Warning: package 'BiocFileCache' was built under R version
-#> 4.2.2
 #> Loading required package: dbplyr
-#> Warning: package 'dbplyr' was built under R version 4.2.3
 #> 
 #> Attaching package: 'dbplyr'
 #> The following objects are masked from 'package:dplyr':
@@ -99,7 +138,7 @@ library(BiocFileCache)
 #>     ident, sql
 library(clusterProfiler)
 #> 
-#> clusterProfiler v4.7.1.003  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> clusterProfiler v4.6.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
 #> If you use clusterProfiler in published research, please cite:
 #> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141

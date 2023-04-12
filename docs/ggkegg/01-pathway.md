@@ -51,20 +51,20 @@ gg + geom_edge_diagonal(
 
 ## Highlighting set of nodes and edges
 
-If you want to obtain `ko01230`, sand highlight those components
+If you want to obtain `ko01230`, and highlight those components
 involved in `M00002`, and show the corresponding compound names in the map,
-we can write as follows using highligh_set_edges and highlight_set_nodes.
+we can write as follows using `highligh_set_edges` and `highlight_set_nodes`.
 
 
 ```r
-parse_kgml("ko01230") |> 
+pathway("ko01230") |> 
   process_line() |>
   activate(nodes) |>
   mutate(
     compound=convert_id("compound"),
-    M00002=highlight_set_nodes(obtain_module("M00002")$components)) |>
+    M00002=highlight_set_nodes(module("M00002")@reaction_components)) |>
   activate(edges) |>
-  mutate(M00002=highlight_set_edges(obtain_module("M00002")$components)) |>
+  mutate(M00002=highlight_set_edges(module("M00002")@definition_components)) |>
   ggraph(x=x, y=y)+
   geom_edge_link()+
   with_outer_glow(geom_edge_link(aes(color=M00002, filter=M00002)),
@@ -78,6 +78,35 @@ parse_kgml("ko01230") |>
 ```
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
+
+Also for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition:
+
+
+```r
+pathway("ko01100") |> 
+  process_line() |>
+  highlight_module(module("M00021")) |>
+  ggraph(x=x, y=y) +
+  geom_node_point(size=1, aes(color=I(fgcolor),
+    filter=fgcolor!="none" & type!="line"))+
+  geom_edge_link(width=0.1, aes(color=I(fgcolor),
+                                filter=type=="line"& fgcolor!="none"))+
+  with_outer_glow(
+    geom_edge_link(width=1,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  with_outer_glow(
+    geom_node_point(size=2,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/highlight_example2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Visualize the result of `enrichKEGG`
 

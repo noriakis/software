@@ -100,18 +100,18 @@
 <h2>
 <span class="header-section-number">2.1</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
 </h2>
-<p>If you want to obtain <code>ko01230</code>, sand highlight those components
+<p>If you want to obtain <code>ko01230</code>, and highlight those components
 involved in <code>M00002</code>, and show the corresponding compound names in the map,
-we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
+we can write as follows using <code>highligh_set_edges</code> and <code>highlight_set_nodes</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">parse_kgml</span><span class="op">(</span><span class="st">"ko01230"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko01230"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_line.html">process_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    compound<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"compound"</span><span class="op">)</span>,</span>
-<span>    M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_nodes.html">highlight_set_nodes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">$</span><span class="va">components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_nodes.html">highlight_set_nodes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">@</span><span class="va">reaction_components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_edges.html">highlight_set_edges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_module.html">obtain_module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">$</span><span class="va">components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>M00002<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_set_edges.html">highlight_set_edges</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00002"</span><span class="op">)</span><span class="op">@</span><span class="va">definition_components</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">M00002</span>, filter<span class="op">=</span><span class="va">M00002</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -123,13 +123,37 @@ we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
 <span>                 bg.colour<span class="op">=</span><span class="st">"white"</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>Also for highlighting <code>Metabolic pathways (ko01100)</code>, using <code>M00021</code> definition:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko01100"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_line.html">process_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/highlight_module.html">highlight_module</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00021"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>,</span>
+<span>    filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span> <span class="op">&amp;</span> <span class="va">type</span><span class="op">!=</span><span class="st">"line"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>,</span>
+<span>                                filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"line"</span><span class="op">&amp;</span> <span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">1</span>,</span>
+<span>                   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>,</span>
+<span>                       filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span> <span class="op">&amp;</span> <span class="va">M00021</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    colour<span class="op">=</span><span class="st">"red"</span>, expand<span class="op">=</span><span class="fl">3</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">2</span>,</span>
+<span>                   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>,</span>
+<span>                       filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span> <span class="op">&amp;</span> <span class="va">M00021</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    colour<span class="op">=</span><span class="st">"red"</span>, expand<span class="op">=</span><span class="fl">3</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-pathway_files/figure-html/highlight_example2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="visualize-the-result-of-enrichkegg" class="section level2" number="2.2">
 <h2>
 <span class="header-section-number">2.2</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>It can visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> has boolean value whether the investigated gene is in pathway or not.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">'DOSE'</span><span class="op">)</span></span>
 <span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -183,7 +207,7 @@ we can write as follows using highligh_set_edges and highlight_set_nodes.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-11.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
