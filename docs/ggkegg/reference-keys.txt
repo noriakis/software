@@ -3,6 +3,7 @@ pathway
 highlighting-set-of-nodes-and-edges
 visualize-the-result-of-enrichkegg
 module
+module-definition-in-graph
 module-completeness
 visualize-the-result-of-enricher
 usecases

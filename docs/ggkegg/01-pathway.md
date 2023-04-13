@@ -2,7 +2,7 @@
 
 # Pathway
 
-Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` function is used to return `igraph` or `tbl_graph` object.
+Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object.
 
 
 ```r
@@ -13,6 +13,8 @@ library(clusterProfiler)
 library(dplyr)
 library(tidygraph)
 ```
+
+This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes returns the `igraph` object.
 
 
 ```r
@@ -79,7 +81,7 @@ pathway("ko01230") |>
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
 
-Also for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition:
+Also the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`.
 
 
 ```r
@@ -110,7 +112,7 @@ pathway("ko01100") |>
 
 ## Visualize the result of `enrichKEGG`
 
-It can visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` has boolean value whether the investigated gene is in pathway or not.
+It can visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph.
 
 
 ```r
