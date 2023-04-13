@@ -1,5 +1,6 @@
 about
 pathway
+assigning-colors-to-nodes
 highlighting-set-of-nodes-and-edges
 visualize-the-result-of-enrichkegg
 module

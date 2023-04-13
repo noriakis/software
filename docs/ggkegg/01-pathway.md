@@ -9,6 +9,7 @@ Providing `ggkegg` a pathway ID, it fetches information, parse them and make `gg
 library(ggkegg)
 library(ggfx)
 library(ggraph)
+library(igraph)
 library(clusterProfiler)
 library(dplyr)
 library(tidygraph)
@@ -49,6 +50,30 @@ gg + geom_edge_diagonal(
 ```
 
 <img src="01-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Assigning colors to nodes
+
+You can set diffent and multiple colors on nodes using `geom_node_rect`.
+
+
+```r
+g <- pathway("ko00520")
+V(g)$color_one <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set1"))(length(V(g)))
+V(g)$color_two <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set2"))(length(V(g)))
+
+ggraph(g, x=x, y=y) +
+  geom_node_rect(aes(xmin=xmin, xmax=x, fill=I(color_one)), alpha=0.5)+
+  geom_node_rect(aes(xmin=x, xmax=xmax, fill=I(color_two)), alpha=0.5)+
+  ggfx::with_outer_glow(geom_node_text(aes(label=name |> 
+                       strsplit(":") |> 
+                       sapply("[", 2) |>
+                       strsplit(" ") |>
+                       sapply("[", 1),
+                     filter=type=="ortholog"),
+                     size=2), colour="white", expand=1)
+```
+
+<img src="01-pathway_files/figure-html/assign_color-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Highlighting set of nodes and edges
