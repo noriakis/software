@@ -2,7 +2,8 @@
 
 # Pathway
 
-Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object.
+Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object.  
+The `pathway` function is a core function that downloads and parses KGML files. If the file already exists in the current working directory, it will not be downloaded again. The function also extracts reactions that are included in the pathway as edges. If there are nodes represented by type=line, the function converts these nodes to edges based on their coords. This conversion is carried out by the process_line function.
 
 
 ```r
@@ -51,9 +52,13 @@ gg + geom_edge_diagonal(
 
 <img src="01-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Assigning colors to nodes
+## geom_node_rect
 
-You can set diffent and multiple colors on nodes using `geom_node_rect`.
+This package also provides the `geom_node_rect` function, which allows drawing rectangles at specified locations based on mappings of xmin, xmax, ymin, and ymax.
+
+### Assigning colors to nodes
+
+You can set diffent and multiple colors on nodes using `geom_node_rect`. This application is useful when visualizing factors such as log2 fold change among multiple conditions.
 
 
 ```r
@@ -106,14 +111,16 @@ pathway("ko01230") |>
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
 
-Also the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`.
+Also the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. Internally, `higlight_module_compound` and `highlight_module_reaction` are utilized, which add new columns to the tbl_graph with TRUE for nodes and edges that meet the respective conditions.
 
 
 ```r
-pathway("ko01100") |> 
+g <- pathway("ko01100") |> 
   process_line() |>
   highlight_module(module("M00021")) |>
-  ggraph(x=x, y=y) +
+  mutate(compound=convert_id("compound"))
+
+g |> ggraph(x=x, y=y) +
   geom_node_point(size=1, aes(color=I(fgcolor),
     filter=fgcolor!="none" & type!="line"))+
   geom_edge_link(width=0.1, aes(color=I(fgcolor),
@@ -135,9 +142,81 @@ pathway("ko01100") |>
 
 <img src="01-pathway_files/figure-html/highlight_example2-1.png" width="100%" style="display: block; margin: auto;" />
 
+When visualizing information about compounds, it is recommended to use `geom_node_text`, `ggrepel`, and `shadowtext`.
+
+
+```r
+g |> ggraph(x=x, y=y) +
+  geom_node_point(size=1, aes(color=I(fgcolor),
+    filter=fgcolor!="none" & type!="line"))+
+  geom_edge_link(width=0.1, aes(color=I(fgcolor),
+                                filter=type=="line"& fgcolor!="none"))+
+  with_outer_glow(
+    geom_edge_link(width=1,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  with_outer_glow(
+    geom_node_point(size=2,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+    geom_node_text(aes(label=compound, filter=M00021),
+                   repel=TRUE, bg.colour="white", size=5)+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/text_compound-1.png" width="100%" style="display: block; margin: auto;" />
+If necessary, it is possible to visualize what information is included in the highlighted pathway and place it on the original map using the annotation_custom function. In this example, an annotation ggplot is first created and then converted to a grob using ggplotify. The grob is then drawn at any desired position.
+
+
+```r
+
+annot <- g |>  ggraph(x=x, y=y)+
+  with_outer_glow(
+    geom_edge_link(width=1,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  with_outer_glow(
+    geom_node_point(size=2,
+                    aes(color=I(fgcolor),
+                        filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+    geom_node_text(aes(label=compound, filter=M00021),
+                   repel=TRUE, bg.colour="white", size=5)
+g |>
+  ggraph(x=x, y=y) +
+  geom_node_point(size=1, aes(color=I(fgcolor),
+                              filter=fgcolor!="none" & type!="line"))+
+  geom_edge_link(width=0.1, aes(color=I(fgcolor),
+                                filter=type=="line"& fgcolor!="none"))+
+  with_outer_glow(
+    geom_edge_link(width=1,
+                   aes(color=I(fgcolor),
+                       filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  with_outer_glow(
+    geom_node_point(size=2,
+                    aes(color=I(fgcolor),
+                        filter=fgcolor!="none" & M00021)),
+    colour="red", expand=3
+  )+
+  annotation_custom(ggplotify::as.grob(annot),
+    ymin=-1000, ymax=0, xmin=0, xmax=1000)+ ## your desired position
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/annotation-1.png" width="100%" style="display: block; margin: auto;" />
+
 ## Visualize the result of `enrichKEGG`
 
-It can visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph.
+The library can directly visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph.
 
 
 ```r

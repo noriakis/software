@@ -1,5 +1,6 @@
 about
 pathway
+geom_node_rect
 assigning-colors-to-nodes
 highlighting-set-of-nodes-and-edges
 visualize-the-result-of-enrichkegg
@@ -8,3 +9,4 @@ module-definition-in-graph
 module-completeness
 visualize-the-result-of-enricher
 usecases
+projecting-the-gene-regulatory-networks-on-kegg-map
