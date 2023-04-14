@@ -51,14 +51,14 @@ mod@reaction_graph |>
 
 ## Module definition in graph
 
-We can visualize the module definition in the graph. This will make grouping nodes and nodes leading to the nodes connected with `AND` argument ('+' and ' '), and connect the definition.
+We can visualize the module definition in the graph. This will make grouping nodes and nodes leading to the nodes connected with `AND` argument ('+' and ' '), and connect the definition. In the example below, the wrapper function plot_module_blocks() visualizes the definitions of each module. Red represents AND relationships, while other relationships (such as compound or OR) are expressed as edge labels.
 
 
 
 ```r
 module("M00009") |>
   obtain_sequential_module_definition() |> ## return tbl_graph
-  plot_module_steps() ## wrapper function
+  plot_module_blocks() ## wrapper function
 ```
 
 <img src="02-module_files/figure-html/module_definition-1.png" width="100%" style="display: block; margin: auto;" />
@@ -74,7 +74,7 @@ query <- sample(mod@definition_components,5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K00026" "K25801" "K01900" "K00174" "K00164"
+#> [1] "K00247" "K01682" "K01678" "K18860" "K00244"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -93,50 +93,50 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01647,K05942) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01681,K01682) </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.50 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00031,K00030) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01902+K01903,K01899+K01900,K18118) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2000000 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.00 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.0666667 </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 0.20 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01676,K01679,K01677+K01678) </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.25 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
-   <td style="text-align:left;"> TRUE </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:left;"> FALSE </td>
   </tr>
 </tbody>
 </table>
