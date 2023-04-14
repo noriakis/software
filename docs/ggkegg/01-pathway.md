@@ -3,7 +3,7 @@
 # Pathway
 
 Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object.  
-The `pathway` function is a core function that downloads and parses KGML files. If the file already exists in the current working directory, it will not be downloaded again. The function also extracts reactions that are included in the pathway as edges. If there are nodes represented by type=line, the function converts these nodes to edges based on their coords. This conversion is carried out by the process_line function.
+The `pathway` function is a core function that downloads and parses KGML files. If the file already exists in the current working directory, it will not be downloaded again. The function also extracts reactions that are included in the pathway as edges. If there are nodes represented by type=line, the function converts these nodes to edges based on their `coords`. This conversion is carried out by the `process_line` function.
 
 
 ```r
@@ -51,6 +51,8 @@ gg + geom_edge_diagonal(
 ```
 
 <img src="01-pathway_files/figure-html/eco_example-1.png" width="100%" style="display: block; margin: auto;" />
+
+The x-coordinate, y-coordinate, width, and height described in the KGML are listed as x, y, width, and height. Based on this information, xmin, xmax, ymin, and ymax are calculated and stored in the node table.
 
 ## geom_node_rect
 
@@ -208,11 +210,28 @@ g |>
     colour="red", expand=3
   )+
   annotation_custom(ggplotify::as.grob(annot),
-    ymin=-1000, ymax=0, xmin=0, xmax=1000)+ ## your desired position
+    ymin=-1500, ymax=0, xmin=0, xmax=1500)+ ## your desired position
   theme_void()
 ```
 
 <img src="01-pathway_files/figure-html/annotation-1.png" width="100%" style="display: block; margin: auto;" />
+
+Of course, it is also possible to highlight any desired edges or nodes. In this case, the `highlight_set_edges` and `highlight_set_nodes` functions are used within `mutate` to generate a new column containing a boolean indicating whether the specified IDs are included or not. Then, it is possible to highlight those nodes or edges. When `how` is set to `all`, `TRUE` is returned only if all the IDs included in the query are included in the node. When `how` is set to `any`, `TRUE` is returned if any of the IDs included in the query are included in the node.
+
+
+```r
+
+gg <- g |> activate(edges) |> 
+  mutate(highlight=highlight_set_edges(c("ko:K00790","ko:K00789")))
+gg |>
+  ggraph(x=x, y=y) + geom_edge_link(width=0.1, aes(filter=fgcolor!="none",
+                                                   color=I(fgcolor))) + 
+  with_outer_glow(geom_edge_link(width=1, aes(filter=highlight,
+   color=I(fgcolor))), colour="red", expand=3) + theme_graph()
+```
+
+<img src="01-pathway_files/figure-html/highlight_arb-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Visualize the result of `enrichKEGG`
 
