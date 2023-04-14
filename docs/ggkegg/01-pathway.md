@@ -171,6 +171,7 @@ g |> ggraph(x=x, y=y) +
 ```
 
 <img src="01-pathway_files/figure-html/text_compound-1.png" width="100%" style="display: block; margin: auto;" />
+
 If necessary, it is possible to visualize what information is included in the highlighted pathway and place it on the original map using the annotation_custom function. In this example, an annotation ggplot is first created and then converted to a grob using ggplotify. The grob is then drawn at any desired position.
 
 
@@ -231,6 +232,21 @@ gg |>
 ```
 
 <img src="01-pathway_files/figure-html/highlight_arb-1.png" width="100%" style="display: block; margin: auto;" />
+
+Or highlight combined with the `graphhighlight`:
+
+
+```r
+library(graphhighlight)
+g |> ggraph(x=x, y=y) +
+  geom_edge_link(width=0.5, aes(color=I(fgcolor), filter=fgcolor!="none")) +
+  geom_node_point(size=1, aes(color=I(fgcolor), filter=fgcolor!="none" & type!="line"))+
+  highlight_node(glow=TRUE, filter="fgcolor!='none' & type!='line'",
+                 glow_base_size=TRUE,glow_size=0.5)+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/graphhighlight-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Visualize the result of `enrichKEGG`

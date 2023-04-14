@@ -8,5 +8,7 @@ module
 module-definition-in-graph
 module-completeness
 visualize-the-result-of-enricher
+network
+combining-multiple-networks
 usecases
 projecting-the-gene-regulatory-networks-on-kegg-map

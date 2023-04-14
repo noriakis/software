@@ -74,7 +74,7 @@ query <- sample(mod@definition_components,5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K01616" "K01682" "K00382" "K01681" "K01899"
+#> [1] "K00242" "K00031" "K01900" "K00247" "K00382"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -93,49 +93,49 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01647,K05942) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01681,K01682) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1.00 </td>
-   <td style="text-align:left;"> TRUE </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> (K00031,K00030) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.25 </td>
+   <td style="text-align:left;"> (K00031,K00030) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
    <td style="text-align:left;"> TRUE </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.1250000 </td>
+   <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01902+K01903,K01899+K01900,K18118) </td>
    <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.20 </td>
+   <td style="text-align:right;"> 0.2000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 0.1333333 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01676,K01679,K01677+K01678) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
    <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.00 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
 </tbody>
@@ -148,8 +148,6 @@ If you performed some experiments involving KEGG Orthology, and performed enrich
 
 ```r
 library(BiocFileCache)
-#> Warning: package 'BiocFileCache' was built under R version
-#> 4.2.2
 #> Loading required package: dbplyr
 #> Warning: package 'dbplyr' was built under R version 4.2.3
 #> 
