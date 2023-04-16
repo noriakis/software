@@ -82,6 +82,34 @@ ggraph(g, x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/assign_color-1.png" width="100%" style="display: block; margin: auto;" />
 
+It is possible to specify any number of groups.
+
+
+```r
+V(g)$color_one <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set1"))(length(V(g)))
+V(g)$color_two <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set2"))(length(V(g)))
+V(g)$color_three <- colorRampPalette(RColorBrewer::brewer.pal(5,"PuOr"))(length(V(g)))
+V(g)$color_four <- colorRampPalette(RColorBrewer::brewer.pal(5,"Paired"))(length(V(g)))
+
+V(g)$space <- V(g)$width/4
+
+ggraph(g, x=x, y=y) +
+  geom_node_rect(aes(xmin=xmin, xmax=xmin+space, fill=I(color_one), filter=type=="ortholog"))+
+  geom_node_rect(aes(xmin=xmin+space, xmax=xmin+2*space, fill=I(color_two), filter=type=="ortholog"))+
+  geom_node_rect(aes(xmin=xmin+2*space, xmax=xmin+3*space, fill=I(color_three), filter=type=="ortholog"))+
+  geom_node_rect(aes(xmin=xmin+3*space, xmax=xmin+4*space, fill=I(color_four), filter=type=="ortholog"))+
+  ggfx::with_outer_glow(geom_node_text(aes(label=name |> 
+                                             strsplit(":") |> 
+                                             sapply("[", 2) |>
+                                             strsplit(" ") |>
+                                             sapply("[", 1),
+                                           filter=type=="ortholog"),
+                                       size=2), colour="white", expand=1)+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/assign_color2-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Highlighting set of nodes and edges
 
