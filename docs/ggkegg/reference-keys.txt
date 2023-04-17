@@ -13,4 +13,5 @@ network
 combining-multiple-networks
 usecases
 projecting-the-gene-regulatory-networks-on-kegg-map
+visualizing-numerical-attributes-from-deseq2
 visualizing-multiple-enrichment-results

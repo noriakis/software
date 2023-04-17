@@ -49,6 +49,61 @@ joined |>
 
 <img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Visualizing numerical attributes from DESeq2
+
+By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the nodes of a graph. The `assign_deseq2` function can be used for this purpose. By specifying the numerical value (e.g., `log2FoldChange`) that you want to reflect in the graph as the `column` argument, you can assign the value to the nodes. If multiple genes are hit, the `numeric_combine` argument specifies how to combine multiple values (the default is `mean`).
+
+
+```r
+library(DESeq2)
+library(org.Hs.eg.db)
+load("uro.deseq.res.rda") ## Storing DESeq() result
+res
+#> class: DESeqDataSet 
+#> dim: 29744 26 
+#> metadata(1): version
+#> assays(8): counts avgTxLength ... replaceCounts
+#>   replaceCooks
+#> rownames(29744): A1BG A1BG-AS1 ... ZZEF1 ZZZ3
+#> rowData names(27): baseMean baseVar ... maxCooks
+#>   replace
+#> colnames(26): SRR14509882 SRR14509883 ... SRR14509906
+#>   SRR14509907
+#> colData names(27): Assay.Type AvgSpotLen ...
+#>   viral_infection replaceable
+vinf <- results(res, contrast=c("viral_infection","BKPyV (Dunlop) MOI=1","No infection"))
+
+g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf),
+                                   padj=assign_deseq2(vinf, column="padj"),
+                                   converted_name=convert_id("hsa"))
+
+ggraph(g, layout="manual", x=x, y=y) + 
+  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+                 start_cap = square(1, 'cm'),
+                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+  geom_node_rect(aes(fill=deseq2, filter=type=="gene"), color="black")+
+  ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
+  scale_fill_gradient(low="blue",high="red", name="LFC")+
+  theme_void()
+```
+
+<img src="04-usecases_files/figure-html/deseq2-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+
+## Adjusted p-values
+ggraph(g, layout="manual", x=x, y=y) + 
+  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+                 start_cap = square(1, 'cm'),
+                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+  geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
+  ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
+  scale_fill_gradient(low="blue",high="red", name="padj")+
+  theme_void()
+```
+
+<img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Visualizing multiple enrichment results
 

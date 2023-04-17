@@ -98,12 +98,62 @@
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">convertKO</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="visualizing-multiple-enrichment-results" class="section level2" number="5.2">
+<div id="visualizing-numerical-attributes-from-deseq2" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">5.2</span> Visualizing multiple enrichment results<a class="anchor" aria-label="anchor" href="#visualizing-multiple-enrichment-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Visualizing numerical attributes from DESeq2<a class="anchor" aria-label="anchor" href="#visualizing-numerical-attributes-from-deseq2"><i class="fas fa-link"></i></a>
+</h2>
+<p>By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the nodes of a graph. The <code>assign_deseq2</code> function can be used for this purpose. By specifying the numerical value (e.g., <code>log2FoldChange</code>) that you want to reflect in the graph as the <code>column</code> argument, you can assign the value to the nodes. If multiple genes are hit, the <code>numeric_combine</code> argument specifies how to combine multiple values (the default is <code>mean</code>).</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2">DESeq2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"uro.deseq.res.rda"</span><span class="op">)</span> <span class="co">## Storing DESeq() result</span></span>
+<span><span class="va">res</span></span>
+<span><span class="co">#&gt; class: DESeqDataSet </span></span>
+<span><span class="co">#&gt; dim: 29744 26 </span></span>
+<span><span class="co">#&gt; metadata(1): version</span></span>
+<span><span class="co">#&gt; assays(8): counts avgTxLength ... replaceCounts</span></span>
+<span><span class="co">#&gt;   replaceCooks</span></span>
+<span><span class="co">#&gt; rownames(29744): A1BG A1BG-AS1 ... ZZEF1 ZZZ3</span></span>
+<span><span class="co">#&gt; rowData names(27): baseMean baseVar ... maxCooks</span></span>
+<span><span class="co">#&gt;   replace</span></span>
+<span><span class="co">#&gt; colnames(26): SRR14509882 SRR14509883 ... SRR14509906</span></span>
+<span><span class="co">#&gt;   SRR14509907</span></span>
+<span><span class="co">#&gt; colData names(27): Assay.Type AvgSpotLen ...</span></span>
+<span><span class="co">#&gt;   viral_infection replaceable</span></span>
+<span><span class="va">vinf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/results.html">results</a></span><span class="op">(</span><span class="va">res</span>, contrast<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"viral_infection"</span>,<span class="st">"BKPyV (Dunlop) MOI=1"</span>,<span class="st">"No infection"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>deseq2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/assign_deseq2.html">assign_deseq2</a></span><span class="op">(</span><span class="va">vinf</span><span class="op">)</span>,</span>
+<span>                                   padj<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/assign_deseq2.html">assign_deseq2</a></span><span class="op">(</span><span class="va">vinf</span>, column<span class="op">=</span><span class="st">"padj"</span><span class="op">)</span>,</span>
+<span>                                   converted_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"hsa"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.5</span>, arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">'mm'</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                 start_cap <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">square</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">'cm'</span><span class="op">)</span>,</span>
+<span>                 end_cap <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">square</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="st">'cm'</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">subtype</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_node_rect</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">deseq2</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"gene"</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">converted_name</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">!=</span><span class="st">"group"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"white"</span>, expand<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"red"</span>, name<span class="op">=</span><span class="st">"LFC"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co">## Adjusted p-values</span></span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.5</span>, arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">'mm'</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                 start_cap <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">square</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">'cm'</span><span class="op">)</span>,</span>
+<span>                 end_cap <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">square</a></span><span class="op">(</span><span class="fl">1.5</span>, <span class="st">'cm'</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">subtype</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_node_rect</span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">padj</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"gene"</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">converted_name</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">!=</span><span class="st">"group"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"white"</span>, expand<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"red"</span>, name<span class="op">=</span><span class="st">"padj"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="visualizing-multiple-enrichment-results" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Visualizing multiple enrichment results<a class="anchor" aria-label="anchor" href="#visualizing-multiple-enrichment-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can visualize the results of multiple enrichment analyses. Similar to using the <code>ggkegg</code> function with the <code>enrichResult</code> class, there is an <code>append_cp</code> function that can be used within the <code>mutate</code> function. By providing an <code>enrichResult</code> object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## These are RDAs storing DEGs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"degListRPTEC.rda"</span><span class="op">)</span></span>
@@ -147,7 +197,8 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#usecases"><span class="header-section-number">5</span> Usecases</a></li>
 <li><a class="nav-link" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><span class="header-section-number">5.1</span> Projecting the gene regulatory networks on KEGG map</a></li>
-<li><a class="nav-link" href="#visualizing-multiple-enrichment-results"><span class="header-section-number">5.2</span> Visualizing multiple enrichment results</a></li>
+<li><a class="nav-link" href="#visualizing-numerical-attributes-from-deseq2"><span class="header-section-number">5.2</span> Visualizing numerical attributes from DESeq2</a></li>
+<li><a class="nav-link" href="#visualizing-multiple-enrichment-results"><span class="header-section-number">5.3</span> Visualizing multiple enrichment results</a></li>
 </ul>
 
       <div class="book-extra">
@@ -164,7 +215,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-17.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
