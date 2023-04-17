@@ -3,6 +3,7 @@ pathway
 geom_node_rect
 assigning-colors-to-nodes
 highlighting-set-of-nodes-and-edges
+group-of-nodes
 visualize-the-result-of-enrichkegg
 module
 module-definition-in-graph

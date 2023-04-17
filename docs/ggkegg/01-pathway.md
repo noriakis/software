@@ -276,6 +276,26 @@ g |> ggraph(x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/graphhighlight-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Group of nodes
+
+The groups are specified in the KGML with type="group". The pathway function adds edges linking the group ID and component ID, allowing the visualization of groups in the layout other than those specified in the KGML. The edges mentioned are specified with the type `in_group`.
+
+
+```r
+g <- pathway("hsa03460") |> mutate(conv=convert_id("hsa"))
+g <- delete_vertex_attr(g, "x")
+g <- delete_vertex_attr(g, "y")
+ggraph(g, layout = "nicely") +
+  geom_node_point(aes(filter=type=="gene" | type=="group"), color="black") +
+  geom_edge_link(aes(color=subtype),end_cap=circle(2,"mm"),
+                 start_cap=circle(2,"mm"),
+                     label_dodge = unit(2,"mm"))+
+  geom_node_text(aes(label=conv), repel=TRUE, bg.colour="white")+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/group-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Visualize the result of `enrichKEGG`
 
