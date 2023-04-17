@@ -71,7 +71,7 @@
 <p>The <code>module</code> function creates an object of the <code>kegg_module</code> class, which stores the parsed information of reactions and definitions in its internal slots. By providing this <code>kegg_module</code> object to various functions, it is possible to execute various operations related to the module.</p>
 <p>Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Some edges are duplicate and have different reactions,</span></span>
@@ -104,7 +104,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00009"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_sequential_module_definition.html">obtain_sequential_module_definition</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## return tbl_graph</span></span>
-<span>  <span class="fu">plot_module_blocks</span><span class="op">(</span><span class="op">)</span> <span class="co">## wrapper function</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/plot_module_blocks.html">plot_module_blocks</a></span><span class="op">(</span><span class="op">)</span> <span class="co">## wrapper function</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-module_files/figure-html/module_definition-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="module-completeness" class="section level2" number="3.2">
@@ -118,7 +118,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">":"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="st">"["</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">query</span></span>
-<span><span class="co">#&gt; [1] "K00030" "K00239" "K00175" "K00025" "K01903"</span></span>
+<span><span class="co">#&gt; [1] "K00164" "K01677" "K01678" "K00031" "K05942"</span></span>
 <span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_completeness.html">module_completeness</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -126,6 +126,9 @@
 <thead><tr>
 <th style="text-align:left;">
 block
+</th>
+<th style="text-align:right;">
+all_num
 </th>
 <th style="text-align:right;">
 present_num
@@ -143,13 +146,16 @@ complete
 (K01647,K05942)
 </td>
 <td style="text-align:right;">
-0
+2
 </td>
 <td style="text-align:right;">
-0.0000000
+1
+</td>
+<td style="text-align:right;">
+0.500
 </td>
 <td style="text-align:left;">
-FALSE
+TRUE
 </td>
 </tr>
 <tr>
@@ -157,10 +163,13 @@ FALSE
 (K01681,K01682)
 </td>
 <td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
 0
 </td>
 <td style="text-align:right;">
-0.0000000
+0.000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -171,10 +180,13 @@ FALSE
 (K00031,K00030)
 </td>
 <td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.5000000
+0.500
 </td>
 <td style="text-align:left;">
 TRUE
@@ -185,10 +197,13 @@ TRUE
 ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176)
 </td>
 <td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.1250000
+0.125
 </td>
 <td style="text-align:left;">
 FALSE
@@ -199,10 +214,13 @@ FALSE
 (K01902+K01903,K01899+K01900,K18118)
 </td>
 <td style="text-align:right;">
-1
+5
 </td>
 <td style="text-align:right;">
-0.2000000
+0
+</td>
+<td style="text-align:right;">
+0.000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -213,10 +231,13 @@ FALSE
 (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247)
 </td>
 <td style="text-align:right;">
-1
+15
 </td>
 <td style="text-align:right;">
-0.0666667
+0
+</td>
+<td style="text-align:right;">
+0.000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -227,13 +248,16 @@ FALSE
 (K01676,K01679,K01677+K01678)
 </td>
 <td style="text-align:right;">
-0
+4
 </td>
 <td style="text-align:right;">
-0.0000000
+2
+</td>
+<td style="text-align:right;">
+0.500
 </td>
 <td style="text-align:left;">
-FALSE
+TRUE
 </td>
 </tr>
 <tr>
@@ -241,13 +265,16 @@ FALSE
 (K00026,K00025,K00024,K00116)
 </td>
 <td style="text-align:right;">
-1
+4
 </td>
 <td style="text-align:right;">
-0.2500000
+0
+</td>
+<td style="text-align:right;">
+0.000
 </td>
 <td style="text-align:left;">
-TRUE
+FALSE
 </td>
 </tr>
 </tbody>
@@ -260,7 +287,10 @@ TRUE
 <p>If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocFileCache</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'BiocFileCache' was built under R version</span></span>
+<span><span class="co">#&gt; 4.2.2</span></span>
 <span><span class="co">#&gt; Loading required package: dbplyr</span></span>
+<span><span class="co">#&gt; Warning: package 'dbplyr' was built under R version 4.2.3</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dbplyr'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:dplyr':</span></span>
@@ -268,7 +298,7 @@ TRUE
 <span><span class="co">#&gt;     ident, sql</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; clusterProfiler v4.6.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/</span></span>
+<span><span class="co">#&gt; clusterProfiler v4.7.1.003  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; If you use clusterProfiler in published research, please cite:</span></span>
 <span><span class="co">#&gt; T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141</span></span>

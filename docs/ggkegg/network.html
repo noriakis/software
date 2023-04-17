@@ -76,14 +76,14 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kne</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network.html">network</a></span><span class="op">(</span><span class="st">"N00385"</span><span class="op">)</span>  <span class="co">## HCMV</span></span>
 <span><span class="va">kne2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network.html">network</a></span><span class="op">(</span><span class="st">"N00366"</span><span class="op">)</span> <span class="co">## HPV</span></span>
-<span><span class="va">one</span> <span class="op">&lt;-</span> <span class="va">kne</span> <span class="op">|&gt;</span> <span class="fu">network_graph</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">two</span> <span class="op">&lt;-</span> <span class="va">kne2</span> <span class="op">|&gt;</span> <span class="fu">network_graph</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">one</span> <span class="op">&lt;-</span> <span class="va">kne</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network_graph.html">network_graph</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">two</span> <span class="op">&lt;-</span> <span class="va">kne2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network_graph.html">network_graph</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">two</span></span>
 <span><span class="co">#&gt; # A tbl_graph: 6 nodes and 5 edges</span></span>
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A rooted tree</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Node Data: 6 × 3 (active)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
 <span><span class="co">#&gt;   name     network_name                          network_ID</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                                 &lt;chr&gt;     </span></span>
 <span><span class="co">#&gt; 1 E5       HPV E5 to EGFR-PI3K signaling pathway N00366    </span></span>
@@ -93,27 +93,27 @@
 <span><span class="co">#&gt; 5 PIP3     HPV E5 to EGFR-PI3K signaling pathway N00366    </span></span>
 <span><span class="co">#&gt; 6 AKT      HPV E5 to EGFR-PI3K signaling pathway N00366    </span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Edge Data: 5 × 4</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 4</span></span>
 <span><span class="co">#&gt;    from    to type  subtype  </span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;    </span></span>
 <span><span class="co">#&gt; 1     1     2 -|    reference</span></span>
 <span><span class="co">#&gt; 2     2     3 -|    reference</span></span>
 <span><span class="co">#&gt; 3     3     4 -&gt;    reference</span></span>
-<span><span class="co">#&gt; # … with 2 more rows</span></span>
-<span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/graph_join.html">graph_join</a></span><span class="op">(</span><span class="va">one</span>, <span class="va">two</span>, by<span class="op">=</span><span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">plot_kegg_network</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 2 more rows</span></span>
+<span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/graph_join.html">graph_join</a></span><span class="op">(</span><span class="va">one</span>, <span class="va">two</span>, by<span class="op">=</span><span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/plot_kegg_network.html">plot_kegg_network</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-network_files/figure-html/network_combine-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>By using <code>ggforce</code>, it is possible to draw multiple graphs showing which genes belong to which network.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kne3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network.html">network</a></span><span class="op">(</span><span class="st">"N00485"</span><span class="op">)</span> <span class="co">## EBV</span></span>
 <span><span class="va">kne4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network.html">network</a></span><span class="op">(</span><span class="st">"N00030"</span><span class="op">)</span> <span class="co">## EGF-EGFR-RAS-PI3K</span></span>
-<span><span class="va">three</span> <span class="op">&lt;-</span> <span class="va">kne3</span> <span class="op">|&gt;</span> <span class="fu">network_graph</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">four</span> <span class="op">&lt;-</span> <span class="va">kne4</span> <span class="op">|&gt;</span> <span class="fu">network_graph</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">three</span> <span class="op">&lt;-</span> <span class="va">kne3</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network_graph.html">network_graph</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">four</span> <span class="op">&lt;-</span> <span class="va">kne4</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/network_graph.html">network_graph</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html">Reduce</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/graph_join.html">graph_join</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>, by<span class="op">=</span><span class="st">"name"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">one</span>, <span class="va">two</span>, <span class="va">three</span>, <span class="va">four</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">coln</span> <span class="op">&lt;-</span> <span class="va">gg</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="va">nids</span> <span class="op">&lt;-</span> <span class="va">coln</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"network_ID"</span>,<span class="va">coln</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu">plot_kegg_network</span><span class="op">(</span><span class="va">gg</span><span class="op">)</span></span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/plot_kegg_network.html">plot_kegg_network</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">nids</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">net</span> <span class="op">&lt;-</span> <span class="va">net</span> <span class="op">+</span> <span class="fu">ggforce</span><span class="fu">::</span><span class="fu"><a href="https://ggforce.data-imaginist.com/reference/geom_mark_hull.html">geom_mark_hull</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.2</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>group<span class="op">=</span><span class="va">.data</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>    fill<span class="op">=</span><span class="va">.data</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span>, filter<span class="op">=</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">.data</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
