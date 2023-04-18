@@ -73,6 +73,7 @@ res
 #>   viral_infection replaceable
 vinf <- results(res, contrast=c("viral_infection","BKPyV (Dunlop) MOI=1","No infection"))
 
+## LFC
 g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf),
                                    padj=assign_deseq2(vinf, column="padj"),
                                    converted_name=convert_id("hsa"))
@@ -98,7 +99,7 @@ ggraph(g, layout="manual", x=x, y=y) +
                  end_cap = square(1.5, 'cm'), aes(color=subtype))+
   geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
   ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
-  scale_fill_gradient(low="blue",high="red", name="padj")+
+  scale_fill_gradient(name="padj")+
   theme_void()
 ```
 
