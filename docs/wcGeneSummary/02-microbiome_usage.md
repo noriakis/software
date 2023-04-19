@@ -8,7 +8,7 @@ The general usage for mining the information related to microbiome-related signa
 
 
 ```r
-library(wcGeneSummary)
+library(biotextgraph)
 library(ggplot2)
 library(ggraph)
 library(RColorBrewer)
@@ -30,30 +30,31 @@ basic <- wcBSDB(c("Veillonella dispar","Neisseria flava"),tag=FALSE,
 #> Filtering 0 words (frequency and/or tfidf)
 basic@freqDf |> head(n=20)
 #>                    word freq
-#> gut                 Gut    8
-#> oral               Oral    5
+#> gut                 gut    8
+#> oral               oral    5
 #> patients       patients    5
 #> study             study    3
 #> arthritis     arthritis    2
 #> association association    2
 #> bacterial     bacterial    2
-#> covid19         COVID19    2
+#> covid19         covid19    2
 #> diabetes       diabetes    2
-#> dysbiosis     Dysbiosis    2
+#> dysbiosis     dysbiosis    2
 #> infant           infant    2
-#> infection     Infection    2
+#> infection     infection    2
 #> obese             obese    2
 #> respiratory respiratory    2
 #> sequencing   sequencing    2
 #> surgery         surgery    2
 #> tract             tract    2
 #>  features      features    1
-#> 16s                 16S    1
-#> aerosol         Aerosol    1
+#> 16s                 16s    1
+#> aerosol         aerosol    1
 basic@wc
+#> <S4 Type Object>
+#> attr(,".S3Class")
+#> [1] "gg"
 ```
-
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;" />
 
 If `target="abstract"`, the corresponding abstract of curated publications will be fetched and be summarized.
 
@@ -75,15 +76,16 @@ basic2 <- wcBSDB(c("Veillonella dispar","Neisseria flava"),tag=TRUE,
 basic2@freqDf |> head()
 #>                word freq
 #> patients   patients   37
-#> gut             Gut   30
-#> oral           Oral   27
-#> bacterial Bacterial   25
+#> gut             gut   30
+#> oral           oral   27
+#> bacterial bacterial   25
 #> species     species   24
-#> microbial Microbial   23
+#> microbial microbial   23
 basic2@wc
+#> <S4 Type Object>
+#> attr(,".S3Class")
+#> [1] "gg"
 ```
-
-<img src="02-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;" />
 
 For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in `wcGeneSummary`.
 
@@ -477,6 +479,14 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
                                 ngram=1), horizontalSpacer=0.1,
                                useWGCNA=FALSE, spacer=0.05,
                                horiz=FALSE, wcScale =5)
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> border is set to FALSE as useggfx is not NULL
 scaled <- micro + scale_y_continuous(expand=c(0,10))
 
@@ -489,9 +499,9 @@ micro + scaled
 
 ```r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31 ucrt)
+#> R version 4.2.1 (2022-06-23 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 19044)
+#> Running under: Windows 10 x64 (build 22621)
 #> 
 #> Matrix products: default
 #> 
@@ -507,74 +517,74 @@ sessionInfo()
 #> [6] methods   base     
 #> 
 #> other attached packages:
-#> [1] ggfx_1.0.1           RColorBrewer_1.1-3  
-#> [3] ggraph_2.1.0         wcGeneSummary_0.99.0
-#> [5] ggplot2_3.4.1       
+#> [1] ggfx_1.0.1          RColorBrewer_1.1-3 
+#> [3] ggraph_2.1.0        biotextgraph_0.99.0
+#> [5] ggplot2_3.4.1      
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] GeneSummary_0.99.4     colorspace_2.1-0      
+#>   [1] GeneSummary_0.99.3     colorspace_2.1-0      
 #>   [3] rjson_0.2.21           ISOcodes_2022.09.29   
 #>   [5] ellipsis_0.3.2         markdown_1.5          
-#>   [7] XVector_0.38.0         GlobalOptions_0.1.2   
+#>   [7] XVector_0.36.0         GlobalOptions_0.1.2   
 #>   [9] base64enc_0.1-3        ggdendro_0.1.23       
-#>  [11] fs_1.6.1               gridtext_0.1.5        
+#>  [11] fs_1.5.2               gridtext_0.1.5        
 #>  [13] rstudioapi_0.14        farver_2.1.1          
 #>  [15] graphlayouts_0.8.4     ggwordcloud_0.6.0     
 #>  [17] ggrepel_0.9.3          bit64_4.0.5           
-#>  [19] AnnotationDbi_1.60.0   fansi_1.0.4           
+#>  [19] AnnotationDbi_1.58.0   fansi_1.0.4           
 #>  [21] xml2_1.3.3             downlit_0.4.2         
-#>  [23] cachem_1.0.7           phylogram_2.1.0       
+#>  [23] cachem_1.0.6           phylogram_2.1.0       
 #>  [25] knitr_1.42             polyclip_1.10-4       
-#>  [27] jsonlite_1.8.4         png_0.1-8             
-#>  [29] graph_1.76.0           ggforce_0.4.1         
-#>  [31] shiny_1.7.4            bugsigdbr_1.4.3       
-#>  [33] rentrez_1.2.3          compiler_4.2.2        
-#>  [35] httr_1.4.5             fastmap_1.1.1         
-#>  [37] cli_3.6.0              later_1.3.0           
-#>  [39] tweenr_2.0.2           htmltools_0.5.4       
-#>  [41] tools_4.2.2            igraph_1.4.1          
-#>  [43] NLP_0.2-1              gtable_0.3.1          
-#>  [45] glue_1.6.2             GenomeInfoDbData_1.2.9
-#>  [47] dplyr_1.1.0            Rcpp_1.0.10           
-#>  [49] slam_0.1-50            Biobase_2.58.0        
-#>  [51] jquerylib_0.1.4        vctrs_0.5.2           
-#>  [53] Biostrings_2.66.0      nlme_3.1-161          
-#>  [55] ape_5.7                stringr_1.5.0         
-#>  [57] xfun_0.37              stopwords_2.3         
+#>  [27] jsonlite_1.8.0         png_0.1-7             
+#>  [29] graph_1.74.0           ggforce_0.4.1         
+#>  [31] shiny_1.7.4            bugsigdbr_1.2.2       
+#>  [33] rentrez_1.2.3          compiler_4.2.1        
+#>  [35] httr_1.4.5             fastmap_1.1.0         
+#>  [37] cli_3.5.0              later_1.3.0           
+#>  [39] tweenr_2.0.2           htmltools_0.5.5       
+#>  [41] tools_4.2.1            igraph_1.4.1          
+#>  [43] NLP_0.2-1              gtable_0.3.3          
+#>  [45] glue_1.6.2             GenomeInfoDbData_1.2.8
+#>  [47] dplyr_1.1.1            Rcpp_1.0.9            
+#>  [49] slam_0.1-50            Biobase_2.56.0        
+#>  [51] jquerylib_0.1.4        vctrs_0.6.1           
+#>  [53] Biostrings_2.64.0      nlme_3.1-157          
+#>  [55] ape_5.7-1              stringr_1.5.0         
+#>  [57] xfun_0.38              stopwords_2.3         
 #>  [59] mime_0.12              lifecycle_1.0.3       
-#>  [61] XML_3.99-0.13          pvclust_2.2-0         
-#>  [63] dendextend_1.16.0      org.Hs.eg.db_3.16.0   
-#>  [65] zlibbioc_1.44.0        MASS_7.3-58.1         
+#>  [61] XML_3.99-0.10          pvclust_2.2-0         
+#>  [63] dendextend_1.17.1      org.Hs.eg.db_3.15.0   
+#>  [65] zlibbioc_1.42.0        MASS_7.3-57           
 #>  [67] scales_1.2.1           tidygraph_1.2.3       
 #>  [69] ragg_1.2.5             promises_1.2.0.1      
-#>  [71] parallel_4.2.2         cyjShiny_1.0.34       
-#>  [73] yaml_2.3.7             memoise_2.0.1         
+#>  [71] parallel_4.2.1         cyjShiny_1.0.42       
+#>  [73] yaml_2.3.5             memoise_2.0.1         
 #>  [75] gridExtra_2.3          yulab.utils_0.0.6     
-#>  [77] sass_0.4.5             stringi_1.7.12        
-#>  [79] RSQLite_2.3.0          highr_0.10            
-#>  [81] S4Vectors_0.36.2       BiocGenerics_0.44.0   
-#>  [83] GenomeInfoDb_1.34.9    commonmark_1.8.1      
-#>  [85] systemfonts_1.0.4      rlang_1.0.6           
+#>  [77] sass_0.4.5             stringi_1.7.8         
+#>  [79] RSQLite_2.2.15         highr_0.10            
+#>  [81] S4Vectors_0.34.0       BiocGenerics_0.42.0   
+#>  [83] GenomeInfoDb_1.32.4    commonmark_1.9.0      
+#>  [85] systemfonts_1.0.4      rlang_1.1.0           
 #>  [87] pkgconfig_2.0.3        bitops_1.0-7          
 #>  [89] lattice_0.20-45        evaluate_0.20         
 #>  [91] purrr_1.0.1            labeling_0.4.2        
-#>  [93] patchwork_1.1.2        htmlwidgets_1.6.1     
-#>  [95] cowplot_1.1.1          bit_4.0.5             
+#>  [93] patchwork_1.1.2        htmlwidgets_1.6.2     
+#>  [95] cowplot_1.1.1          bit_4.0.4             
 #>  [97] tidyselect_1.2.0       magrittr_2.0.3        
 #>  [99] bookdown_0.33          R6_2.5.1              
-#> [101] magick_2.7.4           IRanges_2.32.0        
+#> [101] magick_2.7.4           IRanges_2.30.0        
 #> [103] generics_0.1.3         DBI_1.1.3             
-#> [105] pillar_1.8.1           withr_2.5.0           
-#> [107] KEGGREST_1.38.0        RCurl_1.98-1.10       
-#> [109] tibble_3.1.8           crayon_1.5.2          
+#> [105] pillar_1.9.0           withr_2.5.0           
+#> [107] KEGGREST_1.36.3        RCurl_1.98-1.7        
+#> [109] tibble_3.2.1           crayon_1.5.2          
 #> [111] wordcloud_2.6          utf8_1.2.3            
-#> [113] rmarkdown_2.20         viridis_0.6.2         
-#> [115] GetoptLong_1.0.5       grid_4.2.2            
-#> [117] blob_1.2.3             digest_0.6.31         
-#> [119] xtable_1.8-4           tm_0.7-11             
-#> [121] tidyr_1.3.0            httpuv_1.6.9          
+#> [113] rmarkdown_2.21         viridis_0.6.2         
+#> [115] GetoptLong_1.0.5       grid_4.2.1            
+#> [117] blob_1.2.4             digest_0.6.29         
+#> [119] xtable_1.8-4           tm_0.7-8              
+#> [121] tidyr_1.3.0            httpuv_1.6.5          
 #> [123] textshaping_0.3.6      gridGraphics_0.5-1    
-#> [125] stats4_4.2.2           munsell_0.5.0         
+#> [125] stats4_4.2.1           munsell_0.5.0         
 #> [127] viridisLite_0.4.1      ggplotify_0.1.0       
 #> [129] bslib_0.4.2
 ```

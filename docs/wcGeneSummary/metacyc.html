@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 Including the other databases (an example in MetaCyc) | wcGeneSummary (OSplot)</title>
+<title>Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Including the other databases (an example in MetaCyc) | wcGeneSummary (OSplot)">
+<meta property="og:title" content="Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/metacyc.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Including the other databases (an example in MetaCyc) | wcGeneSummary (OSplot)">
+<meta name="twitter:title" content="Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -32,7 +32,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="">wcGeneSummary (OSplot)</a>
+        <a href="index.html" title="">biotextgraph</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -47,15 +47,16 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
 <li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
 <li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
-<li><a class="" href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">4</span> Interactive inspection of gene cluster network annotated by words</a></li>
-<li><a class="" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">5</span> Annotating gene cluster dendrogram</a></li>
-<li><a class="" href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">6</span> Assess the occurrence of the speicific words across gene clusters</a></li>
-<li><a class="" href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Recluster the cluster using word information</a></li>
-<li><a class="active" href="metacyc.html"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="active" href="metacyc.html"><span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="" href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></li>
+<li><a class="" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">6</span> Annotating gene cluster dendrogram</a></li>
+<li><a class="" href="assess-the-occurrence-of-the-speicific-words-across-gene-clusters.html"><span class="header-section-number">7</span> Assess the occurrence of the speicific words across gene clusters</a></li>
+<li><a class="" href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">8</span> Recluster the cluster using word information</a></li>
 <li><a class="" href="pathview-text.html"><span class="header-section-number">9</span> Pathview text</a></li>
 <li><a class="" href="application-examples.html"><span class="header-section-number">10</span> Application examples</a></li>
 <li><a class="" href="single-cell-transcriptomic-data.html"><span class="header-section-number">11</span> Single-cell transcriptomic data</a></li>
 <li><a class="" href="parsing.html"><span class="header-section-number">12</span> Parsing</a></li>
+<li><a class="" href="perform-each-process-separately.html"><span class="header-section-number">13</span> Perform each process separately</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,19 +64,19 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="metacyc" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="metacyc" class="section level1" number="4">
 <h1>
-<span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)<a class="anchor" aria-label="anchor" href="#metacyc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)<a class="anchor" aria-label="anchor" href="#metacyc"><i class="fas fa-link"></i></a>
 </h1>
 <p>For mining the pathway information in curated database MetaCyc (<a href="https://academic.oup.com/nar/article/48/D1/D445/5581728">Caspi et al. 2020</a>), users can prepare <code>pathways.dat</code> from MetaCyc flat files. Note that you must have a valid license of using MetaCyc. See <a href="https://www.metacyc.org/MetaCycUserGuide.shtml">User guides</a> of MetaCyc, and <a href="www.biocyc.org">BioCyc</a>.
 Suppose we would like to know pathway and related information of “Bifidobacterium longum” and “Escherichia coli”. The function <code>parseMetaCycPathway</code> can be used to parse the summarized comment of pathways using these queries. Note that the function search for <code>TAXONOMIC-RANGE</code> or <code>SPECIES</code> information in <code>pathways.dat</code> if <code>withTax=TRUE</code>. The resulting data.frame looks like below.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">wcGeneSummary</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">candidateSpecies</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Bifidobacterium longum"</span>,<span class="st">"Escherichia coli"</span><span class="op">)</span></span>
 <span><span class="va">file</span> <span class="op">&lt;-</span> <span class="st">"../../metacyc/24.5/data/pathways.dat"</span></span>
-<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span><span class="op">)</span></span>
+<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">input</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   pathwayID</span></span>
@@ -107,7 +108,7 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; 5 Escherichia coli</span></span>
 <span><span class="co">#&gt; 6 Escherichia coli</span></span>
 <span></span>
-<span><span class="va">input2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">input2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">input2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   pathwayID</span></span>
@@ -153,8 +154,8 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; 5 Escherichia coli</span></span>
 <span><span class="co">#&gt; 6 Escherichia coli</span></span></code></pre></div>
 <p>You can strip some tags and symbols by <code>clear=TRUE</code>.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span>, clear<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span>, clear<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">input3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   pathwayID</span></span>
 <span><span class="co">#&gt; 1  PWY-7622</span></span>
@@ -198,11 +199,11 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; 4 Escherichia coli</span></span>
 <span><span class="co">#&gt; 5 Escherichia coli</span></span>
 <span><span class="co">#&gt; 6 Escherichia coli</span></span></code></pre></div>
-<p>These data frames can be passed to <code>wcMan</code> function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have <code>"text"</code> column to make word cloud or a correlation network.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<p>These data frames can be passed to <code>wcMan</code> function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have <code>"text"</code> column to make word cloud or a network.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
-<span><span class="va">metawc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
+<span><span class="va">metawc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
 <span>                numWords<span class="op">=</span><span class="fl">100</span>,</span>
 <span>                 argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
@@ -210,34 +211,37 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span>                   colors<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">8</span>, <span class="st">"Set2"</span><span class="op">)</span>,</span>
 <span>                   random.order<span class="op">=</span><span class="cn">FALSE</span></span>
 <span>                 <span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName to link with query</span></span>
 <span><span class="va">metawc</span></span>
 <span><span class="co">#&gt; Type: manual</span></span>
 <span><span class="co">#&gt; Number of words: 100</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 627.4 Kb</span></span>
-<span><span class="va">metawc</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>For plotting the network, query column must be specified if plotting the query with the word information.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; 870.8 Kb</span></span>
+<span><span class="va">metawc</span><span class="op">@</span><span class="va">wc</span></span>
+<span><span class="co">#&gt; &lt;S4 Type Object&gt;</span></span>
+<span><span class="co">#&gt; attr(,".S3Class")</span></span>
+<span><span class="co">#&gt; [1] "gg"</span></span></code></pre></div>
+<p>For plotting the network, query column must be specified if plotting the query with the word information. In this example, the connection between query and text is not shown because <code>queryPlot</code> is FALSE.</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
-<span><span class="va">metanet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"query"</span>,<span class="st">"text"</span><span class="op">)</span><span class="op">]</span>, </span>
+<span><span class="va">metanet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"query"</span>,<span class="st">"text"</span><span class="op">)</span><span class="op">]</span>, </span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
 <span>                numWords<span class="op">=</span><span class="fl">20</span>, plotType<span class="op">=</span><span class="st">"network"</span>, colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">metanet</span></span>
 <span><span class="co">#&gt; Type: manual</span></span>
 <span><span class="co">#&gt; Number of words: 20</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 625.4 Kb</span></span>
+<span><span class="co">#&gt; 627.9 Kb</span></span>
 <span><span class="va">metanet</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For column other than the query and text, in this example <code>commonName</code> and <code>pathwayID</code>, the relationship between query and these columns are to be plotted.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">metanet2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
+<span><span class="va">metanet2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input</span>, </span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
 <span>                numWords<span class="op">=</span><span class="fl">20</span>, plotType<span class="op">=</span><span class="st">"network"</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                tag<span class="op">=</span><span class="cn">TRUE</span>, nodePal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">8</span>, <span class="st">"Set2"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -253,35 +257,35 @@ Suppose we would like to know pathway and related information of “Bifidobacter
 <span><span class="co">#&gt; Type: manual</span></span>
 <span><span class="co">#&gt; Number of words: 20</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; 711 Kb</span></span>
+<span><span class="co">#&gt; 714.6 Kb</span></span>
 <span><span class="va">metanet2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/wcmeta3-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/wcmeta3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When taxonomy parsing is available, query by the NCBI Taxonomy ID.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set candSp to all and noComma to TRUE</span></span>
-<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, candSp<span class="op">=</span><span class="st">"all"</span>, withTax <span class="op">=</span> <span class="cn">TRUE</span>,noComma<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, candSp<span class="op">=</span><span class="st">"all"</span>, withTax <span class="op">=</span> <span class="cn">TRUE</span>,noComma<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="va">input2</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"TAX-2157"</span>,<span class="va">input</span><span class="op">$</span><span class="va">taxonomicRange</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">input2</span> <span class="op">&lt;-</span> <span class="va">input2</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">input2</span><span class="op">$</span><span class="va">pathwayID</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">onlyText</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">input2</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"text"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">`colnames&lt;-`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"text"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">input2Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">onlyText</span>, plotType<span class="op">=</span><span class="st">"network"</span>, additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,</span>
+<span><span class="va">input2Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">onlyText</span>, plotType<span class="op">=</span><span class="st">"network"</span>, additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,</span>
 <span>                                               <span class="st">"gene"</span>,<span class="st">"genes"</span>,<span class="st">"proteins"</span>,</span>
 <span>                                               <span class="st">"pathway"</span>,<span class="st">"pathways"</span>,<span class="st">"enzyme"</span>,<span class="st">"enzymes"</span>,</span>
 <span>                                               <span class="st">"bacteria"</span>,<span class="st">"reaction"</span>,<span class="st">"protein"</span>,<span class="st">"biosynthesis"</span>,</span>
 <span>                                               <span class="st">"organism"</span>,<span class="st">"organisms"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">input2Net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/query-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/query-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Also, if you want to search for the NCBI tax identifiers and want to use species names as queries,
 First you should convert the IDs using <code>convertMetaCyc</code> function using <code>taxonomizr</code>.
 Next you search for converted names for the interested species, and input this data frame to <code>wcMan</code>.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">input</span><span class="op">$</span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/convertMetaCyc.html">convertMetaCyc</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">input</span><span class="op">$</span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/convertMetaCyc.html">convertMetaCyc</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Bifidobacterium"</span>,<span class="va">input</span><span class="op">$</span><span class="va">converted</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input3</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">input3</span><span class="op">$</span><span class="va">pathwayID</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">input3</span><span class="op">$</span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Bifidobacterium"</span>,<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">input3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input3</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"text"</span>,<span class="st">"pathwayID"</span>,<span class="st">"query"</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">input3Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input3</span>, plotType<span class="op">=</span><span class="st">"network"</span>, queryPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span><span class="va">input3Net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcMan.html">wcMan</a></span><span class="op">(</span><span class="va">input3</span>, plotType<span class="op">=</span><span class="st">"network"</span>, queryPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                   additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,</span>
 <span>                    <span class="st">"gene"</span>,<span class="st">"genes"</span>,<span class="st">"proteins"</span>,</span>
 <span>                    <span class="st">"pathway"</span>,<span class="st">"pathways"</span>,<span class="st">"enzyme"</span>,<span class="st">"enzymes"</span>,</span>
@@ -289,13 +293,13 @@ Next you search for converted names for the interested species, and input this d
 <span>                    <span class="st">"organism"</span>,<span class="st">"organisms"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Including columns pathwayID to link with query</span></span>
 <span><span class="va">input3Net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-metacyc_manual_files/figure-html/query2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/query2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Includes BioCyc (TM) pathway/genome databases under license from SRI International.<br><img src="https://biocyc.org/graphics2021/BioCyc-logo-color-genome.svg" width="100px"></p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
+<span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -310,24 +314,78 @@ Next you search for converted names for the interested species, and input this d
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets </span></span>
 <span><span class="co">#&gt; [6] methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; other attached packages:</span></span>
+<span><span class="co">#&gt; [1] ggraph_2.1.0        biotextgraph_0.99.0</span></span>
+<span><span class="co">#&gt; [3] ggplot2_3.4.1      </span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  </span></span>
-<span><span class="co">#&gt;  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  </span></span>
-<span><span class="co">#&gt;  [7] cachem_1.0.7    rlang_1.0.6     cli_3.6.0      </span></span>
-<span><span class="co">#&gt; [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4</span></span>
-<span><span class="co">#&gt; [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 </span></span>
-<span><span class="co">#&gt; [16] tools_4.2.2     xfun_0.37       yaml_2.3.7     </span></span>
-<span><span class="co">#&gt; [19] fastmap_1.1.1   compiler_4.2.2  memoise_2.0.1  </span></span>
-<span><span class="co">#&gt; [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     </span></span>
-<span><span class="co">#&gt; [25] sass_0.4.5</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] GeneSummary_0.99.3     colorspace_2.1-0      </span></span>
+<span><span class="co">#&gt;   [3] rjson_0.2.21           ellipsis_0.3.2        </span></span>
+<span><span class="co">#&gt;   [5] ISOcodes_2022.09.29    XVector_0.36.0        </span></span>
+<span><span class="co">#&gt;   [7] GlobalOptions_0.1.2    base64enc_0.1-3       </span></span>
+<span><span class="co">#&gt;   [9] ggdendro_0.1.23        fs_1.5.2              </span></span>
+<span><span class="co">#&gt;  [11] rstudioapi_0.14        farver_2.1.1          </span></span>
+<span><span class="co">#&gt;  [13] graphlayouts_0.8.4     ggrepel_0.9.3         </span></span>
+<span><span class="co">#&gt;  [15] bit64_4.0.5            AnnotationDbi_1.58.0  </span></span>
+<span><span class="co">#&gt;  [17] fansi_1.0.4            xml2_1.3.3            </span></span>
+<span><span class="co">#&gt;  [19] codetools_0.2-18       downlit_0.4.2         </span></span>
+<span><span class="co">#&gt;  [21] cachem_1.0.6           knitr_1.42            </span></span>
+<span><span class="co">#&gt;  [23] polyclip_1.10-4        jsonlite_1.8.0        </span></span>
+<span><span class="co">#&gt;  [25] png_0.1-7              graph_1.74.0          </span></span>
+<span><span class="co">#&gt;  [27] ggforce_0.4.1          shiny_1.7.4           </span></span>
+<span><span class="co">#&gt;  [29] bugsigdbr_1.2.2        rentrez_1.2.3         </span></span>
+<span><span class="co">#&gt;  [31] compiler_4.2.1         httr_1.4.5            </span></span>
+<span><span class="co">#&gt;  [33] fastmap_1.1.0          cli_3.5.0             </span></span>
+<span><span class="co">#&gt;  [35] later_1.3.0            tweenr_2.0.2          </span></span>
+<span><span class="co">#&gt;  [37] htmltools_0.5.5        tools_4.2.1           </span></span>
+<span><span class="co">#&gt;  [39] igraph_1.4.1           NLP_0.2-1             </span></span>
+<span><span class="co">#&gt;  [41] gtable_0.3.3           glue_1.6.2            </span></span>
+<span><span class="co">#&gt;  [43] GenomeInfoDbData_1.2.8 dplyr_1.1.1           </span></span>
+<span><span class="co">#&gt;  [45] Rcpp_1.0.9             slam_0.1-50           </span></span>
+<span><span class="co">#&gt;  [47] Biobase_2.56.0         jquerylib_0.1.4       </span></span>
+<span><span class="co">#&gt;  [49] vctrs_0.6.1            Biostrings_2.64.0     </span></span>
+<span><span class="co">#&gt;  [51] xfun_0.38              stopwords_2.3         </span></span>
+<span><span class="co">#&gt;  [53] mime_0.12              lifecycle_1.0.3       </span></span>
+<span><span class="co">#&gt;  [55] XML_3.99-0.10          pvclust_2.2-0         </span></span>
+<span><span class="co">#&gt;  [57] dendextend_1.17.1      org.Hs.eg.db_3.15.0   </span></span>
+<span><span class="co">#&gt;  [59] zlibbioc_1.42.0        MASS_7.3-57           </span></span>
+<span><span class="co">#&gt;  [61] scales_1.2.1           tidygraph_1.2.3       </span></span>
+<span><span class="co">#&gt;  [63] promises_1.2.0.1       parallel_4.2.1        </span></span>
+<span><span class="co">#&gt;  [65] cyjShiny_1.0.42        RColorBrewer_1.1-3    </span></span>
+<span><span class="co">#&gt;  [67] yaml_2.3.5             memoise_2.0.1         </span></span>
+<span><span class="co">#&gt;  [69] gridExtra_2.3          yulab.utils_0.0.6     </span></span>
+<span><span class="co">#&gt;  [71] sass_0.4.5             RSQLite_2.2.15        </span></span>
+<span><span class="co">#&gt;  [73] highr_0.10             S4Vectors_0.34.0      </span></span>
+<span><span class="co">#&gt;  [75] BiocGenerics_0.42.0    GenomeInfoDb_1.32.4   </span></span>
+<span><span class="co">#&gt;  [77] rlang_1.1.0            pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt;  [79] bitops_1.0-7           evaluate_0.20         </span></span>
+<span><span class="co">#&gt;  [81] purrr_1.0.1            labeling_0.4.2        </span></span>
+<span><span class="co">#&gt;  [83] patchwork_1.1.2        htmlwidgets_1.6.2     </span></span>
+<span><span class="co">#&gt;  [85] cowplot_1.1.1          bit_4.0.4             </span></span>
+<span><span class="co">#&gt;  [87] tidyselect_1.2.0       magrittr_2.0.3        </span></span>
+<span><span class="co">#&gt;  [89] bookdown_0.33          R6_2.5.1              </span></span>
+<span><span class="co">#&gt;  [91] IRanges_2.30.0         generics_0.1.3        </span></span>
+<span><span class="co">#&gt;  [93] DBI_1.1.3              pillar_1.9.0          </span></span>
+<span><span class="co">#&gt;  [95] withr_2.5.0            KEGGREST_1.36.3       </span></span>
+<span><span class="co">#&gt;  [97] RCurl_1.98-1.7         tibble_3.2.1          </span></span>
+<span><span class="co">#&gt;  [99] crayon_1.5.2           wordcloud_2.6         </span></span>
+<span><span class="co">#&gt; [101] utf8_1.2.3             rmarkdown_2.21        </span></span>
+<span><span class="co">#&gt; [103] viridis_0.6.2          GetoptLong_1.0.5      </span></span>
+<span><span class="co">#&gt; [105] grid_4.2.1             blob_1.2.4            </span></span>
+<span><span class="co">#&gt; [107] digest_0.6.29          xtable_1.8-4          </span></span>
+<span><span class="co">#&gt; [109] tm_0.7-8               tidyr_1.3.0           </span></span>
+<span><span class="co">#&gt; [111] httpuv_1.6.5           gridGraphics_0.5-1    </span></span>
+<span><span class="co">#&gt; [113] stats4_4.2.1           munsell_0.5.0         </span></span>
+<span><span class="co">#&gt; [115] viridisLite_0.4.1      ggplotify_0.1.0       </span></span>
+<span><span class="co">#&gt; [117] bslib_0.4.2</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="recluster-the-cluster-using-word-information.html"><span class="header-section-number">7</span> Recluster the cluster using word information</a></div>
-<div class="next"><a href="pathview-text.html"><span class="header-section-number">9</span> Pathview text</a></div>
+<div class="prev"><a href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></div>
+<div class="next"><a href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#metacyc"><span class="header-section-number">8</span> Including the other databases (an example in MetaCyc)</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#metacyc"><span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -343,7 +401,7 @@ Next you search for converted names for the interested species, and input this d
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>wcGeneSummary (OSplot)</strong>" was written by Noriaki Sato. It was last built on 2023-04-03.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-04-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

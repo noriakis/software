@@ -1,0 +1,27 @@
+
+
+# Perform each process separately
+
+The same process as functions like `wcGeneSummary` can be performed separately. This is useful for piped processing and for individual customization in each process.
+
+
+```r
+library(biotextgraph)
+btg <- obtain_refseq(c("DDX41","PNKP","IRF3")) |>
+  set_filter_words() |>
+  make_corpus() |>
+  make_TDM() |>
+  make_graph() |>
+  process_network_gene(gene_plot=TRUE, gene_path_plot="reactome") |>
+  plot_biotextgraph(edge_link=FALSE)
+#> Input genes: 3
+#>   Converted input genes: 3
+#> Filter based on GeneSummary
+#> Filtered 81 words (frequency and/or tfidf)
+#> Found 21 enriched term
+btg
+#> Type: refseq
+#> Number of words: 30
+#> DDX41/PNKP/IRF3
+#> 218.3 Kb
+```

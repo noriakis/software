@@ -8,7 +8,7 @@ KEGG mapping plots produced by pathview can be populated with text information (
 
 
 ```r
-library(wcGeneSummary)
+library(biotextgraph)
 library(kableExtra);library(knitr)
 library(dplyr)
 library(pathview);library(png)
@@ -170,9 +170,9 @@ The returned `osplot` object can be accessed as the name `text` in the list. Not
 ```r
 ver$text
 #> Type: pubmed_abstract
-#> Number of words: 20
+#> Number of words: 30
 #> TP53 OR CDC45 OR CDC6
-#> 386.3 Kb
+#> 393.7 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",

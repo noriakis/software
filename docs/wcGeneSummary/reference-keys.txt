@@ -13,6 +13,7 @@ enzymes
 metabolites
 pathway-information
 annotating-the-dendrogram-of-taxonomy
+metacyc
 interactive-inspection-of-gene-cluster-network-annotated-by-words
 annotating-gene-cluster-dendrogram
 annotating-by-pyramid-plots
@@ -20,7 +21,6 @@ annotating-by-word-clouds
 decorating-wordclouds
 assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 recluster-the-cluster-using-word-information
-metacyc
 pathview-text
 ko-queries
 gene-queries
@@ -39,3 +39,4 @@ plotting-the-enrichment-analysis-results-of-marker-genes
 parsing
 parsing-enzyme-comission-numbers-its-description-and-comment.
 parsing-uniprot-organism-identifiers.
+perform-each-process-separately
