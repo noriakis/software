@@ -1,7 +1,7 @@
 --- 
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-04-18"
+date: "2023-04-20"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -42,3 +42,11 @@ pathway("hsa04110") |> ## Obtain and parse the pathway
 ```
 
 <img src="index_files/figure-html/ggkegg-1.png" width="100%" style="display: block; margin: auto;" />
+
+## List of functions merging external information
+
+- `append_cp`
+- `append_node_value`
+- `append_edge_value`
+- `assign_deseq2`
+- `combine_with_bnlearn`

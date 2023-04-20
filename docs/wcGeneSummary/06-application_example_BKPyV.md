@@ -83,6 +83,7 @@ degs
 #> [184] "ZFR"             "ZMAT3"           "ZNF12"          
 #> [187] "ZNF248"          "ZNF322"          "ZNF561"         
 #> [190] "ZNF626"          "ZSCAN30"
+set.seed(1)
 ```
 
 ## Enrichment analysis
@@ -244,46 +245,14 @@ abstnet@net
 
 <img src="06-application_example_BKPyV_files/figure-html/abstmainapp-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Combine and compare networks
+## Combine and inspect merged network
 
 From the RefSeq summary and articles related to important genes, the cluster could have functionality of DNA damage response, which is also upregulated by BKPyV infection. These networks can be combined to find intersections and differences. We can see that in addition to Reactome pathway names, plenty of information could be obtained and summarized by querying other databases, which could aid in interpreting clusters of genes and hypothesis generation.
 
 
 ```r
 compareWordNet(list(abstnet, titlenet, netreac, net1),
-               titles=c("Abstract","Title","Reactome","RefSeq"))
-#> Warning in RColorBrewer::brewer.pal(catNum, colPal): n too large, allowed maximum for palette Pastel1 is 9
-#> Returning the palette you asked for with that many colors
-#> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in
-#> Windows font database
-
-#> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in
-#> Windows font database
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
+               titles=c("Abstract","Title","Reactome","RefSeq"))@net
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/combineapp-1.png" width="100%" style="display: block; margin: auto;" />
@@ -292,11 +261,8 @@ From the network, DNA damage repair pathway, especially nucleotide excision repa
 
 
 ```r
-conet <- compareWordNet(list(netreac,
-                    net1,
-                    titlenet,
-                    abstnet),
-               returnNet = TRUE)
+btg <- compareWordNet(list(net1,titlenet,abstnet,netreac))
+conet <- btg@igraphRaw
 
 ddrNms <- NULL
 for (nm in names(V(conet))) {
@@ -333,35 +299,12 @@ ggraph(ddrRelated)+
                    bg.r = .15)+
     scale_color_manual(values=c("steelblue","tomato"))+
     theme_graph()
-#> Using "stress" as default layout
-#> Warning: Using the `size` aesthetic in this geom was deprecated in
-#> ggplot2 3.4.0.
-#> ℹ Please use `linewidth` in the `default_aes` field and
-#>   elsewhere instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where
-#> this warning was generated.
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/ddr-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-The network can be obtained by `returnNet=TRUE`, which can be used for downstream analysis like assessment of degrees and community detection.
+The network can be obtained by `returnNet=TRUE`, or is stored in returned `biotext` class object in the slot `igraphRaw`, which can be used for downstream analysis like assessment of degrees and graph-based clustering.
 
 
 ```r
@@ -370,46 +313,93 @@ conetDeg <- igraph::degree(conet)
 conetDeg[order(conetDeg, decreasing=TRUE)] |> head(15)
 #>      SESN1       DDB2        DNA      RAD17      Human 
 #>         26         21         20         18         15 
-#>     Cancer       TP53 checkpoint   response  regulates 
+#>     Cancer checkpoint   response       TP53  regulates 
 #>         14         12         12         12         11 
-#>    induced activation    protein     Repair      Death 
+#>    induced activation    protein     Repair     damage 
 #>         11         10         10         10          9
 
-conet <- induced_subgraph(conet, conetDeg>1)
+## Graph-based clustering by cluster_fast_greedy
+## Filling the slot `communities` and assign `igraphRaw` slot `community` attribute.
+btg <- btg |> graph_cluster(func=igraph::cluster_fast_greedy)
 
-wt <- igraph::walktrap.community(conet)
-igraph::V(conet)$walktrap <- wt$membership
-pal <- RColorBrewer::brewer.pal(length(unique(wt$membership)),
-                                "Dark2") 
-#> Warning in RColorBrewer::brewer.pal(length(unique(wt$membership)), "Dark2"): n too large, allowed maximum for palette Dark2 is 8
-#> Returning the palette you asked for with that many colors
-pal <- colorRampPalette(pal)(20)
+## Check the membership for merged network
+data.frame(btg@communities$membership,
+           btg@communities$names) |>
+  `colnames<-`(c("membership","word")) |>
+  group_by(membership) |> summarise(words=paste(word,collapse=",")) |>
+  kableExtra::kable()
+```
 
-ggraph(conet)+
-    geom_edge_link(color="grey80")+
-    geom_node_point(aes(color=factor(walktrap)), size=3)+
-    geom_node_text(aes(label=name, color=factor(walktrap)),
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:right;"> membership </th>
+   <th style="text-align:left;"> words </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> apoptosis,caspase,death,factor,TNFRSF10B,Apoptosis,carcinogenesis,Lung,promotes,Regulation,Roles </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> cellular,checkpoint,cycle,damage,DNA,phosphorylation,required,response,DDB2,RAD17,Cancer,degradation,Excision,Muscle,Nucleotide,protein,regulates,Repair,CDT2,chromatin,complex,Damage,function,Knockdown,level,METTL14,role </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> functions,growth,interacts,kinase,p53,suppressor,tumor,SESN1,TSC1,Human,Cisplatin,effects,HNSCC,increased,induced,levels,Macrophages,regulation,revealed,Study,Transcription,treatment </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> TP53,neuroblastoma,paediatric,Caspase,Death,ligand,Ligands,necroptotic,presence,Regulates,Transcriptional </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> Carcinoma,epithelialmesenchymal,head,miR3773p,Neck,Squamous,Transition </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> DNAbinding,irradiation,mice,protects </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> activation,density,inflammation,lipoproteininduced,macrophages,oxidized,Role,Sestrin1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> Necrosis,Regulated,RIPK1mediated </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:left;"> activity,CASP8,inhibited </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> Intraflagellar,transport </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> Dimerization,procaspase8 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> acid,cyclin </td>
+  </tr>
+</tbody>
+</table>
+
+```r
+
+ggraph(btg@igraphRaw)+
+    geom_edge_link(color="grey80", width=0.5)+
+    geom_node_point(aes(color=community), size=2)+
+    graphhighlight::highlight_node(glow=TRUE, filter="community==2",glow_base_size = TRUE, glow_size=0.5)+
+    geom_node_text(aes(label=name, color=community),
                    check_overlap=TRUE, repel=TRUE,
                    bg.color = "white", segment.color="black",
                    bg.r = .15)+
-    scale_color_manual(values=pal,
-                         name="Walktrap")+
     theme_graph()
-#> Using "stress" as default layout
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/combineNet-1.png" width="100%" style="display: block; margin: auto;" />
@@ -419,8 +409,8 @@ Dynamic layout can be also used to compare the networks, by `graphlayouts`, for 
 
 ```r
 library(igraph)
-dyn <- plotDynamic(list(abstnet, titlenet), concat="intersection",
-                   titles=c("Abstract","Title"), alpha=0.8)
+dyn <- plotDynamic(list(abstnet, titlenet), concat="union",
+                   titles=c("Abstract","Title"))
 dyn
 ```
 
@@ -489,40 +479,41 @@ sessionInfo()
 #>  [59] ellipsis_0.3.2         pkgconfig_2.0.3       
 #>  [61] XML_3.99-0.10          farver_2.1.1          
 #>  [63] sass_0.4.5             utf8_1.2.3            
-#>  [65] ggplotify_0.1.0        tidyselect_1.2.0      
-#>  [67] rlang_1.1.0            reshape2_1.4.4        
-#>  [69] later_1.3.0            munsell_0.5.0         
-#>  [71] tools_4.2.1            cachem_1.0.6          
-#>  [73] downloader_0.4         cli_3.5.0             
-#>  [75] generics_0.1.3         RSQLite_2.2.15        
-#>  [77] gson_0.1.0             evaluate_0.20         
-#>  [79] stringr_1.5.0          fastmap_1.1.0         
-#>  [81] ggdendro_0.1.23        yaml_2.3.5            
-#>  [83] ggtree_3.7.1.002       knitr_1.42            
-#>  [85] bit64_4.0.5            fs_1.5.2              
-#>  [87] tidygraph_1.2.3        purrr_1.0.1           
-#>  [89] KEGGREST_1.36.3        dendextend_1.17.1     
-#>  [91] nlme_3.1-157           mime_0.12             
-#>  [93] slam_0.1-50            aplot_0.1.10          
-#>  [95] xml2_1.3.3             compiler_4.2.1        
-#>  [97] rstudioapi_0.14        png_0.1-7             
-#>  [99] treeio_1.20.2          tibble_3.2.1          
-#> [101] tweenr_2.0.2           bslib_0.4.2           
-#> [103] stringi_1.7.8          cyjShiny_1.0.42       
-#> [105] lattice_0.20-45        Matrix_1.5-3          
-#> [107] vctrs_0.6.1            pillar_1.9.0          
-#> [109] lifecycle_1.0.3        jquerylib_0.1.4       
-#> [111] GlobalOptions_0.1.2    data.table_1.14.2     
-#> [113] cowplot_1.1.1          bitops_1.0-7          
-#> [115] httpuv_1.6.5           patchwork_1.1.2       
-#> [117] qvalue_2.28.0          R6_2.5.1              
-#> [119] bookdown_0.33          promises_1.2.0.1      
-#> [121] gridExtra_2.3          codetools_0.2-18      
-#> [123] MASS_7.3-57            rjson_0.2.21          
-#> [125] withr_2.5.0            GenomeInfoDbData_1.2.8
-#> [127] parallel_4.2.1         ggfun_0.0.9           
-#> [129] grid_4.2.1             tidyr_1.3.0           
-#> [131] HDO.db_0.99.1          rmarkdown_2.21        
-#> [133] downlit_0.4.2          NLP_0.2-1             
-#> [135] shiny_1.7.4            base64enc_0.1-3
+#>  [65] labeling_0.4.2         ggplotify_0.1.0       
+#>  [67] tidyselect_1.2.0       rlang_1.1.0           
+#>  [69] reshape2_1.4.4         later_1.3.0           
+#>  [71] munsell_0.5.0          tools_4.2.1           
+#>  [73] cachem_1.0.6           downloader_0.4        
+#>  [75] cli_3.5.0              generics_0.1.3        
+#>  [77] RSQLite_2.2.15         gson_0.1.0            
+#>  [79] evaluate_0.20          stringr_1.5.0         
+#>  [81] fastmap_1.1.0          ggdendro_0.1.23       
+#>  [83] yaml_2.3.5             ggtree_3.7.1.002      
+#>  [85] knitr_1.42             bit64_4.0.5           
+#>  [87] fs_1.5.2               tidygraph_1.2.3       
+#>  [89] purrr_1.0.1            KEGGREST_1.36.3       
+#>  [91] dendextend_1.17.1      nlme_3.1-157          
+#>  [93] mime_0.12              slam_0.1-50           
+#>  [95] aplot_0.1.10           xml2_1.3.3            
+#>  [97] compiler_4.2.1         rstudioapi_0.14       
+#>  [99] png_0.1-7              treeio_1.20.2         
+#> [101] tibble_3.2.1           tweenr_2.0.2          
+#> [103] bslib_0.4.2            stringi_1.7.8         
+#> [105] cyjShiny_1.0.42        highr_0.10            
+#> [107] lattice_0.20-45        Matrix_1.5-3          
+#> [109] vctrs_0.6.1            pillar_1.9.0          
+#> [111] lifecycle_1.0.3        jquerylib_0.1.4       
+#> [113] GlobalOptions_0.1.2    data.table_1.14.2     
+#> [115] cowplot_1.1.1          bitops_1.0-7          
+#> [117] httpuv_1.6.5           patchwork_1.1.2       
+#> [119] qvalue_2.28.0          R6_2.5.1              
+#> [121] bookdown_0.33          promises_1.2.0.1      
+#> [123] gridExtra_2.3          codetools_0.2-18      
+#> [125] MASS_7.3-57            rjson_0.2.21          
+#> [127] withr_2.5.0            GenomeInfoDbData_1.2.8
+#> [129] parallel_4.2.1         ggfun_0.0.9           
+#> [131] grid_4.2.1             tidyr_1.3.0           
+#> [133] HDO.db_0.99.1          rmarkdown_2.21        
+#> [135] downlit_0.4.2          NLP_0.2-1             
+#> [137] shiny_1.7.4            base64enc_0.1-3
 ```

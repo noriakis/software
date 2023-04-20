@@ -23,5 +23,5 @@ btg
 #> Type: refseq
 #> Number of words: 30
 #> DDX41/PNKP/IRF3
-#> 218.3 Kb
+#> 218.1 Kb
 ```

@@ -19,9 +19,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="5.1 Projecting the gene regulatory networks on KEGG map With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software...">
-<meta property="og:description" content="5.1 Projecting the gene regulatory networks on KEGG map With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software...">
-<meta name="twitter:description" content="5.1 Projecting the gene regulatory networks on KEGG map With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software...">
+<meta name="description" content="5.1 Visualizing numerical attributes from DESeq2 By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the...">
+<meta property="og:description" content="5.1 Visualizing numerical attributes from DESeq2 By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the...">
+<meta name="twitter:description" content="5.1 Visualizing numerical attributes from DESeq2 By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -59,54 +59,18 @@
 <h1>
 <span class="header-section-number">5</span> Usecases<a class="anchor" aria-label="anchor" href="#usecases"><i class="fas fa-link"></i></a>
 </h1>
-<div id="projecting-the-gene-regulatory-networks-on-kegg-map" class="section level2" number="5.1">
+<div id="visualizing-numerical-attributes-from-deseq2" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">5.1</span> Projecting the gene regulatory networks on KEGG map<a class="anchor" aria-label="anchor" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><i class="fas fa-link"></i></a>
-</h2>
-<p>With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using <code>MicrobiomeProfiler</code>. Of course, it is also possible to project networks created using other methods.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/CBNplot">CBNplot</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiomeProfiler/">MicrobiomeProfiler</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
-<span><span class="va">ko.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiomeProfiler/man/enrichKO.html">enrichKO</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
-<span><span class="va">exp.dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">910</span><span class="op">)</span><span class="op">)</span>, <span class="fl">91</span>, <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_rownames</a></span><span class="op">(</span>value<span class="op">=</span><span class="va">Rat_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span>value<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'S'</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">returnnet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CBNplot/man/bngeneplot.html">bngeneplot</a></span><span class="op">(</span><span class="va">ko.res</span>, exp<span class="op">=</span><span class="va">exp.dat</span>, pathNum<span class="op">=</span><span class="fl">1</span>, orgDb<span class="op">=</span><span class="cn">NULL</span>,returnNet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00650"</span><span class="op">)</span></span>
-<span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/combine_with_bnlearn.html">combine_with_bnlearn</a></span><span class="op">(</span><span class="va">pg</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">str</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">av</span><span class="op">)</span></span></code></pre></div>
-<p>Plot the resulting map. In this example, the strength estimated by CBNplot is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">joined</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>convertKO<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"ko"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">2</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span>, color<span class="op">=</span><span class="va">strength</span><span class="op">)</span>,</span>
-<span>                 start_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span>,</span>
-<span>                 end_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span></span>
-<span>    width<span class="op">=</span><span class="fl">0.1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    start_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span>,</span>
-<span>    end_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_colour.html">scale_edge_color_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">geom_node_rect</span><span class="op">(</span>fill<span class="op">=</span><span class="st">"white"</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">convertKO</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;"></div>
-</div>
-<div id="visualizing-numerical-attributes-from-deseq2" class="section level2" number="5.2">
-<h2>
-<span class="header-section-number">5.2</span> Visualizing numerical attributes from DESeq2<a class="anchor" aria-label="anchor" href="#visualizing-numerical-attributes-from-deseq2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Visualizing numerical attributes from DESeq2<a class="anchor" aria-label="anchor" href="#visualizing-numerical-attributes-from-deseq2"><i class="fas fa-link"></i></a>
 </h2>
 <p>By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the nodes of a graph. The <code>assign_deseq2</code> function can be used for this purpose. By specifying the numerical value (e.g., <code>log2FoldChange</code>) that you want to reflect in the graph as the <code>column</code> argument, you can assign the value to the nodes. If multiple genes are hit, the <code>numeric_combine</code> argument specifies how to combine multiple values (the default is <code>mean</code>).</p>
 <p>Here, we use a RNA-Seq dataset that analyzed the transcriptome changes in human urothelial cells infected with BK polyomavirus (<a href="https://doi.org/10.1038/s41388-022-02235-8">Baker et al. 2022</a>). The raw sequences obtained from Sequence Read Archive is processed by <a href="https://nf-co.re/rnaseq">nf-core</a>.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2">DESeq2</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mikelove/DESeq2">DESeq2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"uro.deseq.res.rda"</span><span class="op">)</span> <span class="co">## Storing DESeq() result</span></span>
 <span><span class="va">res</span></span>
 <span><span class="co">#&gt; class: DESeqDataSet </span></span>
@@ -137,7 +101,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"red"</span>, name<span class="op">=</span><span class="st">"LFC"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Adjusted p-values</span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -150,12 +114,56 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
+<div id="integrating-matrix-to-tbl_graph" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Integrating matrix to <code>tbl_graph</code><a class="anchor" aria-label="anchor" href="#integrating-matrix-to-tbl_graph"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you want to reflect an expression matrix in a graph, the <code>append_edge_value</code> and <code>append_node_value</code> functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the <code>tbl_graph</code>. <code>append_edge_value</code> assigns the sum of the two nodes connected by an edge, ignoring group nodes (<a href="https://doi.org/10.1186/s12859-020-03692-2">Adnan et al. 2020</a>).</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/vst.html">vst</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">new_g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/append_edge_value.html">append_edge_value</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/append_node_value.html">append_node_value</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
+<span><span class="va">new_g</span></span>
+<span><span class="co">#&gt; # A tbl_graph: 134 nodes and 117 edges</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # A directed acyclic simple graph with 40 components</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # A tibble: 134 × 47</span></span>
+<span><span class="co">#&gt;   name        type  reaction graphics_name     x     y width</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 hsa:1029    gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
+<span><span class="co">#&gt; 2 hsa:51343   gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
+<span><span class="co">#&gt; 3 hsa:4171 h… gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
+<span><span class="co">#&gt; 4 hsa:23594 … gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
+<span><span class="co">#&gt; 5 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
+<span><span class="co">#&gt; 6 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
+<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 40 more variables: height &lt;dbl&gt;, fgcolor &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;, coords &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;, ymax &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;, deseq2 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, SRR14509882 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509883 &lt;dbl&gt;, SRR14509884 &lt;dbl&gt;, …</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # A tibble: 117 × 32</span></span>
+<span><span class="co">#&gt;    from    to type  subtype    from_nd   to_nd   SRR14509882</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;         &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1   118    39 GErel expression undefined hsa:10…        NA  </span></span>
+<span><span class="co">#&gt; 2    50    61 PPrel inhibition hsa:2932  hsa:59…        24.4</span></span>
+<span><span class="co">#&gt; 3    37    22 GErel expression hsa:7157  hsa:10…        25.5</span></span>
+<span><span class="co">#&gt; # ℹ 114 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 25 more variables: SRR14509883 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509884 &lt;dbl&gt;, SRR14509885 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509886 &lt;dbl&gt;, SRR14509887 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509888 &lt;dbl&gt;, SRR14509889 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509890 &lt;dbl&gt;, SRR14509891 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509892 &lt;dbl&gt;, SRR14509893 &lt;dbl&gt;, …</span></span></code></pre></div>
+</div>
 <div id="visualizing-multiple-enrichment-results" class="section level2" number="5.3">
 <h2>
 <span class="header-section-number">5.3</span> Visualizing multiple enrichment results<a class="anchor" aria-label="anchor" href="#visualizing-multiple-enrichment-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can visualize the results of multiple enrichment analyses. Similar to using the <code>ggkegg</code> function with the <code>enrichResult</code> class, there is an <code>append_cp</code> function that can be used within the <code>mutate</code> function. By providing an <code>enrichResult</code> object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## These are RDAs storing DEGs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"degListRPTEC.rda"</span><span class="op">)</span></span>
@@ -188,6 +196,44 @@
 <span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">converted_name</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">!=</span><span class="st">"group"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"white"</span>, expand<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="projecting-the-gene-regulatory-networks-on-kegg-map" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Projecting the gene regulatory networks on KEGG map<a class="anchor" aria-label="anchor" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><i class="fas fa-link"></i></a>
+</h2>
+<p>With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using <code>MicrobiomeProfiler</code>. Of course, it is also possible to project networks created using other methods.</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/CBNplot">CBNplot</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiomeProfiler/">MicrobiomeProfiler</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
+<span><span class="va">ko.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiomeProfiler/man/enrichKO.html">enrichKO</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
+<span><span class="va">exp.dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">910</span><span class="op">)</span><span class="op">)</span>, <span class="fl">91</span>, <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_rownames</a></span><span class="op">(</span>value<span class="op">=</span><span class="va">Rat_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span>value<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'S'</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">returnnet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CBNplot/man/bngeneplot.html">bngeneplot</a></span><span class="op">(</span><span class="va">ko.res</span>, exp<span class="op">=</span><span class="va">exp.dat</span>, pathNum<span class="op">=</span><span class="fl">1</span>, orgDb<span class="op">=</span><span class="cn">NULL</span>,returnNet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00650"</span><span class="op">)</span></span>
+<span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/combine_with_bnlearn.html">combine_with_bnlearn</a></span><span class="op">(</span><span class="va">pg</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">str</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">av</span><span class="op">)</span></span></code></pre></div>
+<p>Plot the resulting map. In this example, the strength estimated by CBNplot is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it.</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">joined</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>convertKO<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"ko"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">2</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span>, color<span class="op">=</span><span class="va">strength</span><span class="op">)</span>,</span>
+<span>                 start_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span>,</span>
+<span>                 end_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span></span>
+<span>    width<span class="op">=</span><span class="fl">0.1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    start_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span>,</span>
+<span>    end_cap<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geometry.html">circle</a></span><span class="op">(</span><span class="fl">4</span>,<span class="st">"mm"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_colour.html">scale_edge_color_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_node_rect</span><span class="op">(</span>fill<span class="op">=</span><span class="st">"white"</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">convertKO</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
@@ -198,9 +244,10 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#usecases"><span class="header-section-number">5</span> Usecases</a></li>
-<li><a class="nav-link" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><span class="header-section-number">5.1</span> Projecting the gene regulatory networks on KEGG map</a></li>
-<li><a class="nav-link" href="#visualizing-numerical-attributes-from-deseq2"><span class="header-section-number">5.2</span> Visualizing numerical attributes from DESeq2</a></li>
+<li><a class="nav-link" href="#visualizing-numerical-attributes-from-deseq2"><span class="header-section-number">5.1</span> Visualizing numerical attributes from DESeq2</a></li>
+<li><a class="nav-link" href="#integrating-matrix-to-tbl_graph"><span class="header-section-number">5.2</span> Integrating matrix to tbl_graph</a></li>
 <li><a class="nav-link" href="#visualizing-multiple-enrichment-results"><span class="header-section-number">5.3</span> Visualizing multiple enrichment results</a></li>
+<li><a class="nav-link" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><span class="header-section-number">5.4</span> Projecting the gene regulatory networks on KEGG map</a></li>
 </ul>
 
       <div class="book-extra">
@@ -217,7 +264,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-18.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-04-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

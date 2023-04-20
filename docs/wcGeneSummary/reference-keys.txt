@@ -29,7 +29,7 @@ load-the-necessary-packages-and-genes
 enrichment-analysis
 text-mining-the-gene-summaries
 text-mining-the-available-literature
-combine-and-compare-networks
+combine-and-inspect-merged-network
 single-cell-transcriptomic-data
 visualizing-textual-information-for-marker-genes
 findmarkers-in-scran

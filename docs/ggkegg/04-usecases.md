@@ -3,52 +3,6 @@
 
 # Usecases 
 
-
-## Projecting the gene regulatory networks on KEGG map
-
-With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.
-
-
-```r
-library(dplyr)
-library(igraph)
-library(tidygraph)
-library(CBNplot)
-library(ggkegg)
-library(MicrobiomeProfiler)
-data(Rat_data)
-ko.res <- enrichKO(Rat_data)
-exp.dat <- matrix(abs(rnorm(910)), 91, 10) %>% magrittr::set_rownames(value=Rat_data) %>% magrittr::set_colnames(value=paste0('S', seq_len(ncol(.))))
-returnnet <- bngeneplot(ko.res, exp=exp.dat, pathNum=1, orgDb=NULL,returnNet = TRUE)
-pg <- pathway("ko00650")
-joined <- combine_with_bnlearn(pg, returnnet$str, returnnet$av)
-```
-
-Plot the resulting map. In this example, the strength estimated by CBNplot is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it.
-
-
-```r
-joined |> 
-  activate(nodes) |>
-  mutate(convertKO=convert_id("ko")) |>
-  activate(edges) |>
-  filter() |>
-  ggraph(x=x, y=y) +
-  geom_edge_link(width=2,aes(filter=!is.na(strength), color=strength),
-                 start_cap=circle(4,"mm"),
-                 end_cap=circle(4,"mm"))+
-  
-  geom_edge_link(
-    width=0.1, aes(filter=is.na(strength)),
-    start_cap=circle(4,"mm"),
-    end_cap=circle(4,"mm"))+
-  scale_edge_color_gradient(low="blue",high="red")+
-  geom_node_rect(fill="white", color="black")+
-  geom_node_text(aes(label=convertKO), size=2)
-```
-
-<img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
-
 ## Visualizing numerical attributes from DESeq2
 
 By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the nodes of a graph. The `assign_deseq2` function can be used for this purpose. By specifying the numerical value (e.g., `log2FoldChange`) that you want to reflect in the graph as the `column` argument, you can assign the value to the nodes. If multiple genes are hit, the `numeric_combine` argument specifies how to combine multiple values (the default is `mean`).
@@ -57,8 +11,11 @@ Here, we use a RNA-Seq dataset that analyzed the transcriptome changes in human 
 
 
 ```r
+library(ggkegg)
 library(DESeq2)
 library(org.Hs.eg.db)
+library(dplyr)
+
 load("uro.deseq.res.rda") ## Storing DESeq() result
 res
 #> class: DESeqDataSet 
@@ -107,6 +64,52 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;" />
 
+## Integrating matrix to `tbl_graph`
+
+If you want to reflect an expression matrix in a graph, the `append_edge_value` and `append_node_value` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `append_edge_value` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
+https://doi.org/10.1186/s12859-020-03692-2)).
+
+
+```r
+mat <- assay(vst(res))
+new_g <- g |> append_edge_value(mat) |> append_node_value(mat)
+new_g
+#> # A tbl_graph: 134 nodes and 117 edges
+#> #
+#> # A directed acyclic simple graph with 40 components
+#> #
+#> # A tibble: 134 × 47
+#>   name        type  reaction graphics_name     x     y width
+#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
+#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
+#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
+#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
+#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
+#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
+#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
+#> # ℹ 128 more rows
+#> # ℹ 40 more variables: height <dbl>, fgcolor <chr>,
+#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
+#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
+#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
+#> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
+#> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
+#> #
+#> # A tibble: 117 × 32
+#>    from    to type  subtype    from_nd   to_nd   SRR14509882
+#>   <int> <int> <chr> <chr>      <chr>     <chr>         <dbl>
+#> 1   118    39 GErel expression undefined hsa:10…        NA  
+#> 2    50    61 PPrel inhibition hsa:2932  hsa:59…        24.4
+#> 3    37    22 GErel expression hsa:7157  hsa:10…        25.5
+#> # ℹ 114 more rows
+#> # ℹ 25 more variables: SRR14509883 <dbl>,
+#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
+#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
+#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>, …
+```
+
 
 ## Visualizing multiple enrichment results
 
@@ -148,3 +151,48 @@ ggraph(g1, layout="manual", x=x, y=y) +
 ```
 
 <img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Projecting the gene regulatory networks on KEGG map
+
+With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.
+
+
+```r
+library(dplyr)
+library(igraph)
+library(tidygraph)
+library(CBNplot)
+library(ggkegg)
+library(MicrobiomeProfiler)
+data(Rat_data)
+ko.res <- enrichKO(Rat_data)
+exp.dat <- matrix(abs(rnorm(910)), 91, 10) %>% magrittr::set_rownames(value=Rat_data) %>% magrittr::set_colnames(value=paste0('S', seq_len(ncol(.))))
+returnnet <- bngeneplot(ko.res, exp=exp.dat, pathNum=1, orgDb=NULL,returnNet = TRUE)
+pg <- pathway("ko00650")
+joined <- combine_with_bnlearn(pg, returnnet$str, returnnet$av)
+```
+
+Plot the resulting map. In this example, the strength estimated by CBNplot is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it.
+
+
+```r
+joined |> 
+  activate(nodes) |>
+  mutate(convertKO=convert_id("ko")) |>
+  activate(edges) |>
+  ggraph(x=x, y=y) +
+  geom_edge_link(width=2,aes(filter=!is.na(strength), color=strength),
+                 start_cap=circle(4,"mm"),
+                 end_cap=circle(4,"mm"))+
+  
+  geom_edge_link(
+    width=0.1, aes(filter=is.na(strength)),
+    start_cap=circle(4,"mm"),
+    end_cap=circle(4,"mm"))+
+  scale_edge_color_gradient(low="blue",high="red")+
+  geom_node_rect(fill="white", color="black")+
+  geom_node_text(aes(label=convertKO), size=2)
+```
+
+<img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
+
