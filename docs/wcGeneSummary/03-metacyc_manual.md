@@ -168,7 +168,7 @@ metawc@wc
 #> [1] "gg"
 ```
 
-For plotting the network, query column must be specified if plotting the query with the word information. In this example, the connection between query and text is not shown because `queryPlot` is FALSE.
+For plotting the network, query column must be specified if plotting the query with the word information.
 
 
 ```r
@@ -187,7 +187,7 @@ metanet@net
 
 <img src="03-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;" />
 
-For column other than the query and text, in this example `commonName` and `pathwayID`, the relationship between query and these columns are to be plotted.
+For column other than the query and text, in this example `commonName` and `pathwayID`, the relationship between query and these columns are to be plotted. In this example, the connection between query and text is not shown because `queryPlot` is FALSE.
 
 
 ```r

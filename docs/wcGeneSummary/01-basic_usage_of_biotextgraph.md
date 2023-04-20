@@ -23,22 +23,21 @@ load(system.file("extdata", "sysdata.rda", package = "wcGeneSummary"))
 
 ## Producing word clouds
 
-We use ERCC genes as input. The basic usage of the package is producing a word cloud of gene summaries by querying gene IDs, default to symbol. The other type can be set by `keyType`. As many of the words are commonly observed, you should limit word frequency by `excludeFreq`, which is default to 2000. TF-IDF on the all the summary is precomputed, and `exclude="tfidf"` can be specified too.
+We use ERCC genes as input. The one of the basic usage of the package is producing a word cloud of gene summaries by querying gene IDs, default to symbol. The other type can be set by `keyType`. As many of the words are commonly observed, you should limit word frequency by `excludeFreq`, which is default to 2000. TF-IDF on the all the summary is precomputed, and `exclude="tfidf"` can be specified too.
 
 
 ```r
 ## Configure input genes
 inpSymbol <- c("ERCC1","ERCC2","ERCC3","ERCC4","ERCC5","ERCC6","ERCC8")
-gwc <- wcGeneSummary(inpSymbol)
+gwc <- wcGeneSummary(inpSymbol, plotType="wc")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 gwc@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/basic-1.png" width="100%" style="display: block; margin: auto;" />
 
 It accepts values of the `wordcloud()` function. `numWords` specifies how many words are to be shown on word cloud. The words are ordered by their frequency, and the subset of 1:`numWords` is used to downstream visualization. The values must be passed to `argList` arguments as a list.
 
@@ -46,7 +45,9 @@ It accepts values of the `wordcloud()` function. `numWords` specifies how many w
 ```r
 ## Use palette from palettetown, palettetown::pokepal(150) (Mewtwo!)
 gwc <- wcGeneSummary(inpSymbol,
+                     plotType="wc",
                      numWords=100,
+                     scaleFreq=2,
                      excludeFreq=5000,
                      argList=list(
                       "random.order"=FALSE,
@@ -57,16 +58,16 @@ gwc <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 14 words (frequency and/or tfidf)
 gwc@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/basic2-1.png" width="100%" style="display: block; margin: auto;" />
 
 By default, `preserve=TRUE`, which indicates the funciton tries to preserve the original cases of characters. Note that if both the lower case words and capitalized words are present, all words are converted to capitalized words, like `damage` and `Damage` would be shown as `Damage` if `preserve=TRUE`.
 
 
 ```r
-gwc_p <- wcGeneSummary(inpSymbol, 
+gwc_p <- wcGeneSummary(inpSymbol,
+                     plotType="wc",
                      numWords=100,
                      excludeFreq=5000,
                      preserve=FALSE,
@@ -80,10 +81,9 @@ gwc_p <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 14 words (frequency and/or tfidf)
 gwc_p@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/basic_pres_false-1.png" width="100%" style="display: block; margin: auto;" />
 
 It also returns a data frame consisting of frequency of each term in the slot name `freqDf`.
 
@@ -120,25 +120,27 @@ Default is `1`, and the example specifying `2` is shown below.
 ```r
 gwc2 <- wcGeneSummary(inpSymbol,
                       ngram=2,
-                      numWords=50)
+                      numWords=50, plotType="wc")
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwc2@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramwc-1.png" width="100%" style="display: block; margin: auto;" />
 
 Using `clusterProfiler` functions, one can use enriched pathway names for visualization.
 The `enrich` option can be specified for `'kegg'` or `'reactome'`, this time we specify `'reactome'`.
 
 
 ```r
-gwc3 <- wcGeneSummary(inpSymbol,
+gwc3 <- wcGeneSummary(inpSymbol, plotType="wc",
                       enrich="reactome",
                       tfidf=TRUE, numWords=50)
 #> Input genes: 7
@@ -148,26 +150,29 @@ gwc3 <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwc3@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
 
-One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag=TRUE`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix (which is a natural way), `tagWhole=TRUE` can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below.
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/ngrampath-1.png" width="100%" style="display: block; margin: auto;" />
+
+One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag=TRUE`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix (which is a natural way), `tagWhole=TRUE` can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below. For tag coloring, `tagPalette` can be used.
 
 
 ```r
 
-pal <- RColorBrewer::brewer.pal(4, "PuOr") 
+pal <- RColorBrewer::brewer.pal(4, "Dark2") 
 pal <- colorRampPalette(pal)(20)
 
 
 ## Cluster on subset of words
 gwcl <- wcGeneSummary(inpSymbol,
+                     plotType="wc",
                      numWords=30,
                      tag=TRUE,
-                     pal = pal,
+                     tagPalette = pal,
                      argList=list(rot.per=0.4))
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
@@ -185,10 +190,15 @@ gwcl <- wcGeneSummary(inpSymbol,
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwcl@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
 gwcl@pvpick
 #> $clusters
 #> $clusters[[1]]
@@ -215,11 +225,11 @@ gwcl@pvpick
 #> [1]  6 22 23
 
 ## Cluster on whole matrix
-
 gwclWhole <- wcGeneSummary(inpSymbol,
                      numWords=50,
+                     plotType="wc",
                      tag=TRUE, tagWhole=TRUE,
-                     pal = pal,
+                     tagPalette = pal,
                      cl=snow::makeCluster(8),
                      argList=list(rot.per=0.4))
 #> Input genes: 7
@@ -229,10 +239,15 @@ gwclWhole <- wcGeneSummary(inpSymbol,
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 #> Multiscale bootstrap... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gwclWhole@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-2.png" width="100%" style="display: block; margin: auto;" />
+
+```r
 gwclWhole@pvpick
 #> $clusters
 #> $clusters[[1]]
@@ -334,9 +349,9 @@ gwclWhole@pvpick
 
 In this example showing ERCC genes, the term `DNA repair` is clustered as expected.
 
-## Producing correlation networks
+## Producing networks
 
-The next main function is producing correlation networks between words based on the co-occurrence of the words in the text.
+The main function is producing networks between words based on the co-occurrence or correlation of the words in the text.
 
 
 ```r
@@ -350,8 +365,7 @@ net@net
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic3-1.png" width="100%" style="display: block; margin: auto;" />
 
-
-Changing the layout.
+Changing the layout by passing `layout` argument.
 
 
 ```r
@@ -365,7 +379,7 @@ net@net
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic4-1.png" width="100%" style="display: block; margin: auto;" />
 
-The edge label corresponding to correlation values can be shown by `edgeLabel=TRUE`. The number of words to be shown on plot can be specified by `numWords`. The threshold of correlation can be specified by `corThresh`. The text color can be changed by `colorText=TRUE`. The type of edge can be specified by `edgeLink`, which is by default `TRUE` (link will be used).
+The edge label corresponding to correlation or cooccurrence values can be shown by `edgeLabel=TRUE`. The number of words to be shown on plot can be specified by `numWords`. The threshold of correlation can be specified by `corThresh`. The text color can be changed by `colorText=TRUE`. The type of edge can be specified by `edgeLink`, which is by default `TRUE` (link will be used). These functions serve as wrappers for several other functions, but a detailed explanation can be found in @ref(tidy).
 
 
 ```r
@@ -459,7 +473,7 @@ net@net
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/gplot-1.png" width="100%" style="display: block; margin: auto;" />
 
-By default, the associated genes are plotted without colorization (grey). If preferred, set `colorize=TRUE` to colorize the associated genes by `geneColor`. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated gene symbols.
+By default, the associated genes are plotted without colorization (grey). If preferred, set `colorize=TRUE` to colorize the associated genes by `geneColor`. In this way, color of nodes corresponding to words are shown by the gradient of frequency, independent of color of associated gene symbols.
 
 
 ```r
@@ -527,12 +541,14 @@ Using `rentrez`, one can perform the same analysis on PubMed text like the artic
  
 
 ```r
-ab <- wcAbst(inpSymbol[1:3], retMax=20, apiKey=apiKey)
+ab <- wcAbst(inpSymbol[1:3], retMax=20, apiKey=apiKey, plotType="wc")
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 ab@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
 ```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc-1.png" width="100%" style="display: block; margin: auto;" />
 
 The returned PubMed IDs are stored in `pmids` slot.
 
@@ -551,8 +567,8 @@ As fetching the same information is not desirable and time consuming, the same o
 
 
 ```r
-pal <- brewer.pal(5, "PuOr") 
-abtag <- wcAbst(redo=ab, tag=TRUE,
+pal <- brewer.pal(5, "Dark2") 
+abtag <- wcAbst(redo=ab, tag=TRUE, plotType="wc", scaleFreq=5,
                 cl=snow::makeCluster(10), pal=pal, apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
@@ -561,15 +577,15 @@ abtag2 <- wcAbst(redo=abtag, tag=TRUE, genePlot=TRUE,
 #> Resuming from the previous results
 #> Using previous pvclust results
 abtag@wc
-#> <S4 Type Object>
-#> attr(,".S3Class")
-#> [1] "gg"
-abtag2@net
-#> Warning: Removed 3 rows containing missing values
-#> (`geom_point()`).
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc_2-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+abtag2@net
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc_2-2.png" width="100%" style="display: block; margin: auto;" />
 
 If only the gene symbols are to be plotted, specify `onlyGene=TRUE`.
 
@@ -584,7 +600,7 @@ net@net
 
 ## Comparing two or more networks
 
-One can compare two or more networks by providing list of objects produced by wc* functions, like `wcGeneSummary` and `wcAbst`. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names.
+One can compare two or more networks by providing list of `biotext` objects produced by text mining various databases, like `wcGeneSummary`, `wcAbst`, `obtain_refseq`, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.
 
 
 ```r
@@ -596,16 +612,12 @@ for (i in c(1,2,3,5,6,8,9,10,11,12,13,14,16)){
 net1 <- wcGeneSummary(inpSymbol, plotType="network",
                       corThresh=0.5, numWords=20)
 #> Input genes: 7
-#> 'select()' returned 1:1 mapping between keys and
-#> columns
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
 net2 <- wcGeneSummary(cxcls, plotType="network",
                       corThresh=0.5, numWords=20)
 #> Input genes: 13
-#> 'select()' returned 1:1 mapping between keys and
-#> columns
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
 #> Filtered 65 words (frequency and/or tfidf)
@@ -615,113 +627,21 @@ net3 <- wcAbst(redo=ab, plotType="network",
 
 ## Not having meaningful overlaps
 compareWordNet(list(net1, net2),
-               titles=c("ercc","cxcl"))
-#> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in
-#> Windows font database
-
-#> Warning in grid.Call(C_stringMetric,
-#> as.graphicsAnnot(x$label)): font family not found in
-#> Windows font database
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
+               titles=c("ercc","cxcl"), colNum=3)@net
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 compareWordNet(list(net1, net3),
-               titles=c("ercc","ercc-PubMed"))
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
+               titles=c("ercc","ercc-PubMed"), colNum=3)@net
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-2.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 compareWordNet(list(net1, net2, net3),
-               titles=c("ercc","cxcl", "ercc-PubMed"))
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
+               titles=c("ercc","cxcl", "ercc-PubMed"), colNum=5)@net
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-3.png" width="100%" style="display: block; margin: auto;" />
@@ -776,54 +696,7 @@ net2 <- wcGeneSummary(keggList$`04210`,
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
 
-compareWordNet(list(net1, net2), tag=TRUE)
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
-
-#> Warning in grid.Call(C_textBounds,
-#> as.graphicsAnnot(x$label), x$x, x$y, : font family not
-#> found in Windows font database
+compareWordNet(list(net1, net2), tag=TRUE, hull=TRUE)@net
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/tagcomp-1.png" width="100%" style="display: block; margin: auto;" />
@@ -890,6 +763,7 @@ plotORA(net)
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/oraplot-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Dependency analyis using udpipe
+
 Using [`udpipe`](https://github.com/bnosac/udpipe) package ([Straka and Straková. 2017](https://aclanthology.org/K17-3009/)), one can performe dependency analysis of texts in various databases. Set `useUdpipe` to `TRUE`, and specify downloaded model to be used in `udpipeModel`.
 
 
@@ -965,30 +839,32 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] dplyr_1.1.1               dendextend_1.17.1        
-#>  [3] clusterProfiler_4.7.1.003 ReactomePA_1.40.0        
-#>  [5] RColorBrewer_1.1-3        ggraph_2.1.0             
-#>  [7] org.Hs.eg.db_3.15.0       AnnotationDbi_1.58.0     
-#>  [9] IRanges_2.30.0            S4Vectors_0.34.0         
-#> [11] Biobase_2.56.0            BiocGenerics_0.42.0      
-#> [13] biotextgraph_0.99.0       ggplot2_3.4.1            
+#>  [1] ggrepel_0.9.3             ggforce_0.4.1            
+#>  [3] concaveman_1.1.0          dplyr_1.1.1              
+#>  [5] dendextend_1.17.1         clusterProfiler_4.7.1.003
+#>  [7] ReactomePA_1.40.0         RColorBrewer_1.1-3       
+#>  [9] ggraph_2.1.0              org.Hs.eg.db_3.15.0      
+#> [11] AnnotationDbi_1.58.0      IRanges_2.30.0           
+#> [13] S4Vectors_0.34.0          Biobase_2.56.0           
+#> [15] BiocGenerics_0.42.0       biotextgraph_0.99.0      
+#> [17] ggplot2_3.4.1            
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
-#>   [3] plyr_1.8.8             igraph_1.4.1          
-#>   [5] lazyeval_0.2.2         splines_4.2.1         
-#>   [7] BiocParallel_1.30.4    GenomeInfoDb_1.32.4   
-#>   [9] digest_0.6.29          yulab.utils_0.0.6     
-#>  [11] htmltools_0.5.5        bugsigdbr_1.2.2       
-#>  [13] GOSemSim_2.25.0        viridis_0.6.2         
-#>  [15] GO.db_3.15.0           fansi_1.0.4           
-#>  [17] GeneSummary_0.99.3     magrittr_2.0.3        
-#>  [19] memoise_2.0.1          tm_0.7-8              
-#>  [21] Biostrings_2.64.0      graphlayouts_0.8.4    
-#>  [23] pvclust_2.2-0          wordcloud_2.6         
-#>  [25] sysfonts_0.8.8         enrichplot_1.16.2     
-#>  [27] colorspace_2.1-0       rappdirs_0.3.3        
-#>  [29] blob_1.2.4             ggrepel_0.9.3         
+#>   [1] snow_0.4-4             shadowtext_0.1.2      
+#>   [3] fastmatch_1.1-3        plyr_1.8.8            
+#>   [5] igraph_1.4.1           lazyeval_0.2.2        
+#>   [7] splines_4.2.1          BiocParallel_1.30.4   
+#>   [9] GenomeInfoDb_1.32.4    digest_0.6.29         
+#>  [11] yulab.utils_0.0.6      htmltools_0.5.5       
+#>  [13] bugsigdbr_1.2.2        GOSemSim_2.25.0       
+#>  [15] viridis_0.6.2          GO.db_3.15.0          
+#>  [17] fansi_1.0.4            GeneSummary_0.99.3    
+#>  [19] magrittr_2.0.3         memoise_2.0.1         
+#>  [21] tm_0.7-8               Biostrings_2.64.0     
+#>  [23] graphlayouts_0.8.4     pvclust_2.2-0         
+#>  [25] wordcloud_2.6          sysfonts_0.8.8        
+#>  [27] enrichplot_1.16.2      colorspace_2.1-0      
+#>  [29] rappdirs_0.3.3         blob_1.2.4            
 #>  [31] xfun_0.38              crayon_1.5.2          
 #>  [33] RCurl_1.98-1.7         jsonlite_1.8.0        
 #>  [35] scatterpie_0.1.8       graph_1.74.0          
@@ -999,51 +875,52 @@ sessionInfo()
 #>  [45] graphite_1.42.0        rentrez_1.2.3         
 #>  [47] scales_1.2.1           DOSE_3.25.0.002       
 #>  [49] DBI_1.1.3              showtextdb_3.0        
-#>  [51] Rcpp_1.0.9             viridisLite_0.4.1     
-#>  [53] xtable_1.8-4           tidytree_0.4.2        
-#>  [55] gridGraphics_0.5-1     reactome.db_1.81.0    
-#>  [57] bit_4.0.4              htmlwidgets_1.6.2     
-#>  [59] httr_1.4.5             fgsea_1.22.0          
-#>  [61] ellipsis_0.3.2         pkgconfig_2.0.3       
-#>  [63] XML_3.99-0.10          farver_2.1.1          
-#>  [65] sass_0.4.5             utf8_1.2.3            
-#>  [67] labeling_0.4.2         ggplotify_0.1.0       
-#>  [69] tidyselect_1.2.0       rlang_1.1.0           
-#>  [71] reshape2_1.4.4         later_1.3.0           
-#>  [73] munsell_0.5.0          tools_4.2.1           
-#>  [75] cachem_1.0.6           downloader_0.4        
-#>  [77] cli_3.5.0              generics_0.1.3        
-#>  [79] RSQLite_2.2.15         gson_0.1.0            
-#>  [81] evaluate_0.20          stringr_1.5.0         
-#>  [83] fastmap_1.1.0          ggdendro_0.1.23       
-#>  [85] yaml_2.3.5             ggtree_3.7.1.002      
-#>  [87] knitr_1.42             bit64_4.0.5           
-#>  [89] fs_1.5.2               tidygraph_1.2.3       
-#>  [91] purrr_1.0.1            KEGGREST_1.36.3       
-#>  [93] showtext_0.9-5         nlme_3.1-157          
-#>  [95] mime_0.12              slam_0.1-50           
-#>  [97] aplot_0.1.10           xml2_1.3.3            
-#>  [99] compiler_4.2.1         rstudioapi_0.14       
-#> [101] png_0.1-7              treeio_1.20.2         
-#> [103] tibble_3.2.1           tweenr_2.0.2          
-#> [105] bslib_0.4.2            stringi_1.7.8         
-#> [107] cyjShiny_1.0.42        highr_0.10            
-#> [109] lattice_0.20-45        Matrix_1.5-3          
-#> [111] vctrs_0.6.1            pillar_1.9.0          
-#> [113] lifecycle_1.0.3        jquerylib_0.1.4       
-#> [115] GlobalOptions_0.1.2    data.table_1.14.2     
-#> [117] cowplot_1.1.1          bitops_1.0-7          
-#> [119] httpuv_1.6.5           patchwork_1.1.2       
-#> [121] qvalue_2.28.0          R6_2.5.1              
-#> [123] bookdown_0.33          promises_1.2.0.1      
-#> [125] gridExtra_2.3          codetools_0.2-18      
-#> [127] MASS_7.3-57            rjson_0.2.21          
-#> [129] withr_2.5.0            wcGeneSummary_0.99.0  
-#> [131] GenomeInfoDbData_1.2.8 parallel_4.2.1        
-#> [133] ISOcodes_2022.09.29    ggfun_0.0.9           
-#> [135] grid_4.2.1             tidyr_1.3.0           
-#> [137] HDO.db_0.99.1          rmarkdown_2.21        
-#> [139] downlit_0.4.2          ggforce_0.4.1         
-#> [141] NLP_0.2-1              shiny_1.7.4           
-#> [143] base64enc_0.1-3
+#>  [51] Rcpp_1.0.9             gridtext_0.1.5        
+#>  [53] viridisLite_0.4.1      xtable_1.8-4          
+#>  [55] tidytree_0.4.2         gridGraphics_0.5-1    
+#>  [57] reactome.db_1.81.0     bit_4.0.4             
+#>  [59] htmlwidgets_1.6.2      httr_1.4.5            
+#>  [61] fgsea_1.22.0           ggwordcloud_0.6.0     
+#>  [63] ellipsis_0.3.2         pkgconfig_2.0.3       
+#>  [65] XML_3.99-0.10          farver_2.1.1          
+#>  [67] sass_0.4.5             utf8_1.2.3            
+#>  [69] labeling_0.4.2         ggplotify_0.1.0       
+#>  [71] tidyselect_1.2.0       rlang_1.1.0           
+#>  [73] reshape2_1.4.4         later_1.3.0           
+#>  [75] munsell_0.5.0          tools_4.2.1           
+#>  [77] cachem_1.0.6           downloader_0.4        
+#>  [79] cli_3.5.0              generics_0.1.3        
+#>  [81] RSQLite_2.2.15         gson_0.1.0            
+#>  [83] evaluate_0.20          stringr_1.5.0         
+#>  [85] fastmap_1.1.0          ggdendro_0.1.23       
+#>  [87] yaml_2.3.5             ggtree_3.7.1.002      
+#>  [89] knitr_1.42             bit64_4.0.5           
+#>  [91] fs_1.5.2               tidygraph_1.2.3       
+#>  [93] purrr_1.0.1            KEGGREST_1.36.3       
+#>  [95] showtext_0.9-5         nlme_3.1-157          
+#>  [97] mime_0.12              slam_0.1-50           
+#>  [99] aplot_0.1.10           xml2_1.3.3            
+#> [101] compiler_4.2.1         rstudioapi_0.14       
+#> [103] png_0.1-7              treeio_1.20.2         
+#> [105] tibble_3.2.1           tweenr_2.0.2          
+#> [107] bslib_0.4.2            stringi_1.7.8         
+#> [109] cyjShiny_1.0.42        highr_0.10            
+#> [111] lattice_0.20-45        Matrix_1.5-3          
+#> [113] commonmark_1.9.0       markdown_1.5          
+#> [115] vctrs_0.6.1            pillar_1.9.0          
+#> [117] lifecycle_1.0.3        jquerylib_0.1.4       
+#> [119] GlobalOptions_0.1.2    data.table_1.14.2     
+#> [121] cowplot_1.1.1          bitops_1.0-7          
+#> [123] httpuv_1.6.5           patchwork_1.1.2       
+#> [125] qvalue_2.28.0          R6_2.5.1              
+#> [127] bookdown_0.33          promises_1.2.0.1      
+#> [129] gridExtra_2.3          codetools_0.2-18      
+#> [131] MASS_7.3-57            rjson_0.2.21          
+#> [133] withr_2.5.0            wcGeneSummary_0.99.0  
+#> [135] GenomeInfoDbData_1.2.8 parallel_4.2.1        
+#> [137] ISOcodes_2022.09.29    ggfun_0.0.9           
+#> [139] grid_4.2.1             tidyr_1.3.0           
+#> [141] HDO.db_0.99.1          rmarkdown_2.21        
+#> [143] downlit_0.4.2          NLP_0.2-1             
+#> [145] shiny_1.7.4            base64enc_0.1-3
 ```

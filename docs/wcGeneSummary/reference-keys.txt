@@ -2,7 +2,7 @@ tab:table
 about
 basic-usage
 producing-word-clouds
-producing-correlation-networks
+producing-networks
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
 text-over-represenatation-analysis-experimental
@@ -39,4 +39,5 @@ plotting-the-enrichment-analysis-results-of-marker-genes
 parsing
 parsing-enzyme-comission-numbers-its-description-and-comment.
 parsing-uniprot-organism-identifiers.
-perform-each-process-separately
+parsing-metacyc-pathway-text-information
+tidy

@@ -1,6 +1,6 @@
 
 
-# Perform each process separately
+# Perform each process separately {#tidy}
 
 The same process as functions like `wcGeneSummary` can be performed separately. This is useful for piped processing and for individual customization in each process.
 
@@ -24,4 +24,23 @@ btg
 #> Number of words: 30
 #> DDX41/PNKP/IRF3
 #> 218.1 Kb
+
+## Text of enrichment analysis results
+btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
+  set_filter_words() |>
+  make_corpus() |>
+  make_TDM() |>
+  make_graph() |>
+  process_network_manual() |>
+  plot_biotextgraph(edge_link=FALSE)
+#> Input genes: 3
+#>   Converted input genes: 3
+#> Performing enrichment analysis
+#> Filter based on GeneSummary
+#> Filtered 81 words (frequency and/or tfidf)
+btg2
+#> Type: enrich
+#> Number of words: 30
+#> DDX41/PNKP/IRF3
+#> 291.3 Kb
 ```
