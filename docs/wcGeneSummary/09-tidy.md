@@ -13,7 +13,8 @@ btg <- obtain_refseq(c("DDX41","PNKP","IRF3")) |>
   make_TDM() |>
   make_graph() |>
   process_network_gene(gene_plot=TRUE, gene_path_plot="reactome") |>
-  plot_biotextgraph(edge_link=FALSE)
+  plot_biotextgraph(edge_link=FALSE) |>
+  plot_wordcloud()
 #> Input genes: 3
 #>   Converted input genes: 3
 #> Filter based on GeneSummary
@@ -22,8 +23,10 @@ btg <- obtain_refseq(c("DDX41","PNKP","IRF3")) |>
 btg
 #> Type: refseq
 #> Number of words: 30
-#> DDX41/PNKP/IRF3
-#> 218.1 Kb
+#> Query: DDX41/PNKP/IRF3
+#> Graph: V(33), E(237)
+#> Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)
+#> 291 Kb
 
 ## Text of enrichment analysis results
 btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
@@ -41,6 +44,8 @@ btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
 btg2
 #> Type: enrich
 #> Number of words: 30
-#> DDX41/PNKP/IRF3
+#> Query: DDX41/PNKP/IRF3
+#> Graph: V(30), E(46)
+#> Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(5)
 #> 291.3 Kb
 ```

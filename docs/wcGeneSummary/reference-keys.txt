@@ -1,8 +1,8 @@
 tab:table
 about
 basic-usage
-producing-word-clouds
 producing-networks
+producing-word-clouds
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
 text-over-represenatation-analysis-experimental
@@ -19,12 +19,13 @@ annotating-gene-cluster-dendrogram
 annotating-by-pyramid-plots
 annotating-by-word-clouds
 decorating-wordclouds
+quantitative-analysis
 assess-the-occurrence-of-the-speicific-words-across-gene-clusters
 recluster-the-cluster-using-word-information
 pathview-text
 ko-queries
 gene-queries
-application-examples
+app
 load-the-necessary-packages-and-genes
 enrichment-analysis
 text-mining-the-gene-summaries

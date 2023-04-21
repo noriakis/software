@@ -610,7 +610,6 @@ If needed, wordclouds can be filtered by `ggfx` or using `shadowtext`. In this c
 
 ```r
 library(ggfx)
-#> Warning: package 'ggfx' was built under R version 4.2.3
 plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
     bg.colour="grey80")
 #> Bootstrap (r = 0.5)... Done.
@@ -763,9 +762,9 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 
 <img src="04-custom-usage_files/figure-html/decoword2-1.png" width="100%" style="display: block; margin: auto;" />
 
+# Quantitative analysis
 
-
-# Assess the occurrence of the speicific words across gene clusters
+## Assess the occurrence of the speicific words across gene clusters
 
 
 ```r
@@ -994,7 +993,7 @@ p
 
 <img src="04-custom-usage_files/figure-html/findtermWGCNA-1.png" width="100%" style="display: block; margin: auto;" />
 
-# Recluster the cluster using word information
+## Recluster the cluster using word information
 
 
 ```r
