@@ -62,7 +62,7 @@ For visualization, The edge label corresponding to correlation or cooccurrence v
 
 ```r
 net <- wcGeneSummary(inpSymbol, plotType="network",
-                     edgeLabel=TRUE, corThresh=0.5,
+                     edgeLabel=TRUE, corThresh=0.1,
                      numWords=20, colorText=TRUE, layout="kk")
 #> Input genes: 7
 #>   Converted input genes: 7
@@ -781,30 +781,32 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] dplyr_1.1.1               dendextend_1.17.1        
-#>  [3] clusterProfiler_4.7.1.003 ReactomePA_1.42.0        
-#>  [5] RColorBrewer_1.1-3        ggraph_2.1.0             
-#>  [7] org.Hs.eg.db_3.15.0       AnnotationDbi_1.60.2     
-#>  [9] IRanges_2.32.0            S4Vectors_0.36.2         
-#> [11] Biobase_2.58.0            BiocGenerics_0.44.0      
-#> [13] biotextgraph_0.99.0       ggplot2_3.4.2            
+#>  [1] ggrepel_0.9.3             ggforce_0.4.1            
+#>  [3] concaveman_1.1.0          dplyr_1.1.1              
+#>  [5] dendextend_1.17.1         clusterProfiler_4.7.1.003
+#>  [7] ReactomePA_1.42.0         RColorBrewer_1.1-3       
+#>  [9] ggraph_2.1.0              org.Hs.eg.db_3.15.0      
+#> [11] AnnotationDbi_1.60.2      IRanges_2.32.0           
+#> [13] S4Vectors_0.36.2          Biobase_2.58.0           
+#> [15] BiocGenerics_0.44.0       biotextgraph_0.99.0      
+#> [17] ggplot2_3.4.2            
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
-#>   [3] plyr_1.8.8             igraph_1.4.2          
-#>   [5] lazyeval_0.2.2         splines_4.2.1         
-#>   [7] BiocParallel_1.32.6    GenomeInfoDb_1.34.9   
-#>   [9] digest_0.6.29          yulab.utils_0.0.6     
-#>  [11] htmltools_0.5.5        bugsigdbr_1.4.3       
-#>  [13] GOSemSim_2.25.0        viridis_0.6.2         
-#>  [15] GO.db_3.15.0           fansi_1.0.4           
-#>  [17] GeneSummary_0.99.4     magrittr_2.0.3        
-#>  [19] memoise_2.0.1          tm_0.7-11             
-#>  [21] Biostrings_2.66.0      graphlayouts_0.8.4    
-#>  [23] pvclust_2.2-0          wordcloud_2.6         
-#>  [25] sysfonts_0.8.8         enrichplot_1.18.4     
-#>  [27] colorspace_2.1-0       rappdirs_0.3.3        
-#>  [29] blob_1.2.4             ggrepel_0.9.3         
+#>   [3] systemfonts_1.0.4      plyr_1.8.8            
+#>   [5] igraph_1.4.2           lazyeval_0.2.2        
+#>   [7] splines_4.2.1          BiocParallel_1.32.6   
+#>   [9] GenomeInfoDb_1.34.9    digest_0.6.29         
+#>  [11] yulab.utils_0.0.6      htmltools_0.5.5       
+#>  [13] bugsigdbr_1.4.3        GOSemSim_2.25.0       
+#>  [15] viridis_0.6.2          GO.db_3.15.0          
+#>  [17] fansi_1.0.4            GeneSummary_0.99.4    
+#>  [19] magrittr_2.0.3         memoise_2.0.1         
+#>  [21] tm_0.7-11              Biostrings_2.66.0     
+#>  [23] graphlayouts_0.8.4     pvclust_2.2-0         
+#>  [25] wordcloud_2.6          sysfonts_0.8.8        
+#>  [27] enrichplot_1.18.4      colorspace_2.1-0      
+#>  [29] rappdirs_0.3.3         blob_1.2.4            
 #>  [31] xfun_0.38              crayon_1.5.2          
 #>  [33] RCurl_1.98-1.12        jsonlite_1.8.0        
 #>  [35] scatterpie_0.1.8       graph_1.76.0          
@@ -859,7 +861,6 @@ sessionInfo()
 #> [133] ISOcodes_2022.09.29    ggfun_0.0.9           
 #> [135] grid_4.2.1             tidyr_1.3.0           
 #> [137] HDO.db_0.99.1          rmarkdown_2.21        
-#> [139] downlit_0.4.2          ggforce_0.4.1         
-#> [141] NLP_0.2-1              shiny_1.7.4           
-#> [143] base64enc_0.1-3
+#> [139] downlit_0.4.2          NLP_0.2-1             
+#> [141] shiny_1.7.4            base64enc_0.1-3
 ```
