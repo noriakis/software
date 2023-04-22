@@ -62,7 +62,7 @@ For visualization, The edge label corresponding to correlation or cooccurrence v
 
 ```r
 net <- wcGeneSummary(inpSymbol, plotType="network",
-                     edgeLabel=TRUE, corThresh=0.1,
+                     edgeLabel=TRUE, corThresh=0.4,
                      numWords=20, colorText=TRUE, layout="kk")
 #> Input genes: 7
 #>   Converted input genes: 7
