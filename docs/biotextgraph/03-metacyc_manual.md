@@ -211,71 +211,14 @@ sessionInfo()
 #> [1] stats     graphics  grDevices utils     datasets 
 #> [6] methods   base     
 #> 
-#> other attached packages:
-#> [1] ggraph_2.1.0        biotextgraph_0.99.0
-#> [3] ggplot2_3.4.2      
-#> 
 #> loaded via a namespace (and not attached):
-#>   [1] GeneSummary_0.99.4     colorspace_2.1-0      
-#>   [3] rjson_0.2.21           ellipsis_0.3.2        
-#>   [5] ISOcodes_2022.09.29    markdown_1.5          
-#>   [7] XVector_0.38.0         GlobalOptions_0.1.2   
-#>   [9] base64enc_0.1-3        ggdendro_0.1.23       
-#>  [11] fs_1.6.1               gridtext_0.1.5        
-#>  [13] rstudioapi_0.14        farver_2.1.1          
-#>  [15] graphlayouts_0.8.4     ggrepel_0.9.3         
-#>  [17] ggwordcloud_0.6.0      bit64_4.0.5           
-#>  [19] AnnotationDbi_1.60.2   fansi_1.0.4           
-#>  [21] xml2_1.3.3             codetools_0.2-18      
-#>  [23] downlit_0.4.2          cachem_1.0.7          
-#>  [25] knitr_1.42             polyclip_1.10-4       
-#>  [27] jsonlite_1.8.4         png_0.1-8             
-#>  [29] graph_1.76.0           ggforce_0.4.1         
-#>  [31] shiny_1.7.4            bugsigdbr_1.4.3       
-#>  [33] rentrez_1.2.3          compiler_4.2.1        
-#>  [35] httr_1.4.5             fastmap_1.1.1         
-#>  [37] cli_3.6.1              later_1.3.0           
-#>  [39] tweenr_2.0.2           htmltools_0.5.4       
-#>  [41] tools_4.2.1            igraph_1.4.2          
-#>  [43] NLP_0.2-1              gtable_0.3.3          
-#>  [45] glue_1.6.2             GenomeInfoDbData_1.2.9
-#>  [47] dplyr_1.1.1            Rcpp_1.0.10           
-#>  [49] slam_0.1-50            Biobase_2.58.0        
-#>  [51] jquerylib_0.1.4        vctrs_0.6.1           
-#>  [53] Biostrings_2.66.0      stringr_1.5.0         
-#>  [55] xfun_0.37              stopwords_2.3         
-#>  [57] mime_0.12              lifecycle_1.0.3       
-#>  [59] XML_3.99-0.14          pvclust_2.2-0         
-#>  [61] dendextend_1.16.0      org.Hs.eg.db_3.15.0   
-#>  [63] zlibbioc_1.44.0        MASS_7.3-57           
-#>  [65] scales_1.2.1           tidygraph_1.2.3       
-#>  [67] promises_1.2.0.1       parallel_4.2.1        
-#>  [69] cyjShiny_1.0.34        RColorBrewer_1.1-3    
-#>  [71] yaml_2.3.7             memoise_2.0.1         
-#>  [73] gridExtra_2.3          yulab.utils_0.0.6     
-#>  [75] sass_0.4.5             stringi_1.7.12        
-#>  [77] RSQLite_2.3.0          highr_0.10            
-#>  [79] S4Vectors_0.36.2       BiocGenerics_0.44.0   
-#>  [81] GenomeInfoDb_1.34.9    commonmark_1.9.0      
-#>  [83] rlang_1.1.0            pkgconfig_2.0.3       
-#>  [85] bitops_1.0-7           evaluate_0.20         
-#>  [87] purrr_1.0.1            labeling_0.4.2        
-#>  [89] patchwork_1.1.2        htmlwidgets_1.6.2     
-#>  [91] cowplot_1.1.1          bit_4.0.5             
-#>  [93] tidyselect_1.2.0       magrittr_2.0.3        
-#>  [95] bookdown_0.33          R6_2.5.1              
-#>  [97] IRanges_2.32.0         generics_0.1.3        
-#>  [99] DBI_1.1.3              pillar_1.9.0          
-#> [101] withr_2.5.0            KEGGREST_1.38.0       
-#> [103] RCurl_1.98-1.10        tibble_3.2.1          
-#> [105] crayon_1.5.2           wordcloud_2.6         
-#> [107] utf8_1.2.3             rmarkdown_2.20        
-#> [109] viridis_0.6.2          GetoptLong_1.0.5      
-#> [111] grid_4.2.1             blob_1.2.4            
-#> [113] digest_0.6.31          xtable_1.8-4          
-#> [115] tm_0.7-11              tidyr_1.3.0           
-#> [117] httpuv_1.6.9           gridGraphics_0.5-1    
-#> [119] stats4_4.2.1           munsell_0.5.0         
-#> [121] viridisLite_0.4.1      ggplotify_0.1.0       
-#> [123] bslib_0.4.2
+#>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.29  
+#>  [4] R6_2.5.1        jsonlite_1.8.0  evaluate_0.20  
+#>  [7] cachem_1.0.7    rlang_1.1.0     cli_3.6.1      
+#> [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4
+#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.21 
+#> [16] tools_4.2.1     xfun_0.38       yaml_2.3.7     
+#> [19] fastmap_1.1.1   compiler_4.2.1  memoise_2.0.1  
+#> [22] htmltools_0.5.5 downlit_0.4.2   knitr_1.42     
+#> [25] sass_0.4.5
 ```

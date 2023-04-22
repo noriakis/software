@@ -484,7 +484,7 @@ In this example querying ERCC genes, the term `DNA repair` is clustered as expec
 
 ## Visualization of PubMed information.
 
-Using `rentrez`, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing `genePlot`, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by `retMax` and `sortOrder`. Be sure to obtain [an api key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) when querying heavily, and specify in `apiKey` argument. These functions including `wcAbst` and `wcGeneSummary` serve as wrappers for several other functions, but a detailed explanation can be found in @ref(tidy).
+Using `rentrez`, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing `genePlot`, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by `retMax` and `sortOrder`. Be sure to obtain [an api key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) when querying heavily, and specify in `apiKey` argument. These functions including `wcAbst` and `wcGeneSummary` serve as wrappers for several other functions, but a detailed explanation can be found in \@ref(tidy).
  
 
 ```r
@@ -640,7 +640,7 @@ compareWordNet(list(net1, net2), tag=TRUE, hull=TRUE)@net
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/tagcomp-1.png" width="100%" style="display: block; margin: auto;" />
 
-An application example of using text mining for transcriptome analysis of BK polyomavirus infection by combining the functions described here @ref(app).
+An application example of using text mining for transcriptome analysis of BK polyomavirus infection by combining the functions described here \@ref(app).
 
 ## Text over represenatation analysis (experimental)
 
@@ -781,8 +781,8 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] dplyr_1.1.1               dendextend_1.16.0        
-#>  [3] clusterProfiler_4.7.1.003 ReactomePA_1.40.0        
+#>  [1] dplyr_1.1.1               dendextend_1.17.1        
+#>  [3] clusterProfiler_4.7.1.003 ReactomePA_1.42.0        
 #>  [5] RColorBrewer_1.1-3        ggraph_2.1.0             
 #>  [7] org.Hs.eg.db_3.15.0       AnnotationDbi_1.60.2     
 #>  [9] IRanges_2.32.0            S4Vectors_0.36.2         
@@ -794,26 +794,26 @@ sessionInfo()
 #>   [3] plyr_1.8.8             igraph_1.4.2          
 #>   [5] lazyeval_0.2.2         splines_4.2.1         
 #>   [7] BiocParallel_1.32.6    GenomeInfoDb_1.34.9   
-#>   [9] digest_0.6.31          yulab.utils_0.0.6     
-#>  [11] htmltools_0.5.4        bugsigdbr_1.4.3       
-#>  [13] GOSemSim_2.24.0        viridis_0.6.2         
-#>  [15] GO.db_3.16.0           fansi_1.0.4           
+#>   [9] digest_0.6.29          yulab.utils_0.0.6     
+#>  [11] htmltools_0.5.5        bugsigdbr_1.4.3       
+#>  [13] GOSemSim_2.25.0        viridis_0.6.2         
+#>  [15] GO.db_3.15.0           fansi_1.0.4           
 #>  [17] GeneSummary_0.99.4     magrittr_2.0.3        
 #>  [19] memoise_2.0.1          tm_0.7-11             
 #>  [21] Biostrings_2.66.0      graphlayouts_0.8.4    
 #>  [23] pvclust_2.2-0          wordcloud_2.6         
-#>  [25] sysfonts_0.8.8         enrichplot_1.18.3     
+#>  [25] sysfonts_0.8.8         enrichplot_1.18.4     
 #>  [27] colorspace_2.1-0       rappdirs_0.3.3        
 #>  [29] blob_1.2.4             ggrepel_0.9.3         
-#>  [31] xfun_0.37              crayon_1.5.2          
-#>  [33] RCurl_1.98-1.10        jsonlite_1.8.4        
+#>  [31] xfun_0.38              crayon_1.5.2          
+#>  [33] RCurl_1.98-1.12        jsonlite_1.8.0        
 #>  [35] scatterpie_0.1.8       graph_1.76.0          
 #>  [37] ape_5.7-1              glue_1.6.2            
 #>  [39] polyclip_1.10-4        stopwords_2.3         
 #>  [41] gtable_0.3.3           zlibbioc_1.44.0       
 #>  [43] XVector_0.38.0         GetoptLong_1.0.5      
-#>  [45] graphite_1.42.0        rentrez_1.2.3         
-#>  [47] scales_1.2.1           DOSE_3.24.2           
+#>  [45] graphite_1.44.0        rentrez_1.2.3         
+#>  [47] scales_1.2.1           DOSE_3.25.0.002       
 #>  [49] DBI_1.1.3              showtextdb_3.0        
 #>  [51] Rcpp_1.0.10            viridisLite_0.4.1     
 #>  [53] xtable_1.8-4           tidytree_0.4.2        
@@ -829,36 +829,36 @@ sessionInfo()
 #>  [73] munsell_0.5.0          tools_4.2.1           
 #>  [75] cachem_1.0.7           downloader_0.4        
 #>  [77] cli_3.6.1              generics_0.1.3        
-#>  [79] RSQLite_2.3.0          gson_0.1.0            
+#>  [79] RSQLite_2.3.1          gson_0.1.0            
 #>  [81] evaluate_0.20          stringr_1.5.0         
 #>  [83] fastmap_1.1.1          ggdendro_0.1.23       
-#>  [85] yaml_2.3.7             ggtree_3.6.2          
+#>  [85] yaml_2.3.7             ggtree_3.7.1.002      
 #>  [87] knitr_1.42             bit64_4.0.5           
 #>  [89] fs_1.6.1               tidygraph_1.2.3       
 #>  [91] purrr_1.0.1            KEGGREST_1.38.0       
-#>  [93] showtext_0.9-5         nlme_3.1-157          
+#>  [93] showtext_0.9-5         nlme_3.1-162          
 #>  [95] mime_0.12              slam_0.1-50           
 #>  [97] aplot_0.1.10           xml2_1.3.3            
 #>  [99] compiler_4.2.1         rstudioapi_0.14       
 #> [101] png_0.1-8              treeio_1.22.0         
 #> [103] tibble_3.2.1           tweenr_2.0.2          
 #> [105] bslib_0.4.2            stringi_1.7.12        
-#> [107] cyjShiny_1.0.34        highr_0.10            
-#> [109] lattice_0.20-45        Matrix_1.5-4          
-#> [111] vctrs_0.6.1            pillar_1.9.0          
+#> [107] cyjShiny_1.0.42        highr_0.10            
+#> [109] lattice_0.21-8         Matrix_1.5-4          
+#> [111] vctrs_0.6.2            pillar_1.9.0          
 #> [113] lifecycle_1.0.3        jquerylib_0.1.4       
 #> [115] GlobalOptions_0.1.2    data.table_1.14.8     
 #> [117] cowplot_1.1.1          bitops_1.0-7          
 #> [119] httpuv_1.6.9           patchwork_1.1.2       
 #> [121] qvalue_2.30.0          R6_2.5.1              
 #> [123] bookdown_0.33          promises_1.2.0.1      
-#> [125] gridExtra_2.3          codetools_0.2-18      
-#> [127] MASS_7.3-57            rjson_0.2.21          
+#> [125] gridExtra_2.3          codetools_0.2-19      
+#> [127] MASS_7.3-58.3          rjson_0.2.21          
 #> [129] withr_2.5.0            wcGeneSummary_0.99.0  
-#> [131] GenomeInfoDbData_1.2.9 parallel_4.2.1        
+#> [131] GenomeInfoDbData_1.2.8 parallel_4.2.1        
 #> [133] ISOcodes_2022.09.29    ggfun_0.0.9           
 #> [135] grid_4.2.1             tidyr_1.3.0           
-#> [137] HDO.db_0.99.1          rmarkdown_2.20        
+#> [137] HDO.db_0.99.1          rmarkdown_2.21        
 #> [139] downlit_0.4.2          ggforce_0.4.1         
 #> [141] NLP_0.2-1              shiny_1.7.4           
 #> [143] base64enc_0.1-3
