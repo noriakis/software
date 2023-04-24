@@ -8,6 +8,7 @@ group-of-nodes
 visualize-the-result-of-enrichkegg
 module
 module-definition-in-graph
+module-definition-in-text
 module-completeness
 visualize-the-result-of-enricher
 network

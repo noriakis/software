@@ -74,9 +74,9 @@ https://doi.org/10.1186/s12859-020-03692-2)).
 mat <- assay(vst(res))
 new_g <- g |> append_edge_value(mat) |> append_node_value(mat)
 new_g
-#> # A tbl_graph: 134 nodes and 117 edges
+#> # A tbl_graph: 134 nodes and 157 edges
 #> #
-#> # A directed acyclic simple graph with 40 components
+#> # A directed acyclic multigraph with 40 components
 #> #
 #> # A tibble: 134 × 47
 #>   name        type  reaction graphics_name     x     y width
@@ -95,13 +95,13 @@ new_g
 #> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
 #> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
 #> #
-#> # A tibble: 117 × 32
-#>    from    to type  subtype    from_nd   to_nd   SRR14509882
-#>   <int> <int> <chr> <chr>      <chr>     <chr>         <dbl>
-#> 1   118    39 GErel expression undefined hsa:10…        NA  
-#> 2    50    61 PPrel inhibition hsa:2932  hsa:59…        24.4
-#> 3    37    22 GErel expression hsa:7157  hsa:10…        25.5
-#> # ℹ 114 more rows
+#> # A tibble: 157 × 32
+#>    from    to type  subtype        from_nd to_nd SRR14509882
+#>   <int> <int> <chr> <chr>          <chr>   <chr>       <dbl>
+#> 1   118    39 GErel expression     undefi… hsa:…        NA  
+#> 2    50    61 PPrel inhibition     hsa:29… hsa:…        24.4
+#> 3    50    61 PPrel phosphorylati… hsa:29… hsa:…        24.4
+#> # ℹ 154 more rows
 #> # ℹ 25 more variables: SRR14509883 <dbl>,
 #> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
 #> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
