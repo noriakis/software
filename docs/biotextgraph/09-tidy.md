@@ -18,15 +18,15 @@ btg <- obtain_refseq(c("DDX41","PNKP","IRF3")) |>
 #> Input genes: 3
 #>   Converted input genes: 3
 #> Filter based on GeneSummary
-#> Filtered 81 words (frequency and/or tfidf)
-#> Found 21 enriched term
+#> Filtered 76 words (frequency and/or tfidf)
+#> Found 25 enriched term
 btg
 #> Type: refseq
 #> Number of words: 30
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(33), E(237)
 #> Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)
-#> 291 Kb
+#> 291.3 Kb
 
 ## Text of enrichment analysis results
 btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
@@ -40,12 +40,12 @@ btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
 #>   Converted input genes: 3
 #> Performing enrichment analysis
 #> Filter based on GeneSummary
-#> Filtered 81 words (frequency and/or tfidf)
+#> Filtered 76 words (frequency and/or tfidf)
 btg2
 #> Type: enrich
 #> Number of words: 30
 #> Query: DDX41/PNKP/IRF3
-#> Graph: V(30), E(46)
-#> Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(5)
-#> 291.3 Kb
+#> Graph: V(29), E(44)
+#> Degree: innate(8)/immune(7)/responses(7)/activatesmodulates(6)/sars2(6)
+#> 292.1 Kb
 ```
