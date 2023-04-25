@@ -4,6 +4,7 @@ pathway
 geom_node_rect
 assigning-colors-to-nodes
 highlighting-set-of-nodes-and-edges
+overlaying-original-kegg-pathway-images-on-ggraph
 group-of-nodes
 visualize-the-result-of-enrichkegg
 module
