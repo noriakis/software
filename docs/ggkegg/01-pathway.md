@@ -111,6 +111,7 @@ ggraph(g, x=x, y=y) +
 <img src="01-pathway_files/figure-html/assign_color2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
+
 ## Highlighting set of nodes and edges
 
 If you want to obtain `ko01230`, and highlight those components
@@ -307,6 +308,45 @@ ed <- Sys.time()
 ed-st
 #> Time difference of 31.34744 secs
 ```
+
+
+## Overlaying original KEGG pathway images on ggraph
+
+Using `magick`, you can overlay the original KEGG pathway image on the graph you made (or add components on the original image). The package provides overlay_raw_map function, which allows mapping a raster image onto the graph by specifying the pathway ID and the color to be made transparent.
+
+
+```r
+g <- pathway("ko00640",group_rect_nudge=0) ## Obtain pathway graph (don't show grouping rect)
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  geom_node_point(aes(filter=type=="compound"), color="blue", size=2)+
+  geom_node_rect(fill="red",aes(filter=type=="ortholog"))+
+  overlay_raw_map("ko00640")+
+  theme_void()
+ggsave(file="tmp.png",gg,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/raster-1.png" width="100%" style="display: block; margin: auto;" />
+
+You can use your favorite geoms to annotate KEGG map combining the functions.
+
+
+```r
+m <- module("M00013")
+g <- g |> mutate(mod=highlight_set_nodes(m@reaction_components,how="all"))
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  geom_node_rect(fill="grey",aes(filter=type=="ortholog"))+
+  geom_node_point(aes(filter=type=="compound"), color="blue", size=2)+
+  overlay_raw_map("ko00640")+
+  ggfx::with_outer_glow(geom_node_point(aes(filter=mod, x=x, y=y), color="red",size=2),
+                        colour="yellow",expand=5)+
+  theme_void()
+ggsave(file="tmp.png",gg,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/raster2-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Group of nodes
 

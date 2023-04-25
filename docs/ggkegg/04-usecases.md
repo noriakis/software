@@ -78,36 +78,53 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 47
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
-#> # ℹ 40 more variables: height <dbl>, fgcolor <chr>,
-#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
-#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
-#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
-#> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
-#> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
-#> #
-#> # A tibble: 157 × 32
-#>    from    to type  subtype        from_nd to_nd SRR14509882
-#>   <int> <int> <chr> <chr>          <chr>   <chr>       <dbl>
-#> 1   118    39 GErel expression     undefi… hsa:…        NA  
-#> 2    50    61 PPrel inhibition     hsa:29… hsa:…        24.4
-#> 3    50    61 PPrel phosphorylati… hsa:29… hsa:…        24.4
-#> # ℹ 154 more rows
-#> # ℹ 25 more variables: SRR14509883 <dbl>,
+#> # Node Data: 134 × 47 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 39 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
+#> #   SRR14509882 <dbl>, SRR14509883 <dbl>,
 #> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
 #> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
 #> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
 #> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
-#> #   SRR14509892 <dbl>, SRR14509893 <dbl>, …
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
+#> #
+#> # Edge Data: 157 × 32
+#>    from    to type  subtype from_nd to_nd SRR145… SRR145…
+#>   <int> <int> <chr> <chr>   <chr>   <chr>   <dbl>   <dbl>
+#> 1   118    39 GErel expres… undefi… hsa:…    NA      NA  
+#> 2    50    61 PPrel inhibi… hsa:29… hsa:…    24.4    23.5
+#> 3    50    61 PPrel phosph… hsa:29… hsa:…    24.4    23.5
+#> # … with 154 more rows, and 24 more variables:
+#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
+#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
+#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
 ```
 
 
