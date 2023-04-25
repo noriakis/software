@@ -169,6 +169,43 @@ ggraph(g1, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;" />
 
+The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx`, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
+
+
+```r
+library(patchwork)
+right <- (dotplot(ekuro) + ggtitle("Urothelial")) /
+(dotplot(ekrptec) + ggtitle("RPTECs"))
+
+g1 <- pathway("hsa03410") |>
+  mutate(uro=append_cp(ekuro, how="all"),
+        rptec=append_cp(ekrptec, how="all"),
+        converted_name=convert_id("hsa"))
+gg <- ggraph(g1, layout="manual", x=x, y=y)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=uro&rptec, xmin=xmin+0.5),
+                   color="gold", fill="transparent"),
+    colour="gold", expand=15, sigma=10)+
+  geom_node_rect(aes(fill=uro, xmin=xmin+0.5, xmax=xmax,  filter=type=="gene"))+
+  geom_node_rect(aes(fill=rptec, xmin=x+0.5, xmax=xmax, filter=type=="gene")) +
+  overlay_raw_map("hsa03410", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+  scale_fill_manual(values=c("steelblue","tomato"),
+                    name="urothelial|rptec")+
+  theme_void()
+gg2 <- gg + right + plot_layout(design="
+AAAA###
+AAAABBB
+AAAABBB
+AAAA###
+"
+)
+ggsave(file="tmp.png",gg2,width=20,height=15,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## Projecting the gene regulatory networks on KEGG map
 
 With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.
