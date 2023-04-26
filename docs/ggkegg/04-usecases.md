@@ -7,7 +7,7 @@
 
 By providing the results of the DESeq2 package, which is often used for transcriptome analysis, it is possible to reflect numerical results in the nodes of a graph. The `assign_deseq2` function can be used for this purpose. By specifying the numerical value (e.g., `log2FoldChange`) that you want to reflect in the graph as the `column` argument, you can assign the value to the nodes. If multiple genes are hit, the `numeric_combine` argument specifies how to combine multiple values (the default is `mean`).
 
-Here, we use a RNA-Seq dataset that analyzed the transcriptome changes in human urothelial cells infected with BK polyomavirus ([Baker et al. 2022](https://doi.org/10.1038/s41388-022-02235-8)). The raw sequences obtained from Sequence Read Archive is processed by [nf-core](https://nf-co.re/rnaseq).
+Here, we use a RNA-Seq dataset that analyzed the transcriptome changes in human urothelial cells infected with BK polyomavirus ([Baker et al. 2022](https://doi.org/10.1038/s41388-022-02235-8)). The raw sequences obtained from Sequence Read Archive were processed by [nf-core](https://nf-co.re/rnaseq), and subsequently analyzed using `tximport`, `salmon` and `DESeq2`.
 
 
 ```r
@@ -130,7 +130,7 @@ new_g
 
 ## Visualizing multiple enrichment results
 
-You can visualize the results of multiple enrichment analyses. Similar to using the `ggkegg` function with the `enrichResult` class, there is an `append_cp` function that can be used within the `mutate` function. By providing an `enrichResult` object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph.
+You can visualize the results of multiple enrichment analyses. Similar to using the `ggkegg` function with the `enrichResult` class, there is an `append_cp` function that can be used within the `mutate` function. By providing an `enrichResult` object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph. In this example, in addition to the changes in urothelial cells mentioned above, changes in renal proximal tubular epithelial cells are being compared ([Assetta et al. 2016](https://doi.org/10.1128/mbio.00903-16)).
 
 
 ```r
@@ -141,11 +141,11 @@ load("degURO.rda")
 
 library(org.Hs.eg.db);
 library(clusterProfiler);
-input_uro <- bitr(uroUp,
+input_uro <- bitr(uroUp, ## DEGs in urothelial cells
               fromType = "SYMBOL",
               toType = "ENTREZID",
               OrgDb = org.Hs.eg.db)$ENTREZID
-input_rptec <- bitr(gls$day3_up_rptec,
+input_rptec <- bitr(gls$day3_up_rptec, ## DEGs at 3 days post infection in RPTECs
               fromType = "SYMBOL",
               toType = "ENTREZID",
               OrgDb = org.Hs.eg.db)$ENTREZID
@@ -169,7 +169,7 @@ ggraph(g1, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;" />
 
-The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx`, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
+The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx` in yellow outer glow, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
 
 
 ```r
@@ -226,26 +226,38 @@ pg <- pathway("ko00650")
 joined <- combine_with_bnlearn(pg, returnnet$str, returnnet$av)
 ```
 
-Plot the resulting map. In this example, the strength estimated by CBNplot is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it.
+Plot the resulting map. In this example, the strength estimated by `CBNplot` is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it. Also, edges included in both graphs are highlighted by yellow.
 
 
 ```r
+## Summarize duplicate edges including `strength` attribute
+number <- joined |> activate(edges) |> data.frame() |> group_by(from,to) |>
+  summarise(n=n(), incstr=sum(!is.na(strength)))
+
+## Annotate them
+joined <- joined |> activate(edges) |> full_join(number) |> mutate(both=n>1&incstr>0)
+
 joined |> 
   activate(nodes) |>
+  filter(!is.na(type)) |>
   mutate(convertKO=convert_id("ko")) |>
   activate(edges) |>
   ggraph(x=x, y=y) +
-  geom_edge_link(width=2,aes(filter=!is.na(strength), color=strength),
-                 start_cap=circle(4,"mm"),
-                 end_cap=circle(4,"mm"))+
-  
-  geom_edge_link(
-    width=0.1, aes(filter=is.na(strength)),
-    start_cap=circle(4,"mm"),
-    end_cap=circle(4,"mm"))+
+  geom_edge_link0(width=0.5,aes(filter=!is.na(strength),
+                              color=strength), linetype=1)+
+  ggfx::with_outer_glow(
+    geom_edge_link0(width=0.5,aes(filter=!is.na(strength) & both,
+                                  color=strength), linetype=1),
+    colour="yellow", sigma=1, expand=1)+
+  geom_edge_link0(width=0.1, aes(filter=is.na(strength)))+
   scale_edge_color_gradient(low="blue",high="red")+
-  geom_node_rect(fill="white", color="black")+
-  geom_node_text(aes(label=convertKO), size=2)
+  geom_node_rect(color="black", aes(fill=type))+
+  geom_node_text(aes(label=convertKO), size=2)+
+  geom_node_text(aes(label=ifelse(grepl(":", graphics_name), strsplit(graphics_name, ":") |>
+                                    sapply("[",2) |> stringr::str_wrap(22), stringr::str_wrap(graphics_name, 22)),
+                     filter=!is.na(type) & type=="map"), family="serif",
+                 size=2, na.rm=TRUE)+
+  theme_void()
 ```
 
 <img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
