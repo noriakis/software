@@ -64,6 +64,41 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;" />
 
+```r
+
+## Adjusted p-values
+ggraph(g, layout="manual", x=x, y=y) + 
+  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+                 start_cap = square(1, 'cm'),
+                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+  geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
+  ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
+  scale_fill_gradient(name="padj")+
+  theme_void()
+```
+
+<img src="04-usecases_files/figure-html/deseq2-3.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+
+## Highlighting differentially expressed genes at adjusted p-values < 0.05 with coloring of adjusted p-values on raw KEGG map
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  geom_node_rect(aes(fill=padj, xmin=xmin+0.5, xmax=xmax,  filter=type=="gene"))+
+  ggfx::with_outer_glow(geom_node_rect(aes(fill=padj, xmin=xmin+0.5, xmax=xmax,  filter=!is.na(padj) & padj<0.05)),
+                        colour="yellow", expand=5)+
+  overlay_raw_map("hsa04110", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+  scale_fill_gradient(low="pink",high="steelblue") + theme_void()
+
+ggsave(file="tmp.png",gg,width=20,height=15,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/deseq2-4.png" width="100%" style="display: block; margin: auto;" />
+
+
+
+
+
 ## Integrating matrix to `tbl_graph`
 
 If you want to reflect an expression matrix in a graph, the `append_edge_value` and `append_node_value` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `append_edge_value` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
@@ -205,7 +240,6 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 
 <img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;" />
 
-
 ## Projecting the gene regulatory networks on KEGG map
 
 With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.
@@ -262,3 +296,182 @@ joined |>
 
 <img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Cluster marker genes in single-cell transcriptomics
+
+This package can also be applied to single-cell analysis. As an example, consider mapping marker genes between clusters onto KEGG pathways and plotting them together with reduced dimension plots. Here, we use the `Seurat` package. We conduct a fundamental analysis.
+
+
+```r
+library(Seurat)
+# dir = "../filtered_gene_bc_matrices/hg19"
+# pbmc.data <- Read10X(data.dir = dir)
+# pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k",
+#                            min.cells=3, min.features=200)
+# pbmc <- NormalizeData(pbmc)
+# pbmc <- FindVariableFeatures(pbmc, selection.method = "vst")
+# pbmc <- ScaleData(pbmc, features = row.names(pbmc))
+# pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
+# pbmc <- FindNeighbors(pbmc, dims = 1:10, verbose = FALSE)
+# pbmc <- FindClusters(pbmc, resolution = 0.5, verbose = FALSE)
+# pbmc <- RunUMAP(pbmc, dims = 1:10, umap.method = "uwot", metric = "cosine")
+# markers <- FindAllMarkers(pbmc)
+# save(pbmc, markers, file="../sc_data.rda")
+
+## To reduce file size, pre-calculated RDA will be loaded
+load("../sc_data.rda")
+```
+
+Subsequently, we employ the scplot to plot the results of dimensionality reduction using UMAP.  
+Among these, for the present study, we perform enrichment analysis on the marker genes of clusters 1 and 5.
+
+
+```r
+library(scplot)
+## scplot utilizes scattermore for rendering, in this instance, we override the highlighting by geom_node_point.
+dd <- sc_dim(pbmc) + 
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
+                        colour="tomato", expand=9)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
+                        colour="tomato", expand=9)+
+  sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
+                    color='black', bg.color='white')
+
+library(clusterProfiler)
+marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+marker_5 <- clusterProfiler::bitr((markers |> filter(cluster=="5" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+mk1_enrich <- enrichKEGG(marker_1)
+mk5_enrich <- enrichKEGG(marker_5)
+```
+
+Obtain the color information from `ggplot2` and obtain pathway using `ggkegg`. Here, we selected `Osteoclast differentiation (hsa04380)`, nodes are colored by `ggfx` according to the colors in the reduced dimension plot, and markers in both cluster are colored by the specified color (`tomato`). This facilitates the linkage between pathway information, such as KEGG, and single-cell analysis data, enabling the creation of intuitive and comprehensible visual representations.
+
+
+```r
+built <- ggplot_build(dd)$data[[1]]
+cols <- built$colour
+names(cols) <- as.character(as.numeric(built$group)-1)
+gr_cols <- cols[!duplicated(cols)]
+
+g <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
+                                   marker_5=append_cp(mk5_enrich))
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_1&marker_5, xmin=xmin+0.5),
+                   color="tomato", fill="white"), ## Marker 1 & 5
+    colour="tomato", expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_1&!marker_5, xmin=xmin+0.5),
+                   color=gr_cols["1"], fill="white"), ## Marker 1
+    colour=gr_cols["1"], expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_5&!marker_1, xmin=xmin+0.5),
+                   color=gr_cols["5"], fill="white"), ## Marker 5
+    colour=gr_cols["5"], expand=9)+
+  overlay_raw_map("hsa04380",
+                  transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+  theme_void()
+ggsave("tmp.png",
+       gg+dd+plot_layout(widths=c(0.7,0.3)),
+       width=20, height=6, dpi=300, units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/plot_sc-1.png" width="100%" style="display: block; margin: auto;" />
+
+Example for composing multiple pathways:
+
+
+```r
+
+dd <- sc_dim(pbmc) + 
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
+                        colour="tomato", expand=9)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
+                        colour="tomato", expand=9)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="4", color=ident)),
+                        colour="gold", expand=9)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="6", color=ident)),
+                        colour="gold", expand=9)+
+  sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
+                    color='black', bg.color='white')
+
+library(clusterProfiler)
+library(org.Hs.eg.db)
+marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+marker_5 <- clusterProfiler::bitr((markers |> filter(cluster=="5" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+marker_6 <- clusterProfiler::bitr((markers |> filter(cluster=="6" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+marker_4 <- clusterProfiler::bitr((markers |> filter(cluster=="4" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
+mk1_enrich <- enrichKEGG(marker_1)
+mk5_enrich <- enrichKEGG(marker_5)
+mk6_enrich <- enrichKEGG(marker_6)
+mk4_enrich <- enrichKEGG(marker_4)
+
+built <- ggplot_build(dd)$data[[1]]
+cols <- built$colour
+names(cols) <- as.character(as.numeric(built$group)-1)
+gr_cols <- cols[!duplicated(cols)]
+
+g1 <- pathway("hsa04612") |> mutate(marker_4=append_cp(mk4_enrich),
+                                   marker_6=append_cp(mk6_enrich))
+gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_4&marker_6, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color="gold", fill="white"),
+    colour="gold", expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_4&!marker_6, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color=gr_cols["4"], fill="white"),
+    colour=gr_cols["4"], expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_6&!marker_4, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color=gr_cols["6"], fill="white"),
+    colour=gr_cols["6"], expand=9)+
+  overlay_raw_map("hsa04612",
+                  transparent_colors = c("#b3b3b3",
+                                         "#cccccc",
+                                         "#FFFFFF",
+                                         "#BFBFFF",
+                                         "#BFFFBF"))+
+  theme_void()
+
+g2 <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
+                                   marker_5=append_cp(mk5_enrich))
+gg2 <- ggraph(g2, layout="manual", x=x, y=y)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_1&marker_5, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color="tomato", fill="white"), ## Marker 1 & 5
+    colour="tomato", expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_1&!marker_5, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color=gr_cols["1"], fill="white"), ## Marker 1
+    colour=gr_cols["1"], expand=9)+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_5&!marker_1, xmin=xmin+0.5, xmax=xmax+0.5),
+                   color=gr_cols["5"], fill="white"), ## Marker 5
+    colour=gr_cols["5"], expand=9)+
+  overlay_raw_map("hsa04380",
+                  transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+  theme_void()
+left <-  (gg2 + ggtitle("Marker 1 and 5")) /
+ (gg1 + ggtitle("Marker 4 and 6"))
+
+final <- left + dd + plot_layout(design="
+            AAAAA###
+            AAAAACCC
+            BBBBBCCC
+            BBBBB###
+            ")
+
+ggsave("tmp.png",
+       final,
+       width=15, height=10, dpi=300, units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;" />
