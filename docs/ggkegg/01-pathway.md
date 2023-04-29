@@ -16,7 +16,7 @@ library(dplyr)
 library(tidygraph)
 ```
 
-This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes returns the `igraph` object.
+This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the `igraph` object.
 
 
 ```r
@@ -142,7 +142,7 @@ pathway("ko01230") |>
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
 
-Also the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. Internally, `higlight_module_compound` and `highlight_module_reaction` are utilized, which add new columns to the tbl_graph with TRUE for nodes and edges that meet the respective conditions.
+We show the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. Internally, `higlight_module_compound` and `highlight_module_reaction` are utilized, which add new columns to the tbl_graph with `TRUE` for nodes and edges that meet the respective conditions.
 
 
 ```r
@@ -201,7 +201,7 @@ g |> ggraph(x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/text_compound-1.png" width="100%" style="display: block; margin: auto;" />
 
-If necessary, it is possible to visualize what information is included in the highlighted pathway and place it on the original map using the annotation_custom function. In this example, an annotation ggplot is first created and then converted to a grob using ggplotify. The grob is then drawn at any desired position.
+If necessary, it is possible to visualize what information is included in the highlighted pathway and place it on the original map using the `annotation_custom` function. In this example, an annotation ggplot is first created and then converted to a grob using `ggplotify`. The grob is then drawn at any desired position.
 
 
 ```r
@@ -246,7 +246,7 @@ g |>
 
 <img src="01-pathway_files/figure-html/annotation-1.png" width="100%" style="display: block; margin: auto;" />
 
-Of course, it is also possible to highlight any desired edges or nodes. In this case, the `highlight_set_edges` and `highlight_set_nodes` functions are used within `mutate` to generate a new column containing a boolean indicating whether the specified IDs are included or not. Then, it is possible to highlight those nodes or edges. When `how` is set to `all`, `TRUE` is returned only if all the IDs included in the query are included in the node. When `how` is set to `any`, `TRUE` is returned if any of the IDs included in the query are included in the node.
+It is also possible to highlight any desired edges or nodes. In this case, the `highlight_set_edges` and `highlight_set_nodes` functions are used within `mutate` to generate a new column containing a boolean indicating whether the specified IDs are included or not. We can highlight those nodes or edges in the desired geoms. When `how` is set to `all`, `TRUE` is returned only if all the IDs included in the query are included in the node. When `how` is set to `any`, `TRUE` is returned if any of the IDs included in the query are included in the node.
 
 
 ```r
@@ -262,7 +262,7 @@ gg |>
 
 <img src="01-pathway_files/figure-html/highlight_arb-1.png" width="100%" style="display: block; margin: auto;" />
 
-Or highlight combined with the `graphhighlight`:
+An example of highlighting combined with the `graphhighlight`:
 
 
 ```r
@@ -277,13 +277,13 @@ g |> ggraph(x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/graphhighlight-1.png" width="100%" style="display: block; margin: auto;" />
 
-When visualizing large maps such as Global and overview maps, it is better to use `geom_edge_link0`, as described in the documentation. Moreover, for nodes, combining the scattermore package's `geom_scattermore` with ggraph's `StatFilter` allows for faster rendering.
+When visualizing large maps such as global and overview maps, it is better to use `geom_edge_link0`, as described in the documentation of ggraph `geom_edge_*`. Moreover, for nodes, combining the scattermore package's `geom_scattermore` with ggraph's `StatFilter` allows for faster rendering.
 
 
 ```r
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
-  scattermore::geom_scattermore(pointsize=2, stat=StatFilter,
+  scattermore::geom_scattermore(pointsize=1, stat=StatFilter,
     aes(x=x, y=y, color=I(fgcolor),
     filter=type!="map"))
 ```
@@ -293,7 +293,7 @@ ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 1.541906 secs
+#> Time difference of 0.9408278 secs
 
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
@@ -306,7 +306,7 @@ ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 31.34744 secs
+#> Time difference of 23.97227 secs
 ```
 
 
@@ -367,6 +367,82 @@ ggraph(g, layout = "nicely") +
 ```
 
 <img src="01-pathway_files/figure-html/group-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Combining multiple pathways in their native layouts
+
+Combining multiple pathways using their native layouts is possible by mutating the nodes' positions or contracting multiple graphs.
+
+
+```r
+
+## Mutate X position for the first graph
+g1 <-pathway("ko00640")
+pos <- g1 |> activate(nodes) |> data.frame() |> summarise(min=min(y))
+g1_mut <- g1 |> activate(nodes) |> mutate(x=x/max(x))
+
+## Mutate Y position and x position for the second graph
+g2 <-pathway("ko00620")
+g2_mut <- g2 |> activate(nodes) |> mutate(y=y+pos$min, x=x/max(x))
+joined_raw <- graph_join(g1_mut, g2_mut)
+joined_name <- graph_join(g1_mut, g2_mut, by=c("name","x","y"))
+
+## Group by node names and take attribute of first rows
+## For edges, combine reaction
+newg <- joined_raw |>
+  convert(to_contracted, name) |>
+  activate(nodes) |>
+  mutate(purrr::map_vec(.orig_data, function(x) x[1,]))|>
+  activate(edges) |>
+  mutate(reaction=purrr::map_vec(.orig_data, 
+                                 function(x) paste0(unique(x$reaction),
+                                                    collapse=",")),
+         subtype=purrr::map_vec(.orig_data, 
+                                 function(x) unique(x$subtype)))
+```
+
+
+```r
+## Highlight the cpd:C00024 node for normal-joined, and contracted graph by name
+## Blue color indicates occurrence in both pathway
+
+## Normal joined
+joined_name |> morph(to_contracted, name) |> 
+  activate(nodes) |>
+  mutate(occ=purrr::map_vec(.orig_data, function(x) dim(x)[1])) |> 
+  unmorph() |>
+  ggraph(layout="manual", x=x, y=y) + 
+  geom_edge_link0(width=0.1, aes(color=subtype,
+                                 filter=subtype %in% c("substrate","product")))+
+  geom_node_point() +
+  geom_node_point(color="blue", aes(filter=occ>1))+
+  graphhighlight::highlight_node(filter=name=="cpd:C00024", glow=TRUE,
+                                 highlight_color = "red")+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/combine_plot-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+
+## Contracted
+newg |> 
+  activate(nodes) |> mutate(
+    ko=convert_id("ko"),
+    occ=purrr::map_vec(.orig_data, function(x) dim(x)[1])) |>
+ggraph(layout="manual", x=x, y=y) + 
+  geom_edge_link0(width=0.1, aes(color=subtype,
+                                 filter=subtype %in% c("substrate","product")))+
+  geom_node_point()+
+  geom_node_point(color="blue", aes(filter=occ>1)) + 
+  geom_node_point(color="red", aes(filter=name=="cpd:C00024"))+
+  graphhighlight::highlight_node(filter=name=="cpd:C00024", glow=TRUE,
+                                 highlight_color = "red")+
+  geom_node_text(size=1.5, family="serif", repel=TRUE, bg.colour="white",
+                 aes(label=ko, filter=type=="ortholog"))+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/combine_plot-2.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Visualize the result of `enrichKEGG`
