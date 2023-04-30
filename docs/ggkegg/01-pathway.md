@@ -447,7 +447,7 @@ ggraph(layout="manual", x=x, y=y) +
 
 ## Visualize the result of `enrichKEGG`
 
-The library can directly visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph.
+The library can directly visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph. For a quick inspection, `rawMap` function can be used for simply producing highlighted graph with overlaid KEGG raw map.
 
 
 ```r
@@ -478,3 +478,14 @@ enrichKEGG(de, pvalueCutoff=0.01) |>
 ```
 
 <img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+
+
+## Quick inspection
+res <- enrichKEGG(de, pvalueCutoff=0.01) |> rawMap()
+ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;" />

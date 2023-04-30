@@ -83,8 +83,8 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 ## Highlighting differentially expressed genes at adjusted p-values < 0.05 with coloring of adjusted p-values on raw KEGG map
 gg <- ggraph(g, layout="manual", x=x, y=y)+
-  geom_node_rect(aes(fill=padj, xmin=xmin+0.5, xmax=xmax,  filter=type=="gene"))+
-  ggfx::with_outer_glow(geom_node_rect(aes(fill=padj, xmin=xmin+0.5, xmax=xmax,  filter=!is.na(padj) & padj<0.05)),
+  geom_node_rect(aes(fill=padj, filter=type=="gene"))+
+  ggfx::with_outer_glow(geom_node_rect(aes(fill=padj, filter=!is.na(padj) & padj<0.05)),
                         colour="yellow", expand=5)+
   overlay_raw_map("hsa04110", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   scale_fill_gradient(low="pink",high="steelblue") + theme_void()
@@ -175,8 +175,8 @@ ggraph(g1, layout="manual", x=x, y=y) +
   geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
                  end_cap = square(1.5, 'cm'), aes(color=subtype))+
-  geom_node_rect(aes(fill=uro, xmin=xmin, xmax=x,  filter=type=="gene"))+
-  geom_node_rect(aes(fill=rptec, xmin=x, xmax=xmax, filter=type=="gene"))+
+  geom_node_rect(aes(fill=uro, xmax=x,  filter=type=="gene"))+
+  geom_node_rect(aes(fill=rptec, xmin=x, filter=type=="gene"))+
   scale_fill_manual(values=c("steelblue","tomato"), name="urothelial|rptec")+
   ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2), colour="white", expand=1)+
   theme_void()
@@ -198,11 +198,11 @@ g1 <- pathway("hsa03410") |>
         converted_name=convert_id("hsa"))
 gg <- ggraph(g1, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=uro&rptec, xmin=xmin+0.5),
+    geom_node_rect(aes(filter=uro&rptec),
                    color="gold", fill="transparent"),
     colour="gold", expand=15, sigma=10)+
-  geom_node_rect(aes(fill=uro, xmin=xmin+0.5, xmax=xmax,  filter=type=="gene"))+
-  geom_node_rect(aes(fill=rptec, xmin=x+0.5, xmax=xmax, filter=type=="gene")) +
+  geom_node_rect(aes(fill=uro, filter=type=="gene"))+
+  geom_node_rect(aes(fill=rptec, xmin=x, filter=type=="gene")) +
   overlay_raw_map("hsa03410", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   scale_fill_manual(values=c("steelblue","tomato"),
                     name="urothelial|rptec")+
@@ -338,15 +338,15 @@ g <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
                                    marker_5=append_cp(mk5_enrich))
 gg <- ggraph(g, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_1&marker_5, xmin=xmin+0.5),
+    geom_node_rect(aes(filter=marker_1&marker_5),
                    color="tomato", fill="white"), ## Marker 1 & 5
     colour="tomato", expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_1&!marker_5, xmin=xmin+0.5),
+    geom_node_rect(aes(filter=marker_1&!marker_5),
                    color=gr_cols["1"], fill="white"), ## Marker 1
     colour=gr_cols["1"], expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_5&!marker_1, xmin=xmin+0.5),
+    geom_node_rect(aes(filter=marker_5&!marker_1),
                    color=gr_cols["5"], fill="white"), ## Marker 5
     colour=gr_cols["5"], expand=9)+
   overlay_raw_map("hsa04380",
@@ -401,15 +401,15 @@ g1 <- pathway("hsa04612") |> mutate(marker_4=append_cp(mk4_enrich),
                                    marker_6=append_cp(mk6_enrich))
 gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_4&marker_6, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_4&marker_6),
                    color="gold", fill="white"),
     colour="gold", expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_4&!marker_6, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_4&!marker_6),
                    color=gr_cols["4"], fill="white"),
     colour=gr_cols["4"], expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_6&!marker_4, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_6&!marker_4),
                    color=gr_cols["6"], fill="white"),
     colour=gr_cols["6"], expand=9)+
   overlay_raw_map("hsa04612",
@@ -424,15 +424,15 @@ g2 <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
                                    marker_5=append_cp(mk5_enrich))
 gg2 <- ggraph(g2, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_1&marker_5, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_1&marker_5),
                    color="tomato", fill="white"), ## Marker 1 & 5
     colour="tomato", expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_1&!marker_5, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_1&!marker_5),
                    color=gr_cols["1"], fill="white"), ## Marker 1
     colour=gr_cols["1"], expand=9)+
   ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_5&!marker_1, xmin=xmin+0.5, xmax=xmax+0.5),
+    geom_node_rect(aes(filter=marker_5&!marker_1),
                    color=gr_cols["5"], fill="white"), ## Marker 5
     colour=gr_cols["5"], expand=9)+
   overlay_raw_map("hsa04380",
