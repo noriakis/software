@@ -142,7 +142,7 @@ pathway("ko01230") |>
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
 
-We show the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. Internally, `higlight_module_compound` and `highlight_module_reaction` are utilized, which add new columns to the tbl_graph with `TRUE` for nodes and edges that meet the respective conditions.
+We show the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. This adds new columns to the tbl_graph with `TRUE` for nodes and edges that meet the respective conditions.
 
 
 ```r
@@ -150,6 +150,110 @@ g <- pathway("ko01100") |>
   process_line() |>
   highlight_module(module("M00021")) |>
   mutate(compound=convert_id("compound"))
+#> [1] "R00586"
+#> [1] "subst cpd:C00979 modleft cpd:C00065"
+#> [1] "prod cpd:C00065 modright cpd:C00979"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
+#> [1] "R00897"
+#> [1] "subst cpd:C00283 modleft cpd:C00979"
+#> [2] "subst cpd:C00979 modleft cpd:C00283"
+#> [1] "prod cpd:C00097 modright cpd:C00097"
+#> [1] "==="
 
 g |> ggraph(x=x, y=y) +
   geom_node_point(size=1, aes(color=I(fgcolor),
@@ -172,6 +276,33 @@ g |> ggraph(x=x, y=y) +
 ```
 
 <img src="01-pathway_files/figure-html/highlight_example2-1.png" width="100%" style="display: block; margin: auto;" />
+
+Multiple modules involved in Cysteine and methionine metabolism, highlighting `M00017` by `ggforce`.
+
+
+```r
+list_of_modules <- c("M00021","M00338","M00609","M00017","M00034","M00035","M00368")
+for (mm in list_of_modules) {
+  g <- g |> highlight_module(module(mm))
+}
+
+ggraph(g,x=x,y=y,layout="manual") +
+  geom_edge_link0(width=0.5, color="grey")+
+  geom_edge_link(color="red",aes(filter=M00017|M00021|M00338|M00609|M00034|M00035|M00368))+
+geom_node_point(size=2, color="red",aes(filter=M00017|M00021|M00338|M00609|M00034|M00035|M00368))+
+  ggforce::geom_mark_rect(aes(fill=M00017,
+                              label=module("M00017")@name,
+                              x=x, y=y,
+                              group=M00017,
+                              filter=M00017),
+                          label.fill = "transparent",
+                          label.fontsize = 10,
+                          expand=unit(1,"mm"))+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/highlight_example3-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 When visualizing information about compounds, it is recommended to use `geom_node_text`, `ggrepel`, and `shadowtext`.
 

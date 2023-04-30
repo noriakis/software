@@ -104,7 +104,7 @@ https://doi.org/10.1186/s12859-020-03692-2)).
 
 ```r
 mat <- assay(vst(res))
-new_g <- g |> append_edge_value(mat) |> append_node_value(mat)
+new_g <- g |> edge_matrix(mat) |> node_matrix(mat)
 new_g
 #> # A tbl_graph: 134 nodes and 157 edges
 #> #
