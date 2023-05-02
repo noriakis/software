@@ -139,12 +139,50 @@
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/draw_image.html">draw_image</a></span><span class="op">(</span><span class="st">"tmp.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2-4.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="integrating-matrix-to-tbl_graph" class="section level2" number="5.2">
+<div id="integrating-numeric-vector-to-tbl_graph" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">5.2</span> Integrating matrix to <code>tbl_graph</code><a class="anchor" aria-label="anchor" href="#integrating-matrix-to-tbl_graph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Integrating numeric vector to <code>tbl_graph</code><a class="anchor" aria-label="anchor" href="#integrating-numeric-vector-to-tbl_graph"><i class="fas fa-link"></i></a>
+</h2>
+<p>Numerical values can be reflected in node or edge tables, utilizing either the <code>node_numeric</code> or <code>edge_numeric</code> functions. The input can be a named vector or a tibble containing id and value columns.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vec</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa:51343"</span><span class="op">)</span></span>
+<span><span class="va">new_g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>num<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/node_numeric.html">node_numeric</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">new_g</span></span>
+<span><span class="co">#&gt; # A tbl_graph: 134 nodes and 157 edges</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # A directed acyclic multigraph with 40 components</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # Node Data: 134 × 22 (active)</span></span>
+<span><span class="co">#&gt;   name  type  reacti… graphi…     x     y width height</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 hsa:… gene  &lt;NA&gt;    CDKN2A…   532  -218    46     17</span></span>
+<span><span class="co">#&gt; 2 hsa:… gene  &lt;NA&gt;    FZR1, …   981  -630    46     17</span></span>
+<span><span class="co">#&gt; 3 hsa:… gene  &lt;NA&gt;    MCM2, …   553  -681    46     17</span></span>
+<span><span class="co">#&gt; 4 hsa:… gene  &lt;NA&gt;    ORC6, …   494  -681    46     17</span></span>
+<span><span class="co">#&gt; 5 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -392    46     17</span></span>
+<span><span class="co">#&gt; 6 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -613    46     17</span></span>
+<span><span class="co">#&gt; # … with 128 more rows, and 14 more variables:</span></span>
+<span><span class="co">#&gt; #   fgcolor &lt;chr&gt;, bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   coords &lt;chr&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   ymax &lt;dbl&gt;, orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   deseq2 &lt;dbl&gt;, padj &lt;dbl&gt;, converted_name &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   num &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; #</span></span>
+<span><span class="co">#&gt; # Edge Data: 157 × 4</span></span>
+<span><span class="co">#&gt;    from    to type  subtype        </span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          </span></span>
+<span><span class="co">#&gt; 1   118    39 GErel expression     </span></span>
+<span><span class="co">#&gt; 2    50    61 PPrel inhibition     </span></span>
+<span><span class="co">#&gt; 3    50    61 PPrel phosphorylation</span></span>
+<span><span class="co">#&gt; # … with 154 more rows</span></span></code></pre></div>
+</div>
+<div id="integrating-matrix-to-tbl_graph" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Integrating matrix to <code>tbl_graph</code><a class="anchor" aria-label="anchor" href="#integrating-matrix-to-tbl_graph"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you want to reflect an expression matrix in a graph, the <code>edge_matrix</code> and <code>node_matrix</code> functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the <code>tbl_graph</code>. <code>edge_matrix</code> assigns the sum of the two nodes connected by an edge, ignoring group nodes (<a href="https://doi.org/10.1186/s12859-020-03692-2">Adnan et al. 2020</a>).</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html">assay</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/DESeq2/man/vst.html">vst</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">new_g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/edge_matrix.html">edge_matrix</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/node_matrix.html">node_matrix</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span><span class="va">new_g</span></span>
@@ -200,12 +238,12 @@
 <span><span class="co">#&gt; #   SRR14509904 &lt;dbl&gt;, SRR14509905 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509906 &lt;dbl&gt;, SRR14509907 &lt;dbl&gt;</span></span></code></pre></div>
 </div>
-<div id="visualizing-multiple-enrichment-results" class="section level2" number="5.3">
+<div id="visualizing-multiple-enrichment-results" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">5.3</span> Visualizing multiple enrichment results<a class="anchor" aria-label="anchor" href="#visualizing-multiple-enrichment-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Visualizing multiple enrichment results<a class="anchor" aria-label="anchor" href="#visualizing-multiple-enrichment-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can visualize the results of multiple enrichment analyses. Similar to using the <code>ggkegg</code> function with the <code>enrichResult</code> class, there is an <code>append_cp</code> function that can be used within the <code>mutate</code> function. By providing an <code>enrichResult</code> object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph. In this example, in addition to the changes in urothelial cells mentioned above, changes in renal proximal tubular epithelial cells are being compared (<a href="https://doi.org/10.1128/mbio.00903-16">Assetta et al. 2016</a>).</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## These are RDAs storing DEGs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"degListRPTEC.rda"</span><span class="op">)</span></span>
@@ -239,7 +277,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using <code>ggfx</code> in yellow outer glow, with composing <code>dotplot</code> produced by clusterProfiler for the enrichment results by <code>patchwork</code>.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="va">right</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ekuro</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Urothelial"</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ekrptec</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"RPTECs"</span><span class="op">)</span><span class="op">)</span></span>
@@ -270,12 +308,12 @@
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/draw_image.html">draw_image</a></span><span class="op">(</span><span class="st">"tmp.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="projecting-the-gene-regulatory-networks-on-kegg-map" class="section level2" number="5.4">
+<div id="projecting-the-gene-regulatory-networks-on-kegg-map" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">5.4</span> Projecting the gene regulatory networks on KEGG map<a class="anchor" aria-label="anchor" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Projecting the gene regulatory networks on KEGG map<a class="anchor" aria-label="anchor" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><i class="fas fa-link"></i></a>
 </h2>
 <p>With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using <code>MicrobiomeProfiler</code>. Of course, it is also possible to project networks created using other methods.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
@@ -289,7 +327,7 @@
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00650"</span><span class="op">)</span></span>
 <span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/combine_with_bnlearn.html">combine_with_bnlearn</a></span><span class="op">(</span><span class="va">pg</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">str</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">av</span><span class="op">)</span></span></code></pre></div>
 <p>Plot the resulting map. In this example, the strength estimated by <code>CBNplot</code> is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it. Also, edges included in both graphs are highlighted by yellow.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Summarize duplicate edges including `strength` attribute</span></span>
 <span><span class="va">number</span> <span class="op">&lt;-</span> <span class="va">joined</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">from</span>,<span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, incstr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -320,12 +358,12 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="cluster-marker-genes-in-single-cell-transcriptomics" class="section level2" number="5.5">
+<div id="cluster-marker-genes-in-single-cell-transcriptomics" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">5.5</span> Cluster marker genes in single-cell transcriptomics<a class="anchor" aria-label="anchor" href="#cluster-marker-genes-in-single-cell-transcriptomics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Cluster marker genes in single-cell transcriptomics<a class="anchor" aria-label="anchor" href="#cluster-marker-genes-in-single-cell-transcriptomics"><i class="fas fa-link"></i></a>
 </h2>
 <p>This package can also be applied to single-cell analysis. As an example, consider mapping marker genes between clusters onto KEGG pathways and plotting them together with reduced dimension plots. Here, we use the <code>Seurat</code> package. We conduct a fundamental analysis.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></span>
 <span><span class="co"># dir = "../filtered_gene_bc_matrices/hg19"</span></span>
 <span><span class="co"># pbmc.data &lt;- Read10X(data.dir = dir)</span></span>
@@ -345,7 +383,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../sc_data.rda"</span><span class="op">)</span></span></code></pre></div>
 <p>Subsequently, we employ the scplot to plot the results of dimensionality reduction using UMAP.<br>
 Among these, for the present study, we perform enrichment analysis on the marker genes of clusters 1 and 5.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scplot</span><span class="op">)</span></span>
 <span><span class="co">## scplot utilizes scattermore for rendering, in this instance, we override the highlighting by geom_node_point.</span></span>
 <span><span class="va">dd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -364,7 +402,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span><span class="va">mk1_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">marker_1</span><span class="op">)</span></span>
 <span><span class="va">mk5_enrich</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">marker_5</span><span class="op">)</span></span></code></pre></div>
 <p>Obtain the color information from <code>ggplot2</code> and obtain pathway using <code>ggkegg</code>. Here, we selected <code>Osteoclast differentiation (hsa04380)</code>, nodes are colored by <code>ggfx</code> according to the colors in the reduced dimension plot, and markers in both cluster are colored by the specified color (<code>tomato</code>). This facilitates the linkage between pathway information, such as KEGG, and single-cell analysis data, enabling the creation of intuitive and comprehensible visual representations.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">built</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot_build.html">ggplot_build</a></span><span class="op">(</span><span class="va">dd</span><span class="op">)</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="va">built</span><span class="op">$</span><span class="va">colour</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">cols</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">built</span><span class="op">$</span><span class="va">group</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
@@ -394,7 +432,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/draw_image.html">draw_image</a></span><span class="op">(</span><span class="st">"tmp.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Example for composing multiple pathways:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">dd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">UMAP_1</span>, y<span class="op">=</span><span class="va">UMAP_2</span>, filter<span class="op">=</span><span class="va">ident</span><span class="op">==</span><span class="st">"1"</span>, color<span class="op">=</span><span class="va">ident</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -495,10 +533,11 @@ Among these, for the present study, we perform enrichment analysis on the marker
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#usecases"><span class="header-section-number">5</span> Usecases</a></li>
 <li><a class="nav-link" href="#visualizing-numerical-attributes-from-deseq2"><span class="header-section-number">5.1</span> Visualizing numerical attributes from DESeq2</a></li>
-<li><a class="nav-link" href="#integrating-matrix-to-tbl_graph"><span class="header-section-number">5.2</span> Integrating matrix to tbl_graph</a></li>
-<li><a class="nav-link" href="#visualizing-multiple-enrichment-results"><span class="header-section-number">5.3</span> Visualizing multiple enrichment results</a></li>
-<li><a class="nav-link" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><span class="header-section-number">5.4</span> Projecting the gene regulatory networks on KEGG map</a></li>
-<li><a class="nav-link" href="#cluster-marker-genes-in-single-cell-transcriptomics"><span class="header-section-number">5.5</span> Cluster marker genes in single-cell transcriptomics</a></li>
+<li><a class="nav-link" href="#integrating-numeric-vector-to-tbl_graph"><span class="header-section-number">5.2</span> Integrating numeric vector to tbl_graph</a></li>
+<li><a class="nav-link" href="#integrating-matrix-to-tbl_graph"><span class="header-section-number">5.3</span> Integrating matrix to tbl_graph</a></li>
+<li><a class="nav-link" href="#visualizing-multiple-enrichment-results"><span class="header-section-number">5.4</span> Visualizing multiple enrichment results</a></li>
+<li><a class="nav-link" href="#projecting-the-gene-regulatory-networks-on-kegg-map"><span class="header-section-number">5.5</span> Projecting the gene regulatory networks on KEGG map</a></li>
+<li><a class="nav-link" href="#cluster-marker-genes-in-single-cell-transcriptomics"><span class="header-section-number">5.6</span> Cluster marker genes in single-cell transcriptomics</a></li>
 </ul>
 
       <div class="book-extra">

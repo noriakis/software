@@ -16,6 +16,7 @@ network
 combining-multiple-networks
 usecases
 visualizing-numerical-attributes-from-deseq2
+integrating-numeric-vector-to-tbl_graph
 integrating-matrix-to-tbl_graph
 visualizing-multiple-enrichment-results
 projecting-the-gene-regulatory-networks-on-kegg-map

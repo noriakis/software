@@ -96,6 +96,45 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 <img src="04-usecases_files/figure-html/deseq2-4.png" width="100%" style="display: block; margin: auto;" />
 
 
+## Integrating numeric vector to `tbl_graph`
+
+Numerical values can be reflected in node or edge tables, utilizing either the `node_numeric` or `edge_numeric` functions. The input can be a named vector or a tibble containing id and value columns.
+
+
+```r
+vec <- 1
+names(vec) <- c("hsa:51343")
+new_g <- g |> mutate(num=node_numeric(vec))
+new_g
+#> # A tbl_graph: 134 nodes and 157 edges
+#> #
+#> # A directed acyclic multigraph with 40 components
+#> #
+#> # Node Data: 134 × 22 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 14 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
+#> #   num <dbl>
+#> #
+#> # Edge Data: 157 × 4
+#>    from    to type  subtype        
+#>   <int> <int> <chr> <chr>          
+#> 1   118    39 GErel expression     
+#> 2    50    61 PPrel inhibition     
+#> 3    50    61 PPrel phosphorylation
+#> # … with 154 more rows
+```
+
 ## Integrating matrix to `tbl_graph`
 
 If you want to reflect an expression matrix in a graph, the `edge_matrix` and `node_matrix` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `edge_matrix` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
