@@ -1,5 +1,4 @@
 about
-list-of-functions-merging-external-information
 pathway
 geom_node_rect
 assigning-colors-to-nodes

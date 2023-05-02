@@ -31,7 +31,7 @@ two
 #> #
 #> # A rooted tree
 #> #
-#> # A tibble: 6 × 3
+#> # Node Data: 6 × 3 (active)
 #>   name     network_name                          network_ID
 #>   <chr>    <chr>                                 <chr>     
 #> 1 E5       HPV E5 to EGFR-PI3K signaling pathway N00366    
@@ -41,13 +41,13 @@ two
 #> 5 PIP3     HPV E5 to EGFR-PI3K signaling pathway N00366    
 #> 6 AKT      HPV E5 to EGFR-PI3K signaling pathway N00366    
 #> #
-#> # A tibble: 5 × 4
+#> # Edge Data: 5 × 4
 #>    from    to type  subtype  
 #>   <int> <int> <chr> <chr>    
 #> 1     1     2 -|    reference
 #> 2     2     3 -|    reference
 #> 3     3     4 ->    reference
-#> # ℹ 2 more rows
+#> # … with 2 more rows
 graph_join(one, two, by="name") |> plot_kegg_network()
 ```
 
