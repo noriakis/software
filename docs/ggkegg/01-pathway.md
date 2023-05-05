@@ -471,6 +471,29 @@ ggraph(layout="manual", x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/combine_plot-2.png" width="100%" style="display: block; margin: auto;" />
 
+### `multi_pathway_native`
+
+By employing the `multi_pathway_native` function, one can array multiple native KGML layouts on a panel. In conjunction with `to_contracted`, it becomes feasible to examine the relationships of genes across various pathways.
+
+
+```r
+pathways <- c("hsa04110","hsa03460")
+multig <- multi_pathway_native(pathways, row_num=2)
+#> [1] "1 1"
+#> [1] "2 1"
+
+multig |>
+  ggraph(layout="manual", x=x, y=y)+
+  geom_edge_link(alpha=0.2,
+                 arrow=arrow(length=unit(1,"mm")),
+                 start_cap=circle(5,"mm"),
+                 end_cap=circle(5,"mm"))+
+  geom_node_point(aes(color=pathway_id))+
+  theme_void()
+```
+
+<img src="01-pathway_files/figure-html/nativepanel-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Visualize the result of `enrichKEGG`
 
