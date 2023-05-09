@@ -103,7 +103,7 @@ The <code>pathway</code> function is a core function that downloads and parses K
 <p>The x-coordinate, y-coordinate, width, and height described in the KGML are listed as x, y, width, and height. Based on this information, xmin, xmax, ymin, and ymax are calculated and stored in the node table.</p>
 <div id="geom_node_rect" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> geom_node_rect<a class="anchor" aria-label="anchor" href="#geom_node_rect"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> <code>geom_node_rect</code><a class="anchor" aria-label="anchor" href="#geom_node_rect"><i class="fas fa-link"></i></a>
 </h2>
 <p>This package also provides the <code>geom_node_rect</code> function, which allows drawing rectangles at specified locations based on mappings of xmin, xmax, ymin, and ymax.</p>
 <div id="assigning-colors-to-nodes" class="section level3" number="2.1.1">
@@ -152,9 +152,15 @@ The <code>pathway</code> function is a core function that downloads and parses K
 <div class="inline-figure"><img src="01-pathway_files/figure-html/assign_color2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="highlighting-set-of-nodes-and-edges" class="section level2" number="2.2">
+<div id="geom_node_shadowtext" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> <code>geom_node_shadowtext</code><a class="anchor" aria-label="anchor" href="#geom_node_shadowtext"><i class="fas fa-link"></i></a>
+</h2>
+<p>Plot the shadowtext at the <code>x</code> and <code>y</code> position without enabling <code>repel=TRUE</code> in <code>geom_node_text</code>.</p>
+</div>
+<div id="highlighting-set-of-nodes-and-edges" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Highlighting set of nodes and edges<a class="anchor" aria-label="anchor" href="#highlighting-set-of-nodes-and-edges"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you want to obtain <code>ko01230</code>, and highlight those components
 involved in <code>M00002</code>, and show the corresponding compound names in the map,
@@ -306,7 +312,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span><span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.5</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>, filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">1</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>, filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">"none"</span> <span class="op">&amp;</span> <span class="va">type</span><span class="op">!=</span><span class="st">"line"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/graphhighlight/man/highlight_node.html">highlight_node</a></span><span class="op">(</span>glow<span class="op">=</span><span class="cn">TRUE</span>, filter<span class="op">=</span><span class="st">"fgcolor!='none' &amp; type!='line'"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/graphhighlight/man/highlight_node.html">highlight_node</a></span><span class="op">(</span>glow<span class="op">=</span><span class="cn">TRUE</span>, filter<span class="op">=</span><span class="va">fgcolor</span><span class="op">!=</span><span class="st">'none'</span> <span class="op">&amp;</span> <span class="va">type</span><span class="op">!=</span><span class="st">'line'</span>,</span>
 <span>                 glow_base_size<span class="op">=</span><span class="cn">TRUE</span>,glow_size<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/graphhighlight-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -321,7 +327,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ed</span><span class="op">-</span><span class="va">st</span></span>
-<span><span class="co">#&gt; Time difference of 0.9408278 secs</span></span>
+<span><span class="co">#&gt; Time difference of 1.315602 secs</span></span>
 <span></span>
 <span><span class="va">st</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -331,11 +337,11 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">ed</span><span class="op">-</span><span class="va">st</span></span>
-<span><span class="co">#&gt; Time difference of 23.97227 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; Time difference of 38.22705 secs</span></span></code></pre></div>
 </div>
-<div id="overlaying-original-kegg-pathway-images-on-ggraph" class="section level2" number="2.3">
+<div id="overlaying-original-kegg-pathway-images-on-ggraph" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">2.3</span> Overlaying original KEGG pathway images on ggraph<a class="anchor" aria-label="anchor" href="#overlaying-original-kegg-pathway-images-on-ggraph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Overlaying original KEGG pathway images on ggraph<a class="anchor" aria-label="anchor" href="#overlaying-original-kegg-pathway-images-on-ggraph"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>magick</code>, you can overlay the original KEGG pathway image on the graph you made (or add components on the original image). The package provides overlay_raw_map function, which allows mapping a raster image onto the graph by specifying the pathway ID and the color to be made transparent.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -363,9 +369,9 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/draw_image.html">draw_image</a></span><span class="op">(</span><span class="st">"tmp.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/raster2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="group-of-nodes" class="section level2" number="2.4">
+<div id="group-of-nodes" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.4</span> Group of nodes<a class="anchor" aria-label="anchor" href="#group-of-nodes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Group of nodes<a class="anchor" aria-label="anchor" href="#group-of-nodes"><i class="fas fa-link"></i></a>
 </h2>
 <p>The groups are specified in the KGML with type=“group”. The pathway function adds edges linking the group ID and component ID, allowing the visualization of groups in the layout other than those specified in the KGML. The edges mentioned are specified with the type <code>in_group</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -381,9 +387,9 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/group-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="combining-multiple-pathways-in-their-native-layouts" class="section level2" number="2.5">
+<div id="combining-multiple-pathways-in-their-native-layouts" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.5</span> Combining multiple pathways in their native layouts<a class="anchor" aria-label="anchor" href="#combining-multiple-pathways-in-their-native-layouts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Combining multiple pathways in their native layouts<a class="anchor" aria-label="anchor" href="#combining-multiple-pathways-in-their-native-layouts"><i class="fas fa-link"></i></a>
 </h2>
 <p>Combining multiple pathways using their native layouts is possible by mutating the nodes’ positions or contracting multiple graphs.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
@@ -448,16 +454,14 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>                 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">ko</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/combine_plot-2.png" width="100%" style="display: block; margin: auto;"></div>
-<div id="multi_pathway_native" class="section level3" number="2.5.1">
+<div id="multi_pathway_native" class="section level3" number="2.6.1">
 <h3>
-<span class="header-section-number">2.5.1</span> <code>multi_pathway_native</code><a class="anchor" aria-label="anchor" href="#multi_pathway_native"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6.1</span> <code>multi_pathway_native</code><a class="anchor" aria-label="anchor" href="#multi_pathway_native"><i class="fas fa-link"></i></a>
 </h3>
 <p>By employing the <code>multi_pathway_native</code> function, one can array multiple native KGML layouts on a panel. In conjunction with <code>to_contracted</code>, it becomes feasible to examine the relationships of genes across various pathways.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04110"</span>,<span class="st">"hsa03460"</span><span class="op">)</span></span>
 <span><span class="va">multig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/multi_pathway_native.html">multi_pathway_native</a></span><span class="op">(</span><span class="va">pathways</span>, row_num<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "1 1"</span></span>
-<span><span class="co">#&gt; [1] "2 1"</span></span>
 <span></span>
 <span><span class="va">multig</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
@@ -470,9 +474,9 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <div class="inline-figure"><img src="01-pathway_files/figure-html/nativepanel-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="visualize-the-result-of-enrichkegg" class="section level2" number="2.6">
+<div id="visualize-the-result-of-enrichkegg" class="section level2" number="2.7">
 <h2>
-<span class="header-section-number">2.6</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Visualize the result of <code>enrichKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>The library can directly visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> will have boolean value whether the investigated gene is in pathway or not. By piping a <code>enrichResult</code> class object and <code>pathway_number</code> to <code>ggkegg</code>, <code>enrich_attribute</code> will be included in the resulting graph. Highlight <code>enrich_attribute</code> in the resulting graph. For a quick inspection, <code>rawMap</code> function can be used for simply producing highlighted graph with overlaid KEGG raw map.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -522,13 +526,14 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <li>
 <a class="nav-link" href="#geom_node_rect"><span class="header-section-number">2.1</span> geom_node_rect</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#assigning-colors-to-nodes"><span class="header-section-number">2.1.1</span> Assigning colors to nodes</a></li></ul>
 </li>
-<li><a class="nav-link" href="#highlighting-set-of-nodes-and-edges"><span class="header-section-number">2.2</span> Highlighting set of nodes and edges</a></li>
-<li><a class="nav-link" href="#overlaying-original-kegg-pathway-images-on-ggraph"><span class="header-section-number">2.3</span> Overlaying original KEGG pathway images on ggraph</a></li>
-<li><a class="nav-link" href="#group-of-nodes"><span class="header-section-number">2.4</span> Group of nodes</a></li>
+<li><a class="nav-link" href="#geom_node_shadowtext"><span class="header-section-number">2.2</span> geom_node_shadowtext</a></li>
+<li><a class="nav-link" href="#highlighting-set-of-nodes-and-edges"><span class="header-section-number">2.3</span> Highlighting set of nodes and edges</a></li>
+<li><a class="nav-link" href="#overlaying-original-kegg-pathway-images-on-ggraph"><span class="header-section-number">2.4</span> Overlaying original KEGG pathway images on ggraph</a></li>
+<li><a class="nav-link" href="#group-of-nodes"><span class="header-section-number">2.5</span> Group of nodes</a></li>
 <li>
-<a class="nav-link" href="#combining-multiple-pathways-in-their-native-layouts"><span class="header-section-number">2.5</span> Combining multiple pathways in their native layouts</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#multi_pathway_native"><span class="header-section-number">2.5.1</span> multi_pathway_native</a></li></ul>
+<a class="nav-link" href="#combining-multiple-pathways-in-their-native-layouts"><span class="header-section-number">2.6</span> Combining multiple pathways in their native layouts</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#multi_pathway_native"><span class="header-section-number">2.6.1</span> multi_pathway_native</a></li></ul>
 </li>
-<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">2.6</span> Visualize the result of enrichKEGG</a></li>
+<li><a class="nav-link" href="#visualize-the-result-of-enrichkegg"><span class="header-section-number">2.7</span> Visualize the result of enrichKEGG</a></li>
 </ul>
 
       <div class="book-extra">
@@ -545,7 +550,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-05-05.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-05-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

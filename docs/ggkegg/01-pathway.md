@@ -54,7 +54,7 @@ gg + geom_edge_diagonal(
 
 The x-coordinate, y-coordinate, width, and height described in the KGML are listed as x, y, width, and height. Based on this information, xmin, xmax, ymin, and ymax are calculated and stored in the node table.
 
-## geom_node_rect
+## `geom_node_rect`
 
 This package also provides the `geom_node_rect` function, which allows drawing rectangles at specified locations based on mappings of xmin, xmax, ymin, and ymax.
 
@@ -110,6 +110,9 @@ ggraph(g, x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/assign_color2-1.png" width="100%" style="display: block; margin: auto;" />
 
+## `geom_node_shadowtext`
+
+Plot the shadowtext at the `x` and `y` position without enabling `repel=TRUE` in `geom_node_text`.
 
 
 ## Highlighting set of nodes and edges
@@ -297,7 +300,7 @@ library(graphhighlight)
 g |> ggraph(x=x, y=y) +
   geom_edge_link(width=0.5, aes(color=I(fgcolor), filter=fgcolor!="none")) +
   geom_node_point(size=1, aes(color=I(fgcolor), filter=fgcolor!="none" & type!="line"))+
-  highlight_node(glow=TRUE, filter="fgcolor!='none' & type!='line'",
+  highlight_node(glow=TRUE, filter=fgcolor!='none' & type!='line',
                  glow_base_size=TRUE,glow_size=0.5)+
   theme_void()
 ```
@@ -320,7 +323,7 @@ ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 0.9408278 secs
+#> Time difference of 1.315602 secs
 
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
@@ -333,7 +336,7 @@ ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 23.97227 secs
+#> Time difference of 38.22705 secs
 ```
 
 
@@ -479,8 +482,6 @@ By employing the `multi_pathway_native` function, one can array multiple native 
 ```r
 pathways <- c("hsa04110","hsa03460")
 multig <- multi_pathway_native(pathways, row_num=2)
-#> [1] "1 1"
-#> [1] "2 1"
 
 multig |>
   ggraph(layout="manual", x=x, y=y)+

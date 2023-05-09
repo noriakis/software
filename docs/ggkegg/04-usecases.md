@@ -126,12 +126,12 @@ new_g
 #> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
 #> #   padj <dbl>, converted_name <chr>, num <dbl>
 #> #
-#> # A tibble: 157 × 4
-#>    from    to type  subtype        
-#>   <int> <int> <chr> <chr>          
-#> 1   118    39 GErel expression     
-#> 2    50    61 PPrel inhibition     
-#> 3    50    61 PPrel phosphorylation
+#> # A tibble: 157 × 5
+#>    from    to type  subtype         pathway_id
+#>   <int> <int> <chr> <chr>           <chr>     
+#> 1   118    39 GErel expression      hsa04110  
+#> 2    50    61 PPrel inhibition      hsa04110  
+#> 3    50    61 PPrel phosphorylation hsa04110  
 #> # ℹ 154 more rows
 ```
 
@@ -166,19 +166,19 @@ new_g
 #> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
 #> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
 #> #
-#> # A tibble: 157 × 32
-#>    from    to type  subtype        from_nd to_nd SRR14509882
-#>   <int> <int> <chr> <chr>          <chr>   <chr>       <dbl>
-#> 1   118    39 GErel expression     undefi… hsa:…        NA  
-#> 2    50    61 PPrel inhibition     hsa:29… hsa:…        24.4
-#> 3    50    61 PPrel phosphorylati… hsa:29… hsa:…        24.4
+#> # A tibble: 157 × 33
+#>    from    to type  subtype         pathway_id from_nd to_nd
+#>   <int> <int> <chr> <chr>           <chr>      <chr>   <chr>
+#> 1   118    39 GErel expression      hsa04110   undefi… hsa:…
+#> 2    50    61 PPrel inhibition      hsa04110   hsa:29… hsa:…
+#> 3    50    61 PPrel phosphorylation hsa04110   hsa:29… hsa:…
 #> # ℹ 154 more rows
-#> # ℹ 25 more variables: SRR14509883 <dbl>,
-#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
-#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
-#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
-#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
-#> #   SRR14509892 <dbl>, SRR14509893 <dbl>, …
+#> # ℹ 26 more variables: SRR14509882 <dbl>,
+#> #   SRR14509883 <dbl>, SRR14509884 <dbl>,
+#> #   SRR14509885 <dbl>, SRR14509886 <dbl>,
+#> #   SRR14509887 <dbl>, SRR14509888 <dbl>,
+#> #   SRR14509889 <dbl>, SRR14509890 <dbl>,
+#> #   SRR14509891 <dbl>, SRR14509892 <dbl>, …
 ```
 
 

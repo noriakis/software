@@ -169,12 +169,12 @@
 <span><span class="co">#&gt; #   orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;, deseq2 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, num &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 157 × 4</span></span>
-<span><span class="co">#&gt;    from    to type  subtype        </span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          </span></span>
-<span><span class="co">#&gt; 1   118    39 GErel expression     </span></span>
-<span><span class="co">#&gt; 2    50    61 PPrel inhibition     </span></span>
-<span><span class="co">#&gt; 3    50    61 PPrel phosphorylation</span></span>
+<span><span class="co">#&gt; # A tibble: 157 × 5</span></span>
+<span><span class="co">#&gt;    from    to type  subtype         pathway_id</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1   118    39 GErel expression      hsa04110  </span></span>
+<span><span class="co">#&gt; 2    50    61 PPrel inhibition      hsa04110  </span></span>
+<span><span class="co">#&gt; 3    50    61 PPrel phosphorylation hsa04110  </span></span>
 <span><span class="co">#&gt; # ℹ 154 more rows</span></span></code></pre></div>
 </div>
 <div id="integrating-matrix-to-tbl_graph" class="section level2" number="5.3">
@@ -207,19 +207,19 @@
 <span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, SRR14509882 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509883 &lt;dbl&gt;, SRR14509884 &lt;dbl&gt;, …</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 157 × 32</span></span>
-<span><span class="co">#&gt;    from    to type  subtype        from_nd to_nd SRR14509882</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1   118    39 GErel expression     undefi… hsa:…        NA  </span></span>
-<span><span class="co">#&gt; 2    50    61 PPrel inhibition     hsa:29… hsa:…        24.4</span></span>
-<span><span class="co">#&gt; 3    50    61 PPrel phosphorylati… hsa:29… hsa:…        24.4</span></span>
+<span><span class="co">#&gt; # A tibble: 157 × 33</span></span>
+<span><span class="co">#&gt;    from    to type  subtype         pathway_id from_nd to_nd</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1   118    39 GErel expression      hsa04110   undefi… hsa:…</span></span>
+<span><span class="co">#&gt; 2    50    61 PPrel inhibition      hsa04110   hsa:29… hsa:…</span></span>
+<span><span class="co">#&gt; 3    50    61 PPrel phosphorylation hsa04110   hsa:29… hsa:…</span></span>
 <span><span class="co">#&gt; # ℹ 154 more rows</span></span>
-<span><span class="co">#&gt; # ℹ 25 more variables: SRR14509883 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509884 &lt;dbl&gt;, SRR14509885 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509886 &lt;dbl&gt;, SRR14509887 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509888 &lt;dbl&gt;, SRR14509889 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509890 &lt;dbl&gt;, SRR14509891 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509892 &lt;dbl&gt;, SRR14509893 &lt;dbl&gt;, …</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 26 more variables: SRR14509882 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509883 &lt;dbl&gt;, SRR14509884 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509885 &lt;dbl&gt;, SRR14509886 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509887 &lt;dbl&gt;, SRR14509888 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509889 &lt;dbl&gt;, SRR14509890 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509891 &lt;dbl&gt;, SRR14509892 &lt;dbl&gt;, …</span></span></code></pre></div>
 </div>
 <div id="visualizing-multiple-enrichment-results" class="section level2" number="5.4">
 <h2>
@@ -537,7 +537,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-05-05.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-05-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
