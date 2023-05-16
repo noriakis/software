@@ -28,7 +28,7 @@ gg <- ggraph(g, layout="stress")
 gg$data$type |> unique()
 #> [1] "map"      "compound" "gene"
 gg + geom_edge_diagonal(
-  aes(color=subtype,
+  aes(color=subtype_name,
       filter=type!="maplink"))+
   geom_node_point(
   aes(filter= !type%in%c("map","compound")),
@@ -389,7 +389,7 @@ g <- delete_vertex_attr(g, "x")
 g <- delete_vertex_attr(g, "y")
 ggraph(g, layout = "nicely") +
   geom_node_point(aes(filter=type=="gene" | type=="group"), color="black") +
-  geom_edge_link(aes(color=subtype),end_cap=circle(2,"mm"),
+  geom_edge_link(aes(color=subtype_name),end_cap=circle(2,"mm"),
                  start_cap=circle(2,"mm"),
                      label_dodge = unit(2,"mm"))+
   geom_node_text(aes(label=conv), repel=TRUE, bg.colour="white")+
@@ -426,8 +426,8 @@ newg <- joined_raw |>
   mutate(reaction=purrr::map_vec(.orig_data, 
                                  function(x) paste0(unique(x$reaction),
                                                     collapse=",")),
-         subtype=purrr::map_vec(.orig_data, 
-                                 function(x) unique(x$subtype)))
+         subtype_name=purrr::map_vec(.orig_data, 
+                                 function(x) unique(x$subtype_name)))
 ```
 
 
@@ -441,8 +441,8 @@ joined_name |> morph(to_contracted, name) |>
   mutate(occ=purrr::map_vec(.orig_data, function(x) dim(x)[1])) |> 
   unmorph() |>
   ggraph(layout="manual", x=x, y=y) + 
-  geom_edge_link0(width=0.1, aes(color=subtype,
-                                 filter=subtype %in% c("substrate","product")))+
+  geom_edge_link0(width=0.1, aes(color=subtype_name,
+                                 filter=subtype_name %in% c("substrate","product")))+
   geom_node_point() +
   geom_node_point(color="blue", aes(filter=occ>1))+
   graphhighlight::highlight_node(filter=name=="cpd:C00024", glow=TRUE,
@@ -460,8 +460,8 @@ newg |>
     ko=convert_id("ko"),
     occ=purrr::map_vec(.orig_data, function(x) dim(x)[1])) |>
 ggraph(layout="manual", x=x, y=y) + 
-  geom_edge_link0(width=0.1, aes(color=subtype,
-                                 filter=subtype %in% c("substrate","product")))+
+  geom_edge_link0(width=0.1, aes(color=subtype_name,
+                                 filter=subtype_name %in% c("substrate","product")))+
   geom_node_point()+
   geom_node_point(color="blue", aes(filter=occ>1)) + 
   geom_node_point(color="red", aes(filter=name=="cpd:C00024"))+
@@ -508,7 +508,7 @@ enrichKEGG(de, pvalueCutoff=0.01) |>
   ggkegg(convert_org = "hsa",
          pathway_number=1) +
     geom_edge_link(
-    aes(color=subtype),
+    aes(color=subtype_name),
     arrow = arrow(length = unit(1, 'mm')), 
     start_cap = square(1, 'cm'),
     end_cap = square(1.5, 'cm')) + 

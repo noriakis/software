@@ -1,7 +1,7 @@
 --- 
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-05-15"
+date: "2023-05-16"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -15,7 +15,7 @@ csl: chicago-fullnote-bibliography.csl
 
 # About
 
-`ggkegg` fetches information from KEGG and parse, analyze and visualize them using `ggplot2` and `ggraph`, combined with the other packages investigating biological functions using KEGG.
+`ggkegg` fetches information from KEGG and parse, analyze and visualize them using `ggplot2` and `ggraph`, combined with the other packages investigating biological functions using KEGG. This package aims to visualize the complex components of KEGG using grammar of graphics.
 
 
 ```r
@@ -29,7 +29,7 @@ One of the main aims of `ggkegg` or `tidykegg` is manupilating KEGG information 
 ```r
 library(dplyr)
 library(tidygraph)
-pathway("hsa04110") |> ## Obtain and parse the pathway
+pathway("hsa04110") |> ## Obtain and parse the KEGG pathway
   activate(nodes) |> ## node manipulation
   mutate(convert_hsa=convert_id("hsa"),
          convert_map=convert_id("pathway")) |> ## convert IDs for organism hsa and pathway

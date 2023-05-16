@@ -40,7 +40,7 @@ g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf),
 ggraph(g, layout="manual", x=x, y=y) + 
   geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
-                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+                 end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=deseq2, filter=type=="gene"), color="black")+
   ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
   scale_fill_gradient(low="blue",high="red", name="LFC")+
@@ -55,7 +55,7 @@ ggraph(g, layout="manual", x=x, y=y) +
 ggraph(g, layout="manual", x=x, y=y) + 
   geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
-                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+                 end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
   ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
   scale_fill_gradient(name="padj")+
@@ -70,7 +70,7 @@ ggraph(g, layout="manual", x=x, y=y) +
 ggraph(g, layout="manual", x=x, y=y) + 
   geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
-                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+                 end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
   ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
   scale_fill_gradient(name="padj")+
@@ -126,12 +126,12 @@ new_g
 #> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
 #> #   padj <dbl>, converted_name <chr>, num <dbl>
 #> #
-#> # A tibble: 157 × 5
-#>    from    to type  subtype         pathway_id
-#>   <int> <int> <chr> <chr>           <chr>     
-#> 1   118    39 GErel expression      hsa04110  
-#> 2    50    61 PPrel inhibition      hsa04110  
-#> 3    50    61 PPrel phosphorylation hsa04110  
+#> # A tibble: 157 × 6
+#>    from    to type  subtype_name    subtype_value pathway_id
+#>   <int> <int> <chr> <chr>           <chr>         <chr>     
+#> 1   118    39 GErel expression      -->           hsa04110  
+#> 2    50    61 PPrel inhibition      --|           hsa04110  
+#> 3    50    61 PPrel phosphorylation +p            hsa04110  
 #> # ℹ 154 more rows
 ```
 
@@ -166,19 +166,19 @@ new_g
 #> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
 #> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
 #> #
-#> # A tibble: 157 × 33
-#>    from    to type  subtype         pathway_id from_nd to_nd
-#>   <int> <int> <chr> <chr>           <chr>      <chr>   <chr>
-#> 1   118    39 GErel expression      hsa04110   undefi… hsa:…
-#> 2    50    61 PPrel inhibition      hsa04110   hsa:29… hsa:…
-#> 3    50    61 PPrel phosphorylation hsa04110   hsa:29… hsa:…
+#> # A tibble: 157 × 34
+#>    from    to type  subtype_name    subtype_value pathway_id
+#>   <int> <int> <chr> <chr>           <chr>         <chr>     
+#> 1   118    39 GErel expression      -->           hsa04110  
+#> 2    50    61 PPrel inhibition      --|           hsa04110  
+#> 3    50    61 PPrel phosphorylation +p            hsa04110  
 #> # ℹ 154 more rows
-#> # ℹ 26 more variables: SRR14509882 <dbl>,
-#> #   SRR14509883 <dbl>, SRR14509884 <dbl>,
-#> #   SRR14509885 <dbl>, SRR14509886 <dbl>,
-#> #   SRR14509887 <dbl>, SRR14509888 <dbl>,
-#> #   SRR14509889 <dbl>, SRR14509890 <dbl>,
-#> #   SRR14509891 <dbl>, SRR14509892 <dbl>, …
+#> # ℹ 28 more variables: from_nd <chr>, to_nd <chr>,
+#> #   SRR14509882 <dbl>, SRR14509883 <dbl>,
+#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
+#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
+#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>, …
 ```
 
 
@@ -213,7 +213,7 @@ g1 <- pathway("hsa04110") |> mutate(uro=append_cp(ekuro, how="all"),
 ggraph(g1, layout="manual", x=x, y=y) + 
   geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
-                 end_cap = square(1.5, 'cm'), aes(color=subtype))+
+                 end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=uro, xmax=x,  filter=type=="gene"))+
   geom_node_rect(aes(fill=rptec, xmin=x, filter=type=="gene"))+
   scale_fill_manual(values=c("steelblue","tomato"), name="urothelial|rptec")+
