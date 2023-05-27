@@ -540,3 +540,15 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
 <img src="01-pathway_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;" />
+
+`rawMap` can accept multiple `enrichResult` class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in `fill_color`. Also, you should specify pathway ID for multiple enrichment results.
+
+
+```r
+deres <- enrichKEGG(de, pvalueCutoff=0.01) 
+res <- rawMap(list(deres, deres, deres), fill_color=c("red","green","blue"), pid="hsa04110")
+ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;" />
