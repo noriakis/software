@@ -15,7 +15,13 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9FXY6YW4YZ"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-9FXY6YW4YZ');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -491,9 +497,9 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/plotDendroWord-2.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
+<span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -510,7 +516,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
 <span><span class="co">#&gt; [1] RColorBrewer_1.1-3  ggraph_2.1.0       </span></span>
-<span><span class="co">#&gt; [3] biotextgraph_0.99.0 ggplot2_3.4.1      </span></span>
+<span><span class="co">#&gt; [3] biotextgraph_0.99.0 ggplot2_3.4.2      </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] GeneSummary_0.99.4     colorspace_2.1-0      </span></span>
@@ -520,55 +526,55 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;   [9] fs_1.6.1               rstudioapi_0.14       </span></span>
 <span><span class="co">#&gt;  [11] farver_2.1.1           graphlayouts_0.8.4    </span></span>
 <span><span class="co">#&gt;  [13] ggrepel_0.9.3          bit64_4.0.5           </span></span>
-<span><span class="co">#&gt;  [15] AnnotationDbi_1.60.0   fansi_1.0.4           </span></span>
+<span><span class="co">#&gt;  [15] AnnotationDbi_1.60.2   fansi_1.0.4           </span></span>
 <span><span class="co">#&gt;  [17] xml2_1.3.3             downlit_0.4.2         </span></span>
 <span><span class="co">#&gt;  [19] cachem_1.0.7           phylogram_2.1.0       </span></span>
 <span><span class="co">#&gt;  [21] knitr_1.42             polyclip_1.10-4       </span></span>
 <span><span class="co">#&gt;  [23] jsonlite_1.8.4         png_0.1-8             </span></span>
 <span><span class="co">#&gt;  [25] graph_1.76.0           ggforce_0.4.1         </span></span>
 <span><span class="co">#&gt;  [27] shiny_1.7.4            bugsigdbr_1.4.3       </span></span>
-<span><span class="co">#&gt;  [29] rentrez_1.2.3          compiler_4.2.2        </span></span>
+<span><span class="co">#&gt;  [29] rentrez_1.2.3          compiler_4.2.1        </span></span>
 <span><span class="co">#&gt;  [31] httr_1.4.5             fastmap_1.1.1         </span></span>
-<span><span class="co">#&gt;  [33] cli_3.6.0              later_1.3.0           </span></span>
+<span><span class="co">#&gt;  [33] cli_3.6.1              later_1.3.0           </span></span>
 <span><span class="co">#&gt;  [35] tweenr_2.0.2           htmltools_0.5.4       </span></span>
-<span><span class="co">#&gt;  [37] tools_4.2.2            igraph_1.4.1          </span></span>
-<span><span class="co">#&gt;  [39] NLP_0.2-1              gtable_0.3.1          </span></span>
+<span><span class="co">#&gt;  [37] tools_4.2.1            igraph_1.4.2          </span></span>
+<span><span class="co">#&gt;  [39] NLP_0.2-1              gtable_0.3.3          </span></span>
 <span><span class="co">#&gt;  [41] glue_1.6.2             GenomeInfoDbData_1.2.9</span></span>
-<span><span class="co">#&gt;  [43] dplyr_1.1.0            Rcpp_1.0.10           </span></span>
+<span><span class="co">#&gt;  [43] dplyr_1.1.1            Rcpp_1.0.10           </span></span>
 <span><span class="co">#&gt;  [45] slam_0.1-50            Biobase_2.58.0        </span></span>
-<span><span class="co">#&gt;  [47] jquerylib_0.1.4        vctrs_0.5.2           </span></span>
-<span><span class="co">#&gt;  [49] Biostrings_2.66.0      nlme_3.1-161          </span></span>
-<span><span class="co">#&gt;  [51] ape_5.7                xfun_0.37             </span></span>
+<span><span class="co">#&gt;  [47] jquerylib_0.1.4        vctrs_0.6.1           </span></span>
+<span><span class="co">#&gt;  [49] Biostrings_2.66.0      nlme_3.1-157          </span></span>
+<span><span class="co">#&gt;  [51] ape_5.7-1              xfun_0.37             </span></span>
 <span><span class="co">#&gt;  [53] mime_0.12              lifecycle_1.0.3       </span></span>
-<span><span class="co">#&gt;  [55] XML_3.99-0.13          pvclust_2.2-0         </span></span>
-<span><span class="co">#&gt;  [57] dendextend_1.16.0      org.Hs.eg.db_3.16.0   </span></span>
-<span><span class="co">#&gt;  [59] zlibbioc_1.44.0        MASS_7.3-58.1         </span></span>
+<span><span class="co">#&gt;  [55] XML_3.99-0.14          pvclust_2.2-0         </span></span>
+<span><span class="co">#&gt;  [57] dendextend_1.16.0      org.Hs.eg.db_3.15.0   </span></span>
+<span><span class="co">#&gt;  [59] zlibbioc_1.44.0        MASS_7.3-57           </span></span>
 <span><span class="co">#&gt;  [61] scales_1.2.1           tidygraph_1.2.3       </span></span>
-<span><span class="co">#&gt;  [63] promises_1.2.0.1       parallel_4.2.2        </span></span>
+<span><span class="co">#&gt;  [63] promises_1.2.0.1       parallel_4.2.1        </span></span>
 <span><span class="co">#&gt;  [65] cyjShiny_1.0.34        yaml_2.3.7            </span></span>
 <span><span class="co">#&gt;  [67] memoise_2.0.1          gridExtra_2.3         </span></span>
 <span><span class="co">#&gt;  [69] yulab.utils_0.0.6      sass_0.4.5            </span></span>
 <span><span class="co">#&gt;  [71] RSQLite_2.3.0          highr_0.10            </span></span>
 <span><span class="co">#&gt;  [73] S4Vectors_0.36.2       BiocGenerics_0.44.0   </span></span>
-<span><span class="co">#&gt;  [75] GenomeInfoDb_1.34.9    rlang_1.0.6           </span></span>
+<span><span class="co">#&gt;  [75] GenomeInfoDb_1.34.9    rlang_1.1.0           </span></span>
 <span><span class="co">#&gt;  [77] pkgconfig_2.0.3        bitops_1.0-7          </span></span>
 <span><span class="co">#&gt;  [79] lattice_0.20-45        evaluate_0.20         </span></span>
 <span><span class="co">#&gt;  [81] purrr_1.0.1            patchwork_1.1.2       </span></span>
-<span><span class="co">#&gt;  [83] htmlwidgets_1.6.1      cowplot_1.1.1         </span></span>
+<span><span class="co">#&gt;  [83] htmlwidgets_1.6.2      cowplot_1.1.1         </span></span>
 <span><span class="co">#&gt;  [85] bit_4.0.5              tidyselect_1.2.0      </span></span>
 <span><span class="co">#&gt;  [87] magrittr_2.0.3         bookdown_0.33         </span></span>
 <span><span class="co">#&gt;  [89] R6_2.5.1               IRanges_2.32.0        </span></span>
 <span><span class="co">#&gt;  [91] generics_0.1.3         DBI_1.1.3             </span></span>
-<span><span class="co">#&gt;  [93] pillar_1.8.1           withr_2.5.0           </span></span>
+<span><span class="co">#&gt;  [93] pillar_1.9.0           withr_2.5.0           </span></span>
 <span><span class="co">#&gt;  [95] KEGGREST_1.38.0        RCurl_1.98-1.10       </span></span>
-<span><span class="co">#&gt;  [97] tibble_3.1.8           crayon_1.5.2          </span></span>
+<span><span class="co">#&gt;  [97] tibble_3.2.1           crayon_1.5.2          </span></span>
 <span><span class="co">#&gt;  [99] wordcloud_2.6          utf8_1.2.3            </span></span>
 <span><span class="co">#&gt; [101] rmarkdown_2.20         viridis_0.6.2         </span></span>
-<span><span class="co">#&gt; [103] GetoptLong_1.0.5       grid_4.2.2            </span></span>
-<span><span class="co">#&gt; [105] blob_1.2.3             digest_0.6.31         </span></span>
+<span><span class="co">#&gt; [103] GetoptLong_1.0.5       grid_4.2.1            </span></span>
+<span><span class="co">#&gt; [105] blob_1.2.4             digest_0.6.31         </span></span>
 <span><span class="co">#&gt; [107] xtable_1.8-4           tm_0.7-11             </span></span>
 <span><span class="co">#&gt; [109] tidyr_1.3.0            httpuv_1.6.9          </span></span>
-<span><span class="co">#&gt; [111] gridGraphics_0.5-1     stats4_4.2.2          </span></span>
+<span><span class="co">#&gt; [111] gridGraphics_0.5-1     stats4_4.2.1          </span></span>
 <span><span class="co">#&gt; [113] munsell_0.5.0          viridisLite_0.4.1     </span></span>
 <span><span class="co">#&gt; [115] ggplotify_0.1.0        bslib_0.4.2</span></span></code></pre></div>
 
@@ -601,7 +607,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-04-24.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-05-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

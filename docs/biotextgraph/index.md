@@ -1,7 +1,7 @@
 --- 
 title: "biotextgraph"
 author: "Noriaki Sato"
-date: "2023-04-24"
+date: "2023-05-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -22,6 +22,7 @@ This package aims to visualize the word and text information contained in the ge
 ```r
 library(biotextgraph)
 #> Loading required package: ggplot2
+#> Warning: package 'ggplot2' was built under R version 4.2.3
 #> 
 #> Registered S3 method overwritten by 'pvclust':
 #>   method       from      
