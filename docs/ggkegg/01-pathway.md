@@ -552,3 +552,16 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
 <img src="01-pathway_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;" />
+
+`rawMap` also accepts `gseaResult` class, although it may be useful for assigning numeric values such as log2 fold changes directly.
+
+
+```r
+data(geneList, package="DOSE")
+kk <- gseKEGG(geneList)
+res <- rawMap(kk)
+ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;" />
