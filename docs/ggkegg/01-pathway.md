@@ -2,7 +2,7 @@
 
 # Pathway
 
-Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object.  
+Providing `ggkegg` a pathway ID, it fetches information, parse them and make `ggraph` object. Inside, `parse_kgml` or `pathway` function is used to return `igraph` or `tbl_graph` object. It can be used with all the pathways across organisms listed in KEGG PATHWAY database.
 The `pathway` function is a core function that downloads and parses KGML files. If the file already exists in the current working directory, it will not be downloaded again. The function also extracts reactions that are included in the pathway as edges. If there are nodes represented by `type=line`, the function converts these nodes to edges based on their `coords`. This conversion is carried out by the `process_line` function.
 
 
@@ -15,6 +15,8 @@ library(clusterProfiler)
 library(dplyr)
 library(tidygraph)
 ```
+
+## Example visualization
 
 This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the `igraph` object.
 
@@ -496,7 +498,7 @@ multig |>
 <img src="01-pathway_files/figure-html/nativepanel-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-## Visualize the result of `enrichKEGG`
+## Visualize the result of `enrichKEGG` and `gseKEGG`
 
 The library can directly visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph. For a quick inspection, `rawMap` function can be used for simply producing highlighted graph with overlaid KEGG raw map.
 

@@ -1,5 +1,6 @@
 about
 pathway
+example-visualization
 geom_node_rect
 assigning-colors-to-nodes
 geom_node_shadowtext
@@ -8,7 +9,7 @@ overlaying-original-kegg-pathway-images-on-ggraph
 group-of-nodes
 combining-multiple-pathways-in-their-native-layouts
 multi_pathway_native
-visualize-the-result-of-enrichkegg
+visualize-the-result-of-enrichkegg-and-gsekegg
 module
 module-definition-in-graph
 module-definition-in-text
@@ -19,8 +20,12 @@ network
 combining-multiple-networks
 usecases
 visualizing-numerical-attributes-from-deseq2
+using-ggfx-to-further-customize-the-visualization
+integrating-numeric-values-onto-tbl_graph
 integrating-numeric-vector-to-tbl_graph
 integrating-matrix-to-tbl_graph
 visualizing-multiple-enrichment-results
 projecting-the-gene-regulatory-networks-on-kegg-map
-cluster-marker-genes-in-single-cell-transcriptomics
+projection-on-to-the-raw-kegg-map
+analyzing-cluster-marker-genes-in-single-cell-transcriptomics
+example-for-composing-multiple-pathways

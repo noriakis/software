@@ -38,7 +38,7 @@ g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf),
                                    converted_name=convert_id("hsa"))
 
 ggraph(g, layout="manual", x=x, y=y) + 
-  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+  geom_edge_parallel(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
                  end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=deseq2, filter=type=="gene"), color="black")+
@@ -53,7 +53,7 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 ## Adjusted p-values
 ggraph(g, layout="manual", x=x, y=y) + 
-  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+  geom_edge_parallel(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
                  end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
@@ -64,23 +64,10 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/deseq2-2.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+### using `ggfx` to further customize the visualization
 
-## Adjusted p-values
-ggraph(g, layout="manual", x=x, y=y) + 
-  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
-                 start_cap = square(1, 'cm'),
-                 end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
-  geom_node_rect(aes(fill=padj, filter=type=="gene"), color="black")+
-  ggfx::with_outer_glow(geom_node_text(aes(label=converted_name, filter=type!="group"), size=2.5), colour="white", expand=1)+
-  scale_fill_gradient(name="padj")+
-  theme_void()
-```
-
-<img src="04-usecases_files/figure-html/deseq2-3.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
-
 ## Highlighting differentially expressed genes at adjusted p-values < 0.05 with coloring of adjusted p-values on raw KEGG map
 gg <- ggraph(g, layout="manual", x=x, y=y)+
   geom_node_rect(aes(fill=padj, filter=type=="gene"))+
@@ -93,10 +80,11 @@ ggsave(file="tmp.png",gg,width=20,height=15,dpi=300,units="in")
 cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
-<img src="04-usecases_files/figure-html/deseq2-4.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/deseq2_2-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Integrating numeric values onto `tbl_graph`
 
-## Integrating numeric vector to `tbl_graph`
+### Integrating numeric vector to `tbl_graph`
 
 Numerical values can be reflected in node or edge tables, utilizing either the `node_numeric` or `edge_numeric` functions. The input can be a named vector or a tibble containing id and value columns.
 
@@ -135,7 +123,7 @@ new_g
 #> # ℹ 154 more rows
 ```
 
-## Integrating matrix to `tbl_graph`
+### Integrating matrix to `tbl_graph`
 
 If you want to reflect an expression matrix in a graph, the `edge_matrix` and `node_matrix` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `edge_matrix` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
 https://doi.org/10.1186/s12859-020-03692-2)).
@@ -211,7 +199,7 @@ g1 <- pathway("hsa04110") |> mutate(uro=append_cp(ekuro, how="all"),
                                     rptec=append_cp(ekrptec, how="all"),
                                     converted_name=convert_id("hsa"))
 ggraph(g1, layout="manual", x=x, y=y) + 
-  geom_edge_link(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
+  geom_edge_parallel(width=0.5, arrow = arrow(length = unit(1, 'mm')), 
                  start_cap = square(1, 'cm'),
                  end_cap = square(1.5, 'cm'), aes(color=subtype_name))+
   geom_node_rect(aes(fill=uro, xmax=x,  filter=type=="gene"))+
@@ -223,11 +211,24 @@ ggraph(g1, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;" />
 
-The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx` in yellow outer glow, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
+We can combine multiple plots combining `rawMap` by `patchwork`.
 
 
 ```r
 library(patchwork)
+comb <- rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"), pid="hsa04110") + 
+rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"),
+  pid="hsa03460")
+ggsave(file="tmp.png",comb,width=20,height=15,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/multcp1_5-1.png" width="100%" style="display: block; margin: auto;" />
+
+The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx` in yellow outer glow, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
+
+
+```r
 right <- (dotplot(ekuro) + ggtitle("Urothelial")) /
 (dotplot(ekrptec) + ggtitle("RPTECs"))
 
@@ -315,7 +316,30 @@ joined |>
 
 <img src="04-usecases_files/figure-html/konetplot-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Cluster marker genes in single-cell transcriptomics
+### Projection on to the raw KEGG map
+
+You can directly project the inferred network onto the raw PATHWAY map, which enables direct comparison of the knowledge of curated database and inferred network from your own dataset.
+
+
+```r
+raws <- joined |> 
+  ggraph(x=x, y=y) +
+  geom_edge_link(width=0.5,aes(filter=!is.na(strength),
+                                color=strength),
+                 linetype=1,
+                 arrow=arrow(length=unit(1,"mm"),type="closed"),
+                 end_cap=circle(5,"mm"))+
+  overlay_raw_map(transparent_colors = c("#ffffff"))
+
+ggsave("tmp.png",
+        raws,
+       width=10, height=6, dpi=300, units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/konetplotmap-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Analyzing cluster marker genes in single-cell transcriptomics
 
 This package can also be applied to single-cell analysis. As an example, consider mapping marker genes between clusters onto KEGG pathways and plotting them together with reduced dimension plots. Here, we use the `Seurat` package. We conduct a fundamental analysis.
 
@@ -340,7 +364,7 @@ library(Seurat)
 load("../sc_data.rda")
 ```
 
-Subsequently, we employ the scplot to plot the results of dimensionality reduction using UMAP.  
+Subsequently, we employ the `scplot` to plot the results of dimensionality reduction using UMAP.  
 Among these, for the present study, we perform enrichment analysis on the marker genes of clusters 1 and 5.
 
 
@@ -399,7 +423,9 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 
 <img src="04-usecases_files/figure-html/plot_sc-1.png" width="100%" style="display: block; margin: auto;" />
 
-Example for composing multiple pathways:
+### Example for composing multiple pathways
+
+We can inspect marker genes in multiple pathways to better understand the role of marker genes.
 
 
 ```r
