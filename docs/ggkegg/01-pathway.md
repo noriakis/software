@@ -117,6 +117,35 @@ ggraph(g, x=x, y=y) +
 Plot the shadowtext at the `x` and `y` position without enabling `repel=TRUE` in `geom_node_text`.
 
 
+## Global maps
+
+For global maps, `process_line` function, which makes nodes and edges based on `coords` attributes in KGML, is prepared. However, we cannot obtain and parse directed relationship (`substrate` to `product`, `reversible` or `irreversible`) based on `coords`. If you would like to retain these relationships, `process_reaction` function is prepared.
+
+
+```r
+
+pathway("ko01200") |> 
+    process_reaction() |>
+    activate(nodes) |> 
+    mutate(x=NULL, y=NULL,
+       comp=convert_id("compound")) |>
+    mutate(degree=centrality_degree(mode="all")) |>
+ggraph(layout="kk")+
+    geom_node_point(aes(color=degree,
+                        filter=type=="compound"))+
+    geom_edge_parallel(
+        color="grey",
+        end_cap=circle(1,"mm"),
+        start_cap=circle(1,"mm"),
+        arrow=arrow(length=unit(1,"mm"),type="closed"))+
+    geom_node_text(aes(label=comp,filter=degree>15),
+                   repel=TRUE, bg.colour="white")+
+    theme_graph()
+```
+
+<img src="01-pathway_files/figure-html/global_maps-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## Highlighting set of nodes and edges
 
 If you want to obtain `ko01230`, and highlight those components
