@@ -42,3 +42,4 @@ parsing-enzyme-comission-numbers-its-description-and-comment.
 parsing-uniprot-organism-identifiers.
 parsing-metacyc-pathway-text-information
 tidy
+use-of-gene-descriptions-in-alliance-of-genome-resources

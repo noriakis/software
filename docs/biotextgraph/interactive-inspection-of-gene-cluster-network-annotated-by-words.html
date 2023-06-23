@@ -9,7 +9,7 @@
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Interactive inspection of gene cluster network annotated by words | biotextgraph">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/interactive-inspection-of-gene-cluster-network-annotated-by-words.html">
+<meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/interactive-inspection-of-gene-cluster-network-annotated-by-words.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Interactive inspection of gene cluster network annotated by words | biotextgraph">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -80,12 +80,12 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RColorBrewer</span><span class="op">)</span></span></code></pre></div>
-<p>In this example, a Bayesian network showing the module eigengenes relationship are inferred using <code>boot.strength</code> function in <code>bnlearn</code> from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by <code><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary()</a></code>, and can be exported to the format of <code>Cytoscape.js</code> or <code>vis.js</code>. In this way, module relationship can be interactively inspected with the functional implications. The other functions like <code><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst()</a></code> can be used, however, you shold specify API keys for the function makes multiple queries.</p>
+<p>In this example, a Bayesian network showing the module eigengenes relationship are inferred using <code>boot.strength</code> function in <code>bnlearn</code> from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by <code><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq()</a></code>, and can be exported to the format of <code>Cytoscape.js</code> or <code>vis.js</code>. In this way, module relationship can be interactively inspected with the functional implications. The other functions like <code><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed()</a></code> can be used, however, you shold specify API keys for the function makes multiple queries.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## In this example, we simulate WGCNA results.</span></span>
 <span><span class="co">## you can just use results from WGCNA.</span></span>
 <span><span class="co">## Assuming WGCNA results are stored in `mod`</span></span>
-<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">MEs</span> <span class="op">&lt;-</span> <span class="va">mod</span><span class="op">$</span><span class="va">MEs</span></span>
 <span><span class="va">modColors</span> <span class="op">&lt;-</span> <span class="va">mod</span><span class="op">$</span><span class="va">colors</span></span>
 <span><span class="va">ensg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">modColors</span><span class="op">)</span></span>
@@ -141,7 +141,7 @@
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="va">plotType</span><span class="op">==</span><span class="st">"bar"</span><span class="op">)</span><span class="op">{</span></span>
 <span>        <span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/makeBar.html">makeBar</a></span><span class="op">(</span><span class="va">entre</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span> <span class="co"># get barplot</span></span>
 <span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span> <span class="co">## If wordcloud</span></span>
-<span>        <span class="co"># A &lt;- wcGeneSummary(entre, keyType="ENTREZID",</span></span>
+<span>        <span class="co"># A &lt;- refseq(entre, keyType="ENTREZID",</span></span>
 <span>        <span class="co">#                    argList=list(rot.per=0.4,</span></span>
 <span>        <span class="co">#                                 colors=brewer.pal(10,</span></span>
 <span>        <span class="co">#                                                   sample(row.names(RColorBrewer::brewer.pal.info), 1)),</span></span>
@@ -166,15 +166,15 @@
 <span><span class="co">#&gt; [1] "ME1"</span></span>
 <span><span class="co">#&gt; Input genes: 12</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; [1] "ME2"</span></span>
 <span><span class="co">#&gt; Input genes: 13</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; [1] "ME3"</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">image</span> <span class="op">&lt;-</span> <span class="va">images</span></span>
 <span></span>
 <span><span class="co">## Node shape</span></span>
@@ -241,7 +241,7 @@ In this example, the barplot of words are shown in the nodes.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-05-27.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-06-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

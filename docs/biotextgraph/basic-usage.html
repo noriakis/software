@@ -9,7 +9,7 @@
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Basic usage | biotextgraph">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://noriakis.github.io/software/wcGeneSummary/basic-usage.html">
+<meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/basic-usage.html">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Basic usage | biotextgraph">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,55 +85,55 @@ In this example, we use mostly human-derived data, and use <code>org.Hs.eg.db</c
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://talgalili.github.io/dendextend/">dendextend</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"wcGeneSummary"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="producing-networks" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> Producing networks<a class="anchor" aria-label="anchor" href="#producing-networks"><i class="fas fa-link"></i></a>
 </h2>
-<p>The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. <code>wcGeneSummary</code> is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a <code>biotext</code> class object, which contains various types of information. The net slot stores the <code>ggraph</code>, which represents the visualization result of the network.</p>
+<p>The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. <code>refseq</code> is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a <code>biotext</code> class object, which contains various types of information. The net slot stores the <code>ggraph</code>, which represents the visualization result of the network.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Configure input genes</span></span>
 <span><span class="va">inpSymbol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ERCC1"</span>,<span class="st">"ERCC2"</span>,<span class="st">"ERCC3"</span>,<span class="st">"ERCC4"</span>,<span class="st">"ERCC5"</span>,<span class="st">"ERCC6"</span>,<span class="st">"ERCC8"</span><span class="op">)</span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">)</span></span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/basic3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>By default, the gene ID type is set to <code>SYMBOL</code>. The other type can be set by <code>keyType</code>. As many of the words are commonly observed, filtering based on pre-computed word frequency on whole RefSeq data is provided. You should limit word frequency by <code>excludeFreq</code>, which is default to 2000. TF-IDF on the all the summary is also precomputed, and <code>exclude="tfidf"</code> can be specified too.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, excludeFreq<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, excludeFreq<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 129 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 141 words (frequency and/or tfidf)</span></span>
 <span><span class="va">net</span></span>
 <span><span class="co">#&gt; Type: refseq</span></span>
 <span><span class="co">#&gt; Number of words: 15</span></span>
 <span><span class="co">#&gt; Query: ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8</span></span>
 <span><span class="co">#&gt; Graph: V(13), E(34)</span></span>
 <span><span class="co">#&gt; Degree: excision(8)/complementation(7)/Defects(7)/nucleotide(7)/incision(6)</span></span>
-<span><span class="co">#&gt; 210.2 Kb</span></span></code></pre></div>
+<span><span class="co">#&gt; 211.5 Kb</span></span></code></pre></div>
 <p>For visualization, The edge label corresponding to correlation or cooccurrence values can be shown by <code>edgeLabel=TRUE</code>. The number of words to be shown on plot can be specified by <code>numWords</code>. The threshold of correlation can be specified by <code>corThresh</code>. The visualized network layout can be specified by passing <code>layout</code> argument. The text color can be changed by <code>colorText=TRUE</code>. The type of edge can be specified by <code>edgeLink</code>, which is by default <code>TRUE</code> (link will be used).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     edgeLabel<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.4</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">20</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>, layout<span class="op">=</span><span class="st">"kk"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <p><img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramnet-1.png" width="100%" style="display: block; margin: auto;">
 One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (<code>pvclust</code>) and identified significant clusters based on the occurrence in the text can be visualized by specifying <code>tag=TRUE</code>. For the significance threshold, <code>pvclAlpha</code> can be specified. The default parameters perform <code>pvclust</code> on the subset of dataset for words with high frequency specified by <code>numWords</code>. If one want to perform on whole matrix (which is a natural way), <code>tagWhole=TRUE</code> can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to <code>pvclust</code> function, by specifying <code>cl</code> as below. For tag coloring, <code>tagPalette</code> can be used. The <code>igraph</code> contained in the object can also be plotted by passing to <code>plot</code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>,</span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">20</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -171,14 +171,14 @@ One of the main questions is which words can be clustered together among the wor
 <p>The other important aim is finding important genes (queries) in the network. The genes associated with the words can be shown by specifying <code>genePlot=TRUE</code>, useful for assessing which words is associated with interesting genes. The edges connecting words to corresponding genes are shown.
 One can specify <code>genePlotNum</code> for limiting the genes shown by ranking of how often a gene is associated with the high-frequency words. This can be useful for identifying important genes among the network.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -195,14 +195,14 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://joelgombin.github.io/concaveman/">concaveman</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     genePathPlot<span class="op">=</span><span class="st">"reactome"</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                     genePathPlotSig<span class="op">=</span><span class="fl">0.05</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -219,7 +219,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/gpplot-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>By default, the associated genes are plotted without colorization (grey) and without nodes. If preferred, set <code>colorize=TRUE</code> to colorize the associated genes by <code>geneColor</code> and showing the nodes by adding pseudo-frequency corresponding to the minimum frequency of words in the network. In this way, color of nodes corresponding to words are shown by the gradient of frequency, and the queried genes are shown by <code>geneColor</code>. <code>addFreqToGene</code> also adds pseudo-frequency to gene nodes and show the node, but are colorized according to the specified minimum frequency.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span>                     colorize<span class="op">=</span><span class="cn">TRUE</span>, geneColor<span class="op">=</span><span class="st">"pink"</span>,</span>
 <span>                     colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -228,7 +228,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -251,16 +251,16 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <code class="sourceCode R"><span><span class="va">wc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/obtain_refseq.html">obtain_refseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"IRF3"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/make_corpus.html">make_corpus</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/make_TDM.html">make_TDM</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plot_wordcloud.html">plot_wordcloud</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 3</span></span>
 <span><span class="co">#&gt;   Converted input genes: 3</span></span>
-<span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
+<span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">gwc</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/basic-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>It accepts values of the <code>wordcloud()</code> function. <code>numWords</code> specifies how many words are to be shown on word cloud. The words are ordered by their frequency, and the subset of 1:<code>numWords</code> is used to downstream visualization. The arguments for wordcloud visualization must be passed to <code>argList</code> arguments as a list. <code>scaleFreq</code> can be specified to scale the frequency when the observation count is low.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
+<code class="sourceCode R"><span><span class="va">gwc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
 <span>                     plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">100</span>,</span>
 <span>                     scaleFreq<span class="op">=</span><span class="fl">2</span>,</span>
@@ -272,12 +272,12 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 14 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 30 words (frequency and/or tfidf)</span></span>
 <span><span class="va">gwc</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/basic2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>By default, <code>preserve=TRUE</code>, which indicates the funciton tries to preserve the original cases of characters. Note that if both the lower case words and capitalized words are present, all words are converted to capitalized words, like <code>damage</code> and <code>Damage</code> would be shown as <code>Damage</code> if <code>preserve=TRUE</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gwc_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
+<code class="sourceCode R"><span><span class="va">gwc_p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
 <span>                     plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">100</span>,</span>
 <span>                     excludeFreq<span class="op">=</span><span class="fl">5000</span>,</span>
@@ -290,7 +290,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 14 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 30 words (frequency and/or tfidf)</span></span>
 <span><span class="va">gwc_p</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/basic_pres_false-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>It also returns a data frame consisting of frequency of each term in the slot name <code>freqDf</code>.</p>
@@ -341,7 +341,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <p>N-gram is supported by library <code>tm</code>, specified by <code>ngram</code>.
 Default is <code>1</code>, and the example specifying <code>2</code> is shown below.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gwc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
+<code class="sourceCode R"><span><span class="va">gwc2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
 <span>                      ngram<span class="op">=</span><span class="fl">2</span>,</span>
 <span>                      numWords<span class="op">=</span><span class="fl">50</span>,</span>
 <span>                      plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
@@ -355,7 +355,7 @@ Default is <code>1</code>, and the example specifying <code>2</code> is shown be
 <span><span class="co">#&gt; columns</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
@@ -364,16 +364,16 @@ Default is <code>1</code>, and the example specifying <code>2</code> is shown be
 <p>Using <code>clusterProfiler</code> functions, one can use enriched pathway names for visualization.
 The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code>'reactome'</code>, this time we specify <code>'reactome'</code>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gwc3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
+<code class="sourceCode R"><span><span class="va">gwc3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>                      enrich<span class="op">=</span><span class="st">"reactome"</span>,</span>
 <span>                      tfidf<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
 <span><span class="co">#&gt; columns</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Performing enrichment analysis</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
@@ -385,7 +385,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">8</span>, <span class="st">"Dark2"</span><span class="op">)</span> </span>
 <span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/colorRamp.html">colorRampPalette</a></span><span class="op">(</span><span class="va">pal</span><span class="op">)</span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">## Cluster on whole matrix</span></span>
-<span><span class="va">gwclWhole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
+<span><span class="va">gwclWhole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">50</span>,</span>
 <span>                     plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, tagWhole<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -398,7 +398,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; columns</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
@@ -445,9 +445,6 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; [1] "incision"  "including" "light"    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $clusters[[10]]</span></span>
-<span><span class="co">#&gt; [1] "transcriptioncoupled" "upstream"            </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[11]]</span></span>
 <span><span class="co">#&gt;  [1] "basic"            "bivm"            </span></span>
 <span><span class="co">#&gt;  [3] "cachexia"         "cancer"          </span></span>
 <span><span class="co">#&gt;  [5] "cellular"         "characterized"   </span></span>
@@ -458,13 +455,15 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; [15] "growth"           "hypersensitivity"</span></span>
 <span><span class="co">#&gt; [17] "immunoglobulin"   "increased"       </span></span>
 <span><span class="co">#&gt; [19] "motif"            "neighboring"     </span></span>
-<span><span class="co">#&gt; [21] "patients"         "processes"       </span></span>
-<span><span class="co">#&gt; [23] "read"             "referred"        </span></span>
-<span><span class="co">#&gt; [25] "severe"           "singlestrand"    </span></span>
-<span><span class="co">#&gt; [27] "skin"             "specific"        </span></span>
-<span><span class="co">#&gt; [29] "susceptibility"   "uvinduced"       </span></span>
-<span><span class="co">#&gt; [31] "variable"         "vii"             </span></span>
-<span><span class="co">#&gt; [33] "xp7"             </span></span>
+<span><span class="co">#&gt; [21] "processes"        "read"            </span></span>
+<span><span class="co">#&gt; [23] "referred"         "severe"          </span></span>
+<span><span class="co">#&gt; [25] "singlestrand"     "skin"            </span></span>
+<span><span class="co">#&gt; [27] "specific"         "susceptibility"  </span></span>
+<span><span class="co">#&gt; [29] "uvinduced"        "variable"        </span></span>
+<span><span class="co">#&gt; [31] "vii"              "xp7"             </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[11]]</span></span>
+<span><span class="co">#&gt; [1] "transcriptioncoupled" "upstream"            </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $clusters[[12]]</span></span>
 <span><span class="co">#&gt;  [1] "atpdependent"        "basal"              </span></span>
@@ -499,7 +498,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt;  [1]  13  30  97  98 101 104 106 107 110 117 118 119 124 130</span></span>
+<span><span class="co">#&gt;  [1]  13  30  97  98 101 104 106 107 110 113 117 118 123 129</span></span>
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <p><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;">
 In this example querying ERCC genes, the term <code>DNA repair</code> is clustered as expected.</p>
@@ -508,14 +507,14 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <h2>
 <span class="header-section-number">2.3</span> Visualization of PubMed information.<a class="anchor" aria-label="anchor" href="#visualization-of-pubmed-information."><i class="fas fa-link"></i></a>
 </h2>
-<p>Using <code>rentrez</code>, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing <code>genePlot</code>, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by <code>retMax</code> and <code>sortOrder</code>. Be sure to obtain <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">an api key</a> when querying heavily, and specify in <code>apiKey</code> argument. These functions including <code>wcAbst</code> and <code>wcGeneSummary</code> serve as wrappers for several other functions, but a detailed explanation can be found in <a href="tidy.html#tidy">12</a>.</p>
+<p>Using <code>rentrez</code>, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing <code>genePlot</code>, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by <code>retMax</code> and <code>sortOrder</code>. Be sure to obtain <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">an api key</a> when querying heavily, and specify in <code>apiKey</code> argument. These functions including <code>pubmed</code> and <code>refseq</code> serve as wrappers for several other functions, but a detailed explanation can be found in <a href="tidy.html#tidy">12</a>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, retMax<span class="op">=</span><span class="fl">20</span>, apiKey<span class="op">=</span><span class="va">apiKey</span>, plotType<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, retMax<span class="op">=</span><span class="fl">20</span>, apiKey<span class="op">=</span><span class="va">apiKey</span>, plotType<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">ab</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
-<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The returned PubMed IDs are stored in <code>pmids</code> slot.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span><span class="op">@</span><span class="va">pmids</span></span>
@@ -527,18 +526,18 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span><span class="co">#&gt; [1] 20</span></span></code></pre></div>
 <p>As fetching the same information is not desirable and time consuming, the same object can be passed to <code>redo</code> option and re-perform the analysis like tagging, or changing the visualization options. Also, using <code>obtain_pubmed</code> function, only the text can be obtained and be processed by the downstream functions.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
-<span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                 plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Using previous pvclust results</span></span>
 <span><span class="va">abtag2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc_2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If only the gene symbols are to be plotted, specify <code>onlyGene=TRUE</code>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, plotType<span class="op">=</span><span class="st">"network"</span>, onlyGene<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, plotType<span class="op">=</span><span class="st">"network"</span>, onlyGene<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Subsetting to the gene symbol in orgDb</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/onlygene-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -547,26 +546,26 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <h2>
 <span class="header-section-number">2.4</span> Comparing two or more networks<a class="anchor" aria-label="anchor" href="#comparing-two-or-more-networks"><i class="fas fa-link"></i></a>
 </h2>
-<p>One can compare two or more networks by providing list of <code>biotext</code> objects produced by text mining various databases, like <code>wcGeneSummary</code>, <code>wcAbst</code>, <code>obtain_refseq</code>, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.</p>
+<p>One can compare two or more networks by providing list of <code>biotext</code> objects produced by text mining various databases, like <code>refseq</code>, <code>pubmed</code>, <code>obtain_refseq</code>, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cxcls</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CXCL"</span>,<span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                      corThresh<span class="op">=</span><span class="fl">0.5</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">cxcls</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">cxcls</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                      corThresh<span class="op">=</span><span class="fl">0.5</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 13</span></span>
 <span><span class="co">#&gt;   Converted input genes: 13</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcAbst.html">wcAbst</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>               corThresh<span class="op">=</span><span class="fl">0.2</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span></span>
@@ -588,7 +587,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span><span class="va">mappedKeys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-keys.html">mappedkeys</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">)</span></span>
 <span><span class="va">keggList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">[</span><span class="va">mappedKeys</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04110`</span>,</span>
+<span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04110`</span>,</span>
 <span>                      keyType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
 <span>                      plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                      corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
@@ -597,7 +596,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span>                      tfidf<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 124</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -609,7 +608,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
 <span></span>
-<span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04210`</span>,</span>
+<span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04210`</span>,</span>
 <span>                      keyType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
 <span>                      plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                      corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
@@ -618,7 +617,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span>                      tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 87</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -664,14 +663,14 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <p>This thresholding can be used in RefSeq visualization in the above functions.
 Filter words using ORA threshold and frequency threshold by setting <code>ora=TRUE</code>.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     ora<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Performing ORA</span></span>
-<span><span class="co">#&gt; Filtered 148 words (ORA)</span></span>
+<span><span class="co">#&gt; Filtered 0 words (ORA)</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/oranet-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>After obtaining the ORA results, one can plot volcano-plot like plot for the results using <code>plotORA</code> function.</p>
@@ -686,7 +685,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 </h2>
 <p>Using <a href="https://github.com/bnosac/udpipe"><code>udpipe</code></a> package (<a href="https://aclanthology.org/K17-3009/">Straka and Straková. 2017</a>), one can performe dependency analysis of texts in various databases. Set <code>useUdpipe</code> to <code>TRUE</code>, and specify downloaded model to be used in <code>udpipeModel</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"ERCC2"</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"ERCC2"</span><span class="op">)</span>,</span>
 <span>                                  plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                                  useUdpipe<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                                  udpipeModel<span class="op">=</span><span class="st">"~/english-ewt-ud-2.5-191206.udpipe"</span><span class="op">)</span></span>
@@ -694,7 +693,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt; Input genes: 3</span></span>
 <span><span class="co">#&gt;   Converted input genes: 3</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">p</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/udpipe-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -704,20 +703,20 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 </h2>
 <p>Font can be specified by <code>fontFamily</code>, which affects all the labels including edges and nodes.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"wcGeneSummary"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">degs</span> <span class="op">&lt;-</span> <span class="va">d3degUpAssetta2016</span></span>
 <span><span class="co">## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)</span></span>
 <span><span class="fu">sysfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sysfonts/man/font_add.html">font_add</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"alien"</span>,regular<span class="op">=</span><span class="st">"SFAlienEncounters.ttf"</span><span class="op">)</span></span>
 <span><span class="fu">showtext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/showtext/man/showtext_auto.html">showtext_auto</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">wcGeneSummary</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/wcGeneSummary/man/wcGeneSummary.html">wcGeneSummary</a></span><span class="op">(</span><span class="va">degs</span>,</span>
-<span>                                  plotType<span class="op">=</span><span class="st">"network"</span>,</span>
-<span>                                  numWords<span class="op">=</span><span class="fl">50</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                                  fontFamily<span class="op">=</span><span class="st">"alien"</span>,</span>
-<span>                                  colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">degs</span>,</span>
+<span>                          plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>                          numWords<span class="op">=</span><span class="fl">50</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                          fontFamily<span class="op">=</span><span class="st">"alien"</span>,</span>
+<span>                          colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 636</span></span>
 <span><span class="co">#&gt;   Converted input genes: 555</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 65 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">p</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/font-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For complex networks, changing the layout is possible by the small function <code>changeLayout</code>.
@@ -820,13 +819,12 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt; [125] promises_1.2.0.1       gridExtra_2.3         </span></span>
 <span><span class="co">#&gt; [127] codetools_0.2-18       MASS_7.3-57           </span></span>
 <span><span class="co">#&gt; [129] rjson_0.2.21           withr_2.5.0           </span></span>
-<span><span class="co">#&gt; [131] wcGeneSummary_0.99.0   GenomeInfoDbData_1.2.9</span></span>
-<span><span class="co">#&gt; [133] parallel_4.2.1         ISOcodes_2022.09.29   </span></span>
-<span><span class="co">#&gt; [135] ggfun_0.0.9            grid_4.2.1            </span></span>
-<span><span class="co">#&gt; [137] tidyr_1.3.0            HDO.db_0.99.1         </span></span>
-<span><span class="co">#&gt; [139] rmarkdown_2.20         downlit_0.4.2         </span></span>
-<span><span class="co">#&gt; [141] NLP_0.2-1              shiny_1.7.4           </span></span>
-<span><span class="co">#&gt; [143] base64enc_0.1-3</span></span></code></pre></div>
+<span><span class="co">#&gt; [131] GenomeInfoDbData_1.2.9 parallel_4.2.1        </span></span>
+<span><span class="co">#&gt; [133] ISOcodes_2022.09.29    ggfun_0.0.9           </span></span>
+<span><span class="co">#&gt; [135] grid_4.2.1             tidyr_1.3.0           </span></span>
+<span><span class="co">#&gt; [137] HDO.db_0.99.1          rmarkdown_2.20        </span></span>
+<span><span class="co">#&gt; [139] downlit_0.4.2          NLP_0.2-1             </span></span>
+<span><span class="co">#&gt; [141] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
 
 </div>
 </div>
@@ -860,7 +858,7 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-05-27.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-06-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
