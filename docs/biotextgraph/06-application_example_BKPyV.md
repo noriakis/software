@@ -14,7 +14,7 @@ library(ggplot2)
 library(ReactomePA);library(clusterProfiler)
 library(ggraph);library(igraph)
 library(ggforce) ## For genePathPlot
-load(system.file("extdata", "sysdata.rda", package = "wcGeneSummary"))
+load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 degs <- d3degDownAssetta2016
 length(degs)
 #> [1] 191
@@ -144,7 +144,7 @@ We store the name of enriched pathways in the network for the downstream analysi
 
 
 ```r
-netreac <- wcGeneSummary(degs,
+netreac <- refseq(degs,
                          enrich="reactome",
                          plotType="network",
                          numWords=50,
@@ -153,9 +153,14 @@ netreac <- wcGeneSummary(degs,
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
 #>   Converted input genes: 175
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(coGraph)$nodeCat)), : minimal value for n is 3, returning requested palette with 3 different levels
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(ret@igraph)$tag)), "Dark2"): minimal value for n is 3, returning requested palette with 3 different levels
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 ```
 
 ## Text mining the gene summaries
@@ -163,7 +168,7 @@ Next we perform the plain function producing a correlation network, with showing
 
 
 ```r
-net1 <- wcGeneSummary(excheck,
+net1 <- refseq(excheck,
                       plotType="network",
                       colorText=TRUE,
                       numWords=30,
@@ -175,7 +180,7 @@ net1 <- wcGeneSummary(excheck,
 #> Input genes: 57
 #>   Converted input genes: 32
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Found 27 enriched term
 net1@net
 ```
@@ -208,7 +213,7 @@ First, show the network for the article titles.
 
 
 ```r
-titlenet <- wcAbst(top,
+titlenet <- pubmed(top,
                    sortOrder="relevance",
                    target="title",
                    plotType="network",
@@ -220,6 +225,11 @@ titlenet <- wcAbst(top,
                    numWords=40,
                    edgeLink=FALSE)
 #> Proceeding without API key
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(coGraph)$nodeCat)), : minimal value for n is 3, returning requested palette with 3 different levels
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(ret@igraph)$tag)), "Dark2"): minimal value for n is 3, returning requested palette with 3 different levels
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 titlenet@net
 ```
 
@@ -229,7 +239,7 @@ Obtain and show the network for the article abstract.
 
 
 ```r
-abstnet <- wcAbst(top,
+abstnet <- pubmed(top,
                    target="abstract",
                    plotType="network",
                    colorText=TRUE,
@@ -240,6 +250,11 @@ abstnet <- wcAbst(top,
                    numWords=40,
                    edgeLink=FALSE)
 #> Proceeding without API key
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(coGraph)$nodeCat)), : minimal value for n is 3, returning requested palette with 3 different levels
+#> Warning in RColorBrewer::brewer.pal(length(unique(V(ret@igraph)$tag)), "Dark2"): minimal value for n is 3, returning requested palette with 3 different levels
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 abstnet@net
 ```
 

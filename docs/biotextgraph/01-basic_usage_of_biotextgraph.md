@@ -18,22 +18,22 @@ library(ReactomePA)
 library(clusterProfiler)
 library(dendextend)
 library(dplyr)
-load(system.file("extdata", "sysdata.rda", package = "wcGeneSummary"))
+load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 ```
 
 ## Producing networks
 
-The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. `wcGeneSummary` is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a `biotext` class object, which contains various types of information. The net slot stores the `ggraph`, which represents the visualization result of the network.
+The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. `refseq` is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a `biotext` class object, which contains various types of information. The net slot stores the `ggraph`, which represents the visualization result of the network.
 
 
 ```r
 ## Configure input genes
 inpSymbol <- c("ERCC1","ERCC2","ERCC3","ERCC4","ERCC5","ERCC6","ERCC8")
-net <- wcGeneSummary(inpSymbol)
+net <- refseq(inpSymbol)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 net@net
 ```
 
@@ -43,31 +43,31 @@ By default, the gene ID type is set to `SYMBOL`. The other type can be set by `k
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, excludeFreq=1000)
+net <- refseq(inpSymbol, excludeFreq=1000)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 129 words (frequency and/or tfidf)
+#> Filtered 141 words (frequency and/or tfidf)
 net
 #> Type: refseq
 #> Number of words: 15
 #> Query: ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8
 #> Graph: V(13), E(34)
 #> Degree: excision(8)/complementation(7)/Defects(7)/nucleotide(7)/incision(6)
-#> 210.2 Kb
+#> 211.5 Kb
 ```
 
 For visualization, The edge label corresponding to correlation or cooccurrence values can be shown by `edgeLabel=TRUE`. The number of words to be shown on plot can be specified by `numWords`. The threshold of correlation can be specified by `corThresh`. The visualized network layout can be specified by passing `layout` argument. The text color can be changed by `colorText=TRUE`. The type of edge can be specified by `edgeLink`, which is by default `TRUE` (link will be used).
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, plotType="network",
+net <- refseq(inpSymbol, plotType="network",
                      edgeLabel=TRUE, corThresh=0.4,
                      numWords=20, colorText=TRUE, layout="kk")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 net@net
 ```
 
@@ -76,12 +76,12 @@ One of the main questions is which words can be clustered together among the wor
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, plotType="network", corThresh=0.2,
+net <- refseq(inpSymbol, plotType="network", corThresh=0.2,
                      numWords=20, tag=TRUE)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -127,14 +127,14 @@ One can specify `genePlotNum` for limiting the genes shown by ranking of how oft
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, plotType="network",
+net <- refseq(inpSymbol, plotType="network",
                      genePlot=TRUE, corThresh=0.5,
                      tag=TRUE, edgeLink=FALSE,
                      numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -156,14 +156,14 @@ The associated enriched pathways (if present) can be shown by specifying `genePa
 ```r
 library(concaveman)
 library(ggforce)
-net <- wcGeneSummary(inpSymbol, plotType="network",
+net <- refseq(inpSymbol, plotType="network",
                      genePathPlot="reactome", corThresh=0.5,
                      tag=TRUE, edgeLink=FALSE,
                      genePathPlotSig=0.05, numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -185,7 +185,7 @@ By default, the associated genes are plotted without colorization (grey) and wit
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, plotType="network",
+net <- refseq(inpSymbol, plotType="network",
                      genePlot=TRUE, corThresh=0.5,
                      colorize=TRUE, geneColor="pink",
                      colorText=TRUE,
@@ -194,7 +194,7 @@ net <- wcGeneSummary(inpSymbol, plotType="network",
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -219,11 +219,11 @@ The other basic usage of the package is producing a word cloud of summaries of i
 wc <- obtain_refseq(c("DDX41","PNKP","IRF3")) |> make_corpus() |> make_TDM() |> plot_wordcloud()
 #> Input genes: 3
 #>   Converted input genes: 3
-gwc <- wcGeneSummary(inpSymbol, plotType="wc")
+gwc <- refseq(inpSymbol, plotType="wc")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 gwc@wc
 ```
 
@@ -233,7 +233,7 @@ It accepts values of the `wordcloud()` function. `numWords` specifies how many w
 
 
 ```r
-gwc <- wcGeneSummary(inpSymbol,
+gwc <- refseq(inpSymbol,
                      plotType="wc",
                      numWords=100,
                      scaleFreq=2,
@@ -245,7 +245,7 @@ gwc <- wcGeneSummary(inpSymbol,
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 14 words (frequency and/or tfidf)
+#> Filtered 30 words (frequency and/or tfidf)
 gwc@wc
 ```
 
@@ -255,7 +255,7 @@ By default, `preserve=TRUE`, which indicates the funciton tries to preserve the 
 
 
 ```r
-gwc_p <- wcGeneSummary(inpSymbol,
+gwc_p <- refseq(inpSymbol,
                      plotType="wc",
                      numWords=100,
                      excludeFreq=5000,
@@ -268,7 +268,7 @@ gwc_p <- wcGeneSummary(inpSymbol,
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 14 words (frequency and/or tfidf)
+#> Filtered 30 words (frequency and/or tfidf)
 gwc_p@wc
 ```
 
@@ -307,7 +307,7 @@ Default is `1`, and the example specifying `2` is shown below.
 
 
 ```r
-gwc2 <- wcGeneSummary(inpSymbol,
+gwc2 <- refseq(inpSymbol,
                       ngram=2,
                       numWords=50,
                       plotType="wc",
@@ -321,7 +321,7 @@ gwc2 <- wcGeneSummary(inpSymbol,
 #> columns
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
@@ -335,16 +335,16 @@ The `enrich` option can be specified for `'kegg'` or `'reactome'`, this time we 
 
 
 ```r
-gwc3 <- wcGeneSummary(inpSymbol, plotType="wc",
+gwc3 <- refseq(inpSymbol, plotType="wc",
                       enrich="reactome",
                       tfidf=TRUE, numWords=50)
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
 #>   Converted input genes: 7
-#> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
 #> Performing enrichment analysis
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
@@ -361,7 +361,7 @@ In the word cloud, it is also possible to visualize tag information with colors.
 pal <- RColorBrewer::brewer.pal(8, "Dark2") 
 pal <- colorRampPalette(pal)(20)
 ## Cluster on whole matrix
-gwclWhole <- wcGeneSummary(inpSymbol,
+gwclWhole <- refseq(inpSymbol,
                      numWords=50,
                      plotType="wc",
                      tag=TRUE, tagWhole=TRUE,
@@ -374,7 +374,7 @@ gwclWhole <- wcGeneSummary(inpSymbol,
 #> columns
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Multiscale bootstrap... Done.
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
@@ -421,9 +421,6 @@ gwclWhole@pvpick
 #> [1] "incision"  "including" "light"    
 #> 
 #> $clusters[[10]]
-#> [1] "transcriptioncoupled" "upstream"            
-#> 
-#> $clusters[[11]]
 #>  [1] "basic"            "bivm"            
 #>  [3] "cachexia"         "cancer"          
 #>  [5] "cellular"         "characterized"   
@@ -434,13 +431,15 @@ gwclWhole@pvpick
 #> [15] "growth"           "hypersensitivity"
 #> [17] "immunoglobulin"   "increased"       
 #> [19] "motif"            "neighboring"     
-#> [21] "patients"         "processes"       
-#> [23] "read"             "referred"        
-#> [25] "severe"           "singlestrand"    
-#> [27] "skin"             "specific"        
-#> [29] "susceptibility"   "uvinduced"       
-#> [31] "variable"         "vii"             
-#> [33] "xp7"             
+#> [21] "processes"        "read"            
+#> [23] "referred"         "severe"          
+#> [25] "singlestrand"     "skin"            
+#> [27] "specific"         "susceptibility"  
+#> [29] "uvinduced"        "variable"        
+#> [31] "vii"              "xp7"             
+#> 
+#> $clusters[[11]]
+#> [1] "transcriptioncoupled" "upstream"            
 #> 
 #> $clusters[[12]]
 #>  [1] "atpdependent"        "basal"              
@@ -475,7 +474,7 @@ gwclWhole@pvpick
 #> 
 #> 
 #> $edges
-#>  [1]  13  30  97  98 101 104 106 107 110 117 118 119 124 130
+#>  [1]  13  30  97  98 101 104 106 107 110 113 117 118 123 129
 gwclWhole@wc
 ```
 
@@ -484,18 +483,18 @@ In this example querying ERCC genes, the term `DNA repair` is clustered as expec
 
 ## Visualization of PubMed information.
 
-Using `rentrez`, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing `genePlot`, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by `retMax` and `sortOrder`. Be sure to obtain [an api key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) when querying heavily, and specify in `apiKey` argument. These functions including `wcAbst` and `wcGeneSummary` serve as wrappers for several other functions, but a detailed explanation can be found in \@ref(tidy).
+Using `rentrez`, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing `genePlot`, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by `retMax` and `sortOrder`. Be sure to obtain [an api key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) when querying heavily, and specify in `apiKey` argument. These functions including `pubmed` and `refseq` serve as wrappers for several other functions, but a detailed explanation can be found in \@ref(tidy).
  
 
 ```r
-ab <- wcAbst(inpSymbol[1:3], retMax=20, apiKey=apiKey, plotType="wc")
+ab <- pubmed(inpSymbol[1:3], retMax=20, apiKey=apiKey, plotType="wc")
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
 ab@wc
 ```
 
-<img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc-1.png" width="100%" style="display: block; margin: auto;" />
 
 The returned PubMed IDs are stored in `pmids` slot.
 
@@ -514,23 +513,23 @@ As fetching the same information is not desirable and time consuming, the same o
 
 
 ```r
-abtag <- wcAbst(redo=ab, tag=TRUE, cl=snow::makeCluster(10), apiKey=apiKey)
+abtag <- pubmed(redo=ab, tag=TRUE, cl=snow::makeCluster(10), apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
-abtag2 <- wcAbst(redo=abtag, tag=TRUE, genePlot=TRUE,
+abtag2 <- pubmed(redo=abtag, tag=TRUE, genePlot=TRUE,
                  plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
 #> Resuming from the previous results
 #> Using previous pvclust results
 abtag2@net
 ```
 
-<img src="01-basic_usage_of_biotextgraph_files/figure-html/wcabst_wc_2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc_2-1.png" width="100%" style="display: block; margin: auto;" />
 
 If only the gene symbols are to be plotted, specify `onlyGene=TRUE`.
 
 
 ```r
-net <- wcAbst(inpSymbol[1:5], plotType="network", onlyGene=TRUE, apiKey=apiKey)
+net <- pubmed(inpSymbol[1:5], plotType="network", onlyGene=TRUE, apiKey=apiKey)
 #> Subsetting to the gene symbol in orgDb
 net@net
 ```
@@ -539,7 +538,7 @@ net@net
 
 ## Comparing two or more networks
 
-One can compare two or more networks by providing list of `biotext` objects produced by text mining various databases, like `wcGeneSummary`, `wcAbst`, `obtain_refseq`, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.
+One can compare two or more networks by providing list of `biotext` objects produced by text mining various databases, like `refseq`, `pubmed`, `obtain_refseq`, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.
 
 
 ```r
@@ -548,19 +547,19 @@ for (i in c(1,2,3,5,6,8,9,10,11,12,13,14,16)){
     cxcls <- c(cxcls, paste0("CXCL",i))
 }
 
-net1 <- wcGeneSummary(inpSymbol, plotType="network",
+net1 <- refseq(inpSymbol, plotType="network",
                       corThresh=0.5, numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-net2 <- wcGeneSummary(cxcls, plotType="network",
+#> Filtered 77 words (frequency and/or tfidf)
+net2 <- refseq(cxcls, plotType="network",
                       corThresh=0.5, numWords=20)
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
-net3 <- wcAbst(redo=ab, plotType="network",
+#> Filtered 77 words (frequency and/or tfidf)
+net3 <- pubmed(redo=ab, plotType="network",
                corThresh=0.2, numWords=20)
 #> Resuming from the previous results
 
@@ -593,7 +592,7 @@ keggPathways <- org.Hs.egPATH2EG
 mappedKeys <- mappedkeys(keggPathways)
 keggList <- as.list(keggPathways[mappedKeys])
 
-net1 <- wcGeneSummary(keggList$`04110`,
+net1 <- refseq(keggList$`04110`,
                       keyType="ENTREZID",
                       plotType="network",
                       corThresh=0.3,
@@ -602,7 +601,7 @@ net1 <- wcGeneSummary(keggList$`04110`,
                       tfidf=TRUE)
 #> Input genes: 124
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -614,7 +613,7 @@ net1 <- wcGeneSummary(keggList$`04110`,
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
 
-net2 <- wcGeneSummary(keggList$`04210`,
+net2 <- refseq(keggList$`04210`,
                       keyType="ENTREZID",
                       plotType="network",
                       corThresh=0.3,
@@ -623,7 +622,7 @@ net2 <- wcGeneSummary(keggList$`04210`,
                       tag=TRUE)
 #> Input genes: 87
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -682,14 +681,14 @@ Filter words using ORA threshold and frequency threshold by setting `ora=TRUE`.
 
 
 ```r
-net <- wcGeneSummary(inpSymbol, plotType="network",
+net <- refseq(inpSymbol, plotType="network",
                      ora=TRUE, edgeLink=FALSE)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
-#> Filtered 148 words (ORA)
+#> Filtered 0 words (ORA)
 net@net
 ```
 
@@ -711,7 +710,7 @@ Using [`udpipe`](https://github.com/bnosac/udpipe) package ([Straka and Strakov√
 
 
 ```r
-p <- wcGeneSummary::wcGeneSummary(c("DDX41","PNKP","ERCC2"),
+p <- biotextgraph::refseq(c("DDX41","PNKP","ERCC2"),
                                   plotType="network",
                                   useUdpipe=TRUE,
                                   udpipeModel="~/english-ewt-ud-2.5-191206.udpipe")
@@ -719,7 +718,7 @@ p <- wcGeneSummary::wcGeneSummary(c("DDX41","PNKP","ERCC2"),
 #> Input genes: 3
 #>   Converted input genes: 3
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 p@net
 ```
 
@@ -731,20 +730,20 @@ Font can be specified by `fontFamily`, which affects all the labels including ed
 
 
 ```r
-load(system.file("extdata", "sysdata.rda", package = "wcGeneSummary"))
+load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 degs <- d3degUpAssetta2016
 ## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)
 sysfonts::font_add(family="alien",regular="SFAlienEncounters.ttf")
 showtext::showtext_auto()
-p <- wcGeneSummary::wcGeneSummary(degs,
-                                  plotType="network",
-                                  numWords=50, genePlot=TRUE,
-                                  fontFamily="alien",
-                                  colorText=TRUE)
+p <- biotextgraph::refseq(degs,
+                          plotType="network",
+                          numWords=50, genePlot=TRUE,
+                          fontFamily="alien",
+                          colorText=TRUE)
 #> Input genes: 636
 #>   Converted input genes: 555
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 p@net
 ```
 
@@ -856,11 +855,10 @@ sessionInfo()
 #> [125] promises_1.2.0.1       gridExtra_2.3         
 #> [127] codetools_0.2-18       MASS_7.3-57           
 #> [129] rjson_0.2.21           withr_2.5.0           
-#> [131] wcGeneSummary_0.99.0   GenomeInfoDbData_1.2.9
-#> [133] parallel_4.2.1         ISOcodes_2022.09.29   
-#> [135] ggfun_0.0.9            grid_4.2.1            
-#> [137] tidyr_1.3.0            HDO.db_0.99.1         
-#> [139] rmarkdown_2.20         downlit_0.4.2         
-#> [141] NLP_0.2-1              shiny_1.7.4           
-#> [143] base64enc_0.1-3
+#> [131] GenomeInfoDbData_1.2.9 parallel_4.2.1        
+#> [133] ISOcodes_2022.09.29    ggfun_0.0.9           
+#> [135] grid_4.2.1             tidyr_1.3.0           
+#> [137] HDO.db_0.99.1          rmarkdown_2.20        
+#> [139] downlit_0.4.2          NLP_0.2-1             
+#> [141] shiny_1.7.4            base64enc_0.1-3
 ```

@@ -2,7 +2,7 @@
 
 # Perform each process separately {#tidy}
 
-The same process as functions like `wcGeneSummary` can be performed separately. This is useful for piped processing and for individual customization in each process.
+The same process as functions like `refseq` can be performed separately. This is useful for piped processing and for individual customization in each process.
 
 
 ```r
@@ -27,7 +27,7 @@ btg
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(33), E(237)
 #> Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)
-#> 302.8 Kb
+#> 304.3 Kb
 
 ## Text of enrichment analysis results
 btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
@@ -48,5 +48,23 @@ btg2
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(30), E(46)
 #> Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(5)
-#> 291.2 Kb
+#> 292.4 Kb
+```
+
+
+## Use of gene descriptions in Alliance of Genome Resources
+
+We can use gene descriptions of alliance of genome resources, that can be obtained from [here](https://www.alliancegenome.org/downloads). Download the file and call `obtain_alliance` function. The default path is set to the working directory and human gene description.
+
+
+```r
+btg_agr <- obtain_alliance(c("DDX41","PNKP","IRF3")) |>
+  make_corpus() |> ## No filter this time
+  make_TDM() |>
+  make_graph() |>
+  graph_cluster() |>
+  process_network_gene(gene_plot=TRUE, gene_path_plot="reactome") |>
+  plot_biotextgraph(edge_link=FALSE)
+#> Input genes: 3
+#> Found 21 enriched term
 ```

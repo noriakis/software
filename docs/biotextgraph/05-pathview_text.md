@@ -39,7 +39,7 @@ grid::rasterGrob(readPNG("ko00270.pathview.png"), interpolate=FALSE)
 ![raw pathview plot](https://github.com/noriakis/software/blob/main/images/ko00270.pathview.png?raw=true){width=500px}
 
 To use the `pathviewText()` one should specify which database to retrieve the text, `"refseq"` or `"abstract"`.
-The default is "refseq", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. Thus, we convert the KO number to EC number using KEGG REST API, and fetches the description using `wcEC()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm` obtained by `onlyTerm=TRUE`, and `termMap`, which map the KO and EC. Note that `termMap` must have `query` and `description` columns when specifying manually (like KO number and its ortholog name). Also, `node.types="ortholog"` must be passed to `pathview`.
+The default is "refseq", which fetches information from RefSeq database. In this case, KO number is not included in RefSeq, thus the abstract is chosen. However, querying in KO number itself is not useful. Thus, we convert the KO number to EC number using KEGG REST API, and fetches the description using `enzyme()` function, and query the enzyme name in PubMed. In this way, one must provide `searchTerm` obtained by `onlyTerm=TRUE`, and `termMap`, which map the KO and EC. Note that `termMap` must have `query` and `description` columns when specifying manually (like KO number and its ortholog name). Also, `node.types="ortholog"` must be passed to `pathview`.
 
 
 ```r
@@ -51,9 +51,9 @@ ecko$KO <- sapply(strsplit(ecko$V2, ":"), "[", 2)
 filt <- ecko[ ecko$KO %in% kos, ]
 ecnum <- filt$EC
 termMap <- filt[,c("KO","EC")] |> `colnames<-`(c("query","number"))
-ecQuery <- wcEC("../enzyme.dat", ecnum = ecnum, onlyTerm =TRUE)
+ecQuery <- enzyme("../enzyme.dat", ecnum = ecnum, onlyTerm =TRUE)
 #> Processing EC file
-ecMap <- wcEC("../enzyme.dat", ecnum = ecnum, onlyDf =TRUE)
+ecMap <- enzyme("../enzyme.dat", ecnum = ecnum, onlyDf =TRUE)
 #> Processing EC file
 termMap <- merge(termMap, ecMap[,c("number","desc")], by="number") |>
   `colnames<-`(c("number","query","description"))

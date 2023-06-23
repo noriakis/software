@@ -1,11 +1,11 @@
 --- 
 title: "biotextgraph"
 author: "Noriaki Sato"
-date: "2023-05-27"
+date: "2023-06-23"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
-url: https://noriakis.github.io/software/wcGeneSummary
+url: https://noriakis.github.io/software/biotextgraph
 # cover-image: path to the social sharing image like images/cover.jpg
 biblio-style: apalike
 csl: chicago-fullnote-bibliography.csl
@@ -13,7 +13,7 @@ csl: chicago-fullnote-bibliography.csl
 
 # About
 
-This package aims to visualize the word and text information contained in the gene or the other omics identifiers such as microbiome, and identify important words among the clusters, and compare the clusters based on those information. It contributes to understanding the gene clusters and aid in easy interpretation and visualization. The documentation using bookdown is available [here](https://noriakis.github.io/software/wcGeneSummary), and the web server using `shinyapps.io` is [here](https://nsato.shinyapps.io/osplotweb/).
+This package aims to visualize the word and text information contained in the gene or the other omics identifiers such as microbiome, and identify important words among the clusters, and compare the clusters based on those information. It contributes to understanding the gene clusters and aid in easy interpretation and visualization. The documentation using bookdown is available [here](https://noriakis.github.io/software/biotextgraph), and the web server using `shinyapps.io` is [here](https://nsato.shinyapps.io/biotextgraphweb/).
 
 
 

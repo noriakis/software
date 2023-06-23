@@ -12,14 +12,14 @@ library(biotextgraph)
 library(ggplot2)
 library(ggraph)
 library(RColorBrewer)
-load(system.file("extdata", "sysdata.rda", package = "wcGeneSummary"))
+load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 ```
 
 We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases ([Geistlinger et al. 2022](https://bugsigdb.org/Main_Page)). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If `target="title"`, the title of the corresponding articles will be summarized.
 
 
 ```r
-basic <- wcBSDB(c("Veillonella dispar","Neisseria flava"),tag=FALSE, plotType="wc",
+basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag=FALSE, plotType="wc",
     curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Set2"),numWords=80,argList=list(min.freq=1))
 #> Input microbes: 2
@@ -59,7 +59,7 @@ If `target="abstract"`, the corresponding abstract of curated publications will 
 
 
 ```r
-basic2 <- wcBSDB(c("Veillonella dispar","Neisseria flava"),tag=TRUE, plotType="wc",
+basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag=TRUE, plotType="wc",
     curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Dark2"),numWords=80)
 #> Input microbes: 2
@@ -85,7 +85,7 @@ basic2@wc
 
 <img src="02-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;" />
 
-For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in `wcGeneSummary`.
+For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in `refseq`.
 
 
 ```r
@@ -117,11 +117,11 @@ filter |> head(n=20)
 #> risk          33        risk
 ```
 The network visualization is possible by enabling `plotType="network"`.
-The same parameters that can be passed to `wcGeneSummary` can be used.
+The same parameters that can be passed to `refseq` can be used.
 
 
 ```r
-net <- wcBSDB(c("Neisseria","Veillonella"),
+net <- bugsigdb(c("Neisseria","Veillonella"),
     curate=TRUE,
     target="title",
     pre=TRUE,
@@ -145,7 +145,7 @@ The words-to-species relationship can be plotted by `mbPlot=TRUE`, useful for as
 
 
 ```r
-net2 <- wcBSDB(c("Veillonella dispar","Neisseria flava",
+net2 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
                  "Veillonella parvula","Akkermansia muciniphila"),
             mbPlot=TRUE,
             curate=TRUE,
@@ -177,7 +177,7 @@ As the BugSigDB contains the relationship between bacterial taxonomy and disease
  
 
 ```r
-net3 <- wcBSDB(c("Veillonella dispar","Neisseria flava",
+net3 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
     "Veillonella parvula","Akkermansia muciniphila"), mbPlot=TRUE,
     curate=TRUE,target="title",pre=TRUE,plotType="network",
     additionalRemove=filter$word, disPlot=TRUE, colorize=TRUE,
@@ -199,7 +199,7 @@ Other than curated databases, the PubMed query can also be performed with settin
 
 
 ```r
-net4 <- wcBSDB(c("Akkermansia muciniphila"),
+net4 <- bugsigdb(c("Akkermansia muciniphila"),
     curate=FALSE,target="title",pre=TRUE,plotType="network",
     additionalRemove=filter$word,
     numWords=40, corThresh=0.2, colorText=TRUE, colorize=TRUE,
@@ -217,7 +217,7 @@ net4@net
 
 ## Enzymes
 
-For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `wcEC` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
+For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `enzyme` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
 
 - [enzyme.dat - from Expasy](https://enzyme.expasy.org/)
 - [speclist.txt - UniProt Controlled vocabulary of species](https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt)
@@ -225,7 +225,7 @@ For microbiome analysis, it is often the case that investigating coded enzymes i
 
 ```r
 
-vp <- wcBSDB(c("Veillonella parvula"),
+vp <- bugsigdb(c("Veillonella parvula"),
                  plotType="network", layout="nicely",
                 curate=TRUE, target="title", edgeLink=TRUE,
                 mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag=TRUE,
@@ -262,13 +262,13 @@ metab <- readxl::read_excel(
   "../41467_2022_33050_MOESM8_ESM.xlsx",skip = 7)
 ```
 
-Pass this tibble, as well as the columns to represent `taxonomy`, `metabolites`, and `quantitative values to threshold` to `metCol`. In this case, `metCol <- c("Metagenomic species", "Metabolite", "Spearman's ρ")`. `wcMan` function can be also used for the general purpose of adding external information.
+Pass this tibble, as well as the columns to represent `taxonomy`, `metabolites`, and `quantitative values to threshold` to `metCol`. In this case, `metCol <- c("Metagenomic species", "Metabolite", "Spearman's ρ")`. `manual` function can be also used for the general purpose of adding external information.
 
 
 
 ```r
 
-metabEx <- wcBSDB(c("Akkermansia muciniphila"),
+metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 edgeLink=FALSE,
                 curate=TRUE,
                 corThresh=0.3,
@@ -307,7 +307,7 @@ By default, the category other than words are plotted without node and colorizat
 
 ```r
 
-metabEx <- wcBSDB(c("Akkermansia muciniphila"),
+metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 edgeLink=FALSE,
                 curate=TRUE,
                 target="abstract",
@@ -466,7 +466,7 @@ input$query <- input$species
 library(ggfx) # use ggfx
 micro <- plotEigengeneNetworksWithWords(NA, sampled,
                                useWC = TRUE, # Use wordcloud
-                               useFunc = "wcMan", # Use manual function (as the input is custom data.frame)
+                               useFunc = "manual", # Use manual function (as the input is custom data.frame)
                                useDf=input,dendPlot="ggplot",dhc=dhc,
                                useggfx="with_outer_glow",
                                ggfxParams=list(colour="white",expand=5),

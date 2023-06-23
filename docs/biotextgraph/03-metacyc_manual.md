@@ -71,12 +71,12 @@ input3 <- parseMetaCycPathway(file, candidateSpecies, withTax=TRUE, clear=TRUE)
 ## Not shown because of the long text
 ```
 
-These data frames can be passed to `wcMan` function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have `"text"` column to make word cloud or a network. 
+These data frames can be passed to `manual` function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have `"text"` column to make word cloud or a network. 
 
 
 ```r
 
-metawc <- wcMan(input, plotType="wc",
+metawc <- manual(input, plotType="wc",
 				additionalRemove=c("cits","frame","pathway"),
                 numWords=100,
                  argList=list(
@@ -100,14 +100,16 @@ For plotting the network, query column must be specified if plotting the query w
 ```r
 
 
-metanet <- wcMan(input[,c("query","text")], 
+metanet <- manual(input[,c("query","text")], 
 				additionalRemove=c("cits","frame","pathway"),
                 numWords=20, plotType="network", colorText=TRUE)
 metanet
 #> Type: manual
 #> Number of words: 20
-#> 
-#> 627.9 Kb
+#> Query: 
+#> Graph: V(20), E(65)
+#> Degree: cluster(12)/gene(11)/addition(10)/acid(9)/Biosynthesis(9)
+#> 634.7 Kb
 metanet@net
 ```
 
@@ -118,7 +120,7 @@ For column other than the query and text, in this example `commonName` and `path
 
 ```r
 
-metanet2 <- wcMan(input, 
+metanet2 <- manual(input, 
 				additionalRemove=c("cits","frame","pathway"),
                 numWords=20, plotType="network", colorText=TRUE,
                 tag=TRUE)
@@ -136,8 +138,10 @@ metanet2 <- wcMan(input,
 metanet2
 #> Type: manual
 #> Number of words: 20
-#> 
-#> 714.6 Kb
+#> Query: 
+#> Graph: V(48), E(91)
+#> Degree: Escherichia coli(24)/cluster(12)/gene(11)/addition(10)/acid(9)
+#> 723.4 Kb
 metanet2@net
 ```
 
@@ -154,7 +158,7 @@ input <- parseMetaCycPathway(file, candSp="all", withTax = TRUE,noComma=TRUE)
 input2 <- input[grepl("TAX-2157",input$taxonomicRange),]
 input2 <- input2[!duplicated(input2$pathwayID),]
 onlyText <- data.frame(input2[,c("text")]) |> `colnames<-`(c("text"))
-input2Net <- wcMan(onlyText, plotType="network", additionalRemove=c("cits","frame",
+input2Net <- manual(onlyText, plotType="network", additionalRemove=c("cits","frame",
                                                "gene","genes","proteins",
                                                "pathway","pathways","enzyme","enzymes",
                                                "bacteria","reaction","protein","biosynthesis",
@@ -166,7 +170,7 @@ input2Net@net
 
 Also, if you want to search for the NCBI tax identifiers and want to use species names as queries,
 First you should convert the IDs using `convertMetaCyc` function using `taxonomizr`.
-Next you search for converted names for the interested species, and input this data frame to `wcMan`.
+Next you search for converted names for the interested species, and input this data frame to `manual`.
 
 
 
@@ -176,7 +180,7 @@ input3 <- input[grepl("Bifidobacterium",input$converted),]
 input3 <- input3[!duplicated(input3$pathwayID),]
 input3$query <- rep("Bifidobacterium",nrow(input3))
 input3 <- input3[,c("text","pathwayID","query")]
-input3Net <- wcMan(input3, plotType="network", queryPlot=TRUE,
+input3Net <- manual(input3, plotType="network", queryPlot=TRUE,
                    additionalRemove=c("cits","frame",
                     "gene","genes","proteins",
                     "pathway","pathways","enzyme","enzymes",

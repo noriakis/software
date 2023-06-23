@@ -13,14 +13,14 @@ library(clusterProfiler)
 library(RColorBrewer)
 ```
 
-In this example, a Bayesian network showing the module eigengenes relationship are inferred using `boot.strength` function in `bnlearn` from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by `wcGeneSummary()`, and can be exported to the format of `Cytoscape.js` or `vis.js`. In this way, module relationship can be interactively inspected with the functional implications. The other functions like `wcAbst()` can be used, however, you shold specify API keys for the function makes multiple queries.
+In this example, a Bayesian network showing the module eigengenes relationship are inferred using `boot.strength` function in `bnlearn` from the weighted gene correlation network analysis (WGCNA) results. The modules are annotated by word clouds produced by `refseq()`, and can be exported to the format of `Cytoscape.js` or `vis.js`. In this way, module relationship can be interactively inspected with the functional implications. The other functions like `pubmed()` can be used, however, you shold specify API keys for the function makes multiple queries.
 
 
 ```r
 ## In this example, we simulate WGCNA results.
 ## you can just use results from WGCNA.
 ## Assuming WGCNA results are stored in `mod`
-mod <- wcGeneSummary::returnExample()
+mod <- biotextgraph::returnExample()
 MEs <- mod$MEs
 modColors <- mod$colors
 ensg <- names(modColors)
@@ -76,7 +76,7 @@ for (i in V(g)$name){
     if (plotType=="bar"){
         plt <- makeBar(entre, keyType="ENTREZID") # get barplot
     } else { ## If wordcloud
-        # A <- wcGeneSummary(entre, keyType="ENTREZID",
+        # A <- refseq(entre, keyType="ENTREZID",
         #                    argList=list(rot.per=0.4,
         #                                 colors=brewer.pal(10,
         #                                                   sample(row.names(RColorBrewer::brewer.pal.info), 1)),
@@ -101,15 +101,15 @@ for (i in V(g)$name){
 #> [1] "ME1"
 #> Input genes: 12
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> [1] "ME2"
 #> Input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> [1] "ME3"
 #> Input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 V(g)$image <- images
 
 ## Node shape
@@ -175,7 +175,7 @@ knitr::include_url("https://noriakis.github.io/cyjs_test/visjs")
 
 ## Annotating by pyramid plots
 
-The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with wcGeneSummary, which plot additional word information on a dendrogram with one line.
+The relationship between gene clusters are often investigated in clustering analysis like WGCNA. As workflows involving gene clustering analysis typically plot dendrogram and heatmap of module eigengenes using `plotEigengeneNetworks`, it is useful to combine with biotextgraph, which plot additional word information on a dendrogram with one line.
 
 
 ```r
@@ -259,7 +259,7 @@ plotEigengeneNetworksWithWords(MEs,
 
 <img src="04-custom-usage_files/figure-html/wgcnaInt-1.png" width="100%" style="display: block; margin: auto;" />
 
-For examining enriched pathway names in the dendrograms, specify `argList` to `wcGeneSummary`, like `list(enrich="kegg")`.
+For examining enriched pathway names in the dendrograms, specify `argList` to `refseq`, like `list(enrich="kegg")`.
 
 
 ```r
@@ -591,13 +591,13 @@ gro <- plotEigengeneNetworksWithWords(mod$MEs, mod$colors, candidateNodes=c("ME2
 #> columns
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 13
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 ggplotify::as.ggplot(gro[[1]]$plot)
 ```
 
@@ -1004,23 +1004,23 @@ simExample <- returnSim(returnExample()$color,
 #> Input genes: 12
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
-#> Filtered 109 words (ORA)
+#> Filtered 0 words (ORA)
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
-#> Filtered 238 words (ORA)
+#> Filtered 0 words (ORA)
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
-#> Filtered 148 words (ORA)
+#> Filtered 0 words (ORA)
 heatmap(simExample)
 ```
 
@@ -1036,17 +1036,17 @@ simExample <- returnSim(returnExample()$color,
 #> Input genes: 12
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 heatmap(simExample)
 ```
 
@@ -1064,17 +1064,17 @@ simExample <- returnSim(returnExample()$color,
 #> Input genes: 12
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
-#> Filtered 65 words (frequency and/or tfidf)
+#> Filtered 77 words (frequency and/or tfidf)
 heatmap(simExample)
 ```
 
