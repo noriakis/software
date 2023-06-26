@@ -66,6 +66,9 @@
 <span class="header-section-number">1</span> About<a class="anchor" aria-label="anchor" href="#about"><i class="fas fa-link"></i></a>
 </h1>
 <p><code>ggkegg</code> fetches information from KEGG and parse, analyze and visualize them using <code>ggplot2</code> and <code>ggraph</code>, combined with the other packages investigating biological functions using KEGG. This package aims to visualize the complex components of KEGG using the grammar of graphics. For Python, please use <a href="https://pykegg.readthedocs.io"><code>pykegg</code></a> using <code>plotnine</code>, which offers the almost same functionality as <code>ggkegg</code> used in conjuction with the package such as <code>gseapy</code> and <code>PyDESeq2</code> and single-cell transcriptomics analysis library <code>scanpy</code>.</p>
+<div class="rmdwarning">
+<p><code>ggkegg</code> uses KEGG API, and is restricted to academic use by academic users belonging to academic institutions.</p>
+</div>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># devtools::install_github("noriakis/ggkegg")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">ggkegg</span><span class="op">)</span></span></code></pre></div>
@@ -74,7 +77,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Obtain and parse the KEGG pathway</span></span>
-<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## node manipulation</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## node manipulation</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>convert_hsa<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"hsa"</span><span class="op">)</span>,</span>
 <span>         convert_map<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## convert IDs for organism hsa and pathway</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span> <span class="co">## ggraph plot</span></span>
@@ -114,7 +117,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-06-14.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-06-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

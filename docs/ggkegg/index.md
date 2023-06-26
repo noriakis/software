@@ -1,7 +1,7 @@
---- 
+---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-06-14"
+date: "2023-06-26"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -16,6 +16,10 @@ csl: chicago-fullnote-bibliography.csl
 # About
 
 `ggkegg` fetches information from KEGG and parse, analyze and visualize them using `ggplot2` and `ggraph`, combined with the other packages investigating biological functions using KEGG. This package aims to visualize the complex components of KEGG using the grammar of graphics. For Python, please use [`pykegg`](https://pykegg.readthedocs.io) using `plotnine`, which offers the almost same functionality as `ggkegg` used in conjuction with the package such as `gseapy` and `PyDESeq2` and single-cell transcriptomics analysis library `scanpy`.
+
+::: rmdwarning
+`ggkegg` uses KEGG API, and is restricted to academic use by academic users belonging to academic institutions.
+:::
 
 
 ```r
