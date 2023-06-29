@@ -88,7 +88,9 @@ random grouping from <code>PRJEB9584</code>. The data was loaded with
 <code>100003</code> (<code>s__Alistipes shahii</code>) is loaded.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Specify the output of `merge` command with grouping</span></span>
-<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"merge_midas2_sample"</span>, cl<span class="op">=</span><span class="va">randomGroup</span>, candSp<span class="op">=</span><span class="st">"100003"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"merge_midas2_sample"</span>, cl<span class="op">=</span><span class="va">randomGroup</span>, candSp<span class="op">=</span><span class="st">"100003"</span>,</span>
+<span>                    loadSummary<span class="op">=</span><span class="cn">TRUE</span>,loadInfo<span class="op">=</span><span class="cn">TRUE</span>,loadDepth<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                    taxtbl<span class="op">=</span><span class="va">taxtbl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">## Examine sample object</span></span>
@@ -104,6 +106,20 @@ random grouping from <code>PRJEB9584</code>. The data was loaded with
 <span><span class="co">##   Species cleared gene filter: 1</span></span>
 <span><span class="co">## 7.2 Mb</span></span></code></pre>
 <div class="section level3">
+<h3 id="filtering">Filtering<a class="anchor" aria-label="anchor" href="#filtering"></a>
+</h3>
+<p>The species that satisfies the filtering criteria specified can be
+accessed by the slot <code>clearSnps</code> storing species ID. If
+<code>taxtbl</code> was provided on <code>load*</code> functions,
+<code>clearSnpsSpecies</code> has species name.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">clearSnps</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "100003"</span></span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">clearSnpsSpecies</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes;s__Alistipes shahii"</span></span></code></pre>
+</div>
+<div class="section level3">
 <h3 id="calling-consensus-sequence">Calling consensus sequence<a class="anchor" aria-label="anchor" href="#calling-consensus-sequence"></a>
 </h3>
 <p>You can call the consensus sequence based on SNV frequency table. The
@@ -111,14 +127,14 @@ implementation and filtering options are based on the original
 <code>MIDAS</code> script (<code>call_consensus.py</code>). The
 resulting FASTA will be written to the current directory, and is loaded
 into <code>fastaList</code> slot.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KlausVigo/phangorn" class="external-link">phangorn</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/" class="external-link">ggtree</a></span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/consensusSeqMIDAS2.html">consensusSeqMIDAS2</a></span><span class="op">(</span><span class="va">stana</span>, species<span class="op">=</span><span class="st">"100003"</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Beginning calling for 100003</span></span>
 <span><span class="co">##   Site number: 5019</span></span>
 <span><span class="co">##   Outputting consensus sequence to 100003_consensus.fasta</span></span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tree estimation and visualization by `phangorn` and `ggtree`</span></span>
 <span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html" class="external-link">dist.ml</a></span><span class="op">(</span><span class="va">stana</span><span class="op">@</span><span class="va">fastaList</span><span class="op">$</span><span class="va">`100003`</span><span class="op">)</span></span>
 <span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/NJ.html" class="external-link">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span></span>
@@ -128,6 +144,27 @@ into <code>fastaList</code> slot.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tippoint.html" class="external-link">geom_tippoint</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">tp</span></span></code></pre></div>
 <p><img src="usage_of_stana_files/figure-html/cons-1.png" width="480"></p>
+<div class="section level4">
+<h4 id="identify-key-elements-for-differentiating-groups">Identify key elements for differentiating groups<a class="anchor" aria-label="anchor" href="#identify-key-elements-for-differentiating-groups"></a>
+</h4>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/mbq/Boruta/" class="external-link">Boruta</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## You can provide preprocessed matrix to `mat`</span></span>
+<span><span class="fu"><a href="../reference/doBoruta.html">doBoruta</a></span><span class="op">(</span><span class="va">stana</span>, target <span class="op">=</span> <span class="st">"gene"</span>, sp<span class="op">=</span><span class="st">"100003"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Using grouping from the slot</span></span>
+<span><span class="co">## If needed, please provide preprocessed matrix of genes to `mat`</span></span>
+<span><span class="co">## Feature number: 21806</span></span>
+<span><span class="co">## Performing Boruta</span></span></code></pre>
+<pre><code><span><span class="co">## $boruta</span></span>
+<span><span class="co">## Boruta performed 99 iterations in 28.91061 secs.</span></span>
+<span><span class="co">## Tentatives roughfixed over the last 99 iterations.</span></span>
+<span><span class="co">##  13 attributes confirmed important: UHGG000008_01798, UHGG006336_00186,</span></span>
+<span><span class="co">## UHGG032322_01036, UHGG044133_01185, UHGG060667_01243 and 8 more;</span></span>
+<span><span class="co">##  21793 attributes confirmed unimportant: UHGG000008_00008,</span></span>
+<span><span class="co">## UHGG000008_00009, UHGG000008_00010, UHGG000008_00012, UHGG000008_00015</span></span>
+<span><span class="co">## and 21788 more;</span></span></code></pre>
+</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
