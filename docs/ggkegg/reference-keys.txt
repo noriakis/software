@@ -30,3 +30,6 @@ projecting-the-gene-regulatory-networks-on-kegg-map
 projection-on-to-the-raw-kegg-map
 analyzing-cluster-marker-genes-in-single-cell-transcriptomics
 example-for-composing-multiple-pathways
+customizing-global-map-visualization
+preprocessing
+plotting

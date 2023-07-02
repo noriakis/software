@@ -1,7 +1,9 @@
 
 
 
-# Usecases 
+
+# Usecases
+
 
 ## Visualizing numerical attributes from DESeq2
 
@@ -520,3 +522,219 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
 <img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+## Customizing global map visualization
+
+One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`.
+
+
+```r
+load("../lfcs.rda") ## Storing named vector of KOs storing LFCs and significant KOs
+load("../func_cat.rda") ## Functional categories for hex values in ko01100
+
+lfcs |> head()
+#>  ko:K00013  ko:K00018  ko:K00031  ko:K00042  ko:K00065 
+#> -0.2955686 -0.4803597 -0.3052872  0.9327130  1.0954976 
+#>  ko:K00087 
+#>  0.8713860
+signame |> head()
+#> [1] "ko:K00013" "ko:K00018" "ko:K00031" "ko:K00042"
+#> [5] "ko:K00065" "ko:K00087"
+func_cat |> head()
+#> # A tibble: 6 × 3
+#>   hex     class                                        top  
+#>   <chr>   <chr>                                        <chr>
+#> 1 #B3B3E6 Metabolism; Carbohydrate metabolism          Amin…
+#> 2 #F06292 Metabolism; Biosynthesis of other secondary… Bios…
+#> 3 #FFB3CC Metabolism; Metabolism of cofactors and vit… Bios…
+#> 4 #FF8080 Metabolism; Nucleotide metabolism            Puri…
+#> 5 #6C63F6 Metabolism; Carbohydrate metabolism          Glyc…
+#> 6 #FFCC66 Metabolism; Amino acid metabolism            Bios…
+
+## Named vector for Assigning functional category 
+hex <- func_cat$hex |> setNames(func_cat$hex)
+class <- func_cat$class |> setNames(func_cat$hex)
+hex |> head()
+#>   #B3B3E6   #F06292   #FFB3CC   #FF8080   #6C63F6   #FFCC66 
+#> "#B3B3E6" "#F06292" "#FFB3CC" "#FF8080" "#6C63F6" "#FFCC66"
+class |> head()
+#>                                                   #B3B3E6 
+#>                     "Metabolism; Carbohydrate metabolism" 
+#>                                                   #F06292 
+#> "Metabolism; Biosynthesis of other secondary metabolites" 
+#>                                                   #FFB3CC 
+#>        "Metabolism; Metabolism of cofactors and vitamins" 
+#>                                                   #FF8080 
+#>                       "Metabolism; Nucleotide metabolism" 
+#>                                                   #6C63F6 
+#>                     "Metabolism; Carbohydrate metabolism" 
+#>                                                   #FFCC66 
+#>                       "Metabolism; Amino acid metabolism"
+```
+
+### Preprocessing
+
+We obtained `tidygraph` of ko01100, and process the graph. First, we append edges corresponding to inter-compound relationships. Although most of the reactions are reversible and by default adds two edges in `process_reaction`, we specify `single_edge=TRUE` here for visualization. Also, converting compound ID and KO ID and append attributes to graph. 
+
+
+```r
+g <- ggkegg::pathway("ko01100")
+g <- g |> process_reaction(single_edge=TRUE)
+g <- g |> mutate(x=NULL, y=NULL)
+g <- g |> activate(nodes) |> mutate(compn=convert_id("compound",
+                                          first_arg_comma = FALSE))
+g <- g |> activate(edges) |> mutate(kon=convert_id("ko",edge=TRUE))
+```
+Next we append values such as KOs and degrees to graph. In addition, here we append additional attribute, like which species have the enzymes, to the graph. This type of information can be obtained from stratified output of `HUMAnN3`.
+
+
+```r
+g2 <- g |> activate(edges) |> 
+  mutate(kolfc=edge_numeric(lfcs), ## Pre-computed LFCs
+         siglgl=name %in% signame) |> ## Whether the KO is significant
+  activate(nodes) |>
+  filter(type=="compound") |> ## Subset to compound nodes and 
+  mutate(Degree=centrality_degree(mode="all")) |> ## Calculate degree
+  activate(nodes) |>
+  filter(Degree>2) |> ## Filter based on degree
+  activate(edges) |>
+  mutate(Species=ifelse(kon=="lyxK", "Escherichia coli", "Others"))
+```
+
+We next check overall classes of these KOs based on ko01100, and the class with the highest number of KOs was Carbohydrate metabolism.
+
+
+```r
+class_table <- (g |> activate(edges) |>
+  mutate(siglgl=name %in% signame) |>
+  filter(siglgl) |>
+  data.frame())$fgcolor |>
+  table() |> sort(decreasing=TRUE)
+names(class_table) <- class[names(class_table)]
+class_table
+#>                     Metabolism; Carbohydrate metabolism 
+#>                                                      21 
+#>          Metabolism; Glycan biosynthesis and metabolism 
+#>                                                      16 
+#>        Metabolism; Metabolism of cofactors and vitamins 
+#>                                                      11 
+#>                       Metabolism; Amino acid metabolism 
+#>                                                       8 
+#>                       Metabolism; Nucleotide metabolism 
+#>                                                       7 
+#>    Metabolism; Metabolism of terpenoids and polyketides 
+#>                                                       3 
+#>                           Metabolism; Energy metabolism 
+#>                                                       3 
+#>   Metabolism; Xenobiotics biodegradation and metabolism 
+#>                                                       3 
+#>                     Metabolism; Carbohydrate metabolism 
+#>                                                       2 
+#>                            Metabolism; Lipid metabolism 
+#>                                                       1 
+#> Metabolism; Biosynthesis of other secondary metabolites 
+#>                                                       1 
+#>             Metabolism; Metabolism of other amino acids 
+#>                                                       1
+```
+
+### Plotting
+
+We first visualize overall global map using the default values in `ko01100` and calculated degree.
+
+
+```r
+ggraph(g2, layout="fr")+
+  geom_edge_link0(aes(color=I(fgcolor)), width=0.1)+
+  geom_node_point(aes(fill=I(fgcolor), size=Degree), color="black", shape=21)+
+  theme_graph()
+```
+
+<img src="04-usecases_files/figure-html/glplot1-1.png" width="100%" style="display: block; margin: auto;" />
+
+We can apply various geoms to components in KEGG PATHWAY for the effective visualization. In this example, we highlighted significant edges (KOs) colored by their LFCs by `ggfx`, point size corresponding to degree in the network, and we showed edge label of significant KO names. KO names were colored by `Species` attributes. This time we set this to `Escherichia coli` and `Others`.
+
+
+```r
+ggraph(g2, layout="fr") +
+  geom_edge_diagonal(color="grey50", width=0.1)+ ## Base edge
+  ggfx::with_outer_glow(
+    geom_edge_diagonal(aes(color=kolfc,filter=siglgl),
+                       angle_calc = "along",
+                       label_size=2.5),
+    colour="gold", expand=3
+  )+ ## Highlight significant edges
+  scale_edge_color_gradient2(midpoint = 0, mid = "white",
+                                    low=scales::muted("blue"),
+                                    high=scales::muted("red"),
+                                    name="LFC")+ ## Set gradient color
+  geom_node_point(aes(fill=bgcolor,size=Degree),
+                  shape=21,
+                  color="black")+ ## Node size set to degree
+  scale_size(range=c(1,4))+
+  geom_edge_label_diagonal(aes(
+    label=kon,
+    label_colour=Species,
+    filter=siglgl
+  ),
+  angle_calc = "along",
+  label_size=2.5)+ ## Showing edge label, label color is Species attribute
+  scale_label_colour_manual(values=c("tomato","black"),
+                            name="Species")+ ## Scale color for edge label
+  scale_fill_manual(values=hex,labels=class,name="Class")+ ## Show legend based on HEX
+  theme_graph()+
+  guides(fill = guide_legend(override.aes = list(size=5))) ## Change legend point size
+```
+
+<img src="04-usecases_files/figure-html/glplot2-1.png" width="100%" style="display: block; margin: auto;" />
+
+If we want to investigate the specific class, subset by HEX value in graph.
+
+
+```r
+
+## Subset and do the same thing
+g2 |>
+  morph(to_subgraph, siglgl) |>
+  activate(nodes) |>
+  mutate(tmp=centrality_degree(mode="all")) |>
+  filter(tmp>0) |>
+  mutate(subname=compn) |>
+  unmorph() |>
+  activate(nodes) |>
+  filter(bgcolor=="#B3B3E6") |>
+  mutate(Degree=centrality_degree(mode="all")) |> ## Calculate degree
+  filter(Degree>0) |>
+ggraph(layout="fr") +
+  geom_edge_diagonal(color="grey50", width=0.1)+ ## Base edge
+  ggfx::with_outer_glow(
+    geom_edge_diagonal(aes(color=kolfc,filter=siglgl),
+                       angle_calc = "along",
+                       label_size=2.5),
+    colour="gold", expand=3
+  )+
+  scale_edge_color_gradient2(midpoint = 0, mid = "white",
+                             low=scales::muted("blue"),
+                             high=scales::muted("red"),
+                             name="LFC")+
+  geom_node_point(aes(fill=bgcolor,size=Degree),
+                  shape=21,
+                  color="black")+
+  scale_size(range=c(1,4))+
+  geom_edge_label_diagonal(aes(
+    label=kon,
+    label_colour=Species,
+    filter=siglgl
+  ),
+  angle_calc = "along",
+  label_size=2.5)+ ## Showing edge label
+  scale_label_colour_manual(values=c("tomato","black"),
+                            name="Species")+ ## Scale color for edge label
+  geom_node_text(aes(label=subname), repel=TRUE, bg.colour="white", size=3)+
+  scale_fill_manual(values=hex,labels=class,name="Class")+
+  theme_graph()+
+  guides(fill = guide_legend(override.aes = list(size=5)))
+```
+
+<img src="04-usecases_files/figure-html/glplot3-1.png" width="100%" style="display: block; margin: auto;" />

@@ -323,17 +323,17 @@
 <p>Plot the resulting map. In this example, the strength estimated by <code>CBNplot</code> is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it. Also, edges included in both graphs are highlighted by yellow.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Summarize duplicate edges including `strength` attribute</span></span>
-<span><span class="va">number</span> <span class="op">&lt;-</span> <span class="va">joined</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">from</span>,<span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="va">number</span> <span class="op">&lt;-</span> <span class="va">joined</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">from</span>,<span class="va">to</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, incstr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Annotate them</span></span>
-<span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="va">joined</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>both<span class="op">=</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">&amp;</span><span class="va">incstr</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="va">joined</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">number</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>both<span class="op">=</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">&amp;</span><span class="va">incstr</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">joined</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">type</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>convertKO<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"ko"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidygraph/man/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link0</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">0.5</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>filter<span class="op">=</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span>,</span>
 <span>                              color<span class="op">=</span><span class="va">strength</span><span class="op">)</span>, linetype<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
@@ -541,6 +541,200 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span>       width<span class="op">=</span><span class="fl">15</span>, height<span class="op">=</span><span class="fl">10</span>, dpi<span class="op">=</span><span class="fl">300</span>, units<span class="op">=</span><span class="st">"in"</span><span class="op">)</span></span>
 <span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/draw_image.html">draw_image</a></span><span class="op">(</span><span class="st">"tmp.png"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="customizing-global-map-visualization" class="section level2" number="5.6">
+<h2>
+<span class="header-section-number">5.6</span> Customizing global map visualization<a class="anchor" aria-label="anchor" href="#customizing-global-map-visualization"><i class="fas fa-link"></i></a>
+</h2>
+<p>One advantage of using <code>ggkegg</code> is visualizing global maps effectively using the power of <code>ggplot2</code> and <code>ggraph</code>. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as <code>HUMAnN3</code>.</p>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../lfcs.rda"</span><span class="op">)</span> <span class="co">## Storing named vector of KOs storing LFCs and significant KOs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../func_cat.rda"</span><span class="op">)</span> <span class="co">## Functional categories for hex values in ko01100</span></span>
+<span></span>
+<span><span class="va">lfcs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  ko:K00013  ko:K00018  ko:K00031  ko:K00042  ko:K00065 </span></span>
+<span><span class="co">#&gt; -0.2955686 -0.4803597 -0.3052872  0.9327130  1.0954976 </span></span>
+<span><span class="co">#&gt;  ko:K00087 </span></span>
+<span><span class="co">#&gt;  0.8713860</span></span>
+<span><span class="va">signame</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "ko:K00013" "ko:K00018" "ko:K00031" "ko:K00042"</span></span>
+<span><span class="co">#&gt; [5] "ko:K00065" "ko:K00087"</span></span>
+<span><span class="va">func_cat</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span><span class="co">#&gt;   hex     class                                        top  </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                                        &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; 1 #B3B3E6 Metabolism; Carbohydrate metabolism          Amin…</span></span>
+<span><span class="co">#&gt; 2 #F06292 Metabolism; Biosynthesis of other secondary… Bios…</span></span>
+<span><span class="co">#&gt; 3 #FFB3CC Metabolism; Metabolism of cofactors and vit… Bios…</span></span>
+<span><span class="co">#&gt; 4 #FF8080 Metabolism; Nucleotide metabolism            Puri…</span></span>
+<span><span class="co">#&gt; 5 #6C63F6 Metabolism; Carbohydrate metabolism          Glyc…</span></span>
+<span><span class="co">#&gt; 6 #FFCC66 Metabolism; Amino acid metabolism            Bios…</span></span>
+<span></span>
+<span><span class="co">## Named vector for Assigning functional category </span></span>
+<span><span class="va">hex</span> <span class="op">&lt;-</span> <span class="va">func_cat</span><span class="op">$</span><span class="va">hex</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">func_cat</span><span class="op">$</span><span class="va">hex</span><span class="op">)</span></span>
+<span><span class="va">class</span> <span class="op">&lt;-</span> <span class="va">func_cat</span><span class="op">$</span><span class="va">class</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">func_cat</span><span class="op">$</span><span class="va">hex</span><span class="op">)</span></span>
+<span><span class="va">hex</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   #B3B3E6   #F06292   #FFB3CC   #FF8080   #6C63F6   #FFCC66 </span></span>
+<span><span class="co">#&gt; "#B3B3E6" "#F06292" "#FFB3CC" "#FF8080" "#6C63F6" "#FFCC66"</span></span>
+<span><span class="va">class</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                                                   #B3B3E6 </span></span>
+<span><span class="co">#&gt;                     "Metabolism; Carbohydrate metabolism" </span></span>
+<span><span class="co">#&gt;                                                   #F06292 </span></span>
+<span><span class="co">#&gt; "Metabolism; Biosynthesis of other secondary metabolites" </span></span>
+<span><span class="co">#&gt;                                                   #FFB3CC </span></span>
+<span><span class="co">#&gt;        "Metabolism; Metabolism of cofactors and vitamins" </span></span>
+<span><span class="co">#&gt;                                                   #FF8080 </span></span>
+<span><span class="co">#&gt;                       "Metabolism; Nucleotide metabolism" </span></span>
+<span><span class="co">#&gt;                                                   #6C63F6 </span></span>
+<span><span class="co">#&gt;                     "Metabolism; Carbohydrate metabolism" </span></span>
+<span><span class="co">#&gt;                                                   #FFCC66 </span></span>
+<span><span class="co">#&gt;                       "Metabolism; Amino acid metabolism"</span></span></code></pre></div>
+<div id="preprocessing" class="section level3" number="5.6.1">
+<h3>
+<span class="header-section-number">5.6.1</span> Preprocessing<a class="anchor" aria-label="anchor" href="#preprocessing"><i class="fas fa-link"></i></a>
+</h3>
+<p>We obtained <code>tidygraph</code> of ko01100, and process the graph. First, we append edges corresponding to inter-compound relationships. Although most of the reactions are reversible and by default adds two edges in <code>process_reaction</code>, we specify <code>single_edge=TRUE</code> here for visualization. Also, converting compound ID and KO ID and append attributes to graph.</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">ggkegg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko01100"</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_reaction.html">process_reaction</a></span><span class="op">(</span>single_edge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>x<span class="op">=</span><span class="cn">NULL</span>, y<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>compn<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"compound"</span>,</span>
+<span>                                          first_arg_comma <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>kon<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"ko"</span>,edge<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Next we append values such as KOs and degrees to graph. In addition, here we append additional attribute, like which species have the enzymes, to the graph. This type of information can be obtained from stratified output of <code>HUMAnN3</code>.</p>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g2</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>kolfc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/edge_numeric.html">edge_numeric</a></span><span class="op">(</span><span class="va">lfcs</span><span class="op">)</span>, <span class="co">## Pre-computed LFCs</span></span>
+<span>         siglgl<span class="op">=</span><span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">signame</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Whether the KO is significant</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">==</span><span class="st">"compound"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Subset to compound nodes and </span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Degree<span class="op">=</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/centrality.html">centrality_degree</a></span><span class="op">(</span>mode<span class="op">=</span><span class="st">"all"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Calculate degree</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Degree</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Filter based on degree</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Species<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">kon</span><span class="op">==</span><span class="st">"lyxK"</span>, <span class="st">"Escherichia coli"</span>, <span class="st">"Others"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>We next check overall classes of these KOs based on ko01100, and the class with the highest number of KOs was Carbohydrate metabolism.</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">class_table</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">g</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>siglgl<span class="op">=</span><span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">signame</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">siglgl</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">fgcolor</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span>decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">class_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">class</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">class_table</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">class_table</span></span>
+<span><span class="co">#&gt;                     Metabolism; Carbohydrate metabolism </span></span>
+<span><span class="co">#&gt;                                                      21 </span></span>
+<span><span class="co">#&gt;          Metabolism; Glycan biosynthesis and metabolism </span></span>
+<span><span class="co">#&gt;                                                      16 </span></span>
+<span><span class="co">#&gt;        Metabolism; Metabolism of cofactors and vitamins </span></span>
+<span><span class="co">#&gt;                                                      11 </span></span>
+<span><span class="co">#&gt;                       Metabolism; Amino acid metabolism </span></span>
+<span><span class="co">#&gt;                                                       8 </span></span>
+<span><span class="co">#&gt;                       Metabolism; Nucleotide metabolism </span></span>
+<span><span class="co">#&gt;                                                       7 </span></span>
+<span><span class="co">#&gt;    Metabolism; Metabolism of terpenoids and polyketides </span></span>
+<span><span class="co">#&gt;                                                       3 </span></span>
+<span><span class="co">#&gt;                           Metabolism; Energy metabolism </span></span>
+<span><span class="co">#&gt;                                                       3 </span></span>
+<span><span class="co">#&gt;   Metabolism; Xenobiotics biodegradation and metabolism </span></span>
+<span><span class="co">#&gt;                                                       3 </span></span>
+<span><span class="co">#&gt;                     Metabolism; Carbohydrate metabolism </span></span>
+<span><span class="co">#&gt;                                                       2 </span></span>
+<span><span class="co">#&gt;                            Metabolism; Lipid metabolism </span></span>
+<span><span class="co">#&gt;                                                       1 </span></span>
+<span><span class="co">#&gt; Metabolism; Biosynthesis of other secondary metabolites </span></span>
+<span><span class="co">#&gt;                                                       1 </span></span>
+<span><span class="co">#&gt;             Metabolism; Metabolism of other amino acids </span></span>
+<span><span class="co">#&gt;                                                       1</span></span></code></pre></div>
+</div>
+<div id="plotting" class="section level3" number="5.6.2">
+<h3>
+<span class="header-section-number">5.6.2</span> Plotting<a class="anchor" aria-label="anchor" href="#plotting"><i class="fas fa-link"></i></a>
+</h3>
+<p>We first visualize overall global map using the default values in <code>ko01100</code> and calculated degree.</p>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g2</span>, layout<span class="op">=</span><span class="st">"fr"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link0</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span><span class="op">)</span>, width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html">I</a></span><span class="op">(</span><span class="va">fgcolor</span><span class="op">)</span>, size<span class="op">=</span><span class="va">Degree</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span>, shape<span class="op">=</span><span class="fl">21</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/glplot1-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>We can apply various geoms to components in KEGG PATHWAY for the effective visualization. In this example, we highlighted significant edges (KOs) colored by their LFCs by <code>ggfx</code>, point size corresponding to degree in the network, and we showed edge label of significant KO names. KO names were colored by <code>Species</code> attributes. This time we set this to <code>Escherichia coli</code> and <code>Others</code>.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g2</span>, layout<span class="op">=</span><span class="st">"fr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"grey50"</span>, width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> <span class="co">## Base edge</span></span>
+<span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">kolfc</span>,filter<span class="op">=</span><span class="va">siglgl</span><span class="op">)</span>,</span>
+<span>                       angle_calc <span class="op">=</span> <span class="st">"along"</span>,</span>
+<span>                       label_size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span>,</span>
+<span>    colour<span class="op">=</span><span class="st">"gold"</span>, expand<span class="op">=</span><span class="fl">3</span></span>
+<span>  <span class="op">)</span><span class="op">+</span> <span class="co">## Highlight significant edges</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_colour.html">scale_edge_color_gradient2</a></span><span class="op">(</span>midpoint <span class="op">=</span> <span class="fl">0</span>, mid <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>                                    low<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>                                    high<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"red"</span><span class="op">)</span>,</span>
+<span>                                    name<span class="op">=</span><span class="st">"LFC"</span><span class="op">)</span><span class="op">+</span> <span class="co">## Set gradient color</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">bgcolor</span>,size<span class="op">=</span><span class="va">Degree</span><span class="op">)</span>,</span>
+<span>                  shape<span class="op">=</span><span class="fl">21</span>,</span>
+<span>                  color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span> <span class="co">## Node size set to degree</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_label_diagonal</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    label<span class="op">=</span><span class="va">kon</span>,</span>
+<span>    label_colour<span class="op">=</span><span class="va">Species</span>,</span>
+<span>    filter<span class="op">=</span><span class="va">siglgl</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  angle_calc <span class="op">=</span> <span class="st">"along"</span>,</span>
+<span>  label_size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span><span class="op">+</span> <span class="co">## Showing edge label, label color is Species attribute</span></span>
+<span>  <span class="fu">scale_label_colour_manual</span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"black"</span><span class="op">)</span>,</span>
+<span>                            name<span class="op">=</span><span class="st">"Species"</span><span class="op">)</span><span class="op">+</span> <span class="co">## Scale color for edge label</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">hex</span>,labels<span class="op">=</span><span class="va">class</span>,name<span class="op">=</span><span class="st">"Class"</span><span class="op">)</span><span class="op">+</span> <span class="co">## Show legend based on HEX</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>override.aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co">## Change legend point size</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/glplot2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>If we want to investigate the specific class, subset by HEX value in graph.</p>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co">## Subset and do the same thing</span></span>
+<span><span class="va">g2</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/morph.html">morph</a></span><span class="op">(</span><span class="va">to_subgraph</span>, <span class="va">siglgl</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>tmp<span class="op">=</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/centrality.html">centrality_degree</a></span><span class="op">(</span>mode<span class="op">=</span><span class="st">"all"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>subname<span class="op">=</span><span class="va">compn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/morph.html">unmorph</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">bgcolor</span><span class="op">==</span><span class="st">"#B3B3E6"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Degree<span class="op">=</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/centrality.html">centrality_degree</a></span><span class="op">(</span>mode<span class="op">=</span><span class="st">"all"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## Calculate degree</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Degree</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout<span class="op">=</span><span class="st">"fr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"grey50"</span>, width<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span> <span class="co">## Base edge</span></span>
+<span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">kolfc</span>,filter<span class="op">=</span><span class="va">siglgl</span><span class="op">)</span>,</span>
+<span>                       angle_calc <span class="op">=</span> <span class="st">"along"</span>,</span>
+<span>                       label_size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span>,</span>
+<span>    colour<span class="op">=</span><span class="st">"gold"</span>, expand<span class="op">=</span><span class="fl">3</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/scale_edge_colour.html">scale_edge_color_gradient2</a></span><span class="op">(</span>midpoint <span class="op">=</span> <span class="fl">0</span>, mid <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>                             low<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>                             high<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"red"</span><span class="op">)</span>,</span>
+<span>                             name<span class="op">=</span><span class="st">"LFC"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">bgcolor</span>,size<span class="op">=</span><span class="va">Degree</span><span class="op">)</span>,</span>
+<span>                  shape<span class="op">=</span><span class="fl">21</span>,</span>
+<span>                  color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_label_diagonal</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    label<span class="op">=</span><span class="va">kon</span>,</span>
+<span>    label_colour<span class="op">=</span><span class="va">Species</span>,</span>
+<span>    filter<span class="op">=</span><span class="va">siglgl</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  angle_calc <span class="op">=</span> <span class="st">"along"</span>,</span>
+<span>  label_size<span class="op">=</span><span class="fl">2.5</span><span class="op">)</span><span class="op">+</span> <span class="co">## Showing edge label</span></span>
+<span>  <span class="fu">scale_label_colour_manual</span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"black"</span><span class="op">)</span>,</span>
+<span>                            name<span class="op">=</span><span class="st">"Species"</span><span class="op">)</span><span class="op">+</span> <span class="co">## Scale color for edge label</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">subname</span><span class="op">)</span>, repel<span class="op">=</span><span class="cn">TRUE</span>, bg.colour<span class="op">=</span><span class="st">"white"</span>, size<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">hex</span>,labels<span class="op">=</span><span class="va">class</span>,name<span class="op">=</span><span class="st">"Class"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>override.aes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/glplot3-1.png" width="100%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
@@ -568,6 +762,12 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <li>
 <a class="nav-link" href="#analyzing-cluster-marker-genes-in-single-cell-transcriptomics"><span class="header-section-number">5.5</span> Analyzing cluster marker genes in single-cell transcriptomics</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#example-for-composing-multiple-pathways"><span class="header-section-number">5.5.1</span> Example for composing multiple pathways</a></li></ul>
 </li>
+<li>
+<a class="nav-link" href="#customizing-global-map-visualization"><span class="header-section-number">5.6</span> Customizing global map visualization</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preprocessing"><span class="header-section-number">5.6.1</span> Preprocessing</a></li>
+<li><a class="nav-link" href="#plotting"><span class="header-section-number">5.6.2</span> Plotting</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -584,7 +784,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-06-26.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-07-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
