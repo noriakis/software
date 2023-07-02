@@ -731,7 +731,8 @@ ggraph(layout="fr") +
   label_size=2.5)+ ## Showing edge label
   scale_label_colour_manual(values=c("tomato","black"),
                             name="Species")+ ## Scale color for edge label
-  geom_node_text(aes(label=subname), repel=TRUE, bg.colour="white", size=3)+
+  geom_node_text(aes(label=stringr::str_wrap(subname,10,whitespace_only = FALSE)),
+    repel=TRUE, bg.colour="white", size=2)+
   scale_fill_manual(values=hex,labels=class,name="Class")+
   theme_graph()+
   guides(fill = guide_legend(override.aes = list(size=5)))
