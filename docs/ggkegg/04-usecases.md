@@ -262,6 +262,119 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 
 <img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;" />
 
+### Multiple enrichment analysis results across multiple pathways
+
+In addition to native layouts, it is sometimes useful to show the interesting genes e.g. DEGs across multiple pathways. Here, we use [`scatterpie`](https://github.com/GuangchuangYu/scatterpie) library for visualization of multiple enrichment analysis results across multiple pathways.
+
+
+```r
+library(scatterpie)
+## Obtain enrichment analysis results
+entrezid <- uroUp |>
+  clusterProfiler::bitr("SYMBOL","ENTREZID",org.Hs.eg.db)
+cp <- clusterProfiler::enrichKEGG(entrezid$ENTREZID)
+
+entrezid2 <- gls$day3_up_rptec |>
+  clusterProfiler::bitr("SYMBOL","ENTREZID",org.Hs.eg.db)
+cp2 <- clusterProfiler::enrichKEGG(entrezid2$ENTREZID)
+
+
+## Filter to interesting pathways
+include <- (cp@result |> row.names())[c(1,3,4)]
+pathways <- cp@result[include,"ID"]
+pathways
+#> [1] "hsa04110" "hsa03460" "hsa03440"
+```
+
+We obtain multiple pathway data (the function returns the native coordinates but we ignore them).
+
+
+```r
+
+g1 <- multi_pathway_native(pathways, row_num=1)
+g2 <- g1 |> mutate(new_name=
+                    ifelse(name=="undefined",
+                           paste0(name,"_",pathway_id,"_",orig.id),
+                           name)) |>
+  convert(to_contracted, new_name, simplify=FALSE) |>
+  activate(nodes) |> 
+  mutate(purrr::map_vec(.orig_data,function (x) x[1,] )) |>
+  mutate(pid1 = purrr::map(.orig_data,function (x) unique(x["pathway_id"]) )) |>
+  mutate(hsa03440 = purrr:::map_lgl(pid1, function(x) "hsa03440" %in% x$pathway_id) ,
+         hsa04110 = purrr:::map_lgl(pid1, function(x) "hsa04110" %in% x$pathway_id),
+         hsa03460 = purrr:::map_lgl(pid1, function(x) "hsa03460" %in% x$pathway_id))
+
+nds <- g2 |> activate(nodes) |> data.frame()
+eds <- g2 |> activate(edges) |> data.frame()
+rmdup_eds <- eds[!duplicated(eds[,c("from","to","subtype_name")]),]
+
+g2_2 <- tbl_graph(nodes=nds, edges=rmdup_eds)
+g2_2 <- g2_2 |>  activate(nodes) |>
+  mutate(
+    in_pathway_uro=append_cp(cp, pid=include,name="new_name"),
+    x=NULL, y=NULL,
+   in_pathway_rptec=append_cp(cp2, pid=include,name = "new_name"),
+   id=convert_id("hsa",name = "new_name")) |>
+  morph(to_subgraph, type!="group") |>
+  mutate(deg=centrality_degree(mode="all")) |>
+  unmorph() |>
+  filter(deg>0)
+```
+
+Here, we additionally assign graph-based clustering results to the graph, and we scale the size of the nodes so that the nodes can be visualized by scatterpie.
+
+
+```r
+V(g2_2)$walktrap <- igraph::walktrap.community(g2_2)$membership
+
+## Scale the node size
+sizeMin <- 0.1
+sizeMax <- 0.3
+rawMin <- min(V(g2_2)$deg)
+rawMax <- max(V(g2_2)$deg)
+scf <- (sizeMax-sizeMin)/(rawMax-rawMin)
+V(g2_2)$size <- scf * V(g2_2)$deg + sizeMin - scf * rawMin
+
+
+## Make base graph
+g3 <- ggraph(g2_2, layout="nicely")+
+  geom_edge_parallel(alpha=0.9,
+                 arrow=arrow(length=unit(1,"mm")),
+                 aes(color=subtype_name),
+                 start_cap=circle(3,"mm"),
+                 end_cap=circle(8,"mm"))+
+  scale_edge_color_discrete(name="Edge type")
+graphdata <- g3$data
+```
+
+Finally, we use `geom_scatterpie` for the visualization. The background scatterpie indicates whether the genes are in the pathways, and the foreground indicates whether the gene is differentially expressed in multiple datasets. We highlight the genes which were differentially expressed in both datasets by gold colour.
+
+
+```r
+g4 <- g3+
+  ggforce::geom_mark_rect(aes(x=x, y=y, group=walktrap),color="grey")+
+  geom_scatterpie(aes(x=x, y=y, r=size+0.1),
+                  color="transparent",
+                  legend_name="Pathway",
+                  data=graphdata,
+                  cols=c("hsa04110", "hsa03440","hsa03460")) +
+  geom_scatterpie(aes(x=x, y=y, r=size),
+                           color="transparent",
+                           data=graphdata, legend_name="enrich",
+                           cols=c("in_pathway_rptec","in_pathway_uro"))+
+  ggfx::with_outer_glow(geom_scatterpie(aes(x=x, y=y, r=size),
+                  color="transparent",
+                  data=graphdata[graphdata$in_pathway_rptec & graphdata$in_pathway_uro,],
+                  cols=c("in_pathway_rptec","in_pathway_uro")), colour="gold", expand=7)+
+  geom_node_point(shape=19, size=3, aes(filter=!in_pathway_uro & !in_pathway_rptec & type!="map"))+
+  geom_node_shadowtext(aes(label=id, y=y-0.5), size=3, family="sans", bg.colour="white", colour="black")+
+  theme_void()+coord_fixed()
+g4
+```
+
+<img src="04-usecases_files/figure-html/final_scatterpie-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## Projecting the gene regulatory networks on KEGG map
 
 With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.

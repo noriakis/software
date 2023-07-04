@@ -26,6 +26,7 @@ integrating-numeric-values-onto-tbl_graph
 integrating-numeric-vector-to-tbl_graph
 integrating-matrix-to-tbl_graph
 visualizing-multiple-enrichment-results
+multiple-enrichment-analysis-results-across-multiple-pathways
 projecting-the-gene-regulatory-networks-on-kegg-map
 projection-on-to-the-raw-kegg-map
 analyzing-cluster-marker-genes-in-single-cell-transcriptomics

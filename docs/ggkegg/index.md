@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-07-02"
+date: "2023-07-04"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
