@@ -91,6 +91,12 @@ random grouping from <code>PRJEB9584</code>. The data was loaded with
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"merge_midas2_sample"</span>, cl<span class="op">=</span><span class="va">randomGroup</span>, candSp<span class="op">=</span><span class="st">"100003"</span>,</span>
 <span>                    loadSummary<span class="op">=</span><span class="cn">TRUE</span>,loadInfo<span class="op">=</span><span class="cn">TRUE</span>,loadDepth<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                    taxtbl<span class="op">=</span><span class="va">taxtbl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span></code></pre></div>
+<p>When loading the dataset, filter options can be applied.
+<code>filtType</code> specifies how the filtering should be applied,
+<code>whole</code> or <code>group</code>. <code>filtNum</code> specifies
+the number, <code>filtPer</code> specifies fraction of samples. For
+instance, If <code>group</code> and <code>filtNum=2</code>, the species
+with sampled number above or equal 2 per group are included.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">## Examine sample object</span></span>
@@ -99,7 +105,7 @@ random grouping from <code>PRJEB9584</code>. The data was loaded with
 <pre><code><span><span class="co">## Type: MIDAS2</span></span>
 <span><span class="co">## Directory: midas2_sample_merge_uhgg</span></span>
 <span><span class="co">## Species: 1</span></span>
-<span><span class="co">## Filter type: group, number: 2, proportion: 0.8</span></span>
+<span><span class="co">## Filter type: group, number: 1, proportion: 0.8</span></span>
 <span><span class="co">## Loaded SNV table: 1</span></span>
 <span><span class="co">##   Species cleared SNV filter: 1</span></span>
 <span><span class="co">## Loaded gene table (copynum): 1</span></span>
@@ -144,15 +150,16 @@ into <code>fastaList</code> slot.</p>
 <span>        <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tippoint.html" class="external-link">geom_tippoint</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">tp</span></span></code></pre></div>
 <p><img src="usage_of_stana_files/figure-html/cons-1.png" width="480"></p>
-<div class="section level4">
-<h4 id="perform-permanova-based-on-the-groups">Perform PERMANOVA based on the groups<a class="anchor" aria-label="anchor" href="#perform-permanova-based-on-the-groups"></a>
-</h4>
+</div>
+<div class="section level3">
+<h3 id="perform-permanova-based-on-the-groups">Perform PERMANOVA based on the groups<a class="anchor" aria-label="anchor" href="#perform-permanova-based-on-the-groups"></a>
+</h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="identify-key-elements-for-differentiating-groups">Identify key elements for differentiating groups<a class="anchor" aria-label="anchor" href="#identify-key-elements-for-differentiating-groups"></a>
-</h4>
+<div class="section level3">
+<h3 id="identify-key-elements-for-differentiating-groups">Identify key elements for differentiating groups<a class="anchor" aria-label="anchor" href="#identify-key-elements-for-differentiating-groups"></a>
+</h3>
 <p>Using the profiled matrices, the <code>Boruta</code> algorithm can be
 run to identify the key elements that distinguish the groups. The
 <code>doBoruta</code> function performs the <code>Boruta</code>
@@ -169,17 +176,17 @@ matrices are to be used, please pass them to <code>mat</code>.</p>
 <span><span class="co">## Feature number: 21806</span></span>
 <span><span class="co">## Performing Boruta</span></span></code></pre>
 <pre><code><span><span class="co">## $boruta</span></span>
-<span><span class="co">## Boruta performed 99 iterations in 28.17062 secs.</span></span>
+<span><span class="co">## Boruta performed 99 iterations in 45.42658 secs.</span></span>
 <span><span class="co">## Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">##  12 attributes confirmed important: UHGG000008_01641, UHGG025024_01181,</span></span>
-<span><span class="co">## UHGG060667_01243, UHGG061776_01339, UHGG158704_01078 and 7 more;</span></span>
-<span><span class="co">##  21794 attributes confirmed unimportant: UHGG000008_00008,</span></span>
+<span><span class="co">##  9 attributes confirmed important: UHGG000008_01798, UHGG004375_00184,</span></span>
+<span><span class="co">## UHGG025024_01181, UHGG061776_01340, UHGG095278_00266 and 4 more;</span></span>
+<span><span class="co">##  21797 attributes confirmed unimportant: UHGG000008_00008,</span></span>
 <span><span class="co">## UHGG000008_00009, UHGG000008_00010, UHGG000008_00012, UHGG000008_00015</span></span>
-<span><span class="co">## and 21789 more;</span></span></code></pre>
+<span><span class="co">## and 21792 more;</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="parsing-functional-annotations">Parsing functional annotations<a class="anchor" aria-label="anchor" href="#parsing-functional-annotations"></a>
-</h4>
+<div class="section level3">
+<h3 id="parsing-functional-annotations">Parsing functional annotations<a class="anchor" aria-label="anchor" href="#parsing-functional-annotations"></a>
+</h3>
 <p>Functional annotation of genes can be obtained through
 <code>PATRIC</code> server (used in <code>MIDAS</code>), and annotation
 results such as ortholog assignment using <code>eggNOG-mapper v2</code>.
@@ -187,7 +194,8 @@ results such as ortholog assignment using <code>eggNOG-mapper v2</code>.
 used to parse the obtained data. The below example returns KEGG
 ORTHOLOGY from <code>eggNOG-mapper v2</code> annotation file.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">annotationFile</span> <span class="op">&lt;-</span> <span class="st">"100003_uhgg_eggnog_out.emapper.annotations"</span></span>
+<code class="sourceCode R"><span><span class="co">## Not to be evaluated</span></span>
+<span><span class="va">annotationFile</span> <span class="op">&lt;-</span> <span class="st">"100003_uhgg_eggnog_out.emapper.annotations"</span></span>
 <span><span class="va">annot</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="va">annotationFile</span>, ret <span class="op">=</span> <span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">annot</span></span></code></pre></div>
 <p>Using the parsed annotation tibble, gene copy number data frame can
@@ -196,24 +204,25 @@ that annotation tibble must have <code>ID</code> and <code>value</code>
 column specifying gene ID in <code>ID</code> and functional annotation
 such as KEGG ORTHOLOGY ID in <code>value</code>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/summariseAbundance.html">summariseAbundance</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100224"</span>, <span class="va">annot</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Not to be evaluated</span></span>
+<span><span class="fu"><a href="../reference/summariseAbundance.html">summariseAbundance</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100224"</span>, <span class="va">annot</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
-</h4>
+<div class="section level3">
+<h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
+</h3>
 <p>Several visualization functions are implemented.</p>
-<div class="section level5">
-<h5 id="plotting-mean-coverage-across-samples">Plotting mean coverage across samples<a class="anchor" aria-label="anchor" href="#plotting-mean-coverage-across-samples"></a>
-</h5>
+<div class="section level4">
+<h4 id="plotting-mean-coverage-across-samples">Plotting mean coverage across samples<a class="anchor" aria-label="anchor" href="#plotting-mean-coverage-across-samples"></a>
+</h4>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plotCoverage.html">plotCoverage</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span><span class="op">+</span> <span class="co">## grouping is already set</span></span>
 <span>  <span class="fu">ggrepel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html" class="external-link">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">ids</span><span class="op">)</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="usage_of_stana_files/figure-html/cov-1.png" width="480"></p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## R version 4.2.1 (2022-06-23 ucrt)</span></span>
+<pre><code><span><span class="co">## R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">## Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">## Running under: Windows 10 x64 (build 22621)</span></span>
+<span><span class="co">## Running under: Windows 10 x64 (build 19044)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## </span></span>
@@ -226,48 +235,47 @@ such as KEGG ORTHOLOGY ID in <code>value</code>.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] Boruta_8.0.0     ggtree_3.7.1.002 phangorn_2.11.1  ape_5.7-1       </span></span>
+<span><span class="co">## [1] Boruta_8.0.0     ggtree_3.6.2     phangorn_2.11.1  ape_5.7         </span></span>
 <span><span class="co">## [5] stana_0.99.0     BiocStyle_2.26.0</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
 <span><span class="co">##   [1] colorspace_2.1-0    rjson_0.2.21        rprojroot_2.0.3    </span></span>
 <span><span class="co">##   [4] circlize_0.4.15     GlobalOptions_0.1.2 fs_1.6.1           </span></span>
-<span><span class="co">##   [7] aplot_0.1.10        rstudioapi_0.14     farver_2.1.1       </span></span>
+<span><span class="co">##   [7] aplot_0.1.9         rstudioapi_0.14     farver_2.1.1       </span></span>
 <span><span class="co">##  [10] graphlayouts_0.8.4  ggrepel_0.9.3       bit64_4.0.5        </span></span>
-<span><span class="co">##  [13] fansi_1.0.4         ranger_0.15.1       codetools_0.2-19   </span></span>
-<span><span class="co">##  [16] splines_4.2.1       cachem_1.0.7        knitr_1.42         </span></span>
-<span><span class="co">##  [19] polyclip_1.10-4     jsonlite_1.8.0      cluster_2.1.4      </span></span>
-<span><span class="co">##  [22] dbplyr_2.3.2        ggforce_0.4.1       BiocManager_1.30.20</span></span>
-<span><span class="co">##  [25] compiler_4.2.1      httr_1.4.5          Matrix_1.5-4       </span></span>
-<span><span class="co">##  [28] fastmap_1.1.1       lazyeval_0.2.2      cli_3.6.1          </span></span>
-<span><span class="co">##  [31] tweenr_2.0.2        htmltools_0.5.5     tools_4.2.1        </span></span>
-<span><span class="co">##  [34] igraph_1.4.2        gtable_0.3.3        glue_1.6.2         </span></span>
-<span><span class="co">##  [37] dplyr_1.1.1         rappdirs_0.3.3      fastmatch_1.1-3    </span></span>
+<span><span class="co">##  [13] fansi_1.0.4         ranger_0.15.1       codetools_0.2-18   </span></span>
+<span><span class="co">##  [16] splines_4.2.2       cachem_1.0.7        knitr_1.42         </span></span>
+<span><span class="co">##  [19] polyclip_1.10-4     jsonlite_1.8.4      cluster_2.1.4      </span></span>
+<span><span class="co">##  [22] dbplyr_2.3.1        ggforce_0.4.1       BiocManager_1.30.20</span></span>
+<span><span class="co">##  [25] compiler_4.2.2      httr_1.4.5          Matrix_1.5-3       </span></span>
+<span><span class="co">##  [28] fastmap_1.1.1       lazyeval_0.2.2      cli_3.6.0          </span></span>
+<span><span class="co">##  [31] tweenr_2.0.2        htmltools_0.5.4     tools_4.2.2        </span></span>
+<span><span class="co">##  [34] igraph_1.4.1        gtable_0.3.1        glue_1.6.2         </span></span>
+<span><span class="co">##  [37] dplyr_1.1.0         rappdirs_0.3.3      fastmatch_1.1-3    </span></span>
 <span><span class="co">##  [40] Rcpp_1.0.10         jquerylib_0.1.4     pkgdown_2.0.7      </span></span>
-<span><span class="co">##  [43] vctrs_0.6.2         nlme_3.1-162        ggraph_2.1.0       </span></span>
-<span><span class="co">##  [46] xfun_0.38           stringr_1.5.0       lifecycle_1.0.3    </span></span>
-<span><span class="co">##  [49] MASS_7.3-58.3       scales_1.2.1        tidygraph_1.2.3    </span></span>
-<span><span class="co">##  [52] ragg_1.2.5          parallel_4.2.1      RColorBrewer_1.1-3 </span></span>
+<span><span class="co">##  [43] vctrs_0.5.2         nlme_3.1-161        ggraph_2.1.0       </span></span>
+<span><span class="co">##  [46] xfun_0.37           stringr_1.5.0       lifecycle_1.0.3    </span></span>
+<span><span class="co">##  [49] MASS_7.3-58.1       scales_1.2.1        tidygraph_1.2.3    </span></span>
+<span><span class="co">##  [52] ragg_1.2.5          parallel_4.2.2      RColorBrewer_1.1-3 </span></span>
 <span><span class="co">##  [55] yaml_2.3.7          curl_5.0.0          memoise_2.0.1      </span></span>
-<span><span class="co">##  [58] gridExtra_2.3       ggplot2_3.4.2       ggfun_0.0.9        </span></span>
+<span><span class="co">##  [58] gridExtra_2.3       ggplot2_3.4.1       ggfun_0.0.9        </span></span>
 <span><span class="co">##  [61] yulab.utils_0.0.6   sass_0.4.5          stringi_1.7.12     </span></span>
-<span><span class="co">##  [64] RSQLite_2.3.1       highr_0.10          desc_1.4.2         </span></span>
+<span><span class="co">##  [64] RSQLite_2.3.0       highr_0.10          desc_1.4.2         </span></span>
 <span><span class="co">##  [67] tidytree_0.4.2      permute_0.9-7       filelock_1.0.2     </span></span>
-<span><span class="co">##  [70] shape_1.4.6         rlang_1.1.0         pkgconfig_2.0.3    </span></span>
+<span><span class="co">##  [70] shape_1.4.6         rlang_1.0.6         pkgconfig_2.0.3    </span></span>
 <span><span class="co">##  [73] systemfonts_1.0.4   bitops_1.0-7        evaluate_0.20      </span></span>
-<span><span class="co">##  [76] lattice_0.21-8      purrr_1.0.1         treeio_1.22.0      </span></span>
+<span><span class="co">##  [76] lattice_0.20-45     purrr_1.0.1         treeio_1.22.0      </span></span>
 <span><span class="co">##  [79] patchwork_1.1.2     labeling_0.4.2      bit_4.0.5          </span></span>
 <span><span class="co">##  [82] tidyselect_1.2.0    magrittr_2.0.3      bookdown_0.33      </span></span>
 <span><span class="co">##  [85] R6_2.5.1            generics_0.1.3      DBI_1.1.3          </span></span>
-<span><span class="co">##  [88] pillar_1.9.0        withr_2.5.0         mgcv_1.8-42        </span></span>
-<span><span class="co">##  [91] RCurl_1.98-1.12     tibble_3.2.1        crayon_1.5.2       </span></span>
-<span><span class="co">##  [94] utf8_1.2.3          BiocFileCache_2.6.1 rmarkdown_2.21     </span></span>
-<span><span class="co">##  [97] viridis_0.6.2       GetoptLong_1.0.5    grid_4.2.1         </span></span>
-<span><span class="co">## [100] data.table_1.14.8   blob_1.2.4          vegan_2.6-4        </span></span>
-<span><span class="co">## [103] digest_0.6.29       tidyr_1.3.0         gridGraphics_0.5-1 </span></span>
+<span><span class="co">##  [88] pillar_1.8.1        withr_2.5.0         mgcv_1.8-42        </span></span>
+<span><span class="co">##  [91] RCurl_1.98-1.10     tibble_3.1.8        crayon_1.5.2       </span></span>
+<span><span class="co">##  [94] utf8_1.2.3          BiocFileCache_2.6.1 rmarkdown_2.20     </span></span>
+<span><span class="co">##  [97] viridis_0.6.2       GetoptLong_1.0.5    grid_4.2.2         </span></span>
+<span><span class="co">## [100] data.table_1.14.8   blob_1.2.3          vegan_2.6-4        </span></span>
+<span><span class="co">## [103] digest_0.6.31       tidyr_1.3.0         gridGraphics_0.5-1 </span></span>
 <span><span class="co">## [106] textshaping_0.3.6   munsell_0.5.0       viridisLite_0.4.1  </span></span>
 <span><span class="co">## [109] ggplotify_0.1.0     bslib_0.4.2         quadprog_1.5-8</span></span></code></pre>
-</div>
 </div>
 </div>
 </div>

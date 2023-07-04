@@ -722,13 +722,41 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <p>For complex networks, changing the layout is possible by the small function <code>changeLayout</code>.
 Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/changeLayout.html">changeLayout</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_with_graphopt.html">layout.graphopt</a></span><span class="op">)</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/changeLayout.html">changeLayout</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/layout_with_graphopt.html">layout.graphopt</a></span><span class="op">)</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/clay-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="biofabric-layout" class="section level2" number="2.8">
+<h2>
+<span class="header-section-number">2.8</span> Biofabric layout<a class="anchor" aria-label="anchor" href="#biofabric-layout"><i class="fas fa-link"></i></a>
+</h2>
+<p>It is possible to use the <code>biofabric</code> layout from the extracted <code>igraph</code>. In this case, one want to add text position in x-axis using <code>obtainTextPosition</code>.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span><span class="op">)</span>,</span>
+<span>                   genePlot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input genes: 2</span></span>
+<span><span class="co">#&gt;   Converted input genes: 2</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="va">ex</span><span class="op">@</span><span class="va">igraph</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/obtainTextPosition.html">obtainTextPosition</a></span><span class="op">(</span><span class="op">)</span> <span class="co">## Obtain text position</span></span>
+<span><span class="va">ex</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="st">"fabric"</span>,</span>
+<span>  sort.by <span class="op">=</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/layout_tbl_graph_fabric.html">node_rank_fabric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_range.html">geom_node_range</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_span.html">geom_edge_span</a></span><span class="op">(</span>end_shape <span class="op">=</span> <span class="st">'circle'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xmin</span><span class="op">-</span><span class="fl">4</span>, label<span class="op">=</span><span class="va">name</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">4.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">shadowtext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shadowtext/man/geom_shadowtext.html">geom_shadowtext</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">center</span>,</span>
+<span>                       color<span class="op">=</span><span class="va">nodeCat</span>,</span>
+<span>                       y<span class="op">=</span><span class="va">y</span><span class="op">+</span><span class="fl">1</span>,</span>
+<span>                       label<span class="op">=</span><span class="va">name</span><span class="op">)</span>,</span>
+<span>                   size<span class="op">=</span><span class="fl">4.5</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"grey20"</span>, <span class="st">"grey80"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/biof-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
+<span><span class="co">#&gt; Running under: Windows 10 x64 (build 19044)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -744,20 +772,20 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt; [6] datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt;  [1] ggforce_0.4.1             concaveman_1.1.0         </span></span>
-<span><span class="co">#&gt;  [3] dplyr_1.1.1               dendextend_1.16.0        </span></span>
-<span><span class="co">#&gt;  [5] clusterProfiler_4.7.1.003 ReactomePA_1.40.0        </span></span>
-<span><span class="co">#&gt;  [7] RColorBrewer_1.1-3        ggraph_2.1.0             </span></span>
-<span><span class="co">#&gt;  [9] org.Hs.eg.db_3.15.0       AnnotationDbi_1.60.2     </span></span>
-<span><span class="co">#&gt; [11] IRanges_2.32.0            S4Vectors_0.36.2         </span></span>
-<span><span class="co">#&gt; [13] Biobase_2.58.0            BiocGenerics_0.44.0      </span></span>
-<span><span class="co">#&gt; [15] biotextgraph_0.99.0       ggplot2_3.4.2            </span></span>
+<span><span class="co">#&gt;  [1] ggforce_0.4.1         concaveman_1.1.0     </span></span>
+<span><span class="co">#&gt;  [3] dplyr_1.1.0           dendextend_1.16.0    </span></span>
+<span><span class="co">#&gt;  [5] clusterProfiler_4.6.2 ReactomePA_1.42.0    </span></span>
+<span><span class="co">#&gt;  [7] RColorBrewer_1.1-3    ggraph_2.1.0         </span></span>
+<span><span class="co">#&gt;  [9] org.Hs.eg.db_3.16.0   AnnotationDbi_1.60.0 </span></span>
+<span><span class="co">#&gt; [11] IRanges_2.32.0        S4Vectors_0.36.2     </span></span>
+<span><span class="co">#&gt; [13] Biobase_2.58.0        BiocGenerics_0.44.0  </span></span>
+<span><span class="co">#&gt; [15] biotextgraph_0.99.0   ggplot2_3.4.1        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] shadowtext_0.1.2       fastmatch_1.1-3       </span></span>
 <span><span class="co">#&gt;   [3] systemfonts_1.0.4      plyr_1.8.8            </span></span>
-<span><span class="co">#&gt;   [5] igraph_1.4.2           lazyeval_0.2.2        </span></span>
-<span><span class="co">#&gt;   [7] splines_4.2.1          BiocParallel_1.32.6   </span></span>
+<span><span class="co">#&gt;   [5] igraph_1.4.1           lazyeval_0.2.2        </span></span>
+<span><span class="co">#&gt;   [7] splines_4.2.2          BiocParallel_1.32.5   </span></span>
 <span><span class="co">#&gt;   [9] GenomeInfoDb_1.34.9    digest_0.6.31         </span></span>
 <span><span class="co">#&gt;  [11] yulab.utils_0.0.6      htmltools_0.5.4       </span></span>
 <span><span class="co">#&gt;  [13] bugsigdbr_1.4.3        GOSemSim_2.24.0       </span></span>
@@ -768,60 +796,60 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt;  [23] graphlayouts_0.8.4     pvclust_2.2-0         </span></span>
 <span><span class="co">#&gt;  [25] wordcloud_2.6          sysfonts_0.8.8        </span></span>
 <span><span class="co">#&gt;  [27] enrichplot_1.18.3      colorspace_2.1-0      </span></span>
-<span><span class="co">#&gt;  [29] rappdirs_0.3.3         blob_1.2.4            </span></span>
+<span><span class="co">#&gt;  [29] rappdirs_0.3.3         blob_1.2.3            </span></span>
 <span><span class="co">#&gt;  [31] ggrepel_0.9.3          xfun_0.37             </span></span>
 <span><span class="co">#&gt;  [33] crayon_1.5.2           RCurl_1.98-1.10       </span></span>
-<span><span class="co">#&gt;  [35] jsonlite_1.8.4         scatterpie_0.1.8      </span></span>
-<span><span class="co">#&gt;  [37] graph_1.76.0           ape_5.7-1             </span></span>
+<span><span class="co">#&gt;  [35] jsonlite_1.8.4         scatterpie_0.1.8.001  </span></span>
+<span><span class="co">#&gt;  [37] graph_1.76.0           ape_5.7               </span></span>
 <span><span class="co">#&gt;  [39] glue_1.6.2             polyclip_1.10-4       </span></span>
-<span><span class="co">#&gt;  [41] stopwords_2.3          gtable_0.3.3          </span></span>
+<span><span class="co">#&gt;  [41] stopwords_2.3          gtable_0.3.1          </span></span>
 <span><span class="co">#&gt;  [43] zlibbioc_1.44.0        XVector_0.38.0        </span></span>
-<span><span class="co">#&gt;  [45] GetoptLong_1.0.5       graphite_1.42.0       </span></span>
+<span><span class="co">#&gt;  [45] GetoptLong_1.0.5       graphite_1.44.0       </span></span>
 <span><span class="co">#&gt;  [47] rentrez_1.2.3          scales_1.2.1          </span></span>
 <span><span class="co">#&gt;  [49] DOSE_3.24.2            DBI_1.1.3             </span></span>
 <span><span class="co">#&gt;  [51] showtextdb_3.0         Rcpp_1.0.10           </span></span>
 <span><span class="co">#&gt;  [53] viridisLite_0.4.1      xtable_1.8-4          </span></span>
 <span><span class="co">#&gt;  [55] tidytree_0.4.2         gridGraphics_0.5-1    </span></span>
-<span><span class="co">#&gt;  [57] reactome.db_1.81.0     bit_4.0.5             </span></span>
-<span><span class="co">#&gt;  [59] htmlwidgets_1.6.2      httr_1.4.5            </span></span>
+<span><span class="co">#&gt;  [57] reactome.db_1.82.0     bit_4.0.5             </span></span>
+<span><span class="co">#&gt;  [59] htmlwidgets_1.6.1      httr_1.4.5            </span></span>
 <span><span class="co">#&gt;  [61] fgsea_1.24.0           ellipsis_0.3.2        </span></span>
-<span><span class="co">#&gt;  [63] pkgconfig_2.0.3        XML_3.99-0.14         </span></span>
+<span><span class="co">#&gt;  [63] pkgconfig_2.0.3        XML_3.99-0.13         </span></span>
 <span><span class="co">#&gt;  [65] farver_2.1.1           sass_0.4.5            </span></span>
 <span><span class="co">#&gt;  [67] utf8_1.2.3             labeling_0.4.2        </span></span>
 <span><span class="co">#&gt;  [69] ggplotify_0.1.0        tidyselect_1.2.0      </span></span>
-<span><span class="co">#&gt;  [71] rlang_1.1.0            reshape2_1.4.4        </span></span>
+<span><span class="co">#&gt;  [71] rlang_1.0.6            reshape2_1.4.4        </span></span>
 <span><span class="co">#&gt;  [73] later_1.3.0            munsell_0.5.0         </span></span>
-<span><span class="co">#&gt;  [75] tools_4.2.1            cachem_1.0.7          </span></span>
-<span><span class="co">#&gt;  [77] downloader_0.4         cli_3.6.1             </span></span>
+<span><span class="co">#&gt;  [75] tools_4.2.2            cachem_1.0.7          </span></span>
+<span><span class="co">#&gt;  [77] downloader_0.4         cli_3.6.0             </span></span>
 <span><span class="co">#&gt;  [79] generics_0.1.3         RSQLite_2.3.0         </span></span>
-<span><span class="co">#&gt;  [81] gson_0.1.0             evaluate_0.20         </span></span>
+<span><span class="co">#&gt;  [81] gson_0.0.9             evaluate_0.20         </span></span>
 <span><span class="co">#&gt;  [83] stringr_1.5.0          fastmap_1.1.1         </span></span>
 <span><span class="co">#&gt;  [85] ggdendro_0.1.23        yaml_2.3.7            </span></span>
 <span><span class="co">#&gt;  [87] ggtree_3.6.2           knitr_1.42            </span></span>
 <span><span class="co">#&gt;  [89] bit64_4.0.5            fs_1.6.1              </span></span>
 <span><span class="co">#&gt;  [91] tidygraph_1.2.3        purrr_1.0.1           </span></span>
 <span><span class="co">#&gt;  [93] KEGGREST_1.38.0        showtext_0.9-5        </span></span>
-<span><span class="co">#&gt;  [95] nlme_3.1-157           mime_0.12             </span></span>
-<span><span class="co">#&gt;  [97] slam_0.1-50            aplot_0.1.10          </span></span>
-<span><span class="co">#&gt;  [99] xml2_1.3.3             compiler_4.2.1        </span></span>
+<span><span class="co">#&gt;  [95] nlme_3.1-161           mime_0.12             </span></span>
+<span><span class="co">#&gt;  [97] slam_0.1-50            aplot_0.1.9           </span></span>
+<span><span class="co">#&gt;  [99] xml2_1.3.3             compiler_4.2.2        </span></span>
 <span><span class="co">#&gt; [101] rstudioapi_0.14        png_0.1-8             </span></span>
-<span><span class="co">#&gt; [103] treeio_1.22.0          tibble_3.2.1          </span></span>
+<span><span class="co">#&gt; [103] treeio_1.22.0          tibble_3.1.8          </span></span>
 <span><span class="co">#&gt; [105] tweenr_2.0.2           bslib_0.4.2           </span></span>
 <span><span class="co">#&gt; [107] stringi_1.7.12         cyjShiny_1.0.34       </span></span>
 <span><span class="co">#&gt; [109] highr_0.10             lattice_0.20-45       </span></span>
-<span><span class="co">#&gt; [111] Matrix_1.5-4           vctrs_0.6.1           </span></span>
-<span><span class="co">#&gt; [113] pillar_1.9.0           lifecycle_1.0.3       </span></span>
+<span><span class="co">#&gt; [111] Matrix_1.5-3           vctrs_0.5.2           </span></span>
+<span><span class="co">#&gt; [113] pillar_1.8.1           lifecycle_1.0.3       </span></span>
 <span><span class="co">#&gt; [115] jquerylib_0.1.4        GlobalOptions_0.1.2   </span></span>
 <span><span class="co">#&gt; [117] data.table_1.14.8      cowplot_1.1.1         </span></span>
 <span><span class="co">#&gt; [119] bitops_1.0-7           httpuv_1.6.9          </span></span>
 <span><span class="co">#&gt; [121] patchwork_1.1.2        qvalue_2.30.0         </span></span>
 <span><span class="co">#&gt; [123] R6_2.5.1               bookdown_0.33         </span></span>
 <span><span class="co">#&gt; [125] promises_1.2.0.1       gridExtra_2.3         </span></span>
-<span><span class="co">#&gt; [127] codetools_0.2-18       MASS_7.3-57           </span></span>
+<span><span class="co">#&gt; [127] codetools_0.2-18       MASS_7.3-58.1         </span></span>
 <span><span class="co">#&gt; [129] rjson_0.2.21           withr_2.5.0           </span></span>
-<span><span class="co">#&gt; [131] GenomeInfoDbData_1.2.9 parallel_4.2.1        </span></span>
+<span><span class="co">#&gt; [131] GenomeInfoDbData_1.2.9 parallel_4.2.2        </span></span>
 <span><span class="co">#&gt; [133] ISOcodes_2022.09.29    ggfun_0.0.9           </span></span>
-<span><span class="co">#&gt; [135] grid_4.2.1             tidyr_1.3.0           </span></span>
+<span><span class="co">#&gt; [135] grid_4.2.2             tidyr_1.3.0           </span></span>
 <span><span class="co">#&gt; [137] HDO.db_0.99.1          rmarkdown_2.20        </span></span>
 <span><span class="co">#&gt; [139] downlit_0.4.2          NLP_0.2-1             </span></span>
 <span><span class="co">#&gt; [141] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
@@ -842,6 +870,7 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <li><a class="nav-link" href="#text-over-represenatation-analysis-experimental"><span class="header-section-number">2.5</span> Text over represenatation analysis (experimental)</a></li>
 <li><a class="nav-link" href="#dependency-analyis-using-udpipe"><span class="header-section-number">2.6</span> Dependency analyis using udpipe</a></li>
 <li><a class="nav-link" href="#changing-the-font"><span class="header-section-number">2.7</span> Changing the font</a></li>
+<li><a class="nav-link" href="#biofabric-layout"><span class="header-section-number">2.8</span> Biofabric layout</a></li>
 </ul>
 
       <div class="book-extra">
@@ -858,7 +887,7 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-06-23.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
