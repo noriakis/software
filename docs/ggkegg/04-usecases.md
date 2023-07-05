@@ -100,29 +100,29 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 22
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
-#> # ℹ 15 more variables: height <dbl>, fgcolor <chr>,
-#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
-#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
-#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
-#> #   padj <dbl>, converted_name <chr>, num <dbl>
+#> # Node Data: 134 × 22 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 14 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
+#> #   num <dbl>
 #> #
-#> # A tibble: 157 × 6
+#> # Edge Data: 157 × 6
 #>    from    to type  subtype_name    subtype_value pathway_id
 #>   <int> <int> <chr> <chr>           <chr>         <chr>     
 #> 1   118    39 GErel expression      -->           hsa04110  
 #> 2    50    61 PPrel inhibition      --|           hsa04110  
 #> 3    50    61 PPrel phosphorylation +p            hsa04110  
-#> # ℹ 154 more rows
+#> # … with 154 more rows
 ```
 
 ### Integrating matrix to `tbl_graph`
@@ -139,36 +139,54 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 47
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
-#> # ℹ 40 more variables: height <dbl>, fgcolor <chr>,
-#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
-#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
-#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
-#> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
-#> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
-#> #
-#> # A tibble: 157 × 34
-#>    from    to type  subtype_name    subtype_value pathway_id
-#>   <int> <int> <chr> <chr>           <chr>         <chr>     
-#> 1   118    39 GErel expression      -->           hsa04110  
-#> 2    50    61 PPrel inhibition      --|           hsa04110  
-#> 3    50    61 PPrel phosphorylation +p            hsa04110  
-#> # ℹ 154 more rows
-#> # ℹ 28 more variables: from_nd <chr>, to_nd <chr>,
+#> # Node Data: 134 × 47 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 39 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
 #> #   SRR14509882 <dbl>, SRR14509883 <dbl>,
 #> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
 #> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
 #> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
-#> #   SRR14509890 <dbl>, SRR14509891 <dbl>, …
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
+#> #
+#> # Edge Data: 157 × 34
+#>    from    to type  subtyp… subtyp… pathwa… from_nd to_nd
+#>   <int> <int> <chr> <chr>   <chr>   <chr>   <chr>   <chr>
+#> 1   118    39 GErel expres… -->     hsa041… undefi… hsa:…
+#> 2    50    61 PPrel inhibi… --|     hsa041… hsa:29… hsa:…
+#> 3    50    61 PPrel phosph… +p      hsa041… hsa:29… hsa:…
+#> # … with 154 more rows, and 26 more variables:
+#> #   SRR14509882 <dbl>, SRR14509883 <dbl>,
+#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
+#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
+#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
 ```
 
 
@@ -635,6 +653,94 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
 <img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;" />
+
+### Barplot for numeric values on raw map
+
+For nodes in which they are enriched in multiple clusters, we can plot barplot for numeric values. The referenced codes are [here](https://stackoverflow.com/questions/36063043/how-to-plot-barchart-onto-ggplot2-map) by inscaven.
+
+
+```r
+
+## Assign lfc to graph
+mark_4 <- clusterProfiler::bitr((markers |> filter(cluster=="4" & p_val_adj < 1e-50) |>
+                                     dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)
+mark_6 <- clusterProfiler::bitr((markers |> filter(cluster=="6" & p_val_adj < 1e-50) |>
+                                   dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)
+mark_4$lfc <- markers[markers$cluster=="4" & markers$gene %in% mark_4$SYMBOL,]$avg_log2FC
+mark_4$hsa <- paste0("hsa:",mark_4$ENTREZID)
+mark_6$lfc <- markers[markers$cluster=="6" & markers$gene %in% mark_4$SYMBOL,]$avg_log2FC
+mark_6$hsa <- paste0("hsa:",mark_6$ENTREZID)
+mk4lfc <- mark_4$lfc
+names(mk4lfc) <- mark_4$hsa
+mk6lfc <- mark_6$lfc
+names(mk6lfc) <- mark_6$hsa
+
+g1 <- g1 |> mutate(mk4lfc=node_numeric(mk4lfc),
+             mk6lfc=node_numeric(mk6lfc))
+
+## Make data frame containing necessary data from node
+subset_df <- g1 |> activate(nodes) |> data.frame() |>
+    dplyr::filter(marker_4 & marker_6) |>
+    dplyr::select(orig.id, mk4lfc, mk6lfc, x, y, xmin, xmax, ymin, ymax) |>
+    tidyr::pivot_longer(cols=c("mk4lfc","mk6lfc"))
+
+## Actually we dont need position list
+pos_list <- list()
+annot_list <- list()
+for (i in subset_df$orig.id |> unique()) {
+    tmp <- subset_df[subset_df$orig.id==i,]
+    ymin <- tmp$ymin |> unique()
+    ymax <- tmp$ymax |> unique()
+    xmin <- tmp$xmin |> unique()
+    xmax <- tmp$xmax |> unique()
+    pos_list[[as.character(i)]] <- c(xmin, xmax,
+                                     ymin, ymax)
+    barp <- tmp |>
+        ggplot(aes(x=name, y=value, fill=name))+
+        geom_col(width=1)+
+        scale_fill_manual(values=c(gr_cols["4"] |> as.character(),
+                                   gr_cols["6"] |> as.character()))+
+        labs(x = NULL, y = NULL) +
+        coord_cartesian(expand = FALSE) +
+        theme(
+            legend.position = "none",
+            panel.background = element_rect(fill = "transparent", colour = NA),
+            line = element_blank(),
+            text = element_blank()
+        )
+    gbar <- ggplotGrob(barp)
+    panel_coords <- gbar$layout[gbar$layout$name == "panel", ]
+    gbar_mod <- gbar[panel_coords$t:panel_coords$b, panel_coords$l:panel_coords$r]
+    annot_list[[as.character(i)]] <- annotation_custom(gbar_mod,
+                                                      xmin=xmin, xmax=xmax,
+                                                      ymin=ymin, ymax=ymax)
+}
+
+## Make ggraph, annotate barplot, and overlay raw map.
+graph_tmp <- ggraph(g1, layout="manual", x=x, y=y)+
+    geom_node_rect(aes(filter=marker_4&marker_6),
+                   fill="gold")+
+    geom_node_rect(aes(filter=marker_4&!marker_6),
+                   fill=gr_cols["4"])+
+    geom_node_rect(aes(filter=marker_6&!marker_4),
+                   fill=gr_cols["6"])+
+    theme_void()
+final_bar <- Reduce("+", annot_list, graph_tmp)+
+overlay_raw_map("hsa04612",
+                transparent_colors = c("#b3b3b3",
+                                       "#cccccc",
+                                       "#FFFFFF",
+                                       "#BFBFFF",
+                                       "#BFFFBF"))
+ggsave("tmp.png",
+       final_bar,
+       width=15, height=10, dpi=300, units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/barp_prepare-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 
 
 ## Customizing global map visualization

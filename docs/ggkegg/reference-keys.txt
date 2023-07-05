@@ -15,6 +15,7 @@ module
 module-definition-in-graph
 module-definition-in-text
 module-completeness
+assessing-module-completeness-across-multiple-microbial-genomes
 module-abundance-and-pathway-abundance-calculation
 visualize-the-result-of-enricher
 network
@@ -31,6 +32,7 @@ projecting-the-gene-regulatory-networks-on-kegg-map
 projection-on-to-the-raw-kegg-map
 analyzing-cluster-marker-genes-in-single-cell-transcriptomics
 example-for-composing-multiple-pathways
+barplot-for-numeric-values-on-raw-map
 customizing-global-map-visualization
 preprocessing
 plotting

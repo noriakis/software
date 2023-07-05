@@ -87,7 +87,7 @@ query <- sample(mod@definition_components,5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K00240" "K01679" "K00242" "K01616" "K00658"
+#> [1] "K00246" "K01616" "K00026" "K01678" "K01681"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -114,9 +114,9 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01681,K01682) </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00031,K00030) </td>
@@ -128,8 +128,8 @@ mod |>
   <tr>
    <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.1250000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
@@ -142,8 +142,8 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) </td>
    <td style="text-align:right;"> 15 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.1333333 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0666667 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
@@ -151,17 +151,107 @@ mod |>
    <td style="text-align:right;"> 4 </td>
    <td style="text-align:right;"> 1 </td>
    <td style="text-align:right;"> 0.2500000 </td>
-   <td style="text-align:left;"> TRUE </td>
+   <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
 </tbody>
 </table>
+
+### Assessing module completeness across multiple microbial genomes
+
+For instance, we can assess completeness from KOs inferred from multiple species genome. Here, we mapped EC numbers available in the annotation file in `MIDAS` pipeline, which is obtained from PATRIC server, to KOs and calculate completeness for randomly obtained species.
+
+
+
+```r
+## Load pre-computed KOs, and recursively perform completeness calculation.
+mf <- list.files("../")
+mf <- mf[startsWith(mf, "M")]
+annos <- list()
+
+candspid <- list.files("../species_dir")
+candspid <- sample(candspid, 10)
+mapper <- data.table::fread("https://rest.kegg.jp/link/ec/ko",header=FALSE)
+
+suppressMessages(
+  for (i in candspid) {
+    mcs <- NULL
+    df <- read.table(paste0("../species_dir/",i), sep="\t", header=1)
+    fid <- paste0("ec:",df[df$ontology=="ec",]$function_id)
+    kos <- mapper[mapper$V2 %in% fid,]$V1 |> strsplit(":") |> sapply("[",2) |> unique()
+    for (mid in mf) {
+      mc <- module_completeness(module(mid, directory="../"),
+                                query = kos)
+      mcs <- c(mcs, mc$complete |> mean()) ## Mean of blocks
+    }
+    annos[[as.character(i)]] <- mcs
+  }
+)
+```
+
+We will next visualize the results using `ComplexHeatmap` and `simplifyEnrichment`. We will plot the word cloud of module description alongside heatmap by `simplifyEnrichment`, for determined clusters.
+
+
+```r
+library(ComplexHeatmap)
+
+## Make data.frame
+hdf <- data.frame(annos, check.names=FALSE)
+row.names(hdf) <- mf
+hdf[is.na(hdf)] <- 0
+hdf <- hdf[apply(hdf, 1, sum)!=0,]
+
+## Prepare for word cloud annotation
+moddesc <- data.table::fread("https://rest.kegg.jp/list/module", header=FALSE)
+
+## Obtain K-means clustering
+km = kmeans(hdf, centers = 10)$cluster
+
+gene_list <- split(row.names(hdf), km)
+gene_list <- lapply(gene_list, function(x) {
+  x[!is.na(x)]
+})
+
+annotList <- list()
+for (i in names(gene_list)) {
+  maps <- (moddesc |> dplyr::filter(V1 %in% gene_list[[i]]))$V2
+  annotList[[i]] <-  maps
+}
+```
+
+
+```r
+
+col_fun = circlize::colorRamp2(c(0, 0.5, 1),
+                               c(scales::muted("blue"), "white", scales::muted("red")))
+
+ht1 <- Heatmap(hdf, show_column_names = TRUE,
+               col=col_fun, row_split=km,
+               heatmap_legend_param = list(
+                 legend_direction = "horizontal", 
+                 legend_width = unit(5, "cm")
+               ),
+               rect_gp = gpar(col = "white", lwd = 2),
+               name="Module completeness", border=TRUE,
+               column_names_max_height =unit(10,"cm"))+
+  rowAnnotation(
+    keywords = simplifyEnrichment::anno_word_cloud(align_to = km,
+                                                   term=annotList,
+                                                   exclude_words=c("pathway","degradation",
+                                                                   "biosynthesis"),
+                                                   max_words = 40,fontsize_range = c(5,20))
+  )
+ht1
+```
+
+<img src="02-module_files/figure-html/visualizecomplexheatmap-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Module abundance and pathway abundance calculation
 
@@ -180,18 +270,14 @@ If you performed some experiments involving KEGG Orthology, and performed enrich
 
 ```r
 library(BiocFileCache)
-#> Warning: package 'BiocFileCache' was built under R version
-#> 4.2.2
 #> Loading required package: dbplyr
-#> Warning: package 'dbplyr' was built under R version 4.2.3
 #> 
 #> Attaching package: 'dbplyr'
 #> The following objects are masked from 'package:dplyr':
 #> 
 #>     ident, sql
 library(clusterProfiler)
-#> 
-#> clusterProfiler v4.7.1.003  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> clusterProfiler v4.6.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
 #> If you use clusterProfiler in published research, please cite:
 #> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
