@@ -17,6 +17,11 @@ library(ggkegg)
 library(DESeq2)
 library(org.Hs.eg.db)
 library(dplyr)
+```
+
+
+
+```r
 
 load("uro.deseq.res.rda") ## Storing DESeq() result
 res
@@ -741,7 +746,120 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 <img src="04-usecases_files/figure-html/barp_prepare-1.png" width="100%" style="display: block; margin: auto;" />
 
 
+### Barplot across all the clusters
 
+By iterating the above codes, we can plot all the clusters' quantitative data on plot. Although it is preferred to use ggplot2 mapping to produce the legend, here we obtain the legend from reduced dimension plot.
+
+
+```r
+g1 <- pathway("hsa04612") 
+for (cluster_num in seq_len(9)) {
+    cluster_num <- as.character(cluster_num - 1)
+    mark <- clusterProfiler::bitr((markers |> filter(cluster==cluster_num & p_val_adj < 1e-50) |>
+                                         dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)
+    mark$lfc <- markers[markers$cluster==cluster_num & markers$gene %in% mark$SYMBOL,]$avg_log2FC
+    mark$hsa <- paste0("hsa:",mark$ENTREZID)
+    coln <- paste0("marker",cluster_num,"lfc")
+    g1 <- g1 |> mutate(!!coln := node_numeric(mark$lfc |> setNames(mark$hsa)))
+}
+```
+
+Make `ggplotGrob()`.
+
+
+```r
+
+subset_df <- g1 |> activate(nodes) |> data.frame() |>
+    dplyr::select(orig.id, paste0("marker",seq_len(9)-1,"lfc"), x, y, xmin, xmax, ymin, ymax) |>
+    tidyr::pivot_longer(cols=paste0("marker",seq_len(9)-1,"lfc"))
+pos_list <- list()
+annot_list <- list()
+all_gr_cols <- gr_cols
+names(all_gr_cols) <- paste0("marker",names(all_gr_cols),"lfc")
+for (i in subset_df$orig.id |> unique()) {
+    tmp <- subset_df[subset_df$orig.id==i,]
+    ymin <- tmp$ymin |> unique()
+    ymax <- tmp$ymax |> unique()
+    xmin <- tmp$xmin |> unique()
+    xmax <- tmp$xmax |> unique()
+    pos_list[[as.character(i)]] <- c(xmin, xmax,
+                                     ymin, ymax)
+    if ((tmp |> filter(!is.na(value)) |> dim())[1]!=0) {
+        barp <- tmp |> filter(!is.na(value)) |>
+            ggplot(aes(x=name, y=value, fill=name))+
+            geom_col(width=1)+
+            scale_fill_manual(values=all_gr_cols)+
+            ## We add horizontal line to show the direction of bar
+            geom_hline(yintercept=0, linewidth=1, colour="grey")+
+            labs(x = NULL, y = NULL) +
+            coord_cartesian(expand = FALSE) +
+            theme(
+                legend.position = "none",
+                panel.background = element_rect(fill = "transparent", colour = NA),
+                text = element_blank()
+            )
+        gbar <- ggplotGrob(barp)
+        panel_coords <- gbar$layout[gbar$layout$name == "panel", ]
+        gbar_mod <- gbar[panel_coords$t:panel_coords$b, panel_coords$l:panel_coords$r]
+        annot_list[[as.character(i)]] <- annotation_custom(gbar_mod,
+                                                           xmin=xmin, xmax=xmax,
+                                                           ymin=ymin, ymax=ymax)
+    }
+}
+```
+
+Obtain legend and modify.
+
+
+```r
+## Take scplot legend, make it rectangle
+dd2 <- sc_dim(pbmc) + 
+    sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
+                      color='black', bg.color='white', size=3)+
+    guides(color = guide_legend(override.aes = list(shape=15, size=5)))
+grobs <- ggplot_gtable(ggplot_build(dd2))
+num <- which(sapply(grobs$grobs, function(x) x$name) == "guide-box")
+legendGrob <- grobs$grobs[[num]]
+
+## Show it
+ggplotify::as.ggplot(legendGrob)
+```
+
+<img src="04-usecases_files/figure-html/legend1-1.png" width="100%" style="display: block; margin: auto;" />
+
+
+
+```r
+
+## Make dummy legend by `fill`
+graph_tmp <- ggraph(g1, layout="manual", x=x, y=y)+
+    geom_node_rect(aes(fill="transparent"))+
+    scale_fill_manual(values="transparent" |> setNames("transparent"))+
+    theme_void()
+
+## Overlaid the raw map
+overlaid <- Reduce("+", annot_list, graph_tmp)+
+    overlay_raw_map("hsa04612",
+                    transparent_colors = c("#b3b3b3",
+                                           "#cccccc",
+                                           "#FFFFFF",
+                                           "#BFBFFF",
+                                           "#BFFFBF"))
+
+## Replace the guides
+overlaidGtable <- ggplot_gtable(ggplot_build(overlaid))
+num2 <- which(sapply(overlaidGtable$grobs, function(x) x$name) == "guide-box")
+overlaidGtable$grobs[[num2]] <- legendGrob
+
+
+## Save
+ggsave("tmp.png",
+       ggplotify::as.ggplot(overlaidGtable),
+       width=15, height=10, dpi=300, units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="04-usecases_files/figure-html/legend2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Customizing global map visualization
 
