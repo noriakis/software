@@ -467,7 +467,9 @@ raws <- joined |>
                  linetype=1,
                  arrow=arrow(length=unit(1,"mm"),type="closed"),
                  end_cap=circle(5,"mm"))+
-  overlay_raw_map(transparent_colors = c("#ffffff"))
+  scale_edge_color_gradient2()+
+  overlay_raw_map(transparent_colors = c("#ffffff"))+
+  theme_void()
 
 ggsave("tmp.png",
         raws,
@@ -484,6 +486,7 @@ This package can also be applied to single-cell analysis. As an example, conside
 
 ```r
 library(Seurat)
+library(scplot)
 # dir = "../filtered_gene_bc_matrices/hg19"
 # pbmc.data <- Read10X(data.dir = dir)
 # pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k",
@@ -507,7 +510,6 @@ Among these, for the present study, we perform enrichment analysis on the marker
 
 
 ```r
-library(scplot)
 ## scplot utilizes scattermore for rendering, in this instance, we override the highlighting by geom_node_point.
 dd <- sc_dim(pbmc) + 
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
@@ -601,27 +603,28 @@ names(cols) <- as.character(as.numeric(built$group)-1)
 gr_cols <- cols[!duplicated(cols)]
 
 g1 <- pathway("hsa04612") |> mutate(marker_4=append_cp(mk4_enrich),
-                                   marker_6=append_cp(mk6_enrich))
+                                    marker_6=append_cp(mk6_enrich),
+                                    gene_name=convert_id("hsa"))
 gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
-  ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_4&marker_6),
-                   color="gold", fill="white"),
-    colour="gold", expand=9)+
-  ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_4&!marker_6),
-                   color=gr_cols["4"], fill="white"),
-    colour=gr_cols["4"], expand=9)+
-  ggfx::with_outer_glow(
-    geom_node_rect(aes(filter=marker_6&!marker_4),
-                   color=gr_cols["6"], fill="white"),
-    colour=gr_cols["6"], expand=9)+
-  overlay_raw_map("hsa04612",
-                  transparent_colors = c("#b3b3b3",
-                                         "#cccccc",
-                                         "#FFFFFF",
-                                         "#BFBFFF",
-                                         "#BFFFBF"))+
-  theme_void()
+    overlay_raw_map("hsa04612",
+                    transparent_colors = c("#FFFFFF",
+                                           "#BFBFFF",
+                                           "#BFFFBF"))+
+    ggfx::with_outer_glow(
+        geom_node_rect(aes(filter=marker_4&marker_6),
+                       color="black", linewidth=0.1, fill="white"),
+        colour="gold", expand=9)+
+    ggfx::with_outer_glow(
+        geom_node_rect(aes(filter=marker_4&!marker_6),
+                       color="black", linewidth=0.1, fill="white"),
+        colour=gr_cols["4"], expand=9)+
+    ggfx::with_outer_glow(
+        geom_node_rect(aes(filter=marker_6&!marker_4),
+                       color="black", linewidth=0.1, fill="white"),
+        colour=gr_cols["6"], expand=9)+
+    geom_node_text(aes(label=gene_name, filter=marker_4|marker_6),
+                   size=1.5, family="serif")+
+    theme_void()
 
 g2 <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
                                    marker_5=append_cp(mk5_enrich))
@@ -732,9 +735,7 @@ graph_tmp <- ggraph(g1, layout="manual", x=x, y=y)+
     theme_void()
 final_bar <- Reduce("+", annot_list, graph_tmp)+
 overlay_raw_map("hsa04612",
-                transparent_colors = c("#b3b3b3",
-                                       "#cccccc",
-                                       "#FFFFFF",
+                transparent_colors = c("#FFFFFF",
                                        "#BFBFFF",
                                        "#BFFFBF"))
 ggsave("tmp.png",
@@ -840,9 +841,7 @@ graph_tmp <- ggraph(g1, layout="manual", x=x, y=y)+
 ## Overlaid the raw map
 overlaid <- Reduce("+", annot_list, graph_tmp)+
     overlay_raw_map("hsa04612",
-                    transparent_colors = c("#b3b3b3",
-                                           "#cccccc",
-                                           "#FFFFFF",
+                    transparent_colors = c("#FFFFFF",
                                            "#BFBFFF",
                                            "#BFFFBF"))
 
