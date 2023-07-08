@@ -55,16 +55,21 @@ the relationship between genes and corresponding SNVs in genes.</p>
 <span>  <span class="va">stana</span>,</span>
 <span>  <span class="va">candSp</span>,</span>
 <span>  <span class="va">genomeId</span>,</span>
+<span>  include_gene <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  thresh_snp_gene <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>  featList <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tomato"</span>, <span class="st">"steelblue"</span>, <span class="st">"gold"</span>, <span class="st">"seagreen"</span><span class="op">)</span>,</span>
 <span>  controlColor <span class="op">=</span> <span class="st">"steelblue"</span>,</span>
+<span>  MAF <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cl <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  featCircos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  showGeneName <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  returnRawDf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  featThresh <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  cex <span class="op">=</span> <span class="fl">0.3</span>,</span>
 <span>  textCex <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  bar_width <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  contPalette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>,</span>
+<span>  contPalette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>, <span class="st">"tomato"</span><span class="op">)</span>,</span>
 <span>  discPalette <span class="op">=</span> <span class="st">"Dark2"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -99,8 +104,24 @@ the relationship between genes and corresponding SNVs in genes.</p>
 <dd><p>control (not reaching `featThresh`) color in points and barplot</p></dd>
 
 
+<dt>MAF</dt>
+<dd><p>plot MAF for each group</p></dd>
+
+
+<dt>cl</dt>
+<dd><p>cluster information (named list)</p></dd>
+
+
 <dt>featCircos</dt>
 <dd><p>which type of circos to use in the corresponding feature</p></dd>
+
+
+<dt>showGeneName</dt>
+<dd><p>show gene ID on the plot</p></dd>
+
+
+<dt>returnRawDf</dt>
+<dd><p>return the raw data frame used in the plot</p></dd>
 
 
 <dt>featThresh</dt>

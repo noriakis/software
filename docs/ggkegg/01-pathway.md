@@ -516,7 +516,7 @@ multig <- multi_pathway_native(pathways, row_num=2)
 
 multig |>
   ggraph(layout="manual", x=x, y=y)+
-  geom_edge_link(alpha=0.2,
+  geom_edge_parallel(alpha=0.2,
                  arrow=arrow(length=unit(1,"mm")),
                  start_cap=circle(5,"mm"),
                  end_cap=circle(5,"mm"))+
@@ -596,3 +596,14 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```
 
 <img src="01-pathway_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;" />
+
+The same can be done for the numeric values using `rawValue`. You can control your favorite color gradient using `scale_fill_gradient2`. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as [`ggh4x`](https://github.com/teunbrand/ggh4x).
+
+
+```r
+res <- rawValue(geneList[1:100], "hsa04110", auto_add=TRUE)
+ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
+cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+```
+
+<img src="01-pathway_files/figure-html/cp_value-1.png" width="100%" style="display: block; margin: auto;" />
