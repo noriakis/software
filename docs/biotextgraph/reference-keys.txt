@@ -9,6 +9,7 @@ text-over-represenatation-analysis-experimental
 dependency-analyis-using-udpipe
 changing-the-font
 biofabric-layout
+highlighting-genes-in-the-layout
 the-basic-usage-for-microbiome-related-data
 enzymes
 metabolites
