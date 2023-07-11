@@ -1,0 +1,10 @@
+about
+motivation
+importing
+instrain
+midas
+midas2
+metasnv
+gt-pro
+visualization
+visualization-of-instrain-results

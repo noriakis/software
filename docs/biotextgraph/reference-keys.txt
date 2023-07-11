@@ -10,6 +10,7 @@ dependency-analyis-using-udpipe
 changing-the-font
 biofabric-layout
 highlighting-genes-in-the-layout
+wrapper-for-biofabric-layout
 the-basic-usage-for-microbiome-related-data
 enzymes
 metabolites
