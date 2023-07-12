@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Importing | stana</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default.  2.1 InStrain   2.2...">
+<meta name="description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Importing | stana">
 <meta property="og:type" content="book">
-<meta property="og:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default.  2.1 InStrain   2.2...">
+<meta property="og:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Importing | stana">
-<meta name="twitter:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default.  2.1 InStrain   2.2...">
+<meta name="twitter:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -60,20 +60,80 @@
 <p><code>stana</code> is aimed to import the metagenotyping results of various pipelines.
 The package is designed primarily for <code>MIDAS</code> and <code>MIDAS2</code>, which outputs the
 gene abundances by default.</p>
-<div id="instrain" class="section level2" number="2.1">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span></code></pre></div>
+<div id="midas" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> InStrain<a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> MIDAS<a class="anchor" aria-label="anchor" href="#midas"><i class="fas fa-link"></i></a>
 </h2>
+<p>For <code>MIDAS</code>, <code>loadMIDAS</code> function can be used to import the output of <code>merge</code> command.</p>
 </div>
-<div id="midas" class="section level2" number="2.2">
+<div id="midas2" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> MIDAS<a class="anchor" aria-label="anchor" href="#midas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> MIDAS2<a class="anchor" aria-label="anchor" href="#midas2"><i class="fas fa-link"></i></a>
 </h2>
+<p>For <code>MIDAS2</code>, <code>loadMIDAS2</code> function can be used to import the output of <code>merge</code> command.</p>
 </div>
-<div id="midas2" class="section level2" number="2.3">
+<div id="instrain" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> MIDAS2<a class="anchor" aria-label="anchor" href="#midas2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> inStrain<a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
 </h2>
+<p>For inStrain, we need <code>compare</code> command output, after <code>profile</code> command. First we would like to know which species are profiled. <code>just_species</code> option only list species in the table. Here, we load an example dataset profiled by <code>inStrain</code>, using the default database described in their original tutorial. For <code>inStrain</code>, loading all the SNV tables is often impossible, we must specify <code>candidate_species</code> for investigation.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, just_species<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">sp</span></span>
+<span><span class="co">#&gt;  [1] "GUT_GENOME000022" "GUT_GENOME000024"</span></span>
+<span><span class="co">#&gt;  [3] "GUT_GENOME000147" "GUT_GENOME000220"</span></span>
+<span><span class="co">#&gt;  [5] "GUT_GENOME000221" "GUT_GENOME000224"</span></span>
+<span><span class="co">#&gt;  [7] "GUT_GENOME000225" "GUT_GENOME000231"</span></span>
+<span><span class="co">#&gt;  [9] "GUT_GENOME000509" "GUT_GENOME007566"</span></span>
+<span><span class="co">#&gt; [11] "GUT_GENOME009103" "GUT_GENOME031782"</span></span>
+<span><span class="co">#&gt; [13] "GUT_GENOME034989" "GUT_GENOME044231"</span></span>
+<span><span class="co">#&gt; [15] "GUT_GENOME067546" "GUT_GENOME068725"</span></span>
+<span><span class="co">#&gt; [17] "GUT_GENOME080972" "GUT_GENOME090701"</span></span>
+<span><span class="co">#&gt; [19] "GUT_GENOME094995" "GUT_GENOME096045"</span></span>
+<span><span class="co">#&gt; [21] "GUT_GENOME096080" "GUT_GENOME096083"</span></span>
+<span><span class="co">#&gt; [23] "GUT_GENOME096473" "GUT_GENOME096573"</span></span>
+<span><span class="co">#&gt; [25] "GUT_GENOME102034" "GUT_GENOME103721"</span></span>
+<span><span class="co">#&gt; [27] "GUT_GENOME104570" "GUT_GENOME109880"</span></span>
+<span><span class="co">#&gt; [29] "GUT_GENOME112794" "GUT_GENOME113322"</span></span>
+<span><span class="co">#&gt; [31] "GUT_GENOME114679" "GUT_GENOME115272"</span></span>
+<span><span class="co">#&gt; [33] "GUT_GENOME115357" "GUT_GENOME116258"</span></span>
+<span><span class="co">#&gt; [35] "GUT_GENOME116897" "GUT_GENOME117271"</span></span>
+<span><span class="co">#&gt; [37] "GUT_GENOME132077" "GUT_GENOME135463"</span></span>
+<span><span class="co">#&gt; [39] "GUT_GENOME140076" "GUT_GENOME142015"</span></span>
+<span><span class="co">#&gt; [41] "GUT_GENOME142390" "GUT_GENOME143131"</span></span>
+<span><span class="co">#&gt; [43] "GUT_GENOME143211" "GUT_GENOME143348"</span></span>
+<span><span class="co">#&gt; [45] "GUT_GENOME143497" "GUT_GENOME143505"</span></span>
+<span><span class="co">#&gt; [47] "GUT_GENOME149497" "GUT_GENOME156849"</span></span>
+<span><span class="co">#&gt; [49] "GUT_GENOME174809" "GUT_GENOME175554"</span></span>
+<span><span class="co">#&gt; [51] "GUT_GENOME189814" "GUT_GENOME195293"</span></span>
+<span><span class="co">#&gt; [53] "GUT_GENOME208589" "GUT_GENOME210309"</span></span>
+<span><span class="co">#&gt; [55] "GUT_GENOME210710" "GUT_GENOME217823"</span></span>
+<span><span class="co">#&gt; [57] "GUT_GENOME217842" "GUT_GENOME217850"</span></span>
+<span><span class="co">#&gt; [59] "GUT_GENOME234840" "GUT_GENOME252930"</span></span>
+<span><span class="co">#&gt; [61] "GUT_GENOME258721" "GUT_GENOME261411"</span></span>
+<span><span class="co">#&gt; [63] "GUT_GENOME272874" "GUT_GENOME274362"</span></span>
+<span><span class="co">#&gt; [65] "GUT_GENOME275708" "GUT_GENOME277090"</span></span>
+<span><span class="co">#&gt; [67] "GUT_GENOME284693" "GUT_GENOME286118"</span></span></code></pre></div>
+<p>This recalculates the minor allele frequency based on pooled SNV information (not on individual SNV information), thus takes a long time in case the number of profiled positions is large. We can set <code>cl</code> argument if needed.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
+<span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span>, skip_pool<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Load MAF table</span></span>
+<span><span class="co">#&gt; Loading allele count table</span></span>
+<span><span class="co">#&gt; Loading key table</span></span>
+<span><span class="co">#&gt; Loading info table</span></span>
+<span><span class="co">#&gt; Candidate species: GUT_GENOME142015</span></span>
+<span><span class="co">#&gt;   Candidate key numbers: 1</span></span>
+<span><span class="co">#&gt;   Dimension of pooled SNV table for species: 2359827</span></span>
+<span><span class="co">#&gt; Calculating MAF</span></span>
+<span><span class="va">instr</span></span>
+<span><span class="co">#&gt; Type: InStrain</span></span>
+<span><span class="co">#&gt; Directory: ../inStrain_out</span></span>
+<span><span class="co">#&gt; Species number: 68</span></span>
+<span><span class="co">#&gt; Loaded SNV table: 1</span></span>
+<span><span class="co">#&gt; Loaded gene table (): 0</span></span>
+<span><span class="co">#&gt; 70.4 Mb</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
@@ -94,9 +154,9 @@ gene abundances by default.</p>
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#importing"><span class="header-section-number">2</span> Importing</a></li>
-<li><a class="nav-link" href="#instrain"><span class="header-section-number">2.1</span> InStrain</a></li>
-<li><a class="nav-link" href="#midas"><span class="header-section-number">2.2</span> MIDAS</a></li>
-<li><a class="nav-link" href="#midas2"><span class="header-section-number">2.3</span> MIDAS2</a></li>
+<li><a class="nav-link" href="#midas"><span class="header-section-number">2.1</span> MIDAS</a></li>
+<li><a class="nav-link" href="#midas2"><span class="header-section-number">2.2</span> MIDAS2</a></li>
+<li><a class="nav-link" href="#instrain"><span class="header-section-number">2.3</span> inStrain</a></li>
 <li><a class="nav-link" href="#metasnv"><span class="header-section-number">2.4</span> metaSNV</a></li>
 <li><a class="nav-link" href="#gt-pro"><span class="header-section-number">2.5</span> GT-Pro</a></li>
 </ul>
@@ -116,7 +176,7 @@ gene abundances by default.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-11.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

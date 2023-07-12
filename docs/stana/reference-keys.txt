@@ -1,10 +1,12 @@
 about
 motivation
 importing
-instrain
 midas
 midas2
+instrain
 metasnv
 gt-pro
 visualization
+visualization-of-gene-abundances
+visualization-of-functional-analysis-results
 visualization-of-instrain-results
