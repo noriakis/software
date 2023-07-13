@@ -6,29 +6,33 @@
 ```r
 library(stana)
 library(ComplexHeatmap)
-#> Loading required package: grid
-#> ========================================
-#> ComplexHeatmap version 2.14.0
-#> Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/
-#> Github page: https://github.com/jokergoo/ComplexHeatmap
-#> Documentation: http://jokergoo.github.io/ComplexHeatmap-reference
-#> 
-#> If you use it in published research, please cite either one:
-#> - Gu, Z. Complex Heatmap Visualization. iMeta 2022.
-#> - Gu, Z. Complex heatmaps reveal patterns and correlations in multidimensional 
-#>     genomic data. Bioinformatics 2016.
-#> 
-#> 
-#> The new InteractiveComplexHeatmap package can directly export static 
-#> complex heatmaps into an interactive Shiny app with zero effort. Have a try!
-#> 
-#> This message can be suppressed by:
-#>   suppressPackageStartupMessages(library(ComplexHeatmap))
-#> ========================================
 ```
 
 
 ## Visualization of gene abundances
+
+
+```r
+load("../hd_meta.rda")
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
+#> SNPS
+#>   102478
+#>     Number of snps: 77431
+#>     Number of samples: 31
+#>       Number of samples in HC: 9
+#>       Number of samples in R: 22
+#>       Passed the filter
+#> Genes
+#>   102478
+#>     Number of genes: 150996
+#>     Number of samples: 32
+#>       Number of samples in HC: 10
+#>       Number of samples in R: 22
+#>       Passed the filter
+plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
+```
+
+<img src="02-visualization_files/figure-html/gab-1.png" width="672" />
 
 ## Visualization of functional analysis results
 

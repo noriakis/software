@@ -16,6 +16,167 @@ For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` co
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
+Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[https://doi.org/10.3389/fcimb.2022.904284]. As the long output is expected, only one species is loaded here. `hd_meta` includes named list of grouping.
+
+
+```r
+load("../hd_meta.rda")
+hd_meta
+#> $HC
+#>  [1] "ERR9492498" "ERR9492502" "ERR9492507" "ERR9492508"
+#>  [5] "ERR9492512" "ERR9492497" "ERR9492499" "ERR9492501"
+#>  [9] "ERR9492504" "ERR9492505" "ERR9492509" "ERR9492511"
+#> [13] "ERR9492500" "ERR9492503" "ERR9492506" "ERR9492510"
+#> 
+#> $R
+#>  [1] "ERR9492489" "ERR9492490" "ERR9492492" "ERR9492494"
+#>  [5] "ERR9492519" "ERR9492524" "ERR9492526" "ERR9492527"
+#>  [9] "ERR9492528" "ERR9492513" "ERR9492514" "ERR9492518"
+#> [13] "ERR9492520" "ERR9492522" "ERR9492523" "ERR9492525"
+#> [17] "ERR9492491" "ERR9492493" "ERR9492495" "ERR9492496"
+#> [21] "ERR9492515" "ERR9492516" "ERR9492517" "ERR9492521"
+```
+
+
+```r
+stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
+#> SNPS
+#>   100002
+#>     Number of snps: 2058
+#>     Number of samples: 5
+#>       Number of samples in HC: 1
+#>       Number of samples in R: 4
+#>       Not passed the filter
+#> Genes
+#>   100002
+#>     Number of genes: 23427
+#>     Number of samples: 7
+#>       Number of samples in HC: 1
+#>       Number of samples in R: 6
+#>       Not passed the filter
+```
+
+The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified to load the SNV summary and SNV info per species.
+
+
+```r
+stana@snps$`100002` |> head()
+#>                                 ERR9492497 ERR9492515
+#> gnl|Prokka|UHGG000004_1|2901|A           1          1
+#> gnl|Prokka|UHGG000004_1|4071|C           1          0
+#> gnl|Prokka|UHGG000004_1|11094|T          1          0
+#> gnl|Prokka|UHGG000004_1|11148|T          1          0
+#> gnl|Prokka|UHGG000004_1|11940|G          0          0
+#> gnl|Prokka|UHGG000004_1|11970|C          0          0
+#>                                 ERR9492526 ERR9492527
+#> gnl|Prokka|UHGG000004_1|2901|A           0      0.429
+#> gnl|Prokka|UHGG000004_1|4071|C           1      0.000
+#> gnl|Prokka|UHGG000004_1|11094|T          0      0.000
+#> gnl|Prokka|UHGG000004_1|11148|T          0      0.429
+#> gnl|Prokka|UHGG000004_1|11940|G          1      0.444
+#> gnl|Prokka|UHGG000004_1|11970|C          1      0.556
+#>                                 ERR9492528
+#> gnl|Prokka|UHGG000004_1|2901|A           0
+#> gnl|Prokka|UHGG000004_1|4071|C           0
+#> gnl|Prokka|UHGG000004_1|11094|T          1
+#> gnl|Prokka|UHGG000004_1|11148|T          1
+#> gnl|Prokka|UHGG000004_1|11940|G          0
+#> gnl|Prokka|UHGG000004_1|11970|C          0
+stana@freqTableSnps |> head()
+#>        species HC R
+#> 100002  100002  1 4
+```
+
+For ID conversion, the metadata accompanied with the default database can be used.
+
+
+```r
+taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
+                     header=1, row.names=1, check.names = FALSE)
+taxtbl |> head()
+#>          representative MGnify_accession species_closest
+#> 100001 GUT_GENOME000001  MGYG-HGUT-00001          100049
+#> 100002 GUT_GENOME000004  MGYG-HGUT-00002          100201
+#> 100003 GUT_GENOME000008  MGYG-HGUT-00003          103279
+#> 100004 GUT_GENOME000010  MGYG-HGUT-00004          103876
+#> 100005 GUT_GENOME000017  MGYG-HGUT-00005          101623
+#> 100006 GUT_GENOME000020  MGYG-HGUT-00006          100011
+#>        ani_closest gtpro_kmer_counts phyeco_marker_counts
+#> 100001    83.35600                NA                   15
+#> 100002    84.86955             29822                   15
+#> 100003    93.41555              1115                   15
+#> 100004    78.17620                NA                   15
+#> 100005    85.84275                NA                   15
+#> 100006    93.07075                NA                   15
+#>        phyeco_pass_ratio pangene_counts genome_counts
+#> 100001                 1           4893             4
+#> 100002                 1         147601           358
+#> 100003                 1         113409          1178
+#> 100004                 1          12599            24
+#> 100005                 1           5488             2
+#> 100006                 1           2656             1
+#>        Genome_type  Length N_contigs    N50 GC_content
+#> 100001     Isolate 3219614       137  47258      28.26
+#> 100002     Isolate 4433090       100 109266      42.60
+#> 100003     Isolate 3229507        35 158570      58.52
+#> 100004     Isolate 3698872       105  90296      54.19
+#> 100005     Isolate 3930422        32 350032      28.59
+#> 100006     Isolate 2822523        36 121380      32.65
+#>        Completeness Contamination
+#> 100001        98.59          0.70
+#> 100002        99.37          0.00
+#> 100003       100.00          0.00
+#> 100004        98.66          0.22
+#> 100005        99.30          0.00
+#> 100006        99.26          1.39
+#>                                                                                                                                                Lineage
+#> 100001                                 d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Peptostreptococcales;f__Peptostreptococcaceae;g__GCA-900066495;s__
+#> 100002                            d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#> 100003                                   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes;s__Alistipes shahii
+#> 100004                   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Oscillospirales;f__Ruminococcaceae;g__Anaerotruncus;s__Anaerotruncus colihominis
+#> 100005 d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Peptostreptococcales;f__Peptostreptococcaceae;g__Terrisporobacter;s__Terrisporobacter glycolicus_A
+#> 100006                       d__Bacteria;p__Firmicutes;c__Bacilli;o__Staphylococcales;f__Staphylococcaceae;g__Staphylococcus;s__Staphylococcus xylosus
+#>        Continent
+#> 100001    Europe
+#> 100002    Europe
+#> 100003    Europe
+#> 100004    Europe
+#> 100005    Europe
+#> 100006    Europe
+```
+
+The taxonomy table can be loaded with providing to `taxtbl` argument.
+
+
+```r
+loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg")
+#> SNPS
+#>   100002
+#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>     Number of snps: 2058
+#>     Number of samples: 5
+#>       Number of samples in HC: 1
+#>       Number of samples in R: 4
+#>       Not passed the filter
+#> Genes
+#>   100002
+#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>     Number of genes: 23427
+#>     Number of samples: 7
+#>       Number of samples in HC: 1
+#>       Number of samples in R: 6
+#>       Not passed the filter
+#> Type: MIDAS2
+#> Directory: ../merge_uhgg
+#> Species number: 1
+#> Filter type: group, number: 2, proportion: 0.8
+#> Loaded SNV table: 1
+#>   Species cleared SNV filter: 0
+#> Loaded gene table (copynum): 1
+#>   Species cleared gene filter: 0
+#> 3.5 Mb
+```
+
 
 ## inStrain
 
@@ -84,5 +245,3 @@ instr
 ```
 
 ## metaSNV
-
-## GT-Pro
