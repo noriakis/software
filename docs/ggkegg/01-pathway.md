@@ -354,7 +354,7 @@ ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 0.571496 secs
+#> Time difference of 0.4859622 secs
 
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
@@ -367,7 +367,7 @@ ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 19.63125 secs
+#> Time difference of 19.0965 secs
 ```
 
 
