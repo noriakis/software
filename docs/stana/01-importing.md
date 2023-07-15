@@ -2,11 +2,12 @@
 
 `stana` is aimed to import the metagenotyping results of various pipelines.
 The package is designed primarily for `MIDAS` and `MIDAS2`, which outputs the 
-gene abundances by default.
+gene abundances by default. Note that the slot name `snps` here refers to just the variable, and not to reflect the actual meaning.
 
 
 ```r
 library(stana)
+#> 
 ```
 
 ## MIDAS
@@ -16,7 +17,7 @@ For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` co
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
-Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[https://doi.org/10.3389/fcimb.2022.904284]. As the long output is expected, only one species is loaded here. `hd_meta` includes named list of grouping.
+Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[https://doi.org/10.3389/fcimb.2022.904284]. `hd_meta` includes named list of grouping.
 
 
 ```r
@@ -36,6 +37,25 @@ hd_meta
 #> [17] "ERR9492491" "ERR9492493" "ERR9492495" "ERR9492496"
 #> [21] "ERR9492515" "ERR9492516" "ERR9492517" "ERR9492521"
 ```
+
+We can check stats of how many samples are profiled for each species, by `only_stat`. This returns the list of tibbles with names `snps` and `genes`.
+
+
+```r
+stana <- loadMIDAS2("../merge_uhgg", only_stat=TRUE, cl=hd_meta)
+stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
+#> # A tibble: 6 × 3
+#> # Groups:   species_id [6]
+#>   species_id group     n
+#>        <int> <chr> <int>
+#> 1     101346 HC       12
+#> 2     102438 HC       10
+#> 3     101378 HC        9
+#> 4     102478 HC        9
+#> 5     102492 HC        8
+#> 6     100044 HC        7
+```
+As the long output is expected, only one species is loaded here. 
 
 
 ```r

@@ -11,6 +11,7 @@ group-of-nodes
 combining-multiple-pathways-in-their-native-layouts
 multi_pathway_native
 visualize-the-result-of-enrichkegg-and-gsekegg
+using-multiple-scales-when-highlighting-multiple-values-in-pathway
 module
 module-definition-in-graph
 module-definition-in-text

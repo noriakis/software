@@ -79,15 +79,13 @@ ggraph(g, layout="manual", x=x, y=y) +
 gg <- ggraph(g, layout="manual", x=x, y=y)+
   geom_node_rect(aes(fill=padj, filter=type=="gene"))+
   ggfx::with_outer_glow(geom_node_rect(aes(fill=padj, filter=!is.na(padj) & padj<0.05)),
-                        colour="yellow", expand=5)+
+                        colour="yellow", expand=2)+
   overlay_raw_map("hsa04110", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   scale_fill_gradient(low="pink",high="steelblue") + theme_void()
-
-ggsave(file="tmp.png",gg,width=20,height=15,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+gg
 ```
 
-<img src="04-usecases_files/figure-html/deseq2_2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/deseq2_2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ## Integrating numeric values onto `tbl_graph`
 
@@ -216,7 +214,7 @@ ggraph(g1, layout="manual", x=x, y=y) +
   theme_void()
 ```
 
-<img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/multcp-1.svg" width="100%" style="display: block; margin: auto;" />
 
 We can combine multiple plots combining `rawMap` by `patchwork`.
 
@@ -226,11 +224,10 @@ library(patchwork)
 comb <- rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"), pid="hsa04110") + 
 rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"),
   pid="hsa03460")
-ggsave(file="tmp.png",comb,width=20,height=15,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+comb
 ```
 
-<img src="04-usecases_files/figure-html/multcp1_5-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/multcp1_5-1.svg" width="100%" style="display: block; margin: auto;" />
 
 The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx` in yellow outer glow, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
 
@@ -247,7 +244,7 @@ gg <- ggraph(g1, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=uro&rptec),
                    color="gold", fill="transparent"),
-    colour="gold", expand=15, sigma=10)+
+    colour="gold", expand=5, sigma=10)+
   geom_node_rect(aes(fill=uro, filter=type=="gene"))+
   geom_node_rect(aes(fill=rptec, xmin=x, filter=type=="gene")) +
   overlay_raw_map("hsa03410", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
@@ -261,11 +258,10 @@ AAAABBB
 AAAA###
 "
 )
-ggsave(file="tmp.png",gg2,width=20,height=15,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+gg2
 ```
 
-<img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/multcp2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ### Multiple enrichment analysis results across multiple pathways
 
@@ -370,14 +366,14 @@ g4 <- g3+
   ggfx::with_outer_glow(geom_scatterpie(aes(x=x, y=y, r=size),
                   color="transparent",
                   data=graphdata[graphdata$in_pathway_rptec & graphdata$in_pathway_uro,],
-                  cols=c("in_pathway_rptec","in_pathway_uro")), colour="gold", expand=7)+
+                  cols=c("in_pathway_rptec","in_pathway_uro")), colour="gold", expand=3)+
   geom_node_point(shape=19, size=3, aes(filter=!in_pathway_uro & !in_pathway_rptec & type!="map"))+
   geom_node_shadowtext(aes(label=id, y=y-0.5), size=3, family="sans", bg.colour="white", colour="black")+
   theme_void()+coord_fixed()
 g4
 ```
 
-<img src="04-usecases_files/figure-html/final_scatterpie-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/final_scatterpie-1.svg" width="100%" style="display: block; margin: auto;" />
 
 
 ## Projecting the gene regulatory networks on KEGG map
@@ -452,14 +448,10 @@ raws <- joined |>
   scale_edge_color_gradient2()+
   overlay_raw_map(transparent_colors = c("#ffffff"))+
   theme_void()
-
-ggsave("tmp.png",
-        raws,
-       width=10, height=6, dpi=300, units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+raws
 ```
 
-<img src="04-usecases_files/figure-html/konetplotmap-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/konetplotmap-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ## Analyzing cluster marker genes in single-cell transcriptomics
 
@@ -495,9 +487,9 @@ Among these, for the present study, we perform enrichment analysis on the marker
 ## scplot utilizes scattermore for rendering, in this instance, we override the highlighting by geom_node_point.
 dd <- sc_dim(pbmc) + 
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
-                        colour="tomato", expand=9)+
+                        colour="tomato", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
-                        colour="tomato", expand=9)+
+                        colour="tomato", expand=3)+
   sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
                     color='black', bg.color='white')
 
@@ -525,25 +517,22 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&marker_5),
                    color="tomato", fill="white"), ## Marker 1 & 5
-    colour="tomato", expand=9)+
+    colour="tomato", expand=3)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&!marker_5),
                    color=gr_cols["1"], fill="white"), ## Marker 1
-    colour=gr_cols["1"], expand=9)+
+    colour=gr_cols["1"], expand=3)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_5&!marker_1),
                    color=gr_cols["5"], fill="white"), ## Marker 5
-    colour=gr_cols["5"], expand=9)+
+    colour=gr_cols["5"], expand=3)+
   overlay_raw_map("hsa04380",
                   transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   theme_void()
-ggsave("tmp.png",
-       gg+dd+plot_layout(widths=c(0.7,0.3)),
-       width=20, height=6, dpi=300, units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+gg+dd+plot_layout(widths=c(0.7,0.3))
 ```
 
-<img src="04-usecases_files/figure-html/plot_sc-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/plot_sc-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ### Example for composing multiple pathways
 
@@ -554,13 +543,13 @@ We can inspect marker genes in multiple pathways to better understand the role o
 
 dd <- sc_dim(pbmc) + 
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
-                        colour="tomato", expand=9)+
+                        colour="tomato", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
-                        colour="tomato", expand=9)+
+                        colour="tomato", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="4", color=ident)),
-                        colour="gold", expand=9)+
+                        colour="gold", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="6", color=ident)),
-                        colour="gold", expand=9)+
+                        colour="gold", expand=3)+
   sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
                     color='black', bg.color='white')
 
@@ -595,15 +584,15 @@ gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
     ggfx::with_outer_glow(
         geom_node_rect(aes(filter=marker_4&marker_6),
                        color="black", linewidth=0.1, fill="white"),
-        colour="gold", expand=9)+
+        colour="gold", expand=3)+
     ggfx::with_outer_glow(
         geom_node_rect(aes(filter=marker_4&!marker_6),
                        color="black", linewidth=0.1, fill="white"),
-        colour=gr_cols["4"], expand=9)+
+        colour=gr_cols["4"], expand=3)+
     ggfx::with_outer_glow(
         geom_node_rect(aes(filter=marker_6&!marker_4),
                        color="black", linewidth=0.1, fill="white"),
-        colour=gr_cols["6"], expand=9)+
+        colour=gr_cols["6"], expand=3)+
     geom_node_text(aes(label=gene_name, filter=marker_4|marker_6),
                    size=1.5, family="serif")+
     theme_void()
@@ -614,15 +603,15 @@ gg2 <- ggraph(g2, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&marker_5),
                    color="tomato", fill="white"), ## Marker 1 & 5
-    colour="tomato", expand=9)+
+    colour="tomato", expand=3)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&!marker_5),
                    color=gr_cols["1"], fill="white"), ## Marker 1
-    colour=gr_cols["1"], expand=9)+
+    colour=gr_cols["1"], expand=3)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_5&!marker_1),
                    color=gr_cols["5"], fill="white"), ## Marker 5
-    colour=gr_cols["5"], expand=9)+
+    colour=gr_cols["5"], expand=3)+
   overlay_raw_map("hsa04380",
                   transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   theme_void()
@@ -636,13 +625,10 @@ final <- left + dd + plot_layout(design="
             BBBBB###
             ")
 
-ggsave("tmp.png",
-       final,
-       width=15, height=10, dpi=300, units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+final
 ```
 
-<img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/plot_sc2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ### Barplot for numeric values on raw map
 
@@ -720,13 +706,10 @@ overlay_raw_map("hsa04612",
                 transparent_colors = c("#FFFFFF",
                                        "#BFBFFF",
                                        "#BFFFBF"))
-ggsave("tmp.png",
-       final_bar,
-       width=15, height=10, dpi=300, units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+final_bar
 ```
 
-<img src="04-usecases_files/figure-html/barp_prepare-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/barp_prepare-1.svg" width="100%" style="display: block; margin: auto;" />
 
 
 ### Barplot across all the clusters
@@ -808,7 +791,7 @@ legendGrob <- grobs$grobs[[num]]
 ggplotify::as.ggplot(legendGrob)
 ```
 
-<img src="04-usecases_files/figure-html/legend1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/legend1-1.svg" width="100%" style="display: block; margin: auto;" />
 
 
 
@@ -833,14 +816,10 @@ num2 <- which(sapply(overlaidGtable$grobs, function(x) x$name) == "guide-box")
 overlaidGtable$grobs[[num2]] <- legendGrob
 
 
-## Save
-ggsave("tmp.png",
-       ggplotify::as.ggplot(overlaidGtable),
-       width=15, height=10, dpi=300, units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+ggplotify::as.ggplot(overlaidGtable)
 ```
 
-<img src="04-usecases_files/figure-html/legend2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="04-usecases_files/figure-html/legend2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ## Customizing global map visualization
 

@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Importing | stana</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
+<meta name="description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. Note that the slot...">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Importing | stana">
 <meta property="og:type" content="book">
-<meta property="og:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
+<meta property="og:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. Note that the slot...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Importing | stana">
-<meta name="twitter:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. library(stana)  2.1...">
+<meta name="twitter:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed primarily for MIDAS and MIDAS2, which outputs the gene abundances by default. Note that the slot...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,7 +45,8 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
 <li><a class="active" href="importing.html"><span class="header-section-number">2</span> Importing</a></li>
-<li><a class="" href="visualization.html"><span class="header-section-number">3</span> Visualization</a></li>
+<li><a class="" href="function.html"><span class="header-section-number">3</span> Functional annotation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">4</span> Visualization</a></li>
 </ul>
 
         <div class="book-extra">
@@ -59,9 +60,10 @@
 </h1>
 <p><code>stana</code> is aimed to import the metagenotyping results of various pipelines.
 The package is designed primarily for <code>MIDAS</code> and <code>MIDAS2</code>, which outputs the
-gene abundances by default.</p>
+gene abundances by default. Note that the slot name <code>snps</code> here refers to just the variable, and not to reflect the actual meaning.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
 <div id="midas" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> MIDAS<a class="anchor" aria-label="anchor" href="#midas"><i class="fas fa-link"></i></a>
@@ -73,7 +75,7 @@ gene abundances by default.</p>
 <span class="header-section-number">2.2</span> MIDAS2<a class="anchor" aria-label="anchor" href="#midas2"><i class="fas fa-link"></i></a>
 </h2>
 <p>For <code>MIDAS2</code>, <code>loadMIDAS2</code> function can be used to import the output of <code>merge</code> command.
-Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[<a href="https://doi.org/10.3389/fcimb.2022.904284" class="uri">https://doi.org/10.3389/fcimb.2022.904284</a>]. As the long output is expected, only one species is loaded here. <code>hd_meta</code> includes named list of grouping.</p>
+Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[<a href="https://doi.org/10.3389/fcimb.2022.904284" class="uri">https://doi.org/10.3389/fcimb.2022.904284</a>]. <code>hd_meta</code> includes named list of grouping.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">hd_meta</span></span>
@@ -90,7 +92,22 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt; [13] "ERR9492520" "ERR9492522" "ERR9492523" "ERR9492525"</span></span>
 <span><span class="co">#&gt; [17] "ERR9492491" "ERR9492493" "ERR9492495" "ERR9492496"</span></span>
 <span><span class="co">#&gt; [21] "ERR9492515" "ERR9492516" "ERR9492517" "ERR9492521"</span></span></code></pre></div>
+<p>We can check stats of how many samples are profiled for each species, by <code>only_stat</code>. This returns the list of tibbles with names <code>snps</code> and <code>genes</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span>, cl<span class="op">=</span><span class="va">hd_meta</span><span class="op">)</span></span>
+<span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">group</span><span class="op">==</span><span class="st">"HC"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span><span class="co">#&gt; # Groups:   species_id [6]</span></span>
+<span><span class="co">#&gt;   species_id group     n</span></span>
+<span><span class="co">#&gt;        &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1     101346 HC       12</span></span>
+<span><span class="co">#&gt; 2     102438 HC       10</span></span>
+<span><span class="co">#&gt; 3     101378 HC        9</span></span>
+<span><span class="co">#&gt; 4     102478 HC        9</span></span>
+<span><span class="co">#&gt; 5     102492 HC        8</span></span>
+<span><span class="co">#&gt; 6     100044 HC        7</span></span></code></pre></div>
+<p>As the long output is expected, only one species is loaded here.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, candSp<span class="op">=</span><span class="st">"100002"</span>, cl<span class="op">=</span><span class="va">hd_meta</span><span class="op">)</span></span>
 <span><span class="co">#&gt; SNPS</span></span>
 <span><span class="co">#&gt;   100002</span></span>
@@ -107,7 +124,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt;       Number of samples in R: 6</span></span>
 <span><span class="co">#&gt;       Not passed the filter</span></span></code></pre></div>
 <p>The data is profiled against UHGG. <code>loadSummary</code> and <code>loadInfo</code> can be specified to load the SNV summary and SNV info per species.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">snps</span><span class="op">$</span><span class="va">`100002`</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                 ERR9492497 ERR9492515</span></span>
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|2901|A           1          1</span></span>
@@ -134,7 +151,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt;        species HC R</span></span>
 <span><span class="co">#&gt; 100002  100002  1 4</span></span></code></pre></div>
 <p>For ID conversion, the metadata accompanied with the default database can be used.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
 <span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">taxtbl</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -188,7 +205,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt; 100005    Europe</span></span>
 <span><span class="co">#&gt; 100006    Europe</span></span></code></pre></div>
 <p>The taxonomy table can be loaded with providing to <code>taxtbl</code> argument.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"100002"</span>, taxtbl<span class="op">=</span><span class="va">taxtbl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; SNPS</span></span>
 <span><span class="co">#&gt;   100002</span></span>
@@ -221,7 +238,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span class="header-section-number">2.3</span> inStrain<a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
 </h2>
 <p>For inStrain, we need <code>compare</code> command output, after <code>profile</code> command. First we would like to know which species are profiled. <code>just_species</code> option only list species in the table. Here, we load an example dataset profiled by <code>inStrain</code>, using the default database described in their original tutorial. For <code>inStrain</code>, loading all the SNV tables is often impossible, we must specify <code>candidate_species</code> for investigation.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, just_species<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">sp</span></span>
 <span><span class="co">#&gt;  [1] "GUT_GENOME000022" "GUT_GENOME000024"</span></span>
@@ -259,7 +276,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt; [65] "GUT_GENOME275708" "GUT_GENOME277090"</span></span>
 <span><span class="co">#&gt; [67] "GUT_GENOME284693" "GUT_GENOME286118"</span></span></code></pre></div>
 <p>This recalculates the minor allele frequency based on pooled SNV information (not on individual SNV information), thus takes a long time in case the number of profiled positions is large. We can set <code>cl</code> argument if needed.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
 <span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span>, skip_pool<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Load MAF table</span></span>
 <span><span class="co">#&gt; Loading allele count table</span></span>
@@ -286,7 +303,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html"><span class="header-section-number">1</span> About</a></div>
-<div class="next"><a href="visualization.html"><span class="header-section-number">3</span> Visualization</a></div>
+<div class="next"><a href="function.html"><span class="header-section-number">3</span> Functional annotation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -312,7 +329,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-13.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

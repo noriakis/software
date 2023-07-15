@@ -346,7 +346,7 @@ st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
   scattermore::geom_scattermore(pointsize=1, stat=StatFilter,
     aes(x=x, y=y, color=I(fgcolor),
-    filter=type!="map"))
+    filter=type!="map"))+theme_void()
 ```
 
 <img src="01-pathway_files/figure-html/fastrender-1.png" width="100%" style="display: block; margin: auto;" />
@@ -354,12 +354,12 @@ ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 1.315602 secs
+#> Time difference of 0.571496 secs
 
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
   geom_node_point(size=2, aes(color=I(fgcolor),
-    filter=type!="map"))
+    filter=type!="map"))+theme_void()
 ```
 
 <img src="01-pathway_files/figure-html/fastrender-2.png" width="100%" style="display: block; margin: auto;" />
@@ -367,7 +367,7 @@ ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
 ```r
 ed <- Sys.time()
 ed-st
-#> Time difference of 38.22705 secs
+#> Time difference of 19.63125 secs
 ```
 
 
@@ -383,11 +383,10 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
   geom_node_rect(fill="red",aes(filter=type=="ortholog"))+
   overlay_raw_map("ko00640")+
   theme_void()
-ggsave(file="tmp.png",gg,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+gg
 ```
 
-<img src="01-pathway_files/figure-html/raster-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/raster-1.svg" width="100%" style="display: block; margin: auto;" />
 
 You can use your favorite geoms to annotate KEGG map combining the functions.
 
@@ -402,11 +401,10 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(geom_node_point(aes(filter=mod, x=x, y=y), color="red",size=2),
                         colour="yellow",expand=5)+
   theme_void()
-ggsave(file="tmp.png",gg,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+gg
 ```
 
-<img src="01-pathway_files/figure-html/raster2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/raster2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 
 ## Group of nodes
@@ -559,18 +557,17 @@ enrichKEGG(de, pvalueCutoff=0.01) |>
     theme_void()
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg-1.svg" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
 
 ## Quick inspection
 res <- enrichKEGG(de, pvalueCutoff=0.01) |> rawMap()
-ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg-2.svg" width="100%" style="display: block; margin: auto;" />
 
 `rawMap` can accept multiple `enrichResult` class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in `fill_color`. Also, you should specify pathway ID for multiple enrichment results.
 
@@ -578,11 +575,10 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 ```r
 deres <- enrichKEGG(de, pvalueCutoff=0.01) 
 res <- rawMap(list(deres, deres, deres), fill_color=c("red","green","blue"), pid="hsa04110")
-ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg_2-1.svg" width="100%" style="display: block; margin: auto;" />
 
 `rawMap` also accepts `gseaResult` class, although it may be useful for assigning numeric values such as log2 fold changes directly.
 
@@ -591,19 +587,56 @@ cowplot::ggdraw()+cowplot::draw_image("tmp.png")
 data(geneList, package="DOSE")
 kk <- gseKEGG(geneList)
 res <- rawMap(kk)
-ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg_3-1.svg" width="100%" style="display: block; margin: auto;" />
 
 The same can be done for the numeric values using `rawValue`. You can control your favorite color gradient using `scale_fill_gradient2`. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as [`ggh4x`](https://github.com/teunbrand/ggh4x).
 
 
 ```r
 res <- rawValue(geneList[1:100], "hsa04110", auto_add=TRUE)
-ggsave(file="tmp.png",res,width=12,height=7,dpi=300,units="in")
-cowplot::ggdraw()+cowplot::draw_image("tmp.png")
+res
 ```
 
-<img src="01-pathway_files/figure-html/cp_value-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_value-1.svg" width="100%" style="display: block; margin: auto;" />
+
+
+## Using multiple scales when highlighting multiple values in pathway
+
+Using `ggh4x`, you can plot the multiple values in its own scale using `scale_fill_multi()`. It is used in the package `plotKEGGPathway` in `stana` package for intra-species diversity analysis. For usage in the function, please refer to [`ggh4x`](https://github.com/teunbrand/ggh4x) site and [the code](https://github.com/noriakis/stana/blob/main/R/plotKEGGPathway.R).
+
+
+```r
+library(ggh4x)
+test <- geneList[1:100]
+names(test) <- paste0("hsa:",names(test))
+g <- pathway("hsa04110") |> 
+  mutate(value1=node_numeric(test),
+         value2=node_numeric(test),
+         value3=node_numeric(test),
+         value4=node_numeric(test))
+res <- ggraph(g) + 
+  geom_node_rect(aes(value1=value1)) + 
+  geom_node_rect(aes(value2=value2, xmin=xmin+width/4))+
+  geom_node_rect(aes(value3=value3, xmin=xmin+2*width/4))+
+  geom_node_rect(aes(value4=value4, xmin=xmin+3*width/4))+
+  overlay_raw_map() + theme_void() +
+  scale_fill_multi(aesthetics = c("value1", "value2",
+                                  "value3", "value4"),
+                   name = list("Condition1",
+                               "Condition2",
+                               "Condition3",
+                               "Condition4"),
+                   colours = list(
+                     scales::brewer_pal(palette = "YlGnBu")(6),
+                     scales::brewer_pal(palette = "RdPu")(6),
+                     scales::brewer_pal(palette = "PuOr")(6),
+                     scales::brewer_pal(palette = "RdBu")(6)
+                   ),
+                   guide = guide_colorbar(barheight = unit(50, "pt")))
+res
+```
+
+<img src="01-pathway_files/figure-html/multscale-1.svg" width="100%" style="display: block; margin: auto;" />

@@ -87,7 +87,7 @@ query <- sample(mod@definition_components,5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K00235" "K01678" "K00031" "K01681" "K05942"
+#> [1] "K00116" "K01682" "K00031" "K01681" "K18859"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -107,15 +107,15 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01647,K05942) </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
-   <td style="text-align:left;"> TRUE </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01681,K01682) </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.5000000 </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> 1.0000000 </td>
    <td style="text-align:left;"> TRUE </td>
   </tr>
   <tr>
@@ -149,16 +149,16 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01676,K01679,K01677+K01678) </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
 </tbody>
 </table>
@@ -270,6 +270,8 @@ If you performed some experiments involving KEGG Orthology, and performed enrich
 
 ```r
 library(BiocFileCache)
+#> Warning: package 'BiocFileCache' was built under R version
+#> 4.2.2
 #> Loading required package: dbplyr
 #> Warning: package 'dbplyr' was built under R version 4.2.3
 #> 

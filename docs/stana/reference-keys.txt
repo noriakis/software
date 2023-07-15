@@ -5,6 +5,13 @@ midas
 midas2
 instrain
 metasnv
+function
+parsing-patric-results
+parsing-eggnog-mapper-v2-results
+visualizing-function-network
+kgeg-pathway-and-kegg-orthology
+visualization-of-kegg-pathway
+visualizing-differences-per-species
 visualization
 visualization-of-gene-abundances
 visualization-of-functional-analysis-results
