@@ -563,50 +563,44 @@ cols <- built$colour
 names(cols) <- as.character(as.numeric(built$group)-1)
 gr_cols <- cols[!duplicated(cols)]
 
+
 g1 <- pathway("hsa04612") |> mutate(marker_4=append_cp(mk4_enrich),
                                     marker_6=append_cp(mk6_enrich),
                                     gene_name=convert_id("hsa"))
 gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
-    overlay_raw_map("hsa04612",
-                    transparent_colors = c("#FFFFFF",
-                                           "#BFBFFF",
-                                           "#BFFFBF"))+
-    ggfx::with_outer_glow(
-        geom_node_rect(aes(filter=marker_4&marker_6),
-                       color="black", linewidth=0.2, fill="white"),
-        colour="gold")+
-    ggfx::with_outer_glow(
-        geom_node_rect(aes(filter=marker_4&!marker_6),
-                       color="black", linewidth=0.2, fill="white"),
-        colour=gr_cols["4"])+
-    ggfx::with_outer_glow(
-        geom_node_rect(aes(filter=marker_6&!marker_4),
-                       color="black", linewidth=0.2, fill="white"),
-        colour=gr_cols["6"], expand=3)+
-    geom_node_text(aes(label=gene_name, filter=marker_4|marker_6),
-                   size=1.3, family="serif")+
-    theme_void()
+  overlay_raw_map("hsa04612", transparent_colors = c("#FFFFFF", "#BFBFFF", "#BFFFBF"))+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_4&marker_6), fill="white"),
+    colour="gold")+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_4&!marker_6), fill="white"),
+    colour=gr_cols["4"])+
+  ggfx::with_outer_glow(
+    geom_node_rect(aes(filter=marker_6&!marker_4), fill="white"),
+    colour=gr_cols["6"], expand=3)+
+  overlay_raw_map("hsa04612", transparent_colors = c("#B3B3B3", "#FFFFFF", "#BFBFFF", "#BFFFBF"))+
+  theme_void()
 
 g2 <- pathway("hsa04380") |> mutate(marker_1=append_cp(mk1_enrich),
-                                   marker_5=append_cp(mk5_enrich))
+                                    marker_5=append_cp(mk5_enrich))
 gg2 <- ggraph(g2, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&marker_5),
-                   color="tomato", fill="white"), ## Marker 1 & 5
+                   fill="white"), ## Marker 1 & 5
     colour="tomato")+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&!marker_5),
-                   color=gr_cols["1"], fill="white"), ## Marker 1
+                   fill="white"), ## Marker 1
     colour=gr_cols["1"])+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_5&!marker_1),
-                   color=gr_cols["5"], fill="white"), ## Marker 5
+                   fill="white"), ## Marker 5
     colour=gr_cols["5"])+
   overlay_raw_map("hsa04380",
                   transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
   theme_void()
 left <-  (gg2 + ggtitle("Marker 1 and 5")) /
- (gg1 + ggtitle("Marker 4 and 6"))
+  (gg1 + ggtitle("Marker 4 and 6"))
 
 final <- left + dd + plot_layout(design="
             AAAAA###
