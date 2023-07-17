@@ -110,7 +110,7 @@ You can provide multiple pathway IDs to pathway_id, which returns a list of plot
 ```r
 gg <- plotKEGGPathway(stana, c("101346","102438"),
                       pathway_id=c("ko00270","ko00620"),
-                      multi_scale=FALSE)
+                      multi_scale=TRUE)
 #> Using pre-computed KO table
 #> Using pre-computed KO table
 #> 101346: HC / R

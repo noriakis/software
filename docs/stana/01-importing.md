@@ -17,7 +17,7 @@ For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` co
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
-Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (Shi et al. 2022)[https://doi.org/10.3389/fcimb.2022.904284]. `hd_meta` includes named list of grouping.
+Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients ([Shi et al. 2022](https://doi.org/10.3389/fcimb.2022.904284)). `hd_meta` includes named list of grouping.
 
 
 ```r
