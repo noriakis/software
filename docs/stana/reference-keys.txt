@@ -5,6 +5,10 @@ midas
 midas2
 instrain
 metasnv
+statistial-analysis
+consensus-sequence-calling
+permanova
+boruta
 function
 parsing-patric-results
 parsing-eggnog-mapper-v2-results
