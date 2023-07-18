@@ -124,7 +124,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt;       Number of samples in HC: 1</span></span>
 <span><span class="co">#&gt;       Number of samples in R: 6</span></span>
 <span><span class="co">#&gt;       Not passed the filter</span></span></code></pre></div>
-<p>The data is profiled against UHGG. <code>loadSummary</code> and <code>loadInfo</code> can be specified to load the SNV summary and SNV info per species.</p>
+<p>The data is profiled against UHGG. <code>loadSummary</code> and <code>loadInfo</code> can be specified to load the SNV summary and SNV info per species, which is default to <code>TRUE</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">snps</span><span class="op">$</span><span class="va">`100002`</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                 ERR9492497 ERR9492515</span></span>
@@ -232,14 +232,18 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt;   Species cleared SNV filter: 0</span></span>
 <span><span class="co">#&gt; Loaded gene table (copynum): 1</span></span>
 <span><span class="co">#&gt;   Species cleared gene filter: 0</span></span>
-<span><span class="co">#&gt; 3.5 Mb</span></span></code></pre></div>
+<span><span class="co">#&gt; 4.2 Mb</span></span></code></pre></div>
+<p>The coverage for each species per sample is plotted by <code>plotCoverage</code></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotCoverage.html">plotCoverage</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100002"</span>, pointSize<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-importing_files/figure-html/plotcoverage-1.png" width="672"></div>
 </div>
 <div id="instrain" class="section level2" number="2.3">
 <h2>
 <span class="header-section-number">2.3</span> inStrain<a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
 </h2>
 <p>For inStrain, we need <code>compare</code> command output, after <code>profile</code> command. First we would like to know which species are profiled. <code>just_species</code> option only list species in the table. Here, we load an example dataset profiled by <code>inStrain</code>, using the default database described in their original tutorial. For <code>inStrain</code>, loading all the SNV tables is often impossible, we must specify <code>candidate_species</code> for investigation.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, just_species<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">sp</span></span>
 <span><span class="co">#&gt;  [1] "GUT_GENOME000022" "GUT_GENOME000024"</span></span>
@@ -277,7 +281,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt; [65] "GUT_GENOME275708" "GUT_GENOME277090"</span></span>
 <span><span class="co">#&gt; [67] "GUT_GENOME284693" "GUT_GENOME286118"</span></span></code></pre></div>
 <p>This recalculates the minor allele frequency based on pooled SNV information (not on individual SNV information), thus takes a long time in case the number of profiled positions is large. We can set <code>cl</code> argument if needed.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
 <span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span>, skip_pool<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Load MAF table</span></span>
 <span><span class="co">#&gt; Loading allele count table</span></span>

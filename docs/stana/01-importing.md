@@ -76,7 +76,7 @@ stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
 #>       Not passed the filter
 ```
 
-The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified to load the SNV summary and SNV info per species.
+The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified to load the SNV summary and SNV info per species, which is default to `TRUE`.
 
 
 ```r
@@ -194,9 +194,17 @@ loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg
 #>   Species cleared SNV filter: 0
 #> Loaded gene table (copynum): 1
 #>   Species cleared gene filter: 0
-#> 3.5 Mb
+#> 4.2 Mb
 ```
 
+The coverage for each species per sample is plotted by `plotCoverage`
+
+
+```r
+plotCoverage(stana, "100002", pointSize=5)
+```
+
+<img src="01-importing_files/figure-html/plotcoverage-1.png" width="672" />
 
 ## inStrain
 

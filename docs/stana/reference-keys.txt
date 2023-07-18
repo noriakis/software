@@ -8,7 +8,7 @@ metasnv
 statistial-analysis
 consensus-sequence-calling
 permanova
-boruta
+performing-boruta
 function
 parsing-patric-results
 parsing-eggnog-mapper-v2-results
