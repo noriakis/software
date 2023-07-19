@@ -8,11 +8,13 @@ metasnv
 statistial-analysis
 consensus-sequence-calling
 permanova
+comparing-gene-abundances
 performing-boruta
 function
 parsing-patric-results
+draw-the-network
 parsing-eggnog-mapper-v2-results
-visualizing-function-network
+draw-the-network-1
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species

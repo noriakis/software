@@ -46,7 +46,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana@treeList[["100003"]] <- tre
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582884, Pr: 0.693
+#>   R2: 0.0740407267582884, Pr: 0.705
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -55,19 +55,37 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.693
+#> gr        1  0.15557 0.07404 0.7196  0.705
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
 
+## Comparing gene abundances
+
+For `MIDAS` and `MIDAS2` output (or if you have `genes` slot filled in the stana object), gene abundances can be compared one by one using exact Wilcoxon rank-sum test using `wilcox.exact` in `exactRankTests` computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.
+
+
+```r
+res <- compareGenes(stana, "100003")
+#> Testing total of 21806
+res[["UHGG000008_01733"]]
+#> 
+#> 	Exact Wilcoxon rank sum test
+#> 
+#> data:  c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and c(0.535732, 1.709442, 1.31675, 3.44086, 2.712423, 1.923076, 1.062853, c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and 1.21147, 0, 1.509217)
+#> W = 22, p-value = 0.4256
+#> alternative hypothesis: true mu is not equal to 0
+```
+
+
 ## Performing Boruta
 
-`Boruta` algorithm can be run on matrices to obtain important marker (SNV or gene) for distinguishing between group by `doBoruta` function. The function performs `Boruta` algorithm on specified data and returns the `Boruta` class result.
+`Boruta` algorithm can be run on matrices to obtain important marker (SNV or gene) for distinguishing between group by `doBoruta` function. The function performs `Boruta` algorithm on specified data and returns the `Boruta` class result. By default, the function performs fixes to tentative input. To disable this, specify `doFix=FALSE`.
 
 
 ```r
 library(Boruta)
-#> Warning: package 'Boruta' was built under R version 4.2.2
+#> Warning: package 'Boruta' was built under R version 4.2.3
 brres <- doBoruta(stana, "100003")
 #> Using grouping from the slot
 #> If needed, please provide preprocessed matrix of genes to `mat`
@@ -75,17 +93,17 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 25.10388 secs.
+#> Boruta performed 99 iterations in 39.54887 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  9 attributes confirmed important: UHGG060667_01243,
-#> UHGG158704_01078, UHGG165139_01108, UHGG178445_00058,
-#> UHGG209319_01719 and 4 more;
-#>  21797 attributes confirmed unimportant:
+#>  10 attributes confirmed important: UHGG000008_01098,
+#> UHGG000008_01647, UHGG095278_00266, UHGG165531_00641,
+#> UHGG209319_01719 and 5 more;
+#>  21796 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21792 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21791 more;
 ```
 
-Further, we visualize the important genes confirmed.
+Further, we visualize the abundances of important genes confirmed.
 
 
 ```r

@@ -10,9 +10,172 @@ library(ComplexHeatmap)
 
 ## Parsing `PATRIC` results
 
+Use `checkPATRIC` function to obtain information related to `PATRIC` functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses `BiocFileCache()` to cache the obtained results from API.
+
+
+```r
+genes <- list("test"=read.table("../test_genes.txt")$V1)
+res <- checkPATRIC(genes, "pathway_name")
+#> Obtaining annotations of 3 genomes
+#>   Obtaining information on 1280701.3
+#>   Obtaining information on 1410605.3
+#>   Obtaining information on 1447715.5
+#> Checking results on cluster test
+#>   total of 2 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 2 annotation obtained after removal of duplication
+res$test
+#> $DF
+#>                  patric_id ec_number
+#> 254  fig|1280701.3.peg.570  4.2.1.51
+#> 608 fig|1280701.3.peg.1186  2.1.1.37
+#>                          ec_description pathway_id
+#> 254              Prephenate dehydratase        400
+#> 608 DNA (cytosine-5-)-methyltransferase        270
+#>                                            pathway_name
+#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
+#> 608                  Cysteine and methionine metabolism
+#> 
+#> $REMOVEDUP
+#>                  patric_id ec_number
+#> 254  fig|1280701.3.peg.570  4.2.1.51
+#> 608 fig|1280701.3.peg.1186  2.1.1.37
+#>                          ec_description pathway_id
+#> 254              Prephenate dehydratase        400
+#> 608 DNA (cytosine-5-)-methyltransferase        270
+#>                                            pathway_name
+#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
+#> 608                  Cysteine and methionine metabolism
+#> 
+#> $SORTED
+#> 
+#>                  Cysteine and methionine metabolism 
+#>                                                   1 
+#> Phenylalanine, tyrosine and tryptophan biosynthesis 
+#>                                                   1
+```
+
+### Draw the network
+
+
+You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.
+
+
+```r
+drawPATRIC(genes)
+#> Obtaining annotations of 3 genomes
+#>   Obtaining information on 1280701.3
+#>   Obtaining information on 1410605.3
+#>   Obtaining information on 1447715.5
+#> Checking results on cluster test
+#>   total of 2 annotation obtained
+#>   remove duplicate based on ec_description
+#>   total of 2 annotation obtained after removal of duplication
+#> Making graph on pathway_name and ec_description
+#>   subsetting to 5 label on each category
+#> $test
+#> $test$DF
+#>                  patric_id ec_number
+#> 254  fig|1280701.3.peg.570  4.2.1.51
+#> 608 fig|1280701.3.peg.1186  2.1.1.37
+#>                          ec_description pathway_id
+#> 254              Prephenate dehydratase        400
+#> 608 DNA (cytosine-5-)-methyltransferase        270
+#>                                            pathway_name
+#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
+#> 608                  Cysteine and methionine metabolism
+#> 
+#> $test$REMOVEDUP
+#>                  patric_id ec_number
+#> 254  fig|1280701.3.peg.570  4.2.1.51
+#> 608 fig|1280701.3.peg.1186  2.1.1.37
+#>                          ec_description pathway_id
+#> 254              Prephenate dehydratase        400
+#> 608 DNA (cytosine-5-)-methyltransferase        270
+#>                                            pathway_name
+#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
+#> 608                  Cysteine and methionine metabolism
+#> 
+#> $test$SORTED
+#> 
+#> DNA (cytosine-5-)-methyltransferase 
+#>                                   1 
+#>              Prephenate dehydratase 
+#>                                   1 
+#> 
+#> $test$GRAPH
+#> IGRAPH 2fd6ecf UN-- 4 2 -- 
+#> + attr: name (v/c)
+#> + edges from 2fd6ecf (vertex names):
+#> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
+#> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
+#> 
+#> $test$PLOT
+```
+
+<img src="03-function_files/figure-html/drawpat-1.png" width="672" />
+
 ## Parsing `eggNOG-mapper v2` results
 
-### Visualizing function network
+Use `checkEGGNOG` function to read the output of eggNOG-mapper v2. Specify IDs you want to obtain to `ret`, such as "KEGG_ko" and "KEGG_Pathway".
+
+
+```r
+tib <- checkEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
+    ret="KEGG_ko")
+tib |> head()
+#> # A tibble: 6 × 3
+#>   ID                    name    value    
+#>   <chr>                 <chr>   <chr>    
+#> 1 GCF_002846775.1_00408 KEGG_ko ko:K11533
+#> 2 GCF_002846815.1_01743 KEGG_ko ko:K11533
+#> 3 GCF_004156145.1_01406 KEGG_ko ko:K11533
+#> 4 GCF_004155565.1_00557 KEGG_ko ko:K11533
+#> 5 GCF_004155645.1_00353 KEGG_ko ko:K11533
+#> 6 GCF_000800475.2_00338 KEGG_ko ko:K11533
+```
+
+### Draw the network
+
+You can draw the relationships between IDs by `drawEGGNOG`.
+
+
+```r
+drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
+           candPlot = c("KEGG_ko","KEGG_Pathway"),
+           geneIDs = tib$ID |> head(100))
+#> # A tibble: 4,287 × 3
+#>    ID                    name          value                
+#>    <chr>                 <chr>         <chr>                
+#>  1 GCF_002846775.1_00408 seed_ortholog 1690.BPSG_1412       
+#>  2 GCF_002846775.1_00408 eggNOG_OGs    COG0304@1|root       
+#>  3 GCF_002846775.1_00408 eggNOG_OGs    COG0331@1|root       
+#>  4 GCF_002846775.1_00408 eggNOG_OGs    COG2030@1|root       
+#>  5 GCF_002846775.1_00408 eggNOG_OGs    COG4981@1|root       
+#>  6 GCF_002846775.1_00408 eggNOG_OGs    COG0304@2|Bacteria   
+#>  7 GCF_002846775.1_00408 eggNOG_OGs    COG0331@2|Bacteria   
+#>  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   
+#>  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   
+#> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
+#> # … with 4,277 more rows
+#> $graph
+#> IGRAPH 30e9bc9 UN-- 21 922 -- 
+#> + attr: name (v/c), category (v/c), size (v/n)
+#> + edges from 30e9bc9 (vertex names):
+#>  [1] ko:K11533--ko00061 ko:K11533--ko01100
+#>  [3] ko:K11533--ko01212 ko:K11533--ko04931
+#>  [5] ko:K11533--ko00061 ko:K11533--ko01100
+#>  [7] ko:K11533--ko01212 ko:K11533--ko04931
+#>  [9] ko:K11533--ko00061 ko:K11533--ko01100
+#> [11] ko:K11533--ko01212 ko:K11533--ko04931
+#> [13] ko:K11533--ko00061 ko:K11533--ko01100
+#> [15] ko:K11533--ko01212 ko:K11533--ko04931
+#> + ... omitted several edges
+#> 
+#> $plot
+```
+
+<img src="03-function_files/figure-html/drawEGGNOG-1.png" width="672" />
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY
 

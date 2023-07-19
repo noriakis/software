@@ -14,6 +14,11 @@ library(stana)
 
 For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` command.
 
+
+```r
+# stana <- loadMIDAS("../")
+```
+
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
@@ -197,7 +202,7 @@ loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg
 #> 4.2 Mb
 ```
 
-The coverage for each species per sample is plotted by `plotCoverage`
+The coverage for each species per sample is plotted by `plotCoverage`.
 
 
 ```r
