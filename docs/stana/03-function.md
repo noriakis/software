@@ -57,7 +57,6 @@ res$test
 
 ### Draw the network
 
-
 You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.
 
 
@@ -104,9 +103,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 2fd6ecf UN-- 4 2 -- 
+#> IGRAPH 06767ec UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 2fd6ecf (vertex names):
+#> + edges from 06767ec (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -159,9 +158,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # … with 4,277 more rows
 #> $graph
-#> IGRAPH 30e9bc9 UN-- 21 922 -- 
+#> IGRAPH 0794884 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 30e9bc9 (vertex names):
+#> + edges from 0794884 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -176,6 +175,12 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 ```
 
 <img src="03-function_files/figure-html/drawEGGNOG-1.png" width="672" />
+
+
+## Heatmap of the gene abundances with functional annotations
+
+You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`.
+
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY
 

@@ -273,8 +273,17 @@ instr
 #> Directory: ../inStrain_out
 #> Species number: 68
 #> Loaded SNV table: 1
-#> Loaded gene table (): 0
 #> 70.4 Mb
 ```
 
 ## metaSNV
+
+For loading the output of `metaSNV`, `metaSNV.py` and `metaSNV_Filtering.py` are typically performed beforehand. You can use `just_species` to return species ID. Note that the `loadmetaSNV` is currently supported to load only the SNV profiles.
+
+
+```r
+meta <- loadmetaSNV("../metasnv_sample_out")
+#>   Loading refGenome1clus
+#>   Loading refGenome2clus
+#>   Loading refGenome3clus
+```

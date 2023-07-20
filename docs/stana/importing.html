@@ -298,13 +298,18 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <span><span class="co">#&gt; Directory: ../inStrain_out</span></span>
 <span><span class="co">#&gt; Species number: 68</span></span>
 <span><span class="co">#&gt; Loaded SNV table: 1</span></span>
-<span><span class="co">#&gt; Loaded gene table (): 0</span></span>
 <span><span class="co">#&gt; 70.4 Mb</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
 <span class="header-section-number">2.4</span> metaSNV<a class="anchor" aria-label="anchor" href="#metasnv"><i class="fas fa-link"></i></a>
 </h2>
+<p>For loading the output of <code>metaSNV</code>, <code>metaSNV.py</code> and <code>metaSNV_Filtering.py</code> are typically performed beforehand. You can use <code>just_species</code> to return species ID. Note that the <code>loadmetaSNV</code> is currently supported to load only the SNV profiles.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadmetaSNV.html">loadmetaSNV</a></span><span class="op">(</span><span class="st">"../metasnv_sample_out"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   Loading refGenome1clus</span></span>
+<span><span class="co">#&gt;   Loading refGenome2clus</span></span>
+<span><span class="co">#&gt;   Loading refGenome3clus</span></span></code></pre></div>
 
 </div>
 </div>
@@ -336,7 +341,7 @@ Here, we load the example dataset deposited by the study investigating gut micro
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-19.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

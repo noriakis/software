@@ -15,10 +15,12 @@ parsing-patric-results
 draw-the-network
 parsing-eggnog-mapper-v2-results
 draw-the-network-1
+heatmap-of-the-gene-abundances-with-functional-annotations
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species
 visualization
+plotpca
 visualization-of-gene-abundances
 visualization-of-functional-analysis-results
 visualization-of-instrain-results
