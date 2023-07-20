@@ -15,6 +15,24 @@ Use `checkPATRIC` function to obtain information related to `PATRIC` functional 
 
 ```r
 genes <- list("test"=read.table("../test_genes.txt")$V1)
+genes |> head()
+#> $test
+#>  [1] "1280701.3.peg.1153" "1280701.3.peg.1169"
+#>  [3] "1280701.3.peg.1174" "1280701.3.peg.1179"
+#>  [5] "1280701.3.peg.1186" "1280701.3.peg.203" 
+#>  [7] "1280701.3.peg.361"  "1280701.3.peg.363" 
+#>  [9] "1280701.3.peg.368"  "1280701.3.peg.369" 
+#> [11] "1280701.3.peg.570"  "1280701.3.peg.758" 
+#> [13] "1280701.3.peg.762"  "1410605.3.peg.1201"
+#> [15] "1410605.3.peg.1204" "1410605.3.peg.1463"
+#> [17] "1410605.3.peg.1510" "1410605.3.peg.1568"
+#> [19] "1410605.3.peg.450"  "1410605.3.peg.593" 
+#> [21] "1410605.3.peg.655"  "1410605.3.peg.833" 
+#> [23] "1410605.3.peg.844"  "1410605.3.peg.903" 
+#> [25] "1410605.3.peg.953"  "1447715.5.peg.1455"
+#> [27] "1447715.5.peg.1549" "1447715.5.peg.1582"
+#> [29] "1447715.5.peg.256"  "1447715.5.peg.33"  
+#> [31] "1447715.5.peg.566"  "1447715.5.peg.964"
 res <- checkPATRIC(genes, "pathway_name")
 #> Obtaining annotations of 3 genomes
 #>   Obtaining information on 1280701.3
@@ -103,9 +121,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 06767ec UN-- 4 2 -- 
+#> IGRAPH bd8a5c6 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 06767ec (vertex names):
+#> + edges from bd8a5c6 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -156,11 +174,11 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #>  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   
 #>  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
-#> # … with 4,277 more rows
+#> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 0794884 UN-- 21 922 -- 
+#> IGRAPH be6ad52 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 0794884 (vertex names):
+#> + edges from be6ad52 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -179,7 +197,16 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 
 ## Heatmap of the gene abundances with functional annotations
 
-You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`.
+You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`. The `plotHeatmap` function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, `anno_PATRIC_keywords` and `anno_eggNOG_keywords` are used to plot the word clouds alongside `Heatmap` from `ComplexHeatmap`.
+
+### `MIDAS`
+
+For `MIDAS`, the function automatically query API of `PATRIC` server using the gene names.
+
+### `MIDAS2`
+
+For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
+
 
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY

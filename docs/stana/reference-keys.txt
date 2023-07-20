@@ -16,6 +16,8 @@ draw-the-network
 parsing-eggnog-mapper-v2-results
 draw-the-network-1
 heatmap-of-the-gene-abundances-with-functional-annotations
+midas-1
+midas2-1
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species
