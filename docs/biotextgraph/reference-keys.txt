@@ -18,6 +18,7 @@ pathway-information
 annotating-the-dendrogram-of-taxonomy
 metacyc
 interactive-inspection-of-gene-cluster-network-annotated-by-words
+wrapper-function-for-wordcloud-network
 annotating-gene-cluster-dendrogram
 annotating-by-pyramid-plots
 annotating-by-word-clouds

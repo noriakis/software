@@ -170,6 +170,87 @@ knitr::include_url("https://noriakis.github.io/cyjs_test/visjs")
 
 <iframe src="https://noriakis.github.io/cyjs_test/visjs" width="100%" height="400px" data-external="1" style="border: none;"></iframe>
 
+## Wrapper function for wordcloud network
+
+The network like the previous example can be conveniently exported using `exportWCNetwork` function, which wrapped the previous code. The input is `igraph` and named gene list.
+
+
+```r
+mod <- biotextgraph::returnExample()
+#> 'select()' returned 1:many mapping between keys and
+#> columns
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+g <- graph_from_literal( ME1-+ME2, ME1-+ME3 )
+geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
+     "ME2"=mod$colors[mod$colors==2] |> names(),
+     "ME3"=mod$colors[mod$colors==3] |> names())
+g
+#> IGRAPH be98147 DN-- 3 2 -- 
+#> + attr: name (v/c)
+#> + edges from be98147 (vertex names):
+#> [1] ME1->ME2 ME1->ME3
+geneList
+#> $ME1
+#>  [1] "ENSG00000108702" "ENSG00000108691" "ENSG00000277632"
+#>  [4] "ENSG00000278567" "ENSG00000274221" "ENSG00000275302"
+#>  [7] "ENSG00000277943" "ENSG00000275824" "ENSG00000271503"
+#> [10] "ENSG00000274233" "ENSG00000108688" "ENSG00000108700"
+#> 
+#> $ME2
+#>  [1] "ENSG00000163739" "ENSG00000081041" "ENSG00000163734"
+#>  [4] "ENSG00000163735" "ENSG00000124875" "ENSG00000169429"
+#>  [7] "ENSG00000138755" "ENSG00000169245" "ENSG00000169248"
+#> [10] "ENSG00000107562" "ENSG00000156234" "ENSG00000145824"
+#> [13] "ENSG00000161921"
+#> 
+#> $ME3
+#> [1] "ENSG00000012061" "ENSG00000104884" "ENSG00000163161"
+#> [4] "ENSG00000175595" "ENSG00000134899" "ENSG00000225830"
+#> [7] "ENSG00000049167"
+exportWCNetwork(g,geneList,keyType="ENSEMBL",
+    wcScale=50,scaleMax=20,scaleMin=10)
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
+#> Returning the palette you asked for with that many colors
+#> Input genes: 12
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+#> Input genes: 13
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 13
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+#> Input genes: 7
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
+```
 
 # Annotating gene cluster dendrogram
 

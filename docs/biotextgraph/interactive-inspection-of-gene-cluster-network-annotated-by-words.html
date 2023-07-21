@@ -91,11 +91,11 @@
 <span><span class="va">ensg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">modColors</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># library(bnlearn)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Replace like boot.strength(mod$MEs, R=500, algorithm = "hc")</span></span>
 <span><span class="co"># dag &lt;- model2network("[ME1][ME2|ME1]") # If using bnlearn</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span> <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME2</span>, <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME3</span> <span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span> <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME2</span>, <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME3</span> <span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Convert to igraph</span></span>
 <span><span class="co"># g &lt;- as.igraph(dag)</span></span>
@@ -109,9 +109,9 @@
 <span><span class="co"># E(g)$direction &lt;- el$direction</span></span>
 <span></span>
 <span><span class="co">## Node attributes</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">stripName</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"ME"</span>,<span class="st">""</span>,<span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">stripName</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"ME"</span>,<span class="st">""</span>,<span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
 <span><span class="va">sizes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">modColors</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">sizes</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">stripName</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">sizes</span><span class="op">[</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">stripName</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Directory to save images and a script</span></span>
 <span><span class="va">rootDir</span> <span class="op">&lt;-</span> <span class="st">"./"</span></span>
@@ -124,7 +124,7 @@
 <span><span class="va">images</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">plotType</span> <span class="op">&lt;-</span> <span class="st">"bar"</span></span>
 <span><span class="va">numLim</span> <span class="op">&lt;-</span> <span class="fl">200</span> <span class="co"># limit for gene number</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
 <span>    <span class="va">i</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"ME"</span>,<span class="st">""</span>,<span class="va">i</span><span class="op">)</span><span class="op">)</span> <span class="co"># strip ME</span></span>
 <span></span>
@@ -175,29 +175,29 @@
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">image</span> <span class="op">&lt;-</span> <span class="va">images</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">image</span> <span class="op">&lt;-</span> <span class="va">images</span></span>
 <span></span>
 <span><span class="co">## Node shape</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="va">plotType</span><span class="op">==</span><span class="st">"bar"</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"rectangle"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
+<span>    <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"rectangle"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"circle"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"circle"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co">## Scale the node size</span></span>
 <span><span class="va">sizeMin</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
 <span><span class="va">sizeMax</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
-<span><span class="va">rawMin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span><span class="op">)</span></span>
-<span><span class="va">rawMax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span><span class="op">)</span></span>
+<span><span class="va">rawMin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span><span class="op">)</span></span>
+<span><span class="va">rawMax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span><span class="op">)</span></span>
 <span><span class="va">scf</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">sizeMax</span><span class="op">-</span><span class="va">sizeMin</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">rawMax</span><span class="op">-</span><span class="va">rawMin</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="va">scf</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">+</span> <span class="va">sizeMin</span> <span class="op">-</span> <span class="va">scf</span> <span class="op">*</span> <span class="va">rawMin</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="va">scf</span> <span class="op">*</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">+</span> <span class="va">sizeMin</span> <span class="op">-</span> <span class="va">scf</span> <span class="op">*</span> <span class="va">rawMin</span></span>
 <span></span>
 <span><span class="co">## Export</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/exportCyjs.html">exportCyjs</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">rootDir</span>, <span class="va">netDir</span><span class="op">)</span></span>
 <span><span class="co"># or, exportVisjs(g, rootDir, netDir)</span></span></code></pre></div>
 <p>Use like <code>http-server</code> in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information. The example visualization is shown below (not by the code above, but Bayesian network of module eigenes inferred from RNA-seq dataset ofbladder cancer).</p>
-<div class="figure">
-<img src="https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true" style="width:50.0%" alt=""><p class="caption">Example visualization of a Bayesian network</p>
+<div class="float">
+<img src="https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true" style="width:50.0%" alt="Example visualization of a Bayesian network"><div class="figcaption">Example visualization of a Bayesian network</div>
 </div>
 <p>Interactive inspection is possible using GitHub pages or the other hosting services like below.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
@@ -206,7 +206,7 @@
 </iframe>
 <p>If you specify node attribute named <code>group</code>, and set <code>bubble=TRUE</code> in <code>exportCyjs</code> function, bubble sets will be plotted using <a href="https://github.com/upsetjs/cytoscape.js-bubblesets"><code>cytoscape.js-bubblesets</code></a>, useful for inspecting the similarity betwteen the gene cluster, like the output of <code>pvclust</code> and <code>pvpick</code> on module eigengenes.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span></span>
 <span><span class="co"># exportCyjs(g, rootDir, netDir, bubble=TRUE)</span></span>
 <span></span>
 <span><span class="co">## Example, not by the code above.</span></span>
@@ -219,13 +219,97 @@ In this example, the barplot of words are shown in the nodes.</p>
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://noriakis.github.io/cyjs_test/visjs"</span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://noriakis.github.io/cyjs_test/visjs" width="100%" height="400px" data-external="1" style="border: none;">
 </iframe>
+<div id="wrapper-function-for-wordcloud-network" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Wrapper function for wordcloud network<a class="anchor" aria-label="anchor" href="#wrapper-function-for-wordcloud-network"><i class="fas fa-link"></i></a>
+</h2>
+<p>The network like the previous example can be conveniently exported using <code>exportWCNetwork</code> function, which wrapped the previous code. The input is <code>igraph</code> and named gene list.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_literal.html">graph_from_literal</a></span><span class="op">(</span> <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME2</span>, <span class="va">ME1</span><span class="op">-</span><span class="op">+</span><span class="va">ME3</span> <span class="op">)</span></span>
+<span><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"ME1"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     <span class="st">"ME2"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">2</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>     <span class="st">"ME3"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">g</span></span>
+<span><span class="co">#&gt; IGRAPH be98147 DN-- 3 2 -- </span></span>
+<span><span class="co">#&gt; + attr: name (v/c)</span></span>
+<span><span class="co">#&gt; + edges from be98147 (vertex names):</span></span>
+<span><span class="co">#&gt; [1] ME1-&gt;ME2 ME1-&gt;ME3</span></span>
+<span><span class="va">geneList</span></span>
+<span><span class="co">#&gt; $ME1</span></span>
+<span><span class="co">#&gt;  [1] "ENSG00000108702" "ENSG00000108691" "ENSG00000277632"</span></span>
+<span><span class="co">#&gt;  [4] "ENSG00000278567" "ENSG00000274221" "ENSG00000275302"</span></span>
+<span><span class="co">#&gt;  [7] "ENSG00000277943" "ENSG00000275824" "ENSG00000271503"</span></span>
+<span><span class="co">#&gt; [10] "ENSG00000274233" "ENSG00000108688" "ENSG00000108700"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ME2</span></span>
+<span><span class="co">#&gt;  [1] "ENSG00000163739" "ENSG00000081041" "ENSG00000163734"</span></span>
+<span><span class="co">#&gt;  [4] "ENSG00000163735" "ENSG00000124875" "ENSG00000169429"</span></span>
+<span><span class="co">#&gt;  [7] "ENSG00000138755" "ENSG00000169245" "ENSG00000169248"</span></span>
+<span><span class="co">#&gt; [10] "ENSG00000107562" "ENSG00000156234" "ENSG00000145824"</span></span>
+<span><span class="co">#&gt; [13] "ENSG00000161921"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ME3</span></span>
+<span><span class="co">#&gt; [1] "ENSG00000012061" "ENSG00000104884" "ENSG00000163161"</span></span>
+<span><span class="co">#&gt; [4] "ENSG00000175595" "ENSG00000134899" "ENSG00000225830"</span></span>
+<span><span class="co">#&gt; [7] "ENSG00000049167"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/exportWCNetwork.html">exportWCNetwork</a></span><span class="op">(</span><span class="va">g</span>,<span class="va">geneList</span>,keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>,</span>
+<span>    wcScale<span class="op">=</span><span class="fl">50</span>,scaleMax<span class="op">=</span><span class="fl">20</span>,scaleMin<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9</span></span>
+<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
+<span><span class="co">#&gt; Input genes: 12</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
+<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
+<span><span class="co">#&gt; fit on page. They have been removed.</span></span>
+<span><span class="co">#&gt; Input genes: 13</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 13</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
+<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
+<span><span class="co">#&gt; fit on page. They have been removed.</span></span>
+<span><span class="co">#&gt; Input genes: 7</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
+<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
+<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
+<span><span class="co">#&gt; fit on page. They have been removed.</span></span></code></pre></div>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="metacyc.html"><span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)</a></div>
 <div class="next"><a href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">6</span> Annotating gene cluster dendrogram</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#interactive-inspection-of-gene-cluster-network-annotated-by-words"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#interactive-inspection-of-gene-cluster-network-annotated-by-words"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></li>
+<li><a class="nav-link" href="#wrapper-function-for-wordcloud-network"><span class="header-section-number">5.1</span> Wrapper function for wordcloud network</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -241,7 +325,7 @@ In this example, the barplot of words are shown in the nodes.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-11.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
