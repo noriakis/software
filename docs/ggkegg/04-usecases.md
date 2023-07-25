@@ -103,7 +103,6 @@ cont <- akima::interp2xyz(interp::interp(df$x, df$y, df$lfc)) |>
 
 ## 
 sysfonts::font_add(family="monocraft",regular="Monocraft.ttf")
-showtext::showtext_auto()
 gg <- ggraph(g, layout="manual", x=x, y=y)+
     geom_edge_parallel(arrow=arrow(length=unit(1,"mm")),
                        aes(color=subtype_name),
