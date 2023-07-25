@@ -87,6 +87,46 @@ gg
 
 <img src="04-usecases_files/figure-html/deseq2_2-1.svg" width="100%" style="display: block; margin: auto;" />
 
+### using multiple geoms to add information
+
+You can use your favorite geoms in `ggplot2` and their extensions to add information. In this example, We add log2 fold changes as contour using [`geomtextpath`](https://github.com/AllanCameron/geomtextpath), and customized the font using [`Monocraft`](https://github.com/IdreesInc/Monocraft/).
+
+
+```r
+g <- g |> mutate(lfc=assign_deseq2(vinf, column="log2FoldChange"))
+
+## Make contour data
+df <- g |> data.frame()
+df <- df[!is.na(df$lfc),]
+cont <- akima::interp2xyz(interp::interp(df$x, df$y, df$lfc)) |>
+    data.frame() |> `colnames<-`(c("x","y","z"))
+
+## 
+sysfonts::font_add(family="monocraft",regular="Monocraft.ttf")
+showtext::showtext_auto()
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+    geom_edge_parallel(arrow=arrow(length=unit(1,"mm")),
+                       aes(color=subtype_name),
+                       end_cap=circle(7.5,"mm"),
+                       alpha=0.5)+
+    geomtextpath::geom_textcontour(aes(x=x, y=y, z=z,color=after_stat(level)),
+                                   size=3, linetype=2,
+                                   linewidth=0.1, data=cont)+
+    geom_node_rect(aes(fill=padj, filter=type=="gene"))+
+    ggfx::with_outer_glow(geom_node_rect(aes(fill=padj, filter=!is.na(padj) & padj<0.05)),
+                          colour="yellow", expand=2)+
+    geom_node_text(aes(label=converted_name), family="monocraft")+
+    scale_color_gradient2(low=scales::muted("blue"),
+                          high=scales::muted("red"),
+                          name="LFC")+
+    scale_edge_color_manual(values=viridis::viridis(11), name="Edge type")+
+    scale_fill_gradient(low="pink",high="steelblue") +
+    theme_void()
+gg
+```
+
+<img src="04-usecases_files/figure-html/deseq2_3-1.svg" width="100%" style="display: block; margin: auto;" />
+
 ## Integrating numeric values onto `tbl_graph`
 
 ### Integrating numeric vector to `tbl_graph`
@@ -103,29 +143,29 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 22
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
-#> # ℹ 15 more variables: height <dbl>, fgcolor <chr>,
-#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
-#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
-#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
-#> #   padj <dbl>, converted_name <chr>, num <dbl>
+#> # Node Data: 134 × 23 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 15 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
+#> #   lfc <dbl>, num <dbl>
 #> #
-#> # A tibble: 157 × 6
+#> # Edge Data: 157 × 6
 #>    from    to type  subtype_name    subtype_value pathway_id
 #>   <int> <int> <chr> <chr>           <chr>         <chr>     
 #> 1   118    39 GErel expression      -->           hsa04110  
 #> 2    50    61 PPrel inhibition      --|           hsa04110  
 #> 3    50    61 PPrel phosphorylation +p            hsa04110  
-#> # ℹ 154 more rows
+#> # … with 154 more rows
 ```
 
 ### Integrating matrix to `tbl_graph`
@@ -142,36 +182,54 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 47
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
-#> # ℹ 40 more variables: height <dbl>, fgcolor <chr>,
-#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
-#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
-#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
-#> #   padj <dbl>, converted_name <chr>, SRR14509882 <dbl>,
-#> #   SRR14509883 <dbl>, SRR14509884 <dbl>, …
+#> # Node Data: 134 × 48 (active)
+#>   name  type  reacti… graphi…     x     y width height
+#>   <chr> <chr> <chr>   <chr>   <dbl> <dbl> <dbl>  <dbl>
+#> 1 hsa:… gene  <NA>    CDKN2A…   532  -218    46     17
+#> 2 hsa:… gene  <NA>    FZR1, …   981  -630    46     17
+#> 3 hsa:… gene  <NA>    MCM2, …   553  -681    46     17
+#> 4 hsa:… gene  <NA>    ORC6, …   494  -681    46     17
+#> 5 hsa:… gene  <NA>    ANAPC1…   981  -392    46     17
+#> 6 hsa:… gene  <NA>    ANAPC1…   981  -613    46     17
+#> # … with 128 more rows, and 40 more variables:
+#> #   fgcolor <chr>, bgcolor <chr>, graphics_type <chr>,
+#> #   coords <chr>, xmin <dbl>, xmax <dbl>, ymin <dbl>,
+#> #   ymax <dbl>, orig.id <chr>, pathway_id <chr>,
+#> #   deseq2 <dbl>, padj <dbl>, converted_name <chr>,
+#> #   lfc <dbl>, SRR14509882 <dbl>, SRR14509883 <dbl>,
+#> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
+#> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
+#> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
 #> #
-#> # A tibble: 157 × 34
-#>    from    to type  subtype_name    subtype_value pathway_id
-#>   <int> <int> <chr> <chr>           <chr>         <chr>     
-#> 1   118    39 GErel expression      -->           hsa04110  
-#> 2    50    61 PPrel inhibition      --|           hsa04110  
-#> 3    50    61 PPrel phosphorylation +p            hsa04110  
-#> # ℹ 154 more rows
-#> # ℹ 28 more variables: from_nd <chr>, to_nd <chr>,
+#> # Edge Data: 157 × 34
+#>    from    to type  subtyp… subtyp… pathwa… from_nd to_nd
+#>   <int> <int> <chr> <chr>   <chr>   <chr>   <chr>   <chr>
+#> 1   118    39 GErel expres… -->     hsa041… undefi… hsa:…
+#> 2    50    61 PPrel inhibi… --|     hsa041… hsa:29… hsa:…
+#> 3    50    61 PPrel phosph… +p      hsa041… hsa:29… hsa:…
+#> # … with 154 more rows, and 26 more variables:
 #> #   SRR14509882 <dbl>, SRR14509883 <dbl>,
 #> #   SRR14509884 <dbl>, SRR14509885 <dbl>,
 #> #   SRR14509886 <dbl>, SRR14509887 <dbl>,
 #> #   SRR14509888 <dbl>, SRR14509889 <dbl>,
-#> #   SRR14509890 <dbl>, SRR14509891 <dbl>, …
+#> #   SRR14509890 <dbl>, SRR14509891 <dbl>,
+#> #   SRR14509892 <dbl>, SRR14509893 <dbl>,
+#> #   SRR14509894 <dbl>, SRR14509895 <dbl>,
+#> #   SRR14509896 <dbl>, SRR14509897 <dbl>,
+#> #   SRR14509898 <dbl>, SRR14509899 <dbl>,
+#> #   SRR14509900 <dbl>, SRR14509901 <dbl>,
+#> #   SRR14509902 <dbl>, SRR14509903 <dbl>,
+#> #   SRR14509904 <dbl>, SRR14509905 <dbl>,
+#> #   SRR14509906 <dbl>, SRR14509907 <dbl>
 ```
 
 
@@ -856,7 +914,7 @@ class |> head()
 
 ### Preprocessing
 
-We obtained `tidygraph` of ko01100, and process the graph. First, we append edges corresponding to inter-compound relationships. Although most of the reactions are reversible and by default adds two edges in `process_reaction`, we specify `single_edge=TRUE` here for visualization. Also, converting compound ID and KO ID and append attributes to graph. 
+We obtained `tbl_graph` of ko01100, and process the graph. First, we append edges corresponding to inter-compound relationships. Although most of the reactions are reversible and by default adds two edges in `process_reaction`, we specify `single_edge=TRUE` here for visualization. Also, converting compound ID and KO ID and append attributes to graph. 
 
 
 ```r

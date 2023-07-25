@@ -24,6 +24,7 @@ combining-multiple-networks
 usecases
 visualizing-numerical-attributes-from-deseq2
 using-ggfx-to-further-customize-the-visualization
+using-multiple-geoms-to-add-information
 integrating-numeric-values-onto-tbl_graph
 integrating-numeric-vector-to-tbl_graph
 integrating-matrix-to-tbl_graph

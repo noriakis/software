@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-07-16"
+date: "2023-07-25"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -27,7 +27,7 @@ csl: chicago-fullnote-bibliography.csl
 library(ggkegg)
 ```
 
-One of the main aims of `ggkegg` or `tidykegg` is manupilating KEGG information in tidy ways using `tidygraph`, and offers the customized visualization of KEGG information including KEGG PATHWAY, MODULE, and NETWORK.
+One of the main aims of `ggkegg` is manupilating KEGG information in tidy ways using `tidygraph`, and offers the customized visualization of KEGG information including KEGG PATHWAY, MODULE, and NETWORK.
 
 
 ```r
