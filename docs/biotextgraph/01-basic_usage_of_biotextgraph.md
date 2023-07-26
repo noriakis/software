@@ -734,7 +734,6 @@ load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 degs <- d3degUpAssetta2016
 ## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)
 sysfonts::font_add(family="alien",regular="SFAlienEncounters.ttf")
-showtext::showtext_auto()
 p <- biotextgraph::refseq(degs,
                           plotType="network",
                           numWords=50, genePlot=TRUE,
@@ -777,12 +776,12 @@ ggraph("fabric",
   sort.by = node_rank_fabric())+
     geom_node_range() +
     geom_edge_span(end_shape = 'circle') +
-    geom_node_text(aes(x=xmin-4, label=name), size=4.5)+
+    geom_node_text(aes(x=xmin-4, label=name), size=2.5)+
     shadowtext::geom_shadowtext(aes(x=center,
                        color=nodeCat,
                        y=y+1,
                        label=name),
-                   size=4.5, bg.colour="white")+
+                   size=2.5, bg.colour="white")+
     scale_color_manual(values=c("grey20", "grey80"))+
     theme_graph()
 ```
@@ -861,17 +860,18 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggkegg_0.99.1             XML_3.99-0.14            
-#>  [3] tidygraph_1.2.3           ggfx_1.0.1               
-#>  [5] igraph_1.5.0              GetoptLong_1.0.5         
-#>  [7] ggforce_0.4.1             concaveman_1.1.0         
-#>  [9] dplyr_1.1.1               dendextend_1.16.0        
-#> [11] clusterProfiler_4.7.1.003 ReactomePA_1.40.0        
-#> [13] RColorBrewer_1.1-3        ggraph_2.1.0.9000        
-#> [15] org.Hs.eg.db_3.15.0       AnnotationDbi_1.60.2     
-#> [17] IRanges_2.32.0            S4Vectors_0.36.2         
-#> [19] Biobase_2.58.0            BiocGenerics_0.44.0      
-#> [21] biotextgraph_0.99.0       ggplot2_3.4.2            
+#>  [1] ggkegg_0.99.1             testthat_3.1.7           
+#>  [3] XML_3.99-0.14             tidygraph_1.2.3          
+#>  [5] ggfx_1.0.1                igraph_1.5.0             
+#>  [7] GetoptLong_1.0.5          ggforce_0.4.1            
+#>  [9] concaveman_1.1.0          dplyr_1.1.1              
+#> [11] dendextend_1.16.0         clusterProfiler_4.7.1.003
+#> [13] ReactomePA_1.40.0         RColorBrewer_1.1-3       
+#> [15] ggraph_2.1.0.9000         org.Hs.eg.db_3.15.0      
+#> [17] AnnotationDbi_1.60.2      IRanges_2.32.0           
+#> [19] S4Vectors_0.36.2          Biobase_2.58.0           
+#> [21] BiocGenerics_0.44.0       biotextgraph_0.99.0      
+#> [23] ggplot2_3.4.2            
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] utf8_1.2.3             tidyselect_1.2.0      
@@ -930,28 +930,29 @@ sessionInfo()
 #> [107] DBI_1.1.3              tweenr_2.0.2          
 #> [109] dbplyr_2.3.2           MASS_7.3-57           
 #> [111] rappdirs_0.3.3         Matrix_1.5-4          
-#> [113] cli_3.6.1              parallel_4.2.1        
-#> [115] pkgconfig_2.0.3        xml2_1.3.3            
-#> [117] ggtree_3.6.2           bslib_0.4.2           
-#> [119] XVector_0.38.0         yulab.utils_0.0.6     
-#> [121] stringr_1.5.0          callr_3.7.3           
-#> [123] digest_0.6.31          showtextdb_3.0        
-#> [125] graph_1.76.0           Biostrings_2.66.0     
-#> [127] tm_0.7-11              rmarkdown_2.20        
-#> [129] fastmatch_1.1-3        tidytree_0.4.2        
-#> [131] cyjShiny_1.0.34        curl_5.0.0            
-#> [133] shiny_1.7.4            graphite_1.42.0       
-#> [135] rjson_0.2.21           lifecycle_1.0.3       
-#> [137] nlme_3.1-157           jsonlite_1.8.4        
-#> [139] desc_1.4.2             viridisLite_0.4.1     
-#> [141] fansi_1.0.4            pillar_1.9.0          
-#> [143] lattice_0.20-45        KEGGREST_1.38.0       
-#> [145] fastmap_1.1.1          httr_1.4.5            
-#> [147] pkgbuild_1.4.0         GO.db_3.16.0          
-#> [149] remotes_2.4.2          glue_1.6.2            
-#> [151] png_0.1-8              bit_4.0.5             
-#> [153] profvis_0.3.7          stringi_1.7.12        
-#> [155] sass_0.4.5             blob_1.2.4            
-#> [157] textshaping_0.3.6      memoise_2.0.1         
-#> [159] ape_5.7-1              sysfonts_0.8.8
+#> [113] brio_1.1.3             cli_3.6.1             
+#> [115] parallel_4.2.1         pkgconfig_2.0.3       
+#> [117] xml2_1.3.3             ggtree_3.6.2          
+#> [119] bslib_0.4.2            XVector_0.38.0        
+#> [121] yulab.utils_0.0.6      stringr_1.5.0         
+#> [123] callr_3.7.3            digest_0.6.31         
+#> [125] showtextdb_3.0         graph_1.76.0          
+#> [127] Biostrings_2.66.0      tm_0.7-11             
+#> [129] rmarkdown_2.20         fastmatch_1.1-3       
+#> [131] tidytree_0.4.2         cyjShiny_1.0.34       
+#> [133] curl_5.0.0             shiny_1.7.4           
+#> [135] graphite_1.42.0        rjson_0.2.21          
+#> [137] lifecycle_1.0.3        nlme_3.1-157          
+#> [139] jsonlite_1.8.4         desc_1.4.2            
+#> [141] viridisLite_0.4.1      fansi_1.0.4           
+#> [143] pillar_1.9.0           lattice_0.20-45       
+#> [145] KEGGREST_1.38.0        fastmap_1.1.1         
+#> [147] httr_1.4.5             pkgbuild_1.4.0        
+#> [149] GO.db_3.16.0           remotes_2.4.2         
+#> [151] glue_1.6.2             png_0.1-8             
+#> [153] bit_4.0.5              profvis_0.3.7         
+#> [155] stringi_1.7.12         sass_0.4.5            
+#> [157] blob_1.2.4             textshaping_0.3.6     
+#> [159] memoise_2.0.1          ape_5.7-1             
+#> [161] sysfonts_0.8.8
 ```

@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH be98147 DN-- 3 2 -- 
+#> IGRAPH 449ed44 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from be98147 (vertex names):
+#> + edges from 449ed44 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,8 +212,15 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGn is 9
 #> Returning the palette you asked for with that many colors
+
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGn is 9
+#> Returning the palette you asked for with that many colors
+#> Warning in dir.create(paste0(dir)): 'network' already
+#> exists
+#> Warning in dir.create(paste0(dir, "/images")):
+#> 'network\images' already exists
 #> Input genes: 12
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
