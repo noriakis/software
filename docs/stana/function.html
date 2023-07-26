@@ -17,7 +17,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.1/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.27/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
 <script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
@@ -64,7 +64,7 @@
 <span class="header-section-number">4</span> Functional annotation<a class="anchor" aria-label="anchor" href="#function"><i class="fas fa-link"></i></a>
 </h1>
 <p>For functional profiling, several functions are prepared in <code>stana</code>. Note that these functions are primarily designed for <code>MIDAS</code> and <code>MIDAS2</code>, which profile gene abundances within species by default.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
 <div id="parsing-patric-results" class="section level2" number="4.1">
@@ -72,7 +72,7 @@
 <span class="header-section-number">4.1</span> Parsing <code>PATRIC</code> results<a class="anchor" aria-label="anchor" href="#parsing-patric-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use <code>checkPATRIC</code> function to obtain information related to <code>PATRIC</code> functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses <code>BiocFileCache()</code> to cache the obtained results from API.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../test_genes.txt"</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
 <span><span class="va">genes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $test</span></span>
@@ -102,13 +102,13 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0ef75ba074c45fa0f060" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0ef75ba074c45fa0f060">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c58d14443f9e29dec960" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c58d14443f9e29dec960">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawPATRIC.html">drawPATRIC</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Obtaining annotations of 3 genomes</span></span>
 <span><span class="co">#&gt;   Obtaining information on 1280701.3</span></span>
@@ -151,9 +151,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH 36f1684 UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH cc45924 UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 36f1684 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from cc45924 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -166,17 +166,17 @@
 <span class="header-section-number">4.2</span> Parsing <code>eggNOG-mapper v2</code> results<a class="anchor" aria-label="anchor" href="#parsing-eggnog-mapper-v2-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use <code>checkEGGNOG</code> function to read the output of eggNOG-mapper v2. Specify IDs you want to obtain to <code>ret</code>, such as “KEGG_ko” and “KEGG_Pathway”.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-877148777273f2d41c15" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-877148777273f2d41c15">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a3166d9ff8eaa8b506cd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a3166d9ff8eaa8b506cd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the relationships between IDs by <code>drawEGGNOG</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>           candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
 <span>           geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
@@ -193,11 +193,11 @@
 <span><span class="co">#&gt;  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   </span></span>
 <span><span class="co">#&gt;  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   </span></span>
 <span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
-<span><span class="co">#&gt; # … with 4,277 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH 37efc8d UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH cdc5c53 UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from 37efc8d (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from cdc5c53 (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
@@ -216,19 +216,88 @@
 <h2>
 <span class="header-section-number">4.3</span> Heatmap of the gene abundances with functional annotations<a class="anchor" aria-label="anchor" href="#heatmap-of-the-gene-abundances-with-functional-annotations"><i class="fas fa-link"></i></a>
 </h2>
-<p>You can inspect the overview of functional differences using gene abundances along with <code>simplifyEnrichment</code>. The <code>plotHeatmap</code> function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, <code>anno_PATRIC_keywords</code> and <code>anno_eggNOG_keywords</code> are used to plot the word clouds alongside <code>Heatmap</code> from <code>ComplexHeatmap</code>.</p>
+<p>You can inspect the overview of functional differences using gene abundances along with <code>simplifyEnrichment</code>. The <code>plotHeatmap</code> function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, <code>anno_PATRIC_keywords</code> and <code>anno_eggNOG_keywords</code> are used to plot the word clouds alongside <code>Heatmap</code> from <code>ComplexHeatmap</code>. It is easy for <code>MIDAS</code>, as the function obtains functional annotation from PATRIC API server and no annotation step is needed.</p>
 <div id="midas-1" class="section level3" number="4.3.1">
 <h3>
 <span class="header-section-number">4.3.1</span> <code>MIDAS</code><a class="anchor" aria-label="anchor" href="#midas-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>For <code>MIDAS</code>, the function automatically query API of <code>PATRIC</code> server using the gene names.</p>
+<p>For <code>MIDAS</code>, the function automatically query API of <code>PATRIC</code> server using the gene names. As the gene number is large typically, one can filter the genes by options <code>filter_zero_frac</code>, <code>filter_max_frac</code> and <code>filter_max_value</code>. However, one should perform own filtering beforehand and provide the matrix to <code>mat</code>. If <code>mat</code> is specified, other filtering options will be ignored.</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/simplifyEnrichment">simplifyEnrichment</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
+<span><span class="co">#&gt;   Snps</span></span>
+<span><span class="co">#&gt;     HC 13</span></span>
+<span><span class="co">#&gt;     R 16</span></span>
+<span><span class="co">#&gt;     Bacteroides_uniformis_57318 cleared filtering threshold in SNV</span></span>
+<span><span class="co">#&gt;   Genes</span></span>
+<span><span class="co">#&gt;     HC 13</span></span>
+<span><span class="co">#&gt;     R 16</span></span>
+<span><span class="co">#&gt;     Bacteroides_uniformis_57318 cleared filtering threshold in genes</span></span>
+<span><span class="co">#&gt; Overall, 1 species met criteria in SNPs</span></span>
+<span><span class="co">#&gt; Overall, 1 species met criteria in genes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotHeatmap.html">plotHeatmap</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"Bacteroides_uniformis_57318"</span>,filter_max_value <span class="op">=</span> <span class="fl">2</span>,filter_max_frac <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">#&gt; In resulting matrix, max: 1.99955229433902, min: 0</span></span>
+<span><span class="co">#&gt; Dimension: 4911, 29</span></span>
+<span><span class="co">#&gt; Obtaining gene information from PATRIC server</span></span>
+<span><span class="co">#&gt; Obtaining annotations of 7 genomes</span></span>
+<span><span class="co">#&gt;   Obtaining information on 1235787.3</span></span>
+<span><span class="co">#&gt;   Obtaining information on 1339348.3</span></span>
+<span><span class="co">#&gt;   Obtaining information on 411479.10</span></span>
+<span><span class="co">#&gt;   Obtaining information on 457393.3</span></span>
+<span><span class="co">#&gt;   Obtaining information on 585543.3</span></span>
+<span><span class="co">#&gt;   Obtaining information on 997889.3</span></span>
+<span><span class="co">#&gt;   Obtaining information on 997890.3</span></span>
+<span><span class="co">#&gt; Checking results on cluster 1</span></span>
+<span><span class="co">#&gt;   total of 273 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 261 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 2</span></span>
+<span><span class="co">#&gt;   total of 334 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 329 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 3</span></span>
+<span><span class="co">#&gt;   total of 693 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 662 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 4</span></span>
+<span><span class="co">#&gt;   total of 175 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 174 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 5</span></span>
+<span><span class="co">#&gt;   total of 310 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 303 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 6</span></span>
+<span><span class="co">#&gt;   total of 898 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 868 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 7</span></span>
+<span><span class="co">#&gt;   total of 521 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 503 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 8</span></span>
+<span><span class="co">#&gt;   total of 701 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 675 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 9</span></span>
+<span><span class="co">#&gt;   total of 1140 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 1105 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt; Checking results on cluster 10</span></span>
+<span><span class="co">#&gt;   total of 1090 annotation obtained</span></span>
+<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
+<span><span class="co">#&gt;   total of 1053 annotation obtained after removal of duplication</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="672"></div>
 </div>
 <div id="midas2-1" class="section level3" number="4.3.2">
 <h3>
 <span class="header-section-number">4.3.2</span> <code>MIDAS2</code><a class="anchor" aria-label="anchor" href="#midas2-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>For <code>MIDAS2</code>, the users should provide eggNOG annotation on <code>eggNOG</code> slot of stana object. <code>fnc</code> argument accepts <code>KEGG_Pathway</code> or <code>KEGG_Module</code> available in eggNOG annotation. The function queries <code>KEGG REST API</code> to obtain pathway and module description. As the gene number is large typically, one can filter the genes by options <code>filter_zero_frac</code>, <code>filter_max_frac</code> and <code>filter_max_value</code>. However, one should perform own filtering beforehand and provide the matrix to <code>mat</code>. If <code>mat</code> is specified, other filtering options will be ignored.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<p>For <code>MIDAS2</code>, the users should provide eggNOG annotation on <code>eggNOG</code> slot of stana object. <code>fnc</code> argument accepts <code>KEGG_Pathway</code> or <code>KEGG_Module</code> available in eggNOG annotation. The function queries <code>KEGG REST API</code> to obtain pathway and module description.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
 <span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -250,11 +319,11 @@
 <span><span class="co">#&gt;       Number of samples in R: 18</span></span>
 <span><span class="co">#&gt;       Passed the filter</span></span></code></pre></div>
 <p>We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
 <span><span class="va">stana</span><span class="op">@</span><span class="va">eggNOG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span><span class="op">)</span></span></code></pre></div>
 <p>You can set <code>removeAdditional</code> argument to filter words that are to be displayed.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/simplifyEnrichment">simplifyEnrichment</a></span><span class="op">)</span></span>
 <span></span>
@@ -285,7 +354,7 @@
 <span class="header-section-number">4.4.1.1</span> Visualizing differences per species<a class="anchor" aria-label="anchor" href="#visualizing-differences-per-species"><i class="fas fa-link"></i></a>
 </h4>
 <p>Load the profile for multiple species.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
 <span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -322,13 +391,13 @@
 <span><span class="co">#&gt;       Passed the filter</span></span></code></pre></div>
 <p>Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 This way, the <code>plotKEGGPathway</code> function automatically calculates the abundance by user-defined method.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
 <span><span class="va">stana</span><span class="op">@</span><span class="va">eggNOG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span>,</span>
 <span>                     <span class="st">"102438"</span><span class="op">=</span><span class="st">"../annotations_uhgg/102438_eggnog_out.emapper.annotations"</span><span class="op">)</span></span></code></pre></div>
 <p>plotKEGGPathway can be run by providing stana object, species (when multiple species, rectangular nodes will be split),
 and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate metabolism for example. As for the large annotation table, the calculation takes time and you can provide pre-calculated KO table in <code>kos</code> slot of stana object, or specify <code>only_ko = TRUE</code> to first return KO table.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, only_ko<span class="op">=</span><span class="cn">TRUE</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
@@ -338,7 +407,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/onescale-1.svg" width="672"></div>
 <p>By default, the scale is same. If you install <code>ggh4x</code>, multiple scales can be added, by specifying <code>multi_scale</code> argument.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
@@ -347,7 +416,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/multscale-1.svg" width="672"></div>
 <p>You can provide multiple pathway IDs to pathway_id, which returns a list of plot.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
 <span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,</span>
 <span>                      multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -366,7 +435,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span class="header-section-number">4.4.2</span> Visualizing calculated values across species<a class="anchor" aria-label="anchor" href="#visualizing-calculated-values-across-species"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you want to see the sum values across species, you can set option <code>summarize=TRUE</code>. This way, the KO values across specified species are summed, and compared between groups, then plotted.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
 <span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,</span>
 <span>                      summarize<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>

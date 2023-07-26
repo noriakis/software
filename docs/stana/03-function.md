@@ -46,8 +46,8 @@ DT::datatable(res$test$DF)
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0ef75ba074c45fa0f060" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-0ef75ba074c45fa0f060">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c58d14443f9e29dec960" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c58d14443f9e29dec960">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -98,9 +98,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 36f1684 UN-- 4 2 -- 
+#> IGRAPH cc45924 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 36f1684 (vertex names):
+#> + edges from cc45924 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -121,8 +121,8 @@ tib |> head() |> DT::datatable()
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-877148777273f2d41c15" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-877148777273f2d41c15">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a3166d9ff8eaa8b506cd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a3166d9ff8eaa8b506cd">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -147,11 +147,11 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #>  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   
 #>  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
-#> # … with 4,277 more rows
+#> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 37efc8d UN-- 21 922 -- 
+#> IGRAPH cdc5c53 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 37efc8d (vertex names):
+#> + edges from cdc5c53 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -170,16 +170,89 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 
 ## Heatmap of the gene abundances with functional annotations
 
-You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`. The `plotHeatmap` function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, `anno_PATRIC_keywords` and `anno_eggNOG_keywords` are used to plot the word clouds alongside `Heatmap` from `ComplexHeatmap`.
+You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`. The `plotHeatmap` function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, `anno_PATRIC_keywords` and `anno_eggNOG_keywords` are used to plot the word clouds alongside `Heatmap` from `ComplexHeatmap`. It is easy for `MIDAS`, as the function obtains functional annotation from PATRIC API server and no annotation step is needed.
 
 ### `MIDAS`
 
-For `MIDAS`, the function automatically query API of `PATRIC` server using the gene names.
+For `MIDAS`, the function automatically query API of `PATRIC` server using the gene names. As the gene number is large typically, one can filter the genes by options `filter_zero_frac`, `filter_max_frac` and `filter_max_value`. However, one should perform own filtering beforehand and provide the matrix to `mat`. If `mat` is specified, other filtering options will be ignored.
+
+
+```r
+library(ComplexHeatmap)
+library(simplifyEnrichment)
+load("../hd_meta.rda")
+stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis_57318")
+#> Bacteroides_uniformis_57318
+#>   Snps
+#>     HC 13
+#>     R 16
+#>     Bacteroides_uniformis_57318 cleared filtering threshold in SNV
+#>   Genes
+#>     HC 13
+#>     R 16
+#>     Bacteroides_uniformis_57318 cleared filtering threshold in genes
+#> Overall, 1 species met criteria in SNPs
+#> Overall, 1 species met criteria in genes
+plotHeatmap(stana, "Bacteroides_uniformis_57318",filter_max_value = 2,filter_max_frac = 0)
+#> In resulting matrix, max: 1.99955229433902, min: 0
+#> Dimension: 4911, 29
+#> Obtaining gene information from PATRIC server
+#> Obtaining annotations of 7 genomes
+#>   Obtaining information on 1235787.3
+#>   Obtaining information on 1339348.3
+#>   Obtaining information on 411479.10
+#>   Obtaining information on 457393.3
+#>   Obtaining information on 585543.3
+#>   Obtaining information on 997889.3
+#>   Obtaining information on 997890.3
+#> Checking results on cluster 1
+#>   total of 273 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 261 annotation obtained after removal of duplication
+#> Checking results on cluster 2
+#>   total of 334 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 329 annotation obtained after removal of duplication
+#> Checking results on cluster 3
+#>   total of 693 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 662 annotation obtained after removal of duplication
+#> Checking results on cluster 4
+#>   total of 175 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 174 annotation obtained after removal of duplication
+#> Checking results on cluster 5
+#>   total of 310 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 303 annotation obtained after removal of duplication
+#> Checking results on cluster 6
+#>   total of 898 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 868 annotation obtained after removal of duplication
+#> Checking results on cluster 7
+#>   total of 521 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 503 annotation obtained after removal of duplication
+#> Checking results on cluster 8
+#>   total of 701 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 675 annotation obtained after removal of duplication
+#> Checking results on cluster 9
+#>   total of 1140 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 1105 annotation obtained after removal of duplication
+#> Checking results on cluster 10
+#>   total of 1090 annotation obtained
+#>   remove duplicate based on pathway_name
+#>   total of 1053 annotation obtained after removal of duplication
+```
+
+<img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="672" />
+
 
 ### `MIDAS2`
 
-For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description. As the gene number is large typically, one can filter the genes by options `filter_zero_frac`, `filter_max_frac` and `filter_max_value`. However, one should perform own filtering beforehand and provide the matrix to `mat`. If `mat` is specified, other filtering options will be ignored.
-
+For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
 
 
 ```r

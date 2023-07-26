@@ -12,17 +12,47 @@ library(stana)
 
 ## MIDAS
 
-For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` command.
+For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` command. In `MIDAS` and `MIDAS2` examples, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients ([Shi et al. 2022](https://doi.org/10.3389/fcimb.2022.904284)). `hd_meta` includes named list of grouping. First we would like to see how many samples were profiled in the species.
 
 
 ```r
-# stana <- loadMIDAS("../")
+load("../hd_meta.rda")
+stana <- loadMIDAS("../merge_midas1", cl=hd_meta, only_stat=TRUE)
+stana$snps |> head() |> DT::datatable()
+```
+
+```{=html}
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-96b2edac6e0d22b0800f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-96b2edac6e0d22b0800f">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+```
+We will load the interesting species.
+
+
+```r
+stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis_57318")
+#> Bacteroides_uniformis_57318
+#>   Snps
+#>     HC 13
+#>     R 16
+#>     Bacteroides_uniformis_57318 cleared filtering threshold in SNV
+#>   Genes
+#>     HC 13
+#>     R 16
+#>     Bacteroides_uniformis_57318 cleared filtering threshold in genes
+#> Overall, 1 species met criteria in SNPs
+#> Overall, 1 species met criteria in genes
+stana
+#> Type: MIDAS1
+#> Directory: ../merge_midas1/
+#> Species number: 144
+#> Loaded SNV table: 1
+#> Loaded gene table (copynum): 1
+#> 12.3 Mb
 ```
 
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
-Here, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients ([Shi et al. 2022](https://doi.org/10.3389/fcimb.2022.904284)). `hd_meta` includes named list of grouping.
 
 
 ```r
