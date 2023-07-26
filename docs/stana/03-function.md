@@ -42,35 +42,12 @@ res <- checkPATRIC(genes, "pathway_name")
 #>   total of 2 annotation obtained
 #>   remove duplicate based on pathway_name
 #>   total of 2 annotation obtained after removal of duplication
-res$test
-#> $DF
-#>                  patric_id ec_number
-#> 254  fig|1280701.3.peg.570  4.2.1.51
-#> 608 fig|1280701.3.peg.1186  2.1.1.37
-#>                          ec_description pathway_id
-#> 254              Prephenate dehydratase        400
-#> 608 DNA (cytosine-5-)-methyltransferase        270
-#>                                            pathway_name
-#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
-#> 608                  Cysteine and methionine metabolism
-#> 
-#> $REMOVEDUP
-#>                  patric_id ec_number
-#> 254  fig|1280701.3.peg.570  4.2.1.51
-#> 608 fig|1280701.3.peg.1186  2.1.1.37
-#>                          ec_description pathway_id
-#> 254              Prephenate dehydratase        400
-#> 608 DNA (cytosine-5-)-methyltransferase        270
-#>                                            pathway_name
-#> 254 Phenylalanine, tyrosine and tryptophan biosynthesis
-#> 608                  Cysteine and methionine metabolism
-#> 
-#> $SORTED
-#> 
-#>                  Cysteine and methionine metabolism 
-#>                                                   1 
-#> Phenylalanine, tyrosine and tryptophan biosynthesis 
-#>                                                   1
+DT::datatable(res$test$DF)
+```
+
+```{=html}
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0ef75ba074c45fa0f060" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0ef75ba074c45fa0f060">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -121,9 +98,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH ab868e7 UN-- 4 2 -- 
+#> IGRAPH 36f1684 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from ab868e7 (vertex names):
+#> + edges from 36f1684 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -140,16 +117,12 @@ Use `checkEGGNOG` function to read the output of eggNOG-mapper v2. Specify IDs y
 ```r
 tib <- checkEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
     ret="KEGG_ko")
-tib |> head()
-#> # A tibble: 6 × 3
-#>   ID                    name    value    
-#>   <chr>                 <chr>   <chr>    
-#> 1 GCF_002846775.1_00408 KEGG_ko ko:K11533
-#> 2 GCF_002846815.1_01743 KEGG_ko ko:K11533
-#> 3 GCF_004156145.1_01406 KEGG_ko ko:K11533
-#> 4 GCF_004155565.1_00557 KEGG_ko ko:K11533
-#> 5 GCF_004155645.1_00353 KEGG_ko ko:K11533
-#> 6 GCF_000800475.2_00338 KEGG_ko ko:K11533
+tib |> head() |> DT::datatable()
+```
+
+```{=html}
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-877148777273f2d41c15" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-877148777273f2d41c15">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -176,9 +149,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # … with 4,277 more rows
 #> $graph
-#> IGRAPH acadef8 UN-- 21 922 -- 
+#> IGRAPH 37efc8d UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from acadef8 (vertex names):
+#> + edges from 37efc8d (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -240,46 +213,12 @@ We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 stana@eggNOG <- list("101346"="../annotations_uhgg/101346_eggnog_out.emapper.annotations")
 ```
 
+You can set `removeAdditional` argument to filter words that are to be displayed.
+
 
 ```r
 library(ComplexHeatmap)
 library(simplifyEnrichment)
-#> Loading required package: BiocGenerics
-#> 
-#> Attaching package: 'BiocGenerics'
-#> The following object is masked from 'package:stana':
-#> 
-#>     plotPCA
-#> The following objects are masked from 'package:stats':
-#> 
-#>     IQR, mad, sd, var, xtabs
-#> The following objects are masked from 'package:base':
-#> 
-#>     anyDuplicated, aperm, append, as.data.frame,
-#>     basename, cbind, colnames, dirname, do.call,
-#>     duplicated, eval, evalq, Filter, Find, get, grep,
-#>     grepl, intersect, is.unsorted, lapply, Map,
-#>     mapply, match, mget, order, paste, pmax,
-#>     pmax.int, pmin, pmin.int, Position, rank, rbind,
-#>     Reduce, rownames, sapply, setdiff, sort, table,
-#>     tapply, union, unique, unsplit, which.max,
-#>     which.min
-#> 
-#> ========================================
-#> simplifyEnrichment version 1.8.0
-#> Bioconductor page: https://bioconductor.org/packages/simplifyEnrichment/
-#> Github page: https://github.com/jokergoo/simplifyEnrichment
-#> Documentation: https://jokergoo.github.io/simplifyEnrichment/
-#> Examples: https://simplifyenrichment.github.io/
-#> 
-#> If you use it in published research, please cite:
-#> Gu, Z. simplifyEnrichment: an R/Bioconductor package for Clustering and 
-#>   Visualizing Functional Enrichment Results, Genomics, Proteomics & 
-#>   Bioinformatics 2022.
-#> 
-#> This message can be suppressed by:
-#>   suppressPackageStartupMessages(library(simplifyEnrichment))
-#> ========================================
 
 plotHeatmap(stana, "101346",
     fnc="KEGG_Module",
@@ -291,23 +230,9 @@ plotHeatmap(stana, "101346",
 #> Dimension: 3501, 31
 #> MIDAS2, looking for the annotation file by eggNOG-mapper v2
 #> Loading annotation
-#> Warning in data.table::fread(annot_file, skip = 4, sep =
-#> "\t"): Stopped early on line 567905. Expected 21 fields but
-#> found 1. Consider fill=TRUE and comment.char=. First
-#> discarded non-empty line: <<## 567899 queries scanned>>
-#> Warning: The input is a data frame-like object, convert it to
-#> a matrix.
-#> `use_raster` is automatically set to TRUE for a
-#> matrix with more than 2000 rows. You can control
-#> `use_raster` argument by explicitly setting
-#> TRUE/FALSE to it.
-#> 
-#> Set `ht_opt$message = FALSE` to turn off this
-#> message.
 ```
 
 <img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
-
 
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY

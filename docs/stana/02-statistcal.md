@@ -46,7 +46,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana@treeList[["100003"]] <- tre
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582884, Pr: 0.685
+#>   R2: 0.0740407267582884, Pr: 0.695
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -55,7 +55,7 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.685
+#> gr        1  0.15557 0.07404 0.7196  0.695
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -93,22 +93,15 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 39.27488 secs.
+#> Boruta performed 99 iterations in 39.31606 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  5 attributes confirmed important: UHGG060667_01243,
-#> UHGG158704_01078, UHGG215309_01728, UHGG254988_00945,
-#> UHGG281294_00506;
-#>  21801 attributes confirmed unimportant:
+#>  10 attributes confirmed important: UHGG000008_01290,
+#> UHGG044133_01185, UHGG060667_01243, UHGG061776_01340,
+#> UHGG123756_00815 and 5 more;
+#>  21796 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21796 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21791 more;
 ```
-
-
-```r
-plot(brres$boruta)
-```
-
-<img src="02-statistcal_files/figure-html/plotboruta-1.png" width="960" />
 
 Further, we visualize the abundances of important genes confirmed.
 
