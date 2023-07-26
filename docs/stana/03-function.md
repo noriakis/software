@@ -121,9 +121,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 0e539b4 UN-- 4 2 -- 
+#> IGRAPH ab868e7 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 0e539b4 (vertex names):
+#> + edges from ab868e7 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -176,9 +176,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # … with 4,277 more rows
 #> $graph
-#> IGRAPH 3ffb8b9 UN-- 21 922 -- 
+#> IGRAPH acadef8 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 3ffb8b9 (vertex names):
+#> + edges from acadef8 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -205,7 +205,108 @@ For `MIDAS`, the function automatically query API of `PATRIC` server using the g
 
 ### `MIDAS2`
 
-For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
+For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description. As the gene number is large typically, one can filter the genes by options `filter_zero_frac`, `filter_max_frac` and `filter_max_value`. However, one should perform own filtering beforehand and provide the matrix to `mat`. If `mat` is specified, other filtering options will be ignored.
+
+
+
+```r
+load("../hd_meta.rda")
+taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
+                     header=1, row.names=1, check.names = FALSE)
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346"), taxtbl=taxtbl, db="uhgg")
+#> SNPS
+#>   101346
+#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>     Number of snps: 70178
+#>     Number of samples: 28
+#>       Number of samples in HC: 12
+#>       Number of samples in R: 16
+#>       Passed the filter
+#> Genes
+#>   101346
+#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>     Number of genes: 120158
+#>     Number of samples: 31
+#>       Number of samples in HC: 13
+#>       Number of samples in R: 18
+#>       Passed the filter
+```
+
+We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
+
+
+```r
+## Set the annotation file
+stana@eggNOG <- list("101346"="../annotations_uhgg/101346_eggnog_out.emapper.annotations")
+```
+
+
+```r
+library(ComplexHeatmap)
+library(simplifyEnrichment)
+#> Loading required package: BiocGenerics
+#> 
+#> Attaching package: 'BiocGenerics'
+#> The following object is masked from 'package:stana':
+#> 
+#>     plotPCA
+#> The following objects are masked from 'package:stats':
+#> 
+#>     IQR, mad, sd, var, xtabs
+#> The following objects are masked from 'package:base':
+#> 
+#>     anyDuplicated, aperm, append, as.data.frame,
+#>     basename, cbind, colnames, dirname, do.call,
+#>     duplicated, eval, evalq, Filter, Find, get, grep,
+#>     grepl, intersect, is.unsorted, lapply, Map,
+#>     mapply, match, mget, order, paste, pmax,
+#>     pmax.int, pmin, pmin.int, Position, rank, rbind,
+#>     Reduce, rownames, sapply, setdiff, sort, table,
+#>     tapply, union, unique, unsplit, which.max,
+#>     which.min
+#> 
+#> ========================================
+#> simplifyEnrichment version 1.8.0
+#> Bioconductor page: https://bioconductor.org/packages/simplifyEnrichment/
+#> Github page: https://github.com/jokergoo/simplifyEnrichment
+#> Documentation: https://jokergoo.github.io/simplifyEnrichment/
+#> Examples: https://simplifyenrichment.github.io/
+#> 
+#> If you use it in published research, please cite:
+#> Gu, Z. simplifyEnrichment: an R/Bioconductor package for Clustering and 
+#>   Visualizing Functional Enrichment Results, Genomics, Proteomics & 
+#>   Bioinformatics 2022.
+#> 
+#> This message can be suppressed by:
+#>   suppressPackageStartupMessages(library(simplifyEnrichment))
+#> ========================================
+
+plotHeatmap(stana, "101346",
+    fnc="KEGG_Module",
+    removeAdditional=c("cycle","pathway"),
+    filter_zero_frac = 0.5,
+    filter_max_frac = 0,
+    filter_max_value = 5)
+#> In resulting matrix, max: 4.999739, min: 0
+#> Dimension: 3501, 31
+#> MIDAS2, looking for the annotation file by eggNOG-mapper v2
+#> Loading annotation
+#> Warning in data.table::fread(annot_file, skip = 4, sep =
+#> "\t"): Stopped early on line 567905. Expected 21 fields but
+#> found 1. Consider fill=TRUE and comment.char=. First
+#> discarded non-empty line: <<## 567899 queries scanned>>
+#> Warning: The input is a data frame-like object, convert it to
+#> a matrix.
+#> `use_raster` is automatically set to TRUE for a
+#> matrix with more than 2000 rows. You can control
+#> `use_raster` argument by explicitly setting
+#> TRUE/FALSE to it.
+#> 
+#> Set `ht_opt$message = FALSE` to turn off this
+#> message.
+```
+
+<img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
 
 
 
