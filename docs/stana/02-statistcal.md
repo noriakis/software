@@ -46,7 +46,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana@treeList[["100003"]] <- tre
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582884, Pr: 0.692
+#>   R2: 0.0740407266729293, Pr: 0.695
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -55,7 +55,7 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.692
+#> gr        1  0.15557 0.07404 0.7196  0.695
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -85,7 +85,6 @@ res[["UHGG000008_01733"]]
 
 ```r
 library(Boruta)
-#> Warning: package 'Boruta' was built under R version 4.2.2
 brres <- doBoruta(stana, "100003")
 #> Using grouping from the slot
 #> If needed, please provide preprocessed matrix of genes to `mat`
@@ -93,14 +92,14 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 51.58528 secs.
+#> Boruta performed 99 iterations in 39.57059 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  13 attributes confirmed important: UHGG001963_01239,
-#> UHGG005230_00283, UHGG025024_01181, UHGG035784_01994,
-#> UHGG060667_01243 and 8 more;
-#>  21793 attributes confirmed unimportant:
+#>  11 attributes confirmed important: UHGG000008_01290,
+#> UHGG000008_01798, UHGG004616_01682, UHGG006042_01659,
+#> UHGG060667_01243 and 6 more;
+#>  21795 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21788 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21790 more;
 ```
 
 
@@ -108,7 +107,7 @@ brres
 plot(brres$boruta)
 ```
 
-<img src="02-statistcal_files/figure-html/plotboruta-1.png" width="672" />
+<img src="02-statistcal_files/figure-html/plotboruta-1.png" width="960" />
 
 Further, we visualize the abundances of important genes confirmed.
 

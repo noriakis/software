@@ -7,7 +7,7 @@
 <title>Chapter 4 Functional annotation | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
-<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Functional annotation | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -61,126 +61,126 @@
 </h1>
 <p>For functional profiling, several functions are prepared in <code>stana</code>. Note that these functions are primarily designed for <code>MIDAS</code> and <code>MIDAS2</code>, which profile gene abundances within species by default.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></code></pre></div>
 <div id="parsing-patric-results" class="section level2" number="4.1">
 <h2>
 <span class="header-section-number">4.1</span> Parsing <code>PATRIC</code> results<a class="anchor" aria-label="anchor" href="#parsing-patric-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use <code>checkPATRIC</code> function to obtain information related to <code>PATRIC</code> functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses <code>BiocFileCache()</code> to cache the obtained results from API.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../test_genes.txt"</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
-<span><span class="va">genes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; $test</span></span>
-<span><span class="co">#&gt;  [1] "1280701.3.peg.1153" "1280701.3.peg.1169"</span></span>
-<span><span class="co">#&gt;  [3] "1280701.3.peg.1174" "1280701.3.peg.1179"</span></span>
-<span><span class="co">#&gt;  [5] "1280701.3.peg.1186" "1280701.3.peg.203" </span></span>
-<span><span class="co">#&gt;  [7] "1280701.3.peg.361"  "1280701.3.peg.363" </span></span>
-<span><span class="co">#&gt;  [9] "1280701.3.peg.368"  "1280701.3.peg.369" </span></span>
-<span><span class="co">#&gt; [11] "1280701.3.peg.570"  "1280701.3.peg.758" </span></span>
-<span><span class="co">#&gt; [13] "1280701.3.peg.762"  "1410605.3.peg.1201"</span></span>
-<span><span class="co">#&gt; [15] "1410605.3.peg.1204" "1410605.3.peg.1463"</span></span>
-<span><span class="co">#&gt; [17] "1410605.3.peg.1510" "1410605.3.peg.1568"</span></span>
-<span><span class="co">#&gt; [19] "1410605.3.peg.450"  "1410605.3.peg.593" </span></span>
-<span><span class="co">#&gt; [21] "1410605.3.peg.655"  "1410605.3.peg.833" </span></span>
-<span><span class="co">#&gt; [23] "1410605.3.peg.844"  "1410605.3.peg.903" </span></span>
-<span><span class="co">#&gt; [25] "1410605.3.peg.953"  "1447715.5.peg.1455"</span></span>
-<span><span class="co">#&gt; [27] "1447715.5.peg.1549" "1447715.5.peg.1582"</span></span>
-<span><span class="co">#&gt; [29] "1447715.5.peg.256"  "1447715.5.peg.33"  </span></span>
-<span><span class="co">#&gt; [31] "1447715.5.peg.566"  "1447715.5.peg.964"</span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkPATRIC.html">checkPATRIC</a></span><span class="op">(</span><span class="va">genes</span>, <span class="st">"pathway_name"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Obtaining annotations of 3 genomes</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1280701.3</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1410605.3</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1447715.5</span></span>
-<span><span class="co">#&gt; Checking results on cluster test</span></span>
-<span><span class="co">#&gt;   total of 2 annotation obtained</span></span>
-<span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
-<span><span class="va">res</span><span class="op">$</span><span class="va">test</span></span>
-<span><span class="co">#&gt; $DF</span></span>
-<span><span class="co">#&gt;                  patric_id ec_number</span></span>
-<span><span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span></span>
-<span><span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span></span>
-<span><span class="co">#&gt;                          ec_description pathway_id</span></span>
-<span><span class="co">#&gt; 254              Prephenate dehydratase        400</span></span>
-<span><span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span></span>
-<span><span class="co">#&gt;                                            pathway_name</span></span>
-<span><span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
-<span><span class="co">#&gt; 608                  Cysteine and methionine metabolism</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $REMOVEDUP</span></span>
-<span><span class="co">#&gt;                  patric_id ec_number</span></span>
-<span><span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span></span>
-<span><span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span></span>
-<span><span class="co">#&gt;                          ec_description pathway_id</span></span>
-<span><span class="co">#&gt; 254              Prephenate dehydratase        400</span></span>
-<span><span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span></span>
-<span><span class="co">#&gt;                                            pathway_name</span></span>
-<span><span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
-<span><span class="co">#&gt; 608                  Cysteine and methionine metabolism</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $SORTED</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                  Cysteine and methionine metabolism </span></span>
-<span><span class="co">#&gt;                                                   1 </span></span>
-<span><span class="co">#&gt; Phenylalanine, tyrosine and tryptophan biosynthesis </span></span>
-<span><span class="co">#&gt;                                                   1</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../test_genes.txt"</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span>
+<span class="va">genes</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; $test</span>
+<span class="co">#&gt;  [1] "1280701.3.peg.1153" "1280701.3.peg.1169"</span>
+<span class="co">#&gt;  [3] "1280701.3.peg.1174" "1280701.3.peg.1179"</span>
+<span class="co">#&gt;  [5] "1280701.3.peg.1186" "1280701.3.peg.203" </span>
+<span class="co">#&gt;  [7] "1280701.3.peg.361"  "1280701.3.peg.363" </span>
+<span class="co">#&gt;  [9] "1280701.3.peg.368"  "1280701.3.peg.369" </span>
+<span class="co">#&gt; [11] "1280701.3.peg.570"  "1280701.3.peg.758" </span>
+<span class="co">#&gt; [13] "1280701.3.peg.762"  "1410605.3.peg.1201"</span>
+<span class="co">#&gt; [15] "1410605.3.peg.1204" "1410605.3.peg.1463"</span>
+<span class="co">#&gt; [17] "1410605.3.peg.1510" "1410605.3.peg.1568"</span>
+<span class="co">#&gt; [19] "1410605.3.peg.450"  "1410605.3.peg.593" </span>
+<span class="co">#&gt; [21] "1410605.3.peg.655"  "1410605.3.peg.833" </span>
+<span class="co">#&gt; [23] "1410605.3.peg.844"  "1410605.3.peg.903" </span>
+<span class="co">#&gt; [25] "1410605.3.peg.953"  "1447715.5.peg.1455"</span>
+<span class="co">#&gt; [27] "1447715.5.peg.1549" "1447715.5.peg.1582"</span>
+<span class="co">#&gt; [29] "1447715.5.peg.256"  "1447715.5.peg.33"  </span>
+<span class="co">#&gt; [31] "1447715.5.peg.566"  "1447715.5.peg.964"</span>
+<span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkPATRIC.html">checkPATRIC</a></span><span class="op">(</span><span class="va">genes</span>, <span class="st">"pathway_name"</span><span class="op">)</span>
+<span class="co">#&gt; Obtaining annotations of 3 genomes</span>
+<span class="co">#&gt;   Obtaining information on 1280701.3</span>
+<span class="co">#&gt;   Obtaining information on 1410605.3</span>
+<span class="co">#&gt;   Obtaining information on 1447715.5</span>
+<span class="co">#&gt; Checking results on cluster test</span>
+<span class="co">#&gt;   total of 2 annotation obtained</span>
+<span class="co">#&gt;   remove duplicate based on pathway_name</span>
+<span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span>
+<span class="va">res</span><span class="op">$</span><span class="va">test</span>
+<span class="co">#&gt; $DF</span>
+<span class="co">#&gt;                  patric_id ec_number</span>
+<span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span>
+<span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span>
+<span class="co">#&gt;                          ec_description pathway_id</span>
+<span class="co">#&gt; 254              Prephenate dehydratase        400</span>
+<span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span>
+<span class="co">#&gt;                                            pathway_name</span>
+<span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span>
+<span class="co">#&gt; 608                  Cysteine and methionine metabolism</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $REMOVEDUP</span>
+<span class="co">#&gt;                  patric_id ec_number</span>
+<span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span>
+<span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span>
+<span class="co">#&gt;                          ec_description pathway_id</span>
+<span class="co">#&gt; 254              Prephenate dehydratase        400</span>
+<span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span>
+<span class="co">#&gt;                                            pathway_name</span>
+<span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span>
+<span class="co">#&gt; 608                  Cysteine and methionine metabolism</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $SORTED</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;                  Cysteine and methionine metabolism </span>
+<span class="co">#&gt;                                                   1 </span>
+<span class="co">#&gt; Phenylalanine, tyrosine and tryptophan biosynthesis </span>
+<span class="co">#&gt;                                                   1</span></code></pre></div>
 <div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawPATRIC.html">drawPATRIC</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Obtaining annotations of 3 genomes</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1280701.3</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1410605.3</span></span>
-<span><span class="co">#&gt;   Obtaining information on 1447715.5</span></span>
-<span><span class="co">#&gt; Checking results on cluster test</span></span>
-<span><span class="co">#&gt;   total of 2 annotation obtained</span></span>
-<span><span class="co">#&gt;   remove duplicate based on ec_description</span></span>
-<span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
-<span><span class="co">#&gt; Making graph on pathway_name and ec_description</span></span>
-<span><span class="co">#&gt;   subsetting to 5 label on each category</span></span>
-<span><span class="co">#&gt; $test</span></span>
-<span><span class="co">#&gt; $test$DF</span></span>
-<span><span class="co">#&gt;                  patric_id ec_number</span></span>
-<span><span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span></span>
-<span><span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span></span>
-<span><span class="co">#&gt;                          ec_description pathway_id</span></span>
-<span><span class="co">#&gt; 254              Prephenate dehydratase        400</span></span>
-<span><span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span></span>
-<span><span class="co">#&gt;                                            pathway_name</span></span>
-<span><span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
-<span><span class="co">#&gt; 608                  Cysteine and methionine metabolism</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $test$REMOVEDUP</span></span>
-<span><span class="co">#&gt;                  patric_id ec_number</span></span>
-<span><span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span></span>
-<span><span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span></span>
-<span><span class="co">#&gt;                          ec_description pathway_id</span></span>
-<span><span class="co">#&gt; 254              Prephenate dehydratase        400</span></span>
-<span><span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span></span>
-<span><span class="co">#&gt;                                            pathway_name</span></span>
-<span><span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
-<span><span class="co">#&gt; 608                  Cysteine and methionine metabolism</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $test$SORTED</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; DNA (cytosine-5-)-methyltransferase </span></span>
-<span><span class="co">#&gt;                                   1 </span></span>
-<span><span class="co">#&gt;              Prephenate dehydratase </span></span>
-<span><span class="co">#&gt;                                   1 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH bd8a5c6 UN-- 4 2 -- </span></span>
-<span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from bd8a5c6 (vertex names):</span></span>
-<span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
-<span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $test$PLOT</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawPATRIC.html">drawPATRIC</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span>
+<span class="co">#&gt; Obtaining annotations of 3 genomes</span>
+<span class="co">#&gt;   Obtaining information on 1280701.3</span>
+<span class="co">#&gt;   Obtaining information on 1410605.3</span>
+<span class="co">#&gt;   Obtaining information on 1447715.5</span>
+<span class="co">#&gt; Checking results on cluster test</span>
+<span class="co">#&gt;   total of 2 annotation obtained</span>
+<span class="co">#&gt;   remove duplicate based on ec_description</span>
+<span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span>
+<span class="co">#&gt; Making graph on pathway_name and ec_description</span>
+<span class="co">#&gt;   subsetting to 5 label on each category</span>
+<span class="co">#&gt; $test</span>
+<span class="co">#&gt; $test$DF</span>
+<span class="co">#&gt;                  patric_id ec_number</span>
+<span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span>
+<span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span>
+<span class="co">#&gt;                          ec_description pathway_id</span>
+<span class="co">#&gt; 254              Prephenate dehydratase        400</span>
+<span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span>
+<span class="co">#&gt;                                            pathway_name</span>
+<span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span>
+<span class="co">#&gt; 608                  Cysteine and methionine metabolism</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $test$REMOVEDUP</span>
+<span class="co">#&gt;                  patric_id ec_number</span>
+<span class="co">#&gt; 254  fig|1280701.3.peg.570  4.2.1.51</span>
+<span class="co">#&gt; 608 fig|1280701.3.peg.1186  2.1.1.37</span>
+<span class="co">#&gt;                          ec_description pathway_id</span>
+<span class="co">#&gt; 254              Prephenate dehydratase        400</span>
+<span class="co">#&gt; 608 DNA (cytosine-5-)-methyltransferase        270</span>
+<span class="co">#&gt;                                            pathway_name</span>
+<span class="co">#&gt; 254 Phenylalanine, tyrosine and tryptophan biosynthesis</span>
+<span class="co">#&gt; 608                  Cysteine and methionine metabolism</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $test$SORTED</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; DNA (cytosine-5-)-methyltransferase </span>
+<span class="co">#&gt;                                   1 </span>
+<span class="co">#&gt;              Prephenate dehydratase </span>
+<span class="co">#&gt;                                   1 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $test$GRAPH</span>
+<span class="co">#&gt; IGRAPH 0e539b4 UN-- 4 2 -- </span>
+<span class="co">#&gt; + attr: name (v/c)</span>
+<span class="co">#&gt; + edges from 0e539b4 (vertex names):</span>
+<span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span>
+<span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $test$PLOT</span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/drawpat-1.png" width="672"></div>
 </div>
 </div>
@@ -190,56 +190,56 @@
 </h2>
 <p>Use <code>checkEGGNOG</code> function to read the output of eggNOG-mapper v2. Specify IDs you want to obtain to <code>ret</code>, such as “KEGG_ko” and “KEGG_Pathway”.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
-<span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
-<span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span><span class="co">#&gt;   ID                    name    value    </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;   &lt;chr&gt;    </span></span>
-<span><span class="co">#&gt; 1 GCF_002846775.1_00408 KEGG_ko ko:K11533</span></span>
-<span><span class="co">#&gt; 2 GCF_002846815.1_01743 KEGG_ko ko:K11533</span></span>
-<span><span class="co">#&gt; 3 GCF_004156145.1_01406 KEGG_ko ko:K11533</span></span>
-<span><span class="co">#&gt; 4 GCF_004155565.1_00557 KEGG_ko ko:K11533</span></span>
-<span><span class="co">#&gt; 5 GCF_004155645.1_00353 KEGG_ko ko:K11533</span></span>
-<span><span class="co">#&gt; 6 GCF_000800475.2_00338 KEGG_ko ko:K11533</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,
+    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span>
+<span class="va">tib</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 × 3</span>
+<span class="co">#&gt;   ID                    name    value    </span>
+<span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;   &lt;chr&gt;    </span>
+<span class="co">#&gt; 1 GCF_002846775.1_00408 KEGG_ko ko:K11533</span>
+<span class="co">#&gt; 2 GCF_002846815.1_01743 KEGG_ko ko:K11533</span>
+<span class="co">#&gt; 3 GCF_004156145.1_01406 KEGG_ko ko:K11533</span>
+<span class="co">#&gt; 4 GCF_004155565.1_00557 KEGG_ko ko:K11533</span>
+<span class="co">#&gt; 5 GCF_004155645.1_00353 KEGG_ko ko:K11533</span>
+<span class="co">#&gt; 6 GCF_000800475.2_00338 KEGG_ko ko:K11533</span></code></pre></div>
 <div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the relationships between IDs by <code>drawEGGNOG</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
-<span>           candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
-<span>           geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4,287 × 3</span></span>
-<span><span class="co">#&gt;    ID                    name          value                </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;         &lt;chr&gt;                </span></span>
-<span><span class="co">#&gt;  1 GCF_002846775.1_00408 seed_ortholog 1690.BPSG_1412       </span></span>
-<span><span class="co">#&gt;  2 GCF_002846775.1_00408 eggNOG_OGs    COG0304@1|root       </span></span>
-<span><span class="co">#&gt;  3 GCF_002846775.1_00408 eggNOG_OGs    COG0331@1|root       </span></span>
-<span><span class="co">#&gt;  4 GCF_002846775.1_00408 eggNOG_OGs    COG2030@1|root       </span></span>
-<span><span class="co">#&gt;  5 GCF_002846775.1_00408 eggNOG_OGs    COG4981@1|root       </span></span>
-<span><span class="co">#&gt;  6 GCF_002846775.1_00408 eggNOG_OGs    COG0304@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  7 GCF_002846775.1_00408 eggNOG_OGs    COG0331@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   </span></span>
-<span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
-<span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
-<span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH be6ad52 UN-- 21 922 -- </span></span>
-<span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from be6ad52 (vertex names):</span></span>
-<span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
-<span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
-<span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
-<span><span class="co">#&gt;  [7] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
-<span><span class="co">#&gt;  [9] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
-<span><span class="co">#&gt; [11] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
-<span><span class="co">#&gt; [13] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
-<span><span class="co">#&gt; [15] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
-<span><span class="co">#&gt; + ... omitted several edges</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $plot</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,
+           candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,
+           geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4,287 × 3</span>
+<span class="co">#&gt;    ID                    name          value                </span>
+<span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;         &lt;chr&gt;                </span>
+<span class="co">#&gt;  1 GCF_002846775.1_00408 seed_ortholog 1690.BPSG_1412       </span>
+<span class="co">#&gt;  2 GCF_002846775.1_00408 eggNOG_OGs    COG0304@1|root       </span>
+<span class="co">#&gt;  3 GCF_002846775.1_00408 eggNOG_OGs    COG0331@1|root       </span>
+<span class="co">#&gt;  4 GCF_002846775.1_00408 eggNOG_OGs    COG2030@1|root       </span>
+<span class="co">#&gt;  5 GCF_002846775.1_00408 eggNOG_OGs    COG4981@1|root       </span>
+<span class="co">#&gt;  6 GCF_002846775.1_00408 eggNOG_OGs    COG0304@2|Bacteria   </span>
+<span class="co">#&gt;  7 GCF_002846775.1_00408 eggNOG_OGs    COG0331@2|Bacteria   </span>
+<span class="co">#&gt;  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   </span>
+<span class="co">#&gt;  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   </span>
+<span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span>
+<span class="co">#&gt; # … with 4,277 more rows</span>
+<span class="co">#&gt; $graph</span>
+<span class="co">#&gt; IGRAPH 3ffb8b9 UN-- 21 922 -- </span>
+<span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span>
+<span class="co">#&gt; + edges from 3ffb8b9 (vertex names):</span>
+<span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span>
+<span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span>
+<span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span>
+<span class="co">#&gt;  [7] ko:K11533--ko01212 ko:K11533--ko04931</span>
+<span class="co">#&gt;  [9] ko:K11533--ko00061 ko:K11533--ko01100</span>
+<span class="co">#&gt; [11] ko:K11533--ko01212 ko:K11533--ko04931</span>
+<span class="co">#&gt; [13] ko:K11533--ko00061 ko:K11533--ko01100</span>
+<span class="co">#&gt; [15] ko:K11533--ko01212 ko:K11533--ko04931</span>
+<span class="co">#&gt; + ... omitted several edges</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $plot</span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/drawEGGNOG-1.png" width="672"></div>
 </div>
 </div>
@@ -276,81 +276,97 @@
 </h4>
 <p>Load the profile for multiple species.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
-<span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
-<span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, taxtbl<span class="op">=</span><span class="va">taxtbl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; SNPS</span></span>
-<span><span class="co">#&gt;   101346</span></span>
-<span><span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis</span></span>
-<span><span class="co">#&gt;     Number of snps: 70178</span></span>
-<span><span class="co">#&gt;     Number of samples: 28</span></span>
-<span><span class="co">#&gt;       Number of samples in HC: 12</span></span>
-<span><span class="co">#&gt;       Number of samples in R: 16</span></span>
-<span><span class="co">#&gt;       Passed the filter</span></span>
-<span><span class="co">#&gt;   102438</span></span>
-<span><span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis</span></span>
-<span><span class="co">#&gt;     Number of snps: 18102</span></span>
-<span><span class="co">#&gt;     Number of samples: 28</span></span>
-<span><span class="co">#&gt;       Number of samples in HC: 10</span></span>
-<span><span class="co">#&gt;       Number of samples in R: 18</span></span>
-<span><span class="co">#&gt;       Passed the filter</span></span>
-<span><span class="co">#&gt; Genes</span></span>
-<span><span class="co">#&gt;   101346</span></span>
-<span><span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis</span></span>
-<span><span class="co">#&gt;     Number of genes: 120158</span></span>
-<span><span class="co">#&gt;     Number of samples: 31</span></span>
-<span><span class="co">#&gt;       Number of samples in HC: 13</span></span>
-<span><span class="co">#&gt;       Number of samples in R: 18</span></span>
-<span><span class="co">#&gt;       Passed the filter</span></span>
-<span><span class="co">#&gt;   102438</span></span>
-<span><span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis</span></span>
-<span><span class="co">#&gt;     Number of genes: 47046</span></span>
-<span><span class="co">#&gt;     Number of samples: 29</span></span>
-<span><span class="co">#&gt;       Number of samples in HC: 11</span></span>
-<span><span class="co">#&gt;       Number of samples in R: 18</span></span>
-<span><span class="co">#&gt;       Passed the filter</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span>
+<span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,
+                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, taxtbl<span class="op">=</span><span class="va">taxtbl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span>
+<span class="co">#&gt; SNPS</span>
+<span class="co">#&gt;   101346</span>
+<span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis</span>
+<span class="co">#&gt;     Number of snps: 70178</span>
+<span class="co">#&gt;     Number of samples: 28</span>
+<span class="co">#&gt;       Number of samples in HC: 12</span>
+<span class="co">#&gt;       Number of samples in R: 16</span>
+<span class="co">#&gt;       Passed the filter</span>
+<span class="co">#&gt;   102438</span>
+<span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis</span>
+<span class="co">#&gt;     Number of snps: 18102</span>
+<span class="co">#&gt;     Number of samples: 28</span>
+<span class="co">#&gt;       Number of samples in HC: 10</span>
+<span class="co">#&gt;       Number of samples in R: 18</span>
+<span class="co">#&gt;       Passed the filter</span>
+<span class="co">#&gt; Genes</span>
+<span class="co">#&gt;   101346</span>
+<span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis</span>
+<span class="co">#&gt;     Number of genes: 120158</span>
+<span class="co">#&gt;     Number of samples: 31</span>
+<span class="co">#&gt;       Number of samples in HC: 13</span>
+<span class="co">#&gt;       Number of samples in R: 18</span>
+<span class="co">#&gt;       Passed the filter</span>
+<span class="co">#&gt;   102438</span>
+<span class="co">#&gt;   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis</span>
+<span class="co">#&gt;     Number of genes: 47046</span>
+<span class="co">#&gt;     Number of samples: 29</span>
+<span class="co">#&gt;       Number of samples in HC: 11</span>
+<span class="co">#&gt;       Number of samples in R: 18</span>
+<span class="co">#&gt;       Passed the filter</span></code></pre></div>
 <p>Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 This way, the <code>plotKEGGPathway</code> function automatically calculates the abundance by user-defined method.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">eggNOG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span>,</span>
-<span>                     <span class="st">"102438"</span><span class="op">=</span><span class="st">"../annotations_uhgg/102438_eggnog_out.emapper.annotations"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="co">## Set the annotation file</span>
+<span class="va">stana</span><span class="op">@</span><span class="va">eggNOG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span>,
+                     <span class="st">"102438"</span><span class="op">=</span><span class="st">"../annotations_uhgg/102438_eggnog_out.emapper.annotations"</span><span class="op">)</span></code></pre></div>
 <p>plotKEGGPathway can be run by providing stana object, species (when multiple species, rectangular nodes will be split),
 and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate metabolism for example. As for the large annotation table, the calculation takes time and you can provide pre-calculated KO table in <code>kos</code> slot of stana object, or specify <code>only_ko = TRUE</code> to first return KO table.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, only_ko<span class="op">=</span><span class="cn">TRUE</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; 101346: HC / R</span></span>
-<span><span class="co">#&gt; 102438: HC / R</span></span>
-<span><span class="va">gg</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, only_ko<span class="op">=</span><span class="cn">TRUE</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; 101346: HC / R</span>
+<span class="co">#&gt; 102438: HC / R</span>
+<span class="va">gg</span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/onescale-1.svg" width="672"></div>
 <p>By default, the scale is same. If you install <code>ggh4x</code>, multiple scales can be added, by specifying <code>multi_scale</code> argument.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; 101346: HC / R</span></span>
-<span><span class="co">#&gt; 102438: HC / R</span></span>
-<span><span class="va">gg</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; 101346: HC / R</span>
+<span class="co">#&gt; 102438: HC / R</span>
+<span class="va">gg</span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/multscale-1.svg" width="672"></div>
 <p>You can provide multiple pathway IDs to pathway_id, which returns a list of plot.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
-<span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,</span>
-<span>                      multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; Using pre-computed KO table</span></span>
-<span><span class="co">#&gt; 101346: HC / R</span></span>
-<span><span class="co">#&gt; 102438: HC / R</span></span>
-<span><span class="va">gg2</span> <span class="op">&lt;-</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span></span>
-<span><span class="va">gg2</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,
+                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,
+                      multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; 101346: HC / R</span>
+<span class="co">#&gt; 102438: HC / R</span>
+<span class="va">gg2</span> <span class="op">&lt;-</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span>
+<span class="va">gg2</span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/pathway-1.svg" width="672"></div>
 <p>In this way, differences in orthologies in the pathway across multiple species can be readily captured.</p>
-
 </div>
+</div>
+<div id="visualizing-calculated-values-across-species" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Visualizing calculated values across species<a class="anchor" aria-label="anchor" href="#visualizing-calculated-values-across-species"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you want to see the sum values across species, you can set option <code>summarize=TRUE</code>. This way, the KO values across specified species are summed, and compared between groups, then plotted.</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,
+                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,
+                      summarize<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; Using pre-computed KO table</span>
+<span class="co">#&gt; 102438: HC / R</span>
+<span class="va">gg2</span> <span class="op">&lt;-</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span>
+<span class="va">gg2</span></code></pre></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/pathway_SUM-1.svg" width="672"></div>
+
 </div>
 </div>
 </div>
@@ -374,7 +390,10 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#kgeg-pathway-and-kegg-orthology"><span class="header-section-number">4.4</span> KGEG PATHWAY and KEGG ORTHOLOGY</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#visualization-of-kegg-pathway"><span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY</a></li></ul>
+<a class="nav-link" href="#kgeg-pathway-and-kegg-orthology"><span class="header-section-number">4.4</span> KGEG PATHWAY and KEGG ORTHOLOGY</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#visualization-of-kegg-pathway"><span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY</a></li>
+<li><a class="nav-link" href="#visualizing-calculated-values-across-species"><span class="header-section-number">4.4.2</span> Visualizing calculated values across species</a></li>
+</ul>
 </li>
 </ul>
 
@@ -393,7 +412,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-20.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

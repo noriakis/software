@@ -21,6 +21,7 @@ midas2-1
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species
+visualizing-calculated-values-across-species
 visualization
 plotpca
 visualization-of-gene-abundances

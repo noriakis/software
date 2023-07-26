@@ -7,7 +7,7 @@
 <title>Chapter 3 Statistial analysis | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content='stana provides some functions to perform statistical analysis based on loaded data. library(stana) library(phangorn) library(ggtree) ## Examine sample object load(system.file("extdata",...'>
-<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Statistial analysis | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content='stana provides some functions to perform statistical analysis based on loaded data. library(stana) library(phangorn) library(ggtree) ## Examine sample object load(system.file("extdata",...'>
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content='stana provides some functions to perform statistical analysis based on loaded data. library(stana) library(phangorn) library(ggtree) ## Examine sample object load(system.file("extdata",...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -61,31 +61,31 @@
 </h1>
 <p><code>stana</code> provides some functions to perform statistical analysis based on loaded data.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KlausVigo/phangorn">phangorn</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/">ggtree</a></span><span class="op">)</span></span>
-<span><span class="co">## Examine sample object</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"stana"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KlausVigo/phangorn">phangorn</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/treedata-book/">ggtree</a></span><span class="op">)</span>
+<span class="co">## Examine sample object</span>
+<span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"stana"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div id="consensus-sequence-calling" class="section level2" number="3.1">
 <h2>
 <span class="header-section-number">3.1</span> Consensus sequence calling<a class="anchor" aria-label="anchor" href="#consensus-sequence-calling"><i class="fas fa-link"></i></a>
 </h2>
 <p>The consensus sequence calling can be performed for <code>MIDAS</code> and <code>MIDAS2</code> output. The implementation is based on <code>call_consensus.py</code> script available in <code>MIDAS</code>. Here we use pair-wise distances of sequences calculated by <code>dist.ml</code> in the default amino acid model (<code>JC69</code>), and performs neighbor-joining tree estimation by <code>NJ</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/consensusSeqMIDAS2.html">consensusSeqMIDAS2</a></span><span class="op">(</span><span class="va">stana</span>, species<span class="op">=</span><span class="st">"100003"</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Beginning calling for 100003</span></span>
-<span><span class="co">#&gt;   Site number: 5019</span></span>
-<span><span class="co">#&gt;   Outputting consensus sequence to 100003_consensus.fasta</span></span>
-<span></span>
-<span><span class="co">## Tree estimation and visualization by `phangorn` and `ggtree`</span></span>
-<span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="va">stana</span><span class="op">@</span><span class="va">fastaList</span><span class="op">$</span><span class="va">`100003`</span><span class="op">)</span></span>
-<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/NJ.html">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span></span>
-<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytree/man/groupOTU.html">groupOTU</a></span><span class="op">(</span><span class="va">tre</span>, <span class="va">stana</span><span class="op">@</span><span class="va">cl</span><span class="op">)</span></span>
-<span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>,</span>
-<span>             layout<span class="op">=</span><span class="st">'circular'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tippoint.html">geom_tippoint</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu">ggtree</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">stana</span><span class="op">@</span><span class="va">colors</span><span class="op">)</span></span>
-<span><span class="va">tp</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/consensusSeqMIDAS2.html">consensusSeqMIDAS2</a></span><span class="op">(</span><span class="va">stana</span>, species<span class="op">=</span><span class="st">"100003"</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; Beginning calling for 100003</span>
+<span class="co">#&gt;   Site number: 5019</span>
+<span class="co">#&gt;   Outputting consensus sequence to 100003_consensus.fasta</span>
+
+<span class="co">## Tree estimation and visualization by `phangorn` and `ggtree`</span>
+<span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="va">stana</span><span class="op">@</span><span class="va">fastaList</span><span class="op">$</span><span class="va">`100003`</span><span class="op">)</span>
+<span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/NJ.html">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span>
+<span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytree/man/groupOTU.html">groupOTU</a></span><span class="op">(</span><span class="va">tre</span>, <span class="va">stana</span><span class="op">@</span><span class="va">cl</span><span class="op">)</span>
+<span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>,
+             layout<span class="op">=</span><span class="st">'circular'</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tippoint.html">geom_tippoint</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+        <span class="fu">ggtree</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">stana</span><span class="op">@</span><span class="va">colors</span><span class="op">)</span>
+<span class="va">tp</span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/cons-1.png" width="672"></div>
 </div>
 <div id="permanova" class="section level2" number="3.2">
@@ -94,21 +94,21 @@
 </h2>
 <p>Using <code>adonis2</code> function in <code>vegan</code>, one can compare distance matrix based on SNV frequency or gene abundances, or tree-based distance between the specified group. When the <code>target=tree</code> is specified, tree shuold be in <code>stana@treeList</code>, with the species name as the key. The <code><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">ape::cophenetic.phylo()</a></code> is used to calculate distance between tips based on branch length. Distance method can be chosen from <code>dist</code> function in <code>stats</code>. You can specify <code>distArg</code> to pass the arguments to <code>dist</code>. Also, the distance calculated directly from sequences can be used. In this case, <code>target='fasta'</code> should be chosen, and the function to calculate distance should be provided to <code>AAfunc</code> argument.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">treeList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tre</span></span>
-<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Performing adonis in 100003</span></span>
-<span><span class="co">#&gt;   R2: 0.0740407267582884, Pr: 0.692</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">adonisList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
-<span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
-<span><span class="co">#&gt; Permutation: free</span></span>
-<span><span class="co">#&gt; Number of permutations: 999</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; adonis2(formula = d ~ gr)</span></span>
-<span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.692</span></span>
-<span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
-<span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">stana</span><span class="op">@</span><span class="va">treeList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tre</span>
+<span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span>
+<span class="co">#&gt; Performing adonis in 100003</span>
+<span class="co">#&gt;   R2: 0.0740407266729293, Pr: 0.695</span>
+<span class="va">stana</span><span class="op">@</span><span class="va">adonisList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; Permutation test for adonis under reduced model</span>
+<span class="co">#&gt; Terms added sequentially (first to last)</span>
+<span class="co">#&gt; Permutation: free</span>
+<span class="co">#&gt; Number of permutations: 999</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; adonis2(formula = d ~ gr)</span>
+<span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span>
+<span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.695</span>
+<span class="co">#&gt; Residual  9  1.94558 0.92596              </span>
+<span class="co">#&gt; Total    10  2.10115 1.00000</span></code></pre></div>
 </div>
 <div id="comparing-gene-abundances" class="section level2" number="3.3">
 <h2>
@@ -116,15 +116,15 @@
 </h2>
 <p>For <code>MIDAS</code> and <code>MIDAS2</code> output (or if you have <code>genes</code> slot filled in the stana object), gene abundances can be compared one by one using exact Wilcoxon rank-sum test using <code>wilcox.exact</code> in <code>exactRankTests</code> computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/compareGenes.html">compareGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Testing total of 21806</span></span>
-<span><span class="va">res</span><span class="op">[[</span><span class="st">"UHGG000008_01733"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Exact Wilcoxon rank sum test</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; data:  c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and c(0.535732, 1.709442, 1.31675, 3.44086, 2.712423, 1.923076, 1.062853, c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and 1.21147, 0, 1.509217)</span></span>
-<span><span class="co">#&gt; W = 22, p-value = 0.4256</span></span>
-<span><span class="co">#&gt; alternative hypothesis: true mu is not equal to 0</span></span></code></pre></div>
+<code class="sourceCode R"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/compareGenes.html">compareGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span>
+<span class="co">#&gt; Testing total of 21806</span>
+<span class="va">res</span><span class="op">[[</span><span class="st">"UHGG000008_01733"</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;  Exact Wilcoxon rank sum test</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; data:  c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and c(0.535732, 1.709442, 1.31675, 3.44086, 2.712423, 1.923076, 1.062853, c(1.154444, 2.404241, 0, 1.421386, 1.50773, 0) and 1.21147, 0, 1.509217)</span>
+<span class="co">#&gt; W = 22, p-value = 0.4256</span>
+<span class="co">#&gt; alternative hypothesis: true mu is not equal to 0</span></code></pre></div>
 </div>
 <div id="performing-boruta" class="section level2" number="3.4">
 <h2>
@@ -132,31 +132,30 @@
 </h2>
 <p><code>Boruta</code> algorithm can be run on matrices to obtain important marker (SNV or gene) for distinguishing between group by <code>doBoruta</code> function. The function performs <code>Boruta</code> algorithm on specified data and returns the <code>Boruta</code> class result. By default, the function performs fixes to tentative input. To disable this, specify <code>doFix=FALSE</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/mbq/Boruta/">Boruta</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'Boruta' was built under R version 4.2.2</span></span>
-<span><span class="va">brres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doBoruta.html">doBoruta</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Using grouping from the slot</span></span>
-<span><span class="co">#&gt; If needed, please provide preprocessed matrix of genes to `mat`</span></span>
-<span><span class="co">#&gt; Feature number: 21806</span></span>
-<span><span class="co">#&gt; Performing Boruta</span></span>
-<span><span class="va">brres</span></span>
-<span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 99 iterations in 51.58528 secs.</span></span>
-<span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">#&gt;  13 attributes confirmed important: UHGG001963_01239,</span></span>
-<span><span class="co">#&gt; UHGG005230_00283, UHGG025024_01181, UHGG035784_01994,</span></span>
-<span><span class="co">#&gt; UHGG060667_01243 and 8 more;</span></span>
-<span><span class="co">#&gt;  21793 attributes confirmed unimportant:</span></span>
-<span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
-<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21788 more;</span></span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/mbq/Boruta/">Boruta</a></span><span class="op">)</span>
+<span class="va">brres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doBoruta.html">doBoruta</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span>
+<span class="co">#&gt; Using grouping from the slot</span>
+<span class="co">#&gt; If needed, please provide preprocessed matrix of genes to `mat`</span>
+<span class="co">#&gt; Feature number: 21806</span>
+<span class="co">#&gt; Performing Boruta</span>
+<span class="va">brres</span>
+<span class="co">#&gt; $boruta</span>
+<span class="co">#&gt; Boruta performed 99 iterations in 39.57059 secs.</span>
+<span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span>
+<span class="co">#&gt;  11 attributes confirmed important: UHGG000008_01290,</span>
+<span class="co">#&gt; UHGG000008_01798, UHGG004616_01682, UHGG006042_01659,</span>
+<span class="co">#&gt; UHGG060667_01243 and 6 more;</span>
+<span class="co">#&gt;  21795 attributes confirmed unimportant:</span>
+<span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span>
+<span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21790 more;</span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="02-statistcal_files/figure-html/plotboruta-1.png" width="672"></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="02-statistcal_files/figure-html/plotboruta-1.png" width="960"></div>
 <p>Further, we visualize the abundances of important genes confirmed.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>,</span>
-<span>          <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">geneID</span>,scales<span class="op">=</span><span class="st">"free_y"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>,
+          <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span>
+  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">geneID</span>,scales<span class="op">=</span><span class="st">"free_y"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/vis-1.png" width="672"></div>
 
 </div>
@@ -189,7 +188,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-20.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

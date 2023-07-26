@@ -121,9 +121,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH bd8a5c6 UN-- 4 2 -- 
+#> IGRAPH 0e539b4 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from bd8a5c6 (vertex names):
+#> + edges from 0e539b4 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -174,11 +174,11 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #>  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   
 #>  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
-#> # ℹ 4,277 more rows
+#> # … with 4,277 more rows
 #> $graph
-#> IGRAPH be6ad52 UN-- 21 922 -- 
+#> IGRAPH 3ffb8b9 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from be6ad52 (vertex names):
+#> + edges from 3ffb8b9 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -317,3 +317,21 @@ gg2
 <img src="03-function_files/figure-html/pathway-1.svg" width="672" />
 
 In this way, differences in orthologies in the pathway across multiple species can be readily captured.
+
+### Visualizing calculated values across species
+
+If you want to see the sum values across species, you can set option `summarize=TRUE`. This way, the KO values across specified species are summed, and compared between groups, then plotted.
+
+
+```r
+gg <- plotKEGGPathway(stana, c("101346","102438"),
+                      pathway_id=c("ko00270","ko00620"),
+                      summarize=TRUE)
+#> Using pre-computed KO table
+#> Using pre-computed KO table
+#> 102438: HC / R
+gg2 <- patchwork::wrap_plots(gg)
+gg2
+```
+
+<img src="03-function_files/figure-html/pathway_SUM-1.svg" width="672" />
