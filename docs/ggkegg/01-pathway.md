@@ -386,7 +386,7 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
 gg
 ```
 
-<img src="01-pathway_files/figure-html/raster-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/raster-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can use your favorite geoms to annotate KEGG map combining the functions.
 
@@ -404,7 +404,7 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
 gg
 ```
 
-<img src="01-pathway_files/figure-html/raster2-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/raster2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Group of nodes
@@ -557,7 +557,7 @@ enrichKEGG(de, pvalueCutoff=0.01) |>
     theme_void()
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -567,7 +567,7 @@ res <- enrichKEGG(de, pvalueCutoff=0.01) |> rawMap()
 res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg-2.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;" />
 
 `rawMap` can accept multiple `enrichResult` class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in `fill_color`. Also, you should specify pathway ID for multiple enrichment results.
 
@@ -578,7 +578,7 @@ res <- rawMap(list(deres, deres, deres), fill_color=c("red","green","blue"), pid
 res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg_2-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;" />
 
 `rawMap` also accepts `gseaResult` class, although it may be useful for assigning numeric values such as log2 fold changes directly.
 
@@ -590,7 +590,7 @@ res <- rawMap(kk)
 res
 ```
 
-<img src="01-pathway_files/figure-html/cp_kegg_3-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;" />
 
 The same can be done for the numeric values using `rawValue`. You can control your favorite color gradient using `scale_fill_gradient2`. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as [`ggh4x`](https://github.com/teunbrand/ggh4x).
 
@@ -600,7 +600,7 @@ res <- rawValue(geneList[1:100], "hsa04110", auto_add=TRUE)
 res
 ```
 
-<img src="01-pathway_files/figure-html/cp_value-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/cp_value-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Using multiple scales when highlighting multiple values in pathway
@@ -639,4 +639,4 @@ res <- ggraph(g) +
 res
 ```
 
-<img src="01-pathway_files/figure-html/multscale-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="01-pathway_files/figure-html/multscale-1.png" width="100%" style="display: block; margin: auto;" />

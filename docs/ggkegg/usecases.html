@@ -133,7 +133,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span><span class="st">"hsa04110"</span>, transparent_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#cccccc"</span>,<span class="st">"#FFFFFF"</span>,<span class="st">"#BFBFFF"</span>,<span class="st">"#BFFFBF"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"pink"</span>,high<span class="op">=</span><span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2_2-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="using-multiple-geoms-to-add-information" class="section level3" number="5.1.2">
 <h3>
@@ -170,7 +170,7 @@
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"pink"</span>,high<span class="op">=</span><span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2_3-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/deseq2_3-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="integrating-numeric-values-onto-tbl_graph" class="section level2" number="5.2">
@@ -191,29 +191,29 @@
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed acyclic multigraph with 40 components</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Node Data: 134 × 23 (active)</span></span>
-<span><span class="co">#&gt;   name  type  reacti… graphi…     x     y width height</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 hsa:… gene  &lt;NA&gt;    CDKN2A…   532  -218    46     17</span></span>
-<span><span class="co">#&gt; 2 hsa:… gene  &lt;NA&gt;    FZR1, …   981  -630    46     17</span></span>
-<span><span class="co">#&gt; 3 hsa:… gene  &lt;NA&gt;    MCM2, …   553  -681    46     17</span></span>
-<span><span class="co">#&gt; 4 hsa:… gene  &lt;NA&gt;    ORC6, …   494  -681    46     17</span></span>
-<span><span class="co">#&gt; 5 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -392    46     17</span></span>
-<span><span class="co">#&gt; 6 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -613    46     17</span></span>
-<span><span class="co">#&gt; # … with 128 more rows, and 15 more variables:</span></span>
-<span><span class="co">#&gt; #   fgcolor &lt;chr&gt;, bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   coords &lt;chr&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   ymax &lt;dbl&gt;, orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   deseq2 &lt;dbl&gt;, padj &lt;dbl&gt;, converted_name &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   lfc &lt;dbl&gt;, num &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; # A tibble: 134 × 23</span></span>
+<span><span class="co">#&gt;   name        type  reaction graphics_name     x     y width</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 hsa:1029    gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
+<span><span class="co">#&gt; 2 hsa:51343   gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
+<span><span class="co">#&gt; 3 hsa:4171 h… gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
+<span><span class="co">#&gt; 4 hsa:23594 … gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
+<span><span class="co">#&gt; 5 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
+<span><span class="co">#&gt; 6 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
+<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 16 more variables: height &lt;dbl&gt;, fgcolor &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;, coords &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;, ymax &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;, deseq2 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, lfc &lt;dbl&gt;, num &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Edge Data: 157 × 6</span></span>
+<span><span class="co">#&gt; # A tibble: 157 × 6</span></span>
 <span><span class="co">#&gt;    from    to type  subtype_name    subtype_value pathway_id</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;     </span></span>
 <span><span class="co">#&gt; 1   118    39 GErel expression      --&gt;           hsa04110  </span></span>
 <span><span class="co">#&gt; 2    50    61 PPrel inhibition      --|           hsa04110  </span></span>
 <span><span class="co">#&gt; 3    50    61 PPrel phosphorylation +p            hsa04110  </span></span>
-<span><span class="co">#&gt; # … with 154 more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 154 more rows</span></span></code></pre></div>
 </div>
 <div id="integrating-matrix-to-tbl_graph" class="section level3" number="5.2.2">
 <h3>
@@ -228,54 +228,36 @@
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed acyclic multigraph with 40 components</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Node Data: 134 × 48 (active)</span></span>
-<span><span class="co">#&gt;   name  type  reacti… graphi…     x     y width height</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 hsa:… gene  &lt;NA&gt;    CDKN2A…   532  -218    46     17</span></span>
-<span><span class="co">#&gt; 2 hsa:… gene  &lt;NA&gt;    FZR1, …   981  -630    46     17</span></span>
-<span><span class="co">#&gt; 3 hsa:… gene  &lt;NA&gt;    MCM2, …   553  -681    46     17</span></span>
-<span><span class="co">#&gt; 4 hsa:… gene  &lt;NA&gt;    ORC6, …   494  -681    46     17</span></span>
-<span><span class="co">#&gt; 5 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -392    46     17</span></span>
-<span><span class="co">#&gt; 6 hsa:… gene  &lt;NA&gt;    ANAPC1…   981  -613    46     17</span></span>
-<span><span class="co">#&gt; # … with 128 more rows, and 40 more variables:</span></span>
-<span><span class="co">#&gt; #   fgcolor &lt;chr&gt;, bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   coords &lt;chr&gt;, xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   ymax &lt;dbl&gt;, orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   deseq2 &lt;dbl&gt;, padj &lt;dbl&gt;, converted_name &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   lfc &lt;dbl&gt;, SRR14509882 &lt;dbl&gt;, SRR14509883 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509884 &lt;dbl&gt;, SRR14509885 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509886 &lt;dbl&gt;, SRR14509887 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509888 &lt;dbl&gt;, SRR14509889 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509890 &lt;dbl&gt;, SRR14509891 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509892 &lt;dbl&gt;, SRR14509893 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509894 &lt;dbl&gt;, SRR14509895 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509896 &lt;dbl&gt;, SRR14509897 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509898 &lt;dbl&gt;, SRR14509899 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509900 &lt;dbl&gt;, SRR14509901 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509902 &lt;dbl&gt;, SRR14509903 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509904 &lt;dbl&gt;, SRR14509905 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509906 &lt;dbl&gt;, SRR14509907 &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; # A tibble: 134 × 48</span></span>
+<span><span class="co">#&gt;   name        type  reaction graphics_name     x     y width</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 hsa:1029    gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
+<span><span class="co">#&gt; 2 hsa:51343   gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
+<span><span class="co">#&gt; 3 hsa:4171 h… gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
+<span><span class="co">#&gt; 4 hsa:23594 … gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
+<span><span class="co">#&gt; 5 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
+<span><span class="co">#&gt; 6 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
+<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 41 more variables: height &lt;dbl&gt;, fgcolor &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;, coords &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;, ymax &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;, deseq2 &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, lfc &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   SRR14509882 &lt;dbl&gt;, SRR14509883 &lt;dbl&gt;, …</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # Edge Data: 157 × 34</span></span>
-<span><span class="co">#&gt;    from    to type  subtyp… subtyp… pathwa… from_nd to_nd</span></span>
-<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1   118    39 GErel expres… --&gt;     hsa041… undefi… hsa:…</span></span>
-<span><span class="co">#&gt; 2    50    61 PPrel inhibi… --|     hsa041… hsa:29… hsa:…</span></span>
-<span><span class="co">#&gt; 3    50    61 PPrel phosph… +p      hsa041… hsa:29… hsa:…</span></span>
-<span><span class="co">#&gt; # … with 154 more rows, and 26 more variables:</span></span>
+<span><span class="co">#&gt; # A tibble: 157 × 34</span></span>
+<span><span class="co">#&gt;    from    to type  subtype_name    subtype_value pathway_id</span></span>
+<span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;     </span></span>
+<span><span class="co">#&gt; 1   118    39 GErel expression      --&gt;           hsa04110  </span></span>
+<span><span class="co">#&gt; 2    50    61 PPrel inhibition      --|           hsa04110  </span></span>
+<span><span class="co">#&gt; 3    50    61 PPrel phosphorylation +p            hsa04110  </span></span>
+<span><span class="co">#&gt; # ℹ 154 more rows</span></span>
+<span><span class="co">#&gt; # ℹ 28 more variables: from_nd &lt;chr&gt;, to_nd &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509882 &lt;dbl&gt;, SRR14509883 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509884 &lt;dbl&gt;, SRR14509885 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509886 &lt;dbl&gt;, SRR14509887 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509888 &lt;dbl&gt;, SRR14509889 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509890 &lt;dbl&gt;, SRR14509891 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509892 &lt;dbl&gt;, SRR14509893 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509894 &lt;dbl&gt;, SRR14509895 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509896 &lt;dbl&gt;, SRR14509897 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509898 &lt;dbl&gt;, SRR14509899 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509900 &lt;dbl&gt;, SRR14509901 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509902 &lt;dbl&gt;, SRR14509903 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509904 &lt;dbl&gt;, SRR14509905 &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   SRR14509906 &lt;dbl&gt;, SRR14509907 &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; #   SRR14509890 &lt;dbl&gt;, SRR14509891 &lt;dbl&gt;, …</span></span></code></pre></div>
 </div>
 </div>
 <div id="visualizing-multiple-enrichment-results" class="section level2" number="5.3">
@@ -315,7 +297,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>,<span class="st">"tomato"</span><span class="op">)</span>, name<span class="op">=</span><span class="st">"urothelial|rptec"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">ggfx</span><span class="fu">::</span><span class="fu"><a href="https://ggfx.data-imaginist.com/reference/with_outer_glow.html">with_outer_glow</a></span><span class="op">(</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">converted_name</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">!=</span><span class="st">"group"</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span>, colour<span class="op">=</span><span class="st">"white"</span>, expand<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We can combine multiple plots combining <code>rawMap</code> by <code>patchwork</code>.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
@@ -323,7 +305,7 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ekuro</span>, <span class="va">ekrptec</span><span class="op">)</span>, fill_color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"tomato"</span><span class="op">)</span>,</span>
 <span>  pid<span class="op">=</span><span class="st">"hsa03460"</span><span class="op">)</span></span>
 <span><span class="va">comb</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp1_5-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp1_5-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using <code>ggfx</code> in yellow outer glow, with composing <code>dotplot</code> produced by clusterProfiler for the enrichment results by <code>patchwork</code>.</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">right</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ekuro</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Urothelial"</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span></span>
@@ -352,7 +334,7 @@
 <span><span class="st">"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">gg2</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp2-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/multcp2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="multiple-enrichment-analysis-results-across-multiple-pathways" class="section level3" number="5.3.1">
 <h3>
 <span class="header-section-number">5.3.1</span> Multiple enrichment analysis results across multiple pathways<a class="anchor" aria-label="anchor" href="#multiple-enrichment-analysis-results-across-multiple-pathways"><i class="fas fa-link"></i></a>
@@ -408,15 +390,15 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">deg</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>Here, we additionally assign graph-based clustering results to the graph, and we scale the size of the nodes so that the nodes can be visualized by scatterpie.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">walktrap</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/cluster_walktrap.html">walktrap.community</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">walktrap</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/cluster_walktrap.html">walktrap.community</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span></span>
 <span></span>
 <span><span class="co">## Scale the node size</span></span>
 <span><span class="va">sizeMin</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="va">sizeMax</span> <span class="op">&lt;-</span> <span class="fl">0.3</span></span>
-<span><span class="va">rawMin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span><span class="op">)</span></span>
-<span><span class="va">rawMax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span><span class="op">)</span></span>
+<span><span class="va">rawMin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span><span class="op">)</span></span>
+<span><span class="va">rawMax</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span><span class="op">)</span></span>
 <span><span class="va">scf</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">sizeMax</span><span class="op">-</span><span class="va">sizeMin</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="va">rawMax</span><span class="op">-</span><span class="va">rawMin</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="va">scf</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span> <span class="op">+</span> <span class="va">sizeMin</span> <span class="op">-</span> <span class="va">scf</span> <span class="op">*</span> <span class="va">rawMin</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">size</span> <span class="op">&lt;-</span> <span class="va">scf</span> <span class="op">*</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">deg</span> <span class="op">+</span> <span class="va">sizeMin</span> <span class="op">-</span> <span class="va">scf</span> <span class="op">*</span> <span class="va">rawMin</span></span>
 <span></span>
 <span></span>
 <span><span class="co">## Make base graph</span></span>
@@ -449,7 +431,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_shadowtext.html">geom_node_shadowtext</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">id</span>, y<span class="op">=</span><span class="va">y</span><span class="op">-</span><span class="fl">0.5</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">3</span>, family<span class="op">=</span><span class="st">"sans"</span>, bg.colour<span class="op">=</span><span class="st">"white"</span>, colour<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">g4</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/final_scatterpie-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/final_scatterpie-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="projecting-the-gene-regulatory-networks-on-kegg-map" class="section level2" number="5.4">
@@ -459,7 +441,7 @@
 <p>With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using <code>MicrobiomeProfiler</code>. Of course, it is also possible to project networks created using other methods.</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/CBNplot">CBNplot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
@@ -518,7 +500,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>transparent_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#ffffff"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">raws</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/konetplotmap-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/konetplotmap-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="analyzing-cluster-marker-genes-in-single-cell-transcriptomics" class="section level2" number="5.5">
@@ -580,7 +562,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span><span class="st">"hsa04380"</span>, transparent_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#cccccc"</span>,<span class="st">"#FFFFFF"</span>,<span class="st">"#BFBFFF"</span>,<span class="st">"#BFFFBF"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gg</span><span class="op">+</span><span class="va">dd</span><span class="op">+</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>widths<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.6</span>,<span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="example-for-composing-multiple-pathways" class="section level3" number="5.5.1">
 <h3>
 <span class="header-section-number">5.5.1</span> Example for composing multiple pathways<a class="anchor" aria-label="anchor" href="#example-for-composing-multiple-pathways"><i class="fas fa-link"></i></a>
@@ -667,7 +649,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span><span class="st">            "</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">final</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc2-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/plot_sc2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="barplot-for-numeric-values-on-raw-map" class="section level3" number="5.5.2">
 <h3>
@@ -746,7 +728,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span>                                       <span class="st">"#BFBFFF"</span>,</span>
 <span>                                       <span class="st">"#BFFFBF"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">final_bar</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/barp_prepare-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/barp_prepare-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="barplot-across-all-the-clusters" class="section level3" number="5.5.3">
 <h3>
@@ -817,7 +799,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span></span>
 <span><span class="co">## Show it</span></span>
 <span><span class="fu">ggplotify</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplotify/man/as.ggplot.html">as.ggplot</a></span><span class="op">(</span><span class="va">legendGrob</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/legend1-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/legend1-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Make dummy legend by `fill`</span></span>
@@ -840,7 +822,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span></span>
 <span></span>
 <span><span class="fu">ggplotify</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplotify/man/as.ggplot.html">as.ggplot</a></span><span class="op">(</span><span class="va">overlaidGtable</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="04-usecases_files/figure-html/legend2-1.svg" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="04-usecases_files/figure-html/legend2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="customizing-global-map-visualization" class="section level2" number="5.6">
@@ -1094,7 +1076,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-07-25.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-07-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
