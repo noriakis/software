@@ -72,12 +72,12 @@ net@net
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramnet-1.png" width="100%" style="display: block; margin: auto;" />
-One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag=TRUE`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix (which is a natural way), `tagWhole=TRUE` can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below. For tag coloring, `tagPalette` can be used. The `igraph` contained in the object can also be plotted by passing to `plot` function.
+One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag="tdm"` or `tag="cor"`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix of TDM (which is a natural way), `tagWhole=TRUE` can be specified with `tag="tdm"`, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below. For tag coloring, `tagPalette` can be used. The `igraph` contained in the object can also be plotted by passing to `plot` function.
 
 
 ```r
 net <- refseq(inpSymbol, plotType="network", corThresh=0.2,
-                     numWords=20, tag=TRUE)
+                     numWords=20, tag="cor")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
@@ -99,24 +99,7 @@ net@net
 
 ```r
 net@pvpick
-#> $clusters
-#> $clusters[[1]]
-#> [1] "pigmentosum" "xeroderma"  
-#> 
-#> $clusters[[2]]
-#>  [1] "activity"             "atpdependent"        
-#>  [3] "complementation"      "defects"             
-#>  [5] "factor"               "functions"           
-#>  [7] "incision"             "interacts"           
-#>  [9] "nucleotide"           "product"             
-#> [11] "transcriptioncoupled"
-#> 
-#> $clusters[[3]]
-#> [1] "dna"    "repair"
-#> 
-#> 
-#> $edges
-#> [1]  2 12 13
+#> list()
 plot(net)
 ```
 
@@ -129,7 +112,7 @@ One can specify `genePlotNum` for limiting the genes shown by ranking of how oft
 ```r
 net <- refseq(inpSymbol, plotType="network",
                      genePlot=TRUE, corThresh=0.5,
-                     tag=TRUE, edgeLink=FALSE,
+                     tag="cor", edgeLink=FALSE,
                      numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
@@ -158,12 +141,13 @@ library(concaveman)
 library(ggforce)
 net <- refseq(inpSymbol, plotType="network",
                      genePathPlot="reactome", corThresh=0.5,
-                     tag=TRUE, edgeLink=FALSE,
+                     tag="cor", edgeLink=FALSE,
                      genePathPlotSig=0.05, numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Found 47 enriched term
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -174,7 +158,6 @@ net <- refseq(inpSymbol, plotType="network",
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-#> Found 47 enriched term
 
 net@net
 ```
@@ -189,7 +172,7 @@ net <- refseq(inpSymbol, plotType="network",
                      genePlot=TRUE, corThresh=0.5,
                      colorize=TRUE, geneColor="pink",
                      colorText=TRUE,
-                     tag=TRUE, edgeLink=FALSE,
+                     tag="cor", edgeLink=FALSE,
                      numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
@@ -364,7 +347,7 @@ pal <- colorRampPalette(pal)(20)
 gwclWhole <- refseq(inpSymbol,
                      numWords=50,
                      plotType="wc",
-                     tag=TRUE, tagWhole=TRUE,
+                     tag="cor",
                      tagPalette = pal,
                      scaleFreq=5,
                      cl=snow::makeCluster(8),
@@ -382,99 +365,37 @@ gwclWhole <- refseq(inpSymbol,
 gwclWhole@pvpick
 #> $clusters
 #> $clusters[[1]]
-#>  [1] "abnormally"        "active"           
-#>  [3] "csb"               "defective"        
-#>  [5] "disease"           "hereditary"       
-#>  [7] "identified"        "iih"              
-#>  [9] "p44"               "radiation"        
-#> [11] "repeat"            "sensitive"        
-#> [13] "transcriptionally" "ultraviolet"      
-#> 
-#> $clusters[[2]]
-#>  [1] "activates"       "adjacent"        "atpase"         
-#>  [4] "atpstimulated"   "dnabinding"      "downstream"     
-#>  [7] "encode"          "formation"       "frame"          
-#> [10] "fusion"          "individual"      "occurs"         
-#> [13] "polyadenylation" "promote"         "reading"        
-#> [16] "sequence"        "shares"          "sites"          
-#> 
-#> $clusters[[3]]
-#> [1] "class" "tfiih"
-#> 
-#> $clusters[[4]]
-#> [1] "complementation" "defects"        
-#> 
-#> $clusters[[5]]
-#> [1] "eme1"      "ercc1"     "structure" "xp6"      
-#> 
-#> $clusters[[6]]
-#> [1] "orf"               "piggybackderived3"
-#> [3] "splice"           
-#> 
-#> $clusters[[7]]
 #> [1] "pigmentosum" "xeroderma"  
 #> 
-#> $clusters[[8]]
-#> [1] "interacts" "type"     
-#> 
-#> $clusters[[9]]
-#> [1] "incision"  "including" "light"    
-#> 
-#> $clusters[[10]]
-#>  [1] "basic"            "bivm"            
-#>  [3] "cachexia"         "cancer"          
-#>  [5] "cellular"         "characterized"   
-#>  [7] "cognitive"        "develop"         
-#>  [9] "development"      "disability"      
-#> [11] "disorder"         "exists"          
-#> [13] "exposure"         "function"        
-#> [15] "growth"           "hypersensitivity"
-#> [17] "immunoglobulin"   "increased"       
-#> [19] "motif"            "neighboring"     
-#> [21] "processes"        "read"            
-#> [23] "referred"         "severe"          
-#> [25] "singlestrand"     "skin"            
-#> [27] "specific"         "susceptibility"  
-#> [29] "uvinduced"        "variable"        
-#> [31] "vii"              "xp7"             
-#> 
-#> $clusters[[11]]
-#> [1] "transcriptioncoupled" "upstream"            
-#> 
-#> $clusters[[12]]
-#>  [1] "atpdependent"        "basal"              
-#>  [3] "belongs"             "btf2tfiih"          
-#>  [5] "cancerprone"         "disorders"          
-#>  [7] "factor"              "helicase"           
-#>  [9] "helicases"           "integral"           
-#> [11] "mechanism"           "rad3xpd"            
-#> [13] "subfamily"           "trichothiodystrophy"
-#> 
-#> $clusters[[13]]
-#>  [1] "alter"                     "carcinogenesis"           
-#>  [3] "catalyzes"                 "cd3e"                     
-#>  [5] "cerebrooculofacioskeletal" "cisplatin"                
-#>  [7] "compounds"                 "crosslinks"               
-#>  [9] "electrophilic"             "epsilon"                  
-#> [11] "ercc4"                     "excising"                 
-#> [13] "exon"                      "formed"                   
-#> [15] "forms"                     "heterodimer"              
-#> [17] "heterodimeric"             "induced"                  
-#> [19] "interstrand"               "lesion"                   
-#> [21] "lesions"                   "molecule"                 
-#> [23] "overlaps"                  "pathway"                  
-#> [25] "play"                      "polymorphisms"            
-#> [27] "process"                   "product"                  
-#> [29] "recombinational"           "required"                 
-#> [31] "result"                    "strand"                   
-#> [33] "xpf"                      
-#> 
-#> $clusters[[14]]
+#> $clusters[[2]]
 #> [1] "dna"    "repair"
+#> 
+#> $clusters[[3]]
+#>  [1] "abnormally"                "activates"                
+#>  [3] "active"                    "activity"                 
+#>  [5] "adjacent"                  "alter"                    
+#>  [7] "atpase"                    "atpdependent"             
+#>  [9] "atpstimulated"             "basal"                    
+#> [11] "basic"                     "belongs"                  
+#> [13] "bivm"                      "cerebrooculofacioskeletal"
+#> [15] "characterized"             "complementation"          
+#> [17] "damage"                    "defects"                  
+#> [19] "exon"                      "factor"                   
+#> [21] "forms"                     "functions"                
+#> [23] "helicase"                  "heterodimeric"            
+#> [25] "incision"                  "including"                
+#> [27] "interacts"                 "light"                    
+#> [29] "nucleotide"                "orf"                      
+#> [31] "pathway"                   "piggybackderived3"        
+#> [33] "product"                   "result"                   
+#> [35] "skin"                      "specific"                 
+#> [37] "splice"                    "transcriptioncoupled"     
+#> [39] "trichothiodystrophy"       "type"                     
+#> [41] "upstream"                 
 #> 
 #> 
 #> $edges
-#>  [1]  13  30  97  98 101 104 106 107 110 113 117 118 123 129
+#> [1] 16 41 43
 gwclWhole@wc
 ```
 
@@ -513,10 +434,10 @@ As fetching the same information is not desirable and time consuming, the same o
 
 
 ```r
-abtag <- pubmed(redo=ab, tag=TRUE, cl=snow::makeCluster(10), apiKey=apiKey)
+abtag <- pubmed(redo=ab, tag="tdm", cl=snow::makeCluster(10), apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
-abtag2 <- pubmed(redo=abtag, tag=TRUE, genePlot=TRUE,
+abtag2 <- pubmed(redo=abtag, tag="tdm", genePlot=TRUE,
                  plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
 #> Resuming from the previous results
 #> Using previous pvclust results
@@ -597,7 +518,7 @@ net1 <- refseq(keggList$`04110`,
                       plotType="network",
                       corThresh=0.3,
                       numWords=30,
-                      tag=TRUE,
+                      tag="cor",
                       tfidf=TRUE)
 #> Input genes: 124
 #> Filter based on GeneSummary
@@ -619,7 +540,7 @@ net2 <- refseq(keggList$`04210`,
                       corThresh=0.3,
                       numWords=30,
                       tfidf=TRUE,
-                      tag=TRUE)
+                      tag="cor")
 #> Input genes: 87
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)

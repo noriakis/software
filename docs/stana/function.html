@@ -102,8 +102,8 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bbec947a5e561d19c15a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bbec947a5e561d19c15a">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-922c4b7a48e0b37766c0" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-922c4b7a48e0b37766c0">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
@@ -151,9 +151,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH 29da8e6 UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 246da26 UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 29da8e6 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 246da26 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -170,8 +170,8 @@
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8b1eb9d7708d20113b75" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8b1eb9d7708d20113b75">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c679913791c4dc89d6ab" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c679913791c4dc89d6ab">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -195,9 +195,9 @@
 <span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
 <span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH 2be2ef7 UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 25bbde0 UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from 2be2ef7 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 25bbde0 (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
@@ -348,7 +348,7 @@
 <h3>
 <span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY<a class="anchor" aria-label="anchor" href="#visualization-of-kegg-pathway"><i class="fas fa-link"></i></a>
 </h3>
-<p><code>KEGG PATHWAY</code> is frequently used to characterize metabolic function of microbiome. Utilizing <a href="https://github.com/noriakis/ggkegg"><code>ggkegg</code></a>, the information of intra-species diversity, particulary gene abundance differences, can be reflected onto <code>KEGG PATHWAY</code>.</p>
+<p><code>KEGG PATHWAY</code> is frequently used to characterize metabolic function of microbiome. Utilizing <a href="https://github.com/noriakis/ggkegg"><code>ggkegg</code></a>, the information of intra-species diversity, particulary gene abundance differences, can be reflected onto <code>KEGG PATHWAY</code>. It needs <code>genes</code> slot filled, and some annotations files, typically <code>eggNOG-mapper v2</code>, are needed.</p>
 <div id="visualizing-differences-per-species" class="section level4" number="4.4.1.1">
 <h4>
 <span class="header-section-number">4.4.1.1</span> Visualizing differences per species<a class="anchor" aria-label="anchor" href="#visualizing-differences-per-species"><i class="fas fa-link"></i></a>
@@ -405,7 +405,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="co">#&gt; 101346: HC / R</span></span>
 <span><span class="co">#&gt; 102438: HC / R</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-function_files/figure-html/onescale-1.svg" width="672"></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/onescale-1.png" width="672"></div>
 <p>By default, the scale is same. If you install <code>ggh4x</code>, multiple scales can be added, by specifying <code>multi_scale</code> argument.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -414,7 +414,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="co">#&gt; 101346: HC / R</span></span>
 <span><span class="co">#&gt; 102438: HC / R</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-function_files/figure-html/multscale-1.svg" width="672"></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/multscale-1.png" width="672"></div>
 <p>You can provide multiple pathway IDs to pathway_id, which returns a list of plot.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
@@ -426,7 +426,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="co">#&gt; 102438: HC / R</span></span>
 <span><span class="va">gg2</span> <span class="op">&lt;-</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span></span>
 <span><span class="va">gg2</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-function_files/figure-html/pathway-1.svg" width="672"></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/pathway-1.png" width="672"></div>
 <p>In this way, differences in orthologies in the pathway across multiple species can be readily captured.</p>
 </div>
 </div>
@@ -444,7 +444,27 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="co">#&gt; 102438: HC / R</span></span>
 <span><span class="va">gg2</span> <span class="op">&lt;-</span> <span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">gg</span><span class="op">)</span></span>
 <span><span class="va">gg2</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-function_files/figure-html/pathway_SUM-1.svg" width="672"></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/pathway_SUM-1.png" width="672"></div>
+</div>
+<div id="show-which-species-have-the-kos" class="section level3" number="4.4.3">
+<h3>
+<span class="header-section-number">4.4.3</span> Show which species have the KOs<a class="anchor" aria-label="anchor" href="#show-which-species-have-the-kos"><i class="fas fa-link"></i></a>
+</h3>
+<p>If you specify <code>point_mode=TRUE</code>, the function plot points on the KOs on the pathways
+based on whether the specified species have the corresponding KOs annotated.</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
+<span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span>,</span>
+<span>                      sp_colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>,<span class="st">"red"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                      point_mode<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using pre-computed KO table</span></span>
+<span><span class="co">#&gt; Using pre-computed KO table</span></span>
+<span><span class="co">#&gt; 101346: HC / R</span></span>
+<span><span class="co">#&gt; 102438: HC / R</span></span>
+<span><span class="co">#&gt; Point mode enabled</span></span>
+<span><span class="va">gg</span></span>
+<span><span class="co">#&gt; $ko00270</span></span></code></pre></div>
+<div class="inline-figure"><img src="03-function_files/figure-html/pathway_point-1.png" width="672"></div>
 
 </div>
 </div>
@@ -472,6 +492,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <a class="nav-link" href="#kgeg-pathway-and-kegg-orthology"><span class="header-section-number">4.4</span> KGEG PATHWAY and KEGG ORTHOLOGY</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#visualization-of-kegg-pathway"><span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY</a></li>
 <li><a class="nav-link" href="#visualizing-calculated-values-across-species"><span class="header-section-number">4.4.2</span> Visualizing calculated values across species</a></li>
+<li><a class="nav-link" href="#show-which-species-have-the-kos"><span class="header-section-number">4.4.3</span> Show which species have the KOs</a></li>
 </ul>
 </li>
 </ul>
@@ -491,7 +512,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-26.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

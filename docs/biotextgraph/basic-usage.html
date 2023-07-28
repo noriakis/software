@@ -126,10 +126,10 @@ In this example, we use mostly human-derived data, and use <code>org.Hs.eg.db</c
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <p><img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramnet-1.png" width="100%" style="display: block; margin: auto;">
-One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (<code>pvclust</code>) and identified significant clusters based on the occurrence in the text can be visualized by specifying <code>tag=TRUE</code>. For the significance threshold, <code>pvclAlpha</code> can be specified. The default parameters perform <code>pvclust</code> on the subset of dataset for words with high frequency specified by <code>numWords</code>. If one want to perform on whole matrix (which is a natural way), <code>tagWhole=TRUE</code> can be specified, although it is computationally intensive. One can pass clusters to perform parallel computing owning to <code>pvclust</code> function, by specifying <code>cl</code> as below. For tag coloring, <code>tagPalette</code> can be used. The <code>igraph</code> contained in the object can also be plotted by passing to <code>plot</code> function.</p>
+One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (<code>pvclust</code>) and identified significant clusters based on the occurrence in the text can be visualized by specifying <code>tag="tdm"</code> or <code>tag="cor"</code>. For the significance threshold, <code>pvclAlpha</code> can be specified. The default parameters perform <code>pvclust</code> on the subset of dataset for words with high frequency specified by <code>numWords</code>. If one want to perform on whole matrix of TDM (which is a natural way), <code>tagWhole=TRUE</code> can be specified with <code>tag="tdm"</code>, although it is computationally intensive. One can pass clusters to perform parallel computing owning to <code>pvclust</code> function, by specifying <code>cl</code> as below. For tag coloring, <code>tagPalette</code> can be used. The <code>igraph</code> contained in the object can also be plotted by passing to <code>plot</code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>,</span>
-<span>                     numWords<span class="op">=</span><span class="fl">20</span>, tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                     numWords<span class="op">=</span><span class="fl">20</span>, tag<span class="op">=</span><span class="st">"cor"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
@@ -148,24 +148,7 @@ One of the main questions is which words can be clustered together among the wor
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagnet-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span><span class="op">@</span><span class="va">pvpick</span></span>
-<span><span class="co">#&gt; $clusters</span></span>
-<span><span class="co">#&gt; $clusters[[1]]</span></span>
-<span><span class="co">#&gt; [1] "pigmentosum" "xeroderma"  </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[2]]</span></span>
-<span><span class="co">#&gt;  [1] "activity"             "atpdependent"        </span></span>
-<span><span class="co">#&gt;  [3] "complementation"      "defects"             </span></span>
-<span><span class="co">#&gt;  [5] "factor"               "functions"           </span></span>
-<span><span class="co">#&gt;  [7] "incision"             "interacts"           </span></span>
-<span><span class="co">#&gt;  [9] "nucleotide"           "product"             </span></span>
-<span><span class="co">#&gt; [11] "transcriptioncoupled"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[3]]</span></span>
-<span><span class="co">#&gt; [1] "dna"    "repair"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt; [1]  2 12 13</span></span>
+<span><span class="co">#&gt; list()</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagnet-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The other important aim is finding important genes (queries) in the network. The genes associated with the words can be shown by specifying <code>genePlot=TRUE</code>, useful for assessing which words is associated with interesting genes. The edges connecting words to corresponding genes are shown.
@@ -173,7 +156,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>                     tag<span class="op">=</span><span class="st">"cor"</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
@@ -197,12 +180,13 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span></span>
 <span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     genePathPlot<span class="op">=</span><span class="st">"reactome"</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>                     tag<span class="op">=</span><span class="st">"cor"</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                     genePathPlotSig<span class="op">=</span><span class="fl">0.05</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Found 47 enriched term</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -213,7 +197,6 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
-<span><span class="co">#&gt; Found 47 enriched term</span></span>
 <span></span>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/gpplot-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -223,7 +206,7 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <span>                     genePlot<span class="op">=</span><span class="cn">TRUE</span>, corThresh<span class="op">=</span><span class="fl">0.5</span>,</span>
 <span>                     colorize<span class="op">=</span><span class="cn">TRUE</span>, geneColor<span class="op">=</span><span class="st">"pink"</span>,</span>
 <span>                     colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>                     tag<span class="op">=</span><span class="st">"cor"</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
 <span><span class="co">#&gt;   Converted input genes: 7</span></span>
@@ -388,7 +371,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="va">gwclWhole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
 <span>                     numWords<span class="op">=</span><span class="fl">50</span>,</span>
 <span>                     plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
-<span>                     tag<span class="op">=</span><span class="cn">TRUE</span>, tagWhole<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                     tag<span class="op">=</span><span class="st">"cor"</span>,</span>
 <span>                     tagPalette <span class="op">=</span> <span class="va">pal</span>,</span>
 <span>                     scaleFreq<span class="op">=</span><span class="fl">5</span>,</span>
 <span>                     cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>,</span>
@@ -406,99 +389,37 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">pvpick</span></span>
 <span><span class="co">#&gt; $clusters</span></span>
 <span><span class="co">#&gt; $clusters[[1]]</span></span>
-<span><span class="co">#&gt;  [1] "abnormally"        "active"           </span></span>
-<span><span class="co">#&gt;  [3] "csb"               "defective"        </span></span>
-<span><span class="co">#&gt;  [5] "disease"           "hereditary"       </span></span>
-<span><span class="co">#&gt;  [7] "identified"        "iih"              </span></span>
-<span><span class="co">#&gt;  [9] "p44"               "radiation"        </span></span>
-<span><span class="co">#&gt; [11] "repeat"            "sensitive"        </span></span>
-<span><span class="co">#&gt; [13] "transcriptionally" "ultraviolet"      </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[2]]</span></span>
-<span><span class="co">#&gt;  [1] "activates"       "adjacent"        "atpase"         </span></span>
-<span><span class="co">#&gt;  [4] "atpstimulated"   "dnabinding"      "downstream"     </span></span>
-<span><span class="co">#&gt;  [7] "encode"          "formation"       "frame"          </span></span>
-<span><span class="co">#&gt; [10] "fusion"          "individual"      "occurs"         </span></span>
-<span><span class="co">#&gt; [13] "polyadenylation" "promote"         "reading"        </span></span>
-<span><span class="co">#&gt; [16] "sequence"        "shares"          "sites"          </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[3]]</span></span>
-<span><span class="co">#&gt; [1] "class" "tfiih"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[4]]</span></span>
-<span><span class="co">#&gt; [1] "complementation" "defects"        </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[5]]</span></span>
-<span><span class="co">#&gt; [1] "eme1"      "ercc1"     "structure" "xp6"      </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[6]]</span></span>
-<span><span class="co">#&gt; [1] "orf"               "piggybackderived3"</span></span>
-<span><span class="co">#&gt; [3] "splice"           </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[7]]</span></span>
 <span><span class="co">#&gt; [1] "pigmentosum" "xeroderma"  </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[8]]</span></span>
-<span><span class="co">#&gt; [1] "interacts" "type"     </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[9]]</span></span>
-<span><span class="co">#&gt; [1] "incision"  "including" "light"    </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[10]]</span></span>
-<span><span class="co">#&gt;  [1] "basic"            "bivm"            </span></span>
-<span><span class="co">#&gt;  [3] "cachexia"         "cancer"          </span></span>
-<span><span class="co">#&gt;  [5] "cellular"         "characterized"   </span></span>
-<span><span class="co">#&gt;  [7] "cognitive"        "develop"         </span></span>
-<span><span class="co">#&gt;  [9] "development"      "disability"      </span></span>
-<span><span class="co">#&gt; [11] "disorder"         "exists"          </span></span>
-<span><span class="co">#&gt; [13] "exposure"         "function"        </span></span>
-<span><span class="co">#&gt; [15] "growth"           "hypersensitivity"</span></span>
-<span><span class="co">#&gt; [17] "immunoglobulin"   "increased"       </span></span>
-<span><span class="co">#&gt; [19] "motif"            "neighboring"     </span></span>
-<span><span class="co">#&gt; [21] "processes"        "read"            </span></span>
-<span><span class="co">#&gt; [23] "referred"         "severe"          </span></span>
-<span><span class="co">#&gt; [25] "singlestrand"     "skin"            </span></span>
-<span><span class="co">#&gt; [27] "specific"         "susceptibility"  </span></span>
-<span><span class="co">#&gt; [29] "uvinduced"        "variable"        </span></span>
-<span><span class="co">#&gt; [31] "vii"              "xp7"             </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[11]]</span></span>
-<span><span class="co">#&gt; [1] "transcriptioncoupled" "upstream"            </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[12]]</span></span>
-<span><span class="co">#&gt;  [1] "atpdependent"        "basal"              </span></span>
-<span><span class="co">#&gt;  [3] "belongs"             "btf2tfiih"          </span></span>
-<span><span class="co">#&gt;  [5] "cancerprone"         "disorders"          </span></span>
-<span><span class="co">#&gt;  [7] "factor"              "helicase"           </span></span>
-<span><span class="co">#&gt;  [9] "helicases"           "integral"           </span></span>
-<span><span class="co">#&gt; [11] "mechanism"           "rad3xpd"            </span></span>
-<span><span class="co">#&gt; [13] "subfamily"           "trichothiodystrophy"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[13]]</span></span>
-<span><span class="co">#&gt;  [1] "alter"                     "carcinogenesis"           </span></span>
-<span><span class="co">#&gt;  [3] "catalyzes"                 "cd3e"                     </span></span>
-<span><span class="co">#&gt;  [5] "cerebrooculofacioskeletal" "cisplatin"                </span></span>
-<span><span class="co">#&gt;  [7] "compounds"                 "crosslinks"               </span></span>
-<span><span class="co">#&gt;  [9] "electrophilic"             "epsilon"                  </span></span>
-<span><span class="co">#&gt; [11] "ercc4"                     "excising"                 </span></span>
-<span><span class="co">#&gt; [13] "exon"                      "formed"                   </span></span>
-<span><span class="co">#&gt; [15] "forms"                     "heterodimer"              </span></span>
-<span><span class="co">#&gt; [17] "heterodimeric"             "induced"                  </span></span>
-<span><span class="co">#&gt; [19] "interstrand"               "lesion"                   </span></span>
-<span><span class="co">#&gt; [21] "lesions"                   "molecule"                 </span></span>
-<span><span class="co">#&gt; [23] "overlaps"                  "pathway"                  </span></span>
-<span><span class="co">#&gt; [25] "play"                      "polymorphisms"            </span></span>
-<span><span class="co">#&gt; [27] "process"                   "product"                  </span></span>
-<span><span class="co">#&gt; [29] "recombinational"           "required"                 </span></span>
-<span><span class="co">#&gt; [31] "result"                    "strand"                   </span></span>
-<span><span class="co">#&gt; [33] "xpf"                      </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[14]]</span></span>
+<span><span class="co">#&gt; $clusters[[2]]</span></span>
 <span><span class="co">#&gt; [1] "dna"    "repair"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[3]]</span></span>
+<span><span class="co">#&gt;  [1] "abnormally"                "activates"                </span></span>
+<span><span class="co">#&gt;  [3] "active"                    "activity"                 </span></span>
+<span><span class="co">#&gt;  [5] "adjacent"                  "alter"                    </span></span>
+<span><span class="co">#&gt;  [7] "atpase"                    "atpdependent"             </span></span>
+<span><span class="co">#&gt;  [9] "atpstimulated"             "basal"                    </span></span>
+<span><span class="co">#&gt; [11] "basic"                     "belongs"                  </span></span>
+<span><span class="co">#&gt; [13] "bivm"                      "cerebrooculofacioskeletal"</span></span>
+<span><span class="co">#&gt; [15] "characterized"             "complementation"          </span></span>
+<span><span class="co">#&gt; [17] "damage"                    "defects"                  </span></span>
+<span><span class="co">#&gt; [19] "exon"                      "factor"                   </span></span>
+<span><span class="co">#&gt; [21] "forms"                     "functions"                </span></span>
+<span><span class="co">#&gt; [23] "helicase"                  "heterodimeric"            </span></span>
+<span><span class="co">#&gt; [25] "incision"                  "including"                </span></span>
+<span><span class="co">#&gt; [27] "interacts"                 "light"                    </span></span>
+<span><span class="co">#&gt; [29] "nucleotide"                "orf"                      </span></span>
+<span><span class="co">#&gt; [31] "pathway"                   "piggybackderived3"        </span></span>
+<span><span class="co">#&gt; [33] "product"                   "result"                   </span></span>
+<span><span class="co">#&gt; [35] "skin"                      "specific"                 </span></span>
+<span><span class="co">#&gt; [37] "splice"                    "transcriptioncoupled"     </span></span>
+<span><span class="co">#&gt; [39] "trichothiodystrophy"       "type"                     </span></span>
+<span><span class="co">#&gt; [41] "upstream"                 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt;  [1]  13  30  97  98 101 104 106 107 110 113 117 118 123 129</span></span>
+<span><span class="co">#&gt; [1] 16 41 43</span></span>
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <p><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;">
 In this example querying ERCC genes, the term <code>DNA repair</code> is clustered as expected.</p>
@@ -526,10 +447,10 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span><span class="co">#&gt; [1] 20</span></span></code></pre></div>
 <p>As fetching the same information is not desirable and time consuming, the same object can be passed to <code>redo</code> option and re-perform the analysis like tagging, or changing the visualization options. Also, using <code>obtain_pubmed</code> function, only the text can be obtained and be processed by the downstream functions.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="st">"tdm"</span>, cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
-<span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="st">"tdm"</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                 plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Using previous pvclust results</span></span>
@@ -592,7 +513,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span>                      plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                      corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                      numWords<span class="op">=</span><span class="fl">30</span>,</span>
-<span>                      tag<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                      tag<span class="op">=</span><span class="st">"cor"</span>,</span>
 <span>                      tfidf<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 124</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
@@ -614,7 +535,7 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <span>                      corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                      numWords<span class="op">=</span><span class="fl">30</span>,</span>
 <span>                      tfidf<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                      tag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                      tag<span class="op">=</span><span class="st">"cor"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 87</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
@@ -949,7 +870,7 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-26.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

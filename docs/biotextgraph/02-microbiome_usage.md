@@ -19,7 +19,7 @@ We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the r
 
 
 ```r
-basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag=FALSE, plotType="wc",
+basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="none", plotType="wc",
     curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Set2"),numWords=80,argList=list(min.freq=1))
 #> Input microbes: 2
@@ -59,7 +59,7 @@ If `target="abstract"`, the corresponding abstract of curated publications will 
 
 
 ```r
-basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag=TRUE, plotType="wc",
+basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="cor", plotType="wc",
     curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Dark2"),numWords=80)
 #> Input microbes: 2
@@ -228,7 +228,7 @@ For microbiome analysis, it is often the case that investigating coded enzymes i
 vp <- bugsigdb(c("Veillonella parvula"),
                  plotType="network", layout="nicely",
                 curate=TRUE, target="title", edgeLink=TRUE,
-                mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag=TRUE,
+                mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag="cor",
                 cl=snow::makeCluster(10),colorText=TRUE, pre=TRUE, numWords=30,
                 ecFile="../enzyme.dat", addFreqToMB=TRUE, ## Add nodes other than words pseudo-frequency
                 upTaxFile = "../speclist.txt")
@@ -239,7 +239,16 @@ vp <- bugsigdb(c("Veillonella parvula"),
 #> Filtering 0 words (frequency and/or tfidf)
 #> Processing EC file
 #>   Linking taxonomy to EC
-#> Multiscale bootstrap... Done.
+#> Bootstrap (r = 0.5)... Done.
+#> Bootstrap (r = 0.6)... Done.
+#> Bootstrap (r = 0.7)... Done.
+#> Bootstrap (r = 0.8)... Done.
+#> Bootstrap (r = 0.9)... Done.
+#> Bootstrap (r = 1.0)... Done.
+#> Bootstrap (r = 1.1)... Done.
+#> Bootstrap (r = 1.2)... Done.
+#> Bootstrap (r = 1.3)... Done.
+#> Bootstrap (r = 1.4)... Done.
 vp@net
 ```
 
@@ -314,7 +323,6 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 corThresh=0.3,
                 colorize=TRUE,
                 pre=TRUE,
-                tag=FALSE,
                 additionalRemove = filter$word,
                 colorText=TRUE,
                 plotType="network",

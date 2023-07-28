@@ -46,8 +46,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bbec947a5e561d19c15a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-bbec947a5e561d19c15a">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-922c4b7a48e0b37766c0" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-922c4b7a48e0b37766c0">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -98,9 +98,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 29da8e6 UN-- 4 2 -- 
+#> IGRAPH 246da26 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 29da8e6 (vertex names):
+#> + edges from 246da26 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -121,8 +121,8 @@ tib |> head() |> DT::datatable()
 ```
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8b1eb9d7708d20113b75" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8b1eb9d7708d20113b75">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c679913791c4dc89d6ab" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c679913791c4dc89d6ab">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 ### Draw the network
@@ -149,9 +149,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 2be2ef7 UN-- 21 922 -- 
+#> IGRAPH 25bbde0 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 2be2ef7 (vertex names):
+#> + edges from 25bbde0 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -312,7 +312,7 @@ plotHeatmap(stana, "101346",
 
 ### Visualization of KEGG PATHWAY
 
-`KEGG PATHWAY` is frequently used to characterize metabolic function of microbiome. Utilizing [`ggkegg`](https://github.com/noriakis/ggkegg), the information of intra-species diversity, particulary gene abundance differences, can be reflected onto `KEGG PATHWAY`.
+`KEGG PATHWAY` is frequently used to characterize metabolic function of microbiome. Utilizing [`ggkegg`](https://github.com/noriakis/ggkegg), the information of intra-species diversity, particulary gene abundance differences, can be reflected onto `KEGG PATHWAY`. It needs `genes` slot filled, and some annotations files, typically `eggNOG-mapper v2`, are needed.
 
 #### Visualizing differences per species
 
@@ -381,7 +381,7 @@ gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_s
 gg
 ```
 
-<img src="03-function_files/figure-html/onescale-1.svg" width="672" />
+<img src="03-function_files/figure-html/onescale-1.png" width="672" />
 
 By default, the scale is same. If you install `ggh4x`, multiple scales can be added, by specifying `multi_scale` argument.
 
@@ -396,7 +396,7 @@ gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_s
 gg
 ```
 
-<img src="03-function_files/figure-html/multscale-1.svg" width="672" />
+<img src="03-function_files/figure-html/multscale-1.png" width="672" />
 
 You can provide multiple pathway IDs to pathway_id, which returns a list of plot.
 
@@ -413,7 +413,7 @@ gg2 <- patchwork::wrap_plots(gg)
 gg2
 ```
 
-<img src="03-function_files/figure-html/pathway-1.svg" width="672" />
+<img src="03-function_files/figure-html/pathway-1.png" width="672" />
 
 In this way, differences in orthologies in the pathway across multiple species can be readily captured.
 
@@ -433,4 +433,26 @@ gg2 <- patchwork::wrap_plots(gg)
 gg2
 ```
 
-<img src="03-function_files/figure-html/pathway_SUM-1.svg" width="672" />
+<img src="03-function_files/figure-html/pathway_SUM-1.png" width="672" />
+
+### Show which species have the KOs
+
+If you specify `point_mode=TRUE`, the function plot points on the KOs on the pathways
+based on whether the specified species have the corresponding KOs annotated.
+
+
+```r
+gg <- plotKEGGPathway(stana, c("101346","102438"),
+                      pathway_id=c("ko00270"),
+                      sp_colors=c("blue","red") |> setNames(c("101346","102438")),
+                      point_mode=TRUE)
+#> Using pre-computed KO table
+#> Using pre-computed KO table
+#> 101346: HC / R
+#> 102438: HC / R
+#> Point mode enabled
+gg
+#> $ko00270
+```
+
+<img src="03-function_files/figure-html/pathway_point-1.png" width="672" />

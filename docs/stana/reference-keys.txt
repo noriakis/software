@@ -22,6 +22,7 @@ kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species
 visualizing-calculated-values-across-species
+show-which-species-have-the-kos
 visualization
 plotpca
 visualization-of-gene-abundances

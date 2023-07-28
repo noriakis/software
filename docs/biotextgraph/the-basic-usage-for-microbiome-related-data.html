@@ -82,7 +82,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases (<a href="https://bugsigdb.org/Main_Page">Geistlinger et al. 2022</a>). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If <code>target="title"</code>, the title of the corresponding articles will be summarized.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="cn">FALSE</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
+<code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"none"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span>,argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>min.freq<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
@@ -117,7 +117,7 @@
 <div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If <code>target="abstract"</code>, the corresponding abstract of curated publications will be fetched and be summarized.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="cn">TRUE</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
+<code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"cor"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Dark2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
@@ -261,7 +261,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="va">vp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella parvula"</span><span class="op">)</span>,</span>
 <span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"nicely"</span>,</span>
 <span>                curate<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="st">"title"</span>, edgeLink<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                mbPlot <span class="op">=</span> <span class="cn">TRUE</span>, ecPlot<span class="op">=</span><span class="cn">TRUE</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>, tag<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                mbPlot <span class="op">=</span> <span class="cn">TRUE</span>, ecPlot<span class="op">=</span><span class="cn">TRUE</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>, tag<span class="op">=</span><span class="st">"cor"</span>,</span>
 <span>                cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,colorText<span class="op">=</span><span class="cn">TRUE</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">30</span>,</span>
 <span>                ecFile<span class="op">=</span><span class="st">"../enzyme.dat"</span>, addFreqToMB<span class="op">=</span><span class="cn">TRUE</span>, <span class="co">## Add nodes other than words pseudo-frequency</span></span>
 <span>                upTaxFile <span class="op">=</span> <span class="st">"../speclist.txt"</span><span class="op">)</span></span>
@@ -272,7 +272,16 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Processing EC file</span></span>
 <span><span class="co">#&gt;   Linking taxonomy to EC</span></span>
-<span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
 <span><span class="va">vp</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -337,7 +346,6 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>                corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                colorize<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                pre<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                tag<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                additionalRemove <span class="op">=</span> <span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
 <span>                colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -608,7 +616,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-26.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
