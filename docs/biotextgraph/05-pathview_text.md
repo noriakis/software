@@ -171,8 +171,10 @@ The returned `osplot` object can be accessed as the name `text` in the list. Not
 ver$text
 #> Type: pubmed_abstract
 #> Number of words: 30
-#> TP53 OR CDC45 OR CDC6
-#> 393.7 Kb
+#> Query: TP53 OR CDC45 OR CDC6
+#> Graph: V(31), E(201)
+#> Degree: TP53(79)/role(16)/survival(16)/TP53(16)/Cancer(15)
+#> 323.7 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",
@@ -188,6 +190,10 @@ ver <- pathviewText(query,
 #> Info: Working in directory C:/Users/nsato/Dropbox/build_wgcs/book
 #> Info: Writing image file hsa04110.custom.cols.png
 #> Proceeding without API key
+#> Joining with `by = join_by(name, type)`
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 
 ver$concat
 ```

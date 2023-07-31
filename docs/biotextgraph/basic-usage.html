@@ -112,9 +112,9 @@ In this example, we use mostly human-derived data, and use <code>org.Hs.eg.db</c
 <span><span class="co">#&gt; Type: refseq</span></span>
 <span><span class="co">#&gt; Number of words: 15</span></span>
 <span><span class="co">#&gt; Query: ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8</span></span>
-<span><span class="co">#&gt; Graph: V(13), E(34)</span></span>
-<span><span class="co">#&gt; Degree: excision(8)/complementation(7)/Defects(7)/nucleotide(7)/incision(6)</span></span>
-<span><span class="co">#&gt; 211.5 Kb</span></span></code></pre></div>
+<span><span class="co">#&gt; Graph: V(15), E(41)</span></span>
+<span><span class="co">#&gt; Degree: complementation(8)/Defects(8)/DNA(8)/excision(7)/incision(7)</span></span>
+<span><span class="co">#&gt; 210.1 Kb</span></span></code></pre></div>
 <p>For visualization, The edge label corresponding to correlation or cooccurrence values can be shown by <code>edgeLabel=TRUE</code>. The number of words to be shown on plot can be specified by <code>numWords</code>. The threshold of correlation can be specified by <code>corThresh</code>. The visualized network layout can be specified by passing <code>layout</code> argument. The text color can be changed by <code>colorText=TRUE</code>. The type of edge can be specified by <code>edgeLink</code>, which is by default <code>TRUE</code> (link will be used).</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -281,8 +281,8 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <code class="sourceCode R"><span><span class="va">gwc</span></span>
 <span><span class="co">#&gt; Type: refseq</span></span>
 <span><span class="co">#&gt; Number of words: 100</span></span>
-<span><span class="co">#&gt; ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8</span></span>
-<span><span class="co">#&gt; 483.1 Kb</span></span>
+<span><span class="co">#&gt; Query: ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8</span></span>
+<span><span class="co">#&gt; 202.4 Kb</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gwc</span><span class="op">@</span><span class="va">freqDf</span><span class="op">)</span>, caption <span class="op">=</span> <span class="st">'Term frequencies.'</span>,</span>
 <span>  row.names <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -300,24 +300,24 @@ One can specify <code>genePlotNum</code> for limiting the genes shown by ranking
 <td align="right">16</td>
 </tr>
 <tr class="even">
+<td align="left">The</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
 <td align="left">DNA</td>
 <td align="right">11</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">syndrome</td>
 <td align="right">9</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">excision</td>
 <td align="right">8</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">transcription</td>
 <td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">cockayne</td>
-<td align="right">6</td>
 </tr>
 </tbody>
 </table></div>
@@ -389,37 +389,42 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">pvpick</span></span>
 <span><span class="co">#&gt; $clusters</span></span>
 <span><span class="co">#&gt; $clusters[[1]]</span></span>
-<span><span class="co">#&gt; [1] "pigmentosum" "xeroderma"  </span></span>
+<span><span class="co">#&gt; [1] "activates" "adjacent" </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $clusters[[2]]</span></span>
-<span><span class="co">#&gt; [1] "dna"    "repair"</span></span>
+<span><span class="co">#&gt; [1] "cerebrooculofacioskeletal" "exon"                     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $clusters[[3]]</span></span>
-<span><span class="co">#&gt;  [1] "abnormally"                "activates"                </span></span>
-<span><span class="co">#&gt;  [3] "active"                    "activity"                 </span></span>
-<span><span class="co">#&gt;  [5] "adjacent"                  "alter"                    </span></span>
-<span><span class="co">#&gt;  [7] "atpase"                    "atpdependent"             </span></span>
-<span><span class="co">#&gt;  [9] "atpstimulated"             "basal"                    </span></span>
-<span><span class="co">#&gt; [11] "basic"                     "belongs"                  </span></span>
-<span><span class="co">#&gt; [13] "bivm"                      "cerebrooculofacioskeletal"</span></span>
-<span><span class="co">#&gt; [15] "characterized"             "complementation"          </span></span>
-<span><span class="co">#&gt; [17] "damage"                    "defects"                  </span></span>
-<span><span class="co">#&gt; [19] "exon"                      "factor"                   </span></span>
-<span><span class="co">#&gt; [21] "forms"                     "functions"                </span></span>
-<span><span class="co">#&gt; [23] "helicase"                  "heterodimeric"            </span></span>
-<span><span class="co">#&gt; [25] "incision"                  "including"                </span></span>
-<span><span class="co">#&gt; [27] "interacts"                 "light"                    </span></span>
-<span><span class="co">#&gt; [29] "nucleotide"                "orf"                      </span></span>
-<span><span class="co">#&gt; [31] "pathway"                   "piggybackderived3"        </span></span>
-<span><span class="co">#&gt; [33] "product"                   "result"                   </span></span>
-<span><span class="co">#&gt; [35] "skin"                      "specific"                 </span></span>
-<span><span class="co">#&gt; [37] "splice"                    "transcriptioncoupled"     </span></span>
-<span><span class="co">#&gt; [39] "trichothiodystrophy"       "type"                     </span></span>
-<span><span class="co">#&gt; [41] "upstream"                 </span></span>
+<span><span class="co">#&gt; [1] "orf"               "piggybackderived3"</span></span>
+<span><span class="co">#&gt; [3] "splice"           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[4]]</span></span>
+<span><span class="co">#&gt; [1] "pigmentosum" "xeroderma"  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[5]]</span></span>
+<span><span class="co">#&gt; [1] "atpdependent"        "basal"              </span></span>
+<span><span class="co">#&gt; [3] "factor"              "helicase"           </span></span>
+<span><span class="co">#&gt; [5] "trichothiodystrophy"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[6]]</span></span>
+<span><span class="co">#&gt; [1] "abnormally" "active"     "rna"       </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[7]]</span></span>
+<span><span class="co">#&gt; [1] "transcriptioncoupled" "upstream"            </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[8]]</span></span>
+<span><span class="co">#&gt;  [1] "characterized"   "complementation" "damage"         </span></span>
+<span><span class="co">#&gt;  [4] "defects"         "forms"           "heterodimeric"  </span></span>
+<span><span class="co">#&gt;  [7] "incision"        "including"       "light"          </span></span>
+<span><span class="co">#&gt; [10] "pathway"         "result"          "skin"           </span></span>
+<span><span class="co">#&gt; [13] "specific"        "xpf"            </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[9]]</span></span>
+<span><span class="co">#&gt; [1] "dna"    "repair" "the"   </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt; [1] 16 41 43</span></span>
+<span><span class="co">#&gt; [1]  2  6 12 14 17 18 20 39 41</span></span>
 <span><span class="va">gwclWhole</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <p><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;">
 In this example querying ERCC genes, the term <code>DNA repair</code> is clustered as expected.</p>
@@ -439,10 +444,10 @@ In this example querying ERCC genes, the term <code>DNA repair</code> is cluster
 <p>The returned PubMed IDs are stored in <code>pmids</code> slot.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span><span class="op">@</span><span class="va">pmids</span></span>
-<span><span class="co">#&gt;  [1] "20301571" "27051024" "27838878" "21278243" "31077069"</span></span>
-<span><span class="co">#&gt;  [6] "25867436" "16835333" "32749109" "23593158" "8053936" </span></span>
-<span><span class="co">#&gt; [11] "28803404" "28088319" "28474168" "24582975" "27051038"</span></span>
-<span><span class="co">#&gt; [16] "24023723" "34284736" "33125943" "25674148" "20687508"</span></span>
+<span><span class="co">#&gt;  [1] "27051024" "1433335"  "31077069" "27838878" "21278243"</span></span>
+<span><span class="co">#&gt;  [6] "23593158" "25867436" "28088319" "32749109" "20687508"</span></span>
+<span><span class="co">#&gt; [11] "27051038" "34284736" "28803404" "24833529" "16835333"</span></span>
+<span><span class="co">#&gt; [16] "28388903" "26400354" "24531312" "8053936"  "26782397"</span></span>
 <span><span class="va">ab</span><span class="op">@</span><span class="va">pmids</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 20</span></span></code></pre></div>
 <p>As fetching the same information is not desirable and time consuming, the same object can be passed to <code>redo</code> option and re-perform the analysis like tagging, or changing the visualization options. Also, using <code>obtain_pubmed</code> function, only the text can be obtained and be processed by the downstream functions.</p>
@@ -707,15 +712,44 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>size<span class="op">=</span><span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/biof2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="wrapper-for-biofabric-layout" class="section level3" number="2.8.2">
+<div id="biofabric-layouts-for-combined-networks" class="section level3" number="2.8.2">
 <h3>
-<span class="header-section-number">2.8.2</span> Wrapper for <code>BioFabric</code> layout<a class="anchor" aria-label="anchor" href="#wrapper-for-biofabric-layout"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8.2</span> Biofabric layouts for combined networks<a class="anchor" aria-label="anchor" href="#biofabric-layouts-for-combined-networks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Can be used in cojuction with <code><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet()</a></code>.</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04110`</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
+<span>               corThresh<span class="op">=</span><span class="fl">0.3</span>, numWords<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input genes: 124</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04114`</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
+<span>               corThresh<span class="op">=</span><span class="fl">0.3</span>, numWords<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input genes: 112</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"4110"</span>,<span class="st">"4114"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Grouping is stored in `col` variable of nodes</span></span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">comp</span><span class="op">@</span><span class="va">igraphRaw</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/obtainTextPosition.html">obtainTextPosition</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"fabric"</span>,sort.by<span class="op">=</span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/layout_tbl_graph_fabric.html">node_rank_fabric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_range.html">geom_node_range</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_span.html">geom_edge_span</a></span><span class="op">(</span>end_shape <span class="op">=</span> <span class="st">'circle'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/geom_node_shadowtext.html">geom_node_shadowtext</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">xmin</span><span class="op">-</span><span class="fl">4</span>,</span>
+<span>    label<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"grey20"</span>,size<span class="op">=</span><span class="fl">2</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/geom_node_shadowtext.html">geom_node_shadowtext</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">center</span>,</span>
+<span>    y<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">y</span><span class="op">+</span><span class="fl">1</span>, label<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">name</span>, color<span class="op">=</span><span class="va">col</span><span class="op">)</span>, bg.colour<span class="op">=</span><span class="st">"white"</span>, size<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/fabriccomb-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="wrapper-for-biofabric-layout" class="section level3" number="2.8.3">
+<h3>
+<span class="header-section-number">2.8.3</span> Wrapper for <code>BioFabric</code> layout<a class="anchor" aria-label="anchor" href="#wrapper-for-biofabric-layout"><i class="fas fa-link"></i></a>
 </h3>
 <p>The funciton <code>plot_biofabric</code> is prepared, which accepts <code>biotext</code> class object.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plot_biofabric.html">plot_biofabric</a></span><span class="op">(</span>end_shape<span class="op">=</span><span class="st">"square"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pbfbrc-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -737,11 +771,11 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt; other attached packages:</span></span>
 <span><span class="co">#&gt;  [1] ggkegg_0.99.1             testthat_3.1.7           </span></span>
 <span><span class="co">#&gt;  [3] XML_3.99-0.14             tidygraph_1.2.3          </span></span>
-<span><span class="co">#&gt;  [5] ggfx_1.0.1                igraph_1.4.2             </span></span>
+<span><span class="co">#&gt;  [5] ggfx_1.0.1                igraph_1.5.0             </span></span>
 <span><span class="co">#&gt;  [7] GetoptLong_1.0.5          ggforce_0.4.1            </span></span>
 <span><span class="co">#&gt;  [9] concaveman_1.1.0          dplyr_1.1.1              </span></span>
-<span><span class="co">#&gt; [11] dendextend_1.17.1         clusterProfiler_4.7.1.003</span></span>
-<span><span class="co">#&gt; [13] ReactomePA_1.42.0         RColorBrewer_1.1-3       </span></span>
+<span><span class="co">#&gt; [11] dendextend_1.16.0         clusterProfiler_4.7.1.003</span></span>
+<span><span class="co">#&gt; [13] ReactomePA_1.40.0         RColorBrewer_1.1-3       </span></span>
 <span><span class="co">#&gt; [15] ggraph_2.1.0.9000         org.Hs.eg.db_3.15.0      </span></span>
 <span><span class="co">#&gt; [17] AnnotationDbi_1.60.2      IRanges_2.32.0           </span></span>
 <span><span class="co">#&gt; [19] S4Vectors_0.36.2          Biobase_2.58.0           </span></span>
@@ -750,31 +784,31 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] utf8_1.2.3             tidyselect_1.2.0      </span></span>
-<span><span class="co">#&gt;   [3] RSQLite_2.3.1          htmlwidgets_1.6.2     </span></span>
+<span><span class="co">#&gt;   [3] RSQLite_2.3.0          htmlwidgets_1.6.2     </span></span>
 <span><span class="co">#&gt;   [5] grid_4.2.1             BiocParallel_1.32.6   </span></span>
 <span><span class="co">#&gt;   [7] devtools_2.4.5         scatterpie_0.1.8      </span></span>
-<span><span class="co">#&gt;   [9] munsell_0.5.0          codetools_0.2-19      </span></span>
+<span><span class="co">#&gt;   [9] munsell_0.5.0          codetools_0.2-18      </span></span>
 <span><span class="co">#&gt;  [11] ragg_1.2.5             rentrez_1.2.3         </span></span>
 <span><span class="co">#&gt;  [13] miniUI_0.1.1.1         withr_2.5.0           </span></span>
-<span><span class="co">#&gt;  [15] colorspace_2.1-0       GOSemSim_2.25.0       </span></span>
+<span><span class="co">#&gt;  [15] colorspace_2.1-0       GOSemSim_2.24.0       </span></span>
 <span><span class="co">#&gt;  [17] filelock_1.0.2         NLP_0.2-1             </span></span>
 <span><span class="co">#&gt;  [19] highr_0.10             knitr_1.42            </span></span>
-<span><span class="co">#&gt;  [21] rstudioapi_0.14        DOSE_3.25.0.002       </span></span>
+<span><span class="co">#&gt;  [21] rstudioapi_0.14        DOSE_3.24.2           </span></span>
 <span><span class="co">#&gt;  [23] GeneSummary_0.99.4     labeling_0.4.2        </span></span>
-<span><span class="co">#&gt;  [25] slam_0.1-50            GenomeInfoDbData_1.2.8</span></span>
+<span><span class="co">#&gt;  [25] slam_0.1-50            GenomeInfoDbData_1.2.9</span></span>
 <span><span class="co">#&gt;  [27] polyclip_1.10-4        bit64_4.0.5           </span></span>
 <span><span class="co">#&gt;  [29] farver_2.1.1           rprojroot_2.0.3       </span></span>
-<span><span class="co">#&gt;  [31] downloader_0.4         vctrs_0.6.2           </span></span>
+<span><span class="co">#&gt;  [31] downloader_0.4         vctrs_0.6.1           </span></span>
 <span><span class="co">#&gt;  [33] treeio_1.22.0          generics_0.1.3        </span></span>
-<span><span class="co">#&gt;  [35] gson_0.1.0             xfun_0.38             </span></span>
+<span><span class="co">#&gt;  [35] gson_0.1.0             xfun_0.37             </span></span>
 <span><span class="co">#&gt;  [37] BiocFileCache_2.6.1    R6_2.5.1              </span></span>
 <span><span class="co">#&gt;  [39] GenomeInfoDb_1.34.9    graphlayouts_0.8.4    </span></span>
 <span><span class="co">#&gt;  [41] ISOcodes_2022.09.29    bitops_1.0-7          </span></span>
 <span><span class="co">#&gt;  [43] cachem_1.0.7           fgsea_1.24.0          </span></span>
 <span><span class="co">#&gt;  [45] gridGraphics_0.5-1     showtext_0.9-5        </span></span>
 <span><span class="co">#&gt;  [47] promises_1.2.0.1       scales_1.2.1          </span></span>
-<span><span class="co">#&gt;  [49] enrichplot_1.18.4      gtable_0.3.3          </span></span>
-<span><span class="co">#&gt;  [51] downlit_0.4.2          processx_3.8.1        </span></span>
+<span><span class="co">#&gt;  [49] enrichplot_1.18.3      gtable_0.3.3          </span></span>
+<span><span class="co">#&gt;  [51] downlit_0.4.2          processx_3.8.0        </span></span>
 <span><span class="co">#&gt;  [53] rlang_1.1.0            systemfonts_1.0.4     </span></span>
 <span><span class="co">#&gt;  [55] GlobalOptions_0.1.2    splines_4.2.1         </span></span>
 <span><span class="co">#&gt;  [57] lazyeval_0.2.2         stopwords_2.3         </span></span>
@@ -787,8 +821,8 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt;  [71] ggdendro_0.1.23        sessioninfo_1.2.2     </span></span>
 <span><span class="co">#&gt;  [73] Rcpp_1.0.10            plyr_1.8.8            </span></span>
 <span><span class="co">#&gt;  [75] base64enc_0.1-3        zlibbioc_1.44.0       </span></span>
-<span><span class="co">#&gt;  [77] purrr_1.0.1            RCurl_1.98-1.12       </span></span>
-<span><span class="co">#&gt;  [79] prettyunits_1.1.1      ps_1.7.5              </span></span>
+<span><span class="co">#&gt;  [77] purrr_1.0.1            RCurl_1.98-1.10       </span></span>
+<span><span class="co">#&gt;  [79] prettyunits_1.1.1      ps_1.7.2              </span></span>
 <span><span class="co">#&gt;  [81] viridis_0.6.2          urlchecker_1.0.1      </span></span>
 <span><span class="co">#&gt;  [83] cowplot_1.1.1          ggrepel_0.9.3         </span></span>
 <span><span class="co">#&gt;  [85] fs_1.6.1               magrittr_2.0.3        </span></span>
@@ -799,31 +833,31 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <span><span class="co">#&gt;  [95] HDO.db_0.99.1          gridExtra_2.3         </span></span>
 <span><span class="co">#&gt;  [97] compiler_4.2.1         bugsigdbr_1.4.3       </span></span>
 <span><span class="co">#&gt;  [99] tibble_3.2.1           crayon_1.5.2          </span></span>
-<span><span class="co">#&gt; [101] shadowtext_0.1.2       htmltools_0.5.5       </span></span>
+<span><span class="co">#&gt; [101] shadowtext_0.1.2       htmltools_0.5.4       </span></span>
 <span><span class="co">#&gt; [103] ggfun_0.0.9            later_1.3.0           </span></span>
 <span><span class="co">#&gt; [105] tidyr_1.3.0            aplot_0.1.10          </span></span>
 <span><span class="co">#&gt; [107] DBI_1.1.3              tweenr_2.0.2          </span></span>
-<span><span class="co">#&gt; [109] dbplyr_2.3.2           MASS_7.3-58.3         </span></span>
+<span><span class="co">#&gt; [109] dbplyr_2.3.2           MASS_7.3-57           </span></span>
 <span><span class="co">#&gt; [111] rappdirs_0.3.3         Matrix_1.5-4          </span></span>
 <span><span class="co">#&gt; [113] brio_1.1.3             cli_3.6.1             </span></span>
 <span><span class="co">#&gt; [115] parallel_4.2.1         pkgconfig_2.0.3       </span></span>
-<span><span class="co">#&gt; [117] xml2_1.3.3             ggtree_3.7.1.002      </span></span>
+<span><span class="co">#&gt; [117] xml2_1.3.3             ggtree_3.6.2          </span></span>
 <span><span class="co">#&gt; [119] bslib_0.4.2            XVector_0.38.0        </span></span>
 <span><span class="co">#&gt; [121] yulab.utils_0.0.6      stringr_1.5.0         </span></span>
-<span><span class="co">#&gt; [123] callr_3.7.3            digest_0.6.29         </span></span>
+<span><span class="co">#&gt; [123] callr_3.7.3            digest_0.6.31         </span></span>
 <span><span class="co">#&gt; [125] showtextdb_3.0         graph_1.76.0          </span></span>
 <span><span class="co">#&gt; [127] Biostrings_2.66.0      tm_0.7-11             </span></span>
-<span><span class="co">#&gt; [129] rmarkdown_2.21         fastmatch_1.1-3       </span></span>
-<span><span class="co">#&gt; [131] tidytree_0.4.2         cyjShiny_1.0.42       </span></span>
+<span><span class="co">#&gt; [129] rmarkdown_2.20         fastmatch_1.1-3       </span></span>
+<span><span class="co">#&gt; [131] tidytree_0.4.2         cyjShiny_1.0.34       </span></span>
 <span><span class="co">#&gt; [133] curl_5.0.0             shiny_1.7.4           </span></span>
-<span><span class="co">#&gt; [135] graphite_1.44.0        rjson_0.2.21          </span></span>
-<span><span class="co">#&gt; [137] lifecycle_1.0.3        nlme_3.1-162          </span></span>
-<span><span class="co">#&gt; [139] jsonlite_1.8.0         desc_1.4.2            </span></span>
+<span><span class="co">#&gt; [135] graphite_1.42.0        rjson_0.2.21          </span></span>
+<span><span class="co">#&gt; [137] lifecycle_1.0.3        nlme_3.1-157          </span></span>
+<span><span class="co">#&gt; [139] jsonlite_1.8.4         desc_1.4.2            </span></span>
 <span><span class="co">#&gt; [141] viridisLite_0.4.1      fansi_1.0.4           </span></span>
-<span><span class="co">#&gt; [143] pillar_1.9.0           lattice_0.21-8        </span></span>
+<span><span class="co">#&gt; [143] pillar_1.9.0           lattice_0.20-45       </span></span>
 <span><span class="co">#&gt; [145] KEGGREST_1.38.0        fastmap_1.1.1         </span></span>
 <span><span class="co">#&gt; [147] httr_1.4.5             pkgbuild_1.4.0        </span></span>
-<span><span class="co">#&gt; [149] GO.db_3.15.0           remotes_2.4.2         </span></span>
+<span><span class="co">#&gt; [149] GO.db_3.16.0           remotes_2.4.2         </span></span>
 <span><span class="co">#&gt; [151] glue_1.6.2             png_0.1-8             </span></span>
 <span><span class="co">#&gt; [153] bit_4.0.5              profvis_0.3.7         </span></span>
 <span><span class="co">#&gt; [155] stringi_1.7.12         sass_0.4.5            </span></span>
@@ -851,7 +885,8 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <li>
 <a class="nav-link" href="#biofabric-layout"><span class="header-section-number">2.8</span> Biofabric layout</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#highlighting-genes-in-the-layout"><span class="header-section-number">2.8.1</span> Highlighting genes in the layout</a></li>
-<li><a class="nav-link" href="#wrapper-for-biofabric-layout"><span class="header-section-number">2.8.2</span> Wrapper for BioFabric layout</a></li>
+<li><a class="nav-link" href="#biofabric-layouts-for-combined-networks"><span class="header-section-number">2.8.2</span> Biofabric layouts for combined networks</a></li>
+<li><a class="nav-link" href="#wrapper-for-biofabric-layout"><span class="header-section-number">2.8.3</span> Wrapper for BioFabric layout</a></li>
 </ul>
 </li>
 </ul>
@@ -870,7 +905,7 @@ Specify which layout algorithm to choose in <code>igrpah</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-28.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

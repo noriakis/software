@@ -88,7 +88,7 @@ metawc
 #> Type: manual
 #> Number of words: 100
 #> Query: 
-#> 628.9 Kb
+#> 614.8 Kb
 metawc@wc
 ```
 
@@ -107,9 +107,9 @@ metanet
 #> Type: manual
 #> Number of words: 20
 #> Query: 
-#> Graph: V(20), E(65)
-#> Degree: cluster(12)/gene(11)/addition(10)/acid(9)/Biosynthesis(9)
-#> 634.7 Kb
+#> Graph: V(20), E(72)
+#> Degree: addition(12)/cluster(12)/Escherichia(11)/gene(10)/Biosynthesis(9)
+#> 616.5 Kb
 metanet@net
 ```
 
@@ -139,9 +139,9 @@ metanet2
 #> Type: manual
 #> Number of words: 20
 #> Query: 
-#> Graph: V(48), E(91)
-#> Degree: Escherichia coli(24)/cluster(12)/gene(11)/addition(10)/acid(9)
-#> 648 Kb
+#> Graph: V(48), E(98)
+#> Degree: Escherichia coli(24)/addition(12)/cluster(12)/Escherichia(11)/gene(10)
+#> 634.3 Kb
 metanet2@net
 ```
 
@@ -216,13 +216,13 @@ sessionInfo()
 #> [6] methods   base     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.29  
-#>  [4] R6_2.5.1        jsonlite_1.8.0  evaluate_0.20  
+#>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  
+#>  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  
 #>  [7] cachem_1.0.7    rlang_1.1.0     cli_3.6.1      
 #> [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4
-#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.21 
-#> [16] tools_4.2.1     xfun_0.38       yaml_2.3.7     
+#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 
+#> [16] tools_4.2.1     xfun_0.37       yaml_2.3.7     
 #> [19] fastmap_1.1.1   compiler_4.2.1  memoise_2.0.1  
-#> [22] htmltools_0.5.5 downlit_0.4.2   knitr_1.42     
+#> [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     
 #> [25] sass_0.4.5
 ```
