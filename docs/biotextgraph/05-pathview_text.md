@@ -172,9 +172,9 @@ ver$text
 #> Type: pubmed_abstract
 #> Number of words: 30
 #> Query: TP53 OR CDC45 OR CDC6
-#> Graph: V(31), E(201)
-#> Degree: TP53(79)/role(16)/survival(16)/TP53(16)/Cancer(15)
-#> 323.7 Kb
+#> Graph: V(31), E(203)
+#> Degree: TP53(79)/tumor(18)/TP53(17)/survival(16)/Cancer(15)
+#> 329.4 Kb
 
 ver <- pathviewText(query,
      keyType = "SYMBOL",

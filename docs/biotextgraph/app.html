@@ -83,7 +83,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">ReactomePA</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggforce.data-imaginist.com">ggforce</a></span><span class="op">)</span> <span class="co">## For genePathPlot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">degs</span> <span class="op">&lt;-</span> <span class="va">d3degDownAssetta2016</span></span>
@@ -215,7 +215,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <span><span class="co">#&gt; Input genes: 191</span></span>
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
 <span><span class="co">#&gt; columns</span></span>
-<span><span class="co">#&gt;   Converted input genes: 175</span></span>
+<span><span class="co">#&gt;   Converted input genes: 174</span></span>
 <span><span class="co">#&gt; Performing enrichment analysis</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
@@ -242,7 +242,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <span><span class="co">#&gt;   Converted input genes: 32</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Found 27 enriched term</span></span>
+<span><span class="co">#&gt; Found 28 enriched term</span></span>
 <span><span class="va">net1</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_BKPyV_files/figure-html/basic2app-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
@@ -317,9 +317,9 @@ First, show the network for the article titles.</p>
 <span><span class="va">conet</span> <span class="op">&lt;-</span> <span class="va">btg</span><span class="op">@</span><span class="va">igraphRaw</span></span>
 <span></span>
 <span><span class="va">ddrNms</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
-<span><span class="kw">for</span> <span class="op">(</span><span class="va">nm</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">nm</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">nm</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dna"</span>,<span class="st">"damage"</span>,<span class="st">"repair"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>        <span class="va">ddrNms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ddrNms</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/neighbors.html">neighbors</a></span><span class="op">(</span><span class="va">conet</span>, <span class="va">nm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>        <span class="va">ddrNms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">ddrNms</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/neighbors.html">neighbors</a></span><span class="op">(</span><span class="va">conet</span>, <span class="va">nm</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="op">}</span></span>
 <span><span class="op">}</span></span>
 <span><span class="va">ddrNms</span></span>
@@ -340,9 +340,9 @@ First, show the network for the article titles.</p>
 <span><span class="co">#&gt; [43] "RAD17"           "Cancer"          "chromatin"      </span></span>
 <span><span class="co">#&gt; [46] "complex"         "function"</span></span>
 <span></span>
-<span><span class="va">ddrRelated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.html">induced.subgraph</a></span><span class="op">(</span><span class="va">conet</span>,</span>
-<span>                 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ddrNms</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">$</span><span class="va">SYMBOL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">keys</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>,<span class="st">"SYMBOL"</span><span class="op">)</span></span>
+<span><span class="va">ddrRelated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/subgraph.html">induced.subgraph</a></span><span class="op">(</span><span class="va">conet</span>,</span>
+<span>                 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">ddrNms</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">$</span><span class="va">SYMBOL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">keys</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>,<span class="st">"SYMBOL"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">ddrRelated</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal2</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"grey80"</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">SYMBOL</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -355,7 +355,7 @@ First, show the network for the article titles.</p>
 <p>The network can be obtained by <code>returnNet=TRUE</code>, or is stored in returned <code>biotext</code> class object in the slot <code>igraphRaw</code>, which can be used for downstream analysis like assessment of degrees and graph-based clustering.</p>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">conetDeg</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/degree.html">degree</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span></span>
+<span><span class="va">conetDeg</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html">degree</a></span><span class="op">(</span><span class="va">conet</span><span class="op">)</span></span>
 <span><span class="va">conetDeg</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">conetDeg</span>, decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      SESN1       DDB2        DNA      RAD17      Human </span></span>
 <span><span class="co">#&gt;         26         21         20         18         15 </span></span>
@@ -366,7 +366,7 @@ First, show the network for the article titles.</p>
 <span></span>
 <span><span class="co">## Graph-based clustering by igraph::cluster_fast_greedy()</span></span>
 <span><span class="co">## Filling the slot `communities` and assign `igraphRaw` slot `community` attribute.</span></span>
-<span><span class="va">btg</span> <span class="op">&lt;-</span> <span class="va">btg</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/graph_cluster.html">graph_cluster</a></span><span class="op">(</span>func<span class="op">=</span><span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/cluster_fast_greedy.html">cluster_fast_greedy</a></span><span class="op">)</span></span>
+<span><span class="va">btg</span> <span class="op">&lt;-</span> <span class="va">btg</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/graph_cluster.html">graph_cluster</a></span><span class="op">(</span>func<span class="op">=</span><span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/igraph/man/cluster_fast_greedy.html">cluster_fast_greedy</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Check the membership for merged network</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">btg</span><span class="op">@</span><span class="va">communities</span><span class="op">$</span><span class="va">membership</span>,</span>
@@ -496,14 +496,38 @@ acid,cyclin
 <div class="inline-figure"><img src="06-application_example_BKPyV_files/figure-html/combineNet-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Dynamic layout can be also used to compare the networks, by <code>graphlayouts</code>, for comparing the multiple graphs, especially useful for time-series analysis. See the documentation of <a href="http://graphlayouts.schochastics.net/reference/layout_dynamic.html"><code>layout_as_dynamic</code></a> for specifying the alpha, which is default to 0.5.</p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">dyn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotDynamic.html">plotDynamic</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">abstnet</span>, <span class="va">titlenet</span><span class="op">)</span>, concat<span class="op">=</span><span class="st">"union"</span>,</span>
 <span>                   titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Abstract"</span>,<span class="st">"Title"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
+<span><span class="co">#&gt; This graph was created by an old(er) igraph version.</span></span>
+<span><span class="co">#&gt;   Call upgrade_graph() on it to use with the current igraph version</span></span>
+<span><span class="co">#&gt;   For now we convert it on the fly...</span></span>
 <span><span class="va">dyn</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_BKPyV_files/figure-html/dyn-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -521,89 +545,83 @@ acid,cyclin
 <span><span class="co">#&gt; [6] datasets  methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
-<span><span class="co">#&gt;  [1] ggforce_0.4.1             igraph_1.5.0             </span></span>
-<span><span class="co">#&gt;  [3] ggraph_2.1.0.9000         clusterProfiler_4.7.1.003</span></span>
-<span><span class="co">#&gt;  [5] ReactomePA_1.40.0         org.Hs.eg.db_3.15.0      </span></span>
-<span><span class="co">#&gt;  [7] AnnotationDbi_1.60.2      IRanges_2.32.0           </span></span>
-<span><span class="co">#&gt;  [9] S4Vectors_0.36.2          Biobase_2.58.0           </span></span>
-<span><span class="co">#&gt; [11] BiocGenerics_0.44.0       biotextgraph_0.99.0      </span></span>
-<span><span class="co">#&gt; [13] ggplot2_3.4.2            </span></span>
+<span><span class="co">#&gt;  [1] ggforce_0.4.1         igraph_1.4.1         </span></span>
+<span><span class="co">#&gt;  [3] ggraph_2.1.0.9000     clusterProfiler_4.6.2</span></span>
+<span><span class="co">#&gt;  [5] ReactomePA_1.42.0     org.Hs.eg.db_3.16.0  </span></span>
+<span><span class="co">#&gt;  [7] AnnotationDbi_1.60.0  IRanges_2.32.0       </span></span>
+<span><span class="co">#&gt;  [9] S4Vectors_0.36.2      Biobase_2.58.0       </span></span>
+<span><span class="co">#&gt; [11] BiocGenerics_0.44.0   biotextgraph_0.99.0  </span></span>
+<span><span class="co">#&gt; [13] ggplot2_3.4.2        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] shadowtext_0.1.2       fastmatch_1.1-3       </span></span>
-<span><span class="co">#&gt;   [3] systemfonts_1.0.4      plyr_1.8.8            </span></span>
-<span><span class="co">#&gt;   [5] lazyeval_0.2.2         splines_4.2.1         </span></span>
-<span><span class="co">#&gt;   [7] BiocParallel_1.32.6    GenomeInfoDb_1.34.9   </span></span>
-<span><span class="co">#&gt;   [9] digest_0.6.31          yulab.utils_0.0.6     </span></span>
-<span><span class="co">#&gt;  [11] htmltools_0.5.4        bugsigdbr_1.4.3       </span></span>
-<span><span class="co">#&gt;  [13] GOSemSim_2.24.0        viridis_0.6.2         </span></span>
-<span><span class="co">#&gt;  [15] GO.db_3.16.0           fansi_1.0.4           </span></span>
-<span><span class="co">#&gt;  [17] GeneSummary_0.99.4     magrittr_2.0.3        </span></span>
-<span><span class="co">#&gt;  [19] memoise_2.0.1          tm_0.7-11             </span></span>
-<span><span class="co">#&gt;  [21] Biostrings_2.66.0      graphlayouts_0.8.4    </span></span>
-<span><span class="co">#&gt;  [23] pvclust_2.2-0          wordcloud_2.6         </span></span>
-<span><span class="co">#&gt;  [25] svglite_2.1.1          enrichplot_1.18.3     </span></span>
-<span><span class="co">#&gt;  [27] graphhighlight_0.1.0   colorspace_2.1-0      </span></span>
-<span><span class="co">#&gt;  [29] rvest_1.0.3            rappdirs_0.3.3        </span></span>
-<span><span class="co">#&gt;  [31] blob_1.2.4             ggrepel_0.9.3         </span></span>
-<span><span class="co">#&gt;  [33] xfun_0.37              dplyr_1.1.1           </span></span>
-<span><span class="co">#&gt;  [35] crayon_1.5.2           RCurl_1.98-1.10       </span></span>
-<span><span class="co">#&gt;  [37] jsonlite_1.8.4         scatterpie_0.1.8      </span></span>
-<span><span class="co">#&gt;  [39] graph_1.76.0           ape_5.7-1             </span></span>
-<span><span class="co">#&gt;  [41] glue_1.6.2             kableExtra_1.3.4      </span></span>
-<span><span class="co">#&gt;  [43] polyclip_1.10-4        stopwords_2.3         </span></span>
-<span><span class="co">#&gt;  [45] gtable_0.3.3           zlibbioc_1.44.0       </span></span>
-<span><span class="co">#&gt;  [47] XVector_0.38.0         webshot_0.5.4         </span></span>
-<span><span class="co">#&gt;  [49] GetoptLong_1.0.5       graphite_1.42.0       </span></span>
-<span><span class="co">#&gt;  [51] rentrez_1.2.3          scales_1.2.1          </span></span>
-<span><span class="co">#&gt;  [53] DOSE_3.24.2            DBI_1.1.3             </span></span>
-<span><span class="co">#&gt;  [55] Rcpp_1.0.10            viridisLite_0.4.1     </span></span>
-<span><span class="co">#&gt;  [57] xtable_1.8-4           tidytree_0.4.2        </span></span>
-<span><span class="co">#&gt;  [59] gridGraphics_0.5-1     reactome.db_1.81.0    </span></span>
-<span><span class="co">#&gt;  [61] bit_4.0.5              htmlwidgets_1.6.2     </span></span>
-<span><span class="co">#&gt;  [63] httr_1.4.5             fgsea_1.24.0          </span></span>
-<span><span class="co">#&gt;  [65] RColorBrewer_1.1-3     ellipsis_0.3.2        </span></span>
-<span><span class="co">#&gt;  [67] pkgconfig_2.0.3        XML_3.99-0.14         </span></span>
-<span><span class="co">#&gt;  [69] farver_2.1.1           sass_0.4.5            </span></span>
-<span><span class="co">#&gt;  [71] utf8_1.2.3             labeling_0.4.2        </span></span>
-<span><span class="co">#&gt;  [73] ggplotify_0.1.0        tidyselect_1.2.0      </span></span>
-<span><span class="co">#&gt;  [75] rlang_1.1.0            reshape2_1.4.4        </span></span>
-<span><span class="co">#&gt;  [77] later_1.3.0            munsell_0.5.0         </span></span>
-<span><span class="co">#&gt;  [79] tools_4.2.1            cachem_1.0.7          </span></span>
-<span><span class="co">#&gt;  [81] downloader_0.4         cli_3.6.1             </span></span>
-<span><span class="co">#&gt;  [83] generics_0.1.3         RSQLite_2.3.0         </span></span>
-<span><span class="co">#&gt;  [85] gson_0.1.0             evaluate_0.20         </span></span>
-<span><span class="co">#&gt;  [87] stringr_1.5.0          fastmap_1.1.1         </span></span>
-<span><span class="co">#&gt;  [89] ggdendro_0.1.23        yaml_2.3.7            </span></span>
-<span><span class="co">#&gt;  [91] ggtree_3.6.2           knitr_1.42            </span></span>
-<span><span class="co">#&gt;  [93] bit64_4.0.5            fs_1.6.1              </span></span>
-<span><span class="co">#&gt;  [95] tidygraph_1.2.3        purrr_1.0.1           </span></span>
-<span><span class="co">#&gt;  [97] KEGGREST_1.38.0        dendextend_1.16.0     </span></span>
-<span><span class="co">#&gt;  [99] nlme_3.1-157           mime_0.12             </span></span>
-<span><span class="co">#&gt; [101] slam_0.1-50            aplot_0.1.10          </span></span>
-<span><span class="co">#&gt; [103] xml2_1.3.3             concaveman_1.1.0      </span></span>
-<span><span class="co">#&gt; [105] compiler_4.2.1         rstudioapi_0.14       </span></span>
-<span><span class="co">#&gt; [107] png_0.1-8              treeio_1.22.0         </span></span>
-<span><span class="co">#&gt; [109] tibble_3.2.1           tweenr_2.0.2          </span></span>
-<span><span class="co">#&gt; [111] bslib_0.4.2            stringi_1.7.12        </span></span>
-<span><span class="co">#&gt; [113] cyjShiny_1.0.34        highr_0.10            </span></span>
-<span><span class="co">#&gt; [115] lattice_0.20-45        Matrix_1.5-4          </span></span>
-<span><span class="co">#&gt; [117] vctrs_0.6.1            pillar_1.9.0          </span></span>
-<span><span class="co">#&gt; [119] lifecycle_1.0.3        jquerylib_0.1.4       </span></span>
-<span><span class="co">#&gt; [121] GlobalOptions_0.1.2    data.table_1.14.8     </span></span>
-<span><span class="co">#&gt; [123] cowplot_1.1.1          bitops_1.0-7          </span></span>
-<span><span class="co">#&gt; [125] httpuv_1.6.9           patchwork_1.1.2       </span></span>
-<span><span class="co">#&gt; [127] qvalue_2.30.0          R6_2.5.1              </span></span>
-<span><span class="co">#&gt; [129] bookdown_0.33          promises_1.2.0.1      </span></span>
-<span><span class="co">#&gt; [131] gridExtra_2.3          codetools_0.2-18      </span></span>
-<span><span class="co">#&gt; [133] MASS_7.3-57            rjson_0.2.21          </span></span>
-<span><span class="co">#&gt; [135] withr_2.5.0            GenomeInfoDbData_1.2.9</span></span>
-<span><span class="co">#&gt; [137] parallel_4.2.1         ISOcodes_2022.09.29   </span></span>
-<span><span class="co">#&gt; [139] ggfun_0.0.9            grid_4.2.1            </span></span>
-<span><span class="co">#&gt; [141] tidyr_1.3.0            HDO.db_0.99.1         </span></span>
-<span><span class="co">#&gt; [143] rmarkdown_2.20         downlit_0.4.2         </span></span>
-<span><span class="co">#&gt; [145] NLP_0.2-1              shiny_1.7.4           </span></span>
-<span><span class="co">#&gt; [147] base64enc_0.1-3</span></span></code></pre></div>
+<span><span class="co">#&gt;   [3] plyr_1.8.8             lazyeval_0.2.2        </span></span>
+<span><span class="co">#&gt;   [5] splines_4.2.2          BiocParallel_1.32.5   </span></span>
+<span><span class="co">#&gt;   [7] GenomeInfoDb_1.34.9    digest_0.6.31         </span></span>
+<span><span class="co">#&gt;   [9] yulab.utils_0.0.6      htmltools_0.5.4       </span></span>
+<span><span class="co">#&gt;  [11] bugsigdbr_1.4.3        GOSemSim_2.24.0       </span></span>
+<span><span class="co">#&gt;  [13] viridis_0.6.2          GO.db_3.16.0          </span></span>
+<span><span class="co">#&gt;  [15] fansi_1.0.4            GeneSummary_0.99.4    </span></span>
+<span><span class="co">#&gt;  [17] magrittr_2.0.3         memoise_2.0.1         </span></span>
+<span><span class="co">#&gt;  [19] tm_0.7-11              Biostrings_2.66.0     </span></span>
+<span><span class="co">#&gt;  [21] graphlayouts_0.8.4     pvclust_2.2-0         </span></span>
+<span><span class="co">#&gt;  [23] wordcloud_2.6          enrichplot_1.18.3     </span></span>
+<span><span class="co">#&gt;  [25] colorspace_2.1-0       rappdirs_0.3.3        </span></span>
+<span><span class="co">#&gt;  [27] blob_1.2.3             ggrepel_0.9.3         </span></span>
+<span><span class="co">#&gt;  [29] xfun_0.37              dplyr_1.1.0           </span></span>
+<span><span class="co">#&gt;  [31] crayon_1.5.2           RCurl_1.98-1.10       </span></span>
+<span><span class="co">#&gt;  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  </span></span>
+<span><span class="co">#&gt;  [35] graph_1.76.0           ape_5.7               </span></span>
+<span><span class="co">#&gt;  [37] glue_1.6.2             polyclip_1.10-4       </span></span>
+<span><span class="co">#&gt;  [39] gtable_0.3.1           zlibbioc_1.44.0       </span></span>
+<span><span class="co">#&gt;  [41] XVector_0.38.0         GetoptLong_1.0.5      </span></span>
+<span><span class="co">#&gt;  [43] graphite_1.44.0        rentrez_1.2.3         </span></span>
+<span><span class="co">#&gt;  [45] scales_1.2.1           DOSE_3.24.2           </span></span>
+<span><span class="co">#&gt;  [47] DBI_1.1.3              Rcpp_1.0.10           </span></span>
+<span><span class="co">#&gt;  [49] viridisLite_0.4.1      xtable_1.8-4          </span></span>
+<span><span class="co">#&gt;  [51] tidytree_0.4.2         gridGraphics_0.5-1    </span></span>
+<span><span class="co">#&gt;  [53] reactome.db_1.82.0     bit_4.0.5             </span></span>
+<span><span class="co">#&gt;  [55] htmlwidgets_1.6.1      httr_1.4.5            </span></span>
+<span><span class="co">#&gt;  [57] fgsea_1.24.0           RColorBrewer_1.1-3    </span></span>
+<span><span class="co">#&gt;  [59] ellipsis_0.3.2         pkgconfig_2.0.3       </span></span>
+<span><span class="co">#&gt;  [61] XML_3.99-0.13          farver_2.1.1          </span></span>
+<span><span class="co">#&gt;  [63] sass_0.4.5             utf8_1.2.3            </span></span>
+<span><span class="co">#&gt;  [65] ggplotify_0.1.0        tidyselect_1.2.0      </span></span>
+<span><span class="co">#&gt;  [67] rlang_1.1.1            reshape2_1.4.4        </span></span>
+<span><span class="co">#&gt;  [69] later_1.3.0            munsell_0.5.0         </span></span>
+<span><span class="co">#&gt;  [71] tools_4.2.2            cachem_1.0.7          </span></span>
+<span><span class="co">#&gt;  [73] downloader_0.4         cli_3.6.0             </span></span>
+<span><span class="co">#&gt;  [75] generics_0.1.3         RSQLite_2.3.0         </span></span>
+<span><span class="co">#&gt;  [77] gson_0.0.9             evaluate_0.20         </span></span>
+<span><span class="co">#&gt;  [79] stringr_1.5.0          fastmap_1.1.1         </span></span>
+<span><span class="co">#&gt;  [81] ggdendro_0.1.23        yaml_2.3.7            </span></span>
+<span><span class="co">#&gt;  [83] ggtree_3.6.2           knitr_1.42            </span></span>
+<span><span class="co">#&gt;  [85] bit64_4.0.5            fs_1.6.1              </span></span>
+<span><span class="co">#&gt;  [87] tidygraph_1.2.3        purrr_1.0.1           </span></span>
+<span><span class="co">#&gt;  [89] KEGGREST_1.38.0        dendextend_1.16.0     </span></span>
+<span><span class="co">#&gt;  [91] nlme_3.1-161           mime_0.12             </span></span>
+<span><span class="co">#&gt;  [93] slam_0.1-50            aplot_0.1.9           </span></span>
+<span><span class="co">#&gt;  [95] xml2_1.3.3             compiler_4.2.2        </span></span>
+<span><span class="co">#&gt;  [97] rstudioapi_0.14        png_0.1-8             </span></span>
+<span><span class="co">#&gt;  [99] treeio_1.22.0          tibble_3.1.8          </span></span>
+<span><span class="co">#&gt; [101] tweenr_2.0.2           bslib_0.4.2           </span></span>
+<span><span class="co">#&gt; [103] stringi_1.7.12         cyjShiny_1.0.34       </span></span>
+<span><span class="co">#&gt; [105] lattice_0.20-45        Matrix_1.5-3          </span></span>
+<span><span class="co">#&gt; [107] vctrs_0.5.2            pillar_1.8.1          </span></span>
+<span><span class="co">#&gt; [109] lifecycle_1.0.3        jquerylib_0.1.4       </span></span>
+<span><span class="co">#&gt; [111] GlobalOptions_0.1.2    data.table_1.14.8     </span></span>
+<span><span class="co">#&gt; [113] cowplot_1.1.1          bitops_1.0-7          </span></span>
+<span><span class="co">#&gt; [115] httpuv_1.6.9           patchwork_1.1.2       </span></span>
+<span><span class="co">#&gt; [117] qvalue_2.30.0          R6_2.5.1              </span></span>
+<span><span class="co">#&gt; [119] bookdown_0.33          promises_1.2.0.1      </span></span>
+<span><span class="co">#&gt; [121] gridExtra_2.3          codetools_0.2-18      </span></span>
+<span><span class="co">#&gt; [123] MASS_7.3-58.1          rjson_0.2.21          </span></span>
+<span><span class="co">#&gt; [125] withr_2.5.0            GenomeInfoDbData_1.2.9</span></span>
+<span><span class="co">#&gt; [127] parallel_4.2.2         ggfun_0.0.9           </span></span>
+<span><span class="co">#&gt; [129] grid_4.2.2             tidyr_1.3.0           </span></span>
+<span><span class="co">#&gt; [131] HDO.db_0.99.1          rmarkdown_2.20        </span></span>
+<span><span class="co">#&gt; [133] downlit_0.4.2          NLP_0.2-1             </span></span>
+<span><span class="co">#&gt; [135] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
 
 </div>
 </div>
@@ -635,7 +653,7 @@ acid,cyclin
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-07-31.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

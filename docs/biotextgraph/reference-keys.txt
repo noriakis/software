@@ -2,6 +2,7 @@ tab:table
 about
 basic-usage
 producing-networks
+identifying-important-genes-in-the-network
 producing-word-clouds
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
@@ -15,6 +16,7 @@ wrapper-for-biofabric-layout
 the-basic-usage-for-microbiome-related-data
 enzymes
 metabolites
+interactive
 pathway-information
 annotating-the-dendrogram-of-taxonomy
 metacyc
