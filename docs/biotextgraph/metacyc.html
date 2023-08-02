@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph</title>
+<title>Chapter 3 Microbial functional analysis | biotextgraph</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="generator" content="bookdown 0.33 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph">
+<meta property="og:title" content="Chapter 3 Microbial functional analysis | biotextgraph">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/metacyc.html">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Including the other databases (an example in MetaCyc) | biotextgraph">
+<meta name="twitter:title" content="Chapter 3 Microbial functional analysis | biotextgraph">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -26,9 +26,9 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="For mining the pathway information in curated database MetaCyc (Caspi et al. 2020), users can prepare pathways.dat from MetaCyc flat files. Note that you must have a valid license of using...">
-<meta property="og:description" content="For mining the pathway information in curated database MetaCyc (Caspi et al. 2020), users can prepare pathways.dat from MetaCyc flat files. Note that you must have a valid license of using...">
-<meta name="twitter:description" content="For mining the pathway information in curated database MetaCyc (Caspi et al. 2020), users can prepare pathways.dat from MetaCyc flat files. Note that you must have a valid license of using...">
+<meta name="description" content="In this section, we introduce making word networks showing microbial function using taxonomic idenfiers as input. For mining the pathway information in curated database MetaCyc (Caspi et...">
+<meta property="og:description" content="In this section, we introduce making word networks showing microbial function using taxonomic idenfiers as input. For mining the pathway information in curated database MetaCyc (Caspi et...">
+<meta name="twitter:description" content="In this section, we introduce making word networks showing microbial function using taxonomic idenfiers as input. For mining the pathway information in curated database MetaCyc (Caspi et...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -52,8 +52,8 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
 <li><a class="" href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></li>
-<li><a class="" href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></li>
-<li><a class="active" href="metacyc.html"><span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)</a></li>
+<li><a class="active" href="metacyc.html"><span class="header-section-number">3</span> Microbial functional analysis</a></li>
+<li><a class="" href="the-other-usage-for-microbiome-related-data.html"><span class="header-section-number">4</span> The other usage for microbiome-related data</a></li>
 <li><a class="" href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></li>
 <li><a class="" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">6</span> Annotating gene cluster dendrogram</a></li>
 <li><a class="" href="quantitative-analysis.html"><span class="header-section-number">7</span> Quantitative analysis</a></li>
@@ -69,13 +69,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="metacyc" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="metacyc" class="section level1" number="3">
 <h1>
-<span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)<a class="anchor" aria-label="anchor" href="#metacyc"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Microbial functional analysis<a class="anchor" aria-label="anchor" href="#metacyc"><i class="fas fa-link"></i></a>
 </h1>
-<p>For mining the pathway information in curated database MetaCyc (<a href="https://academic.oup.com/nar/article/48/D1/D445/5581728">Caspi et al. 2020</a>), users can prepare <code>pathways.dat</code> from MetaCyc flat files. Note that you must have a valid license of using MetaCyc. See <a href="https://www.metacyc.org/MetaCycUserGuide.shtml">User guides</a> of MetaCyc, and <a href="www.biocyc.org">BioCyc</a>.
-Suppose we would like to know pathway and related information of “Bifidobacterium longum” and “Escherichia coli”. The function <code>parseMetaCycPathway</code> can be used to parse the summarized comment of pathways using these queries. Note that the function search for <code>TAXONOMIC-RANGE</code> or <code>SPECIES</code> information in <code>pathways.dat</code> if <code>withTax=TRUE</code>. The resulting data.frame looks like below.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<p>In this section, we introduce making word networks showing microbial function using taxonomic idenfiers as input. For mining the pathway information in curated database MetaCyc (<a href="https://academic.oup.com/nar/article/48/D1/D445/5581728">Caspi et al. 2020</a>), users can prepare <code>pathways.dat</code> from MetaCyc flat files. Note that you must have a valid license of using MetaCyc. See <a href="https://www.metacyc.org/MetaCycUserGuide.shtml">User guides</a> of MetaCyc, and <a href="www.biocyc.org">BioCyc</a>. The other options will be KEGG Pathway textual information.</p>
+<p>Suppose we would like to know pathway and related information of “<em>Bifidobacterium longum</em>” and “<em>Escherichia coli</em>”. The function <code>parseMetaCycPathway</code> can be used to parse the summarized comment of pathways using these queries. Note that the function search for <code>TAXONOMIC-RANGE</code> or <code>SPECIES</code> information in <code>pathways.dat</code> if <code>withTax=TRUE</code>. The resulting data.frame looks like below.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span></span>
@@ -108,7 +108,7 @@ Escherichia coli
 </td>
 </tr></tbody>
 </table></div>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">input2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -150,11 +150,11 @@ Escherichia coli
 </tr></tbody>
 </table></div>
 <p>You can strip some tags and symbols in the text by <code>clear=TRUE</code>.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, <span class="va">candidateSpecies</span>, withTax<span class="op">=</span><span class="cn">TRUE</span>, clear<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">## Not shown because of the long text</span></span></code></pre></div>
 <p>These data frames can be passed to <code>manual</code> function, which performs the same analysis as RefSeq or PubMed information. The input data frame has to have <code>"text"</code> column to make word cloud or a network.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">metawc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/manual.html">manual</a></span><span class="op">(</span><span class="va">input</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
@@ -170,9 +170,9 @@ Escherichia coli
 <span><span class="co">#&gt; Query: </span></span>
 <span><span class="co">#&gt; 593.1 Kb</span></span>
 <span><span class="va">metawc</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/wcmeta-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-metacyc_manual_files/figure-html/wcmeta-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For plotting the network, query column must be specified if plotting the query with the word information.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="va">metanet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/manual.html">manual</a></span><span class="op">(</span><span class="va">input</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"query"</span>,<span class="st">"text"</span><span class="op">)</span><span class="op">]</span>, </span>
@@ -186,9 +186,9 @@ Escherichia coli
 <span><span class="co">#&gt; Degree: cluster(12)/gene(11)/addition(10)/acid(9)/Biosynthesis(9)</span></span>
 <span><span class="co">#&gt; 598.9 Kb</span></span>
 <span><span class="va">metanet</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For column other than the query and text, in this example <code>commonName</code> and <code>pathwayID</code>, the relationship between query and these columns are to be plotted. In this example, the connection between query and text is not shown because <code>queryPlot</code> is FALSE.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">metanet2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/manual.html">manual</a></span><span class="op">(</span><span class="va">input</span>, </span>
 <span>                additionalRemove<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cits"</span>,<span class="st">"frame"</span>,<span class="st">"pathway"</span><span class="op">)</span>,</span>
@@ -213,9 +213,9 @@ Escherichia coli
 <span><span class="co">#&gt; Degree: Escherichia coli(24)/cluster(12)/gene(11)/addition(10)/acid(9)</span></span>
 <span><span class="co">#&gt; 618.4 Kb</span></span>
 <span><span class="va">metanet2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/wcmeta3-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-metacyc_manual_files/figure-html/wcmeta3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>When taxonomy parsing is available, query by the NCBI Taxonomy ID.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set candSp to all and noComma to TRUE</span></span>
 <span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>, candSp<span class="op">=</span><span class="st">"all"</span>, withTax <span class="op">=</span> <span class="cn">TRUE</span>,noComma<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -229,11 +229,11 @@ Escherichia coli
 <span>                                               <span class="st">"bacteria"</span>,<span class="st">"reaction"</span>,<span class="st">"protein"</span>,<span class="st">"biosynthesis"</span>,</span>
 <span>                                               <span class="st">"organism"</span>,<span class="st">"organisms"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">input2Net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/query-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-metacyc_manual_files/figure-html/query-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Also, if you want to search for the NCBI tax identifiers and want to use species names as queries,
 First you should convert the IDs using <code>convertMetaCyc</code> function using <code>taxonomizr</code>.
 Next you search for converted names for the interested species, and input this data frame to <code>manual</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input</span><span class="op">$</span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/convertMetaCyc.html">convertMetaCyc</a></span><span class="op">(</span><span class="va">input</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Bifidobacterium"</span>,<span class="va">input</span><span class="op">$</span><span class="va">converted</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">input3</span> <span class="op">&lt;-</span> <span class="va">input3</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">input3</span><span class="op">$</span><span class="va">pathwayID</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -247,11 +247,11 @@ Next you search for converted names for the interested species, and input this d
 <span>                    <span class="st">"organism"</span>,<span class="st">"organisms"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Including columns pathwayID to link with query</span></span>
 <span><span class="va">input3Net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
-<div class="inline-figure"><img src="03-metacyc_manual_files/figure-html/query2-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="02-metacyc_manual_files/figure-html/query2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Includes BioCyc (TM) pathway/genome databases under license from SRI International.<br><img src="https://biocyc.org/graphics2021/BioCyc-logo-color-genome.svg" width="100px"></p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
 <span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -269,23 +269,23 @@ Next you search for converted names for the interested species, and input this d
 <span><span class="co">#&gt; [6] methods   base     </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  </span></span>
-<span><span class="co">#&gt;  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  </span></span>
-<span><span class="co">#&gt;  [7] cachem_1.0.7    rlang_1.1.1     cli_3.6.0      </span></span>
+<span><span class="co">#&gt;  [1] bookdown_0.33   withr_2.5.0     digest_0.6.29  </span></span>
+<span><span class="co">#&gt;  [4] R6_2.5.1        jsonlite_1.8.0  evaluate_0.20  </span></span>
+<span><span class="co">#&gt;  [7] cachem_1.0.7    rlang_1.1.0     cli_3.6.1      </span></span>
 <span><span class="co">#&gt; [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4</span></span>
-<span><span class="co">#&gt; [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 </span></span>
-<span><span class="co">#&gt; [16] tools_4.2.2     xfun_0.37       yaml_2.3.7     </span></span>
-<span><span class="co">#&gt; [19] fastmap_1.1.1   compiler_4.2.2  memoise_2.0.1  </span></span>
-<span><span class="co">#&gt; [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     </span></span>
+<span><span class="co">#&gt; [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.21 </span></span>
+<span><span class="co">#&gt; [16] tools_4.2.1     xfun_0.38       yaml_2.3.7     </span></span>
+<span><span class="co">#&gt; [19] fastmap_1.1.1   compiler_4.2.1  memoise_2.0.1  </span></span>
+<span><span class="co">#&gt; [22] htmltools_0.5.5 downlit_0.4.2   knitr_1.42     </span></span>
 <span><span class="co">#&gt; [25] sass_0.4.5</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="the-basic-usage-for-microbiome-related-data.html"><span class="header-section-number">3</span> The basic usage for microbiome-related data</a></div>
-<div class="next"><a href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></div>
+<div class="prev"><a href="basic-usage.html"><span class="header-section-number">2</span> Basic usage</a></div>
+<div class="next"><a href="the-other-usage-for-microbiome-related-data.html"><span class="header-section-number">4</span> The other usage for microbiome-related data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#metacyc"><span class="header-section-number">4</span> Including the other databases (an example in MetaCyc)</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#metacyc"><span class="header-section-number">3</span> Microbial functional analysis</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -301,7 +301,7 @@ Next you search for converted names for the interested species, and input this d
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-01.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

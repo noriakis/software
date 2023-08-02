@@ -6,6 +6,7 @@ identifying-important-genes-in-the-network
 producing-word-clouds
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
+connecting-the-networks-and-identify-shared-genes
 text-over-represenatation-analysis-experimental
 dependency-analyis-using-udpipe
 changing-the-font
@@ -13,13 +14,14 @@ biofabric-layout
 highlighting-genes-in-the-layout
 biofabric-layouts-for-combined-networks
 wrapper-for-biofabric-layout
-the-basic-usage-for-microbiome-related-data
+metacyc
+the-other-usage-for-microbiome-related-data
+diseases
 enzymes
 metabolites
 interactive
 pathway-information
 annotating-the-dendrogram-of-taxonomy
-metacyc
 interactive-inspection-of-gene-cluster-network-annotated-by-words
 wrapper-function-for-wordcloud-network
 annotating-gene-cluster-dendrogram
