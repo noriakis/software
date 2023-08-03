@@ -16,7 +16,7 @@ biofabric-layouts-for-combined-networks
 wrapper-for-biofabric-layout
 metacyc
 the-other-usage-for-microbiome-related-data
-diseases
+disease
 enzymes
 metabolites
 interactive
