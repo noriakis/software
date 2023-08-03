@@ -74,7 +74,7 @@
 <span class="header-section-number">4</span> The other usage for microbiome-related data<a class="anchor" aria-label="anchor" href="#the-other-usage-for-microbiome-related-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>In this section, we introduce the other usage for mining the information related to microbiome-related signatures, including disease, enzymes and metabolites by the package.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
@@ -85,7 +85,7 @@
 <span class="header-section-number">4.1</span> Diseases<a class="anchor" aria-label="anchor" href="#disease"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases (<a href="https://bugsigdb.org/Main_Page">Geistlinger et al. 2022</a>). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If <code>target="title"</code>, the title of the corresponding articles will be summarized.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"none"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span>,argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>min.freq<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -120,7 +120,7 @@
 <span><span class="va">basic</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If <code>target="abstract"</code>, the corresponding abstract of curated publications will be fetched and be summarized.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"cor"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Dark2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
@@ -145,7 +145,7 @@
 <span><span class="va">basic2</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in <code>refseq</code>.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rmwords</span> <span class="op">&lt;-</span> <span class="va">allFreqBSDB</span></span>
 <span><span class="va">filter</span> <span class="op">&lt;-</span> <span class="va">rmwords</span><span class="op">[</span><span class="va">rmwords</span><span class="op">$</span><span class="va">freq</span><span class="op">&gt;</span><span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">rmwords</span><span class="op">$</span><span class="va">freq</span>, <span class="fl">0.95</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">filter</span><span class="op">$</span><span class="va">word</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -174,7 +174,7 @@
 <span><span class="co">#&gt; risk          33        risk</span></span></code></pre></div>
 <p>The network visualization is possible by enabling <code>plotType="network"</code>.
 The same parameters that can be passed to <code>refseq</code> can be used.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Neisseria"</span>,<span class="st">"Veillonella"</span><span class="op">)</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    target<span class="op">=</span><span class="st">"title"</span>,</span>
@@ -193,7 +193,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The words-to-species relationship can be plotted by <code>mbPlot=TRUE</code>, useful for assessing which species have similar characteristics regarding diseases.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
 <span>                 <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>,</span>
 <span>            mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -220,7 +220,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>As the BugSigDB contains the relationship between bacterial taxonomy and disease, disease name can also be plotted. When <code>disPlot=TRUE</code>, the <code>mbPlot</code>
 will be set to <code>TRUE</code> by default. Words from PubMed that is contained in the disease flag will be concatenated into disease label (like <code>pregnancy</code>) when the <code>colorize=TRUE</code> like the example below.</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
 <span>    <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>, mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -237,7 +237,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="va">net3</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Other than curated databases, the PubMed query can also be performed with setting <code>curate=FALSE</code>. This way, the text information of the latest literature for the microbes and diseases can be plotted. The options for use in function obtaining PubMed information can be specified to <code>abstArg</code> in list format, like <code>sortOrder="pubdate"</code>.</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">FALSE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
@@ -261,7 +261,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <li><a href="https://enzyme.expasy.org/">enzyme.dat - from Expasy</a></li>
 <li><a href="https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/docs/speclist.txt">speclist.txt - UniProt Controlled vocabulary of species</a></li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">vp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella parvula"</span><span class="op">)</span>,</span>
 <span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"kk"</span>,</span>
@@ -305,11 +305,11 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 </ul>
 <p>We now use data obtained in <a href="https://www.nature.com/articles/s41467-022-33050-0">Dekkers et al.</a>.
 First, read the downloaded file using <code>readxl</code>.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metab</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span></span>
 <span>  <span class="st">"../41467_2022_33050_MOESM8_ESM.xlsx"</span>,skip <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 <p>Pass this tibble, as well as the columns to represent <code>taxonomy</code>, <code>metabolites</code>, and <code>quantitative values to threshold</code> to <code>metCol</code>. In this case, <code>metCol &lt;- c("Metagenomic species", "Metabolite", "Spearman's ρ")</code>. <code>manual</code> function can be also used for the general purpose of adding external information.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">metabEx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>,</span>
 <span>                edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
@@ -343,7 +343,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/metabex-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.</p>
 <p>By default, the category other than words are plotted without node and colorization (grey). If preferred, set <code>colorize=TRUE</code> to colorize the associated information by <code>catColors</code>. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated categories.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">metabEx</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>,</span>
 <span>                edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
@@ -376,7 +376,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 </h3>
 <p>For the complex network, the resulting image might be unreadable.
 <code>exportCyjsWithoutImage</code> function can be used to export the graph to readily interactive interface using <code>Cytoscape.js</code>. The below chunk shows the output produced by the function, hosted by GitHub Pages.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## exportCyjsWithoutImage(metabEx@igraph, rootDir=".", netDir="",nodeColorDiscretePal = "Pastel1")</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://noriakis.github.io/cyjs_test/complex"</span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://noriakis.github.io/cyjs_test/complex" width="100%" height="400px" data-external="1" style="border: none;">
@@ -394,7 +394,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span class="header-section-number">4.5</span> Annotating the dendrogram of taxonomy<a class="anchor" aria-label="anchor" href="#annotating-the-dendrogram-of-taxonomy"><i class="fas fa-link"></i></a>
 </h2>
 <p>Annotating the dendrogram (or cladogram) of taxonomy is possible by the <code>plotEigengeneNetworksWithWords</code> function. The used need to provide customized data.frame depicting query (taxonomy) and its corresponding text, like MetaCyc.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Read pathway description</span></span>
 <span><span class="va">file</span> <span class="op">&lt;-</span> <span class="st">"../../metacyc/24.5/data/pathways.dat"</span></span>
@@ -415,7 +415,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; [5] "Bacteria;Pseudomonadota;Betaproteobacteria;Burkholderiales;Burkholderiaceae;Paraburkholderia;Paraburkholderia phymatum"</span></span>
 <span><span class="co">#&gt; [6] "Bacteria;Pseudomonadota;Betaproteobacteria;Burkholderiales;Burkholderiaceae;Cupriavidus;Cupriavidus basilensis"</span></span></code></pre></div>
 <p>Now we fetch species under <code>Bacillota</code>.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="va">input</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"Bacillota"</span>, <span class="va">input</span><span class="op">$</span><span class="va">spConverted</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">bc</span> <span class="op">&lt;-</span> <span class="va">bc</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">bc</span><span class="op">$</span><span class="va">pathwayID</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="va">bc</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -455,7 +455,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; 749                              Bacteria;Bacillota;Bacilli;Bacillales;Bacillaceae;Bacillus;Bacillus subtilis</span></span>
 <span><span class="co">#&gt; 799                              Bacteria;Bacillota;Bacilli;Bacillales;Bacillaceae;Bacillus;Bacillus subtilis</span></span></code></pre></div>
 <p>This time we use a random dendrogram and rename the rows with taxonomic name included in MetaCyc.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">uniq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">bc</span><span class="op">$</span><span class="va">species</span>, <span class="fl">10</span><span class="op">)</span></span>
@@ -472,12 +472,12 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="va">dhc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html">as.dendrogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dhc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/example-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Maket it cladogram</span></span>
 <span><span class="va">dhc</span> <span class="op">&lt;-</span> <span class="fu">phylogram</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/phylogram/reference/as.cladogram.html">as.cladogram</a></span><span class="op">(</span><span class="va">dhc</span><span class="op">)</span></span></code></pre></div>
 <p>Using the dendrogram (<code>dhc</code> argument) and input data.frame with the column name <code>query</code>, we can plot the dendrogram with pathway information. Note we need to provide the function named vector of nodes (corresponding to gene clusters when the gene as input). This time, wordclouds are to be plotted and additional arguments can by specified in <code>argList</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Some filtering</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../allFreqMetaCyc.rda"</span><span class="op">)</span></span>
 <span><span class="va">deleter</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">allFreqMetaCyc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">freq</span><span class="op">&gt;</span><span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">word</span></span>
@@ -515,10 +515,10 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">## Non-scaled and scaled (show the truncated tip labels)</span></span>
 <span><span class="va">micro</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/plotDendroWord-1.svg" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scaled</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/plotDendroWord-2.svg" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.2.1 (2022-06-23 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -545,9 +545,9 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] readxl_1.4.2           shadowtext_0.1.2      </span></span>
 <span><span class="co">#&gt;   [3] BiocFileCache_2.6.1    systemfonts_1.0.4     </span></span>
-<span><span class="co">#&gt;   [5] igraph_1.5.0           GenomeInfoDb_1.34.9   </span></span>
-<span><span class="co">#&gt;   [7] digest_0.6.31          yulab.utils_0.0.6     </span></span>
-<span><span class="co">#&gt;   [9] htmltools_0.5.4        bugsigdbr_1.4.3       </span></span>
+<span><span class="co">#&gt;   [5] igraph_1.4.2           GenomeInfoDb_1.34.9   </span></span>
+<span><span class="co">#&gt;   [7] digest_0.6.29          yulab.utils_0.0.6     </span></span>
+<span><span class="co">#&gt;   [9] htmltools_0.5.5        bugsigdbr_1.4.3       </span></span>
 <span><span class="co">#&gt;  [11] viridis_0.6.2          magick_2.7.4          </span></span>
 <span><span class="co">#&gt;  [13] fansi_1.0.4            GeneSummary_0.99.4    </span></span>
 <span><span class="co">#&gt;  [15] magrittr_2.0.3         memoise_2.0.1         </span></span>
@@ -556,9 +556,9 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;  [21] wordcloud_2.6          colorspace_2.1-0      </span></span>
 <span><span class="co">#&gt;  [23] blob_1.2.4             rappdirs_0.3.3        </span></span>
 <span><span class="co">#&gt;  [25] ggrepel_0.9.3          textshaping_0.3.6     </span></span>
-<span><span class="co">#&gt;  [27] xfun_0.37              dplyr_1.1.1           </span></span>
-<span><span class="co">#&gt;  [29] crayon_1.5.2           RCurl_1.98-1.10       </span></span>
-<span><span class="co">#&gt;  [31] jsonlite_1.8.4         graph_1.76.0          </span></span>
+<span><span class="co">#&gt;  [27] xfun_0.38              dplyr_1.1.1           </span></span>
+<span><span class="co">#&gt;  [29] crayon_1.5.2           RCurl_1.98-1.12       </span></span>
+<span><span class="co">#&gt;  [31] jsonlite_1.8.0         graph_1.76.0          </span></span>
 <span><span class="co">#&gt;  [33] ape_5.7-1              glue_1.6.2            </span></span>
 <span><span class="co">#&gt;  [35] polyclip_1.10-4        stopwords_2.3         </span></span>
 <span><span class="co">#&gt;  [37] gtable_0.3.3           phylogram_2.1.0       </span></span>
@@ -580,23 +580,23 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;  [69] munsell_0.5.0          cellranger_1.1.0      </span></span>
 <span><span class="co">#&gt;  [71] tools_4.2.1            cachem_1.0.7          </span></span>
 <span><span class="co">#&gt;  [73] cli_3.6.1              generics_0.1.3        </span></span>
-<span><span class="co">#&gt;  [75] RSQLite_2.3.0          stringr_1.5.0         </span></span>
+<span><span class="co">#&gt;  [75] RSQLite_2.3.1          stringr_1.5.0         </span></span>
 <span><span class="co">#&gt;  [77] evaluate_0.20          fastmap_1.1.1         </span></span>
 <span><span class="co">#&gt;  [79] ggdendro_0.1.23        yaml_2.3.7            </span></span>
 <span><span class="co">#&gt;  [81] ragg_1.2.5             org.Hs.eg.db_3.15.0   </span></span>
 <span><span class="co">#&gt;  [83] knitr_1.42             bit64_4.0.5           </span></span>
 <span><span class="co">#&gt;  [85] fs_1.6.1               tidygraph_1.2.3       </span></span>
 <span><span class="co">#&gt;  [87] purrr_1.0.1            KEGGREST_1.38.0       </span></span>
-<span><span class="co">#&gt;  [89] dendextend_1.16.0      nlme_3.1-157          </span></span>
+<span><span class="co">#&gt;  [89] dendextend_1.17.1      nlme_3.1-162          </span></span>
 <span><span class="co">#&gt;  [91] mime_0.12              slam_0.1-50           </span></span>
 <span><span class="co">#&gt;  [93] xml2_1.3.3             compiler_4.2.1        </span></span>
 <span><span class="co">#&gt;  [95] rstudioapi_0.14        filelock_1.0.2        </span></span>
 <span><span class="co">#&gt;  [97] curl_5.0.0             png_0.1-8             </span></span>
 <span><span class="co">#&gt;  [99] tibble_3.2.1           tweenr_2.0.2          </span></span>
 <span><span class="co">#&gt; [101] stringi_1.7.12         bslib_0.4.2           </span></span>
-<span><span class="co">#&gt; [103] cyjShiny_1.0.34        highr_0.10            </span></span>
-<span><span class="co">#&gt; [105] lattice_0.20-45        commonmark_1.9.0      </span></span>
-<span><span class="co">#&gt; [107] markdown_1.5           vctrs_0.6.1           </span></span>
+<span><span class="co">#&gt; [103] cyjShiny_1.0.42        highr_0.10            </span></span>
+<span><span class="co">#&gt; [105] lattice_0.21-8         commonmark_1.9.0      </span></span>
+<span><span class="co">#&gt; [107] markdown_1.6           vctrs_0.6.2           </span></span>
 <span><span class="co">#&gt; [109] pillar_1.9.0           lifecycle_1.0.3       </span></span>
 <span><span class="co">#&gt; [111] jquerylib_0.1.4        GlobalOptions_0.1.2   </span></span>
 <span><span class="co">#&gt; [113] data.table_1.14.8      cowplot_1.1.1         </span></span>
@@ -604,11 +604,11 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; [117] patchwork_1.1.2        R6_2.5.1              </span></span>
 <span><span class="co">#&gt; [119] bookdown_0.33          promises_1.2.0.1      </span></span>
 <span><span class="co">#&gt; [121] gridExtra_2.3          IRanges_2.32.0        </span></span>
-<span><span class="co">#&gt; [123] MASS_7.3-57            rjson_0.2.21          </span></span>
+<span><span class="co">#&gt; [123] MASS_7.3-58.3          rjson_0.2.21          </span></span>
 <span><span class="co">#&gt; [125] withr_2.5.0            S4Vectors_0.36.2      </span></span>
-<span><span class="co">#&gt; [127] GenomeInfoDbData_1.2.9 parallel_4.2.1        </span></span>
+<span><span class="co">#&gt; [127] GenomeInfoDbData_1.2.8 parallel_4.2.1        </span></span>
 <span><span class="co">#&gt; [129] ISOcodes_2022.09.29    grid_4.2.1            </span></span>
-<span><span class="co">#&gt; [131] tidyr_1.3.0            rmarkdown_2.20        </span></span>
+<span><span class="co">#&gt; [131] tidyr_1.3.0            rmarkdown_2.21        </span></span>
 <span><span class="co">#&gt; [133] downlit_0.4.2          ggforce_0.4.1         </span></span>
 <span><span class="co">#&gt; [135] Biobase_2.58.0         NLP_0.2-1             </span></span>
 <span><span class="co">#&gt; [137] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
