@@ -57,11 +57,10 @@
 <li><a class="" href="interactive-inspection-of-gene-cluster-network-annotated-by-words.html"><span class="header-section-number">5</span> Interactive inspection of gene cluster network annotated by words</a></li>
 <li><a class="active" href="annotating-gene-cluster-dendrogram.html"><span class="header-section-number">6</span> Annotating gene cluster dendrogram</a></li>
 <li><a class="" href="quantitative-analysis.html"><span class="header-section-number">7</span> Quantitative analysis</a></li>
-<li><a class="" href="pathview-text.html"><span class="header-section-number">8</span> Pathview text</a></li>
+<li><a class="" href="single-cell-transcriptomic-data.html"><span class="header-section-number">8</span> Single-cell transcriptomic data</a></li>
 <li><a class="" href="app.html"><span class="header-section-number">9</span> Application examples</a></li>
-<li><a class="" href="single-cell-transcriptomic-data.html"><span class="header-section-number">10</span> Single-cell transcriptomic data</a></li>
-<li><a class="" href="parsing.html"><span class="header-section-number">11</span> Parsing</a></li>
-<li><a class="" href="tidy.html"><span class="header-section-number">12</span> Perform each process separately</a></li>
+<li><a class="" href="parsing.html"><span class="header-section-number">10</span> Parsing</a></li>
+<li><a class="" href="tidy.html"><span class="header-section-number">11</span> Perform each process separately</a></li>
 </ul>
 
         <div class="book-extra">
@@ -182,8 +181,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
-<span><span class="co">#&gt; [1] 1.00 1.75 2.00 2.50 3.00</span></span></code></pre></div>
+<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/wgcna4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The column names for clusterProfiler results can be specified to <code>showType</code>.</p>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
@@ -217,7 +215,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <p>If you have a specifically interested pathway, use <code>highlight</code> to highlight the names in the dendrogram.</p>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
-<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -318,7 +317,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <code>horizontalSpacer</code> can be used too for x-axis.</p>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>,</span>
-<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span>, spacer<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span>                               type<span class="op">=</span><span class="st">"enrich"</span>, highlight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04060"</span><span class="op">)</span>, spacer<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -337,7 +337,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">mod</span><span class="op">$</span><span class="va">MEs</span>, <span class="va">mod</span><span class="op">$</span><span class="va">colors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                               spacer<span class="op">=</span><span class="fl">0.2</span>, horizontalSpacer<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
+<span>                               spacer<span class="op">=</span><span class="fl">0.2</span>, horizontalSpacer<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -396,6 +397,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Saving the image for plotting on the dendrogram</span></span>
+<span><span class="co">#&gt; [1] 1.00 1.75 2.00 2.50 3.00</span></span>
 <span><span class="co">#&gt; Input genes: 25</span></span>
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
 <span><span class="co">#&gt; columns</span></span>
@@ -408,7 +410,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="va">gr</span></span>
+<span><span class="va">gr</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
 <span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
 <span><span class="co">#&gt; fit on page. They have been removed.</span></span></code></pre></div>
@@ -427,7 +429,6 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
-<span><span class="co">#&gt; [1] 1.00 1.75 2.00 2.50 3.00</span></span>
 <span><span class="co">#&gt; Input genes: 12</span></span>
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
 <span><span class="co">#&gt; columns</span></span>
@@ -450,9 +451,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <p>If needed, wordclouds can be filtered by <code>ggfx</code> or using <code>shadowtext</code>. In this case, border is set to <code>FALSE</code> and the background will be transparent for resulting grobs. If <code>shadowtext</code> is needed, specify <code>bg.colour</code> argument. If <code>ggfx</code> is needed, specify the filter function in <code>useggfx</code> and parameters in <code>ggfxParams</code>.</p>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: package 'ggfx' was built under R version 4.2.3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">4</span>,</span>
-<span>    bg.colour<span class="op">=</span><span class="st">"grey80"</span><span class="op">)</span></span>
+<span>    bg.colour<span class="op">=</span><span class="st">"grey80"</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -481,7 +481,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/decoword-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">4</span>,</span>
-<span>    useggfx<span class="op">=</span><span class="st">"with_outer_glow"</span>, ggfxParams<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"white"</span>,expand<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span>    useggfx<span class="op">=</span><span class="st">"with_outer_glow"</span>, ggfxParams<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"white"</span>,expand<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -508,7 +508,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/decoword-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The below example shows using the other dendrogram like those produced by WGCNA combining the parameters.</p>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./blockwiseModule.rda"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./blockwiseModule.rda"</span><span class="op">)</span></span>
 <span><span class="va">MEs</span> <span class="op">&lt;-</span> <span class="va">bwmod</span><span class="op">$</span><span class="va">MEs</span></span>
 <span><span class="va">modColors</span> <span class="op">&lt;-</span> <span class="va">bwmod</span><span class="op">$</span><span class="va">colors</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>,useWC<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -516,7 +517,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span>                              useggfx<span class="op">=</span><span class="st">"with_outer_glow"</span>, useRandomColor<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                              ggfxParams<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"white"</span>,expand<span class="op">=</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>                              wcScale<span class="op">=</span><span class="fl">6</span>, wcArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>shape<span class="op">=</span><span class="st">"square"</span>,</span>
-<span>                              min.freq<span class="op">=</span><span class="fl">1</span>, max.words<span class="op">=</span><span class="cn">Inf</span>,rot.per<span class="op">=</span><span class="fl">0.5</span>,random.order<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span>                              min.freq<span class="op">=</span><span class="fl">1</span>, max.words<span class="op">=</span><span class="cn">Inf</span>, rot.per<span class="op">=</span><span class="fl">0.5</span>,random.order<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.49)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.69)... Done.</span></span>
@@ -528,88 +529,26 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.29)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
 <span><span class="co">#&gt; Input genes: 5847</span></span>
-<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
-<span><span class="co">#&gt; columns</span></span>
-<span><span class="co">#&gt;   Converted input genes: 4895</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4868</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrRd is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Input genes: 634</span></span>
-<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
-<span><span class="co">#&gt; columns</span></span>
-<span><span class="co">#&gt;   Converted input genes: 518</span></span>
+<span><span class="co">#&gt;   Converted input genes: 517</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel2 is 8</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Input genes: 2054</span></span>
-<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
-<span><span class="co">#&gt; columns</span></span>
-<span><span class="co">#&gt;   Converted input genes: 1689</span></span>
+<span><span class="co">#&gt;   Converted input genes: 1682</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuGn is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Input genes: 132</span></span>
-<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
-<span><span class="co">#&gt; columns</span></span>
 <span><span class="co">#&gt;   Converted input genes: 127</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Input genes: 5673</span></span>
-<span><span class="co">#&gt; 'select()' returned 1:many mapping between keys and</span></span>
-<span><span class="co">#&gt; columns</span></span>
-<span><span class="co">#&gt;   Converted input genes: 4728</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4701</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrBr is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
-<span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="co">#&gt; border is set to FALSE as useggfx is not NULL</span></span>
-<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
-<span><span class="co">#&gt; points_valid_first, boxes = boxes, : One word could not fit</span></span>
-<span><span class="co">#&gt; on page. It has been removed.</span></span>
-<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
-<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
-<span><span class="co">#&gt; fit on page. They have been removed.</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
-<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
-<span><span class="co">#&gt; fit on page. They have been removed.</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
-<span><span class="co">#&gt; points_valid_first, boxes = boxes, : Some words could not</span></span>
-<span><span class="co">#&gt; fit on page. They have been removed.</span></span></code></pre></div>
+<span><span class="co">#&gt; border is set to FALSE as useggfx is not NULL</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/decoword2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
@@ -639,7 +578,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-03.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-04.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

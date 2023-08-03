@@ -488,9 +488,6 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
                                 ngram=1), horizontalSpacer=0.1,
                                useWGCNA=FALSE, spacer=0.05,
                                horiz=FALSE, wcScale =5)
-#>  [1]  1.0000  1.7500  2.0000  2.5000  3.0000  3.6250  4.0000
-#>  [8]  4.5000  5.0000  5.5000  6.0000  6.1875  6.5000  7.0000
-#> [15]  8.0000  8.7500  9.0000  9.5000 10.0000
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query

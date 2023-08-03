@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 2d0bfa2 DN-- 3 2 -- 
+#> IGRAPH a608633 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 2d0bfa2 (vertex names):
+#> + edges from a608633 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,7 +212,7 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Purples is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greens is 9
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network' already
 #> exists
@@ -389,7 +389,6 @@ plotEigengeneNetworksWithWords(MEs, modColors, type="enrich")
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-#> [1] 1.00 1.75 2.00 2.50 3.00
 ```
 
 <img src="04-custom-usage_files/figure-html/wgcna4-1.png" width="100%" style="display: block; margin: auto;" />
@@ -438,7 +437,8 @@ If you have a specifically interested pathway, use `highlight` to highlight the 
 
 ```r
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
-                               type="enrich", highlight=c("hsa04060"))
+                               type="enrich", highlight=c("hsa04060"))+
+  scale_y_continuous(expand=c(0,1))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -559,7 +559,8 @@ plotEigengeneNetworksWithWords(MEs,
 
 ```r
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
-                               type="enrich", highlight=c("hsa04060"), spacer=0.2)
+                               type="enrich", highlight=c("hsa04060"), spacer=0.2)+
+    scale_y_continuous(expand=c(0,3))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -581,7 +582,8 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 ```r
 
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors, useWC=TRUE,
-                               spacer=0.2, horizontalSpacer=0.1)
+                               spacer=0.2, horizontalSpacer=0.1)+
+    scale_y_continuous(expand=c(0,3))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -645,6 +647,7 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Adding another scale for size, which will replace the
 #> existing scale.
 #> Saving the image for plotting on the dendrogram
+#> [1] 1.00 1.75 2.00 2.50 3.00
 #> Input genes: 25
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -657,7 +660,7 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
-gr
+gr + scale_x_continuous(expand=c(0,6))
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -681,7 +684,6 @@ gro <- plotEigengeneNetworksWithWords(mod$MEs, mod$colors, candidateNodes=c("ME2
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-#> [1] 1.00 1.75 2.00 2.50 3.00
 #> Input genes: 12
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -706,9 +708,8 @@ If needed, wordclouds can be filtered by `ggfx` or using `shadowtext`. In this c
 
 ```r
 library(ggfx)
-#> Warning: package 'ggfx' was built under R version 4.2.3
 plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
-    bg.colour="grey80")
+    bg.colour="grey80")+ scale_y_continuous(expand=c(0,3))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -740,7 +741,7 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 
 ```r
 plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
-    useggfx="with_outer_glow", ggfxParams=list(colour="white",expand=5))
+    useggfx="with_outer_glow", ggfxParams=list(colour="white",expand=5))+ scale_y_continuous(expand=c(0,3))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -772,6 +773,7 @@ The below example shows using the other dendrogram like those produced by WGCNA 
 
 
 ```r
+library(ggfx)
 load("./blockwiseModule.rda")
 MEs <- bwmod$MEs
 modColors <- bwmod$colors
@@ -780,7 +782,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
                               useggfx="with_outer_glow", useRandomColor=TRUE,
                               ggfxParams=list(colour="white",expand=3),
                               wcScale=6, wcArgs=list(shape="square",
-                              min.freq=1, max.words=Inf,rot.per=0.5,random.order=FALSE))
+                              min.freq=1, max.words=Inf, rot.per=0.5,random.order=FALSE))
 #> Bootstrap (r = 0.49)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.69)... Done.
@@ -792,88 +794,26 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Bootstrap (r = 1.29)... Done.
 #> Bootstrap (r = 1.4)... Done.
 #> Input genes: 5847
-#> 'select()' returned 1:many mapping between keys and
-#> columns
-#>   Converted input genes: 4895
+#>   Converted input genes: 4868
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrRd is 9
-#> Returning the palette you asked for with that many colors
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
 #> Input genes: 634
-#> 'select()' returned 1:many mapping between keys and
-#> columns
-#>   Converted input genes: 518
+#>   Converted input genes: 517
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel2 is 8
-#> Returning the palette you asked for with that many colors
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
 #> Input genes: 2054
-#> 'select()' returned 1:many mapping between keys and
-#> columns
-#>   Converted input genes: 1689
+#>   Converted input genes: 1682
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuGn is 9
-#> Returning the palette you asked for with that many colors
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
 #> Input genes: 132
-#> 'select()' returned 1:1 mapping between keys and
-#> columns
 #>   Converted input genes: 127
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
 #> Input genes: 5673
-#> 'select()' returned 1:many mapping between keys and
-#> columns
-#>   Converted input genes: 4728
+#>   Converted input genes: 4701
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrBr is 9
-#> Returning the palette you asked for with that many colors
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
 #> border is set to FALSE as useggfx is not NULL
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : One word could not fit
-#> on page. It has been removed.
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
-
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
-
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
 ```
 
 <img src="04-custom-usage_files/figure-html/decoword2-1.png" width="100%" style="display: block; margin: auto;" />
