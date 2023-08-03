@@ -77,7 +77,7 @@
 <p>The <code>module</code> function creates an object of the <code>kegg_module</code> class, which stores the parsed information of reactions and definitions in its internal slots. By providing this <code>kegg_module</code> object to various functions, it is possible to execute various operations related to the module.</p>
 <p>Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Some edges are duplicate and have different reactions,</span></span>
@@ -135,7 +135,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">":"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="st">"["</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">query</span></span>
-<span><span class="co">#&gt; [1] "K01681" "K00174" "K00245" "K00239" "K00234"</span></span>
+<span><span class="co">#&gt; [1] "K00164" "K01647" "K00246" "K00658" "K00245"</span></span>
 <span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_completeness.html">module_completeness</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -166,13 +166,13 @@ complete
 2
 </td>
 <td style="text-align:right;">
-0
+1
 </td>
 <td style="text-align:right;">
-0.000
+0.5000000
 </td>
 <td style="text-align:left;">
-FALSE
+TRUE
 </td>
 </tr>
 <tr>
@@ -183,13 +183,13 @@ FALSE
 2
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:right;">
-0.500
+0.0000000
 </td>
 <td style="text-align:left;">
-TRUE
+FALSE
 </td>
 </tr>
 <tr>
@@ -203,7 +203,7 @@ TRUE
 0
 </td>
 <td style="text-align:right;">
-0.000
+0.0000000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -217,10 +217,10 @@ FALSE
 8
 </td>
 <td style="text-align:right;">
-1
+2
 </td>
 <td style="text-align:right;">
-0.125
+0.2500000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -237,7 +237,7 @@ FALSE
 0
 </td>
 <td style="text-align:right;">
-0.000
+0.0000000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -251,10 +251,10 @@ FALSE
 15
 </td>
 <td style="text-align:right;">
-3
+2
 </td>
 <td style="text-align:right;">
-0.200
+0.1333333
 </td>
 <td style="text-align:left;">
 FALSE
@@ -271,7 +271,7 @@ FALSE
 0
 </td>
 <td style="text-align:right;">
-0.000
+0.0000000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -288,7 +288,7 @@ FALSE
 0
 </td>
 <td style="text-align:right;">
-0.000
+0.0000000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -395,14 +395,17 @@ FALSE
 <p>If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship, <code>ggkegg</code> function accepts the results and plot text-based or network-based graph where KOs are highlighted.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocFileCache</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'BiocFileCache' was built under R version</span></span>
+<span><span class="co">#&gt; 4.2.2</span></span>
 <span><span class="co">#&gt; Loading required package: dbplyr</span></span>
+<span><span class="co">#&gt; Warning: package 'dbplyr' was built under R version 4.2.3</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'dbplyr'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:dplyr':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     ident, sql</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; clusterProfiler v4.6.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/</span></span>
+<span><span class="co">#&gt; clusterProfiler v4.7.1.003  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; If you use clusterProfiler in published research, please cite:</span></span>
 <span><span class="co">#&gt; T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141</span></span>
@@ -461,7 +464,7 @@ FALSE
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-08-01.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-08-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

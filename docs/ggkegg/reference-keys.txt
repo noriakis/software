@@ -28,6 +28,7 @@ using-multiple-geoms-to-add-information
 integrating-numeric-values-onto-tbl_graph
 integrating-numeric-vector-to-tbl_graph
 integrating-matrix-to-tbl_graph
+values-to-edge
 visualizing-multiple-enrichment-results
 multiple-enrichment-analysis-results-across-multiple-pathways
 projecting-the-gene-regulatory-networks-on-kegg-map
