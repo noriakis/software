@@ -99,7 +99,17 @@ net@net
 
 ```r
 net@pvpick
-#> list()
+#> $clusters
+#> $clusters[[1]]
+#> [1] "complementation" "defects"         "pigmentosum"    
+#> [4] "xeroderma"      
+#> 
+#> $clusters[[2]]
+#> [1] "dna"          "endonuclease" "incision"    
+#> 
+#> 
+#> $edges
+#> [1] 3 6
 plot(net)
 ```
 
