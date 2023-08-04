@@ -195,8 +195,8 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/exportCyjs.html">exportCyjs</a></span><span class="op">(</span><span class="va">g</span>, <span class="va">rootDir</span>, <span class="va">netDir</span><span class="op">)</span></span>
 <span><span class="co"># or, exportVisjs(g, rootDir, netDir)</span></span></code></pre></div>
 <p>Use like <code>http-server</code> in the directory containing a exported JavaScript, and interactively inspect the module relationship with word information. The example visualization is shown below (not by the code above, but Bayesian network of module eigenes inferred from RNA-seq dataset ofbladder cancer).</p>
-<div class="figure">
-<img src="https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true" style="width:50.0%" alt=""><p class="caption">Example visualization of a Bayesian network</p>
+<div class="float">
+<img src="https://github.com/noriakis/software/blob/main/images/wcbn.png?raw=true" style="width:50.0%" alt="Example visualization of a Bayesian network"><div class="figcaption">Example visualization of a Bayesian network</div>
 </div>
 <p>Interactive inspection is possible using GitHub pages or the other hosting services like below.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
@@ -236,9 +236,9 @@ In this example, the barplot of words are shown in the nodes.</p>
 <span>     <span class="st">"ME2"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">2</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>     <span class="st">"ME3"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
-<span><span class="co">#&gt; IGRAPH a608633 DN-- 3 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH c35b453 DN-- 3 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from a608633 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from c35b453 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] ME1-&gt;ME2 ME1-&gt;ME3</span></span>
 <span><span class="va">geneList</span></span>
 <span><span class="co">#&gt; $ME1</span></span>
@@ -261,6 +261,8 @@ In this example, the barplot of words are shown in the nodes.</p>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/exportWCNetwork.html">exportWCNetwork</a></span><span class="op">(</span><span class="va">g</span>,<span class="va">geneList</span>,keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>,</span>
 <span>    wcScale<span class="op">=</span><span class="fl">50</span>,scaleMax<span class="op">=</span><span class="fl">20</span>,scaleMin<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greens is 9</span></span>
+<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Accent is 8</span></span>
 <span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Warning in dir.create(paste0(dir)): 'network' already</span></span>
 <span><span class="co">#&gt; exists</span></span>

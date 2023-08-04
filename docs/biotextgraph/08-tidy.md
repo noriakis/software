@@ -27,7 +27,7 @@ btg
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(33), E(237)
 #> Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)
-#> 301 Kb
+#> 288.3 Kb
 
 ## Text of enrichment analysis results
 btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
@@ -48,7 +48,7 @@ btg2
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(30), E(46)
 #> Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(5)
-#> 291.6 Kb
+#> 287.4 Kb
 ```
 
 

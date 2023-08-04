@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH a608633 DN-- 3 2 -- 
+#> IGRAPH c35b453 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from a608633 (vertex names):
+#> + edges from c35b453 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -213,6 +213,8 @@ geneList
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
 #> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greens is 9
+#> Returning the palette you asked for with that many colors
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Accent is 8
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network' already
 #> exists
@@ -438,7 +440,7 @@ If you have a specifically interested pathway, use `highlight` to highlight the 
 ```r
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
                                type="enrich", highlight=c("hsa04060"))+
-  scale_y_continuous(expand=c(0,1))
+  scale_y_continuous(expand=c(0,0.5))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -560,7 +562,7 @@ plotEigengeneNetworksWithWords(MEs,
 ```r
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
                                type="enrich", highlight=c("hsa04060"), spacer=0.2)+
-    scale_y_continuous(expand=c(0,3))
+    scale_y_continuous(expand=c(0,0.5))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -583,7 +585,7 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors,
 
 plotEigengeneNetworksWithWords(mod$MEs, mod$colors, useWC=TRUE,
                                spacer=0.2, horizontalSpacer=0.1)+
-    scale_y_continuous(expand=c(0,3))
+    scale_y_continuous(expand=c(0,0.5))
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
