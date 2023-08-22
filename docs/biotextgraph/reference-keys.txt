@@ -34,7 +34,7 @@ recluster-the-cluster-using-word-information
 single-cell-transcriptomic-data
 visualizing-textual-information-for-marker-genes
 findmarkers-in-scran
-map-resulting-wordcloud-plots-on-the-reduced-dimension-plot.
+map-resulting-wordcloud-plots-on-the-dimensionality-reducing-plot.
 plotting-marker-gene-names-in-plot
 plotting-the-enrichment-analysis-results-of-marker-genes
 app

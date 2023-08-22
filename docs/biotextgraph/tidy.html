@@ -88,14 +88,14 @@
 <span><span class="co">#&gt;   Converted input genes: 3</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 76 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Found 21 enriched term</span></span>
+<span><span class="co">#&gt; Found 25 enriched term</span></span>
 <span><span class="va">btg</span></span>
 <span><span class="co">#&gt; Type: refseq</span></span>
 <span><span class="co">#&gt; Number of words: 30</span></span>
 <span><span class="co">#&gt; Query: DDX41/PNKP/IRF3</span></span>
 <span><span class="co">#&gt; Graph: V(33), E(237)</span></span>
 <span><span class="co">#&gt; Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)</span></span>
-<span><span class="co">#&gt; 288.3 Kb</span></span>
+<span><span class="co">#&gt; 301.4 Kb</span></span>
 <span></span>
 <span><span class="co">## Text of enrichment analysis results</span></span>
 <span><span class="va">btg2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/obtain_enrich.html">obtain_enrich</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"IRF3"</span><span class="op">)</span>, enrich<span class="op">=</span><span class="st">"reactome"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -114,9 +114,9 @@
 <span><span class="co">#&gt; Type: enrich</span></span>
 <span><span class="co">#&gt; Number of words: 30</span></span>
 <span><span class="co">#&gt; Query: DDX41/PNKP/IRF3</span></span>
-<span><span class="co">#&gt; Graph: V(30), E(46)</span></span>
-<span><span class="co">#&gt; Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(5)</span></span>
-<span><span class="co">#&gt; 287.4 Kb</span></span></code></pre></div>
+<span><span class="co">#&gt; Graph: V(29), E(44)</span></span>
+<span><span class="co">#&gt; Degree: innate(8)/immune(7)/responses(7)/activatesmodulates(6)/NA(6)</span></span>
+<span><span class="co">#&gt; 292 Kb</span></span></code></pre></div>
 <div id="use-of-gene-descriptions-in-alliance-of-genome-resources" class="section level2" number="11.1">
 <h2>
 <span class="header-section-number">11.1</span> Use of gene descriptions in Alliance of Genome Resources<a class="anchor" aria-label="anchor" href="#use-of-gene-descriptions-in-alliance-of-genome-resources"><i class="fas fa-link"></i></a>
@@ -131,7 +131,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/process_network_gene.html">process_network_gene</a></span><span class="op">(</span>gene_plot<span class="op">=</span><span class="cn">TRUE</span>, gene_path_plot<span class="op">=</span><span class="st">"reactome"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plot_biotextgraph.html">plot_biotextgraph</a></span><span class="op">(</span>edge_link<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 3</span></span>
-<span><span class="co">#&gt; Found 21 enriched term</span></span></code></pre></div>
+<span><span class="co">#&gt; Found 25 enriched term</span></span></code></pre></div>
 
 </div>
 </div>
@@ -159,7 +159,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-04.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

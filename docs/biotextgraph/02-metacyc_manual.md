@@ -225,10 +225,11 @@ sessionInfo()
 #> loaded via a namespace (and not attached):
 #>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  
 #>  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  
-#>  [7] cachem_1.0.7    rlang_1.1.0     cli_3.6.1      
-#> [10] fs_1.6.1        jquerylib_0.1.4 xml2_1.3.3     
-#> [13] bslib_0.4.2     rmarkdown_2.20  tools_4.2.2    
-#> [16] xfun_0.37       yaml_2.3.7      fastmap_1.1.1  
-#> [19] compiler_4.2.2  memoise_2.0.1   htmltools_0.5.4
-#> [22] downlit_0.4.2   knitr_1.42      sass_0.4.5
+#>  [7] cachem_1.0.7    rlang_1.1.1     cli_3.6.0      
+#> [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4
+#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 
+#> [16] tools_4.2.2     xfun_0.37       yaml_2.3.7     
+#> [19] fastmap_1.1.1   compiler_4.2.2  memoise_2.0.1  
+#> [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     
+#> [25] sass_0.4.5
 ```

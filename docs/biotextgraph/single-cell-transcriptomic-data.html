@@ -83,7 +83,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scplot</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scplot</span><span class="op">)</span> <span class="co">## can be installed by devtools::install_github("YuLab-SMU/ggsc")</span></span></code></pre></div>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dir</span> <span class="op">=</span> <span class="st">"filtered_gene_bc_matrices/hg19"</span></span>
 <span><span class="va">pbmc.data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/Read10X.html">Read10X</a></span><span class="op">(</span>data.dir <span class="op">=</span> <span class="va">dir</span><span class="op">)</span></span>
@@ -95,12 +95,12 @@
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunPCA.html">RunPCA</a></span><span class="op">(</span><span class="va">pbmc</span>, features <span class="op">=</span> <span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/VariableFeatures.html">VariableFeatures</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">pbmc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindNeighbors.html">FindNeighbors</a></span><span class="op">(</span><span class="va">pbmc</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/FindClusters.html">FindClusters</a></span><span class="op">(</span><span class="va">pbmc</span>, resolution <span class="op">=</span> <span class="fl">0.5</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">pbmc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/RunUMAP.html">RunUMAP</a></span><span class="op">(</span><span class="va">pbmc</span>, dims <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, umap.method <span class="op">=</span> <span class="st">"uwot"</span>, metric <span class="op">=</span> <span class="st">"cosine"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"umap"</span>,</span>
+<span><span class="co"># pbmc &lt;- RunUMAP(pbmc, dims = 1:10, umap.method = "uwot", metric = "cosine")</span></span>
+<span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">pbmc</span>, reduction <span class="op">=</span> <span class="st">"pca"</span>,</span>
 <span>        label <span class="op">=</span> <span class="cn">TRUE</span>, pt.size <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="05-sc_files/figure-html/sc1-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Or, use scplot (https://yulab-smu.top/scplot/)</span></span>
+<code class="sourceCode R"><span><span class="co">## Or, use scplot (ggsc, https://yulab-smu.top/scplot/)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim-geom-label.html">sc_dim_geom_label</a></span><span class="op">(</span>geom <span class="op">=</span> <span class="fu">shadowtext</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/shadowtext/man/geom_shadowtext.html">geom_shadowtext</a></span>, </span>
 <span>            color<span class="op">=</span><span class="st">'black'</span>, bg.color<span class="op">=</span><span class="st">'white'</span><span class="op">)</span></span></code></pre></div>
@@ -314,9 +314,9 @@
 <span><span class="va">texts</span><span class="op">$</span><span class="va">`1`</span> <span class="op">+</span> <span class="va">texts</span><span class="op">$</span><span class="va">`4`</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-sc_files/figure-html/sc3_5-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="map-resulting-wordcloud-plots-on-the-reduced-dimension-plot." class="section level2" number="8.3">
+<div id="map-resulting-wordcloud-plots-on-the-dimensionality-reducing-plot." class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">8.3</span> Map resulting wordcloud plots on the reduced dimension plot.<a class="anchor" aria-label="anchor" href="#map-resulting-wordcloud-plots-on-the-reduced-dimension-plot."><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Map resulting wordcloud plots on the dimensionality reducing plot.<a class="anchor" aria-label="anchor" href="#map-resulting-wordcloud-plots-on-the-dimensionality-reducing-plot."><i class="fas fa-link"></i></a>
 </h2>
 <p>Single-cell level wordclouds can be plotted on the reduced dimension plot of cells.
 The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE</code>.</p>
@@ -506,7 +506,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-sc_files/figure-html/formal3-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p><code>geom_sc_wordcloud</code> is prepared to use in conjuction with <code>scplot</code>.</p>
+<p><code>geom_sc_wordcloud</code> is prepared to use in conjuction with <code>scplot</code> (or, <a href="https://github.com/YuLab-SMU/ggsc"><code>ggsc</code></a>).</p>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">scplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scplot/man/sc-dim.html">sc_dim</a></span><span class="op">(</span><span class="va">pbmc</span>,reduction <span class="op">=</span> <span class="st">"pca"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/geom_sc_wordcloud.html">geom_sc_wordcloud</a></span><span class="op">(</span><span class="va">markers</span>, show_markers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span>,</span>
@@ -625,7 +625,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <li><a class="nav-link" href="#single-cell-transcriptomic-data"><span class="header-section-number">8</span> Single-cell transcriptomic data</a></li>
 <li><a class="nav-link" href="#visualizing-textual-information-for-marker-genes"><span class="header-section-number">8.1</span> Visualizing textual information for marker genes</a></li>
 <li><a class="nav-link" href="#findmarkers-in-scran"><span class="header-section-number">8.2</span> findMarkers() in scran</a></li>
-<li><a class="nav-link" href="#map-resulting-wordcloud-plots-on-the-reduced-dimension-plot."><span class="header-section-number">8.3</span> Map resulting wordcloud plots on the reduced dimension plot.</a></li>
+<li><a class="nav-link" href="#map-resulting-wordcloud-plots-on-the-dimensionality-reducing-plot."><span class="header-section-number">8.3</span> Map resulting wordcloud plots on the dimensionality reducing plot.</a></li>
 <li>
 <a class="nav-link" href="#plotting-marker-gene-names-in-plot"><span class="header-section-number">8.4</span> Plotting marker gene names in plot</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#plotting-the-enrichment-analysis-results-of-marker-genes"><span class="header-section-number">8.4.1</span> Plotting the enrichment analysis results of marker genes</a></li></ul>
 </li>
@@ -645,7 +645,7 @@ The title in the wordcloud or network can be suppressed by <code>withTitle=FALSE
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-04.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-22.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
