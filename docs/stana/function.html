@@ -7,7 +7,7 @@
 <title>Chapter 4 Functional annotation | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
-<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Functional annotation | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
@@ -16,11 +16,11 @@
 <meta name="twitter:description" content="For functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for MIDAS and MIDAS2, which profile gene abundances within species by default....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.27/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.28/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -102,8 +102,8 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-922c4b7a48e0b37766c0" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-922c4b7a48e0b37766c0">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-eb24de0db99e89d68833" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-eb24de0db99e89d68833">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
@@ -151,9 +151,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH 246da26 UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 5aa7ce3 UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 246da26 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 5aa7ce3 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -170,16 +170,16 @@
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c679913791c4dc89d6ab" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c679913791c4dc89d6ab">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-94a6b2d650c33cb08fa8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-94a6b2d650c33cb08fa8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the relationships between IDs by <code>drawEGGNOG</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
-<span>           candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
-<span>           geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
+<span>            candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
+<span>            geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4,287 × 3</span></span>
 <span><span class="co">#&gt;    ID                    name          value                </span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;         &lt;chr&gt;                </span></span>
@@ -195,9 +195,9 @@
 <span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
 <span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH 25bbde0 UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 5dc337f UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from 25bbde0 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 5dc337f (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
@@ -318,10 +318,11 @@
 <span><span class="co">#&gt;       Number of samples in HC: 13</span></span>
 <span><span class="co">#&gt;       Number of samples in R: 18</span></span>
 <span><span class="co">#&gt;       Passed the filter</span></span></code></pre></div>
-<p>We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.</p>
+<p>We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
+This can be done by <code>setAnnotation</code> function.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">eggNOG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu">setAnnotation</span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>You can set <code>removeAdditional</code> argument to filter words that are to be displayed.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
@@ -512,7 +513,7 @@ based on whether the specified species have the corresponding KOs annotated.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-07-28.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-08-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

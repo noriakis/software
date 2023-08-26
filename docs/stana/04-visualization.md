@@ -50,6 +50,17 @@ plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 
 <img src="04-visualization_files/figure-html/gab-1.png" width="672" />
 
+Default color mapping can be changed by `changeColors`.
+
+
+```r
+stana <- changeColors(stana, c("blue","red"))
+plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
+```
+
+<img src="04-visualization_files/figure-html/gab2-1.png" width="672" />
+
+
 ## Visualization of functional analysis results
 
 See \@ref(function).
