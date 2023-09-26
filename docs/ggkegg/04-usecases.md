@@ -565,19 +565,19 @@ pcas <- data.frame(
     pbmc@reductions$pca@cell.embeddings[,2],
     pbmc@active.ident,
     pbmc@meta.data$seurat_clusters) |>
-    `colnames<-`(c("PCA_1","PCA_2","Cell","group"))
+    `colnames<-`(c("PC_1","PC_2","Cell","group"))
 
 
 aa <- (pcas %>% group_by(Cell) %>%
-    mutate(meanX=mean(PCA_1), meanY=mean(PCA_2))) |>
+    mutate(meanX=mean(PC_1), meanY=mean(PC_2))) |>
     select(Cell, meanX, meanY)
 label <- aa[!duplicated(aa),]
 
 dd <- ggplot(pcas)+
-    geom_point(aes(x=PCA_1, y=PCA_2, color=Cell))+
+    geom_point(aes(x=PC_1, y=PC_2, color=Cell))+
     shadowtext::geom_shadowtext(x=label$meanX,y=label$meanY,label=label$Cell, data=label,
                             bg.colour="white", colour="black")+
-    theme_minimal()+xlab("PC1")+ylab("PC2")+
+    theme_minimal()+
     theme(legend.position="none")
 
 marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
@@ -620,17 +620,24 @@ We can inspect marker genes in multiple pathways to better understand the role o
 library(clusterProfiler)
 library(org.Hs.eg.db)
 
+subset_lab <- label[label$Cell %in% c("1","4","5","6"),]
 dd <- ggplot(pcas) + 
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="1", color=group)),
+  ggfx::with_outer_glow(geom_node_point(size=1,
+  	  aes(x=PC_1, y=PC_2, filter=group=="1", color=group)),
                         colour="tomato", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="5", color=group)),
+  ggfx::with_outer_glow(geom_node_point(size=1,
+  	  aes(x=PC_1, y=PC_2, filter=group=="5", color=group)),
                         colour="tomato", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="4", color=group)),
+  ggfx::with_outer_glow(geom_node_point(size=1,
+  	  aes(x=PC_1, y=PC_2, filter=group=="4", color=group)),
                         colour="gold", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="6", color=group)),
+  ggfx::with_outer_glow(geom_node_point(size=1,
+  	  aes(x=PC_1, y=PC_2, filter=group=="6", color=group)),
                         colour="gold", expand=3)+
-  shadowtext::geom_shadowtext(x=label$meanX,y=label$meanY, label=label$Cell, data=label,
-                              bg.colour="white", colour="black")+
+  shadowtext::geom_shadowtext(x=subset_lab$meanX,
+  	  y=subset_lab$meanY, label=subset_lab$Cell,
+  	  data=subset_lab,
+      bg.colour="white", colour="black")+
   theme_minimal()
 
 marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
@@ -847,7 +854,7 @@ Obtain legend and modify.
 ## Take scplot legend, make it rectangle
 ## Make pseudo plot
 dd2 <- ggplot(pcas) +
-  geom_node_point(aes(x=PCA_1, y=PCA_2, color=group)) +
+  geom_node_point(aes(x=PC_1, y=PC_2, color=group)) +
   guides(color = guide_legend(override.aes = list(shape=15, size=5)))+
   theme_minimal()
     
