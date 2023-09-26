@@ -535,7 +535,7 @@ This package can also be applied to single-cell analysis. As an example, conside
 
 ```r
 library(Seurat)
-library(scplot)
+library(dplyr)
 # dir = "../filtered_gene_bc_matrices/hg19"
 # pbmc.data <- Read10X(data.dir = dir)
 # pbmc <- CreateSeuratObject(counts = pbmc.data, project = "pbmc3k",
@@ -546,7 +546,6 @@ library(scplot)
 # pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
 # pbmc <- FindNeighbors(pbmc, dims = 1:10, verbose = FALSE)
 # pbmc <- FindClusters(pbmc, resolution = 0.5, verbose = FALSE)
-# pbmc <- RunUMAP(pbmc, dims = 1:10, umap.method = "uwot", metric = "cosine")
 # markers <- FindAllMarkers(pbmc)
 # save(pbmc, markers, file="../sc_data.rda")
 
@@ -554,21 +553,33 @@ library(scplot)
 load("../sc_data.rda")
 ```
 
-Subsequently, we employ the `scplot` to plot the results of dimensionality reduction using UMAP.  
+Subsequently, we plot the results of dimensionality reduction by PCA.  
 Among these, for the present study, we perform enrichment analysis on the marker genes of clusters 1 and 5.
 
 
 ```r
-## scplot utilizes scattermore for rendering, in this instance, we override the highlighting by geom_node_point.
-dd <- sc_dim(pbmc) + 
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
-                        colour="tomato", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
-                        colour="tomato", expand=3)+
-  sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
-                    color='black', bg.color='white')
-
 library(clusterProfiler)
+
+pcas <- data.frame(
+    pbmc@reductions$pca@cell.embeddings[,1],
+    pbmc@reductions$pca@cell.embeddings[,2],
+    pbmc@active.ident,
+    pbmc@meta.data$seurat_clusters) |>
+    `colnames<-`(c("PCA_1","PCA_2","Cell","group"))
+
+
+aa <- (pcas %>% group_by(Cell) %>%
+    mutate(meanX=mean(PCA_1), meanY=mean(PCA_2))) |>
+    select(Cell, meanX, meanY)
+label <- aa[!duplicated(aa),]
+
+dd <- ggplot(pcas)+
+    geom_point(aes(x=PCA_1, y=PCA_2, color=Cell))+
+    shadowtext::geom_shadowtext(x=label$meanX,y=label$meanY,label=label$Cell, data=label,
+                            bg.colour="white", colour="black")+
+    theme_minimal()+xlab("PC1")+ylab("PC2")+
+    theme(legend.position="none")
+
 marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
                                      dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
 marker_5 <- clusterProfiler::bitr((markers |> filter(cluster=="5" & p_val_adj < 1e-50) |>
@@ -581,6 +592,7 @@ Obtain the color information from `ggplot2` and obtain pathway using `ggkegg`. H
 
 
 ```r
+## Make color map
 built <- ggplot_build(dd)$data[[1]]
 cols <- built$colour
 names(cols) <- as.character(as.numeric(built$group)-1)
@@ -605,21 +617,22 @@ We can inspect marker genes in multiple pathways to better understand the role o
 
 
 ```r
-
-dd <- sc_dim(pbmc) + 
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="1", color=ident)),
-                        colour="tomato", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="5", color=ident)),
-                        colour="tomato", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="4", color=ident)),
-                        colour="gold", expand=3)+
-  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=UMAP_1, y=UMAP_2, filter=ident=="6", color=ident)),
-                        colour="gold", expand=3)+
-  sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
-                    color='black', bg.color='white')
-
 library(clusterProfiler)
 library(org.Hs.eg.db)
+
+dd <- ggplot(pcas) + 
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="1", color=group)),
+                        colour="tomato", expand=3)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="5", color=group)),
+                        colour="tomato", expand=3)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="4", color=group)),
+                        colour="gold", expand=3)+
+  ggfx::with_outer_glow(geom_node_point(size=1, aes(x=PCA_1, y=PCA_2, filter=group=="6", color=group)),
+                        colour="gold", expand=3)+
+  shadowtext::geom_shadowtext(x=label$meanX,y=label$meanY, label=label$Cell, data=label,
+                              bg.colour="white", colour="black")+
+  theme_minimal()
+
 marker_1 <- clusterProfiler::bitr((markers |> filter(cluster=="1" & p_val_adj < 1e-50) |>
                                      dplyr::select(gene))$gene,fromType="SYMBOL",toType="ENTREZID",OrgDb = org.Hs.eg.db)$ENTREZID
 marker_5 <- clusterProfiler::bitr((markers |> filter(cluster=="5" & p_val_adj < 1e-50) |>
@@ -632,12 +645,6 @@ mk1_enrich <- enrichKEGG(marker_1)
 mk5_enrich <- enrichKEGG(marker_5)
 mk6_enrich <- enrichKEGG(marker_6)
 mk4_enrich <- enrichKEGG(marker_4)
-
-built <- ggplot_build(dd)$data[[1]]
-cols <- built$colour
-names(cols) <- as.character(as.numeric(built$group)-1)
-gr_cols <- cols[!duplicated(cols)]
-
 
 g1 <- pathway("hsa04612") |> mutate(marker_4=append_cp(mk4_enrich),
                                     marker_6=append_cp(mk6_enrich),
@@ -838,10 +845,12 @@ Obtain legend and modify.
 
 ```r
 ## Take scplot legend, make it rectangle
-dd2 <- sc_dim(pbmc) + 
-    sc_dim_geom_label(geom = shadowtext::geom_shadowtext, 
-                      color='black', bg.color='white', size=3)+
-    guides(color = guide_legend(override.aes = list(shape=15, size=5)))
+## Make pseudo plot
+dd2 <- ggplot(pcas) +
+  geom_node_point(aes(x=PCA_1, y=PCA_2, color=group)) +
+  guides(color = guide_legend(override.aes = list(shape=15, size=5)))+
+  theme_minimal()
+    
 grobs <- ggplot_gtable(ggplot_build(dd2))
 num <- which(sapply(grobs$grobs, function(x) x$name) == "guide-box")
 legendGrob <- grobs$grobs[[num]]
@@ -873,7 +882,6 @@ overlaid <- Reduce("+", annot_list, graph_tmp)+
 overlaidGtable <- ggplot_gtable(ggplot_build(overlaid))
 num2 <- which(sapply(overlaidGtable$grobs, function(x) x$name) == "guide-box")
 overlaidGtable$grobs[[num2]] <- legendGrob
-
 
 ggplotify::as.ggplot(overlaidGtable)
 ```
