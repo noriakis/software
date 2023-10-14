@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-09-26"
+date: "2023-10-14"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -53,3 +53,13 @@ pathway("hsa04110") |> ## Obtain and parse the KEGG pathway
 ```
 
 <img src="index_files/figure-html/ggkegg-1.png" width="100%" style="display: block; margin: auto;" />
+
+Some convenient functions are prepared, like highlighting genes in the pathway.
+
+
+```r
+## Highlight genes in the pathway, and overlay raw map.
+highlight_entities("hsa04110", "CDKN2A")
+```
+
+<img src="index_files/figure-html/ggkegg2-1.png" width="100%" style="display: block; margin: auto;" />
