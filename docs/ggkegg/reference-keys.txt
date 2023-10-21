@@ -1,4 +1,5 @@
 about
+bugs-and-errors
 pathway
 example-visualization
 geom_node_rect

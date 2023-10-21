@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-10-14"
+date: "2023-10-21"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -63,3 +63,7 @@ highlight_entities("hsa04110", "CDKN2A")
 ```
 
 <img src="index_files/figure-html/ggkegg2-1.png" width="100%" style="display: block; margin: auto;" />
+
+## Bugs and errors
+
+If you find bugs or errors such as parsing errors, please kindly report them to [Issues](https://github.com/noriakis/ggkegg/issues), or make a [pull request](https://github.com/noriakis/ggkegg/pulls), or report it directly to [e-mail](nori@hgc.jp).
