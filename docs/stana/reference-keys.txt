@@ -9,7 +9,7 @@ metasnv
 statistial-analysis
 consensus-sequence-calling
 permanova
-comparing-gene-abundances
+comparing-gene-copy-numbers
 performing-boruta
 function
 parsing-patric-results

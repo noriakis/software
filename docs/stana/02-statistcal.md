@@ -29565,14 +29565,14 @@ head(mat)
 
 ## PERMANOVA
 
-Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene abundances, or tree-based distance between the specified group. When the `target=tree` is specified, tree shuold be in `stana@treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
+Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the `target=tree` is specified, tree shuold be in `stana@treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
 
 
 ```r
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582885, Pr: 0.707
+#>   R2: 0.0740407267582885, Pr: 0.666
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -29581,12 +29581,12 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.707
+#> gr        1  0.15557 0.07404 0.7196  0.666
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
 
-## Comparing gene abundances
+## Comparing gene copy numbers
 
 For `MIDAS` and `MIDAS2` output (or if you have `genes` slot filled in the stana object), gene abundances can be compared one by one using exact Wilcoxon rank-sum test using `wilcox.exact` in `exactRankTests` computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.
 
@@ -29618,17 +29618,17 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 30.63069 secs.
+#> Boruta performed 99 iterations in 39.95905 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  11 attributes confirmed important: UHGG005985_00101,
-#> UHGG025024_01181, UHGG044133_01185, UHGG060667_01243,
-#> UHGG121008_01471 and 6 more;
-#>  21795 attributes confirmed unimportant:
+#>  8 attributes confirmed important: UHGG017442_00914,
+#> UHGG025024_01181, UHGG061776_01340, UHGG121008_01471,
+#> UHGG158704_01078 and 3 more;
+#>  21798 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21790 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21793 more;
 ```
 
-Further, we visualize the abundances of important genes confirmed.
+Further, we visualize the copy numbers of important genes confirmed between the group.
 
 
 ```r

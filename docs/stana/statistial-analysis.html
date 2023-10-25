@@ -29615,12 +29615,12 @@
 <h2>
 <span class="header-section-number">3.2</span> PERMANOVA<a class="anchor" aria-label="anchor" href="#permanova"><i class="fas fa-link"></i></a>
 </h2>
-<p>Using <code>adonis2</code> function in <code>vegan</code>, one can compare distance matrix based on SNV frequency or gene abundances, or tree-based distance between the specified group. When the <code>target=tree</code> is specified, tree shuold be in <code>stana@treeList</code>, with the species name as the key. The <code><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">ape::cophenetic.phylo()</a></code> is used to calculate distance between tips based on branch length. Distance method can be chosen from <code>dist</code> function in <code>stats</code>. You can specify <code>distArg</code> to pass the arguments to <code>dist</code>. Also, the distance calculated directly from sequences can be used. In this case, <code>target='fasta'</code> should be chosen, and the function to calculate distance should be provided to <code>AAfunc</code> argument.</p>
+<p>Using <code>adonis2</code> function in <code>vegan</code>, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the <code>target=tree</code> is specified, tree shuold be in <code>stana@treeList</code>, with the species name as the key. The <code><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">ape::cophenetic.phylo()</a></code> is used to calculate distance between tips based on branch length. Distance method can be chosen from <code>dist</code> function in <code>stats</code>. You can specify <code>distArg</code> to pass the arguments to <code>dist</code>. Also, the distance calculated directly from sequences can be used. In this case, <code>target='fasta'</code> should be chosen, and the function to calculate distance should be provided to <code>AAfunc</code> argument.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setTree.html">setTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">tre</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing adonis in 100003</span></span>
-<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.707</span></span>
+<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.666</span></span>
 <span><span class="va">stana</span><span class="op">@</span><span class="va">adonisList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
@@ -29629,13 +29629,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ gr)</span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.707</span></span>
+<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.666</span></span>
 <span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
 <span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
 </div>
-<div id="comparing-gene-abundances" class="section level2" number="3.3">
+<div id="comparing-gene-copy-numbers" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.3</span> Comparing gene abundances<a class="anchor" aria-label="anchor" href="#comparing-gene-abundances"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Comparing gene copy numbers<a class="anchor" aria-label="anchor" href="#comparing-gene-copy-numbers"><i class="fas fa-link"></i></a>
 </h2>
 <p>For <code>MIDAS</code> and <code>MIDAS2</code> output (or if you have <code>genes</code> slot filled in the stana object), gene abundances can be compared one by one using exact Wilcoxon rank-sum test using <code>wilcox.exact</code> in <code>exactRankTests</code> computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
@@ -29663,15 +29663,15 @@
 <span><span class="co">#&gt; Performing Boruta</span></span>
 <span><span class="va">brres</span></span>
 <span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 99 iterations in 30.63069 secs.</span></span>
+<span><span class="co">#&gt; Boruta performed 99 iterations in 39.95905 secs.</span></span>
 <span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">#&gt;  11 attributes confirmed important: UHGG005985_00101,</span></span>
-<span><span class="co">#&gt; UHGG025024_01181, UHGG044133_01185, UHGG060667_01243,</span></span>
-<span><span class="co">#&gt; UHGG121008_01471 and 6 more;</span></span>
-<span><span class="co">#&gt;  21795 attributes confirmed unimportant:</span></span>
+<span><span class="co">#&gt;  8 attributes confirmed important: UHGG017442_00914,</span></span>
+<span><span class="co">#&gt; UHGG025024_01181, UHGG061776_01340, UHGG121008_01471,</span></span>
+<span><span class="co">#&gt; UHGG158704_01078 and 3 more;</span></span>
+<span><span class="co">#&gt;  21798 attributes confirmed unimportant:</span></span>
 <span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
-<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21790 more;</span></span></code></pre></div>
-<p>Further, we visualize the abundances of important genes confirmed.</p>
+<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21793 more;</span></span></code></pre></div>
+<p>Further, we visualize the copy numbers of important genes confirmed between the group.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>,</span>
 <span>          <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -29689,7 +29689,7 @@
 <li><a class="nav-link" href="#statistial-analysis"><span class="header-section-number">3</span> Statistial analysis</a></li>
 <li><a class="nav-link" href="#consensus-sequence-calling"><span class="header-section-number">3.1</span> Consensus sequence calling</a></li>
 <li><a class="nav-link" href="#permanova"><span class="header-section-number">3.2</span> PERMANOVA</a></li>
-<li><a class="nav-link" href="#comparing-gene-abundances"><span class="header-section-number">3.3</span> Comparing gene abundances</a></li>
+<li><a class="nav-link" href="#comparing-gene-copy-numbers"><span class="header-section-number">3.3</span> Comparing gene copy numbers</a></li>
 <li><a class="nav-link" href="#performing-boruta"><span class="header-section-number">3.4</span> Performing Boruta</a></li>
 </ul>
 
