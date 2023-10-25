@@ -1,5 +1,6 @@
 about
 motivation
+bugs-and-errors
 importing
 midas
 midas2

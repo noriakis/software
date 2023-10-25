@@ -64,7 +64,7 @@
 <span class="header-section-number">5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h1>
 <p><code>stana</code> offers visualization functions that can interpret the profiled data.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
 <div id="plotpca" class="section level2" number="5.1">
@@ -72,7 +72,7 @@
 <span class="header-section-number">5.1</span> <code>plotPCA</code><a class="anchor" aria-label="anchor" href="#plotpca"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can plot principal component analysis results using <code>prcomp</code> by <code>plotPCA</code> function across grouping specified. If no group is specified, <code>No_Group</code> label is assigned to all the samples.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadmetaSNV.html">loadmetaSNV</a></span><span class="op">(</span><span class="st">"../metasnv_sample_out/"</span>,just_species <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadmetaSNV.html">loadmetaSNV</a></span><span class="op">(</span><span class="st">"../metasnv_sample_out/"</span>, candSp<span class="op">=</span><span class="va">mt</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Loading refGenome1clus</span></span>
@@ -85,7 +85,7 @@
 <h2>
 <span class="header-section-number">5.2</span> Visualization of gene copy numbers<a class="anchor" aria-label="anchor" href="#visualization-of-gene-copy-numbers"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"102478"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; SNPS</span></span>
@@ -105,7 +105,7 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"102478"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UHGG000186_00531"</span>,<span class="st">"UHGG000186_00521"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/gab-1.png" width="672"></div>
 <p>Default color mapping can be changed by <code>changeColors</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/changeColors.html">changeColors</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"102478"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UHGG000186_00531"</span>,<span class="st">"UHGG000186_00521"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/gab2-1.png" width="672"></div>
@@ -121,12 +121,12 @@
 <span class="header-section-number">5.4</span> Visualization of <code>inStrain</code> results<a class="anchor" aria-label="anchor" href="#visualization-of-instrain-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>The imported <code>inStrain</code> <code>compare</code> profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using <code>genomeHeatmap</code> and <code>strainClusterHeatmap</code> by <code>ComplexHeatmap</code>. For <code>genomeHeatmap</code>, typically population ANI or consensus ANI are plotted, but all the columns listed in <code>genomeWide_compare.tsv</code> can be plotted. The parameters to be passed to <code>Heatmap</code> can be specified with <code>heatmapArgs</code>. If cluster information (<code>stana@cl</code>) is available or <code>cl</code> is specified, the columns will be split to present the grouping. Please refer to the documentation of <a href="https://instrain.readthedocs.io/en/latest/important_concepts.html"><code>inStrain</code></a> for <code>popANI</code> and <code>conANI</code>.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
 <span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/genomeHeatmap.html">genomeHeatmap</a></span><span class="op">(</span><span class="va">instr</span>, <span class="va">instr_chk</span>, column <span class="op">=</span> <span class="st">"popANI"</span>, heatmapArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>show_column_name<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/heatmaps_instrain-1.png" width="672"></div>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/strainClusterHeatmap.html">strainClusterHeatmap</a></span><span class="op">(</span><span class="va">instr</span>, <span class="va">instr_chk</span>, heatmapArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>show_column_name<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/heatmaps_instrain-2.png" width="672"></div>
 
