@@ -11,6 +11,7 @@ consensus-sequence-calling
 permanova
 comparing-gene-copy-numbers
 performing-boruta
+aggregating-gene-copy-numbers
 function
 parsing-patric-results
 draw-the-network
