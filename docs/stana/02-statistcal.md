@@ -13,7 +13,7 @@ load(system.file("extdata", "sysdata.rda", package = "stana"))
 
 ## Consensus sequence calling
 
-The consensus sequence calling can be performed for `MIDAS` and `MIDAS2` output. The implementation is based on `call_consensus.py` script available in `MIDAS`. Here we use pair-wise distances of sequences calculated by `dist.ml` in the default amino acid model (`JC69`), and performs neighbor-joining tree estimation by `NJ`.
+The consensus sequence calling can be performed for `MIDAS` and `MIDAS2` output, which provides statistics of SNVs. The implementation is based on `call_consensus.py` script available in `MIDAS`. Here we use pair-wise distances of sequences calculated by `dist.ml` in the default amino acid model (`JC69`), and performs neighbor-joining tree estimation by `NJ`.
 
 
 
@@ -21,7 +21,8 @@ The consensus sequence calling can be performed for `MIDAS` and `MIDAS2` output.
 stana <- consensusSeqMIDAS2(stana, species="100003", verbose=FALSE)
 #> Beginning calling for 100003
 #>   Site number: 5019
-#>   Outputting consensus sequence to 100003_consensus.fasta
+#>   Profiled samples: 11
+#>   Included samples: 11
 
 ## Tree estimation and visualization by `phangorn` and `ggtree`
 dm <- dist.ml(stana@fastaList$`100003`)
@@ -36,6 +37,20 @@ tp
 
 <img src="02-statistcal_files/figure-html/cons-1.png" width="672" />
 
+The sequences are stored in `fastaList` slot, the list with the species ID as name.
+
+
+```r
+stana <- stana |>
+    consensusSeq(argList=list(site_prev=0.8))
+#> Beginning calling for 100003
+#>   Site number: 5019
+#>   Profiled samples: 11
+#>   Included samples: 11
+stana@fastaList[[1]]
+#> 11 sequences with 4214 character and 2782 different site patterns.
+#> The states are a c g t
+```
 
 ## PERMANOVA
 
@@ -43,10 +58,10 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 
 
 ```r
-stana@treeList[["100003"]] <- tre
+stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582885, Pr: 0.683
+#>   R2: 0.0740407267582885, Pr: 0.707
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -55,7 +70,7 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.683
+#> gr        1  0.15557 0.07404 0.7196  0.707
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -92,14 +107,14 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 1.333982 mins.
+#> Boruta performed 99 iterations in 34.93057 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  12 attributes confirmed important: UHGG000008_01641,
-#> UHGG032042_00636, UHGG035311_01086, UHGG060667_01243,
-#> UHGG164130_01419 and 7 more;
-#>  21794 attributes confirmed unimportant:
+#>  6 attributes confirmed important: UHGG060667_01243,
+#> UHGG158704_01078, UHGG165063_01520, UHGG214192_01692,
+#> UHGG215309_01728 and 1 more;
+#>  21800 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21789 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21795 more;
 ```
 
 Further, we visualize the abundances of important genes confirmed.

@@ -25,6 +25,6 @@ visualizing-calculated-values-across-species
 show-which-species-have-the-kos
 visualization
 plotpca
-visualization-of-gene-abundances
+visualization-of-gene-copy-numbers
 visualization-of-functional-analysis-results
 visualization-of-instrain-results

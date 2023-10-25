@@ -25,7 +25,7 @@ plotPCA(mt, species=mt@ids[1])
 
 <img src="04-visualization_files/figure-html/plotpca-1.png" width="672" />
 
-## Visualization of gene abundances
+## Visualization of gene copy numbers
 
 
 ```r
