@@ -1,6 +1,6 @@
 # Functional annotation {#function}
 
-For functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for `MIDAS` and `MIDAS2`, which profile gene abundances within species by default.
+For functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for `MIDAS` and `MIDAS2`, which profile gene copy numbers within species by default.
 
 
 ```r
@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1c6496398e4fe02d90f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a1c6496398e4fe02d90f">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4873facf71b05dd80011" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4873facf71b05dd80011">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 6b87c9e UN-- 4 2 -- 
+#> IGRAPH 78f4d17 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 6b87c9e (vertex names):
+#> + edges from 78f4d17 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -113,7 +113,10 @@ drawPATRIC(genes)
 
 ## Parsing `eggNOG-mapper v2` results
 
-Use `checkEGGNOG` function to read the output of eggNOG-mapper v2. Specify IDs you want to obtain to `ret`, such as "KEGG_ko" and "KEGG_Pathway".
+Use `checkEGGNOG` function to read the output of eggNOG-mapper v2. 
+You should perform the annotation to genes using [the server](http://eggnog-mapper.embl.de/) or the software.
+Specify IDs you want to obtain to `ret`, such as "KEGG_ko" and "KEGG_Pathway".
+The annotation can be used with the other functions.
 
 
 ```r
@@ -124,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-07f22306113992c97d7b" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-07f22306113992c97d7b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4b4eb021e526a5f72edb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4b4eb021e526a5f72edb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -153,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 6d7894a UN-- 21 922 -- 
+#> IGRAPH 7a1720b UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 6d7894a (vertex names):
+#> + edges from 7a1720b (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -172,9 +175,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 <img src="03-function_files/figure-html/drawEGGNOG-1.png" width="672" />
 
 
-## Heatmap of the gene abundances with functional annotations
+## Heatmap of the gene copy numbers with functional annotations
 
-You can inspect the overview of functional differences using gene abundances along with `simplifyEnrichment`. The `plotHeatmap` function can be used with the stana object or preprocessed gene abundance matrix as input. In the function, `anno_PATRIC_keywords` and `anno_eggNOG_keywords` are used to plot the word clouds alongside `Heatmap` from `ComplexHeatmap`. It is easy for `MIDAS`, as the function obtains functional annotation from PATRIC API server and no annotation step is needed.
+You can inspect the overview of functional differences using gene copy numbers along with `simplifyEnrichment`. The `plotHeatmap` function can be used with the stana object or preprocessed gene copy number matrix as input. In the function, `anno_PATRIC_keywords` and `anno_eggNOG_keywords` are used to plot the word clouds alongside `Heatmap` from `ComplexHeatmap`. It is easy for `MIDAS`, as the function obtains functional annotation from PATRIC API server and no annotation step is needed.
 
 ### `MIDAS`
 
@@ -317,7 +320,7 @@ plotHeatmap(stana, "101346",
 
 ### Visualization of KEGG PATHWAY
 
-`KEGG PATHWAY` is frequently used to characterize metabolic function of microbiome. Utilizing [`ggkegg`](https://github.com/noriakis/ggkegg), the information of intra-species diversity, particulary gene abundance differences, can be reflected onto `KEGG PATHWAY`. It needs `genes` slot filled, and some annotations files, typically `eggNOG-mapper v2`, are needed.
+`KEGG PATHWAY` is frequently used to characterize metabolic function of microbiome. Utilizing [`ggkegg`](https://github.com/noriakis/ggkegg), the information of intra-species diversity, particulary gene copy number differences, can be reflected onto `KEGG PATHWAY`. It needs `genes` slot filled, and some annotations files, typically `eggNOG-mapper v2`, are needed.
 
 #### Visualizing differences per species
 

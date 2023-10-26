@@ -66,6 +66,24 @@ mat |> dim()
 #> [1]   11 4214
 ```
 
+You can use the MSA stored in `fastaList` slot to infer the phylogenetic tree of your choices.
+The `plotTree` function can be used to internally infer and plot the tree based on grouping.
+`dist_method` is set to `dist.ml` by default, and you can pass arguments to the function by `tree_args`.
+
+
+```r
+library(phangorn)
+stana <- plotTree(stana, dist_method="dist.hamming", tree_args=list(exclude="all"))
+stana@treeList[[1]]
+#> 
+#> Phylogenetic tree with 11 tips and 9 internal nodes.
+#> 
+#> Tip labels:
+#>   ERR1711593, ERR1711594, ERR1711596, ERR1711598, ERR1711603, ERR1711605, ...
+#> 
+#> Unrooted; includes branch lengths.
+```
+
 ## PERMANOVA
 
 Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the `target=tree` is specified, tree shuold be in `stana@treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
@@ -75,7 +93,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582885, Pr: 0.706
+#>   R2: 0.0740407267582885, Pr: 0.697
 stana@adonisList[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -84,14 +102,14 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.706
+#> gr        1  0.15557 0.07404 0.7196  0.697
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
 
 ## Comparing gene copy numbers
 
-For `MIDAS` and `MIDAS2` output (or if you have `genes` slot filled in the stana object), gene abundances can be compared one by one using exact Wilcoxon rank-sum test using `wilcox.exact` in `exactRankTests` computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.
+For `MIDAS` and `MIDAS2` output (or if you have `genes` slot filled in the stana object), gene copy numbers can be compared one by one using exact Wilcoxon rank-sum test using `wilcox.exact` in `exactRankTests` computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.
 
 
 ```r
@@ -121,14 +139,14 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 49.09019 secs.
+#> Boruta performed 99 iterations in 1.210126 mins.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  13 attributes confirmed important: UHGG004375_00184,
-#> UHGG035784_01994, UHGG044133_01184, UHGG060667_01243,
-#> UHGG158704_01078 and 8 more;
-#>  21793 attributes confirmed unimportant:
+#>  8 attributes confirmed important: UHGG000008_01098,
+#> UHGG000008_01290, UHGG025024_01950, UHGG026235_00555,
+#> UHGG096197_00528 and 3 more;
+#>  21798 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21788 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21793 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.
@@ -140,7 +158,7 @@ plotGenes(stana, "100003",
   ggplot2::facet_wrap(.~geneID,scales="free_y")
 ```
 
-<img src="02-statistcal_files/figure-html/vis-1.png" width="672" />
+<img src="02-statistcal_files/figure-html/vis-1.png" width="1440" />
 
 ## Aggregating gene copy numbers
 
@@ -149,6 +167,7 @@ plotGenes(stana, "100003",
 ## This returns new stana object
 stanacomb <- combineGenes(list(stana, stana), species="100003")
 #> Common genes: 21806
+#> Duplicate label found in group
 dim(stanacomb@genes[["100003"]])
 #> [1] 21806    32
 ```
