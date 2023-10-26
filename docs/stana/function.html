@@ -102,8 +102,8 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4873facf71b05dd80011" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4873facf71b05dd80011">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-66763b4ab3b7c80ed53a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-66763b4ab3b7c80ed53a">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
@@ -151,9 +151,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH 78f4d17 UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH ebb3c78 UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 78f4d17 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from ebb3c78 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -173,8 +173,8 @@ The annotation can be used with the other functions.</p>
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4b4eb021e526a5f72edb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-4b4eb021e526a5f72edb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1404aee61b2f8468a3da" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1404aee61b2f8468a3da">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -198,9 +198,9 @@ The annotation can be used with the other functions.</p>
 <span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
 <span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH 7a1720b UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH ed0c7b9 UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from 7a1720b (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from ed0c7b9 (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
