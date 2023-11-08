@@ -356,8 +356,8 @@ cp2 <- clusterProfiler::enrichKEGG(entrezid2$ENTREZID)
 
 
 ## Filter to interesting pathways
-include <- (cp@result |> row.names())[c(1,3,4)]
-pathways <- cp@result[include,"ID"]
+include <- (data.frame(cp) |> row.names())[c(1,3,4)]
+pathways <- data.frame(cp)[include,"ID"]
 pathways
 #> [1] "hsa04110" "hsa03460" "hsa03440"
 ```
@@ -560,13 +560,13 @@ Among these, for the present study, we perform enrichment analysis on the marker
 ```r
 library(clusterProfiler)
 
+## Directly access slots in Seurat
 pcas <- data.frame(
     pbmc@reductions$pca@cell.embeddings[,1],
     pbmc@reductions$pca@cell.embeddings[,2],
     pbmc@active.ident,
     pbmc@meta.data$seurat_clusters) |>
     `colnames<-`(c("PC_1","PC_2","Cell","group"))
-
 
 aa <- (pcas %>% group_by(Cell) %>%
     mutate(meanX=mean(PC_1), meanY=mean(PC_2))) |>

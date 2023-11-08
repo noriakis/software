@@ -155,23 +155,28 @@ we can write as follows using `highligh_set_edges` and `highlight_set_nodes`.
 
 ```r
 pathway("ko01230") |> 
-  process_line() |>
-  activate(nodes) |>
-  mutate(
-    compound=convert_id("compound"),
-    M00002=highlight_set_nodes(module("M00002")@reaction_components)) |>
-  activate(edges) |>
-  mutate(M00002=highlight_set_edges(module("M00002")@definition_components)) |>
-  ggraph(x=x, y=y)+
-  geom_edge_link()+
-  with_outer_glow(geom_edge_link(aes(color=M00002, filter=M00002)),
-                  colour="pink")+
-  geom_node_point(shape=21,aes(filter=type!="line"))+
-  with_outer_glow(geom_node_point(shape=21, aes(filter=M00002, color=M00002)),
-                  colour="pink")+
-  geom_node_text(aes(label=compound, filter=M00002), repel=TRUE,
-                 bg.colour="white", size=2)+
-  theme_void()
+    process_line() |>
+    activate(nodes) |>
+    mutate(
+        compound=convert_id("compound"),
+        M00002=highlight_set_nodes(attr(module("M00002"), "reaction_components"))
+    ) |>
+    activate(edges) |>
+    mutate(
+        M00002=highlight_set_edges(attr(module("M00002"), "definition_components"))
+    ) |>
+    ggraph(x=x, y=y)+
+        geom_edge_link()+
+        with_outer_glow(
+            geom_edge_link(aes(color=M00002, filter=M00002)),
+        colour="pink")+
+        geom_node_point(shape=21,aes(filter=type!="line"))+
+        with_outer_glow(
+            geom_node_point(shape=21, aes(filter=M00002, color=M00002)),
+        colour="pink")+
+        geom_node_text(aes(label=compound, filter=M00002), repel=TRUE,
+            bg.colour="white", size=2)+
+        theme_void()
 ```
 
 <img src="01-pathway_files/figure-html/highlight_example-1.png" width="100%" style="display: block; margin: auto;" />
@@ -221,7 +226,7 @@ ggraph(g,x=x,y=y,layout="manual") +
   geom_edge_link(color="red",aes(filter=M00017|M00021|M00338|M00609|M00034|M00035|M00368))+
 geom_node_point(size=2, color="red",aes(filter=M00017|M00021|M00338|M00609|M00034|M00035|M00368))+
   ggforce::geom_mark_rect(aes(fill=M00017,
-                              label=module("M00017")@name,
+                              label=attr(module("M00017"), "name"),
                               x=x, y=y,
                               group=M00017,
                               filter=M00017),
@@ -393,14 +398,16 @@ You can use your favorite geoms to annotate KEGG map combining the functions.
 
 ```r
 m <- module("M00013")
-g <- g |> mutate(mod=highlight_set_nodes(m@reaction_components,how="all"))
+reactions_in_module <- attr(m, "reaction_components")
+g <- g |> mutate(mod=highlight_set_nodes(reactions_in_module, how="all"))
 gg <- ggraph(g, layout="manual", x=x, y=y)+
-  geom_node_rect(fill="grey",aes(filter=type=="ortholog"))+
-  geom_node_point(aes(filter=type=="compound"), color="blue", size=2)+
-  overlay_raw_map("ko00640")+
-  ggfx::with_outer_glow(geom_node_point(aes(filter=mod, x=x, y=y), color="red",size=2),
-                        colour="yellow",expand=5)+
-  theme_void()
+    geom_node_rect(fill="grey",aes(filter=type=="ortholog"))+
+    geom_node_point(aes(filter=type=="compound"), color="blue", size=2)+
+    overlay_raw_map("ko00640")+
+    ggfx::with_outer_glow(
+        geom_node_point(aes(filter=mod, x=x, y=y), color="red",size=2),
+    colour="yellow",expand=5)+
+    theme_void()
 gg
 ```
 
