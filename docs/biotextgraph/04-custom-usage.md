@@ -82,10 +82,10 @@ for (i in V(g)$name){
         #                                                   sample(row.names(RColorBrewer::brewer.pal.info), 1)),
         #                                 random.order=FALSE),
         #                    numWords=80)
-        # # plt <- A@wc
+        # # plt <- plotWC(A)
         # # 
         # # ## This time use ggwordcloud()
-        # plt <- ggwordcloud::ggwordcloud(A@freqDf$word, A@freqDf$freq,
+        # plt <- ggwordcloud::ggwordcloud(getSlot(A, "freqDf")$word, getSlot(A, "freqDf")$freq,
         #                      shape="circle", min.freq = 1,max.words = Inf,
         #                      rot.per = 0.5, random.order = FALSE,
         #                      colors = brewer.pal(10,
@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 9b3d20b DN-- 3 2 -- 
+#> IGRAPH 6969db4 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 9b3d20b (vertex names):
+#> + edges from 6969db4 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,9 +212,9 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGnBu is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
 #> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Reds is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network' already
 #> exists
@@ -227,8 +227,7 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
+#> Adding another scale for size, which will replace the existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -239,8 +238,7 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
+#> Adding another scale for size, which will replace the existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -251,8 +249,7 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the
-#> existing scale.
+#> Adding another scale for size, which will replace the existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -796,15 +793,15 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Bootstrap (r = 1.29)... Done.
 #> Bootstrap (r = 1.4)... Done.
 #> Input genes: 5847
-#>   Converted input genes: 4895
+#>   Converted input genes: 4861
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 634
-#>   Converted input genes: 518
+#>   Converted input genes: 512
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 2054
-#>   Converted input genes: 1689
+#>   Converted input genes: 1679
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 132
@@ -812,7 +809,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 5673
-#>   Converted input genes: 4728
+#>   Converted input genes: 4694
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> border is set to FALSE as useggfx is not NULL

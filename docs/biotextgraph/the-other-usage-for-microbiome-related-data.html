@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 The other usage for microbiome-related data | biotextgraph</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.33 with bs4_book()">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
 <meta property="og:title" content="Chapter 4 The other usage for microbiome-related data | biotextgraph">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/the-other-usage-for-microbiome-related-data.html">
@@ -14,7 +14,7 @@
 <meta name="twitter:title" content="Chapter 4 The other usage for microbiome-related data | biotextgraph">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-9FXY6YW4YZ"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -94,7 +94,7 @@
 <span><span class="co">#&gt; Including 28 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">basic</span><span class="op">@</span><span class="va">freqDf</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu">getSlot</span><span class="op">(</span><span class="va">basic</span>, <span class="st">"freqDf"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                    word freq</span></span>
 <span><span class="co">#&gt; gut                 Gut    8</span></span>
 <span><span class="co">#&gt; oral               Oral    5</span></span>
@@ -116,7 +116,7 @@
 <span><span class="co">#&gt;  features      features    1</span></span>
 <span><span class="co">#&gt; 16s                 16S    1</span></span>
 <span><span class="co">#&gt; aerosol         Aerosol    1</span></span>
-<span><span class="va">basic</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
+<span><span class="fu">plotWC</span><span class="op">(</span><span class="va">basic</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If <code>target="abstract"</code>, the corresponding abstract of curated publications will be fetched and be summarized.</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
@@ -133,15 +133,29 @@
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
-<span><span class="va">basic2</span><span class="op">@</span><span class="va">freqDf</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                word freq</span></span>
-<span><span class="co">#&gt; patients   patients   37</span></span>
-<span><span class="co">#&gt; gut             Gut   30</span></span>
-<span><span class="co">#&gt; oral           Oral   27</span></span>
-<span><span class="co">#&gt; bacterial Bacterial   25</span></span>
-<span><span class="co">#&gt; species     species   24</span></span>
-<span><span class="co">#&gt; microbial Microbial   23</span></span>
-<span><span class="va">basic2</span><span class="op">@</span><span class="va">wc</span></span></code></pre></div>
+<span><span class="fu">getSlot</span><span class="op">(</span><span class="va">basic2</span>, <span class="st">"freqDf"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                    word freq</span></span>
+<span><span class="co">#&gt; patients       patients   37</span></span>
+<span><span class="co">#&gt; gut                 Gut   30</span></span>
+<span><span class="co">#&gt; oral               Oral   27</span></span>
+<span><span class="co">#&gt; bacterial     Bacterial   25</span></span>
+<span><span class="co">#&gt; species         species   24</span></span>
+<span><span class="co">#&gt; microbial     Microbial   23</span></span>
+<span><span class="co">#&gt; subjects       Subjects   20</span></span>
+<span><span class="co">#&gt; sequencing   sequencing   18</span></span>
+<span><span class="co">#&gt; diversity     diversity   17</span></span>
+<span><span class="co">#&gt; composition composition   16</span></span>
+<span><span class="co">#&gt; 16s                 16S   14</span></span>
+<span><span class="co">#&gt; infection     infection   14</span></span>
+<span><span class="co">#&gt; differences differences   13</span></span>
+<span><span class="co">#&gt; healthy         healthy   13</span></span>
+<span><span class="co">#&gt; controls       controls   12</span></span>
+<span><span class="co">#&gt; covid19         COVID19   12</span></span>
+<span><span class="co">#&gt; infant           Infant   12</span></span>
+<span><span class="co">#&gt; rrna               rRNA   12</span></span>
+<span><span class="co">#&gt; compared       compared   11</span></span>
+<span><span class="co">#&gt; disease         disease   11</span></span>
+<span><span class="fu">plotWC</span><span class="op">(</span><span class="va">basic2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in <code>refseq</code>.</p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
@@ -189,7 +203,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span><span class="co">#&gt; Including 502 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The words-to-species relationship can be plotted by <code>mbPlot=TRUE</code>, useful for assessing which species have similar characteristics regarding diseases.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
@@ -215,7 +229,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span><span class="co">#&gt; Including 90 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net2</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">net2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>As the BugSigDB contains the relationship between bacterial taxonomy and disease, disease name can also be plotted. When <code>disPlot=TRUE</code>, the <code>mbPlot</code>
 will be set to <code>TRUE</code> by default. Words from PubMed that is contained in the disease flag will be concatenated into disease label (like <code>pregnancy</code>) when the <code>colorize=TRUE</code> like the example below.</p>
@@ -233,7 +247,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Including 90 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net3</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">net3</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Other than curated databases, the PubMed query can also be performed with setting <code>curate=FALSE</code>. This way, the text information of the latest literature for the microbes and diseases can be plotted. The options for use in function obtaining PubMed information can be specified to <code>abstArg</code> in list format, like <code>sortOrder="pubdate"</code>.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
@@ -248,7 +262,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Proceeding without API key</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">net4</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">net4</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="enzymes" class="section level2" number="4.2">
@@ -286,7 +300,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
-<span><span class="va">vp</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">vp</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="metabolites" class="section level2" number="4.3">
@@ -338,7 +352,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Checking metabolites</span></span>
-<span><span class="va">metabEx</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">metabEx</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/metabex-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.</p>
 <p>By default, the category other than words are plotted without node and colorization (grey). If preferred, set <code>colorize=TRUE</code> to colorize the associated information by <code>catColors</code>. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated categories.</p>
@@ -367,7 +381,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;   Querying without API key</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="va">metabEx</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
+<span><span class="fu">plotNet</span><span class="op">(</span><span class="va">metabEx</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/metabex2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="interactive" class="section level3" number="4.3.1">
 <h3>
@@ -376,7 +390,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <p>For the complex network, the resulting image might be unreadable.
 <code>exportCyjsWithoutImage</code> function can be used to export the graph to readily interactive interface using <code>Cytoscape.js</code>. The below chunk shows the output produced by the function, hosted by GitHub Pages.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## exportCyjsWithoutImage(metabEx@igraph, rootDir=".", netDir="",nodeColorDiscretePal = "Pastel1")</span></span>
+<code class="sourceCode R"><span><span class="co">## exportCyjsWithoutImage(getSlot(metabEx, "igraph"), rootDir=".", netDir="",nodeColorDiscretePal = "Pastel1")</span></span>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_url.html">include_url</a></span><span class="op">(</span><span class="st">"https://noriakis.github.io/cyjs_test/complex"</span><span class="op">)</span></span></code></pre></div>
 <iframe src="https://noriakis.github.io/cyjs_test/complex" width="100%" height="400px" data-external="1" style="border: none;">
 </iframe>
@@ -516,11 +530,12 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/plotDendroWord-2.svg" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.2.2 (2022-10-31 ucrt)</span></span>
+<span><span class="co">#&gt; R version 4.3.1 (2023-06-16 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Windows 10 x64 (build 22621)</span></span>
+<span><span class="co">#&gt; Running under: Windows 11 x64 (build 22621)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
 <span><span class="co">#&gt; [1] LC_COLLATE=Japanese_Japan.utf8 </span></span>
@@ -529,6 +544,9 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; [4] LC_NUMERIC=C                   </span></span>
 <span><span class="co">#&gt; [5] LC_TIME=Japanese_Japan.utf8    </span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; time zone: Asia/Tokyo</span></span>
+<span><span class="co">#&gt; tzcode source: internal</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets </span></span>
 <span><span class="co">#&gt; [6] methods   base     </span></span>
@@ -536,78 +554,77 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; other attached packages:</span></span>
 <span><span class="co">#&gt; [1] ggfx_1.0.1          RColorBrewer_1.1-3 </span></span>
 <span><span class="co">#&gt; [3] ggraph_2.1.0.9000   biotextgraph_0.99.0</span></span>
-<span><span class="co">#&gt; [5] ggplot2_3.4.2      </span></span>
+<span><span class="co">#&gt; [5] ggplot2_3.4.3      </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;   [1] readxl_1.4.2           shadowtext_0.1.2      </span></span>
-<span><span class="co">#&gt;   [3] BiocFileCache_2.6.1    systemfonts_1.0.4     </span></span>
-<span><span class="co">#&gt;   [5] igraph_1.4.1           GenomeInfoDb_1.34.9   </span></span>
-<span><span class="co">#&gt;   [7] digest_0.6.31          yulab.utils_0.0.6     </span></span>
-<span><span class="co">#&gt;   [9] htmltools_0.5.4        bugsigdbr_1.4.3       </span></span>
-<span><span class="co">#&gt;  [11] viridis_0.6.2          magick_2.7.4          </span></span>
-<span><span class="co">#&gt;  [13] fansi_1.0.4            GeneSummary_0.99.4    </span></span>
-<span><span class="co">#&gt;  [15] magrittr_2.0.3         memoise_2.0.1         </span></span>
-<span><span class="co">#&gt;  [17] tm_0.7-11              Biostrings_2.66.0     </span></span>
-<span><span class="co">#&gt;  [19] graphlayouts_0.8.4     pvclust_2.2-0         </span></span>
-<span><span class="co">#&gt;  [21] wordcloud_2.6          colorspace_2.1-0      </span></span>
-<span><span class="co">#&gt;  [23] blob_1.2.3             rappdirs_0.3.3        </span></span>
-<span><span class="co">#&gt;  [25] ggrepel_0.9.3          textshaping_0.3.6     </span></span>
-<span><span class="co">#&gt;  [27] xfun_0.37              dplyr_1.1.0           </span></span>
-<span><span class="co">#&gt;  [29] crayon_1.5.2           RCurl_1.98-1.10       </span></span>
-<span><span class="co">#&gt;  [31] jsonlite_1.8.4         graph_1.76.0          </span></span>
-<span><span class="co">#&gt;  [33] ape_5.7                glue_1.6.2            </span></span>
-<span><span class="co">#&gt;  [35] polyclip_1.10-4        stopwords_2.3         </span></span>
-<span><span class="co">#&gt;  [37] gtable_0.3.1           phylogram_2.1.0       </span></span>
-<span><span class="co">#&gt;  [39] zlibbioc_1.44.0        XVector_0.38.0        </span></span>
-<span><span class="co">#&gt;  [41] GetoptLong_1.0.5       BiocGenerics_0.44.0   </span></span>
-<span><span class="co">#&gt;  [43] rentrez_1.2.3          scales_1.2.1          </span></span>
-<span><span class="co">#&gt;  [45] DBI_1.1.3              Rcpp_1.0.10           </span></span>
-<span><span class="co">#&gt;  [47] gridtext_0.1.5         viridisLite_0.4.1     </span></span>
-<span><span class="co">#&gt;  [49] xtable_1.8-4           gridGraphics_0.5-1    </span></span>
-<span><span class="co">#&gt;  [51] bit_4.0.5              stats4_4.2.2          </span></span>
-<span><span class="co">#&gt;  [53] htmlwidgets_1.6.1      httr_1.4.5            </span></span>
-<span><span class="co">#&gt;  [55] ggwordcloud_0.6.0      ellipsis_0.3.2        </span></span>
-<span><span class="co">#&gt;  [57] pkgconfig_2.0.3        XML_3.99-0.13         </span></span>
-<span><span class="co">#&gt;  [59] farver_2.1.1           sass_0.4.5            </span></span>
-<span><span class="co">#&gt;  [61] dbplyr_2.3.1           utf8_1.2.3            </span></span>
-<span><span class="co">#&gt;  [63] ggplotify_0.1.0        tidyselect_1.2.0      </span></span>
-<span><span class="co">#&gt;  [65] labeling_0.4.2         rlang_1.1.1           </span></span>
-<span><span class="co">#&gt;  [67] later_1.3.0            AnnotationDbi_1.60.0  </span></span>
-<span><span class="co">#&gt;  [69] munsell_0.5.0          cellranger_1.1.0      </span></span>
-<span><span class="co">#&gt;  [71] tools_4.2.2            cachem_1.0.7          </span></span>
-<span><span class="co">#&gt;  [73] cli_3.6.0              generics_0.1.3        </span></span>
-<span><span class="co">#&gt;  [75] RSQLite_2.3.0          stringr_1.5.0         </span></span>
-<span><span class="co">#&gt;  [77] evaluate_0.20          fastmap_1.1.1         </span></span>
-<span><span class="co">#&gt;  [79] ggdendro_0.1.23        yaml_2.3.7            </span></span>
-<span><span class="co">#&gt;  [81] ragg_1.2.5             org.Hs.eg.db_3.16.0   </span></span>
-<span><span class="co">#&gt;  [83] knitr_1.42             bit64_4.0.5           </span></span>
-<span><span class="co">#&gt;  [85] fs_1.6.1               tidygraph_1.2.3       </span></span>
-<span><span class="co">#&gt;  [87] purrr_1.0.1            KEGGREST_1.38.0       </span></span>
-<span><span class="co">#&gt;  [89] dendextend_1.16.0      nlme_3.1-161          </span></span>
-<span><span class="co">#&gt;  [91] mime_0.12              slam_0.1-50           </span></span>
-<span><span class="co">#&gt;  [93] xml2_1.3.3             compiler_4.2.2        </span></span>
-<span><span class="co">#&gt;  [95] rstudioapi_0.14        filelock_1.0.2        </span></span>
-<span><span class="co">#&gt;  [97] curl_5.0.0             png_0.1-8             </span></span>
-<span><span class="co">#&gt;  [99] tibble_3.1.8           tweenr_2.0.2          </span></span>
-<span><span class="co">#&gt; [101] stringi_1.7.12         bslib_0.4.2           </span></span>
-<span><span class="co">#&gt; [103] cyjShiny_1.0.34        highr_0.10            </span></span>
-<span><span class="co">#&gt; [105] lattice_0.20-45        commonmark_1.8.1      </span></span>
-<span><span class="co">#&gt; [107] markdown_1.5           vctrs_0.5.2           </span></span>
-<span><span class="co">#&gt; [109] pillar_1.8.1           lifecycle_1.0.3       </span></span>
-<span><span class="co">#&gt; [111] jquerylib_0.1.4        GlobalOptions_0.1.2   </span></span>
-<span><span class="co">#&gt; [113] data.table_1.14.8      cowplot_1.1.1         </span></span>
-<span><span class="co">#&gt; [115] bitops_1.0-7           httpuv_1.6.9          </span></span>
-<span><span class="co">#&gt; [117] patchwork_1.1.2        R6_2.5.1              </span></span>
-<span><span class="co">#&gt; [119] bookdown_0.33          promises_1.2.0.1      </span></span>
-<span><span class="co">#&gt; [121] gridExtra_2.3          IRanges_2.32.0        </span></span>
-<span><span class="co">#&gt; [123] MASS_7.3-58.1          rjson_0.2.21          </span></span>
-<span><span class="co">#&gt; [125] withr_2.5.0            S4Vectors_0.36.2      </span></span>
-<span><span class="co">#&gt; [127] GenomeInfoDbData_1.2.9 parallel_4.2.2        </span></span>
-<span><span class="co">#&gt; [129] ISOcodes_2022.09.29    grid_4.2.2            </span></span>
-<span><span class="co">#&gt; [131] tidyr_1.3.0            rmarkdown_2.20        </span></span>
-<span><span class="co">#&gt; [133] downlit_0.4.2          ggforce_0.4.1         </span></span>
-<span><span class="co">#&gt; [135] Biobase_2.58.0         NLP_0.2-1             </span></span>
-<span><span class="co">#&gt; [137] shiny_1.7.4            base64enc_0.1-3</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1] ggdendro_0.1.23         jsonlite_1.8.7         </span></span>
+<span><span class="co">#&gt;   [3] pvclust_2.2-0           magrittr_2.0.3         </span></span>
+<span><span class="co">#&gt;   [5] magick_2.7.5            farver_2.1.1           </span></span>
+<span><span class="co">#&gt;   [7] rmarkdown_2.25          ragg_1.2.5             </span></span>
+<span><span class="co">#&gt;   [9] GlobalOptions_0.1.2     fs_1.6.3               </span></span>
+<span><span class="co">#&gt;  [11] zlibbioc_1.47.0         vctrs_0.6.3            </span></span>
+<span><span class="co">#&gt;  [13] memoise_2.0.1           cyjShiny_1.0.42        </span></span>
+<span><span class="co">#&gt;  [15] RCurl_1.98-1.12         base64enc_0.1-3        </span></span>
+<span><span class="co">#&gt;  [17] htmltools_0.5.6         curl_5.0.2             </span></span>
+<span><span class="co">#&gt;  [19] cellranger_1.1.0        gridGraphics_0.5-1     </span></span>
+<span><span class="co">#&gt;  [21] sass_0.4.7              GeneSummary_0.99.6     </span></span>
+<span><span class="co">#&gt;  [23] bslib_0.5.1             htmlwidgets_1.6.2      </span></span>
+<span><span class="co">#&gt;  [25] cachem_1.0.8            commonmark_1.9.0       </span></span>
+<span><span class="co">#&gt;  [27] igraph_1.5.1            mime_0.12              </span></span>
+<span><span class="co">#&gt;  [29] lifecycle_1.0.3         pkgconfig_2.0.3        </span></span>
+<span><span class="co">#&gt;  [31] R6_2.5.1                fastmap_1.1.1          </span></span>
+<span><span class="co">#&gt;  [33] GenomeInfoDbData_1.2.10 shiny_1.7.5            </span></span>
+<span><span class="co">#&gt;  [35] digest_0.6.33           colorspace_2.1-0       </span></span>
+<span><span class="co">#&gt;  [37] patchwork_1.1.3         AnnotationDbi_1.63.2   </span></span>
+<span><span class="co">#&gt;  [39] S4Vectors_0.38.1        textshaping_0.3.6      </span></span>
+<span><span class="co">#&gt;  [41] RSQLite_2.3.1           org.Hs.eg.db_3.17.0    </span></span>
+<span><span class="co">#&gt;  [43] filelock_1.0.2          labeling_0.4.3         </span></span>
+<span><span class="co">#&gt;  [45] fansi_1.0.4             httr_1.4.7             </span></span>
+<span><span class="co">#&gt;  [47] polyclip_1.10-4         compiler_4.3.1         </span></span>
+<span><span class="co">#&gt;  [49] bit64_4.0.5             withr_2.5.0            </span></span>
+<span><span class="co">#&gt;  [51] viridis_0.6.4           DBI_1.1.3              </span></span>
+<span><span class="co">#&gt;  [53] dendextend_1.17.1       highr_0.10             </span></span>
+<span><span class="co">#&gt;  [55] ggforce_0.4.1           MASS_7.3-60            </span></span>
+<span><span class="co">#&gt;  [57] ISOcodes_2022.09.29     rjson_0.2.21           </span></span>
+<span><span class="co">#&gt;  [59] tools_4.3.1             ape_5.7-1              </span></span>
+<span><span class="co">#&gt;  [61] stopwords_2.3           rentrez_1.2.3          </span></span>
+<span><span class="co">#&gt;  [63] httpuv_1.6.11           glue_1.6.2             </span></span>
+<span><span class="co">#&gt;  [65] nlme_3.1-163            promises_1.2.1         </span></span>
+<span><span class="co">#&gt;  [67] gridtext_0.1.5          grid_4.3.1             </span></span>
+<span><span class="co">#&gt;  [69] shadowtext_0.1.2        generics_0.1.3         </span></span>
+<span><span class="co">#&gt;  [71] gtable_0.3.4            tidyr_1.3.0            </span></span>
+<span><span class="co">#&gt;  [73] bugsigdbr_1.8.1         data.table_1.14.8      </span></span>
+<span><span class="co">#&gt;  [75] tidygraph_1.2.3         xml2_1.3.5             </span></span>
+<span><span class="co">#&gt;  [77] utf8_1.2.3              XVector_0.41.1         </span></span>
+<span><span class="co">#&gt;  [79] BiocGenerics_0.47.0     stringr_1.5.0          </span></span>
+<span><span class="co">#&gt;  [81] markdown_1.8            ggrepel_0.9.3          </span></span>
+<span><span class="co">#&gt;  [83] pillar_1.9.0            yulab.utils_0.1.0      </span></span>
+<span><span class="co">#&gt;  [85] later_1.3.1             dplyr_1.1.2            </span></span>
+<span><span class="co">#&gt;  [87] tweenr_2.0.2            BiocFileCache_2.9.1    </span></span>
+<span><span class="co">#&gt;  [89] lattice_0.21-8          bit_4.0.5              </span></span>
+<span><span class="co">#&gt;  [91] tidyselect_1.2.0        phylogram_2.1.0        </span></span>
+<span><span class="co">#&gt;  [93] tm_0.7-11               Biostrings_2.69.2      </span></span>
+<span><span class="co">#&gt;  [95] downlit_0.4.3           knitr_1.44             </span></span>
+<span><span class="co">#&gt;  [97] gridExtra_2.3           NLP_0.2-1              </span></span>
+<span><span class="co">#&gt;  [99] bookdown_0.35           IRanges_2.35.2         </span></span>
+<span><span class="co">#&gt; [101] stats4_4.3.1            xfun_0.40              </span></span>
+<span><span class="co">#&gt; [103] graphlayouts_1.0.0      Biobase_2.61.0         </span></span>
+<span><span class="co">#&gt; [105] stringi_1.7.12          yaml_2.3.7             </span></span>
+<span><span class="co">#&gt; [107] evaluate_0.21           ggwordcloud_0.6.0      </span></span>
+<span><span class="co">#&gt; [109] wordcloud_2.6           tibble_3.2.1           </span></span>
+<span><span class="co">#&gt; [111] graph_1.79.1            ggplotify_0.1.2        </span></span>
+<span><span class="co">#&gt; [113] cli_3.6.1               systemfonts_1.0.4      </span></span>
+<span><span class="co">#&gt; [115] xtable_1.8-4            munsell_0.5.0          </span></span>
+<span><span class="co">#&gt; [117] jquerylib_0.1.4         Rcpp_1.0.11            </span></span>
+<span><span class="co">#&gt; [119] GenomeInfoDb_1.37.4     readxl_1.4.3           </span></span>
+<span><span class="co">#&gt; [121] dbplyr_2.3.3            png_0.1-8              </span></span>
+<span><span class="co">#&gt; [123] XML_3.99-0.14           parallel_4.3.1         </span></span>
+<span><span class="co">#&gt; [125] ellipsis_0.3.2          blob_1.2.4             </span></span>
+<span><span class="co">#&gt; [127] bitops_1.0-7            viridisLite_0.4.2      </span></span>
+<span><span class="co">#&gt; [129] slam_0.1-50             scales_1.2.1           </span></span>
+<span><span class="co">#&gt; [131] purrr_1.0.2             crayon_1.5.2           </span></span>
+<span><span class="co">#&gt; [133] GetoptLong_1.0.5        rlang_1.1.1            </span></span>
+<span><span class="co">#&gt; [135] cowplot_1.1.1           KEGGREST_1.41.0</span></span></code></pre></div>
 
 </div>
 </div>
@@ -641,7 +658,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-08-22.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

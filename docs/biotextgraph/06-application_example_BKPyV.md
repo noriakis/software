@@ -97,7 +97,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 entre <- AnnotationDbi::select(org.Hs.eg.db, keytype="SYMBOL",
                                keys = degs, columns = "ENTREZID")$ENTREZID
 pway <- setReadable(enrichPathway(entre), org.Hs.eg.db)
-sigpway <- subset(pway@result, p.adjust<0.05)
+sigpway <- subset(pway |> data.frame(), p.adjust<0.05)
 sigpway$Description
 #>  [1] "Transcriptional Regulation by TP53"                              
 #>  [2] "RIPK1-mediated regulated necrosis"                               
@@ -110,8 +110,8 @@ sigpway$Description
 #>  [9] "TP53 Regulates Transcription of Death Receptors and Ligands"     
 #> [10] "Caspase activation via Death Receptors in the presence of ligand"
 #> [11] "FOXO-mediated transcription of cell cycle genes"                 
-#> [12] "TP53 Regulates Transcription of Cell Death Genes"                
-#> [13] "Cilium Assembly"
+#> [12] "Cilium Assembly"                                                 
+#> [13] "TP53 Regulates Transcription of Cell Death Genes"
 cnetplot(pway)
 ```
 
@@ -134,10 +134,10 @@ excheck
 #> [33] "IFT46"     "IFT74"     "KIF3A"     "WDR19"    
 #> [37] "CFLAR"     "FAS"       "TNFRSF10B" "FAS"      
 #> [41] "TNFRSF10B" "TNFRSF10D" "BTG1"      "CCNG2"    
-#> [45] "GADD45A"   "FAS"       "TNFRSF10B" "TNFRSF10D"
-#> [49] "TP53INP1"  "CLUAP1"    "DYNC2LI1"  "EXOC1"    
-#> [53] "IFT46"     "IFT74"     "KIF3A"     "LZTFL1"   
-#> [57] "WDR19"
+#> [45] "GADD45A"   "CLUAP1"    "DYNC2LI1"  "EXOC1"    
+#> [49] "IFT46"     "IFT74"     "KIF3A"     "LZTFL1"   
+#> [53] "WDR19"     "FAS"       "TNFRSF10B" "TNFRSF10D"
+#> [57] "TP53INP1"
 ```
 
 We store the name of enriched pathways in the network for the downstream analysis.
@@ -180,13 +180,14 @@ net1 <- refseq(excheck,
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Found 28 enriched term
-net1@net
+plotNet(net1)
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/basic2app-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
-net1@geneCount
+gnc <- getSlot(net1, "geneCount")
+gnc
 #> 
 #>     RAD17     SESN1      TSC1      DDB2 TNFRSF10B      BTG1 
 #>         9         9         6         5         5         4 
@@ -198,7 +199,8 @@ net1@geneCount
 #>         2         2         1         1         1         1 
 #>    PPP2CB     RRM2B 
 #>         1         1
-top <- names(net1@geneCount[net1@geneCount>=5])
+
+top <- names(gnc[gnc>=5])
 top
 #> [1] "RAD17"     "SESN1"     "TSC1"      "DDB2"     
 #> [5] "TNFRSF10B"
@@ -224,7 +226,7 @@ First, show the network for the article titles.
 #                    numWords=40,
 #                    edgeLink=FALSE)
 load("titlenet_20230420.rda")
-titlenet@net
+titlenet |> plotNet()
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/absttitleapp-1.png" width="100%" style="display: block; margin: auto;" />
@@ -244,7 +246,7 @@ Obtain and show the network for the article abstract.
 #                    numWords=40,
 #                    edgeLink=FALSE)
 load("abstnet_20230420.rda")
-abstnet@net
+abstnet |> plotNet()
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/abstmainapp-1.png" width="100%" style="display: block; margin: auto;" />
@@ -256,7 +258,7 @@ From the RefSeq summary and articles related to important genes, the cluster cou
 
 ```r
 compareWordNet(list(abstnet, titlenet, netreac, net1),
-               titles=c("Abstract","Title","Reactome","RefSeq"))@net
+               titles=c("Abstract","Title","Reactome","RefSeq")) |> plotNet()
 ```
 
 <img src="06-application_example_BKPyV_files/figure-html/combineapp-1.png" width="100%" style="display: block; margin: auto;" />
@@ -267,7 +269,7 @@ From the network, DNA damage repair pathway, especially nucleotide excision repa
 ```r
 # btg <- compareWordNet(list(net1,titlenet,abstnet,netreac))
 load("btg_20230420.rda")
-conet <- btg@igraphRaw
+conet <- btg |> getSlot("igraphRaw")
 
 ddrNms <- NULL
 for (nm in names(V(conet))) {
@@ -328,8 +330,8 @@ conetDeg[order(conetDeg, decreasing=TRUE)] |> head(15)
 btg <- btg |> graph_cluster(func=igraph::cluster_fast_greedy)
 
 ## Check the membership for merged network
-data.frame(btg@communities$membership,
-           btg@communities$names) |>
+data.frame(getSlot(btg, "communities")$membership,
+           getSlot(btg, "communities")$names) |>
   `colnames<-`(c("membership","word")) |>
   group_by(membership) |> summarise(words=paste(word,collapse=",")) |>
   kableExtra::kable()
@@ -394,9 +396,11 @@ data.frame(btg@communities$membership,
 </tbody>
 </table>
 
+
+
 ```r
 
-ggraph(btg@igraphRaw)+
+ggraph(btg |> getSlot("igraphRaw"))+
     geom_edge_link(color="grey80", width=0.5)+
     geom_node_point(aes(color=community), size=2)+
     graphhighlight::highlight_node(glow=TRUE, filter=community==2,glow_base_size = TRUE, glow_size=0.5)+
@@ -449,11 +453,12 @@ dyn
 
 ```r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31 ucrt)
+#> R version 4.3.1 (2023-06-16 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 22621)
+#> Running under: Windows 11 x64 (build 22621)
 #> 
 #> Matrix products: default
+#> 
 #> 
 #> locale:
 #> [1] LC_COLLATE=Japanese_Japan.utf8 
@@ -462,86 +467,165 @@ sessionInfo()
 #> [4] LC_NUMERIC=C                   
 #> [5] LC_TIME=Japanese_Japan.utf8    
 #> 
+#> time zone: Asia/Tokyo
+#> tzcode source: internal
+#> 
 #> attached base packages:
 #> [1] stats4    stats     graphics  grDevices utils    
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggforce_0.4.1         igraph_1.4.1         
-#>  [3] ggraph_2.1.0.9000     clusterProfiler_4.6.2
-#>  [5] ReactomePA_1.42.0     org.Hs.eg.db_3.16.0  
-#>  [7] AnnotationDbi_1.60.0  IRanges_2.32.0       
-#>  [9] S4Vectors_0.36.2      Biobase_2.58.0       
-#> [11] BiocGenerics_0.44.0   biotextgraph_0.99.0  
-#> [13] ggplot2_3.4.2        
+#>  [1] ggforce_0.4.1         igraph_1.5.1         
+#>  [3] ggraph_2.1.0.9000     clusterProfiler_4.9.5
+#>  [5] ReactomePA_1.46.0     org.Hs.eg.db_3.17.0  
+#>  [7] AnnotationDbi_1.63.2  IRanges_2.35.2       
+#>  [9] S4Vectors_0.38.1      Biobase_2.61.0       
+#> [11] BiocGenerics_0.47.0   biotextgraph_0.99.0  
+#> [13] ggplot2_3.4.3        
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] shadowtext_0.1.2       fastmatch_1.1-3       
-#>   [3] plyr_1.8.8             lazyeval_0.2.2        
-#>   [5] splines_4.2.2          BiocParallel_1.32.5   
-#>   [7] GenomeInfoDb_1.34.9    digest_0.6.31         
-#>   [9] yulab.utils_0.0.6      htmltools_0.5.4       
-#>  [11] bugsigdbr_1.4.3        GOSemSim_2.24.0       
-#>  [13] viridis_0.6.2          GO.db_3.16.0          
-#>  [15] fansi_1.0.4            GeneSummary_0.99.4    
-#>  [17] magrittr_2.0.3         memoise_2.0.1         
-#>  [19] tm_0.7-11              Biostrings_2.66.0     
-#>  [21] graphlayouts_0.8.4     pvclust_2.2-0         
-#>  [23] wordcloud_2.6          enrichplot_1.18.3     
-#>  [25] colorspace_2.1-0       rappdirs_0.3.3        
-#>  [27] blob_1.2.3             ggrepel_0.9.3         
-#>  [29] xfun_0.37              dplyr_1.1.0           
-#>  [31] crayon_1.5.2           RCurl_1.98-1.10       
-#>  [33] jsonlite_1.8.4         scatterpie_0.1.8.001  
-#>  [35] graph_1.76.0           ape_5.7               
-#>  [37] glue_1.6.2             polyclip_1.10-4       
-#>  [39] gtable_0.3.1           zlibbioc_1.44.0       
-#>  [41] XVector_0.38.0         GetoptLong_1.0.5      
-#>  [43] graphite_1.44.0        rentrez_1.2.3         
-#>  [45] scales_1.2.1           DOSE_3.24.2           
-#>  [47] DBI_1.1.3              Rcpp_1.0.10           
-#>  [49] viridisLite_0.4.1      xtable_1.8-4          
-#>  [51] tidytree_0.4.2         gridGraphics_0.5-1    
-#>  [53] reactome.db_1.82.0     bit_4.0.5             
-#>  [55] htmlwidgets_1.6.1      httr_1.4.5            
-#>  [57] fgsea_1.24.0           RColorBrewer_1.1-3    
-#>  [59] ellipsis_0.3.2         pkgconfig_2.0.3       
-#>  [61] XML_3.99-0.13          farver_2.1.1          
-#>  [63] sass_0.4.5             utf8_1.2.3            
-#>  [65] ggplotify_0.1.0        tidyselect_1.2.0      
-#>  [67] rlang_1.1.1            reshape2_1.4.4        
-#>  [69] later_1.3.0            munsell_0.5.0         
-#>  [71] tools_4.2.2            cachem_1.0.7          
-#>  [73] downloader_0.4         cli_3.6.0             
-#>  [75] generics_0.1.3         RSQLite_2.3.0         
-#>  [77] gson_0.0.9             evaluate_0.20         
-#>  [79] stringr_1.5.0          fastmap_1.1.1         
-#>  [81] ggdendro_0.1.23        yaml_2.3.7            
-#>  [83] ggtree_3.6.2           knitr_1.42            
-#>  [85] bit64_4.0.5            fs_1.6.1              
-#>  [87] tidygraph_1.2.3        purrr_1.0.1           
-#>  [89] KEGGREST_1.38.0        dendextend_1.16.0     
-#>  [91] nlme_3.1-161           mime_0.12             
-#>  [93] slam_0.1-50            aplot_0.1.9           
-#>  [95] xml2_1.3.3             compiler_4.2.2        
-#>  [97] rstudioapi_0.14        png_0.1-8             
-#>  [99] treeio_1.22.0          tibble_3.1.8          
-#> [101] tweenr_2.0.2           bslib_0.4.2           
-#> [103] stringi_1.7.12         cyjShiny_1.0.34       
-#> [105] lattice_0.20-45        Matrix_1.5-3          
-#> [107] vctrs_0.5.2            pillar_1.8.1          
-#> [109] lifecycle_1.0.3        jquerylib_0.1.4       
-#> [111] GlobalOptions_0.1.2    data.table_1.14.8     
-#> [113] cowplot_1.1.1          bitops_1.0-7          
-#> [115] httpuv_1.6.9           patchwork_1.1.2       
-#> [117] qvalue_2.30.0          R6_2.5.1              
-#> [119] bookdown_0.33          promises_1.2.0.1      
-#> [121] gridExtra_2.3          codetools_0.2-18      
-#> [123] MASS_7.3-58.1          rjson_0.2.21          
-#> [125] withr_2.5.0            GenomeInfoDbData_1.2.9
-#> [127] parallel_4.2.2         ggfun_0.0.9           
-#> [129] grid_4.2.2             tidyr_1.3.0           
-#> [131] HDO.db_0.99.1          rmarkdown_2.20        
-#> [133] downlit_0.4.2          NLP_0.2-1             
-#> [135] shiny_1.7.4            base64enc_0.1-3
+#>   [1] RColorBrewer_1.1-3           
+#>   [2] ggdendro_0.1.23              
+#>   [3] jsonlite_1.8.7               
+#>   [4] pvclust_2.2-0                
+#>   [5] magrittr_2.0.3               
+#>   [6] farver_2.1.1                 
+#>   [7] rmarkdown_2.25               
+#>   [8] GlobalOptions_0.1.2          
+#>   [9] fs_1.6.3                     
+#>  [10] zlibbioc_1.47.0              
+#>  [11] vctrs_0.6.3                  
+#>  [12] memoise_2.0.1                
+#>  [13] cyjShiny_1.0.42              
+#>  [14] RCurl_1.98-1.12              
+#>  [15] ggtree_3.9.1                 
+#>  [16] base64enc_0.1-3              
+#>  [17] htmltools_0.5.6              
+#>  [18] AnnotationHub_3.9.2          
+#>  [19] curl_5.0.2                   
+#>  [20] gridGraphics_0.5-1           
+#>  [21] sass_0.4.7                   
+#>  [22] GeneSummary_0.99.6           
+#>  [23] bslib_0.5.1                  
+#>  [24] htmlwidgets_1.6.2            
+#>  [25] plyr_1.8.8                   
+#>  [26] cachem_1.0.8                 
+#>  [27] mime_0.12                    
+#>  [28] lifecycle_1.0.3              
+#>  [29] pkgconfig_2.0.3              
+#>  [30] gson_0.1.0                   
+#>  [31] Matrix_1.6-1                 
+#>  [32] R6_2.5.1                     
+#>  [33] fastmap_1.1.1                
+#>  [34] GenomeInfoDbData_1.2.10      
+#>  [35] shiny_1.7.5                  
+#>  [36] aplot_0.2.1                  
+#>  [37] enrichplot_1.21.3            
+#>  [38] digest_0.6.33                
+#>  [39] colorspace_2.1-0             
+#>  [40] patchwork_1.1.3              
+#>  [41] RSQLite_2.3.1                
+#>  [42] MPO.db_0.99.7                
+#>  [43] filelock_1.0.2               
+#>  [44] fansi_1.0.4                  
+#>  [45] httr_1.4.7                   
+#>  [46] polyclip_1.10-4              
+#>  [47] HPO.db_0.99.2                
+#>  [48] compiler_4.3.1               
+#>  [49] bit64_4.0.5                  
+#>  [50] withr_2.5.0                  
+#>  [51] graphite_1.48.0              
+#>  [52] BiocParallel_1.35.4          
+#>  [53] viridis_0.6.4                
+#>  [54] DBI_1.1.3                    
+#>  [55] dendextend_1.17.1            
+#>  [56] MASS_7.3-60                  
+#>  [57] rappdirs_0.3.3               
+#>  [58] rjson_0.2.21                 
+#>  [59] HDO.db_0.99.1                
+#>  [60] tools_4.3.1                  
+#>  [61] scatterpie_0.2.1             
+#>  [62] ape_5.7-1                    
+#>  [63] interactiveDisplayBase_1.39.0
+#>  [64] rentrez_1.2.3                
+#>  [65] httpuv_1.6.11                
+#>  [66] glue_1.6.2                   
+#>  [67] nlme_3.1-163                 
+#>  [68] GOSemSim_2.27.3              
+#>  [69] promises_1.2.1               
+#>  [70] grid_4.3.1                   
+#>  [71] shadowtext_0.1.2             
+#>  [72] reshape2_1.4.4               
+#>  [73] fgsea_1.27.1                 
+#>  [74] generics_0.1.3               
+#>  [75] gtable_0.3.4                 
+#>  [76] tidyr_1.3.0                  
+#>  [77] bugsigdbr_1.8.1              
+#>  [78] data.table_1.14.8            
+#>  [79] tidygraph_1.2.3              
+#>  [80] xml2_1.3.5                   
+#>  [81] utf8_1.2.3                   
+#>  [82] XVector_0.41.1               
+#>  [83] stringr_1.5.0                
+#>  [84] ggrepel_0.9.3                
+#>  [85] BiocVersion_3.18.0           
+#>  [86] pillar_1.9.0                 
+#>  [87] yulab.utils_0.1.0            
+#>  [88] later_1.3.1                  
+#>  [89] splines_4.3.1                
+#>  [90] dplyr_1.1.2                  
+#>  [91] tweenr_2.0.2                 
+#>  [92] treeio_1.25.4                
+#>  [93] lattice_0.21-8               
+#>  [94] BiocFileCache_2.9.1          
+#>  [95] bit_4.0.5                    
+#>  [96] tidyselect_1.2.0             
+#>  [97] GO.db_3.17.0                 
+#>  [98] tm_0.7-11                    
+#>  [99] Biostrings_2.69.2            
+#> [100] reactome.db_1.86.0           
+#> [101] downlit_0.4.3                
+#> [102] knitr_1.44                   
+#> [103] gridExtra_2.3                
+#> [104] NLP_0.2-1                    
+#> [105] bookdown_0.35                
+#> [106] xfun_0.40                    
+#> [107] graphlayouts_1.0.0           
+#> [108] stringi_1.7.12               
+#> [109] lazyeval_0.2.2               
+#> [110] ggfun_0.1.3                  
+#> [111] yaml_2.3.7                   
+#> [112] evaluate_0.21                
+#> [113] codetools_0.2-19             
+#> [114] wordcloud_2.6                
+#> [115] qvalue_2.33.0                
+#> [116] tibble_3.2.1                 
+#> [117] BiocManager_1.30.22          
+#> [118] graph_1.79.1                 
+#> [119] ggplotify_0.1.2              
+#> [120] cli_3.6.1                    
+#> [121] xtable_1.8-4                 
+#> [122] munsell_0.5.0                
+#> [123] jquerylib_0.1.4              
+#> [124] Rcpp_1.0.11                  
+#> [125] GenomeInfoDb_1.37.4          
+#> [126] dbplyr_2.3.3                 
+#> [127] png_0.1-8                    
+#> [128] XML_3.99-0.14                
+#> [129] parallel_4.3.1               
+#> [130] ellipsis_0.3.2               
+#> [131] blob_1.2.4                   
+#> [132] DOSE_3.27.2                  
+#> [133] bitops_1.0-7                 
+#> [134] tidytree_0.4.5               
+#> [135] viridisLite_0.4.2            
+#> [136] slam_0.1-50                  
+#> [137] scales_1.2.1                 
+#> [138] purrr_1.0.2                  
+#> [139] crayon_1.5.2                 
+#> [140] GetoptLong_1.0.5             
+#> [141] rlang_1.1.1                  
+#> [142] fastmatch_1.1-4              
+#> [143] cowplot_1.1.1                
+#> [144] KEGGREST_1.41.0
 ```

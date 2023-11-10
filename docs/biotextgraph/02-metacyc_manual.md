@@ -96,8 +96,8 @@ metawc
 #> Type: manual
 #> Number of words: 100
 #> Query: 
-#> 586.2 Kb
-metawc@wc
+#> 591.9 Kb
+plotWC(metawc)
 ```
 
 <img src="02-metacyc_manual_files/figure-html/wcmeta-1.png" width="100%" style="display: block; margin: auto;" />
@@ -117,8 +117,8 @@ metanet
 #> Query: 
 #> Graph: V(40), E(183)
 #> Degree: Biosynthesis(16)/addition(14)/cluster(14)/product(14)/protein(13)
-#> 812 Kb
-metanet@net
+#> 819.4 Kb
+plotNet(metanet)
 ```
 
 <img src="02-metacyc_manual_files/figure-html/wcmeta2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -140,7 +140,7 @@ metanet2
 #> Graph: V(21), E(108)
 #> Degree: Escherichia coli(37)/Staphylococcus aureus(22)/Escherichia coli(18)/biosynthetic cluster(15)/Staphylococcus aureus(12)
 #> 1.3 Mb
-metanet2@net
+plotNet(metanet2)
 ```
 
 <img src="02-metacyc_manual_files/figure-html/wcmeta3-1.png" width="100%" style="display: block; margin: auto;" />
@@ -160,7 +160,7 @@ input2Net <- manual(onlyText, additionalRemove=c("cits","frame",
                        "pathway","pathways","enzyme","enzymes",
                        "bacteria","reaction","protein","biosynthesis",
                        "organism","organisms"))
-input2Net@net
+plotNet(input2Net)
 ```
 
 <img src="02-metacyc_manual_files/figure-html/query-1.png" width="100%" style="display: block; margin: auto;" />
@@ -194,7 +194,7 @@ input3Net <- manual(input3, plotType="network", queryPlot=TRUE,
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
 #> Including columns pathwayID to link with query
-input3Net@net
+plotNet(input3Net)
 ```
 
 <img src="02-metacyc_manual_files/figure-html/query2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -205,11 +205,12 @@ Includes BioCyc (TM) pathway/genome databases under license from SRI Internation
 
 ```r
 sessionInfo()
-#> R version 4.2.2 (2022-10-31 ucrt)
+#> R version 4.3.1 (2023-06-16 ucrt)
 #> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 10 x64 (build 22621)
+#> Running under: Windows 11 x64 (build 22621)
 #> 
 #> Matrix products: default
+#> 
 #> 
 #> locale:
 #> [1] LC_COLLATE=Japanese_Japan.utf8 
@@ -218,18 +219,20 @@ sessionInfo()
 #> [4] LC_NUMERIC=C                   
 #> [5] LC_TIME=Japanese_Japan.utf8    
 #> 
+#> time zone: Asia/Tokyo
+#> tzcode source: internal
+#> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets 
 #> [6] methods   base     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] bookdown_0.33   withr_2.5.0     digest_0.6.31  
-#>  [4] R6_2.5.1        jsonlite_1.8.4  evaluate_0.20  
-#>  [7] cachem_1.0.7    rlang_1.1.1     cli_3.6.0      
-#> [10] fs_1.6.1        rstudioapi_0.14 jquerylib_0.1.4
-#> [13] xml2_1.3.3      bslib_0.4.2     rmarkdown_2.20 
-#> [16] tools_4.2.2     xfun_0.37       yaml_2.3.7     
-#> [19] fastmap_1.1.1   compiler_4.2.2  memoise_2.0.1  
-#> [22] htmltools_0.5.4 downlit_0.4.2   knitr_1.42     
-#> [25] sass_0.4.5
+#>  [1] digest_0.6.33   R6_2.5.1        bookdown_0.35  
+#>  [4] fastmap_1.1.1   xfun_0.40       cachem_1.0.8   
+#>  [7] knitr_1.44      memoise_2.0.1   htmltools_0.5.6
+#> [10] rmarkdown_2.25  xml2_1.3.5      cli_3.6.1      
+#> [13] downlit_0.4.3   sass_0.4.7      withr_2.5.0    
+#> [16] jquerylib_0.1.4 compiler_4.3.1  tools_4.3.1    
+#> [19] evaluate_0.21   bslib_0.5.1     yaml_2.3.7     
+#> [22] fs_1.6.3        rlang_1.1.1     jsonlite_1.8.7
 ```

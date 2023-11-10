@@ -20,14 +20,14 @@ btg <- obtain_refseq(c("DDX41","PNKP","IRF3")) |>
 #>   Converted input genes: 3
 #> Filter based on GeneSummary
 #> Filtered 76 words (frequency and/or tfidf)
-#> Found 25 enriched term
+#> Found 21 enriched term
 btg
 #> Type: refseq
 #> Number of words: 30
 #> Query: DDX41/PNKP/IRF3
 #> Graph: V(33), E(237)
 #> Degree: response(32)/immune(23)/innate(23)/addition(16)/alteration(16)
-#> 301.4 Kb
+#> 289.5 Kb
 
 ## Text of enrichment analysis results
 btg2 <- obtain_enrich(c("DDX41","PNKP","IRF3"), enrich="reactome") |>
@@ -46,9 +46,9 @@ btg2
 #> Type: enrich
 #> Number of words: 30
 #> Query: DDX41/PNKP/IRF3
-#> Graph: V(29), E(44)
-#> Degree: innate(8)/immune(7)/responses(7)/activatesmodulates(6)/NA(6)
-#> 292 Kb
+#> Graph: V(29), E(40)
+#> Degree: immune(7)/innate(7)/responses(7)/activatesmodulates(5)/adaptive(4)
+#> 302.9 Kb
 ```
 
 
@@ -66,5 +66,5 @@ btg_agr <- obtain_alliance(c("DDX41","PNKP","IRF3")) |>
   process_network_gene(gene_plot=TRUE, gene_path_plot="reactome") |>
   plot_biotextgraph(edge_link=FALSE)
 #> Input genes: 3
-#> Found 25 enriched term
+#> Found 21 enriched term
 ```
