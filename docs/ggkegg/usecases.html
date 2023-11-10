@@ -54,6 +54,7 @@
 <li><a class="" href="module.html"><span class="header-section-number">3</span> Module</a></li>
 <li><a class="" href="network.html"><span class="header-section-number">4</span> Network</a></li>
 <li><a class="active" href="usecases.html"><span class="header-section-number">5</span> Usecases</a></li>
+<li><a class="" href="notes.html"><span class="header-section-number">6</span> Notes</a></li>
 </ul>
 
         <div class="book-extra">
@@ -477,13 +478,13 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">CBNplot</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/CBNplot">CBNplot</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/YuLab-SMU/MicrobiomeProfiler/">MicrobiomeProfiler</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
 <span><span class="va">ko.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MicrobiomeProfiler/man/enrichKO.html">enrichKO</a></span><span class="op">(</span><span class="va">Rat_data</span><span class="op">)</span></span>
 <span><span class="va">exp.dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">910</span><span class="op">)</span><span class="op">)</span>, <span class="fl">91</span>, <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_rownames</a></span><span class="op">(</span>value<span class="op">=</span><span class="va">Rat_data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">magrittr</span><span class="fu">::</span><span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span>value<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'S'</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">returnnet</span> <span class="op">&lt;-</span> <span class="fu">bngeneplot</span><span class="op">(</span><span class="va">ko.res</span>, exp<span class="op">=</span><span class="va">exp.dat</span>, pathNum<span class="op">=</span><span class="fl">1</span>, orgDb<span class="op">=</span><span class="cn">NULL</span>,returnNet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">returnnet</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/CBNplot/man/bngeneplot.html">bngeneplot</a></span><span class="op">(</span><span class="va">ko.res</span>, exp<span class="op">=</span><span class="va">exp.dat</span>, pathNum<span class="op">=</span><span class="fl">1</span>, orgDb<span class="op">=</span><span class="cn">NULL</span>,returnNet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">pg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00650"</span><span class="op">)</span></span>
 <span><span class="va">joined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/combine_with_bnlearn.html">combine_with_bnlearn</a></span><span class="op">(</span><span class="va">pg</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">str</span>, <span class="va">returnnet</span><span class="op">$</span><span class="va">av</span><span class="op">)</span></span></code></pre></div>
 <p>Plot the resulting map. In this example, the strength estimated by <code>CBNplot</code> is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it. Also, edges included in both graphs are highlighted by yellow.</p>
@@ -955,7 +956,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">class_table</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">class</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">class_table</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">class_table</span></span>
 <span><span class="co">#&gt;                     Metabolism; Carbohydrate metabolism </span></span>
-<span><span class="co">#&gt;                                                      21 </span></span>
+<span><span class="co">#&gt;                                                      20 </span></span>
 <span><span class="co">#&gt;          Metabolism; Glycan biosynthesis and metabolism </span></span>
 <span><span class="co">#&gt;                                                      16 </span></span>
 <span><span class="co">#&gt;        Metabolism; Metabolism of cofactors and vitamins </span></span>
@@ -1073,7 +1074,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="network.html"><span class="header-section-number">4</span> Network</a></div>
-<div class="empty"></div>
+<div class="next"><a href="notes.html"><span class="header-section-number">6</span> Notes</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -1125,7 +1126,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-11-08.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2023-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

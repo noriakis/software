@@ -41,3 +41,5 @@ barplot-across-all-the-clusters
 customizing-global-map-visualization
 preprocessing
 plotting
+notes
+parsing-of-reactions-in-the-pathway

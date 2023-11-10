@@ -985,7 +985,7 @@ class_table <- (g |> activate(edges) |>
 names(class_table) <- class[names(class_table)]
 class_table
 #>                     Metabolism; Carbohydrate metabolism 
-#>                                                      21 
+#>                                                      20 
 #>          Metabolism; Glycan biosynthesis and metabolism 
 #>                                                      16 
 #>        Metabolism; Metabolism of cofactors and vitamins 
