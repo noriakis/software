@@ -76,7 +76,7 @@
 <code class="sourceCode R"><span><span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadmetaSNV.html">loadmetaSNV</a></span><span class="op">(</span><span class="st">"../metasnv_sample_out/"</span>,just_species <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">mt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadmetaSNV.html">loadmetaSNV</a></span><span class="op">(</span><span class="st">"../metasnv_sample_out/"</span>, candSp<span class="op">=</span><span class="va">mt</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Loading refGenome1clus</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotPCA.html">plotPCA</a></span><span class="op">(</span><span class="va">mt</span>, species<span class="op">=</span><span class="va">mt</span><span class="op">@</span><span class="va">ids</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotPCA.html">plotPCA</a></span><span class="op">(</span><span class="va">mt</span>, species<span class="op">=</span><span class="fu">getID</span><span class="op">(</span><span class="va">mt</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; After filtering: 1022 SNVs</span></span>
 <span><span class="co">#&gt; $refGenome1clus</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/plotpca-1.png" width="672"></div>
@@ -120,7 +120,7 @@
 <h2>
 <span class="header-section-number">5.4</span> Visualization of <code>inStrain</code> results<a class="anchor" aria-label="anchor" href="#visualization-of-instrain-results"><i class="fas fa-link"></i></a>
 </h2>
-<p>The imported <code>inStrain</code> <code>compare</code> profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using <code>genomeHeatmap</code> and <code>strainClusterHeatmap</code> by <code>ComplexHeatmap</code>. For <code>genomeHeatmap</code>, typically population ANI or consensus ANI are plotted, but all the columns listed in <code>genomeWide_compare.tsv</code> can be plotted. The parameters to be passed to <code>Heatmap</code> can be specified with <code>heatmapArgs</code>. If cluster information (<code>stana@cl</code>) is available or <code>cl</code> is specified, the columns will be split to present the grouping. Please refer to the documentation of <a href="https://instrain.readthedocs.io/en/latest/important_concepts.html"><code>inStrain</code></a> for <code>popANI</code> and <code>conANI</code>.</p>
+<p>The imported <code>inStrain</code> <code>compare</code> profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using <code>genomeHeatmap</code> and <code>strainClusterHeatmap</code> by <code>ComplexHeatmap</code>. For <code>genomeHeatmap</code>, typically population ANI or consensus ANI are plotted, but all the columns listed in <code>genomeWide_compare.tsv</code> can be plotted. The parameters to be passed to <code>Heatmap</code> can be specified with <code>heatmapArgs</code>. If cluster information (<code>getCl(stana)</code>) is available or <code>cl</code> is specified, the columns will be split to present the grouping. Please refer to the documentation of <a href="https://instrain.readthedocs.io/en/latest/important_concepts.html"><code>inStrain</code></a> for <code>popANI</code> and <code>conANI</code>.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
 <span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span><span class="op">)</span></span>
@@ -160,7 +160,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-10-26.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-11-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

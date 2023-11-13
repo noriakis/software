@@ -77,8 +77,8 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-65e9a8012488788fbeec" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-65e9a8012488788fbeec">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a4420e3a169908583a4a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a4420e3a169908583a4a">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
@@ -128,13 +128,13 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
 <span><span class="co">#&gt; # Groups:   species_id [6]</span></span>
 <span><span class="co">#&gt;   species_id group     n</span></span>
-<span><span class="co">#&gt;        &lt;int&gt; &lt;chr&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1     101346 HC       12</span></span>
-<span><span class="co">#&gt; 2     102438 HC       10</span></span>
-<span><span class="co">#&gt; 3     101378 HC        9</span></span>
-<span><span class="co">#&gt; 4     102478 HC        9</span></span>
-<span><span class="co">#&gt; 5     102492 HC        8</span></span>
-<span><span class="co">#&gt; 6     100044 HC        7</span></span></code></pre></div>
+<span><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 101346     HC       12</span></span>
+<span><span class="co">#&gt; 2 102438     HC       10</span></span>
+<span><span class="co">#&gt; 3 101378     HC        9</span></span>
+<span><span class="co">#&gt; 4 102478     HC        9</span></span>
+<span><span class="co">#&gt; 5 102492     HC        8</span></span>
+<span><span class="co">#&gt; 6 100044     HC        7</span></span></code></pre></div>
 <p>As the long output is expected, only one species is loaded here.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, candSp<span class="op">=</span><span class="st">"100002"</span>, cl<span class="op">=</span><span class="va">hd_meta</span><span class="op">)</span></span>
@@ -154,7 +154,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt;       Not passed the filter</span></span></code></pre></div>
 <p>The data is profiled against UHGG. <code>loadSummary</code> and <code>loadInfo</code> can be specified to load the SNV summary and SNV info per species, which is default to <code>TRUE</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stana</span><span class="op">@</span><span class="va">snps</span><span class="op">$</span><span class="va">`100002`</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snps"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100002"</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                                 ERR9492497 ERR9492515</span></span>
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|2901|A           1          1</span></span>
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|4071|C           1          0</span></span>
@@ -176,7 +176,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|11148|T          1</span></span>
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|11940|G          0</span></span>
 <span><span class="co">#&gt; gnl|Prokka|UHGG000004_1|11970|C          0</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">freqTableSnps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"freqTableSnps"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        species HC R</span></span>
 <span><span class="co">#&gt; 100002  100002  1 4</span></span></code></pre></div>
 <p>For ID conversion, the metadata accompanied with the default database can be used.</p>
@@ -313,6 +313,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <code class="sourceCode R"><span><span class="va">instr_chk</span> <span class="op">&lt;-</span> <span class="st">"GUT_GENOME142015"</span></span>
 <span><span class="va">instr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadInStrain.html">loadInStrain</a></span><span class="op">(</span><span class="st">"../inStrain_out"</span>, <span class="va">instr_chk</span>, skip_pool<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Load MAF table</span></span>
 <span><span class="co">#&gt; Loading allele count table</span></span>
+<span><span class="co">#&gt; Loading the large table...</span></span>
 <span><span class="co">#&gt; Loading key table</span></span>
 <span><span class="co">#&gt; Loading info table</span></span>
 <span><span class="co">#&gt; Candidate species: GUT_GENOME142015</span></span>
@@ -324,7 +325,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; Directory: ../inStrain_out</span></span>
 <span><span class="co">#&gt; Species number: 1</span></span>
 <span><span class="co">#&gt; Loaded SNV table: 1</span></span>
-<span><span class="co">#&gt; 70.4 Mb</span></span></code></pre></div>
+<span><span class="co">#&gt; 77.7 Mb</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
@@ -367,7 +368,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-10-26.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-11-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

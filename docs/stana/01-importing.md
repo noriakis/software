@@ -22,8 +22,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-65e9a8012488788fbeec" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-65e9a8012488788fbeec">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a4420e3a169908583a4a" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a4420e3a169908583a4a">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -83,13 +83,13 @@ stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
 #> # A tibble: 6 × 3
 #> # Groups:   species_id [6]
 #>   species_id group     n
-#>        <int> <chr> <int>
-#> 1     101346 HC       12
-#> 2     102438 HC       10
-#> 3     101378 HC        9
-#> 4     102478 HC        9
-#> 5     102492 HC        8
-#> 6     100044 HC        7
+#>   <chr>      <chr> <int>
+#> 1 101346     HC       12
+#> 2 102438     HC       10
+#> 3 101378     HC        9
+#> 4 102478     HC        9
+#> 5 102492     HC        8
+#> 6 100044     HC        7
 ```
 As the long output is expected, only one species is loaded here. 
 
@@ -116,7 +116,7 @@ The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified
 
 
 ```r
-stana@snps$`100002` |> head()
+getSlot(stana, "snps")[["100002"]] |> head()
 #>                                 ERR9492497 ERR9492515
 #> gnl|Prokka|UHGG000004_1|2901|A           1          1
 #> gnl|Prokka|UHGG000004_1|4071|C           1          0
@@ -138,7 +138,7 @@ stana@snps$`100002` |> head()
 #> gnl|Prokka|UHGG000004_1|11148|T          1
 #> gnl|Prokka|UHGG000004_1|11940|G          0
 #> gnl|Prokka|UHGG000004_1|11970|C          0
-stana@freqTableSnps |> head()
+getSlot(stana, "freqTableSnps") |> head()
 #>        species HC R
 #> 100002  100002  1 4
 ```
@@ -293,6 +293,7 @@ This recalculates the minor allele frequency based on pooled SNV information (no
 instr_chk <- "GUT_GENOME142015"
 instr <- loadInStrain("../inStrain_out", instr_chk, skip_pool=FALSE) ## Load MAF table
 #> Loading allele count table
+#> Loading the large table...
 #> Loading key table
 #> Loading info table
 #> Candidate species: GUT_GENOME142015
@@ -304,7 +305,7 @@ instr
 #> Directory: ../inStrain_out
 #> Species number: 1
 #> Loaded SNV table: 1
-#> 70.4 Mb
+#> 77.7 Mb
 ```
 
 ## metaSNV

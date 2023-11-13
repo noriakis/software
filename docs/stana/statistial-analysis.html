@@ -100,7 +100,7 @@
 <span><span class="co">#&gt;   Site number: 5019</span></span>
 <span><span class="co">#&gt;   Profiled samples: 11</span></span>
 <span><span class="co">#&gt;   Included samples: 11</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">fastaList</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu">getFasta</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; 11 sequences with 4214 character and 2782 different site patterns.</span></span>
 <span><span class="co">#&gt; The states are a c g t</span></span></code></pre></div>
 <p>Matrix of characters can be returned by <code>return_mat=TRUE</code>. This does not return stana object.</p>
@@ -119,7 +119,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/KlausVigo/phangorn">phangorn</a></span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotTree.html">plotTree</a></span><span class="op">(</span><span class="va">stana</span>, dist_method<span class="op">=</span><span class="st">"dist.hamming"</span>, tree_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>exclude<span class="op">=</span><span class="st">"all"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">treeList</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu">getTree</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Phylogenetic tree with 11 tips and 9 internal nodes.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -137,8 +137,8 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setTree.html">setTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">tre</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing adonis in 100003</span></span>
-<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.7</span></span>
-<span><span class="va">stana</span><span class="op">@</span><span class="va">adonisList</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.694</span></span>
+<span><span class="fu">getAdonis</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
 <span><span class="co">#&gt; Permutation: free</span></span>
@@ -146,7 +146,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ gr)</span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196    0.7</span></span>
+<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.694</span></span>
 <span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
 <span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
 </div>
@@ -178,13 +178,14 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span><span class="co">#&gt; If needed, please provide preprocessed matrix of genes to `mat`</span></span>
 <span><span class="co">#&gt; Feature number: 21806</span></span>
 <span><span class="co">#&gt; Performing Boruta</span></span>
+<span><span class="co">#&gt; Warning in Boruta::TentativeRoughFix(rf): There are no</span></span>
+<span><span class="co">#&gt; Tentative attributes! Returning original object.</span></span>
 <span><span class="va">brres</span></span>
 <span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 99 iterations in 40.40348 secs.</span></span>
-<span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">#&gt;  8 attributes confirmed important: UHGG025024_01181,</span></span>
-<span><span class="co">#&gt; UHGG081390_00130, UHGG158704_01078, UHGG165724_01001,</span></span>
-<span><span class="co">#&gt; UHGG209319_01719 and 3 more;</span></span>
+<span><span class="co">#&gt; Boruta performed 97 iterations in 37.24746 secs.</span></span>
+<span><span class="co">#&gt;  8 attributes confirmed important: UHGG000008_01798,</span></span>
+<span><span class="co">#&gt; UHGG025024_01181, UHGG035311_01086, UHGG060667_01243,</span></span>
+<span><span class="co">#&gt; UHGG158704_01078 and 3 more;</span></span>
 <span><span class="co">#&gt;  21798 attributes confirmed unimportant:</span></span>
 <span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
 <span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21793 more;</span></span></code></pre></div>
@@ -238,7 +239,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-10-26.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-11-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

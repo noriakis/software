@@ -47,7 +47,7 @@ stana <- stana |>
 #>   Site number: 5019
 #>   Profiled samples: 11
 #>   Included samples: 11
-stana@fastaList[[1]]
+getFasta(stana)[[1]]
 #> 11 sequences with 4214 character and 2782 different site patterns.
 #> The states are a c g t
 ```
@@ -74,7 +74,7 @@ The `plotTree` function can be used to internally infer and plot the tree based 
 ```r
 library(phangorn)
 stana <- plotTree(stana, dist_method="dist.hamming", tree_args=list(exclude="all"))
-stana@treeList[[1]]
+getTree(stana)[[1]]
 #> 
 #> Phylogenetic tree with 11 tips and 9 internal nodes.
 #> 
@@ -93,8 +93,8 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582885, Pr: 0.7
-stana@adonisList[["100003"]]
+#>   R2: 0.0740407267582885, Pr: 0.694
+getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
 #> Permutation: free
@@ -102,7 +102,7 @@ stana@adonisList[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196    0.7
+#> gr        1  0.15557 0.07404 0.7196  0.694
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -137,13 +137,14 @@ brres <- doBoruta(stana, "100003")
 #> If needed, please provide preprocessed matrix of genes to `mat`
 #> Feature number: 21806
 #> Performing Boruta
+#> Warning in Boruta::TentativeRoughFix(rf): There are no
+#> Tentative attributes! Returning original object.
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 40.40348 secs.
-#> Tentatives roughfixed over the last 99 iterations.
-#>  8 attributes confirmed important: UHGG025024_01181,
-#> UHGG081390_00130, UHGG158704_01078, UHGG165724_01001,
-#> UHGG209319_01719 and 3 more;
+#> Boruta performed 97 iterations in 37.24746 secs.
+#>  8 attributes confirmed important: UHGG000008_01798,
+#> UHGG025024_01181, UHGG035311_01086, UHGG060667_01243,
+#> UHGG158704_01078 and 3 more;
 #>  21798 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
 #> UHGG000008_00012, UHGG000008_00015 and 21793 more;

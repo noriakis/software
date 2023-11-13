@@ -18,7 +18,7 @@ You can plot principal component analysis results using `prcomp` by `plotPCA` fu
 mt <- loadmetaSNV("../metasnv_sample_out/",just_species = TRUE)
 mt <- loadmetaSNV("../metasnv_sample_out/", candSp=mt[1])
 #>   Loading refGenome1clus
-plotPCA(mt, species=mt@ids[1])
+plotPCA(mt, species=getID(mt)[1])
 #> After filtering: 1022 SNVs
 #> $refGenome1clus
 ```
@@ -67,7 +67,7 @@ See \@ref(function).
 
 ## Visualization of `inStrain` results
 
-The imported `inStrain` `compare` profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using `genomeHeatmap` and `strainClusterHeatmap` by `ComplexHeatmap`. For `genomeHeatmap`, typically population ANI or consensus ANI are plotted, but all the columns listed in `genomeWide_compare.tsv` can be plotted. The parameters to be passed to `Heatmap` can be specified with `heatmapArgs`. If cluster information (`stana@cl`) is available or `cl` is specified, the columns will be split to present the grouping. Please refer to the documentation of [`inStrain`](https://instrain.readthedocs.io/en/latest/important_concepts.html) for `popANI` and `conANI`.
+The imported `inStrain` `compare` profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using `genomeHeatmap` and `strainClusterHeatmap` by `ComplexHeatmap`. For `genomeHeatmap`, typically population ANI or consensus ANI are plotted, but all the columns listed in `genomeWide_compare.tsv` can be plotted. The parameters to be passed to `Heatmap` can be specified with `heatmapArgs`. If cluster information (`getCl(stana)`) is available or `cl` is specified, the columns will be split to present the grouping. Please refer to the documentation of [`inStrain`](https://instrain.readthedocs.io/en/latest/important_concepts.html) for `popANI` and `conANI`.
 
 
 ```r
