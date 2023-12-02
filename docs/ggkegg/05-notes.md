@@ -43,8 +43,11 @@ reac2 |> activate(edges) |> data.frame() |>
 #>   from  to         type subtype_name subtype_value
 #> 1   91 129 irreversible         <NA>          <NA>
 #> 2   91 127 irreversible         <NA>          <NA>
-#>    reaction reaction_id pathway_id  from_name    to_name
-#> 1 rn:R00863        <NA>       <NA> cpd:C00606 cpd:C00041
-#> 2 rn:R00863        <NA>       <NA> cpd:C00606 cpd:C09306
+#>    reaction reaction_id pathway_id      name bgcolor
+#> 1 rn:R00863        <NA>       <NA> ko:K09758 #BFBFFF
+#> 2 rn:R00863        <NA>       <NA> ko:K09758 #BFBFFF
+#>   fgcolor  from_name    to_name
+#> 1 #000000 cpd:C00606 cpd:C00041
+#> 2 #000000 cpd:C00606 cpd:C09306
 ```
 
