@@ -957,13 +957,14 @@ g <- g |> activate(nodes) |> mutate(compn=convert_id("compound",
                                           first_arg_comma = FALSE))
 g <- g |> activate(edges) |> mutate(kon=convert_id("ko",edge=TRUE))
 ```
+
 Next we append values such as KOs and degrees to graph. In addition, here we append additional attribute, like which species have the enzymes, to the graph. This type of information can be obtained from stratified output of `HUMAnN3`.
 
 
 ```r
 g2 <- g |> activate(edges) |> 
   mutate(kolfc=edge_numeric(lfcs), ## Pre-computed LFCs
-         siglgl=name %in% signame) |> ## Whether the KO is significant
+         siglgl=.data$name %in% signame) |> ## Whether the KO is significant
   activate(nodes) |>
   filter(type=="compound") |> ## Subset to compound nodes and 
   mutate(Degree=centrality_degree(mode="all")) |> ## Calculate degree

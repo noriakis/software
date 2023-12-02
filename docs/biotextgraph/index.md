@@ -1,7 +1,7 @@
 --- 
 title: "biotextgraph"
 author: "Noriaki Sato"
-date: "2023-11-10"
+date: "2023-12-02"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -37,6 +37,8 @@ net <- refseq(d3degUpAssetta2016, numWords=40, tag="cor", genePlot=TRUE)
 #>   Converted input genes: 552
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.

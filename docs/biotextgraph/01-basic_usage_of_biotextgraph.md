@@ -23,7 +23,9 @@ load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 
 ## Producing networks
 
-The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. `refseq` is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a `biotext` class object, which contains various types of information. The net slot stores the `ggraph`, which represents the visualization result of the network.
+The main function is producing networks between words based on the co-occurrence or correlation of the words in the text, given the list of gene identifiers. `refseq` is a function that imports gene text from RefSeq and summarizes the text information. Here, we use seven ERCC genes as input. This function returns a `biotext` class object, which contains various types of information. The `net` slot stores the `ggraph`, which represents the visualization result of the network.
+
+The `plotNet` method plots the network. This can modify the options for the visualization. such as the layout and the coloring of the nodes and edges without querying the database again. The same method for the wordcloud is prepared as `plotWC`. The `plotNet` and `plotWC` method by default override preset visualization option, and this behaviour can be turned off by specifying `asis=TRUE`. We can obtain the attribute in the slot by the `getSlot` method. 
 
 
 ```r
@@ -38,7 +40,6 @@ plotNet(net)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic3-1.png" width="100%" style="display: block; margin: auto;" />
-
 By default, the gene ID type is set to `SYMBOL`. The other type can be set by `keyType`. As many of the words are commonly observed, filtering based on pre-computed word frequency on whole RefSeq data is provided. You should limit word frequency by `excludeFreq`, which is default to 2000. TF-IDF on the all the summary is also precomputed, and `exclude="tfidf"` can be specified too.
 
 
@@ -58,26 +59,30 @@ For visualization, The edge label corresponding to correlation or cooccurrence v
 
 ```r
 net <- refseq(inpSymbol, plotType="network",
-                     edgeLabel=TRUE, corThresh=0.4,
-                     numWords=20, colorText=TRUE, layout="kk")
+    edgeLabel=TRUE, corThresh=0.4,
+    numWords=20, colorText=TRUE, layout="kk")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 plotNet(net)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramnet-1.png" width="100%" style="display: block; margin: auto;" />
-One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag="tdm"` or `tag="cor"`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix of TDM (which is a natural way), `tagWhole=TRUE` can be specified with `tag="tdm"`, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below. For tag coloring, `tagPalette` can be used. The `igraph` contained in the object can also be plotted by passing to `plot` function.
+One of the main questions is which words can be clustered together among the words contained in the queried gene cluster. Word clustering (`pvclust`) and identified significant clusters based on the occurrence in the text can be visualized by specifying `tag="tdm"` or `tag="cor"`. For the significance threshold, `pvclAlpha` can be specified. The default parameters perform `pvclust` on the subset of dataset for words with high frequency specified by `numWords`. If one want to perform on whole matrix of TDM (which is a natural way), `tagWhole=TRUE` can be specified with `tag="tdm"`, although it is computationally intensive. One can pass clusters to perform parallel computing owning to `pvclust` function, by specifying `cl` as below. For tag coloring, `tagPalette` can be used. The `igraph` contained in the object can also be plotted by passing to `plot` method.
 
 
 ```r
 net <- refseq(inpSymbol, plotType="network", corThresh=0.2,
-                     numWords=20, tag="cor")
+    numWords=20, tag="cor")
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -97,15 +102,15 @@ plotNet(net)
 getSlot(net, "pvpick")
 #> $clusters
 #> $clusters[[1]]
+#> [1] "dna"           "transcription"
+#> 
+#> $clusters[[2]]
 #> [1] "complementation" "defects"         "pigmentosum"    
 #> [4] "xeroderma"      
 #> 
-#> $clusters[[2]]
-#> [1] "dna"          "endonuclease" "incision"    
-#> 
 #> 
 #> $edges
-#> [1] 3 6
+#> [1] 1 8
 plot(net)
 ```
 
@@ -119,13 +124,15 @@ One can specify `genePlotNum` for limiting the genes shown by ranking of how oft
 
 ```r
 net <- refseq(inpSymbol, plotType="network",
-                     genePlot=TRUE, corThresh=0.5,
-                     tag="cor", edgeLink=FALSE,
-                     numWords=20)
+    genePlot=TRUE, corThresh=0.5,
+    tag="cor", edgeLink=FALSE,
+    numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -148,14 +155,16 @@ The associated enriched pathways (if present) can be shown by specifying `genePa
 library(concaveman)
 library(ggforce)
 net <- refseq(inpSymbol, plotType="network",
-                     genePathPlot="reactome", corThresh=0.5,
-                     tag="cor", edgeLink=FALSE,
-                     genePathPlotSig=0.05, numWords=20)
+    genePathPlot="reactome", corThresh=0.5,
+    tag="cor", edgeLink=FALSE,
+    genePathPlotSig=0.05, numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Found 48 enriched term
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -177,15 +186,17 @@ By default, the associated genes are plotted without colorization (grey) and wit
 
 ```r
 net <- refseq(inpSymbol, plotType="network",
-                     genePlot=TRUE, corThresh=0.5,
-                     colorize=TRUE, geneColor="pink",
-                     colorText=TRUE,
-                     tag="cor", edgeLink=FALSE,
-                     numWords=20)
+    genePlot=TRUE, corThresh=0.5,
+    colorize=TRUE, geneColor="pink",
+    colorText=TRUE,
+    tag="cor", edgeLink=FALSE,
+    numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -225,14 +236,15 @@ It accepts values of the `wordcloud()` function. `numWords` specifies how many w
 
 ```r
 gwc <- refseq(inpSymbol,
-                     plotType="wc",
-                     numWords=100,
-                     scaleFreq=2,
-                     excludeFreq=5000,
-                     argList=list(
-                      "random.order"=FALSE,
-                      colors=RColorBrewer::brewer.pal(8, "Dark2"),
-                     "rot.per"=0.4))
+    plotType="wc",
+    numWords=100,
+    scaleFreq=2,
+    excludeFreq=5000,
+    argList=list(
+        "random.order"=FALSE,
+        colors=RColorBrewer::brewer.pal(8, "Dark2"),
+        "rot.per"=0.4)
+)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
@@ -247,15 +259,15 @@ By default, `preserve=TRUE`, which indicates the funciton tries to preserve the 
 
 ```r
 gwc_p <- refseq(inpSymbol,
-                     plotType="wc",
-                     numWords=100,
-                     excludeFreq=5000,
-                     preserve=FALSE,
-                     argList=list(
-                       rot.per=0.4,
-                       colors=RColorBrewer::brewer.pal(8, "Set2"),
-                       random.order=FALSE
-                     ))
+    plotType="wc",
+    numWords=100,
+    excludeFreq=5000,
+    preserve=FALSE,
+    argList=list(
+        rot.per=0.4,
+        colors=RColorBrewer::brewer.pal(8, "Set2"),
+        random.order=FALSE)
+)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
@@ -302,14 +314,14 @@ Default is `1`, and the example specifying `2` is shown below.
 
 ```r
 gwc2 <- refseq(inpSymbol,
-                      ngram=2,
-                      numWords=50,
-                      plotType="wc",
-                      argList=list(
-                       rot.per=0.4,
-                       colors=RColorBrewer::brewer.pal(8, "Set2"),
-                       random.order=FALSE
-                      ))
+    ngram=2,
+    numWords=50,
+    plotType="wc",
+    argList=list(
+        rot.per=0.4,
+        colors=RColorBrewer::brewer.pal(8, "Set2"),
+        random.order=FALSE)
+)
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -319,6 +331,8 @@ gwc2 <- refseq(inpSymbol,
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
 plotWC(gwc2)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the existing scale.
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramwc-1.png" width="100%" style="display: block; margin: auto;" />
@@ -328,9 +342,10 @@ The `enrich` option can be specified for `'kegg'` or `'reactome'`, this time we 
 
 
 ```r
-gwc3 <- refseq(inpSymbol, plotType="wc",
-                      enrich="reactome",
-                      tfidf=TRUE, numWords=50)
+gwc3 <- refseq(inpSymbol,
+	plotType="wc",
+    enrich="reactome",
+    tfidf=TRUE, numWords=50)
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -341,6 +356,8 @@ gwc3 <- refseq(inpSymbol, plotType="wc",
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
 plotWC(gwc3)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the existing scale.
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngrampath-1.png" width="100%" style="display: block; margin: auto;" />
@@ -354,13 +371,14 @@ pal <- RColorBrewer::brewer.pal(8, "Dark2")
 pal <- colorRampPalette(pal)(20)
 ## Cluster on whole matrix
 gwclWhole <- refseq(inpSymbol,
-                     numWords=50,
-                     plotType="wc",
-                     tag="cor",
-                     tagPalette = pal,
-                     scaleFreq=5,
-                     cl=snow::makeCluster(8),
-                     argList=list(rot.per=0.4))
+    numWords=50,
+    plotType="wc",
+    tag="cor",
+    tagPalette = pal,
+    scaleFreq=5,
+    cl=snow::makeCluster(8),
+    argList=list(rot.per=0.4)
+)
 #> Input genes: 7
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -406,9 +424,12 @@ getSlot(gwclWhole, "pvpick")
 #> $edges
 #> [1] 16 41 43
 plotWC(gwclWhole)
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the existing scale.
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;" />
+
 In this example querying ERCC genes, the term `DNA repair` is clustered as expected.
 
 ## Visualization of PubMed information.
@@ -441,10 +462,13 @@ As fetching the same information is not desirable and time consuming, the same o
 abtag <- pubmed(redo=ab, tag="tdm", cl=snow::makeCluster(10), apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.3
 abtag2 <- pubmed(redo=abtag, tag="tdm", genePlot=TRUE,
-                 plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
+    plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
 #> Resuming from the previous results
-#> Using previous pvclust results
+#> Using previous pvclust resultsIgnoring corThresh, automatically determine the value
+#> threshold = 0.3
 plotNet(abtag2)
 ```
 
@@ -473,38 +497,44 @@ for (i in c(1,2,3,5,6,8,9,10,11,12,13,14,16)){
 }
 
 net1 <- refseq(inpSymbol, plotType="network",
-                      corThresh=0.5, numWords=20)
+    corThresh=0.5, numWords=20)
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 net2 <- refseq(cxcls, plotType="network",
-                      corThresh=0.5, numWords=20)
+    corThresh=0.5, numWords=20)
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.4
 net3 <- pubmed(redo=ab, plotType="network",
-               corThresh=0.2, numWords=20)
+    corThresh=0.2, numWords=20)
 #> Resuming from the previous results
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 
 ## Not having meaningful overlaps
 compareWordNet(list(net1, net2),
-               titles=c("ercc","cxcl"), colNum=3) |> plotNet()
+    titles=c("ercc","cxcl")) |> plotNet()
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 compareWordNet(list(net1, net3),
-               titles=c("ercc","ercc-PubMed"), colNum=3) |> plotNet()
+    titles=c("ercc","ercc-PubMed")) |> plotNet()
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-2.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 compareWordNet(list(net1, net2, net3),
-               titles=c("ercc","cxcl", "ercc-PubMed"), colNum=5) |> plotNet()
+    titles=c("ercc","cxcl", "ercc-PubMed")) |> plotNet()
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-3.png" width="100%" style="display: block; margin: auto;" />
@@ -518,14 +548,16 @@ mappedKeys <- mappedkeys(keggPathways)
 keggList <- as.list(keggPathways[mappedKeys])
 
 net1 <- refseq(keggList$`04110`,
-                      keyType="ENTREZID",
-                      corThresh=0.3,
-                      numWords=30,
-                      tag="cor",
-                      tfidf=TRUE)
+    keyType="ENTREZID",
+    corThresh=0.3,
+    numWords=30,
+    tag="cor",
+    tfidf=TRUE)
 #> Input genes: 124
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -538,14 +570,16 @@ net1 <- refseq(keggList$`04110`,
 #> Bootstrap (r = 1.4)... Done.
 
 net2 <- refseq(keggList$`04210`,
-                      keyType="ENTREZID",
-                      corThresh=0.3,
-                      numWords=30,
-                      tfidf=TRUE,
-                      tag="cor")
+    keyType="ENTREZID",
+    corThresh=0.3,
+    numWords=30,
+    tfidf=TRUE,
+    tag="cor")
 #> Input genes: 87
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -575,22 +609,26 @@ net1 <- refseq(keggList$`04110`, keyType="ENTREZID", corThresh=0.3, numWords=30,
 #> Input genes: 124
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 net2 <- refseq(keggList$`04114`, keyType="ENTREZID", corThresh=0.3, numWords=30, genePlot=TRUE)
 #> Input genes: 112
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 connectGenes(list("4110"=net1, "4114"=net2), "cycle", neighbor=TRUE) |>
-  tidygraph::as_tbl_graph() |>
-  mutate(SYMBOL=name %in% keys(org.Hs.eg.db, "SYMBOL")) |> ## Highlighy symbol
+    tidygraph::as_tbl_graph() |>
+    mutate(SYMBOL=name %in% keys(org.Hs.eg.db, "SYMBOL")) |> ## Highlighy symbol
 ggraph(layout="nicely")+
-  geom_edge_diagonal(color="grey")+
-  geom_node_point(aes(filter=.data$SYMBOL), size=2, color=muted("red"))+
-  graphhighlight::highlight_node(glow=TRUE, filter=SYMBOL,
-                                 glow_base_size = TRUE, glow_size=0.5,highlight_color = muted("red"))+
-  geom_node_point(aes(filter=!.data$SYMBOL), size=2)+
-  geom_node_text(aes(label=name, filter=name!="cycle"), repel=TRUE, bg.colour="white") +
-  geom_node_text(aes(label=name, filter=name=="cycle"), size=6, repel=TRUE, bg.colour="white") +
-  theme_graph()
+    geom_edge_diagonal(color="grey")+
+    geom_node_point(aes(filter=.data$SYMBOL), size=2, color=muted("red"))+
+    graphhighlight::highlight_node(glow=TRUE, filter=SYMBOL,
+        glow_base_size = TRUE, glow_size=0.5,highlight_color = muted("red"))+
+    geom_node_point(aes(filter=!.data$SYMBOL), size=2)+
+    geom_node_text(aes(label=name, filter=name!="cycle"), repel=TRUE, bg.colour="white") +
+    geom_node_text(aes(label=name, filter=name=="cycle"), size=6, repel=TRUE, bg.colour="white") +
+    theme_graph()
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/conn-1.png" width="100%" style="display: block; margin: auto;" />
@@ -643,6 +681,8 @@ net <- refseq(inpSymbol, plotType="network",
 #> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
 #> Filtered 148 words (ORA)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 plotNet(net)
 ```
 
@@ -665,9 +705,8 @@ Using [`udpipe`](https://github.com/bnosac/udpipe) package ([Straka and Strakov√
 
 ```r
 p <- biotextgraph::refseq(c("DDX41","PNKP","ERCC2"),
-                                  plotType="network",
-                                  useUdpipe=TRUE,
-                                  udpipeModel="~/english-ewt-ud-2.5-191206.udpipe")
+    plotType="network", useUdpipe=TRUE,
+    udpipeModel="~/english-ewt-ud-2.5-191206.udpipe")
 #> Using udpipe mode
 #> Input genes: 3
 #>   Converted input genes: 3
@@ -689,21 +728,23 @@ degs <- d3degUpAssetta2016
 ## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)
 sysfonts::font_add(family="alien",regular="SFAlienEncounters.ttf")
 p <- biotextgraph::refseq(degs,
-                          plotType="network",
-                          numWords=50, genePlot=TRUE,
-                          fontFamily="alien",
-                          colorText=TRUE)
+    plotType="network",
+    numWords=50, genePlot=TRUE,
+    fontFamily="alien",
+    colorText=TRUE)
 #> Input genes: 636
 #>   Converted input genes: 552
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 plotNet(p)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/font-1.png" width="100%" style="display: block; margin: auto;" />
 
 For complex networks, changing the layout is possible by the small function `changeLayout`.
-Specify which layout algorithm to choose in `igrpah`.
+Specify which layout algorithm to choose in `igraph`. This can be also accomplished by specifying the layout in `plotNet` method.
 
 
 ```r
@@ -724,6 +765,8 @@ ex <- refseq(c("DDX41","PNKP"),
 #>   Converted input genes: 2
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
 ex <- getSlot(ex, "igraph") |> obtainTextPosition() ## Obtain text position for the X-axis
 ex |> 
 ggraph("fabric",
@@ -732,10 +775,8 @@ ggraph("fabric",
     geom_edge_span(end_shape = 'circle') +
     geom_node_text(aes(x=xmin-4, label=name), size=2.5)+
     shadowtext::geom_shadowtext(aes(x=center,
-                       color=nodeCat,
-                       y=y+1,
-                       label=name),
-                   size=2.5, bg.colour="white")+
+            color=nodeCat, y=y+1, label=name),
+        size=2.5, bg.colour="white")+
     scale_color_manual(values=c("grey20", "grey80"))+
     theme_graph()
 ```
@@ -761,6 +802,8 @@ ex <- suppressMessages(refseq(d3degUpAssetta2016,
 #>   Converted input genes: 552
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 
 # Obtain text positions, and plot using various geoms.
 getSlot(ex, "igraph") |> obtainTextPosition(verbose=FALSE)  |>
@@ -794,22 +837,26 @@ net1 <- refseq(keggList$`04110`, keyType="ENTREZID",
 #> Input genes: 124
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 net2 <- refseq(keggList$`04114`, keyType="ENTREZID",
                corThresh=0.3, numWords=30)
 #> Input genes: 112
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 comp <- compareWordNet(list(net1, net2),titles=c("4110","4114"))
 
 ## Grouping is stored in `col` variable of nodes
 ggraph(getSlot(comp, "igraphRaw") |> obtainTextPosition(), "fabric",sort.by=node_rank_fabric())+
-  geom_node_range() +
-  geom_edge_span(end_shape = 'circle') +
-  geom_node_shadowtext(aes(x=.data$xmin-4,
-  	label=.data$name), color="grey20",size=2, bg.colour="white")+
-  geom_node_shadowtext(aes(x=.data$center,
-  	y=.data$y+1, label=.data$name, color=col), bg.colour="white", size=2)+
-  theme_graph()
+    geom_node_range() +
+    geom_edge_span(end_shape = 'circle') +
+    geom_node_shadowtext(aes(x=.data$xmin-4,
+  	    label=.data$name), color="grey20",size=2, bg.colour="white")+
+    geom_node_shadowtext(aes(x=.data$center,
+  	    y=.data$y+1, label=.data$name, color=col), bg.colour="white", size=2)+
+    theme_graph()
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/fabriccomb-1.png" width="100%" style="display: block; margin: auto;" />
@@ -826,6 +873,96 @@ ex |> plot_biofabric(end_shape="square")
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/pbfbrc-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Actual application of the package
+
+### The selection of genes
+
+The input of genes can be selected in various ways. In most cases, the list obtained by differential expression analysis can be used as an input to the function. Additionally, the cluster of genes identified in gene clustering analysis such as weighted gene co-expression network analysis can be used as input.
+
+### Actual application of the package
+
+For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer ([Chen et al. 2019](https://doi.org/10.1038/s41556-019-0361-y)).
+
+First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.
+
+
+```r
+
+converted <- clusterProfiler::bitr(exampleWGCNAcluster,
+    fromType="ENSEMBL", toType="ENTREZID",
+    OrgDb="org.Hs.eg.db")[,2]
+ora <- clusterProfiler::enrichKEGG(converted)
+ora |> filter(p.adjust<0.05) |> data.frame() |> dplyr::pull("Description")
+#>  [1] "Butanoate metabolism"                      
+#>  [2] "Fatty acid metabolism"                     
+#>  [3] "Tight junction"                            
+#>  [4] "Valine, leucine and isoleucine degradation"
+#>  [5] "Peroxisome"                                
+#>  [6] "Fatty acid degradation"                    
+#>  [7] "Fatty acid elongation"                     
+#>  [8] "Biosynthesis of unsaturated fatty acids"   
+#>  [9] "alpha-Linolenic acid metabolism"           
+#> [10] "PPAR signaling pathway"                    
+#> [11] "Aldosterone-regulated sodium reabsorption" 
+#> [12] "Sphingolipid metabolism"
+enrichplot::dotplot(ora, showCategory=20)
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_kegg-1.png" width="100%" style="display: block; margin: auto;" />
+
+We use the function in `biotextgraph` to make a summarized visualization of textual information, along with associated genes. As for the input reaching to a hundred of genes, there is an option `filterByGO` term, which filters the text mining results to those used in GO terms. This is useful for limiting the visualization to biologically-relevant terms.
+
+
+```r
+check <- refseq(converted, genePlot=TRUE,
+                filterByGO=TRUE, keyType="ENTREZID")
+#> Input genes: 533
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> `filterByGO` option enabled. Filtering by GO terms ...
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
+plotNet(check)
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_btg-1.png" width="100%" style="display: block; margin: auto;" />
+
+Some genes are not related to the significantly enriched pathway, and one would like to inspect the biological function of these genes.
+
+
+```r
+## Extraction of non-related genes
+enr_genes <- ora@result %>% data.frame() %>% 
+  filter(p.adjust<0.05) %>% dplyr::pull(geneID) %>%
+  strsplit("/") %>% unlist() %>% unique()
+
+no_enr <- converted[!(converted %in% enr_genes)]
+length(no_enr)
+#> [1] 471
+```
+
+This time, we enable the `filterByGO` option along with `ngram=2`, which produces 2-gram visualization.
+
+
+```r
+check_noenr_WGO <- refseq(no_enr,
+    layout="nicely",
+    ngram=2,
+    keyType="ENTREZID",
+    filterByGO=TRUE,
+    docsum=TRUE)
+#> Input genes: 471
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> `filterByGO` option enabled. Filtering by GO terms ...
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.01
+plotNet(check_noenr_WGO)
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_noenr-1.png" width="100%" style="display: block; margin: auto;" />
+
+This way, we can filter the unnecessary words from the many terms included in the textual information of identifiers, and focus on biologically relevant terms contained in the identifiers.
 
 
 
@@ -853,7 +990,7 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggkegg_1.1.4          testthat_3.1.10      
+#>  [1] ggkegg_1.1.7          testthat_3.1.10      
 #>  [3] XML_3.99-0.14         tidygraph_1.2.3      
 #>  [5] ggfx_1.0.1            igraph_1.5.1         
 #>  [7] GetoptLong_1.0.5      ggrepel_0.9.3        
@@ -1018,7 +1155,7 @@ sessionInfo()
 #> [149] lazyeval_0.2.2               
 #> [150] devtools_2.4.5               
 #> [151] GOSemSim_2.27.3              
-#> [152] Matrix_1.6-1                 
+#> [152] Matrix_1.6-3                 
 #> [153] patchwork_1.1.3              
 #> [154] bit64_4.0.5                  
 #> [155] KEGGREST_1.41.0              

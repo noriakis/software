@@ -514,7 +514,7 @@ sessionInfo()
 #>  [28] lifecycle_1.0.3              
 #>  [29] pkgconfig_2.0.3              
 #>  [30] gson_0.1.0                   
-#>  [31] Matrix_1.6-1                 
+#>  [31] Matrix_1.6-3                 
 #>  [32] R6_2.5.1                     
 #>  [33] fastmap_1.1.1                
 #>  [34] GenomeInfoDbData_1.2.10      

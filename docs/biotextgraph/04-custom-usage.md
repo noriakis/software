@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 6969db4 DN-- 3 2 -- 
+#> IGRAPH be615f0 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 6969db4 (vertex names):
+#> + edges from be615f0 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,9 +212,9 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9
 #> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Set2 is 8
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network' already
 #> exists
@@ -250,9 +250,6 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
 ```
 
 # Annotating gene cluster dendrogram
@@ -796,22 +793,32 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #>   Converted input genes: 4861
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 #> Input genes: 634
 #>   Converted input genes: 512
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
 #> Input genes: 2054
 #>   Converted input genes: 1679
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 #> Input genes: 132
 #>   Converted input genes: 127
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.201
 #> Input genes: 5673
 #>   Converted input genes: 4694
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
 #> border is set to FALSE as useggfx is not NULL
 ```
 
@@ -1062,6 +1069,8 @@ simExample <- returnSim(returnExample()$color,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
 #> Filtered 109 words (ORA)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.6
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
@@ -1069,6 +1078,8 @@ simExample <- returnSim(returnExample()$color,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
 #> Filtered 238 words (ORA)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.4
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
@@ -1076,6 +1087,8 @@ simExample <- returnSim(returnExample()$color,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Performing ORA
 #> Filtered 148 words (ORA)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
 heatmap(simExample)
 ```
 
@@ -1092,16 +1105,22 @@ simExample <- returnSim(returnExample()$color,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.917
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.091
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.216
 heatmap(simExample)
 ```
 
@@ -1120,16 +1139,22 @@ simExample <- returnSim(returnExample()$color,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.6
 #> 2
 #> Input genes: 13
 #>   Converted input genes: 13
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.4
 #> 3
 #> Input genes: 7
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.7
 heatmap(simExample)
 ```
 

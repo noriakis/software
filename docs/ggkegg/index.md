@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-11-10"
+date: "2023-12-02"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -63,6 +63,18 @@ highlight_entities("hsa04110", "CDKN2A")
 ```
 
 <img src="index_files/figure-html/ggkegg2-1.png" width="100%" style="display: block; margin: auto;" />
+
+If named numeric vector is provided, continuous scale will be used.
+
+
+```r
+## Highlight genes in the pathway, and overlay raw map.
+vecs <- c(-2,2) |> setNames(c("CDKN2A", "CDC45"))
+highlight_entities("hsa04110", vecs) + 
+    scale_fill_viridis(name="LFC")
+```
+
+<img src="index_files/figure-html/ggkegg3-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Bugs and errors
 

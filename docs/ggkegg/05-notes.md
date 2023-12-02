@@ -40,11 +40,11 @@ node_df <- reac2 |> activate(nodes) |> data.frame()
 reac2 |> activate(edges) |> data.frame() |>
     filter(reaction=="rn:R00863") |>
     mutate(from_name=node_df$name[from], to_name=node_df$name[to])
-#>   from  to         type  reaction      name bgcolor fgcolor
-#> 1   91 129 irreversible rn:R00863 ko:K09758 #BFBFFF #000000
-#> 2   91 127 irreversible rn:R00863 ko:K09758 #BFBFFF #000000
-#>    from_name    to_name
-#> 1 cpd:C00606 cpd:C00041
-#> 2 cpd:C00606 cpd:C09306
+#>   from  to         type subtype_name subtype_value
+#> 1   91 129 irreversible         <NA>          <NA>
+#> 2   91 127 irreversible         <NA>          <NA>
+#>    reaction reaction_id pathway_id  from_name    to_name
+#> 1 rn:R00863        <NA>       <NA> cpd:C00606 cpd:C00041
+#> 2 rn:R00863        <NA>       <NA> cpd:C00606 cpd:C09306
 ```
 

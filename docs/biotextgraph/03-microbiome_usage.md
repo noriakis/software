@@ -321,6 +321,8 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
 #> Checking metabolites
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.3
 plotNet(metabEx)
 ```
 
@@ -502,13 +504,29 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
                                 ngram=1), horizontalSpacer=0.1,
                                useWGCNA=FALSE, spacer=0.05,
                                horiz=FALSE, wcScale =5)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.301
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.305
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.3
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.303
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.9
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.702
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> border is set to FALSE as useggfx is not NULL
 scaled <- micro + scale_y_continuous(expand=c(0,6))
