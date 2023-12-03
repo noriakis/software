@@ -82,13 +82,11 @@
 <p>Another example below shows summarization of 636 genes identified in differential expression analysis by <a href="https://biofabric.systemsbiology.net/">BioFabric layout</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">d3degUpAssetta2016</span>, numWords<span class="op">=</span><span class="fl">40</span>, tag<span class="op">=</span><span class="st">"cor"</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">d3degUpAssetta2016</span>, numWords<span class="op">=</span><span class="fl">40</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>, tag<span class="op">=</span><span class="st">"cor"</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 636</span></span>
 <span><span class="co">#&gt;   Converted input genes: 552</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
@@ -124,7 +122,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-02.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

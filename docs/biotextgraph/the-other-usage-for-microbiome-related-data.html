@@ -86,7 +86,7 @@
 <p>We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases (<a href="https://bugsigdb.org/Main_Page">Geistlinger et al. 2022</a>). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If <code>target="title"</code>, the title of the corresponding articles will be summarized.</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"none"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
-<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span>,argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>min.freq<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
 <span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
@@ -96,32 +96,32 @@
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">basic</span>, <span class="st">"freqDf"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                    word freq</span></span>
-<span><span class="co">#&gt; gut                 Gut    8</span></span>
-<span><span class="co">#&gt; oral               Oral    5</span></span>
+<span><span class="co">#&gt; gut                 gut    8</span></span>
+<span><span class="co">#&gt; oral               oral    5</span></span>
 <span><span class="co">#&gt; patients       patients    5</span></span>
 <span><span class="co">#&gt; study             study    3</span></span>
 <span><span class="co">#&gt; arthritis     arthritis    2</span></span>
 <span><span class="co">#&gt; association association    2</span></span>
 <span><span class="co">#&gt; bacterial     bacterial    2</span></span>
-<span><span class="co">#&gt; covid19         COVID19    2</span></span>
+<span><span class="co">#&gt; covid19         covid19    2</span></span>
 <span><span class="co">#&gt; diabetes       diabetes    2</span></span>
-<span><span class="co">#&gt; dysbiosis     Dysbiosis    2</span></span>
+<span><span class="co">#&gt; dysbiosis     dysbiosis    2</span></span>
 <span><span class="co">#&gt; infant           infant    2</span></span>
-<span><span class="co">#&gt; infection     Infection    2</span></span>
+<span><span class="co">#&gt; infection     infection    2</span></span>
 <span><span class="co">#&gt; obese             obese    2</span></span>
 <span><span class="co">#&gt; respiratory respiratory    2</span></span>
 <span><span class="co">#&gt; sequencing   sequencing    2</span></span>
 <span><span class="co">#&gt; surgery         surgery    2</span></span>
 <span><span class="co">#&gt; tract             tract    2</span></span>
 <span><span class="co">#&gt;  features      features    1</span></span>
-<span><span class="co">#&gt; 16s                 16S    1</span></span>
-<span><span class="co">#&gt; aerosol         Aerosol    1</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotWC.html">plotWC</a></span><span class="op">(</span><span class="va">basic</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; 16s                 16s    1</span></span>
+<span><span class="co">#&gt; aerosol         aerosol    1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotWC.html">plotWC</a></span><span class="op">(</span><span class="va">basic</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If <code>target="abstract"</code>, the corresponding abstract of curated publications will be fetched and be summarized.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"cor"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
-<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Dark2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
 <span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
@@ -136,26 +136,26 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">basic2</span>, <span class="st">"freqDf"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                    word freq</span></span>
 <span><span class="co">#&gt; patients       patients   37</span></span>
-<span><span class="co">#&gt; gut                 Gut   30</span></span>
-<span><span class="co">#&gt; oral               Oral   27</span></span>
-<span><span class="co">#&gt; bacterial     Bacterial   25</span></span>
+<span><span class="co">#&gt; gut                 gut   30</span></span>
+<span><span class="co">#&gt; oral               oral   27</span></span>
+<span><span class="co">#&gt; bacterial     bacterial   25</span></span>
 <span><span class="co">#&gt; species         species   24</span></span>
-<span><span class="co">#&gt; microbial     Microbial   23</span></span>
-<span><span class="co">#&gt; subjects       Subjects   20</span></span>
+<span><span class="co">#&gt; microbial     microbial   23</span></span>
+<span><span class="co">#&gt; subjects       subjects   20</span></span>
 <span><span class="co">#&gt; sequencing   sequencing   18</span></span>
 <span><span class="co">#&gt; diversity     diversity   17</span></span>
 <span><span class="co">#&gt; composition composition   16</span></span>
-<span><span class="co">#&gt; 16s                 16S   14</span></span>
+<span><span class="co">#&gt; 16s                 16s   14</span></span>
 <span><span class="co">#&gt; infection     infection   14</span></span>
 <span><span class="co">#&gt; differences differences   13</span></span>
 <span><span class="co">#&gt; healthy         healthy   13</span></span>
 <span><span class="co">#&gt; controls       controls   12</span></span>
-<span><span class="co">#&gt; covid19         COVID19   12</span></span>
-<span><span class="co">#&gt; infant           Infant   12</span></span>
-<span><span class="co">#&gt; rrna               rRNA   12</span></span>
+<span><span class="co">#&gt; covid19         covid19   12</span></span>
+<span><span class="co">#&gt; infant           infant   12</span></span>
+<span><span class="co">#&gt; rrna               rrna   12</span></span>
 <span><span class="co">#&gt; compared       compared   11</span></span>
 <span><span class="co">#&gt; disease         disease   11</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotWC.html">plotWC</a></span><span class="op">(</span><span class="va">basic2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotWC.html">plotWC</a></span><span class="op">(</span><span class="va">basic2</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For successful visualization, pre-caculated TF-IDF and frequency data frame is available and one can use them to filter the highly occurring words, or the other prefiltering option used in <code>refseq</code>.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
@@ -196,6 +196,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
 <span>    corThresh<span class="op">=</span><span class="fl">0.2</span>,</span>
 <span>    edgeLink<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    numWords<span class="op">=</span><span class="fl">60</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
 <span><span class="co">#&gt;   Found 76 entries for Neisseria</span></span>
@@ -203,7 +204,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span><span class="co">#&gt; Including 502 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The words-to-species relationship can be plotted by <code>mbPlot=TRUE</code>, useful for assessing which species have similar characteristics regarding diseases.</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
@@ -219,6 +220,7 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span>            showLegend<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>            numWords<span class="op">=</span><span class="fl">50</span>, </span>
 <span>            corThresh<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span>            autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>            colorText<span class="op">=</span><span class="cn">TRUE</span></span>
 <span>            <span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 4</span></span>
@@ -229,14 +231,14 @@ The same parameters that can be passed to <code>refseq</code> can be used.</p>
 <span><span class="co">#&gt; Including 90 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net2</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>As the BugSigDB contains the relationship between bacterial taxonomy and disease, disease name can also be plotted. When <code>disPlot=TRUE</code>, the <code>mbPlot</code>
 will be set to <code>TRUE</code> by default. Words from PubMed that is contained in the disease flag will be concatenated into disease label (like <code>pregnancy</code>) when the <code>colorize=TRUE</code> like the example below.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span>,</span>
 <span>    <span class="st">"Veillonella parvula"</span>,<span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>, mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>, colorize<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    numWords<span class="op">=</span><span class="fl">50</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 4</span></span>
@@ -247,13 +249,13 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Including 90 entries</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net3</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net3</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Other than curated databases, the PubMed query can also be performed with setting <code>curate=FALSE</code>. This way, the text information of the latest literature for the microbes and diseases can be plotted. The options for use in function obtaining PubMed information can be specified to <code>abstArg</code> in list format, like <code>sortOrder="pubdate"</code>.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Akkermansia muciniphila"</span><span class="op">)</span>,</span>
 <span>    curate<span class="op">=</span><span class="cn">FALSE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,plotType<span class="op">=</span><span class="st">"network"</span>,</span>
-<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
+<span>    additionalRemove<span class="op">=</span><span class="va">filter</span><span class="op">$</span><span class="va">word</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    numWords<span class="op">=</span><span class="fl">40</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>, colorize<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    abstArg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>retMax<span class="op">=</span><span class="fl">80</span>, sortOrder<span class="op">=</span><span class="st">"pubdate"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 1</span></span>
@@ -262,7 +264,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Proceeding without API key</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net4</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="enzymes" class="section level2" number="4.2">
@@ -277,7 +279,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">vp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella parvula"</span><span class="op">)</span>,</span>
-<span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"kk"</span>,</span>
+<span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"kk"</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                curate<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="st">"title"</span>, edgeLink<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                mbPlot <span class="op">=</span> <span class="cn">TRUE</span>, ecPlot<span class="op">=</span><span class="cn">TRUE</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>, tag<span class="op">=</span><span class="st">"cor"</span>,</span>
 <span>                cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,colorText<span class="op">=</span><span class="cn">TRUE</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">30</span>,</span>
@@ -300,7 +302,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">vp</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">vp</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="metabolites" class="section level2" number="4.3">
@@ -336,6 +338,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>                numWords<span class="op">=</span><span class="fl">50</span>,</span>
 <span>                mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                layout<span class="op">=</span><span class="st">"lgl"</span>,</span>
+<span>                autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                metCol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Metagenomic species"</span>, <span class="st">"Metabolite"</span>, <span class="st">"Spearman's ρ"</span><span class="op">)</span>,</span>
 <span>                metab <span class="op">=</span><span class="va">metab</span>, metThresh<span class="op">=</span><span class="fl">0.15</span>,</span>
 <span>                preserve <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -352,9 +355,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Checking metabolites</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.3</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">metabEx</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">metabEx</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/metabex-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>In this way, we can plot links between microbes - metabolites - textual information. For all the information combined, one can plot textual information - metabolites - coded enzymes - diseases - microbes link in one query.</p>
 <p>By default, the category other than words are plotted without node and colorization (grey). If preferred, set <code>colorize=TRUE</code> to colorize the associated information by <code>catColors</code>. In this way, color of nodes of words are shown by the gradient of frequency, independent of color of associated categories.</p>
@@ -367,6 +368,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>                corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                colorize<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                pre<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                additionalRemove <span class="op">=</span> <span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
 <span>                colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -383,7 +385,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;   Querying without API key</span></span>
 <span><span class="co">#&gt; Filter based on BugSigDB</span></span>
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">metabEx</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">metabEx</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/metabex2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div id="interactive" class="section level3" number="4.3.1">
 <h3>
@@ -471,7 +473,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; 799                              Bacteria;Bacillota;Bacilli;Bacillales;Bacillaceae;Bacillus;Bacillus subtilis</span></span></code></pre></div>
 <p>This time we use a random dendrogram and rename the rows with taxonomic name included in MetaCyc.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">uniq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">bc</span><span class="op">$</span><span class="va">species</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">uniq</span><span class="op">)</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">uniq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -495,7 +497,9 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Some filtering</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../allFreqMetaCyc.rda"</span><span class="op">)</span></span>
-<span><span class="va">deleter</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">allFreqMetaCyc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">freq</span><span class="op">&gt;</span><span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">word</span></span>
+<span><span class="va">deleter</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">allFreqMetaCyc</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">freq</span><span class="op">&gt;</span><span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">word</span></span>
 <span><span class="co"># Named vector</span></span>
 <span><span class="va">sampled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sampled</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">sampled</span></span>
@@ -504,38 +508,38 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span> <span class="co"># use ggfx</span></span>
 <span><span class="va">micro</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="va">sampled</span>,</span>
-<span>                               useWC <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Use wordcloud</span></span>
-<span>                               useFunc <span class="op">=</span> <span class="st">"manual"</span>, <span class="co"># Use manual function (as the input is custom data.frame)</span></span>
-<span>                               useDf<span class="op">=</span><span class="va">input</span>,dendPlot<span class="op">=</span><span class="st">"ggplot"</span>,dhc<span class="op">=</span><span class="va">dhc</span>,</span>
-<span>                               useggfx<span class="op">=</span><span class="st">"with_outer_glow"</span>,</span>
-<span>                               ggfxParams<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"white"</span>,expand<span class="op">=</span><span class="fl">5</span><span class="op">)</span>,</span>
-<span>                               argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>additionalRemove<span class="op">=</span><span class="va">deleter</span>,</span>
-<span>                                ngram<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, horizontalSpacer<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span>                               useWGCNA<span class="op">=</span><span class="cn">FALSE</span>, spacer<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span>                               horiz<span class="op">=</span><span class="cn">FALSE</span>, wcScale <span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
+<span>    useWC <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Use wordcloud</span></span>
+<span>    useFunc <span class="op">=</span> <span class="st">"manual"</span>, <span class="co"># Use manual function (as the input is custom data.frame)</span></span>
+<span>    useDf<span class="op">=</span><span class="va">input</span>,dendPlot<span class="op">=</span><span class="st">"ggplot"</span>,dhc<span class="op">=</span><span class="va">dhc</span>,</span>
+<span>    useggfx<span class="op">=</span><span class="st">"with_outer_glow"</span>,</span>
+<span>    ggfxParams<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>colour<span class="op">=</span><span class="st">"white"</span>,expand<span class="op">=</span><span class="fl">5</span><span class="op">)</span>,</span>
+<span>    argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>additionalRemove<span class="op">=</span><span class="va">deleter</span>,</span>
+<span>        ngram<span class="op">=</span><span class="fl">1</span><span class="op">)</span>, horizontalSpacer<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span>    useWGCNA<span class="op">=</span><span class="cn">FALSE</span>, spacer<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span>    horiz<span class="op">=</span><span class="cn">FALSE</span>, wcScale<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.1</span></span>
+<span><span class="co">#&gt; threshold = 0.2</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.101</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.2</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.1</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.2</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.301</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.305</span></span>
+<span><span class="co">#&gt; threshold = 0.205</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.3</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.303</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.9</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.702</span></span>
+<span><span class="co">#&gt; threshold = 0.2</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; border is set to FALSE as useggfx is not NULL</span></span>
 <span><span class="va">scaled</span> <span class="op">&lt;-</span> <span class="va">micro</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
@@ -601,48 +605,49 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt;  [47] polyclip_1.10-4         compiler_4.3.1         </span></span>
 <span><span class="co">#&gt;  [49] bit64_4.0.5             withr_2.5.0            </span></span>
 <span><span class="co">#&gt;  [51] viridis_0.6.4           DBI_1.1.3              </span></span>
-<span><span class="co">#&gt;  [53] dendextend_1.17.1       highr_0.10             </span></span>
-<span><span class="co">#&gt;  [55] ggforce_0.4.1           MASS_7.3-60            </span></span>
-<span><span class="co">#&gt;  [57] ISOcodes_2022.09.29     rjson_0.2.21           </span></span>
-<span><span class="co">#&gt;  [59] tools_4.3.1             ape_5.7-1              </span></span>
-<span><span class="co">#&gt;  [61] stopwords_2.3           rentrez_1.2.3          </span></span>
-<span><span class="co">#&gt;  [63] httpuv_1.6.11           glue_1.6.2             </span></span>
-<span><span class="co">#&gt;  [65] nlme_3.1-163            promises_1.2.1         </span></span>
-<span><span class="co">#&gt;  [67] gridtext_0.1.5          grid_4.3.1             </span></span>
-<span><span class="co">#&gt;  [69] shadowtext_0.1.2        generics_0.1.3         </span></span>
-<span><span class="co">#&gt;  [71] gtable_0.3.4            tidyr_1.3.0            </span></span>
-<span><span class="co">#&gt;  [73] bugsigdbr_1.8.1         data.table_1.14.8      </span></span>
-<span><span class="co">#&gt;  [75] tidygraph_1.2.3         xml2_1.3.5             </span></span>
-<span><span class="co">#&gt;  [77] utf8_1.2.3              XVector_0.41.1         </span></span>
-<span><span class="co">#&gt;  [79] BiocGenerics_0.47.0     stringr_1.5.0          </span></span>
-<span><span class="co">#&gt;  [81] markdown_1.8            ggrepel_0.9.3          </span></span>
-<span><span class="co">#&gt;  [83] pillar_1.9.0            yulab.utils_0.1.0      </span></span>
-<span><span class="co">#&gt;  [85] later_1.3.1             dplyr_1.1.2            </span></span>
-<span><span class="co">#&gt;  [87] tweenr_2.0.2            BiocFileCache_2.9.1    </span></span>
-<span><span class="co">#&gt;  [89] lattice_0.21-8          bit_4.0.5              </span></span>
-<span><span class="co">#&gt;  [91] tidyselect_1.2.0        phylogram_2.1.0        </span></span>
-<span><span class="co">#&gt;  [93] tm_0.7-11               Biostrings_2.69.2      </span></span>
-<span><span class="co">#&gt;  [95] downlit_0.4.3           knitr_1.44             </span></span>
-<span><span class="co">#&gt;  [97] gridExtra_2.3           NLP_0.2-1              </span></span>
-<span><span class="co">#&gt;  [99] bookdown_0.35           IRanges_2.35.2         </span></span>
-<span><span class="co">#&gt; [101] stats4_4.3.1            xfun_0.40              </span></span>
-<span><span class="co">#&gt; [103] graphlayouts_1.0.0      Biobase_2.61.0         </span></span>
-<span><span class="co">#&gt; [105] stringi_1.7.12          yaml_2.3.7             </span></span>
-<span><span class="co">#&gt; [107] evaluate_0.21           ggwordcloud_0.6.0      </span></span>
-<span><span class="co">#&gt; [109] wordcloud_2.6           tibble_3.2.1           </span></span>
-<span><span class="co">#&gt; [111] graph_1.79.1            ggplotify_0.1.2        </span></span>
-<span><span class="co">#&gt; [113] cli_3.6.1               systemfonts_1.0.4      </span></span>
-<span><span class="co">#&gt; [115] xtable_1.8-4            munsell_0.5.0          </span></span>
-<span><span class="co">#&gt; [117] jquerylib_0.1.4         Rcpp_1.0.11            </span></span>
-<span><span class="co">#&gt; [119] GenomeInfoDb_1.37.4     readxl_1.4.3           </span></span>
-<span><span class="co">#&gt; [121] dbplyr_2.3.3            png_0.1-8              </span></span>
-<span><span class="co">#&gt; [123] XML_3.99-0.14           parallel_4.3.1         </span></span>
-<span><span class="co">#&gt; [125] ellipsis_0.3.2          blob_1.2.4             </span></span>
-<span><span class="co">#&gt; [127] bitops_1.0-7            viridisLite_0.4.2      </span></span>
-<span><span class="co">#&gt; [129] slam_0.1-50             scales_1.2.1           </span></span>
-<span><span class="co">#&gt; [131] purrr_1.0.2             crayon_1.5.2           </span></span>
-<span><span class="co">#&gt; [133] GetoptLong_1.0.5        rlang_1.1.1            </span></span>
-<span><span class="co">#&gt; [135] cowplot_1.1.1           KEGGREST_1.41.0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [53] highr_0.10              dendextend_1.17.1      </span></span>
+<span><span class="co">#&gt;  [55] ggforce_0.4.1           taxonomizr_0.10.2      </span></span>
+<span><span class="co">#&gt;  [57] MASS_7.3-60             ISOcodes_2022.09.29    </span></span>
+<span><span class="co">#&gt;  [59] rjson_0.2.21            tools_4.3.1            </span></span>
+<span><span class="co">#&gt;  [61] ape_5.7-1               stopwords_2.3          </span></span>
+<span><span class="co">#&gt;  [63] rentrez_1.2.3           httpuv_1.6.11          </span></span>
+<span><span class="co">#&gt;  [65] glue_1.6.2              nlme_3.1-163           </span></span>
+<span><span class="co">#&gt;  [67] promises_1.2.1          gridtext_0.1.5         </span></span>
+<span><span class="co">#&gt;  [69] grid_4.3.1              shadowtext_0.1.2       </span></span>
+<span><span class="co">#&gt;  [71] generics_0.1.3          snow_0.4-4             </span></span>
+<span><span class="co">#&gt;  [73] gtable_0.3.4            tidyr_1.3.0            </span></span>
+<span><span class="co">#&gt;  [75] bugsigdbr_1.8.1         data.table_1.14.8      </span></span>
+<span><span class="co">#&gt;  [77] tidygraph_1.2.3         xml2_1.3.5             </span></span>
+<span><span class="co">#&gt;  [79] utf8_1.2.3              XVector_0.41.1         </span></span>
+<span><span class="co">#&gt;  [81] BiocGenerics_0.47.0     ggrepel_0.9.3          </span></span>
+<span><span class="co">#&gt;  [83] pillar_1.9.0            markdown_1.8           </span></span>
+<span><span class="co">#&gt;  [85] stringr_1.5.0           yulab.utils_0.1.0      </span></span>
+<span><span class="co">#&gt;  [87] later_1.3.1             dplyr_1.1.2            </span></span>
+<span><span class="co">#&gt;  [89] tweenr_2.0.2            lattice_0.21-8         </span></span>
+<span><span class="co">#&gt;  [91] BiocFileCache_2.9.1     bit_4.0.5              </span></span>
+<span><span class="co">#&gt;  [93] tidyselect_1.2.0        phylogram_2.1.0        </span></span>
+<span><span class="co">#&gt;  [95] tm_0.7-11               Biostrings_2.69.2      </span></span>
+<span><span class="co">#&gt;  [97] downlit_0.4.3           knitr_1.44             </span></span>
+<span><span class="co">#&gt;  [99] gridExtra_2.3           NLP_0.2-1              </span></span>
+<span><span class="co">#&gt; [101] bookdown_0.35           IRanges_2.35.2         </span></span>
+<span><span class="co">#&gt; [103] stats4_4.3.1            xfun_0.40              </span></span>
+<span><span class="co">#&gt; [105] graphlayouts_1.0.0      Biobase_2.61.0         </span></span>
+<span><span class="co">#&gt; [107] stringi_1.7.12          yaml_2.3.7             </span></span>
+<span><span class="co">#&gt; [109] evaluate_0.21           ggwordcloud_0.6.0      </span></span>
+<span><span class="co">#&gt; [111] wordcloud_2.6           tibble_3.2.1           </span></span>
+<span><span class="co">#&gt; [113] graph_1.79.1            ggplotify_0.1.2        </span></span>
+<span><span class="co">#&gt; [115] cli_3.6.1               systemfonts_1.0.4      </span></span>
+<span><span class="co">#&gt; [117] xtable_1.8-4            munsell_0.5.0          </span></span>
+<span><span class="co">#&gt; [119] jquerylib_0.1.4         readxl_1.4.3           </span></span>
+<span><span class="co">#&gt; [121] Rcpp_1.0.11             GenomeInfoDb_1.37.4    </span></span>
+<span><span class="co">#&gt; [123] dbplyr_2.3.3            png_0.1-8              </span></span>
+<span><span class="co">#&gt; [125] XML_3.99-0.14           parallel_4.3.1         </span></span>
+<span><span class="co">#&gt; [127] ellipsis_0.3.2          blob_1.2.4             </span></span>
+<span><span class="co">#&gt; [129] bitops_1.0-7            viridisLite_0.4.2      </span></span>
+<span><span class="co">#&gt; [131] slam_0.1-50             scales_1.2.1           </span></span>
+<span><span class="co">#&gt; [133] purrr_1.0.2             crayon_1.5.2           </span></span>
+<span><span class="co">#&gt; [135] GetoptLong_1.0.5        rlang_1.1.1            </span></span>
+<span><span class="co">#&gt; [137] cowplot_1.1.1           KEGGREST_1.41.0</span></span></code></pre></div>
 
 </div>
 </div>
@@ -676,7 +681,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-02.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -22,7 +22,7 @@ We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the r
 
 ```r
 basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="none", plotType="wc",
-    curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12),
+    curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12), autoThresh=FALSE,
     pal=RColorBrewer::brewer.pal(10, "Set2"),numWords=80,argList=list(min.freq=1))
 #> Input microbes: 2
 #>   Found 17 entries for Veillonella dispar
@@ -32,27 +32,27 @@ basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="none", plotType
 #> Filtering 0 words (frequency and/or tfidf)
 getSlot(basic, "freqDf") |> head(n=20)
 #>                    word freq
-#> gut                 Gut    8
-#> oral               Oral    5
+#> gut                 gut    8
+#> oral               oral    5
 #> patients       patients    5
 #> study             study    3
 #> arthritis     arthritis    2
 #> association association    2
 #> bacterial     bacterial    2
-#> covid19         COVID19    2
+#> covid19         covid19    2
 #> diabetes       diabetes    2
-#> dysbiosis     Dysbiosis    2
+#> dysbiosis     dysbiosis    2
 #> infant           infant    2
-#> infection     Infection    2
+#> infection     infection    2
 #> obese             obese    2
 #> respiratory respiratory    2
 #> sequencing   sequencing    2
 #> surgery         surgery    2
 #> tract             tract    2
 #>  features      features    1
-#> 16s                 16S    1
-#> aerosol         Aerosol    1
-plotWC(basic)
+#> 16s                 16s    1
+#> aerosol         aerosol    1
+plotWC(basic, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/bsdb_basic-1.png" width="100%" style="display: block; margin: auto;" />
@@ -62,7 +62,7 @@ If `target="abstract"`, the corresponding abstract of curated publications will 
 
 ```r
 basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="cor", plotType="wc",
-    curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12),
+    curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12), autoThresh=FALSE,
     pal=RColorBrewer::brewer.pal(10, "Dark2"),numWords=80)
 #> Input microbes: 2
 #>   Found 17 entries for Veillonella dispar
@@ -77,26 +77,26 @@ basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="cor", plotType
 getSlot(basic2, "freqDf") |> head(n=20)
 #>                    word freq
 #> patients       patients   37
-#> gut                 Gut   30
-#> oral               Oral   27
-#> bacterial     Bacterial   25
+#> gut                 gut   30
+#> oral               oral   27
+#> bacterial     bacterial   25
 #> species         species   24
-#> microbial     Microbial   23
-#> subjects       Subjects   20
+#> microbial     microbial   23
+#> subjects       subjects   20
 #> sequencing   sequencing   18
 #> diversity     diversity   17
 #> composition composition   16
-#> 16s                 16S   14
+#> 16s                 16s   14
 #> infection     infection   14
 #> differences differences   13
 #> healthy         healthy   13
 #> controls       controls   12
-#> covid19         COVID19   12
-#> infant           Infant   12
-#> rrna               rRNA   12
+#> covid19         covid19   12
+#> infant           infant   12
+#> rrna               rrna   12
 #> compared       compared   11
 #> disease         disease   11
-plotWC(basic2)
+plotWC(basic2, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/bsdb_basic2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -145,6 +145,7 @@ net <- bugsigdb(c("Neisseria","Veillonella"),
     additionalRemove=filter$word,
     corThresh=0.2,
     edgeLink=FALSE,
+    autoThresh=FALSE,
     numWords=60)
 #> Input microbes: 2
 #>   Found 76 entries for Neisseria
@@ -152,7 +153,7 @@ net <- bugsigdb(c("Neisseria","Veillonella"),
 #> Including 502 entries
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/bsdb_basic_network-1.png" width="100%" style="display: block; margin: auto;" />
@@ -173,6 +174,7 @@ net2 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
             showLegend=TRUE,
             numWords=50, 
             corThresh=0.2,
+            autoThresh=FALSE,
             colorText=TRUE
             )
 #> Input microbes: 4
@@ -183,7 +185,7 @@ net2 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
 #> Including 90 entries
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
-plotNet(net2)
+plotNet(net2, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_mb-1.png" width="100%" style="display: block; margin: auto;" />
@@ -195,7 +197,7 @@ As the BugSigDB contains the relationship between bacterial taxonomy and disease
 ```r
 net3 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
     "Veillonella parvula","Akkermansia muciniphila"), mbPlot=TRUE,
-    curate=TRUE,target="title",pre=TRUE,plotType="network",
+    curate=TRUE,target="title",pre=TRUE,plotType="network", autoThresh=FALSE,
     additionalRemove=filter$word, disPlot=TRUE, colorize=TRUE,
     numWords=50, corThresh=0.2, colorText=TRUE, edgeLink=FALSE)
 #> Input microbes: 4
@@ -206,7 +208,7 @@ net3 <- bugsigdb(c("Veillonella dispar","Neisseria flava",
 #> Including 90 entries
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
-plotNet(net3)
+plotNet(net3, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/bsdb_basic_network_dis-1.png" width="100%" style="display: block; margin: auto;" />
@@ -217,7 +219,7 @@ Other than curated databases, the PubMed query can also be performed with settin
 ```r
 net4 <- bugsigdb(c("Akkermansia muciniphila"),
     curate=FALSE,target="title",pre=TRUE,plotType="network",
-    additionalRemove=filter$word,
+    additionalRemove=filter$word, autoThresh=FALSE,
     numWords=40, corThresh=0.2, colorText=TRUE, colorize=TRUE,
     abstArg = list(retMax=80, sortOrder="pubdate"))
 #> Input microbes: 1
@@ -226,7 +228,7 @@ net4 <- bugsigdb(c("Akkermansia muciniphila"),
 #> Proceeding without API key
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
-plotNet(net4)
+plotNet(net4, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;" />
@@ -242,7 +244,7 @@ For microbiome analysis, it is often the case that investigating coded enzymes i
 ```r
 
 vp <- bugsigdb(c("Veillonella parvula"),
-                 plotType="network", layout="kk",
+                 plotType="network", layout="kk", autoThresh=FALSE,
                 curate=TRUE, target="title", edgeLink=TRUE,
                 mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag="cor",
                 cl=snow::makeCluster(10),colorText=TRUE, pre=TRUE, numWords=30,
@@ -265,7 +267,7 @@ vp <- bugsigdb(c("Veillonella parvula"),
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-plotNet(vp)
+plotNet(vp, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;" />
@@ -305,6 +307,7 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 numWords=50,
                 mbPlot=TRUE,
                 layout="lgl",
+                autoThresh=FALSE,
                 metCol=c("Metagenomic species", "Metabolite", "Spearman's ρ"),
                 metab =metab, metThresh=0.15,
                 preserve = TRUE,
@@ -321,9 +324,7 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
 #> Checking metabolites
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
-plotNet(metabEx)
+plotNet(metabEx, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/metabex-1.png" width="100%" style="display: block; margin: auto;" />
@@ -342,6 +343,7 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 corThresh=0.3,
                 colorize=TRUE,
                 pre=TRUE,
+                autoThresh=FALSE,
                 additionalRemove = filter$word,
                 colorText=TRUE,
                 plotType="network",
@@ -358,7 +360,7 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
 #>   Querying without API key
 #> Filter based on BugSigDB
 #> Filtering 0 words (frequency and/or tfidf)
-plotNet(metabEx)
+plotNet(metabEx, asis=TRUE)
 ```
 
 <img src="03-microbiome_usage_files/figure-html/metabex2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -456,7 +458,7 @@ This time we use a random dendrogram and rename the rows with taxonomic name inc
 
 
 ```r
-
+set.seed(123)
 while (TRUE) {
   uniq <- sample(bc$species, 10)
   if (length(uniq)==length(unique(uniq))) {
@@ -486,7 +488,9 @@ Using the dendrogram (`dhc` argument) and input data.frame with the column name 
 ```r
 # Some filtering
 load("../allFreqMetaCyc.rda")
-deleter <- (allFreqMetaCyc |> dplyr::filter(freq>5000) |> dplyr::select(word))$word
+deleter <- (allFreqMetaCyc |>
+    dplyr::filter(freq>5000) |>
+    dplyr::select(word))$word
 # Named vector
 sampled <- row.names(data)
 names(sampled) <- sampled
@@ -495,38 +499,38 @@ input$query <- input$species
 
 library(ggfx) # use ggfx
 micro <- plotEigengeneNetworksWithWords(NA, sampled,
-                               useWC = TRUE, # Use wordcloud
-                               useFunc = "manual", # Use manual function (as the input is custom data.frame)
-                               useDf=input,dendPlot="ggplot",dhc=dhc,
-                               useggfx="with_outer_glow",
-                               ggfxParams=list(colour="white",expand=5),
-                               argList=list(additionalRemove=deleter,
-                                ngram=1), horizontalSpacer=0.1,
-                               useWGCNA=FALSE, spacer=0.05,
-                               horiz=FALSE, wcScale =5)
+    useWC = TRUE, # Use wordcloud
+    useFunc = "manual", # Use manual function (as the input is custom data.frame)
+    useDf=input,dendPlot="ggplot",dhc=dhc,
+    useggfx="with_outer_glow",
+    ggfxParams=list(colour="white",expand=5),
+    argList=list(additionalRemove=deleter,
+        ngram=1), horizontalSpacer=0.1,
+    useWGCNA=FALSE, spacer=0.05,
+    horiz=FALSE, wcScale=5)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.1
+#> threshold = 0.2
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.101
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
 #> threshold = 0.301
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.305
+#> threshold = 0.205
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.303
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.9
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.702
+#> threshold = 0.2
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> border is set to FALSE as useggfx is not NULL
 scaled <- micro + scale_y_continuous(expand=c(0,6))
@@ -599,46 +603,47 @@ sessionInfo()
 #>  [47] polyclip_1.10-4         compiler_4.3.1         
 #>  [49] bit64_4.0.5             withr_2.5.0            
 #>  [51] viridis_0.6.4           DBI_1.1.3              
-#>  [53] dendextend_1.17.1       highr_0.10             
-#>  [55] ggforce_0.4.1           MASS_7.3-60            
-#>  [57] ISOcodes_2022.09.29     rjson_0.2.21           
-#>  [59] tools_4.3.1             ape_5.7-1              
-#>  [61] stopwords_2.3           rentrez_1.2.3          
-#>  [63] httpuv_1.6.11           glue_1.6.2             
-#>  [65] nlme_3.1-163            promises_1.2.1         
-#>  [67] gridtext_0.1.5          grid_4.3.1             
-#>  [69] shadowtext_0.1.2        generics_0.1.3         
-#>  [71] gtable_0.3.4            tidyr_1.3.0            
-#>  [73] bugsigdbr_1.8.1         data.table_1.14.8      
-#>  [75] tidygraph_1.2.3         xml2_1.3.5             
-#>  [77] utf8_1.2.3              XVector_0.41.1         
-#>  [79] BiocGenerics_0.47.0     stringr_1.5.0          
-#>  [81] markdown_1.8            ggrepel_0.9.3          
-#>  [83] pillar_1.9.0            yulab.utils_0.1.0      
-#>  [85] later_1.3.1             dplyr_1.1.2            
-#>  [87] tweenr_2.0.2            BiocFileCache_2.9.1    
-#>  [89] lattice_0.21-8          bit_4.0.5              
-#>  [91] tidyselect_1.2.0        phylogram_2.1.0        
-#>  [93] tm_0.7-11               Biostrings_2.69.2      
-#>  [95] downlit_0.4.3           knitr_1.44             
-#>  [97] gridExtra_2.3           NLP_0.2-1              
-#>  [99] bookdown_0.35           IRanges_2.35.2         
-#> [101] stats4_4.3.1            xfun_0.40              
-#> [103] graphlayouts_1.0.0      Biobase_2.61.0         
-#> [105] stringi_1.7.12          yaml_2.3.7             
-#> [107] evaluate_0.21           ggwordcloud_0.6.0      
-#> [109] wordcloud_2.6           tibble_3.2.1           
-#> [111] graph_1.79.1            ggplotify_0.1.2        
-#> [113] cli_3.6.1               systemfonts_1.0.4      
-#> [115] xtable_1.8-4            munsell_0.5.0          
-#> [117] jquerylib_0.1.4         Rcpp_1.0.11            
-#> [119] GenomeInfoDb_1.37.4     readxl_1.4.3           
-#> [121] dbplyr_2.3.3            png_0.1-8              
-#> [123] XML_3.99-0.14           parallel_4.3.1         
-#> [125] ellipsis_0.3.2          blob_1.2.4             
-#> [127] bitops_1.0-7            viridisLite_0.4.2      
-#> [129] slam_0.1-50             scales_1.2.1           
-#> [131] purrr_1.0.2             crayon_1.5.2           
-#> [133] GetoptLong_1.0.5        rlang_1.1.1            
-#> [135] cowplot_1.1.1           KEGGREST_1.41.0
+#>  [53] highr_0.10              dendextend_1.17.1      
+#>  [55] ggforce_0.4.1           taxonomizr_0.10.2      
+#>  [57] MASS_7.3-60             ISOcodes_2022.09.29    
+#>  [59] rjson_0.2.21            tools_4.3.1            
+#>  [61] ape_5.7-1               stopwords_2.3          
+#>  [63] rentrez_1.2.3           httpuv_1.6.11          
+#>  [65] glue_1.6.2              nlme_3.1-163           
+#>  [67] promises_1.2.1          gridtext_0.1.5         
+#>  [69] grid_4.3.1              shadowtext_0.1.2       
+#>  [71] generics_0.1.3          snow_0.4-4             
+#>  [73] gtable_0.3.4            tidyr_1.3.0            
+#>  [75] bugsigdbr_1.8.1         data.table_1.14.8      
+#>  [77] tidygraph_1.2.3         xml2_1.3.5             
+#>  [79] utf8_1.2.3              XVector_0.41.1         
+#>  [81] BiocGenerics_0.47.0     ggrepel_0.9.3          
+#>  [83] pillar_1.9.0            markdown_1.8           
+#>  [85] stringr_1.5.0           yulab.utils_0.1.0      
+#>  [87] later_1.3.1             dplyr_1.1.2            
+#>  [89] tweenr_2.0.2            lattice_0.21-8         
+#>  [91] BiocFileCache_2.9.1     bit_4.0.5              
+#>  [93] tidyselect_1.2.0        phylogram_2.1.0        
+#>  [95] tm_0.7-11               Biostrings_2.69.2      
+#>  [97] downlit_0.4.3           knitr_1.44             
+#>  [99] gridExtra_2.3           NLP_0.2-1              
+#> [101] bookdown_0.35           IRanges_2.35.2         
+#> [103] stats4_4.3.1            xfun_0.40              
+#> [105] graphlayouts_1.0.0      Biobase_2.61.0         
+#> [107] stringi_1.7.12          yaml_2.3.7             
+#> [109] evaluate_0.21           ggwordcloud_0.6.0      
+#> [111] wordcloud_2.6           tibble_3.2.1           
+#> [113] graph_1.79.1            ggplotify_0.1.2        
+#> [115] cli_3.6.1               systemfonts_1.0.4      
+#> [117] xtable_1.8-4            munsell_0.5.0          
+#> [119] jquerylib_0.1.4         readxl_1.4.3           
+#> [121] Rcpp_1.0.11             GenomeInfoDb_1.37.4    
+#> [123] dbplyr_2.3.3            png_0.1-8              
+#> [125] XML_3.99-0.14           parallel_4.3.1         
+#> [127] ellipsis_0.3.2          blob_1.2.4             
+#> [129] bitops_1.0-7            viridisLite_0.4.2      
+#> [131] slam_0.1-50             scales_1.2.1           
+#> [133] purrr_1.0.2             crayon_1.5.2           
+#> [135] GetoptLong_1.0.5        rlang_1.1.1            
+#> [137] cowplot_1.1.1           KEGGREST_1.41.0
 ```

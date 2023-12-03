@@ -1,7 +1,7 @@
 --- 
 title: "biotextgraph"
 author: "Noriaki Sato"
-date: "2023-12-02"
+date: "2023-12-03"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -32,13 +32,11 @@ Another example below shows summarization of 636 genes identified in differentia
 
 ```r
 load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
-net <- refseq(d3degUpAssetta2016, numWords=40, tag="cor", genePlot=TRUE)
+net <- refseq(d3degUpAssetta2016, numWords=40, autoThresh=FALSE, tag="cor", genePlot=TRUE)
 #> Input genes: 636
 #>   Converted input genes: 552
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
