@@ -76,7 +76,7 @@
 <h2>
 <span class="header-section-number">7.1</span> Assess the occurrence of the speicific words across gene clusters<a class="anchor" aria-label="anchor" href="#assess-the-occurrence-of-the-speicific-words-across-gene-clusters"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioinf.wehi.edu.au/limma/">limma</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Attaching package: 'limma'</span></span>
@@ -95,64 +95,64 @@
 <span>                split<span class="op">=</span><span class="cn">TRUE</span>, calc<span class="op">=</span><span class="st">"mean"</span>,</span>
 <span>                keyType<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Finding query in 20 clusters ...</span></span>
-<span><span class="co">#&gt; Input genes: 20</span></span>
+<span><span class="co">#&gt; Input genes: 6</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 78</span></span>
+<span><span class="co">#&gt; Input genes: 62</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 20</span></span>
+<span><span class="co">#&gt; Input genes: 58</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 53</span></span>
+<span><span class="co">#&gt; Input genes: 139</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 119</span></span>
+<span><span class="co">#&gt; Input genes: 84</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 70</span></span>
+<span><span class="co">#&gt; Input genes: 250</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 159</span></span>
+<span><span class="co">#&gt; Input genes: 50</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 188</span></span>
+<span><span class="co">#&gt; Input genes: 30</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 23</span></span>
+<span><span class="co">#&gt; Input genes: 103</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 155</span></span>
+<span><span class="co">#&gt; Input genes: 42</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 63</span></span>
+<span><span class="co">#&gt; Input genes: 115</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 96</span></span>
+<span><span class="co">#&gt; Input genes: 132</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 32</span></span>
+<span><span class="co">#&gt; Input genes: 137</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 77</span></span>
+<span><span class="co">#&gt; Input genes: 69</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 225</span></span>
+<span><span class="co">#&gt; Input genes: 152</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 203</span></span>
+<span><span class="co">#&gt; Input genes: 40</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 49</span></span>
+<span><span class="co">#&gt; Input genes: 66</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 23</span></span>
+<span><span class="co">#&gt; Input genes: 97</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 102</span></span>
+<span><span class="co">#&gt; Input genes: 34</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Input genes: 193</span></span>
+<span><span class="co">#&gt; Input genes: 158</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="va">plt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">frq</span>, check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -163,10 +163,12 @@
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">+</span> </span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span>bg.color<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"dna"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"repair"</span><span class="op">)</span></span>
-<span><span class="va">p</span></span></code></pre></div>
+<span><span class="va">p</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 11 unlabeled data points (too many</span></span>
+<span><span class="co">#&gt; overlaps). Consider increasing max.overlaps</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/findterm-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For clustering analysis like <code>WGCNA</code>, making the list and query.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">query</span> <span class="op">&lt;-</span> <span class="st">"antiviral response"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./blockwiseModule.rda"</span><span class="op">)</span></span>
 <span><span class="va">mecolors</span> <span class="op">&lt;-</span> <span class="va">bwmod</span><span class="op">$</span><span class="va">color</span></span>
@@ -296,7 +298,7 @@
 <h2>
 <span class="header-section-number">7.2</span> Recluster the cluster using word information<a class="anchor" aria-label="anchor" href="#recluster-the-cluster-using-word-information"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simExample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnSim.html">returnSim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">color</span>,</span>
 <span>                        keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>, argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>ora<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Number of clusters: 3</span></span>
@@ -329,7 +331,7 @@
 <span><span class="co">#&gt; threshold = 0.5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html">heatmap</a></span><span class="op">(</span><span class="va">simExample</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/textclus-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simExample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnSim.html">returnSim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">color</span>,</span>
 <span>                        keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>,</span>
 <span>                        argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>tfidf<span class="op">=</span><span class="cn">TRUE</span>, takeMax<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -357,7 +359,7 @@
 <span><span class="co">#&gt; threshold = 0.216</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/heatmap.html">heatmap</a></span><span class="op">(</span><span class="va">simExample</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/textclus2-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simExample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnSim.html">returnSim</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/returnExample.html">returnExample</a></span><span class="op">(</span><span class="op">)</span><span class="op">$</span><span class="va">color</span>,</span>
 <span>                        keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>,</span>
 <span>                        argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>tfidf<span class="op">=</span><span class="cn">FALSE</span>,</span>

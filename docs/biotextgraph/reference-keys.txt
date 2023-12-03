@@ -4,6 +4,7 @@ basic-usage
 producing-networks
 identifying-important-genes-in-the-network
 producing-word-clouds
+plotting-associated-genes-in-wc
 visualization-of-pubmed-information.
 comparing-two-or-more-networks
 connecting-the-networks-and-identify-shared-genes

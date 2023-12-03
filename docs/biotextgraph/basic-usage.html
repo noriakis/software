@@ -153,16 +153,15 @@ One of the main questions is which words can be clustered together among the wor
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">net</span>, <span class="st">"pvpick"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $clusters</span></span>
 <span><span class="co">#&gt; $clusters[[1]]</span></span>
+<span><span class="co">#&gt; [1] "dna"           "transcription"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $clusters[[2]]</span></span>
 <span><span class="co">#&gt; [1] "complementation" "defects"         "pigmentosum"    </span></span>
 <span><span class="co">#&gt; [4] "xeroderma"      </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $clusters[[2]]</span></span>
-<span><span class="co">#&gt; [1] "activity"      "atpdependent"  "cockayne"     </span></span>
-<span><span class="co">#&gt; [4] "dna"           "transcription"</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $edges</span></span>
-<span><span class="co">#&gt; [1]  8 13</span></span>
+<span><span class="co">#&gt; [1] 1 8</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagnet-2.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -463,13 +462,43 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>In this example querying ERCC genes, the term <code>DNA repair</code> is clustered as expected.</p>
+<div id="plotting-associated-genes-in-wc" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> Plotting associated genes in WC<a class="anchor" aria-label="anchor" href="#plotting-associated-genes-in-wc"><i class="fas fa-link"></i></a>
+</h3>
+<p>By using the feature <code>label_content</code> in <code>ggwordcloud</code>, the user can choose to plot associated gene names along with the words, by <code>genePlot=TRUE</code>, as same as the network.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">geneplotWC</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>,</span>
+<span>    numWords<span class="op">=</span><span class="fl">50</span>,</span>
+<span>    plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
+<span>    tag<span class="op">=</span><span class="st">"cor"</span>,</span>
+<span>    genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    tagPalette <span class="op">=</span> <span class="va">pal</span>,</span>
+<span>    scaleFreq<span class="op">=</span><span class="fl">5</span>,</span>
+<span>    cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span>,</span>
+<span>    argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>rot.per<span class="op">=</span><span class="fl">0.4</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Input genes: 7</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt;   Converted input genes: 7</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
+<span><span class="co">#&gt; columns</span></span>
+<span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
+<span><span class="co">#&gt; Scale for size is already present.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotWC.html">plotWC</a></span><span class="op">(</span><span class="va">geneplotWC</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/assoc_wc-1.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
 </div>
 <div id="visualization-of-pubmed-information." class="section level2" number="2.4">
 <h2>
 <span class="header-section-number">2.4</span> Visualization of PubMed information.<a class="anchor" aria-label="anchor" href="#visualization-of-pubmed-information."><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>rentrez</code>, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing <code>genePlot</code>, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by <code>retMax</code> and <code>sortOrder</code>. Be sure to obtain <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">an api key</a> when querying heavily, and specify in <code>apiKey</code> argument. These functions including <code>pubmed</code> and <code>refseq</code> serve as wrappers for several other functions, but a detailed explanation can be found in <a href="tidy.html#tidy">11</a>.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, retMax<span class="op">=</span><span class="fl">20</span>, apiKey<span class="op">=</span><span class="va">apiKey</span>, plotType<span class="op">=</span><span class="st">"wc"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
@@ -478,12 +507,12 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The returned PubMed IDs are stored in <code>pmids</code> slot.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pmids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">ab</span>, <span class="st">"pmids"</span><span class="op">)</span></span>
 <span><span class="va">pmids</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 20</span></span></code></pre></div>
 <p>As fetching the same information is not desirable and time consuming, the same object can be passed to <code>redo</code> option and re-perform the analysis like tagging, or changing the visualization options. Also, using <code>obtain_pubmed</code> function, only the text can be obtained and be processed by the downstream functions.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">abtag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">ab</span>, tag<span class="op">=</span><span class="st">"tdm"</span>, cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
@@ -497,7 +526,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">abtag2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If only the gene symbols are to be plotted, specify <code>onlyGene=TRUE</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/pubmed.html">pubmed</a></span><span class="op">(</span><span class="va">inpSymbol</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>    onlyGene<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span>, numWords<span class="op">=</span><span class="fl">150</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
@@ -511,7 +540,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span class="header-section-number">2.5</span> Comparing two or more networks<a class="anchor" aria-label="anchor" href="#comparing-two-or-more-networks"><i class="fas fa-link"></i></a>
 </h2>
 <p>One can compare two or more networks by providing list of <code>biotext</code> objects produced by text mining various databases, like <code>refseq</code>, <code>pubmed</code>, <code>obtain_refseq</code>, etc. This can be useful for assessing the similarity and dissimilarity of the various text sources, like PubMed, RefSeq, and Reactome pathway names. Additionally, performing graph-based clustering on merged networks can potentially identify groups of related terms within the overall network.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span>,<span class="fl">16</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span>    <span class="va">cxcls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">cxcls</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"CXCL"</span>,<span class="va">i</span><span class="op">)</span><span class="op">)</span></span>
@@ -543,16 +572,16 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,</span>
 <span>    titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net3</span><span class="op">)</span>,</span>
 <span>    titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-2.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span>, <span class="va">net3</span><span class="op">)</span>,</span>
 <span>    titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ercc"</span>,<span class="st">"cxcl"</span>, <span class="st">"ercc-PubMed"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/compare-3.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If <code>tag</code> information is available in both gene clusters, combined tags can be visualized by <code>tag=TRUE</code>. If using <code>geom_mark_hull</code> to show the tagging information, specify <code>hull=TRUE</code> in <code>compareWordNet</code>.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">keggPathways</span> <span class="op">&lt;-</span> <span class="va">org.Hs.egPATH2EG</span></span>
 <span><span class="va">mappedKeys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-keys.html">mappedkeys</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">)</span></span>
 <span><span class="va">keggList</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">as.list</a></span><span class="op">(</span><span class="va">keggPathways</span><span class="op">[</span><span class="va">mappedKeys</span><span class="op">]</span><span class="op">)</span></span>
@@ -609,7 +638,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span class="header-section-number">2.5.1</span> Connecting the networks and identify shared genes<a class="anchor" aria-label="anchor" href="#connecting-the-networks-and-identify-shared-genes"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you specify <code>genePlot</code> (or equivalent) in calculating network in both networks, you can connect two networks based on specific words with showing relevant genes by using <code><a href="https://rdrr.io/pkg/biotextgraph/man/connectGenes.html">connectGenes()</a></code>. As it states genes in the title, it can be used with the other networks besides genes. By default, only the queried word is retrieved from the original network, and by specifying <code>neighbors</code>, it fecthes the neighbor words.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></span>
 <span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04110`</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span>, corThresh<span class="op">=</span><span class="fl">0.3</span>, numWords<span class="op">=</span><span class="fl">30</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 124</span></span>
@@ -643,12 +672,12 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span class="header-section-number">2.6</span> Text over represenatation analysis (experimental)<a class="anchor" aria-label="anchor" href="#text-over-represenatation-analysis-experimental"><i class="fas fa-link"></i></a>
 </h2>
 <p>For RefSeq, overrepresentation-based filtering and prioritization of words can be performed using pre-computed background.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geneList</span> <span class="op">&lt;-</span> <span class="va">keggList</span><span class="op">$</span><span class="va">`00785`</span> <span class="co"># Lipoic acid metabolism</span></span>
 <span><span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/ora-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            lipoic              step              acid </span></span>
 <span><span class="co">#&gt;      1.600963e-14      8.016934e-08      5.300425e-07 </span></span>
@@ -659,7 +688,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="va">pvs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/textORA.html">textORA</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/ora-2.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pvs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">pvs</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          drb        chain   complement        class </span></span>
 <span><span class="co">#&gt; 0.000000e+00 3.669590e-82 3.266180e-74 5.496543e-46 </span></span>
@@ -667,7 +696,7 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; 6.851722e-39 1.318324e-34</span></span></code></pre></div>
 <p>This thresholding can be used in RefSeq visualization in the above functions.
 Filter words using ORA threshold and frequency threshold by setting <code>ora=TRUE</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">inpSymbol</span>, plotType<span class="op">=</span><span class="st">"network"</span>,</span>
 <span>                     ora<span class="op">=</span><span class="cn">TRUE</span>, edgeLink<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 7</span></span>
@@ -681,7 +710,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/oranet-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>After obtaining the ORA results, one can plot volcano-plot like plot for the results using <code>plotORA</code> function.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotORA.html">plotORA</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/oraplot-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -691,7 +720,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span class="header-section-number">2.7</span> Dependency analyis using udpipe<a class="anchor" aria-label="anchor" href="#dependency-analyis-using-udpipe"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <a href="https://github.com/bnosac/udpipe"><code>udpipe</code></a> package (<a href="https://aclanthology.org/K17-3009/">Straka and Straková. 2017</a>), one can performe dependency analysis of texts in various databases. Set <code>useUdpipe</code> to <code>TRUE</code>, and specify downloaded model to be used in <code>udpipeModel</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span>,<span class="st">"ERCC2"</span><span class="op">)</span>,</span>
 <span>    plotType<span class="op">=</span><span class="st">"network"</span>, useUdpipe<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    udpipeModel<span class="op">=</span><span class="st">"~/english-ewt-ud-2.5-191206.udpipe"</span><span class="op">)</span></span>
@@ -708,13 +737,13 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span class="header-section-number">2.8</span> Changing the font<a class="anchor" aria-label="anchor" href="#changing-the-font"><i class="fas fa-link"></i></a>
 </h2>
 <p>Font can be specified by <code>fontFamily</code>, which affects all the labels including edges and nodes.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">degs</span> <span class="op">&lt;-</span> <span class="va">d3degUpAssetta2016</span></span>
 <span><span class="co">## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)</span></span>
 <span><span class="fu">sysfonts</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sysfonts/man/font_add.html">font_add</a></span><span class="op">(</span>family<span class="op">=</span><span class="st">"alien"</span>,regular<span class="op">=</span><span class="st">"SFAlienEncounters.ttf"</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">biotextgraph</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">degs</span>,</span>
-<span>    plotType<span class="op">=</span><span class="st">"network"</span>,</span>
+<span>    plotType<span class="op">=</span><span class="st">"network"</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>    numWords<span class="op">=</span><span class="fl">50</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    fontFamily<span class="op">=</span><span class="st">"alien"</span>,</span>
 <span>    colorText<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -722,14 +751,12 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <span><span class="co">#&gt;   Converted input genes: 552</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">p</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/font-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>For complex networks, changing the layout is possible by the small function <code>changeLayout</code>.
 Specify which layout algorithm to choose in <code>igraph</code>. This can be also accomplished by specifying the layout in <code>plotNet</code> method.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/changeLayout.html">changeLayout</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_with_graphopt.html">layout.graphopt</a></span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/changeLayout.html">changeLayout</a></span><span class="op">(</span><span class="va">p</span>, <span class="fu">igraph</span><span class="fu">::</span><span class="va"><a href="https://r.igraph.org/reference/layout_with_graphopt.html">layout.graphopt</a></span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span>asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/clay-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="biofabric-layout" class="section level2" number="2.9">
@@ -737,7 +764,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span class="header-section-number">2.9</span> Biofabric layout<a class="anchor" aria-label="anchor" href="#biofabric-layout"><i class="fas fa-link"></i></a>
 </h2>
 <p>It is possible to use the <code>BioFabric</code> layout from the extracted <code>igraph</code>. In this case, one wants to add text position in x-axis using <code><a href="https://rdrr.io/pkg/biotextgraph/man/obtainTextPosition.html">biotextgraph::obtainTextPosition</a></code>. For the beautiful <code>BioFabric</code> layout, please refer to their original homepage <a href="https://biofabric.systemsbiology.net/">here</a>, and their publication available <a href="https://doi.org/10.1186/1471-2105-13-275">here</a> (Longabaugh, W.J. 2012).</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DDX41"</span>,<span class="st">"PNKP"</span><span class="op">)</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 2</span></span>
 <span><span class="co">#&gt;   Converted input genes: 2</span></span>
@@ -761,7 +788,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span class="header-section-number">2.9.1</span> Highlighting genes in the layout<a class="anchor" aria-label="anchor" href="#highlighting-genes-in-the-layout"><i class="fas fa-link"></i></a>
 </h3>
 <p>For more practical use, we highlight gene names in the layout using <code>ggfx</code>.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Use sample DEGs</span></span>
@@ -797,7 +824,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span class="header-section-number">2.9.2</span> Biofabric layouts for combined networks<a class="anchor" aria-label="anchor" href="#biofabric-layouts-for-combined-networks"><i class="fas fa-link"></i></a>
 </h3>
 <p>Can be used in cojuction with <code><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet()</a></code>. The BioFabric layout is especially useful for visualizing complex networks. For interactively inspecting complex networks, please refer to the section <a href="the-other-usage-for-microbiome-related-data.html#interactive">4.3.1</a>.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">keggList</span><span class="op">$</span><span class="va">`04110`</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
 <span>               corThresh<span class="op">=</span><span class="fl">0.3</span>, numWords<span class="op">=</span><span class="fl">30</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 124</span></span>
@@ -826,7 +853,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span class="header-section-number">2.9.3</span> Wrapper for <code>BioFabric</code> layout<a class="anchor" aria-label="anchor" href="#wrapper-for-biofabric-layout"><i class="fas fa-link"></i></a>
 </h3>
 <p>The funciton <code>plot_biofabric</code> is prepared, which accepts <code>biotext</code> class object.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ex</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plot_biofabric.html">plot_biofabric</a></span><span class="op">(</span>end_shape<span class="op">=</span><span class="st">"square"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pbfbrc-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -847,7 +874,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 </h3>
 <p>For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer (<a href="https://doi.org/10.1038/s41556-019-0361-y">Chen et al. 2019</a>).</p>
 <p>First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/bitr.html">bitr</a></span><span class="op">(</span><span class="va">exampleWGCNAcluster</span>,</span>
 <span>    fromType<span class="op">=</span><span class="st">"ENSEMBL"</span>, toType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
@@ -869,7 +896,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="fu">enrichplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ora</span>, showCategory<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We use the function in <code>biotextgraph</code> to make a summarized visualization of textual information, along with associated genes. As for the input reaching to a hundred of genes, there is an option <code>filterByGO</code> term, which filters the text mining results to those used in GO terms. This is useful for limiting the visualization to biologically-relevant terms.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">check</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">converted</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                filterByGO<span class="op">=</span><span class="cn">TRUE</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 533</span></span>
@@ -881,7 +908,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">check</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_btg-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Some genes are not related to the significantly enriched pathway, and one would like to inspect the biological function of these genes.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Extraction of non-related genes</span></span>
 <span><span class="va">enr_genes</span> <span class="op">&lt;-</span> <span class="va">ora</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">p.adjust</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">geneID</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -891,7 +918,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">no_enr</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 471</span></span></code></pre></div>
 <p>This time, we enable the <code>filterByGO</code> option along with <code>ngram=2</code>, which produces 2-gram visualization.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">check_noenr_WGO</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">no_enr</span>,</span>
 <span>    layout<span class="op">=</span><span class="st">"nicely"</span>,</span>
 <span>    ngram<span class="op">=</span><span class="fl">2</span>,</span>
@@ -907,7 +934,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">check_noenr_WGO</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_noenr-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>This way, we can filter the unnecessary words from the many terms included in the textual information of identifiers, and focus on biologically relevant terms contained in the identifiers.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.3.1 (2023-06-16 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
@@ -1131,7 +1158,9 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <li><a class="nav-link" href="#basic-usage"><span class="header-section-number">2</span> Basic usage</a></li>
 <li><a class="nav-link" href="#producing-networks"><span class="header-section-number">2.1</span> Producing networks</a></li>
 <li><a class="nav-link" href="#identifying-important-genes-in-the-network"><span class="header-section-number">2.2</span> Identifying important genes in the network</a></li>
-<li><a class="nav-link" href="#producing-word-clouds"><span class="header-section-number">2.3</span> Producing word clouds</a></li>
+<li>
+<a class="nav-link" href="#producing-word-clouds"><span class="header-section-number">2.3</span> Producing word clouds</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#plotting-associated-genes-in-wc"><span class="header-section-number">2.3.1</span> Plotting associated genes in WC</a></li></ul>
+</li>
 <li><a class="nav-link" href="#visualization-of-pubmed-information."><span class="header-section-number">2.4</span> Visualization of PubMed information.</a></li>
 <li>
 <a class="nav-link" href="#comparing-two-or-more-networks"><span class="header-section-number">2.5</span> Comparing two or more networks</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#connecting-the-networks-and-identify-shared-genes"><span class="header-section-number">2.5.1</span> Connecting the networks and identify shared genes</a></li></ul>

@@ -106,16 +106,15 @@ plotNet(net)
 getSlot(net, "pvpick")
 #> $clusters
 #> $clusters[[1]]
+#> [1] "dna"           "transcription"
+#> 
+#> $clusters[[2]]
 #> [1] "complementation" "defects"         "pigmentosum"    
 #> [4] "xeroderma"      
 #> 
-#> $clusters[[2]]
-#> [1] "activity"      "atpdependent"  "cockayne"     
-#> [4] "dna"           "transcription"
-#> 
 #> 
 #> $edges
-#> [1]  8 13
+#> [1] 1 8
 plot(net)
 ```
 
@@ -437,6 +436,38 @@ plotWC(gwclWhole)
 
 In this example querying ERCC genes, the term `DNA repair` is clustered as expected.
 
+### Plotting associated genes in WC
+
+By using the feature `label_content` in `ggwordcloud`, the user can choose to plot associated gene names along with the words, by `genePlot=TRUE`, as same as the network.
+
+
+```r
+geneplotWC <- refseq(inpSymbol,
+    numWords=50,
+    plotType="wc",
+    tag="cor",
+    genePlot=TRUE,
+    tagPalette = pal,
+    scaleFreq=5,
+    cl=snow::makeCluster(8),
+    argList=list(rot.per=0.4)
+)
+#> Input genes: 7
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#>   Converted input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> 'select()' returned 1:1 mapping between keys and
+#> columns
+#> Multiscale bootstrap... Done.
+#> Scale for size is already present.
+#> Adding another scale for size, which will replace the existing scale.
+plotWC(geneplotWC, asis=TRUE)
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/assoc_wc-1.png" width="100%" style="display: block; margin: auto;" />
+
 ## Visualization of PubMed information.
 
 Using `rentrez`, one can perform the same analysis on PubMed text like the article title and abstract. The function queries for the input gene symbols (or the other queries) and visualize. For typical use cases, the genes identified by showing `genePlot`, or hub genes identified in gene network analysis can be queried. The basic parameters for searching PubMed, like max number of articles retrieved and how to sort the articles can be specified by `retMax` and `sortOrder`. Be sure to obtain [an api key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) when querying heavily, and specify in `apiKey` argument. These functions including `pubmed` and `refseq` serve as wrappers for several other functions, but a detailed explanation can be found in \@ref(tidy).
@@ -738,7 +769,7 @@ degs <- d3degUpAssetta2016
 ## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)
 sysfonts::font_add(family="alien",regular="SFAlienEncounters.ttf")
 p <- biotextgraph::refseq(degs,
-    plotType="network",
+    plotType="network", autoThresh=FALSE,
     numWords=50, genePlot=TRUE,
     fontFamily="alien",
     colorText=TRUE)
@@ -746,9 +777,7 @@ p <- biotextgraph::refseq(degs,
 #>   Converted input genes: 552
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0
-plotNet(p)
+plotNet(p, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/font-1.png" width="100%" style="display: block; margin: auto;" />
@@ -758,7 +787,7 @@ Specify which layout algorithm to choose in `igraph`. This can be also accomplis
 
 
 ```r
-changeLayout(p, igraph::layout.graphopt) |> plotNet()
+changeLayout(p, igraph::layout.graphopt) |> plotNet(asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/clay-1.png" width="100%" style="display: block; margin: auto;" />
