@@ -9,13 +9,13 @@ Some functions can be used to the parsing purpose.
 
 ```r
 library(biotextgraph)
-#> Loading required package: ggplot2
+#>  要求されたパッケージ ggplot2 をロード中です
 #> 
 #> Registered S3 method overwritten by 'pvclust':
 #>   method       from      
 #>   text.pvclust dendextend
 library(data.table)
-ecdf <- enzyme("../enzyme.dat",ecnum="all", onlyDf=TRUE)
+ecdf <- enzyme("enzyme.dat",ecnum="all", onlyDf=TRUE)
 #> Processing EC file
 data.table(ecdf) |> head()
 #>     number                                 desc
@@ -45,7 +45,7 @@ data.table(ecdf) |> head()
 
 
 ```r
-updf <- getUPtax("../speclist.txt",candUP="all")
+updf <- getUPtax("speclist.txt",candUP="all")
 data.table(updf) |> head()
 #>     UPID                                           Taxonomy
 #> 1: AADNV Aedes albopictus densovirus (isolate Boublik/1994)
@@ -62,7 +62,7 @@ data.table(updf) |> head()
 
 ```r
 candidateSpecies <- c("Escherichia coli")
-file <- "../../metacyc/24.5/data/pathways.dat"
+file <- "metacyc/24.5/data/pathways.dat"
 metacyc <- parseMetaCycPathway(file, candidateSpecies, withTax=TRUE, clear=TRUE)
 #> Warning in grepl(paste(candSp, collapse = "|"), coms):
 #> unable to translate ' Throughout evolution, bioluminescence

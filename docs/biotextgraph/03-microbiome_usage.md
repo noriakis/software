@@ -22,7 +22,7 @@ We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the r
 
 ```r
 basic <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="none", plotType="wc",
-    curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12), autoThresh=FALSE,
+    curate=TRUE,target="title",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Set2"),numWords=80,argList=list(min.freq=1))
 #> Input microbes: 2
 #>   Found 17 entries for Veillonella dispar
@@ -62,7 +62,7 @@ If `target="abstract"`, the corresponding abstract of curated publications will 
 
 ```r
 basic2 <- bugsigdb(c("Veillonella dispar","Neisseria flava"),tag="cor", plotType="wc",
-    curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12), autoThresh=FALSE,
+    curate=TRUE,target="abstract",pre=TRUE,cl=snow::makeCluster(12),
     pal=RColorBrewer::brewer.pal(10, "Dark2"),numWords=80)
 #> Input microbes: 2
 #>   Found 17 entries for Veillonella dispar
@@ -233,7 +233,8 @@ plotNet(net4, asis=TRUE)
 
 <img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Enzymes
+## 
+Enzymes
 
 For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `enzyme` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
 
@@ -244,12 +245,12 @@ For microbiome analysis, it is often the case that investigating coded enzymes i
 ```r
 
 vp <- bugsigdb(c("Veillonella parvula"),
-                 plotType="network", layout="kk", autoThresh=FALSE,
-                curate=TRUE, target="title", edgeLink=TRUE,
+                 plotType="network", layout="kk",
+                curate=TRUE, target="title", edgeLink=TRUE, autoThresh=FALSE,
                 mbPlot = TRUE, ecPlot=TRUE, disPlot=TRUE, tag="cor",
                 cl=snow::makeCluster(10),colorText=TRUE, pre=TRUE, numWords=30,
-                ecFile="../enzyme.dat", addFreqToMB=TRUE, ## Add nodes other than words pseudo-frequency
-                upTaxFile = "../speclist.txt")
+                ecFile="enzyme.dat", addFreqToMB=TRUE, ## Add nodes other than words pseudo-frequency
+                upTaxFile = "speclist.txt")
 #> Input microbes: 1
 #>   Found 20 entries for Veillonella parvula
 #> Including 31 entries
@@ -286,7 +287,7 @@ First, read the downloaded file using `readxl`.
 
 ```r
 metab <- readxl::read_excel(
-  "../41467_2022_33050_MOESM8_ESM.xlsx",skip = 7)
+  "41467_2022_33050_MOESM8_ESM.xlsx",skip = 7)
 ```
 
 Pass this tibble, as well as the columns to represent `taxonomy`, `metabolites`, and `quantitative values to threshold` to `metCol`. In this case, `metCol <- c("Metagenomic species", "Metabolite", "Spearman's ρ")`. `manual` function can be also used for the general purpose of adding external information.
@@ -343,7 +344,6 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 corThresh=0.3,
                 colorize=TRUE,
                 pre=TRUE,
-                autoThresh=FALSE,
                 additionalRemove = filter$word,
                 colorText=TRUE,
                 plotType="network",
@@ -351,6 +351,7 @@ metabEx <- bugsigdb(c("Akkermansia muciniphila"),
                 numWords=50,
                 mbPlot=TRUE,
                 disPlot=TRUE,
+                autoThresh=FALSE,
                 preserve = TRUE)
 #> Input microbes: 1
 #>   Found 21 entries for Akkermansia muciniphila
@@ -391,7 +392,7 @@ Annotating the dendrogram (or cladogram) of taxonomy is possible by the `plotEig
 ```r
 
 ## Read pathway description
-file <- "../../metacyc/24.5/data/pathways.dat"
+file <- "metacyc/24.5/data/pathways.dat"
 input <- parseMetaCycPathway(file,
                               candSp="all",
                               withTax=TRUE,
@@ -458,7 +459,6 @@ This time we use a random dendrogram and rename the rows with taxonomic name inc
 
 
 ```r
-set.seed(123)
 while (TRUE) {
   uniq <- sample(bc$species, 10)
   if (length(uniq)==length(unique(uniq))) {
@@ -487,10 +487,8 @@ Using the dendrogram (`dhc` argument) and input data.frame with the column name 
 
 ```r
 # Some filtering
-load("../allFreqMetaCyc.rda")
-deleter <- (allFreqMetaCyc |>
-    dplyr::filter(freq>5000) |>
-    dplyr::select(word))$word
+load("allFreqMetaCyc.rda")
+deleter <- (allFreqMetaCyc |> dplyr::filter(freq>5000) |> dplyr::select(word))$word
 # Named vector
 sampled <- row.names(data)
 names(sampled) <- sampled
@@ -512,22 +510,22 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
 #> threshold = 0.2
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.101
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.2
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
 #> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.2
+#> threshold = 0.101
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.301
+#> threshold = 0.401
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.205
+#> threshold = 0.101
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.402
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2
@@ -550,22 +548,24 @@ scaled
 
 ```r
 sessionInfo()
-#> R version 4.3.1 (2023-06-16 ucrt)
-#> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 11 x64 (build 22621)
+#> R version 4.3.0 (2023-04-21)
+#> Platform: x86_64-pc-linux-gnu (64-bit)
+#> Running under: CentOS Linux 7 (Core)
 #> 
 #> Matrix products: default
-#> 
+#> BLAS:   /usr/local/package/r/4.3.0/lib64/R/lib/libRblas.so 
+#> LAPACK: /usr/local/package/r/4.3.0/lib64/R/lib/libRlapack.so;  LAPACK version 3.11.0
 #> 
 #> locale:
-#> [1] LC_COLLATE=Japanese_Japan.utf8 
-#> [2] LC_CTYPE=Japanese_Japan.utf8   
-#> [3] LC_MONETARY=Japanese_Japan.utf8
-#> [4] LC_NUMERIC=C                   
-#> [5] LC_TIME=Japanese_Japan.utf8    
+#>  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
+#>  [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    
+#>  [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   
+#>  [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 
+#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#> [11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       
 #> 
 #> time zone: Asia/Tokyo
-#> tzcode source: internal
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets 
@@ -573,77 +573,77 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] ggfx_1.0.1          RColorBrewer_1.1-3 
-#> [3] ggraph_2.1.0.9000   biotextgraph_0.99.0
-#> [5] ggplot2_3.4.3      
+#> [3] ggraph_2.1.0        biotextgraph_0.99.0
+#> [5] ggplot2_3.4.2      
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] ggdendro_0.1.23         jsonlite_1.8.7         
-#>   [3] pvclust_2.2-0           magrittr_2.0.3         
-#>   [5] magick_2.7.5            farver_2.1.1           
-#>   [7] rmarkdown_2.25          ragg_1.2.5             
-#>   [9] GlobalOptions_0.1.2     fs_1.6.3               
-#>  [11] zlibbioc_1.47.0         vctrs_0.6.3            
-#>  [13] memoise_2.0.1           cyjShiny_1.0.42        
-#>  [15] RCurl_1.98-1.12         base64enc_0.1-3        
-#>  [17] htmltools_0.5.6         curl_5.0.2             
-#>  [19] cellranger_1.1.0        gridGraphics_0.5-1     
-#>  [21] sass_0.4.7              GeneSummary_0.99.6     
-#>  [23] bslib_0.5.1             htmlwidgets_1.6.2      
-#>  [25] cachem_1.0.8            commonmark_1.9.0       
-#>  [27] igraph_1.5.1            mime_0.12              
-#>  [29] lifecycle_1.0.3         pkgconfig_2.0.3        
-#>  [31] R6_2.5.1                fastmap_1.1.1          
-#>  [33] GenomeInfoDbData_1.2.10 shiny_1.7.5            
-#>  [35] digest_0.6.33           colorspace_2.1-0       
-#>  [37] patchwork_1.1.3         AnnotationDbi_1.63.2   
-#>  [39] S4Vectors_0.38.1        textshaping_0.3.6      
-#>  [41] RSQLite_2.3.1           org.Hs.eg.db_3.17.0    
-#>  [43] filelock_1.0.2          labeling_0.4.3         
-#>  [45] fansi_1.0.4             httr_1.4.7             
-#>  [47] polyclip_1.10-4         compiler_4.3.1         
-#>  [49] bit64_4.0.5             withr_2.5.0            
-#>  [51] viridis_0.6.4           DBI_1.1.3              
-#>  [53] highr_0.10              dendextend_1.17.1      
-#>  [55] ggforce_0.4.1           taxonomizr_0.10.2      
-#>  [57] MASS_7.3-60             ISOcodes_2022.09.29    
-#>  [59] rjson_0.2.21            tools_4.3.1            
+#>   [1] ggdendro_0.1.23         rstudioapi_0.15.0      
+#>   [3] jsonlite_1.8.7          pvclust_2.2-0          
+#>   [5] magrittr_2.0.3          magick_2.8.1           
+#>   [7] farver_2.1.1            rmarkdown_2.23         
+#>   [9] ragg_1.2.5              GlobalOptions_0.1.2    
+#>  [11] fs_1.6.3                zlibbioc_1.46.0        
+#>  [13] vctrs_0.6.3             memoise_2.0.1          
+#>  [15] cyjShiny_1.0.42         RCurl_1.98-1.13        
+#>  [17] base64enc_0.1-3         htmltools_0.5.6        
+#>  [19] curl_5.0.1              cellranger_1.1.0       
+#>  [21] gridGraphics_0.5-1      sass_0.4.7             
+#>  [23] GeneSummary_0.99.6      bslib_0.5.1            
+#>  [25] htmlwidgets_1.6.2       cachem_1.0.8           
+#>  [27] commonmark_1.9.0        igraph_1.5.1           
+#>  [29] mime_0.12               lifecycle_1.0.3        
+#>  [31] pkgconfig_2.0.3         R6_2.5.1               
+#>  [33] fastmap_1.1.1           GenomeInfoDbData_1.2.10
+#>  [35] shiny_1.7.4.1           digest_0.6.33          
+#>  [37] colorspace_2.1-0        patchwork_1.1.3        
+#>  [39] AnnotationDbi_1.64.1    S4Vectors_0.38.1       
+#>  [41] textshaping_0.3.6       RSQLite_2.3.3          
+#>  [43] org.Hs.eg.db_3.18.0     filelock_1.0.2         
+#>  [45] labeling_0.4.2          fansi_1.0.4            
+#>  [47] httr_1.4.6              polyclip_1.10-6        
+#>  [49] compiler_4.3.0          bit64_4.0.5            
+#>  [51] withr_2.5.0             viridis_0.6.4          
+#>  [53] DBI_1.1.3               dendextend_1.17.1      
+#>  [55] highr_0.10              ggforce_0.4.1          
+#>  [57] MASS_7.3-58.4           ISOcodes_2022.09.29    
+#>  [59] rjson_0.2.21            tools_4.3.0            
 #>  [61] ape_5.7-1               stopwords_2.3          
 #>  [63] rentrez_1.2.3           httpuv_1.6.11          
-#>  [65] glue_1.6.2              nlme_3.1-163           
+#>  [65] glue_1.6.2              nlme_3.1-162           
 #>  [67] promises_1.2.1          gridtext_0.1.5         
-#>  [69] grid_4.3.1              shadowtext_0.1.2       
-#>  [71] generics_0.1.3          snow_0.4-4             
-#>  [73] gtable_0.3.4            tidyr_1.3.0            
-#>  [75] bugsigdbr_1.8.1         data.table_1.14.8      
-#>  [77] tidygraph_1.2.3         xml2_1.3.5             
-#>  [79] utf8_1.2.3              XVector_0.41.1         
-#>  [81] BiocGenerics_0.47.0     ggrepel_0.9.3          
-#>  [83] pillar_1.9.0            markdown_1.8           
-#>  [85] stringr_1.5.0           yulab.utils_0.1.0      
-#>  [87] later_1.3.1             dplyr_1.1.2            
-#>  [89] tweenr_2.0.2            lattice_0.21-8         
-#>  [91] BiocFileCache_2.9.1     bit_4.0.5              
-#>  [93] tidyselect_1.2.0        phylogram_2.1.0        
-#>  [95] tm_0.7-11               Biostrings_2.69.2      
-#>  [97] downlit_0.4.3           knitr_1.44             
-#>  [99] gridExtra_2.3           NLP_0.2-1              
-#> [101] bookdown_0.35           IRanges_2.35.2         
-#> [103] stats4_4.3.1            xfun_0.40              
-#> [105] graphlayouts_1.0.0      Biobase_2.61.0         
-#> [107] stringi_1.7.12          yaml_2.3.7             
-#> [109] evaluate_0.21           ggwordcloud_0.6.0      
-#> [111] wordcloud_2.6           tibble_3.2.1           
-#> [113] graph_1.79.1            ggplotify_0.1.2        
-#> [115] cli_3.6.1               systemfonts_1.0.4      
-#> [117] xtable_1.8-4            munsell_0.5.0          
-#> [119] jquerylib_0.1.4         readxl_1.4.3           
-#> [121] Rcpp_1.0.11             GenomeInfoDb_1.37.4    
-#> [123] dbplyr_2.3.3            png_0.1-8              
-#> [125] XML_3.99-0.14           parallel_4.3.1         
-#> [127] ellipsis_0.3.2          blob_1.2.4             
-#> [129] bitops_1.0-7            viridisLite_0.4.2      
-#> [131] slam_0.1-50             scales_1.2.1           
-#> [133] purrr_1.0.2             crayon_1.5.2           
-#> [135] GetoptLong_1.0.5        rlang_1.1.1            
-#> [137] cowplot_1.1.1           KEGGREST_1.41.0
+#>  [69] grid_4.3.0              shadowtext_0.1.2       
+#>  [71] generics_0.1.3          gtable_0.3.3           
+#>  [73] tidyr_1.3.0             bugsigdbr_1.8.1        
+#>  [75] data.table_1.14.8       tidygraph_1.2.3        
+#>  [77] xml2_1.3.5              utf8_1.2.3             
+#>  [79] XVector_0.40.0          BiocGenerics_0.46.0    
+#>  [81] stringr_1.5.0           markdown_1.11          
+#>  [83] ggrepel_0.9.4           pillar_1.9.0           
+#>  [85] yulab.utils_0.1.0       later_1.3.1            
+#>  [87] dplyr_1.1.2             tweenr_2.0.2           
+#>  [89] BiocFileCache_2.8.0     lattice_0.21-8         
+#>  [91] bit_4.0.5               tidyselect_1.2.0       
+#>  [93] phylogram_2.1.0         tm_0.7-11              
+#>  [95] Biostrings_2.68.1       downlit_0.4.3          
+#>  [97] knitr_1.43              gridExtra_2.3          
+#>  [99] NLP_0.2-1               bookdown_0.36          
+#> [101] IRanges_2.34.1          stats4_4.3.0           
+#> [103] xfun_0.40               graphlayouts_1.0.2     
+#> [105] Biobase_2.60.0          stringi_1.7.12         
+#> [107] yaml_2.3.7              evaluate_0.21          
+#> [109] ggwordcloud_0.6.0       wordcloud_2.6          
+#> [111] tibble_3.2.1            graph_1.80.0           
+#> [113] ggplotify_0.1.2         cli_3.6.1              
+#> [115] systemfonts_1.0.4       xtable_1.8-4           
+#> [117] munsell_0.5.0           jquerylib_0.1.4        
+#> [119] Rcpp_1.0.11             GenomeInfoDb_1.36.4    
+#> [121] readxl_1.4.3            dbplyr_2.3.3           
+#> [123] png_0.1-8               XML_3.99-0.15          
+#> [125] parallel_4.3.0          ellipsis_0.3.2         
+#> [127] blob_1.2.4              bitops_1.0-7           
+#> [129] viridisLite_0.4.2       slam_0.1-50            
+#> [131] scales_1.2.1            purrr_1.0.2            
+#> [133] crayon_1.5.2            GetoptLong_1.0.5       
+#> [135] rlang_1.1.1             cowplot_1.1.1          
+#> [137] KEGGREST_1.40.1
 ```

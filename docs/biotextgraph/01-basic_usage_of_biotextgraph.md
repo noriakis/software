@@ -38,7 +38,7 @@ net <- refseq(inpSymbol)
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.5
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic3-1.png" width="100%" style="display: block; margin: auto;" />
@@ -53,7 +53,7 @@ net <- refseq(inpSymbol, excludeFreq=1000)
 #> Filtered 141 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.519
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic32-1.png" width="100%" style="display: block; margin: auto;" />
@@ -71,7 +71,7 @@ net <- refseq(inpSymbol, plotType="network",
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.5
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramnet-1.png" width="100%" style="display: block; margin: auto;" />
@@ -106,15 +106,16 @@ plotNet(net)
 getSlot(net, "pvpick")
 #> $clusters
 #> $clusters[[1]]
-#> [1] "dna"           "transcription"
-#> 
-#> $clusters[[2]]
 #> [1] "complementation" "defects"         "pigmentosum"    
 #> [4] "xeroderma"      
 #> 
+#> $clusters[[2]]
+#> [1] "activity"      "atpdependent"  "cockayne"     
+#> [4] "dna"           "transcription"
+#> 
 #> 
 #> $edges
-#> [1] 1 8
+#> [1]  8 13
 plot(net)
 ```
 
@@ -147,7 +148,7 @@ net <- refseq(inpSymbol, plotType="network",
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/gplot-1.png" width="100%" style="display: block; margin: auto;" />
@@ -180,7 +181,7 @@ net <- refseq(inpSymbol, plotType="network",
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
 
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/gpplot-1.png" width="100%" style="display: block; margin: auto;" />
@@ -211,7 +212,7 @@ net <- refseq(inpSymbol, plotType="network",
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/gplot2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -230,7 +231,7 @@ gwc <- refseq(inpSymbol, plotType="wc")
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-plotWC(gwc)
+plotWC(gwc, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic-1.png" width="100%" style="display: block; margin: auto;" />
@@ -253,7 +254,7 @@ gwc <- refseq(inpSymbol,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 30 words (frequency and/or tfidf)
-plotWC(gwc)
+plotWC(gwc, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -276,7 +277,7 @@ gwc_p <- refseq(inpSymbol,
 #>   Converted input genes: 7
 #> Filter based on GeneSummary
 #> Filtered 30 words (frequency and/or tfidf)
-plotWC(gwc_p)
+plotWC(gwc_p, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/basic_pres_false-1.png" width="100%" style="display: block; margin: auto;" />
@@ -289,7 +290,7 @@ gwc
 #> Type: refseq
 #> Number of words: 100
 #> Query: ERCC1/ERCC2/ERCC3/ERCC4/ERCC5/ERCC6/ERCC8
-#> 182.1 Kb
+#> 204.1 Kb
 knitr::kable(
     head(getSlot(gwc, "freqDf")),
     caption = 'Term frequencies.',
@@ -301,14 +302,14 @@ knitr::kable(
 
 Table: (\#tab:table)Term frequencies.
 
-|word          | freq|wcColor |
-|:-------------|----:|:-------|
-|repair        |   32|black   |
-|DNA           |   22|black   |
-|syndrome      |   18|black   |
-|excision      |   16|black   |
-|transcription |   14|black   |
-|cockayne      |   12|black   |
+|word          | freq|
+|:-------------|----:|
+|repair        |   16|
+|DNA           |   11|
+|syndrome      |    9|
+|excision      |    8|
+|transcription |    7|
+|Cockayne      |    6|
 
 
 
@@ -334,9 +335,7 @@ gwc2 <- refseq(inpSymbol,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
-plotWC(gwc2)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+plotWC(gwc2, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngramwc-1.png" width="100%" style="display: block; margin: auto;" />
@@ -359,9 +358,7 @@ gwc3 <- refseq(inpSymbol,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
-plotWC(gwc3)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+plotWC(gwc3, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/ngrampath-1.png" width="100%" style="display: block; margin: auto;" />
@@ -427,9 +424,7 @@ getSlot(gwclWhole, "pvpick")
 #> 
 #> $edges
 #> [1] 16 41 43
-plotWC(gwclWhole)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+plotWC(gwclWhole, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/tagging-1.png" width="100%" style="display: block; margin: auto;" />
@@ -462,7 +457,8 @@ geneplotWC <- refseq(inpSymbol,
 #> columns
 #> Multiscale bootstrap... Done.
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 plotWC(geneplotWC, asis=TRUE)
 ```
 
@@ -477,9 +473,7 @@ Using `rentrez`, one can perform the same analysis on PubMed text like the artic
 ab <- pubmed(inpSymbol[1:3], retMax=20, apiKey=apiKey, plotType="wc")
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the existing scale.
-plotWC(ab)
-#> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+plotWC(ab, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc-1.png" width="100%" style="display: block; margin: auto;" />
@@ -507,7 +501,7 @@ abtag2 <- pubmed(redo=abtag, tag="tdm", genePlot=TRUE,
 #> Resuming from the previous results
 #> Using previous pvclust resultsIgnoring corThresh, automatically determine the value
 #> threshold = 0.401
-plotNet(abtag2)
+plotNet(abtag2, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc_2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -521,10 +515,30 @@ net <- pubmed(inpSymbol[1:5], plotType="network",
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.6
 #> Subsetting to the gene symbol in orgDb
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/onlygene-1.png" width="100%" style="display: block; margin: auto;" />
+
+It is sometimes the case that the results of the search is dominated by one well-investigated or well-characterized genes (such as TP53).
+To overcome this, the `perQuery` option can be specified to search the database one by one. It is recommended to use API key for querying a large number of genes. 
+
+
+```r
+netPerQuery <- pubmed(inpSymbol[1:5], perQuery=TRUE, onlyGene=TRUE, apiKey=apiKey, numWords=150)
+#>   Querying ERCC1
+#>   Querying ERCC2
+#>   Querying ERCC3
+#>   Querying ERCC4
+#>   Querying ERCC5
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.3
+#> Subsetting to the gene symbol in orgDb
+plotNet(netPerQuery, asis=TRUE)
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/perquerytest-1.png" width="100%" style="display: block; margin: auto;" />
+
 
 ## Comparing two or more networks
 
@@ -724,7 +738,7 @@ net <- refseq(inpSymbol, plotType="network",
 #> Filtered 148 words (ORA)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.5
-plotNet(net)
+plotNet(net, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/oranet-1.png" width="100%" style="display: block; margin: auto;" />
@@ -747,13 +761,13 @@ Using [`udpipe`](https://github.com/bnosac/udpipe) package ([Straka and Strakov√
 ```r
 p <- biotextgraph::refseq(c("DDX41","PNKP","ERCC2"),
     plotType="network", useUdpipe=TRUE,
-    udpipeModel="~/english-ewt-ud-2.5-191206.udpipe")
+    udpipeModel="english-ewt-ud-2.5-191206.udpipe")
 #> Using udpipe mode
 #> Input genes: 3
 #>   Converted input genes: 3
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-plotNet(p)
+plotNet(p, asis=TRUE)
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/udpipe-1.png" width="100%" style="display: block; margin: auto;" />
@@ -769,9 +783,9 @@ degs <- d3degUpAssetta2016
 ## Use alien encounter fonts (http://www.hipsthetic.com/alien-encounters-free-80s-font-family/)
 sysfonts::font_add(family="alien",regular="SFAlienEncounters.ttf")
 p <- biotextgraph::refseq(degs,
-    plotType="network", autoThresh=FALSE,
+    plotType="network",
     numWords=50, genePlot=TRUE,
-    fontFamily="alien",
+    fontFamily="alien", autoThresh=FALSE,
     colorText=TRUE)
 #> Input genes: 636
 #>   Converted input genes: 552
@@ -904,308 +918,318 @@ ex |> plot_biofabric(end_shape="square")
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/pbfbrc-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Actual application of the package
+### Dynamic layout
 
-### The selection of genes
-
-The input of genes can be selected in various ways. In most cases, the list obtained by differential expression analysis can be used as an input to the function. Additionally, the cluster of genes identified in gene clustering analysis such as weighted gene co-expression network analysis can be used as input.
-
-### Actual application of the package
-
-For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer ([Chen et al. 2019](https://doi.org/10.1038/s41556-019-0361-y)).
-
-First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.
+Dynamic layout can be also used to compare the networks, by `graphlayouts`, for comparing the multiple graphs, especially useful for time-series analysis. See the documentation of [`layout_as_dynamic`](http://graphlayouts.schochastics.net/reference/layout_dynamic.html) for specifying the alpha, which is default to 0.5. 
 
 
 ```r
-
-converted <- clusterProfiler::bitr(exampleWGCNAcluster,
-    fromType="ENSEMBL", toType="ENTREZID",
-    OrgDb="org.Hs.eg.db")[,2]
-ora <- clusterProfiler::enrichKEGG(converted)
-ora |> filter(p.adjust<0.05) |> data.frame() |> dplyr::pull("Description")
-#>  [1] "Butanoate metabolism"                      
-#>  [2] "Fatty acid metabolism"                     
-#>  [3] "Tight junction"                            
-#>  [4] "Valine, leucine and isoleucine degradation"
-#>  [5] "Peroxisome"                                
-#>  [6] "Fatty acid degradation"                    
-#>  [7] "Fatty acid elongation"                     
-#>  [8] "Biosynthesis of unsaturated fatty acids"   
-#>  [9] "alpha-Linolenic acid metabolism"           
-#> [10] "PPAR signaling pathway"                    
-#> [11] "Aldosterone-regulated sodium reabsorption" 
-#> [12] "Sphingolipid metabolism"
-enrichplot::dotplot(ora, showCategory=20)
+library(igraph)
+dyn <- plotDynamic(list(net1, net2), concat="union")
+dyn
 ```
 
-<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_kegg-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/dyn-1.png" width="100%" style="display: block; margin: auto;" />
 
-We use the function in `biotextgraph` to make a summarized visualization of textual information, along with associated genes. As for the input reaching to a hundred of genes, there is an option `filterByGO` term, which filters the text mining results to those used in GO terms. This is useful for limiting the visualization to biologically-relevant terms.
+## Input type
+
+Some input types can be used to conveniently perform text mining. `refseqWGCNA` accepts `blockwiseModules()` results from `WGCNA`, and recursively returns the biotext class object for each of the cluster.
 
 
 ```r
-check <- refseq(converted, genePlot=TRUE,
-                filterByGO=TRUE, keyType="ENTREZID")
-#> Input genes: 533
+load("./blockwiseModule.rda")
+test <- refseqWGCNA(bwmod)
+#> Processing a total of 17 clusters
+#> Input genes: 621
+#>   Converted input genes: 534
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> `filterByGO` option enabled. Filtering by GO terms ...
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+#> Input genes: 2192
+#>   Converted input genes: 2017
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
-plotNet(check)
-```
-
-<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_btg-1.png" width="100%" style="display: block; margin: auto;" />
-
-Some genes are not related to the significantly enriched pathway, and one would like to inspect the biological function of these genes.
-
-
-```r
-## Extraction of non-related genes
-enr_genes <- ora@result %>% data.frame() %>% 
-  filter(p.adjust<0.05) %>% dplyr::pull(geneID) %>%
-  strsplit("/") %>% unlist() %>% unique()
-
-no_enr <- converted[!(converted %in% enr_genes)]
-length(no_enr)
-#> [1] 471
-```
-
-This time, we enable the `filterByGO` option along with `ngram=2`, which produces 2-gram visualization.
-
-
-```r
-check_noenr_WGO <- refseq(no_enr,
-    layout="nicely",
-    ngram=2,
-    keyType="ENTREZID",
-    filterByGO=TRUE,
-    docsum=TRUE)
-#> Input genes: 471
+#> Input genes: 12943
+#>   Converted input genes: 9875
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> `filterByGO` option enabled. Filtering by GO terms ...
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.01
-plotNet(check_noenr_WGO)
+#> threshold = 0
+#> Input genes: 5534
+#>   Converted input genes: 4644
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
+#> Input genes: 653
+#>   Converted input genes: 533
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+#> Input genes: 591
+#>   Converted input genes: 471
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+#> Input genes: 740
+#>   Converted input genes: 577
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.104
+#> Input genes: 89
+#>   Converted input genes: 87
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.103
+#> Input genes: 43
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
+#> Input genes: 39
+#>   Converted input genes: 37
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.107
+#> Input genes: 43
+#>   Converted input genes: 42
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.308
+#> Input genes: 41
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.304
+#> Input genes: 42
+#>   Converted input genes: 40
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.203
+#> Input genes: 40
+#>   Converted input genes: 33
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.317
+#> Input genes: 112
+#>   Converted input genes: 65
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.507
+#> Input genes: 38
+#>   Converted input genes: 38
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
+#> Input genes: 139
+#>   Converted input genes: 58
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.641
+length(test)
+#> [1] 17
+test[[1]]@net + test[[2]]@net
 ```
 
-<img src="01-basic_usage_of_biotextgraph_files/figure-html/aa_noenr-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/refseqwgcna-1.png" width="100%" style="display: block; margin: auto;" />
 
-This way, we can filter the unnecessary words from the many terms included in the textual information of identifiers, and focus on biologically relevant terms contained in the identifiers.
+`refseqDESeq2` accepts the resulting object from `DESeq2::results()` function, with specified criteria such as LFC and p-values and returns the biotext class object like as follows.
+
+
+```r
+library(DESeq2)
+library(org.Hs.eg.db)
+dds <- makeExampleDESeqDataSet(m=4)
+dds <- DESeq(dds)
+res <- results(dds, contrast=c("condition","B","A"))
+set.seed(123)
+row.names(res) <- sample(keys(org.Hs.eg.db, "ENSEMBL"), nrow(res))
+res
+#> log2 fold change (MLE): condition B vs A 
+#> Wald test p-value: condition B vs A 
+#> DataFrame with 1000 rows and 6 columns
+#>                  baseMean log2FoldChange     lfcSE
+#>                 <numeric>      <numeric> <numeric>
+#> ENSG00000134910    0.0000             NA        NA
+#> ENSG00000271702   50.2927       1.069097  0.741541
+#> ENSG00000232764   27.5563       0.326519  0.868801
+#> ENSG00000266610   55.0974       0.833955  0.720673
+#> ENSG00000121351   11.4532      -0.830936  1.349457
+#> ...                   ...            ...       ...
+#> ENSG00000067560  58.98350      0.8363000  0.700295
+#> ENSG00000207714 362.38625      0.2839425  0.427786
+#> ENSG00000184990   1.91443      0.0455055  2.882155
+#> ENSG00000223548  15.13427     -0.2184717  1.131090
+#> ENSG00000169976  14.83963      0.3887442  1.098821
+#>                       stat    pvalue      padj
+#>                  <numeric> <numeric> <numeric>
+#> ENSG00000134910         NA        NA        NA
+#> ENSG00000271702   1.441724  0.149380  0.993345
+#> ENSG00000232764   0.375827  0.707046  0.993345
+#> ENSG00000266610   1.157189  0.247195  0.993345
+#> ENSG00000121351  -0.615756  0.538056  0.993345
+#> ...                    ...       ...       ...
+#> ENSG00000067560  1.1942105  0.232396  0.993345
+#> ENSG00000207714  0.6637483  0.506851  0.993345
+#> ENSG00000184990  0.0157887  0.987403  0.999979
+#> ENSG00000223548 -0.1931515  0.846840  0.993345
+#> ENSG00000169976  0.3537831  0.723501  0.993345
+
+refseqDESeq2(res, log2FoldChange>2) |> plotNet(asis=TRUE)
+#> Input genes: 59
+#>   Converted input genes: 87
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+```
+
+<img src="01-basic_usage_of_biotextgraph_files/figure-html/refseqdeseq2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 
 ```r
 sessionInfo()
-#> R version 4.3.1 (2023-06-16 ucrt)
-#> Platform: x86_64-w64-mingw32/x64 (64-bit)
-#> Running under: Windows 11 x64 (build 22621)
+#> R version 4.3.0 (2023-04-21)
+#> Platform: x86_64-pc-linux-gnu (64-bit)
+#> Running under: CentOS Linux 7 (Core)
 #> 
 #> Matrix products: default
-#> 
+#> BLAS:   /usr/local/package/r/4.3.0/lib64/R/lib/libRblas.so 
+#> LAPACK: /usr/local/package/r/4.3.0/lib64/R/lib/libRlapack.so;  LAPACK version 3.11.0
 #> 
 #> locale:
-#> [1] LC_COLLATE=Japanese_Japan.utf8 
-#> [2] LC_CTYPE=Japanese_Japan.utf8   
-#> [3] LC_MONETARY=Japanese_Japan.utf8
-#> [4] LC_NUMERIC=C                   
-#> [5] LC_TIME=Japanese_Japan.utf8    
+#>  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
+#>  [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    
+#>  [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   
+#>  [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 
+#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+#> [11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       
 #> 
 #> time zone: Asia/Tokyo
-#> tzcode source: internal
+#> tzcode source: system (glibc)
 #> 
 #> attached base packages:
 #> [1] stats4    stats     graphics  grDevices utils    
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] ggkegg_1.0.5          testthat_3.1.10      
-#>  [3] XML_3.99-0.14         tidygraph_1.2.3      
-#>  [5] ggfx_1.0.1            igraph_1.5.1         
-#>  [7] GetoptLong_1.0.5      ggrepel_0.9.3        
-#>  [9] scales_1.2.1          ggforce_0.4.1        
-#> [11] concaveman_1.1.0      dplyr_1.1.2          
-#> [13] dendextend_1.17.1     clusterProfiler_4.9.5
-#> [15] ReactomePA_1.46.0     RColorBrewer_1.1-3   
-#> [17] ggraph_2.1.0.9000     org.Hs.eg.db_3.17.0  
-#> [19] AnnotationDbi_1.63.2  IRanges_2.35.2       
-#> [21] S4Vectors_0.38.1      Biobase_2.61.0       
-#> [23] BiocGenerics_0.47.0   biotextgraph_0.99.0  
-#> [25] ggplot2_3.4.3        
+#>  [1] DESeq2_1.40.2               SummarizedExperiment_1.30.2
+#>  [3] MatrixGenerics_1.12.3       matrixStats_1.0.0          
+#>  [5] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
+#>  [7] scales_1.2.1                ggforce_0.4.1              
+#>  [9] concaveman_1.1.0            ggkegg_1.1.7               
+#> [11] testthat_3.1.10             XML_3.99-0.15              
+#> [13] tidygraph_1.2.3             ggfx_1.0.1                 
+#> [15] igraph_1.5.1                GetoptLong_1.0.5           
+#> [17] ggrepel_0.9.4               dplyr_1.1.2                
+#> [19] dendextend_1.17.1           clusterProfiler_4.8.3      
+#> [21] ReactomePA_1.44.0           RColorBrewer_1.1-3         
+#> [23] ggraph_2.1.0                org.Hs.eg.db_3.18.0        
+#> [25] AnnotationDbi_1.64.1        IRanges_2.34.1             
+#> [27] S4Vectors_0.38.1            Biobase_2.60.0             
+#> [29] BiocGenerics_0.46.0         biotextgraph_0.99.0        
+#> [31] ggplot2_3.4.2              
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] fs_1.6.3                     
-#>   [2] bitops_1.0-7                 
-#>   [3] enrichplot_1.21.3            
-#>   [4] devtools_2.4.5               
-#>   [5] HDO.db_0.99.1                
-#>   [6] httr_1.4.7                   
-#>   [7] profvis_0.3.8                
-#>   [8] tools_4.3.1                  
-#>   [9] utf8_1.2.3                   
-#>  [10] R6_2.5.1                     
-#>  [11] lazyeval_0.2.2               
-#>  [12] urlchecker_1.0.1             
-#>  [13] withr_2.5.0                  
-#>  [14] graphite_1.48.0              
-#>  [15] prettyunits_1.1.1            
-#>  [16] gridExtra_2.3                
-#>  [17] downlit_0.4.3                
-#>  [18] udpipe_0.8.11                
-#>  [19] cli_3.6.1                    
-#>  [20] textshaping_0.3.6            
-#>  [21] Cairo_1.6-1                  
-#>  [22] scatterpie_0.2.1             
-#>  [23] labeling_0.4.3               
-#>  [24] slam_0.1-50                  
-#>  [25] sass_0.4.7                   
-#>  [26] tm_0.7-11                    
-#>  [27] systemfonts_1.0.4            
-#>  [28] commonmark_1.9.0             
-#>  [29] yulab.utils_0.1.0            
-#>  [30] gson_0.1.0                   
-#>  [31] DOSE_3.27.2                  
-#>  [32] rentrez_1.2.3                
-#>  [33] showtext_0.9-6               
-#>  [34] sessioninfo_1.2.2            
-#>  [35] rstudioapi_0.15.0            
-#>  [36] sysfonts_0.8.8               
-#>  [37] RSQLite_2.3.1                
-#>  [38] generics_0.1.3               
-#>  [39] gridGraphics_0.5-1           
-#>  [40] GO.db_3.17.0                 
-#>  [41] Matrix_1.6-3                 
-#>  [42] pvclust_2.2-0                
-#>  [43] fansi_1.0.4                  
-#>  [44] lifecycle_1.0.3              
-#>  [45] yaml_2.3.7                   
-#>  [46] qvalue_2.33.0                
-#>  [47] BiocFileCache_2.9.1          
-#>  [48] cyjShiny_1.0.42              
-#>  [49] grid_4.3.1                   
-#>  [50] blob_1.2.4                   
-#>  [51] promises_1.2.1               
-#>  [52] crayon_1.5.2                 
-#>  [53] miniUI_0.1.1.1               
-#>  [54] lattice_0.21-8               
-#>  [55] cowplot_1.1.1                
-#>  [56] KEGGREST_1.41.0              
-#>  [57] magick_2.7.5                 
-#>  [58] pillar_1.9.0                 
-#>  [59] knitr_1.44                   
-#>  [60] fgsea_1.27.1                 
-#>  [61] rjson_0.2.21                 
-#>  [62] stopwords_2.3                
-#>  [63] codetools_0.2-19             
-#>  [64] fastmatch_1.1-4              
-#>  [65] glue_1.6.2                   
-#>  [66] V8_4.3.3                     
-#>  [67] ggfun_0.1.3                  
-#>  [68] data.table_1.14.8            
-#>  [69] remotes_2.4.2.1              
-#>  [70] vctrs_0.6.3                  
-#>  [71] png_0.1-8                    
-#>  [72] treeio_1.25.4                
-#>  [73] gtable_0.3.4                 
-#>  [74] cachem_1.0.8                 
-#>  [75] xfun_0.40                    
-#>  [76] mime_0.12                    
-#>  [77] showtextdb_3.0               
-#>  [78] ISOcodes_2022.09.29          
-#>  [79] interactiveDisplayBase_1.39.0
-#>  [80] ellipsis_0.3.2               
-#>  [81] GeneSummary_0.99.6           
-#>  [82] nlme_3.1-163                 
-#>  [83] ggtree_3.9.1                 
-#>  [84] usethis_2.2.2                
-#>  [85] bit64_4.0.5                  
-#>  [86] filelock_1.0.2               
-#>  [87] GenomeInfoDb_1.37.4          
-#>  [88] ggwordcloud_0.6.0            
-#>  [89] rprojroot_2.0.3              
-#>  [90] bslib_0.5.1                  
-#>  [91] colorspace_2.1-0             
-#>  [92] DBI_1.1.3                    
-#>  [93] tidyselect_1.2.0             
-#>  [94] processx_3.8.2               
-#>  [95] bit_4.0.5                    
-#>  [96] compiler_4.3.1               
-#>  [97] curl_5.0.2                   
-#>  [98] graph_1.79.1                 
-#>  [99] xml2_1.3.5                   
-#> [100] NLP_0.2-1                    
-#> [101] desc_1.4.2                   
-#> [102] ggdendro_0.1.23              
-#> [103] bookdown_0.35                
-#> [104] shadowtext_0.1.2             
-#> [105] callr_3.7.3                  
-#> [106] rappdirs_0.3.3               
-#> [107] stringr_1.5.0                
-#> [108] digest_0.6.33                
-#> [109] rmarkdown_2.25               
-#> [110] XVector_0.41.1               
-#> [111] htmltools_0.5.6              
-#> [112] pkgconfig_2.0.3              
-#> [113] base64enc_0.1-3              
-#> [114] dbplyr_2.3.3                 
-#> [115] fastmap_1.1.1                
-#> [116] rlang_1.1.1                  
-#> [117] GlobalOptions_0.1.2          
-#> [118] htmlwidgets_1.6.2            
-#> [119] shiny_1.7.5                  
-#> [120] farver_2.1.1                 
-#> [121] jquerylib_0.1.4              
-#> [122] jsonlite_1.8.7               
-#> [123] BiocParallel_1.35.4          
-#> [124] GOSemSim_2.27.3              
-#> [125] RCurl_1.98-1.12              
-#> [126] magrittr_2.0.3               
-#> [127] GenomeInfoDbData_1.2.10      
-#> [128] ggplotify_0.1.2              
-#> [129] wordcloud_2.6                
-#> [130] patchwork_1.1.3              
-#> [131] munsell_0.5.0                
-#> [132] Rcpp_1.0.11                  
-#> [133] ape_5.7-1                    
-#> [134] viridis_0.6.4                
-#> [135] stringi_1.7.12               
-#> [136] brio_1.1.3                   
-#> [137] zlibbioc_1.47.0              
-#> [138] MASS_7.3-60                  
-#> [139] AnnotationHub_3.9.2          
-#> [140] plyr_1.8.8                   
-#> [141] pkgbuild_1.4.2               
-#> [142] parallel_4.3.1               
-#> [143] HPO.db_0.99.2                
-#> [144] bugsigdbr_1.8.1              
-#> [145] Biostrings_2.69.2            
-#> [146] graphlayouts_1.0.0           
-#> [147] splines_4.3.1                
-#> [148] gridtext_0.1.5               
-#> [149] ps_1.7.5                     
-#> [150] graphhighlight_0.1.0         
-#> [151] markdown_1.8                 
-#> [152] reshape2_1.4.4               
-#> [153] pkgload_1.3.2.1              
-#> [154] BiocVersion_3.18.0           
-#> [155] evaluate_0.21                
-#> [156] BiocManager_1.30.22          
-#> [157] tweenr_2.0.2                 
-#> [158] httpuv_1.6.11                
-#> [159] tidyr_1.3.0                  
-#> [160] purrr_1.0.2                  
-#> [161] polyclip_1.10-4              
-#> [162] xtable_1.8-4                 
-#> [163] reactome.db_1.86.0           
-#> [164] tidytree_0.4.5               
-#> [165] MPO.db_0.99.7                
-#> [166] later_1.3.1                  
-#> [167] viridisLite_0.4.2            
-#> [168] ragg_1.2.5                   
-#> [169] snow_0.4-4                   
-#> [170] tibble_3.2.1                 
-#> [171] aplot_0.2.1                  
-#> [172] memoise_2.0.1
+#>   [1] fs_1.6.3                bitops_1.0-7           
+#>   [3] enrichplot_1.20.3       devtools_2.4.5         
+#>   [5] HDO.db_0.99.1           httr_1.4.6             
+#>   [7] profvis_0.3.8           tools_4.3.0            
+#>   [9] utf8_1.2.3              R6_2.5.1               
+#>  [11] lazyeval_0.2.2          urlchecker_1.0.1       
+#>  [13] withr_2.5.0             graphite_1.46.0        
+#>  [15] prettyunits_1.1.1       gridExtra_2.3          
+#>  [17] downlit_0.4.3           cli_3.6.1              
+#>  [19] textshaping_0.3.6       Cairo_1.6-1            
+#>  [21] scatterpie_0.2.1        labeling_0.4.2         
+#>  [23] slam_0.1-50             sass_0.4.7             
+#>  [25] tm_0.7-11               systemfonts_1.0.4      
+#>  [27] commonmark_1.9.0        yulab.utils_0.1.0      
+#>  [29] gson_0.1.0              DOSE_3.26.2            
+#>  [31] rentrez_1.2.3           showtext_0.9-6         
+#>  [33] sessioninfo_1.2.2       rstudioapi_0.15.0      
+#>  [35] sysfonts_0.8.8          RSQLite_2.3.3          
+#>  [37] generics_0.1.3          gridGraphics_0.5-1     
+#>  [39] GO.db_3.17.0            Matrix_1.6-3           
+#>  [41] pvclust_2.2-0           fansi_1.0.4            
+#>  [43] abind_1.4-5             lifecycle_1.0.3        
+#>  [45] yaml_2.3.7              qvalue_2.32.0          
+#>  [47] BiocFileCache_2.8.0     cyjShiny_1.0.42        
+#>  [49] grid_4.3.0              blob_1.2.4             
+#>  [51] promises_1.2.1          crayon_1.5.2           
+#>  [53] miniUI_0.1.1.1          lattice_0.21-8         
+#>  [55] cowplot_1.1.1           KEGGREST_1.40.1        
+#>  [57] magick_2.8.1            pillar_1.9.0           
+#>  [59] knitr_1.43              fgsea_1.26.0           
+#>  [61] rjson_0.2.21            stopwords_2.3          
+#>  [63] codetools_0.2-19        fastmatch_1.1-4        
+#>  [65] glue_1.6.2              downloader_0.4         
+#>  [67] ggfun_0.1.3             data.table_1.14.8      
+#>  [69] remotes_2.4.2.1         vctrs_0.6.3            
+#>  [71] png_0.1-8               treeio_1.24.3          
+#>  [73] gtable_0.3.3            cachem_1.0.8           
+#>  [75] xfun_0.40               S4Arrays_1.2.0         
+#>  [77] mime_0.12               showtextdb_3.0         
+#>  [79] ISOcodes_2022.09.29     ellipsis_0.3.2         
+#>  [81] GeneSummary_0.99.6      nlme_3.1-162           
+#>  [83] ggtree_3.8.2            usethis_2.2.2          
+#>  [85] bit64_4.0.5             filelock_1.0.2         
+#>  [87] ggwordcloud_0.6.0       rprojroot_2.0.3        
+#>  [89] bslib_0.5.1             colorspace_2.1-0       
+#>  [91] DBI_1.1.3               tidyselect_1.2.0       
+#>  [93] processx_3.8.2          bit_4.0.5              
+#>  [95] compiler_4.3.0          curl_5.0.1             
+#>  [97] graph_1.80.0            xml2_1.3.5             
+#>  [99] NLP_0.2-1               DelayedArray_0.26.7    
+#> [101] desc_1.4.2              ggdendro_0.1.23        
+#> [103] bookdown_0.36           shadowtext_0.1.2       
+#> [105] callr_3.7.3             rappdirs_0.3.3         
+#> [107] stringr_1.5.0           digest_0.6.33          
+#> [109] rmarkdown_2.23          XVector_0.40.0         
+#> [111] htmltools_0.5.6         pkgconfig_2.0.3        
+#> [113] base64enc_0.1-3         highr_0.10             
+#> [115] dbplyr_2.3.3            fastmap_1.1.1          
+#> [117] rlang_1.1.1             GlobalOptions_0.1.2    
+#> [119] htmlwidgets_1.6.2       shiny_1.7.4.1          
+#> [121] farver_2.1.1            jquerylib_0.1.4        
+#> [123] jsonlite_1.8.7          BiocParallel_1.34.2    
+#> [125] GOSemSim_2.26.1         RCurl_1.98-1.13        
+#> [127] magrittr_2.0.3          GenomeInfoDbData_1.2.10
+#> [129] ggplotify_0.1.2         wordcloud_2.6          
+#> [131] patchwork_1.1.3         munsell_0.5.0          
+#> [133] Rcpp_1.0.11             ape_5.7-1              
+#> [135] viridis_0.6.4           stringi_1.7.12         
+#> [137] brio_1.1.3              zlibbioc_1.46.0        
+#> [139] MASS_7.3-58.4           plyr_1.8.9             
+#> [141] pkgbuild_1.4.2          parallel_4.3.0         
+#> [143] bugsigdbr_1.8.1         Biostrings_2.68.1      
+#> [145] graphlayouts_1.0.2      splines_4.3.0          
+#> [147] gridtext_0.1.5          locfit_1.5-9.8         
+#> [149] ps_1.7.5                markdown_1.11          
+#> [151] reshape2_1.4.4          pkgload_1.3.2.1        
+#> [153] evaluate_0.21           tweenr_2.0.2           
+#> [155] httpuv_1.6.11           tidyr_1.3.0            
+#> [157] purrr_1.0.2             polyclip_1.10-6        
+#> [159] xtable_1.8-4            reactome.db_1.84.0     
+#> [161] tidytree_0.4.5          later_1.3.1            
+#> [163] viridisLite_0.4.2       ragg_1.2.5             
+#> [165] snow_0.4-4              tibble_3.2.1           
+#> [167] aplot_0.2.2             memoise_2.0.1
 ```

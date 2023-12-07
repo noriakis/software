@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Annotating gene cluster dendrogram | biotextgraph</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Annotating gene cluster dendrogram | biotextgraph">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/annotating-gene-cluster-dendrogram.html">
@@ -365,8 +365,11 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.304</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette OrRd is 9</span></span>
+<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span></code></pre></div>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/highlight_2-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Using a popular tree visualization library <code>ggtree</code> and <code>ggimage</code>, plotting of word cloud on the tip nodes is possible by specifying <code>tipWC=TRUE</code> . This saves the word cloud plots in the <code>imageDir</code>, and show these images on the tip nodes. Various positional parameters as well as aspect ratio can be passed to the function to correctly plot the images. Note that it cannot show all the tip nodes, so interesting nodes should be specified in <code>tipWCNodes</code>. In this mode, one must pass object that can be passed to <code>ggtree()</code>.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
@@ -394,10 +397,11 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.5</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuPu is 9</span></span>
 <span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; Saving the image for plotting on the dendrogram</span></span>
 <span><span class="co">#&gt; Input genes: 25</span></span>
 <span><span class="co">#&gt; 'select()' returned 1:1 mapping between keys and</span></span>
@@ -408,7 +412,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.304</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="va">gr</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ! # Invaild edge matrix for &lt;phylo&gt;. A &lt;tbl_df&gt; is returned.</span></span>
 <span><span class="co">#&gt; ! # Invaild edge matrix for &lt;phylo&gt;. A &lt;tbl_df&gt; is returned.</span></span>
@@ -457,6 +462,8 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotEigengeneNetworksWithWords.html">plotEigengeneNetworksWithWords</a></span><span class="op">(</span><span class="va">MEs</span>, <span class="va">modColors</span>, useWC<span class="op">=</span><span class="cn">TRUE</span>, candidateNodes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ME2"</span><span class="op">)</span>, wcScale<span class="op">=</span><span class="fl">4</span>,</span>
 <span>    bg.colour<span class="op">=</span><span class="st">"grey80"</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>expand<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
+<span><span class="co">#&gt; Warning: inappropriate distance matrices are omitted in</span></span>
+<span><span class="co">#&gt; computation: r = 0.5</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
@@ -474,10 +481,9 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.304</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greens is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; border is set to FALSE as bg.colour is not NULL</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/decoword-1.png" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
@@ -501,10 +507,9 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.304</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuGn is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
-<span><span class="co">#&gt; Adding another scale for size, which will replace the existing scale.</span></span>
+<span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
+<span><span class="co">#&gt; existing scale.</span></span>
 <span><span class="co">#&gt; border is set to FALSE as useggfx is not NULL</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-custom-usage_files/figure-html/decoword-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The below example shows using the other dendrogram like those produced by WGCNA combining the parameters.</p>
@@ -530,19 +535,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Bootstrap (r = 1.29)... Done.</span></span>
 <span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
 <span><span class="co">#&gt; Input genes: 5847</span></span>
-<span><span class="co">#&gt;   Converted input genes: 4861</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0</span></span>
-<span><span class="co">#&gt; Input genes: 634</span></span>
-<span><span class="co">#&gt;   Converted input genes: 512</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.1</span></span>
-<span><span class="co">#&gt; Input genes: 2054</span></span>
-<span><span class="co">#&gt;   Converted input genes: 1679</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4869</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
@@ -554,7 +547,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.201</span></span>
 <span><span class="co">#&gt; Input genes: 5673</span></span>
-<span><span class="co">#&gt;   Converted input genes: 4694</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4702</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
@@ -589,7 +582,7 @@ Useful for inspecting how the branches of dendrogram contains pathway informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-03.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

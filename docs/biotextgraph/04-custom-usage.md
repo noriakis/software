@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH f45434a DN-- 3 2 -- 
+#> IGRAPH 62bef11 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from f45434a (vertex names):
+#> + edges from 62bef11 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,16 +212,14 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Set1 is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
 #> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrBr is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
 #> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greys is 9
-#> Returning the palette you asked for with that many colors
-#> Warning in dir.create(paste0(dir)): 'network' already
-#> exists
+#> Warning in dir.create(paste0(dir)): 'network'
+#> はすでに存在します
 #> Warning in dir.create(paste0(dir, "/images")):
-#> 'network\images' already exists
+#> 'network/images' はすでに存在します
 #> Input genes: 12
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -229,7 +227,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -240,7 +239,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : Some words could not
 #> fit on page. They have been removed.
@@ -251,7 +251,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> Warning in wordcloud_boxes(data_points =
 #> points_valid_first, boxes = boxes, : One word could not fit
 #> on page. It has been removed.
@@ -611,8 +612,11 @@ plotEigengeneNetworksWithWords(mod$MEs, mod$colors, useWC=TRUE,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette OrRd is 9
+#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 ```
 
 <img src="04-custom-usage_files/figure-html/highlight_2-2.png" width="100%" style="display: block; margin: auto;" />
@@ -645,10 +649,11 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.5
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuPu is 9
 #> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> Saving the image for plotting on the dendrogram
 #> Input genes: 25
 #> 'select()' returned 1:1 mapping between keys and
@@ -659,7 +664,8 @@ gr <- plotEigengeneNetworksWithWords(mod$MEs,
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 gr + scale_x_continuous(expand=c(0,6))
 #> ! # Invaild edge matrix for <phylo>. A <tbl_df> is returned.
 #> ! # Invaild edge matrix for <phylo>. A <tbl_df> is returned.
@@ -715,6 +721,8 @@ library(ggfx)
 plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2"), wcScale=4,
     bg.colour="grey80")+ scale_y_continuous(expand=c(0,3))
 #> Bootstrap (r = 0.5)... Done.
+#> Warning: inappropriate distance matrices are omitted in
+#> computation: r = 0.5
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
 #> Bootstrap (r = 0.8)... Done.
@@ -732,10 +740,9 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Greens is 9
-#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> border is set to FALSE as bg.colour is not NULL
 ```
 
@@ -762,10 +769,9 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuGn is 9
-#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
-#> Adding another scale for size, which will replace the existing scale.
+#> Adding another scale for size, which will replace the
+#> existing scale.
 #> border is set to FALSE as useggfx is not NULL
 ```
 
@@ -796,19 +802,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Bootstrap (r = 1.29)... Done.
 #> Bootstrap (r = 1.4)... Done.
 #> Input genes: 5847
-#>   Converted input genes: 4861
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0
-#> Input genes: 634
-#>   Converted input genes: 512
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.1
-#> Input genes: 2054
-#>   Converted input genes: 1679
+#>   Converted input genes: 4869
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
@@ -820,7 +814,7 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.201
 #> Input genes: 5673
-#>   Converted input genes: 4694
+#>   Converted input genes: 4702
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
@@ -838,8 +832,8 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 ```r
 library(limma)
 #> 
-#> Attaching package: 'limma'
-#> The following object is masked from 'package:BiocGenerics':
+#>  次のパッケージを付け加えます: 'limma'
+#>  以下のオブジェクトは 'package:BiocGenerics' からマスクされています:
 #> 
 #>     plotMA
 library(ggrepel)
@@ -854,64 +848,64 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 6
+#> Input genes: 85
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 62
+#> Input genes: 31
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 58
+#> Input genes: 48
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 139
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 84
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 250
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 50
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 30
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 103
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 42
+#> Input genes: 21
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 115
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 132
+#> Input genes: 47
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 137
+#> Input genes: 108
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 69
+#> Input genes: 15
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 152
+#> Input genes: 78
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 40
+#> Input genes: 63
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 66
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 97
+#> Input genes: 113
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 34
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 158
+#> Input genes: 52
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 18
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 225
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 306
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 53
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 42
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 49
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 137
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -923,7 +917,7 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 11 unlabeled data points (too many
+#> Warning: ggrepel: 10 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
@@ -948,13 +942,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 12943
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 9862
+#>   Converted input genes: 9875
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 5534
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4636
+#>   Converted input genes: 4644
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 43
@@ -1008,7 +1002,7 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 740
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 580
+#>   Converted input genes: 577
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 653
@@ -1020,13 +1014,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 621
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 533
+#>   Converted input genes: 534
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 591
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 470
+#>   Converted input genes: 471
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 139

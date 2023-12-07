@@ -1,7 +1,7 @@
 --- 
 title: "biotextgraph"
 author: "Noriaki Sato"
-date: "2023-12-03"
+date: "2023-12-07"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]

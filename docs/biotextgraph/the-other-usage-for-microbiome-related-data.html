@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 The other usage for microbiome-related data | biotextgraph</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.36 with bs4_book()">
 <meta property="og:title" content="Chapter 4 The other usage for microbiome-related data | biotextgraph">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://noriakis.github.io/software/biotextgraph/the-other-usage-for-microbiome-related-data.html">
@@ -86,7 +86,7 @@
 <p>We use BugSigDB, and its R port bugsigdbr to obtain the curated dataset of the relationship with bacterial taxonomy and human diseases (<a href="https://bugsigdb.org/Main_Page">Geistlinger et al. 2022</a>). Users can query microbiome names, which will be searched for MetaPhlAn taxonomic annotation. If <code>target="title"</code>, the title of the corresponding articles will be summarized.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"none"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
-<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"title"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Set2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span>,argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>min.freq<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
 <span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
@@ -121,7 +121,7 @@
 <p>If <code>target="abstract"</code>, the corresponding abstract of curated publications will be fetched and be summarized.</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella dispar"</span>,<span class="st">"Neisseria flava"</span><span class="op">)</span>,tag<span class="op">=</span><span class="st">"cor"</span>, plotType<span class="op">=</span><span class="st">"wc"</span>,</span>
-<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    curate<span class="op">=</span><span class="cn">TRUE</span>,target<span class="op">=</span><span class="st">"abstract"</span>,pre<span class="op">=</span><span class="cn">TRUE</span>,cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span>,</span>
 <span>    pal<span class="op">=</span><span class="fu">RColorBrewer</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">10</span>, <span class="st">"Dark2"</span><span class="op">)</span>,numWords<span class="op">=</span><span class="fl">80</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 2</span></span>
 <span><span class="co">#&gt;   Found 17 entries for Veillonella dispar</span></span>
@@ -267,10 +267,11 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">net4</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
-<div id="enzymes" class="section level2" number="4.2">
+<div id="section" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Enzymes<a class="anchor" aria-label="anchor" href="#enzymes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> <a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
 </h2>
+<p>Enzymes</p>
 <p>For microbiome analysis, it is often the case that investigating coded enzymes is important. Using <code>enzyme</code> function and <code>getUPtax</code> function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in <code>enzyme.dat</code> are searched, and corresponding UniProt identifiers are obtained, followed by mapping using <code>speclist.txt</code>. This way, the links to microbe - textual information - enzyme can be plotted.</p>
 <ul>
 <li><a href="https://enzyme.expasy.org/">enzyme.dat - from Expasy</a></li>
@@ -279,12 +280,12 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">vp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/bugsigdb.html">bugsigdb</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Veillonella parvula"</span><span class="op">)</span>,</span>
-<span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"kk"</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
-<span>                curate<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="st">"title"</span>, edgeLink<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                 plotType<span class="op">=</span><span class="st">"network"</span>, layout<span class="op">=</span><span class="st">"kk"</span>,</span>
+<span>                curate<span class="op">=</span><span class="cn">TRUE</span>, target<span class="op">=</span><span class="st">"title"</span>, edgeLink<span class="op">=</span><span class="cn">TRUE</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                mbPlot <span class="op">=</span> <span class="cn">TRUE</span>, ecPlot<span class="op">=</span><span class="cn">TRUE</span>, disPlot<span class="op">=</span><span class="cn">TRUE</span>, tag<span class="op">=</span><span class="st">"cor"</span>,</span>
 <span>                cl<span class="op">=</span><span class="fu">snow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/snow/man/snow-startstop.html">makeCluster</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>,colorText<span class="op">=</span><span class="cn">TRUE</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">30</span>,</span>
-<span>                ecFile<span class="op">=</span><span class="st">"../enzyme.dat"</span>, addFreqToMB<span class="op">=</span><span class="cn">TRUE</span>, <span class="co">## Add nodes other than words pseudo-frequency</span></span>
-<span>                upTaxFile <span class="op">=</span> <span class="st">"../speclist.txt"</span><span class="op">)</span></span>
+<span>                ecFile<span class="op">=</span><span class="st">"enzyme.dat"</span>, addFreqToMB<span class="op">=</span><span class="cn">TRUE</span>, <span class="co">## Add nodes other than words pseudo-frequency</span></span>
+<span>                upTaxFile <span class="op">=</span> <span class="st">"speclist.txt"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 1</span></span>
 <span><span class="co">#&gt;   Found 20 entries for Veillonella parvula</span></span>
 <span><span class="co">#&gt; Including 31 entries</span></span>
@@ -322,7 +323,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 First, read the downloaded file using <code>readxl</code>.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metab</span> <span class="op">&lt;-</span> <span class="fu">readxl</span><span class="fu">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span><span class="op">(</span></span>
-<span>  <span class="st">"../41467_2022_33050_MOESM8_ESM.xlsx"</span>,skip <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="st">"41467_2022_33050_MOESM8_ESM.xlsx"</span>,skip <span class="op">=</span> <span class="fl">7</span><span class="op">)</span></span></code></pre></div>
 <p>Pass this tibble, as well as the columns to represent <code>taxonomy</code>, <code>metabolites</code>, and <code>quantitative values to threshold</code> to <code>metCol</code>. In this case, <code>metCol &lt;- c("Metagenomic species", "Metabolite", "Spearman's ρ")</code>. <code>manual</code> function can be also used for the general purpose of adding external information.</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
@@ -368,7 +369,6 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>                corThresh<span class="op">=</span><span class="fl">0.3</span>,</span>
 <span>                colorize<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                pre<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                additionalRemove <span class="op">=</span> <span class="va">filter</span><span class="op">$</span><span class="va">word</span>,</span>
 <span>                colorText<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                plotType<span class="op">=</span><span class="st">"network"</span>,</span>
@@ -376,6 +376,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>                numWords<span class="op">=</span><span class="fl">50</span>,</span>
 <span>                mbPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                disPlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                autoThresh<span class="op">=</span><span class="cn">FALSE</span>,</span>
 <span>                preserve <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input microbes: 1</span></span>
 <span><span class="co">#&gt;   Found 21 entries for Akkermansia muciniphila</span></span>
@@ -414,7 +415,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Read pathway description</span></span>
-<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="st">"../../metacyc/24.5/data/pathways.dat"</span></span>
+<span><span class="va">file</span> <span class="op">&lt;-</span> <span class="st">"metacyc/24.5/data/pathways.dat"</span></span>
 <span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/parseMetaCycPathway.html">parseMetaCycPathway</a></span><span class="op">(</span><span class="va">file</span>,</span>
 <span>                              candSp<span class="op">=</span><span class="st">"all"</span>,</span>
 <span>                              withTax<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -473,8 +474,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; 799                              Bacteria;Bacillota;Bacilli;Bacillales;Bacillaceae;Bacillus;Bacillus subtilis</span></span></code></pre></div>
 <p>This time we use a random dendrogram and rename the rows with taxonomic name included in MetaCyc.</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
-<span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
+<code class="sourceCode R"><span><span class="kw">while</span> <span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">uniq</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="va">bc</span><span class="op">$</span><span class="va">species</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">uniq</span><span class="op">)</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">uniq</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="co"># if (sum(is.na(sapply(strsplit(bc[bc$species %in% uniq,]$spConverted, ";"), "[", 7)))==0) {</span></span>
@@ -496,10 +496,8 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <p>Using the dendrogram (<code>dhc</code> argument) and input data.frame with the column name <code>query</code>, we can plot the dendrogram with pathway information. Note we need to provide the function named vector of nodes (corresponding to gene clusters when the gene as input). This time, wordclouds are to be plotted and additional arguments can by specified in <code>argList</code>.</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Some filtering</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../allFreqMetaCyc.rda"</span><span class="op">)</span></span>
-<span><span class="va">deleter</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">allFreqMetaCyc</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">freq</span><span class="op">&gt;</span><span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">word</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"allFreqMetaCyc.rda"</span><span class="op">)</span></span>
+<span><span class="va">deleter</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">allFreqMetaCyc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">freq</span><span class="op">&gt;</span><span class="fl">5000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">word</span></span>
 <span><span class="co"># Named vector</span></span>
 <span><span class="va">sampled</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sampled</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">sampled</span></span>
@@ -521,22 +519,22 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.101</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.2</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.1</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.2</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.301</span></span>
+<span><span class="co">#&gt; threshold = 0.401</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.205</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.402</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
@@ -552,22 +550,24 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/plotDendroWord-2.svg" width="100%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; R version 4.3.1 (2023-06-16 ucrt)</span></span>
-<span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
-<span><span class="co">#&gt; Running under: Windows 11 x64 (build 22621)</span></span>
+<span><span class="co">#&gt; R version 4.3.0 (2023-04-21)</span></span>
+<span><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></span>
+<span><span class="co">#&gt; Running under: CentOS Linux 7 (Core)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Matrix products: default</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; BLAS:   /usr/local/package/r/4.3.0/lib64/R/lib/libRblas.so </span></span>
+<span><span class="co">#&gt; LAPACK: /usr/local/package/r/4.3.0/lib64/R/lib/libRlapack.so;  LAPACK version 3.11.0</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; locale:</span></span>
-<span><span class="co">#&gt; [1] LC_COLLATE=Japanese_Japan.utf8 </span></span>
-<span><span class="co">#&gt; [2] LC_CTYPE=Japanese_Japan.utf8   </span></span>
-<span><span class="co">#&gt; [3] LC_MONETARY=Japanese_Japan.utf8</span></span>
-<span><span class="co">#&gt; [4] LC_NUMERIC=C                   </span></span>
-<span><span class="co">#&gt; [5] LC_TIME=Japanese_Japan.utf8    </span></span>
+<span><span class="co">#&gt;  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              </span></span>
+<span><span class="co">#&gt;  [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    </span></span>
+<span><span class="co">#&gt;  [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   </span></span>
+<span><span class="co">#&gt;  [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 </span></span>
+<span><span class="co">#&gt;  [9] LC_ADDRESS=C               LC_TELEPHONE=C            </span></span>
+<span><span class="co">#&gt; [11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; time zone: Asia/Tokyo</span></span>
-<span><span class="co">#&gt; tzcode source: internal</span></span>
+<span><span class="co">#&gt; tzcode source: system (glibc)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; attached base packages:</span></span>
 <span><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets </span></span>
@@ -575,79 +575,79 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; other attached packages:</span></span>
 <span><span class="co">#&gt; [1] ggfx_1.0.1          RColorBrewer_1.1-3 </span></span>
-<span><span class="co">#&gt; [3] ggraph_2.1.0.9000   biotextgraph_0.99.0</span></span>
-<span><span class="co">#&gt; [5] ggplot2_3.4.3      </span></span>
+<span><span class="co">#&gt; [3] ggraph_2.1.0        biotextgraph_0.99.0</span></span>
+<span><span class="co">#&gt; [5] ggplot2_3.4.2      </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
-<span><span class="co">#&gt;   [1] ggdendro_0.1.23         jsonlite_1.8.7         </span></span>
-<span><span class="co">#&gt;   [3] pvclust_2.2-0           magrittr_2.0.3         </span></span>
-<span><span class="co">#&gt;   [5] magick_2.7.5            farver_2.1.1           </span></span>
-<span><span class="co">#&gt;   [7] rmarkdown_2.25          ragg_1.2.5             </span></span>
-<span><span class="co">#&gt;   [9] GlobalOptions_0.1.2     fs_1.6.3               </span></span>
-<span><span class="co">#&gt;  [11] zlibbioc_1.47.0         vctrs_0.6.3            </span></span>
-<span><span class="co">#&gt;  [13] memoise_2.0.1           cyjShiny_1.0.42        </span></span>
-<span><span class="co">#&gt;  [15] RCurl_1.98-1.12         base64enc_0.1-3        </span></span>
-<span><span class="co">#&gt;  [17] htmltools_0.5.6         curl_5.0.2             </span></span>
-<span><span class="co">#&gt;  [19] cellranger_1.1.0        gridGraphics_0.5-1     </span></span>
-<span><span class="co">#&gt;  [21] sass_0.4.7              GeneSummary_0.99.6     </span></span>
-<span><span class="co">#&gt;  [23] bslib_0.5.1             htmlwidgets_1.6.2      </span></span>
-<span><span class="co">#&gt;  [25] cachem_1.0.8            commonmark_1.9.0       </span></span>
-<span><span class="co">#&gt;  [27] igraph_1.5.1            mime_0.12              </span></span>
-<span><span class="co">#&gt;  [29] lifecycle_1.0.3         pkgconfig_2.0.3        </span></span>
-<span><span class="co">#&gt;  [31] R6_2.5.1                fastmap_1.1.1          </span></span>
-<span><span class="co">#&gt;  [33] GenomeInfoDbData_1.2.10 shiny_1.7.5            </span></span>
-<span><span class="co">#&gt;  [35] digest_0.6.33           colorspace_2.1-0       </span></span>
-<span><span class="co">#&gt;  [37] patchwork_1.1.3         AnnotationDbi_1.63.2   </span></span>
-<span><span class="co">#&gt;  [39] S4Vectors_0.38.1        textshaping_0.3.6      </span></span>
-<span><span class="co">#&gt;  [41] RSQLite_2.3.1           org.Hs.eg.db_3.17.0    </span></span>
-<span><span class="co">#&gt;  [43] filelock_1.0.2          labeling_0.4.3         </span></span>
-<span><span class="co">#&gt;  [45] fansi_1.0.4             httr_1.4.7             </span></span>
-<span><span class="co">#&gt;  [47] polyclip_1.10-4         compiler_4.3.1         </span></span>
-<span><span class="co">#&gt;  [49] bit64_4.0.5             withr_2.5.0            </span></span>
-<span><span class="co">#&gt;  [51] viridis_0.6.4           DBI_1.1.3              </span></span>
-<span><span class="co">#&gt;  [53] highr_0.10              dendextend_1.17.1      </span></span>
-<span><span class="co">#&gt;  [55] ggforce_0.4.1           taxonomizr_0.10.2      </span></span>
-<span><span class="co">#&gt;  [57] MASS_7.3-60             ISOcodes_2022.09.29    </span></span>
-<span><span class="co">#&gt;  [59] rjson_0.2.21            tools_4.3.1            </span></span>
+<span><span class="co">#&gt;   [1] ggdendro_0.1.23         rstudioapi_0.15.0      </span></span>
+<span><span class="co">#&gt;   [3] jsonlite_1.8.7          pvclust_2.2-0          </span></span>
+<span><span class="co">#&gt;   [5] magrittr_2.0.3          magick_2.8.1           </span></span>
+<span><span class="co">#&gt;   [7] farver_2.1.1            rmarkdown_2.23         </span></span>
+<span><span class="co">#&gt;   [9] ragg_1.2.5              GlobalOptions_0.1.2    </span></span>
+<span><span class="co">#&gt;  [11] fs_1.6.3                zlibbioc_1.46.0        </span></span>
+<span><span class="co">#&gt;  [13] vctrs_0.6.3             memoise_2.0.1          </span></span>
+<span><span class="co">#&gt;  [15] cyjShiny_1.0.42         RCurl_1.98-1.13        </span></span>
+<span><span class="co">#&gt;  [17] base64enc_0.1-3         htmltools_0.5.6        </span></span>
+<span><span class="co">#&gt;  [19] curl_5.0.1              cellranger_1.1.0       </span></span>
+<span><span class="co">#&gt;  [21] gridGraphics_0.5-1      sass_0.4.7             </span></span>
+<span><span class="co">#&gt;  [23] GeneSummary_0.99.6      bslib_0.5.1            </span></span>
+<span><span class="co">#&gt;  [25] htmlwidgets_1.6.2       cachem_1.0.8           </span></span>
+<span><span class="co">#&gt;  [27] commonmark_1.9.0        igraph_1.5.1           </span></span>
+<span><span class="co">#&gt;  [29] mime_0.12               lifecycle_1.0.3        </span></span>
+<span><span class="co">#&gt;  [31] pkgconfig_2.0.3         R6_2.5.1               </span></span>
+<span><span class="co">#&gt;  [33] fastmap_1.1.1           GenomeInfoDbData_1.2.10</span></span>
+<span><span class="co">#&gt;  [35] shiny_1.7.4.1           digest_0.6.33          </span></span>
+<span><span class="co">#&gt;  [37] colorspace_2.1-0        patchwork_1.1.3        </span></span>
+<span><span class="co">#&gt;  [39] AnnotationDbi_1.64.1    S4Vectors_0.38.1       </span></span>
+<span><span class="co">#&gt;  [41] textshaping_0.3.6       RSQLite_2.3.3          </span></span>
+<span><span class="co">#&gt;  [43] org.Hs.eg.db_3.18.0     filelock_1.0.2         </span></span>
+<span><span class="co">#&gt;  [45] labeling_0.4.2          fansi_1.0.4            </span></span>
+<span><span class="co">#&gt;  [47] httr_1.4.6              polyclip_1.10-6        </span></span>
+<span><span class="co">#&gt;  [49] compiler_4.3.0          bit64_4.0.5            </span></span>
+<span><span class="co">#&gt;  [51] withr_2.5.0             viridis_0.6.4          </span></span>
+<span><span class="co">#&gt;  [53] DBI_1.1.3               dendextend_1.17.1      </span></span>
+<span><span class="co">#&gt;  [55] highr_0.10              ggforce_0.4.1          </span></span>
+<span><span class="co">#&gt;  [57] MASS_7.3-58.4           ISOcodes_2022.09.29    </span></span>
+<span><span class="co">#&gt;  [59] rjson_0.2.21            tools_4.3.0            </span></span>
 <span><span class="co">#&gt;  [61] ape_5.7-1               stopwords_2.3          </span></span>
 <span><span class="co">#&gt;  [63] rentrez_1.2.3           httpuv_1.6.11          </span></span>
-<span><span class="co">#&gt;  [65] glue_1.6.2              nlme_3.1-163           </span></span>
+<span><span class="co">#&gt;  [65] glue_1.6.2              nlme_3.1-162           </span></span>
 <span><span class="co">#&gt;  [67] promises_1.2.1          gridtext_0.1.5         </span></span>
-<span><span class="co">#&gt;  [69] grid_4.3.1              shadowtext_0.1.2       </span></span>
-<span><span class="co">#&gt;  [71] generics_0.1.3          snow_0.4-4             </span></span>
-<span><span class="co">#&gt;  [73] gtable_0.3.4            tidyr_1.3.0            </span></span>
-<span><span class="co">#&gt;  [75] bugsigdbr_1.8.1         data.table_1.14.8      </span></span>
-<span><span class="co">#&gt;  [77] tidygraph_1.2.3         xml2_1.3.5             </span></span>
-<span><span class="co">#&gt;  [79] utf8_1.2.3              XVector_0.41.1         </span></span>
-<span><span class="co">#&gt;  [81] BiocGenerics_0.47.0     ggrepel_0.9.3          </span></span>
-<span><span class="co">#&gt;  [83] pillar_1.9.0            markdown_1.8           </span></span>
-<span><span class="co">#&gt;  [85] stringr_1.5.0           yulab.utils_0.1.0      </span></span>
-<span><span class="co">#&gt;  [87] later_1.3.1             dplyr_1.1.2            </span></span>
-<span><span class="co">#&gt;  [89] tweenr_2.0.2            lattice_0.21-8         </span></span>
-<span><span class="co">#&gt;  [91] BiocFileCache_2.9.1     bit_4.0.5              </span></span>
-<span><span class="co">#&gt;  [93] tidyselect_1.2.0        phylogram_2.1.0        </span></span>
-<span><span class="co">#&gt;  [95] tm_0.7-11               Biostrings_2.69.2      </span></span>
-<span><span class="co">#&gt;  [97] downlit_0.4.3           knitr_1.44             </span></span>
-<span><span class="co">#&gt;  [99] gridExtra_2.3           NLP_0.2-1              </span></span>
-<span><span class="co">#&gt; [101] bookdown_0.35           IRanges_2.35.2         </span></span>
-<span><span class="co">#&gt; [103] stats4_4.3.1            xfun_0.40              </span></span>
-<span><span class="co">#&gt; [105] graphlayouts_1.0.0      Biobase_2.61.0         </span></span>
-<span><span class="co">#&gt; [107] stringi_1.7.12          yaml_2.3.7             </span></span>
-<span><span class="co">#&gt; [109] evaluate_0.21           ggwordcloud_0.6.0      </span></span>
-<span><span class="co">#&gt; [111] wordcloud_2.6           tibble_3.2.1           </span></span>
-<span><span class="co">#&gt; [113] graph_1.79.1            ggplotify_0.1.2        </span></span>
-<span><span class="co">#&gt; [115] cli_3.6.1               systemfonts_1.0.4      </span></span>
-<span><span class="co">#&gt; [117] xtable_1.8-4            munsell_0.5.0          </span></span>
-<span><span class="co">#&gt; [119] jquerylib_0.1.4         readxl_1.4.3           </span></span>
-<span><span class="co">#&gt; [121] Rcpp_1.0.11             GenomeInfoDb_1.37.4    </span></span>
-<span><span class="co">#&gt; [123] dbplyr_2.3.3            png_0.1-8              </span></span>
-<span><span class="co">#&gt; [125] XML_3.99-0.14           parallel_4.3.1         </span></span>
-<span><span class="co">#&gt; [127] ellipsis_0.3.2          blob_1.2.4             </span></span>
-<span><span class="co">#&gt; [129] bitops_1.0-7            viridisLite_0.4.2      </span></span>
-<span><span class="co">#&gt; [131] slam_0.1-50             scales_1.2.1           </span></span>
-<span><span class="co">#&gt; [133] purrr_1.0.2             crayon_1.5.2           </span></span>
-<span><span class="co">#&gt; [135] GetoptLong_1.0.5        rlang_1.1.1            </span></span>
-<span><span class="co">#&gt; [137] cowplot_1.1.1           KEGGREST_1.41.0</span></span></code></pre></div>
+<span><span class="co">#&gt;  [69] grid_4.3.0              shadowtext_0.1.2       </span></span>
+<span><span class="co">#&gt;  [71] generics_0.1.3          gtable_0.3.3           </span></span>
+<span><span class="co">#&gt;  [73] tidyr_1.3.0             bugsigdbr_1.8.1        </span></span>
+<span><span class="co">#&gt;  [75] data.table_1.14.8       tidygraph_1.2.3        </span></span>
+<span><span class="co">#&gt;  [77] xml2_1.3.5              utf8_1.2.3             </span></span>
+<span><span class="co">#&gt;  [79] XVector_0.40.0          BiocGenerics_0.46.0    </span></span>
+<span><span class="co">#&gt;  [81] stringr_1.5.0           markdown_1.11          </span></span>
+<span><span class="co">#&gt;  [83] ggrepel_0.9.4           pillar_1.9.0           </span></span>
+<span><span class="co">#&gt;  [85] yulab.utils_0.1.0       later_1.3.1            </span></span>
+<span><span class="co">#&gt;  [87] dplyr_1.1.2             tweenr_2.0.2           </span></span>
+<span><span class="co">#&gt;  [89] BiocFileCache_2.8.0     lattice_0.21-8         </span></span>
+<span><span class="co">#&gt;  [91] bit_4.0.5               tidyselect_1.2.0       </span></span>
+<span><span class="co">#&gt;  [93] phylogram_2.1.0         tm_0.7-11              </span></span>
+<span><span class="co">#&gt;  [95] Biostrings_2.68.1       downlit_0.4.3          </span></span>
+<span><span class="co">#&gt;  [97] knitr_1.43              gridExtra_2.3          </span></span>
+<span><span class="co">#&gt;  [99] NLP_0.2-1               bookdown_0.36          </span></span>
+<span><span class="co">#&gt; [101] IRanges_2.34.1          stats4_4.3.0           </span></span>
+<span><span class="co">#&gt; [103] xfun_0.40               graphlayouts_1.0.2     </span></span>
+<span><span class="co">#&gt; [105] Biobase_2.60.0          stringi_1.7.12         </span></span>
+<span><span class="co">#&gt; [107] yaml_2.3.7              evaluate_0.21          </span></span>
+<span><span class="co">#&gt; [109] ggwordcloud_0.6.0       wordcloud_2.6          </span></span>
+<span><span class="co">#&gt; [111] tibble_3.2.1            graph_1.80.0           </span></span>
+<span><span class="co">#&gt; [113] ggplotify_0.1.2         cli_3.6.1              </span></span>
+<span><span class="co">#&gt; [115] systemfonts_1.0.4       xtable_1.8-4           </span></span>
+<span><span class="co">#&gt; [117] munsell_0.5.0           jquerylib_0.1.4        </span></span>
+<span><span class="co">#&gt; [119] Rcpp_1.0.11             GenomeInfoDb_1.36.4    </span></span>
+<span><span class="co">#&gt; [121] readxl_1.4.3            dbplyr_2.3.3           </span></span>
+<span><span class="co">#&gt; [123] png_0.1-8               XML_3.99-0.15          </span></span>
+<span><span class="co">#&gt; [125] parallel_4.3.0          ellipsis_0.3.2         </span></span>
+<span><span class="co">#&gt; [127] blob_1.2.4              bitops_1.0-7           </span></span>
+<span><span class="co">#&gt; [129] viridisLite_0.4.2       slam_0.1-50            </span></span>
+<span><span class="co">#&gt; [131] scales_1.2.1            purrr_1.0.2            </span></span>
+<span><span class="co">#&gt; [133] crayon_1.5.2            GetoptLong_1.0.5       </span></span>
+<span><span class="co">#&gt; [135] rlang_1.1.1             cowplot_1.1.1          </span></span>
+<span><span class="co">#&gt; [137] KEGGREST_1.40.1</span></span></code></pre></div>
 
 </div>
 </div>
@@ -659,7 +659,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#the-other-usage-for-microbiome-related-data"><span class="header-section-number">4</span> The other usage for microbiome-related data</a></li>
 <li><a class="nav-link" href="#disease"><span class="header-section-number">4.1</span> Diseases</a></li>
-<li><a class="nav-link" href="#enzymes"><span class="header-section-number">4.2</span> Enzymes</a></li>
+<li><a class="nav-link" href="#section"><span class="header-section-number">4.2</span></a></li>
 <li>
 <a class="nav-link" href="#metabolites"><span class="header-section-number">4.3</span> Metabolites</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#interactive"><span class="header-section-number">4.3.1</span> Visualizing complex network interactively</a></li></ul>
 </li>
@@ -681,7 +681,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-03.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
