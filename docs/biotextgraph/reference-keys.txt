@@ -17,6 +17,7 @@ biofabric-layouts-for-combined-networks
 wrapper-for-biofabric-layout
 dynamic-layout
 input-type
+split-by-ea
 metacyc
 the-other-usage-for-microbiome-related-data
 disease

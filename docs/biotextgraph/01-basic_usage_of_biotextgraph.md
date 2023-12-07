@@ -918,7 +918,7 @@ ex |> plot_biofabric(end_shape="square")
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/pbfbrc-1.png" width="100%" style="display: block; margin: auto;" />
 
-### Dynamic layout
+## Dynamic layout
 
 Dynamic layout can be also used to compare the networks, by `graphlayouts`, for comparing the multiple graphs, especially useful for time-series analysis. See the documentation of [`layout_as_dynamic`](http://graphlayouts.schochastics.net/reference/layout_dynamic.html) for specifying the alpha, which is default to 0.5. 
 
@@ -1102,6 +1102,245 @@ refseqDESeq2(res, log2FoldChange>2) |> plotNet(asis=TRUE)
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/refseqdeseq2-1.png" width="100%" style="display: block; margin: auto;" />
 
+## Split by EA
+
+If `splitByEA` option is enabled, the function first performs enrichment analysis on the queried input, and output the list of biotext object for each significant pathway, as well as for those not related to significant pathways. This is useful for confirming the prior knowledge in terms of textual information perspective.
+
+
+```r
+eanets <- refseq(inpSymbol, splitByEA="reactome")
+#> Total of 48 pathways, including non-enrichment terms
+#> Input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
+#> Input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
+#> Input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
+#> Input genes: 5
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.7
+#> Input genes: 5
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.7
+#> Input genes: 7
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.5
+#> Input genes: 5
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.7
+#> Input genes: 4
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.8
+#> Input genes: 4
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.8
+#> Input genes: 3
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 3
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 3
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 3
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Input genes: 2
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+```
 
 
 ```r
@@ -1130,106 +1369,101 @@ sessionInfo()
 #> [6] datasets  methods   base     
 #> 
 #> other attached packages:
-#>  [1] DESeq2_1.40.2               SummarizedExperiment_1.30.2
-#>  [3] MatrixGenerics_1.12.3       matrixStats_1.0.0          
-#>  [5] GenomicRanges_1.52.1        GenomeInfoDb_1.36.4        
-#>  [7] scales_1.2.1                ggforce_0.4.1              
-#>  [9] concaveman_1.1.0            ggkegg_1.1.7               
-#> [11] testthat_3.1.10             XML_3.99-0.15              
-#> [13] tidygraph_1.2.3             ggfx_1.0.1                 
-#> [15] igraph_1.5.1                GetoptLong_1.0.5           
-#> [17] ggrepel_0.9.4               dplyr_1.1.2                
-#> [19] dendextend_1.17.1           clusterProfiler_4.8.3      
-#> [21] ReactomePA_1.44.0           RColorBrewer_1.1-3         
-#> [23] ggraph_2.1.0                org.Hs.eg.db_3.18.0        
-#> [25] AnnotationDbi_1.64.1        IRanges_2.34.1             
-#> [27] S4Vectors_0.38.1            Biobase_2.60.0             
-#> [29] BiocGenerics_0.46.0         biotextgraph_0.99.0        
-#> [31] ggplot2_3.4.2              
+#>  [1] ggkegg_1.1.7          testthat_3.1.10      
+#>  [3] XML_3.99-0.15         tidygraph_1.2.3      
+#>  [5] ggfx_1.0.1            igraph_1.5.1         
+#>  [7] GetoptLong_1.0.5      ggrepel_0.9.4        
+#>  [9] dplyr_1.1.2           dendextend_1.17.1    
+#> [11] clusterProfiler_4.8.3 ReactomePA_1.44.0    
+#> [13] RColorBrewer_1.1-3    ggraph_2.1.0         
+#> [15] org.Hs.eg.db_3.18.0   AnnotationDbi_1.64.1 
+#> [17] IRanges_2.34.1        S4Vectors_0.38.1     
+#> [19] Biobase_2.60.0        BiocGenerics_0.46.0  
+#> [21] biotextgraph_0.99.0   ggplot2_3.4.2        
 #> 
 #> loaded via a namespace (and not attached):
-#>   [1] fs_1.6.3                bitops_1.0-7           
-#>   [3] enrichplot_1.20.3       devtools_2.4.5         
-#>   [5] HDO.db_0.99.1           httr_1.4.6             
-#>   [7] profvis_0.3.8           tools_4.3.0            
-#>   [9] utf8_1.2.3              R6_2.5.1               
-#>  [11] lazyeval_0.2.2          urlchecker_1.0.1       
-#>  [13] withr_2.5.0             graphite_1.46.0        
-#>  [15] prettyunits_1.1.1       gridExtra_2.3          
-#>  [17] downlit_0.4.3           cli_3.6.1              
-#>  [19] textshaping_0.3.6       Cairo_1.6-1            
-#>  [21] scatterpie_0.2.1        labeling_0.4.2         
-#>  [23] slam_0.1-50             sass_0.4.7             
-#>  [25] tm_0.7-11               systemfonts_1.0.4      
-#>  [27] commonmark_1.9.0        yulab.utils_0.1.0      
-#>  [29] gson_0.1.0              DOSE_3.26.2            
-#>  [31] rentrez_1.2.3           showtext_0.9-6         
-#>  [33] sessioninfo_1.2.2       rstudioapi_0.15.0      
-#>  [35] sysfonts_0.8.8          RSQLite_2.3.3          
-#>  [37] generics_0.1.3          gridGraphics_0.5-1     
-#>  [39] GO.db_3.17.0            Matrix_1.6-3           
-#>  [41] pvclust_2.2-0           fansi_1.0.4            
-#>  [43] abind_1.4-5             lifecycle_1.0.3        
-#>  [45] yaml_2.3.7              qvalue_2.32.0          
-#>  [47] BiocFileCache_2.8.0     cyjShiny_1.0.42        
-#>  [49] grid_4.3.0              blob_1.2.4             
-#>  [51] promises_1.2.1          crayon_1.5.2           
-#>  [53] miniUI_0.1.1.1          lattice_0.21-8         
-#>  [55] cowplot_1.1.1           KEGGREST_1.40.1        
-#>  [57] magick_2.8.1            pillar_1.9.0           
-#>  [59] knitr_1.43              fgsea_1.26.0           
-#>  [61] rjson_0.2.21            stopwords_2.3          
-#>  [63] codetools_0.2-19        fastmatch_1.1-4        
-#>  [65] glue_1.6.2              downloader_0.4         
-#>  [67] ggfun_0.1.3             data.table_1.14.8      
-#>  [69] remotes_2.4.2.1         vctrs_0.6.3            
-#>  [71] png_0.1-8               treeio_1.24.3          
-#>  [73] gtable_0.3.3            cachem_1.0.8           
-#>  [75] xfun_0.40               S4Arrays_1.2.0         
-#>  [77] mime_0.12               showtextdb_3.0         
-#>  [79] ISOcodes_2022.09.29     ellipsis_0.3.2         
-#>  [81] GeneSummary_0.99.6      nlme_3.1-162           
-#>  [83] ggtree_3.8.2            usethis_2.2.2          
-#>  [85] bit64_4.0.5             filelock_1.0.2         
-#>  [87] ggwordcloud_0.6.0       rprojroot_2.0.3        
-#>  [89] bslib_0.5.1             colorspace_2.1-0       
-#>  [91] DBI_1.1.3               tidyselect_1.2.0       
-#>  [93] processx_3.8.2          bit_4.0.5              
-#>  [95] compiler_4.3.0          curl_5.0.1             
-#>  [97] graph_1.80.0            xml2_1.3.5             
-#>  [99] NLP_0.2-1               DelayedArray_0.26.7    
-#> [101] desc_1.4.2              ggdendro_0.1.23        
-#> [103] bookdown_0.36           shadowtext_0.1.2       
-#> [105] callr_3.7.3             rappdirs_0.3.3         
-#> [107] stringr_1.5.0           digest_0.6.33          
-#> [109] rmarkdown_2.23          XVector_0.40.0         
-#> [111] htmltools_0.5.6         pkgconfig_2.0.3        
-#> [113] base64enc_0.1-3         highr_0.10             
-#> [115] dbplyr_2.3.3            fastmap_1.1.1          
-#> [117] rlang_1.1.1             GlobalOptions_0.1.2    
-#> [119] htmlwidgets_1.6.2       shiny_1.7.4.1          
-#> [121] farver_2.1.1            jquerylib_0.1.4        
-#> [123] jsonlite_1.8.7          BiocParallel_1.34.2    
-#> [125] GOSemSim_2.26.1         RCurl_1.98-1.13        
-#> [127] magrittr_2.0.3          GenomeInfoDbData_1.2.10
-#> [129] ggplotify_0.1.2         wordcloud_2.6          
-#> [131] patchwork_1.1.3         munsell_0.5.0          
-#> [133] Rcpp_1.0.11             ape_5.7-1              
-#> [135] viridis_0.6.4           stringi_1.7.12         
-#> [137] brio_1.1.3              zlibbioc_1.46.0        
-#> [139] MASS_7.3-58.4           plyr_1.8.9             
-#> [141] pkgbuild_1.4.2          parallel_4.3.0         
-#> [143] bugsigdbr_1.8.1         Biostrings_2.68.1      
-#> [145] graphlayouts_1.0.2      splines_4.3.0          
-#> [147] gridtext_0.1.5          locfit_1.5-9.8         
-#> [149] ps_1.7.5                markdown_1.11          
-#> [151] reshape2_1.4.4          pkgload_1.3.2.1        
-#> [153] evaluate_0.21           tweenr_2.0.2           
-#> [155] httpuv_1.6.11           tidyr_1.3.0            
-#> [157] purrr_1.0.2             polyclip_1.10-6        
-#> [159] xtable_1.8-4            reactome.db_1.84.0     
-#> [161] tidytree_0.4.5          later_1.3.1            
-#> [163] viridisLite_0.4.2       ragg_1.2.5             
-#> [165] snow_0.4-4              tibble_3.2.1           
-#> [167] aplot_0.2.2             memoise_2.0.1
+#>   [1] splines_4.3.0           later_1.3.1            
+#>   [3] filelock_1.0.2          bitops_1.0-7           
+#>   [5] ggplotify_0.1.2         tibble_3.2.1           
+#>   [7] polyclip_1.10-6         graph_1.80.0           
+#>   [9] lifecycle_1.0.3         rprojroot_2.0.3        
+#>  [11] bugsigdbr_1.8.1         processx_3.8.2         
+#>  [13] NLP_0.2-1               lattice_0.21-8         
+#>  [15] MASS_7.3-58.4           magrittr_2.0.3         
+#>  [17] sass_0.4.7              rmarkdown_2.23         
+#>  [19] remotes_2.4.2.1         jquerylib_0.1.4        
+#>  [21] yaml_2.3.7              httpuv_1.6.11          
+#>  [23] sessioninfo_1.2.2       pkgbuild_1.4.2         
+#>  [25] cowplot_1.1.1           DBI_1.1.3              
+#>  [27] pkgload_1.3.2.1         zlibbioc_1.46.0        
+#>  [29] purrr_1.0.2             downlit_0.4.3          
+#>  [31] RCurl_1.98-1.13         yulab.utils_0.1.0      
+#>  [33] tweenr_2.0.2            rappdirs_0.3.3         
+#>  [35] pvclust_2.2-0           GenomeInfoDbData_1.2.10
+#>  [37] ISOcodes_2022.09.29     enrichplot_1.20.3      
+#>  [39] cyjShiny_1.0.42         tm_0.7-11              
+#>  [41] tidytree_0.4.5          rentrez_1.2.3          
+#>  [43] reactome.db_1.84.0      ggwordcloud_0.6.0      
+#>  [45] commonmark_1.9.0        codetools_0.2-19       
+#>  [47] DOSE_3.26.2             xml2_1.3.5             
+#>  [49] ggforce_0.4.1           tidyselect_1.2.0       
+#>  [51] aplot_0.2.2             farver_2.1.1           
+#>  [53] viridis_0.6.4           GeneSummary_0.99.6     
+#>  [55] BiocFileCache_2.8.0     base64enc_0.1-3        
+#>  [57] showtext_0.9-6          jsonlite_1.8.7         
+#>  [59] ellipsis_0.3.2          systemfonts_1.0.4      
+#>  [61] tools_4.3.0             ragg_1.2.5             
+#>  [63] treeio_1.24.3           snow_0.4-4             
+#>  [65] Rcpp_1.0.11             glue_1.6.2             
+#>  [67] gridExtra_2.3           xfun_0.40              
+#>  [69] usethis_2.2.2           qvalue_2.32.0          
+#>  [71] GenomeInfoDb_1.36.4     withr_2.5.0            
+#>  [73] fastmap_1.1.1           fansi_1.0.4            
+#>  [75] callr_3.7.3             digest_0.6.33          
+#>  [77] R6_2.5.1                mime_0.12              
+#>  [79] gridGraphics_0.5-1      textshaping_0.3.6      
+#>  [81] colorspace_2.1-0        Cairo_1.6-1            
+#>  [83] GO.db_3.17.0            markdown_1.11          
+#>  [85] RSQLite_2.3.3           utf8_1.2.3             
+#>  [87] tidyr_1.3.0             generics_0.1.3         
+#>  [89] data.table_1.14.8       prettyunits_1.1.1      
+#>  [91] graphlayouts_1.0.2      stopwords_2.3          
+#>  [93] httr_1.4.6              htmlwidgets_1.6.2      
+#>  [95] scatterpie_0.2.1        graphite_1.46.0        
+#>  [97] pkgconfig_2.0.3         gtable_0.3.3           
+#>  [99] blob_1.2.4              XVector_0.40.0         
+#> [101] brio_1.1.3              shadowtext_0.1.2       
+#> [103] htmltools_0.5.6         profvis_0.3.8          
+#> [105] sysfonts_0.8.8          bookdown_0.36          
+#> [107] fgsea_1.26.0            scales_1.2.1           
+#> [109] png_0.1-8               wordcloud_2.6          
+#> [111] ggfun_0.1.3             ggdendro_0.1.23        
+#> [113] knitr_1.43              rstudioapi_0.15.0      
+#> [115] reshape2_1.4.4          rjson_0.2.21           
+#> [117] curl_5.0.1              nlme_3.1-162           
+#> [119] showtextdb_3.0          cachem_1.0.8           
+#> [121] GlobalOptions_0.1.2     stringr_1.5.0          
+#> [123] miniUI_0.1.1.1          parallel_4.3.0         
+#> [125] HDO.db_0.99.1           desc_1.4.2             
+#> [127] pillar_1.9.0            grid_4.3.0             
+#> [129] vctrs_0.6.3             urlchecker_1.0.1       
+#> [131] slam_0.1-50             promises_1.2.1         
+#> [133] dbplyr_2.3.3            xtable_1.8-4           
+#> [135] evaluate_0.21           magick_2.8.1           
+#> [137] cli_3.6.1               compiler_4.3.0         
+#> [139] rlang_1.1.1             crayon_1.5.2           
+#> [141] labeling_0.4.2          ps_1.7.5               
+#> [143] plyr_1.8.9              fs_1.6.3               
+#> [145] stringi_1.7.12          viridisLite_0.4.2      
+#> [147] BiocParallel_1.34.2     munsell_0.5.0          
+#> [149] Biostrings_2.68.1       lazyeval_0.2.2         
+#> [151] devtools_2.4.5          GOSemSim_2.26.1        
+#> [153] Matrix_1.6-3            patchwork_1.1.3        
+#> [155] bit64_4.0.5             KEGGREST_1.40.1        
+#> [157] shiny_1.7.4.1           highr_0.10             
+#> [159] gridtext_0.1.5          memoise_2.0.1          
+#> [161] bslib_0.5.1             ggtree_3.8.2           
+#> [163] fastmatch_1.1-4         bit_4.0.5              
+#> [165] downloader_0.4          ape_5.7-1              
+#> [167] gson_0.1.0
 ```

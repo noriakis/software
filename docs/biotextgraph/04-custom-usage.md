@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 62bef11 DN-- 3 2 -- 
+#> IGRAPH 91c1169 DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 62bef11 (vertex names):
+#> + edges from 91c1169 (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,9 +212,7 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette RdPu is 9
-#> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGnBu is 9
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network'
 #> はすでに存在します
@@ -253,9 +251,6 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : One word could not fit
-#> on page. It has been removed.
 ```
 
 # Annotating gene cluster dendrogram
@@ -831,11 +826,6 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 
 ```r
 library(limma)
-#> 
-#>  次のパッケージを付け加えます: 'limma'
-#>  以下のオブジェクトは 'package:BiocGenerics' からマスクされています:
-#> 
-#>     plotMA
 library(ggrepel)
 query <- "DNA repair"
 tab <- getGeneKEGGLinks(species="hsa")
@@ -917,8 +907,6 @@ p <- ggplot(plt, aes(dna, repair, label = plt[,3])) +
     geom_text_repel(bg.color="white")+theme_minimal()+
     xlab("dna")+ylab("repair")
 p
-#> Warning: ggrepel: 10 unlabeled data points (too many
-#> overlaps). Consider increasing max.overlaps
 ```
 
 <img src="04-custom-usage_files/figure-html/findterm-1.png" width="100%" style="display: block; margin: auto;" />
