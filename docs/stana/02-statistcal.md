@@ -25,13 +25,13 @@ stana <- consensusSeqMIDAS2(stana, species="100003", verbose=FALSE)
 #>   Included samples: 11
 
 ## Tree estimation and visualization by `phangorn` and `ggtree`
-dm <- dist.ml(stana@fastaList$`100003`)
+dm <- dist.ml(getSlot(stana, "fastaList")[["100003"]])
 tre <- NJ(dm)
-tre <- groupOTU(tre, stana@cl)
+tre <- groupOTU(tre, getSlot(stana, "cl"))
 tp <- ggtree(tre, aes(color=.data$group),
              layout='circular') +
         geom_tippoint(size=3) +
-        ggtree::scale_color_manual(values=stana@colors)
+        ggtree::scale_color_manual(values=getSlot(stana, "colors"))
 tp
 ```
 
@@ -84,16 +84,59 @@ getTree(stana)[[1]]
 #> Unrooted; includes branch lengths.
 ```
 
+Owning to the powerful functions in `ggtree` and `ggtreeExtra`, you can visualize the tree based on the metadata.
+You should set `data.frame` containing covariates to stana object by `setMetadata` function. And specify the covariates to `meta` argument in `plotTree`.
+
+
+
+```r
+## Make example metadata
+samples <- getSlot(stana, "snps")[["100003"]] |> colnames()
+metadata <- data.frame(
+    row.names=samples,
+    treatment=sample(1:3, length(samples), replace=TRUE),
+    marker=runif(length(samples))
+)
+
+## Set metadata
+stana <- setMetadata(stana, metadata)
+
+## Call consensus sequence
+## Infer and plot tree based on metadata
+stana <- stana |>
+  consensusSeq(argList=list(site_prev=0.95)) |>
+  plotTree(meta=c("treatment","marker"))
+#> Beginning calling for 100003
+#>   Site number: 5019
+#>   Profiled samples: 11
+#>   Included samples: 11
+getFasta(stana)[[1]]
+#> 11 sequences with 896 character and 625 different site patterns.
+#> The states are a c g t
+getTree(stana)[[1]]
+#> 
+#> Phylogenetic tree with 11 tips and 9 internal nodes.
+#> 
+#> Tip labels:
+#>   ERR1711593, ERR1711594, ERR1711596, ERR1711598, ERR1711603, ERR1711605, ...
+#> 
+#> Unrooted; includes branch lengths.
+getSlot(stana, "treePlotList")[[1]]
+```
+
+<img src="02-statistcal_files/figure-html/tree_fruit-1.png" width="768" />
+
+
 ## PERMANOVA
 
-Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the `target=tree` is specified, tree shuold be in `stana@treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
+Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the `target=tree` is specified, tree shuold be in `treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
 
 
 ```r
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> Performing adonis in 100003
-#>   R2: 0.0740407267582885, Pr: 0.694
+#>   R2: 0.0740407267582885, Pr: 0.711
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -102,7 +145,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ gr)
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.694
+#> gr        1  0.15557 0.07404 0.7196  0.711
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -137,17 +180,16 @@ brres <- doBoruta(stana, "100003")
 #> If needed, please provide preprocessed matrix of genes to `mat`
 #> Feature number: 21806
 #> Performing Boruta
-#> Warning in Boruta::TentativeRoughFix(rf): There are no
-#> Tentative attributes! Returning original object.
 brres
 #> $boruta
-#> Boruta performed 97 iterations in 37.24746 secs.
-#>  8 attributes confirmed important: UHGG000008_01798,
-#> UHGG025024_01181, UHGG035311_01086, UHGG060667_01243,
-#> UHGG158704_01078 and 3 more;
-#>  21798 attributes confirmed unimportant:
+#> Boruta performed 99 iterations in 51.52401 secs.
+#> Tentatives roughfixed over the last 99 iterations.
+#>  9 attributes confirmed important: UHGG000008_01798,
+#> UHGG004375_00184, UHGG044133_01185, UHGG060667_01243,
+#> UHGG061776_01339 and 4 more;
+#>  21797 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21793 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21792 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.
@@ -169,6 +211,6 @@ plotGenes(stana, "100003",
 stanacomb <- combineGenes(list(stana, stana), species="100003")
 #> Common genes: 21806
 #> Duplicate label found in group
-dim(stanacomb@genes[["100003"]])
+dim(getSlot(stanacomb, "genes")[["100003"]])
 #> [1] 21806    32
 ```

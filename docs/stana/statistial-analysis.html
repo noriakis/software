@@ -83,13 +83,13 @@
 <span><span class="co">#&gt;   Included samples: 11</span></span>
 <span></span>
 <span><span class="co">## Tree estimation and visualization by `phangorn` and `ggtree`</span></span>
-<span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="va">stana</span><span class="op">@</span><span class="va">fastaList</span><span class="op">$</span><span class="va">`100003`</span><span class="op">)</span></span>
+<span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"fastaList"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/NJ.html">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span></span>
-<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytree/man/groupOTU.html">groupOTU</a></span><span class="op">(</span><span class="va">tre</span>, <span class="va">stana</span><span class="op">@</span><span class="va">cl</span><span class="op">)</span></span>
+<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytree/man/groupOTU.html">groupOTU</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"cl"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>,</span>
 <span>             layout<span class="op">=</span><span class="st">'circular'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/geom_tippoint.html">geom_tippoint</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>        <span class="fu">ggtree</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="va">stana</span><span class="op">@</span><span class="va">colors</span><span class="op">)</span></span>
+<span>        <span class="fu">ggtree</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"colors"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">tp</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/cons-1.png" width="672"></div>
 <p>The sequences are stored as <code>phyDat</code> class object in <code>fastaList</code> slot, the list with the species ID as name.</p>
@@ -127,17 +127,53 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span><span class="co">#&gt;   ERR1711593, ERR1711594, ERR1711596, ERR1711598, ERR1711603, ERR1711605, ...</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Unrooted; includes branch lengths.</span></span></code></pre></div>
+<p>Owning to the powerful functions in <code>ggtree</code> and <code>ggtreeExtra</code>, you can visualize the tree based on the metadata.
+You should set <code>data.frame</code> containing covariates to stana object by <code>setMetadata</code> function. And specify the covariates to <code>meta</code> argument in <code>plotTree</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Make example metadata</span></span>
+<span><span class="va">samples</span> <span class="op">&lt;-</span> <span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snps"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    row.names<span class="op">=</span><span class="va">samples</span>,</span>
+<span>    treatment<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samples</span><span class="op">)</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    marker<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">samples</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Set metadata</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setMetadata.html">setMetadata</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">metadata</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Call consensus sequence</span></span>
+<span><span class="co">## Infer and plot tree based on metadata</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="va">stana</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/stana/man/consensusSeq.html">consensusSeq</a></span><span class="op">(</span>argList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>site_prev<span class="op">=</span><span class="fl">0.95</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotTree.html">plotTree</a></span><span class="op">(</span>meta<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"treatment"</span>,<span class="st">"marker"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Beginning calling for 100003</span></span>
+<span><span class="co">#&gt;   Site number: 5019</span></span>
+<span><span class="co">#&gt;   Profiled samples: 11</span></span>
+<span><span class="co">#&gt;   Included samples: 11</span></span>
+<span><span class="fu">getFasta</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; 11 sequences with 896 character and 625 different site patterns.</span></span>
+<span><span class="co">#&gt; The states are a c g t</span></span>
+<span><span class="fu">getTree</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Phylogenetic tree with 11 tips and 9 internal nodes.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tip labels:</span></span>
+<span><span class="co">#&gt;   ERR1711593, ERR1711594, ERR1711596, ERR1711598, ERR1711603, ERR1711605, ...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Unrooted; includes branch lengths.</span></span>
+<span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stana</span>, <span class="st">"treePlotList"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-statistcal_files/figure-html/tree_fruit-1.png" width="768"></div>
 </div>
 <div id="permanova" class="section level2" number="3.2">
 <h2>
 <span class="header-section-number">3.2</span> PERMANOVA<a class="anchor" aria-label="anchor" href="#permanova"><i class="fas fa-link"></i></a>
 </h2>
-<p>Using <code>adonis2</code> function in <code>vegan</code>, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the <code>target=tree</code> is specified, tree shuold be in <code>stana@treeList</code>, with the species name as the key. The <code><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">ape::cophenetic.phylo()</a></code> is used to calculate distance between tips based on branch length. Distance method can be chosen from <code>dist</code> function in <code>stats</code>. You can specify <code>distArg</code> to pass the arguments to <code>dist</code>. Also, the distance calculated directly from sequences can be used. In this case, <code>target='fasta'</code> should be chosen, and the function to calculate distance should be provided to <code>AAfunc</code> argument.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<p>Using <code>adonis2</code> function in <code>vegan</code>, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the <code>target=tree</code> is specified, tree shuold be in <code>treeList</code>, with the species name as the key. The <code><a href="https://rdrr.io/pkg/ape/man/cophenetic.phylo.html">ape::cophenetic.phylo()</a></code> is used to calculate distance between tips based on branch length. Distance method can be chosen from <code>dist</code> function in <code>stats</code>. You can specify <code>distArg</code> to pass the arguments to <code>dist</code>. Also, the distance calculated directly from sequences can be used. In this case, <code>target='fasta'</code> should be chosen, and the function to calculate distance should be provided to <code>AAfunc</code> argument.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setTree.html">setTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">tre</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Performing adonis in 100003</span></span>
-<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.694</span></span>
+<span><span class="co">#&gt;   R2: 0.0740407267582885, Pr: 0.711</span></span>
 <span><span class="fu">getAdonis</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
@@ -146,7 +182,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ gr)</span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.694</span></span>
+<span><span class="co">#&gt; gr        1  0.15557 0.07404 0.7196  0.711</span></span>
 <span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
 <span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
 </div>
@@ -155,7 +191,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span class="header-section-number">3.3</span> Comparing gene copy numbers<a class="anchor" aria-label="anchor" href="#comparing-gene-copy-numbers"><i class="fas fa-link"></i></a>
 </h2>
 <p>For <code>MIDAS</code> and <code>MIDAS2</code> output (or if you have <code>genes</code> slot filled in the stana object), gene copy numbers can be compared one by one using exact Wilcoxon rank-sum test using <code>wilcox.exact</code> in <code>exactRankTests</code> computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/compareGenes.html">compareGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Testing total of 21806</span></span>
 <span><span class="va">res</span><span class="op">[[</span><span class="st">"UHGG000008_01733"</span><span class="op">]</span><span class="op">]</span></span>
@@ -171,26 +207,25 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <span class="header-section-number">3.4</span> Performing Boruta<a class="anchor" aria-label="anchor" href="#performing-boruta"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>Boruta</code> algorithm can be run on matrices to obtain important marker (SNV or gene) for distinguishing between group by <code>doBoruta</code> function. The function performs <code>Boruta</code> algorithm on specified data and returns the <code>Boruta</code> class result. By default, the function performs fixes to tentative input. To disable this, specify <code>doFix=FALSE</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gitlab.com/mbq/Boruta/">Boruta</a></span><span class="op">)</span></span>
 <span><span class="va">brres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doBoruta.html">doBoruta</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using grouping from the slot</span></span>
 <span><span class="co">#&gt; If needed, please provide preprocessed matrix of genes to `mat`</span></span>
 <span><span class="co">#&gt; Feature number: 21806</span></span>
 <span><span class="co">#&gt; Performing Boruta</span></span>
-<span><span class="co">#&gt; Warning in Boruta::TentativeRoughFix(rf): There are no</span></span>
-<span><span class="co">#&gt; Tentative attributes! Returning original object.</span></span>
 <span><span class="va">brres</span></span>
 <span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 97 iterations in 37.24746 secs.</span></span>
-<span><span class="co">#&gt;  8 attributes confirmed important: UHGG000008_01798,</span></span>
-<span><span class="co">#&gt; UHGG025024_01181, UHGG035311_01086, UHGG060667_01243,</span></span>
-<span><span class="co">#&gt; UHGG158704_01078 and 3 more;</span></span>
-<span><span class="co">#&gt;  21798 attributes confirmed unimportant:</span></span>
+<span><span class="co">#&gt; Boruta performed 99 iterations in 51.52401 secs.</span></span>
+<span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
+<span><span class="co">#&gt;  9 attributes confirmed important: UHGG000008_01798,</span></span>
+<span><span class="co">#&gt; UHGG004375_00184, UHGG044133_01185, UHGG060667_01243,</span></span>
+<span><span class="co">#&gt; UHGG061776_01339 and 4 more;</span></span>
+<span><span class="co">#&gt;  21797 attributes confirmed unimportant:</span></span>
 <span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
-<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21793 more;</span></span></code></pre></div>
+<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21792 more;</span></span></code></pre></div>
 <p>Further, we visualize the copy numbers of important genes confirmed between the group.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>,</span>
 <span>          <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">geneID</span>,scales<span class="op">=</span><span class="st">"free_y"</span><span class="op">)</span></span></code></pre></div>
@@ -200,12 +235,12 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <h2>
 <span class="header-section-number">3.5</span> Aggregating gene copy numbers<a class="anchor" aria-label="anchor" href="#aggregating-gene-copy-numbers"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## This returns new stana object</span></span>
 <span><span class="va">stanacomb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/combineGenes.html">combineGenes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">stana</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"100003"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Common genes: 21806</span></span>
 <span><span class="co">#&gt; Duplicate label found in group</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">stanacomb</span><span class="op">@</span><span class="va">genes</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="fu">getSlot</span><span class="op">(</span><span class="va">stanacomb</span>, <span class="st">"genes"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 21806    32</span></span></code></pre></div>
 
 </div>
@@ -239,7 +274,7 @@ The <code>plotTree</code> function can be used to internally infer and plot the 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-11-13.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2023-12-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
