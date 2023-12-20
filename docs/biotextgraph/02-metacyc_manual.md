@@ -193,8 +193,6 @@ input3Net <- manual(input3, plotType="network", queryPlot=TRUE,
                                        "pathway","pathways","enzyme","enzymes",
                                        "bacteria","reaction","protein","biosynthesis",
                                        "organism","organisms"))
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.8
 #> Bootstrap (r = 0.5)... Done.
 #> Bootstrap (r = 0.6)... Done.
 #> Bootstrap (r = 0.7)... Done.
@@ -205,6 +203,8 @@ input3Net <- manual(input3, plotType="network", queryPlot=TRUE,
 #> Bootstrap (r = 1.2)... Done.
 #> Bootstrap (r = 1.3)... Done.
 #> Bootstrap (r = 1.4)... Done.
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.8
 #> Including columns pathwayID to link with query
 plotNet(input3Net, asis=TRUE)
 ```

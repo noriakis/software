@@ -258,16 +258,7 @@ vp <- bugsigdb(c("Veillonella parvula"),
 #> Filtering 0 words (frequency and/or tfidf)
 #> Processing EC file
 #>   Linking taxonomy to EC
-#> Bootstrap (r = 0.5)... Done.
-#> Bootstrap (r = 0.6)... Done.
-#> Bootstrap (r = 0.7)... Done.
-#> Bootstrap (r = 0.8)... Done.
-#> Bootstrap (r = 0.9)... Done.
-#> Bootstrap (r = 1.0)... Done.
-#> Bootstrap (r = 1.1)... Done.
-#> Bootstrap (r = 1.2)... Done.
-#> Bootstrap (r = 1.3)... Done.
-#> Bootstrap (r = 1.4)... Done.
+#> Multiscale bootstrap... Done.
 plotNet(vp, asis=TRUE)
 ```
 
@@ -507,25 +498,25 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
     useWGCNA=FALSE, spacer=0.05,
     horiz=FALSE, wcScale=5)
 #> Ignoring corThresh, automatically determine the value
+#> threshold = 0.401
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.201
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.7
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.101
+#> threshold = 0.202
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.401
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.101
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.101
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.402
+#> threshold = 0.601
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2

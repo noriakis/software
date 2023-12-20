@@ -293,16 +293,7 @@ will be set to <code>TRUE</code> by default. Words from PubMed that is contained
 <span><span class="co">#&gt; Filtering 0 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Processing EC file</span></span>
 <span><span class="co">#&gt;   Linking taxonomy to EC</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 0.5)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 0.6)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 0.7)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 0.8)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 0.9)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.0)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.1)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.2)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.3)... Done.</span></span>
-<span><span class="co">#&gt; Bootstrap (r = 1.4)... Done.</span></span>
+<span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">vp</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-microbiome_usage_files/figure-html/enzyme-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -516,25 +507,25 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <span>    useWGCNA<span class="op">=</span><span class="cn">FALSE</span>, spacer<span class="op">=</span><span class="fl">0.05</span>,</span>
 <span>    horiz<span class="op">=</span><span class="cn">FALSE</span>, wcScale<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.401</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.201</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.7</span></span>
+<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.1</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; threshold = 0.202</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.401</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.101</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.101</span></span>
-<span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.402</span></span>
+<span><span class="co">#&gt; threshold = 0.601</span></span>
 <span><span class="co">#&gt; Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
@@ -681,7 +672,7 @@ First, read the downloaded file using <code>readxl</code>.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-07.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-20.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
