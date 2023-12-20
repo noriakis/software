@@ -236,9 +236,9 @@ In this example, the barplot of words are shown in the nodes.</p>
 <span>     <span class="st">"ME2"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">2</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>     <span class="st">"ME3"</span><span class="op">=</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">[</span><span class="va">mod</span><span class="op">$</span><span class="va">colors</span><span class="op">==</span><span class="fl">3</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span></span>
-<span><span class="co">#&gt; IGRAPH 644ec95 DN-- 3 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH c536438 DN-- 3 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 644ec95 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from c536438 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] ME1-&gt;ME2 ME1-&gt;ME3</span></span>
 <span><span class="va">geneList</span></span>
 <span><span class="co">#&gt; $ME1</span></span>
@@ -260,12 +260,9 @@ In this example, the barplot of words are shown in the nodes.</p>
 <span><span class="co">#&gt; [7] "ENSG00000049167"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/exportWCNetwork.html">exportWCNetwork</a></span><span class="op">(</span><span class="va">g</span>,<span class="va">geneList</span>,keyType<span class="op">=</span><span class="st">"ENSEMBL"</span>,</span>
 <span>    wcScale<span class="op">=</span><span class="fl">50</span>,scaleMax<span class="op">=</span><span class="fl">20</span>,scaleMin<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlGnBu is 9</span></span>
 <span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuPu is 9</span></span>
-<span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuPu is 9</span></span>
+<span><span class="co">#&gt; Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette GnBu is 9</span></span>
 <span><span class="co">#&gt; Returning the palette you asked for with that many colors</span></span>
 <span><span class="co">#&gt; Warning in dir.create(paste0(dir)): 'network'</span></span>
 <span><span class="co">#&gt; はすでに存在します</span></span>
