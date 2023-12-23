@@ -22,7 +22,7 @@ library(ggraph);library(igraph)
 load(system.file("extdata", "sysdata.rda", package = "biotextgraph"))
 ```
 
-For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer ([Chen et al. 2019](https://doi.org/10.1038/s41556-019-0361-y)).
+For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the basic usage example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer ([Chen et al. 2019](https://doi.org/10.1038/s41556-019-0361-y)). The gene set contains 621 genes.
 
 First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.
 
@@ -235,7 +235,7 @@ length(no_enr)
 
 ### Text mining the gene summaries
 
-Next we perform the plain function producing a correlation network, with showing the top-genes related to high-frequency words in the text in RefSeq summary. We obtained the list of these genes from geneCount slot.
+Next we perform the plain function producing a correlation network, with showing the top-genes related to high-frequency words in the text in RefSeq summary. We make two networks, those related to significantly enriched pathways and those not related to the significant pathways.
 
 
 ```r
@@ -261,7 +261,7 @@ plotNet(net2, asis=TRUE)
 
 ### Combine and inspect merged network
 
-From the RefSeq summary and articles related to important genes, the cluster could have functionality of DNA damage response, which is also upregulated by BKPyV infection. These networks can be combined to find intersections and differences. We can see that in addition to Reactome pathway names, plenty of information could be obtained and summarized by querying other databases, which could aid in interpreting clusters of genes and hypothesis generation.
+These networks can be combined to find intersections and differences, from textual perspective. We can see from the results that the genes related to non-enriched pathways could be associated with the membrane transport and adhesion, while genes in the enriched pathways have textual information resembling to those in curated biological databases (such as DNA damage response and tumor suppression).
 
 
 ```r

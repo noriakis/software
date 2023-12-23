@@ -98,7 +98,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">ReactomePA</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yulab-smu.top/biomedical-knowledge-mining-book/">clusterProfiler</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer (<a href="https://doi.org/10.1038/s41556-019-0361-y">Chen et al. 2019</a>).</p>
+<p>For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the basic usage example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer (<a href="https://doi.org/10.1038/s41556-019-0361-y">Chen et al. 2019</a>). The gene set contains 621 genes.</p>
 <p>First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.</p>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/bitr.html">bitr</a></span><span class="op">(</span><span class="va">exampleWGCNAcluster</span>,</span>
@@ -291,7 +291,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <h3>
 <span class="header-section-number">9.3.3</span> Text mining the gene summaries<a class="anchor" aria-label="anchor" href="#text-mining-the-gene-summaries"><i class="fas fa-link"></i></a>
 </h3>
-<p>Next we perform the plain function producing a correlation network, with showing the top-genes related to high-frequency words in the text in RefSeq summary. We obtained the list of these genes from geneCount slot.</p>
+<p>Next we perform the plain function producing a correlation network, with showing the top-genes related to high-frequency words in the text in RefSeq summary. We make two networks, those related to significantly enriched pathways and those not related to the significant pathways.</p>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseq.html">refseq</a></span><span class="op">(</span><span class="va">excheck</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">50</span>, docsum<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 57</span></span>
@@ -315,7 +315,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <h3>
 <span class="header-section-number">9.3.4</span> Combine and inspect merged network<a class="anchor" aria-label="anchor" href="#combine-and-inspect-merged-network"><i class="fas fa-link"></i></a>
 </h3>
-<p>From the RefSeq summary and articles related to important genes, the cluster could have functionality of DNA damage response, which is also upregulated by BKPyV infection. These networks can be combined to find intersections and differences. We can see that in addition to Reactome pathway names, plenty of information could be obtained and summarized by querying other databases, which could aid in interpreting clusters of genes and hypothesis generation.</p>
+<p>These networks can be combined to find intersections and differences, from textual perspective. We can see from the results that the genes related to non-enriched pathways could be associated with the membrane transport and adhesion, while genes in the enriched pathways have textual information resembling to those in curated biological databases (such as DNA damage response and tumor suppression).</p>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,</span>
 <span>               titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Enrich"</span>,<span class="st">"No_Enrich"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -467,7 +467,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-20.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2023-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
