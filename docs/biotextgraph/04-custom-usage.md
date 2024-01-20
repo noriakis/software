@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 18ad30f DN-- 3 2 -- 
+#> IGRAPH 7becade DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 18ad30f (vertex names):
+#> + edges from 7becade (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -212,7 +212,11 @@ geneList
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL",
     wcScale=50,scaleMax=20,scaleMin=10)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuBuGn is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel1 is 9
+#> Returning the palette you asked for with that many colors
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Reds is 9
+#> Returning the palette you asked for with that many colors
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuRd is 9
 #> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network'
 #> はすでに存在します
@@ -252,8 +256,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL",
 #> Adding another scale for size, which will replace the
 #> existing scale.
 #> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
+#> points_valid_first, boxes = boxes, : One word could not fit
+#> on page. It has been removed.
 ```
 
 # Annotating gene cluster dendrogram
@@ -803,6 +807,18 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Bootstrap (r = 1.4)... Done.
 #> Input genes: 5847
 #>   Converted input genes: 4869
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
+#> Input genes: 634
+#>   Converted input genes: 513
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.1
+#> Input genes: 2054
+#>   Converted input genes: 1677
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value

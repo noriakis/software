@@ -32,19 +32,15 @@ converted <- clusterProfiler::bitr(exampleWGCNAcluster,
     fromType="ENSEMBL", toType="ENTREZID",
     OrgDb="org.Hs.eg.db")[,2]
 ora <- clusterProfiler::enrichKEGG(converted)
-ora |> filter(p.adjust<0.05) |> data.frame() |> dplyr::pull("Description")
-#>  [1] "Butanoate metabolism"                      
-#>  [2] "Fatty acid metabolism"                     
-#>  [3] "Tight junction"                            
-#>  [4] "Valine, leucine and isoleucine degradation"
-#>  [5] "Peroxisome"                                
-#>  [6] "Fatty acid degradation"                    
-#>  [7] "Fatty acid elongation"                     
-#>  [8] "Biosynthesis of unsaturated fatty acids"   
-#>  [9] "alpha-Linolenic acid metabolism"           
-#> [10] "PPAR signaling pathway"                    
-#> [11] "Aldosterone-regulated sodium reabsorption" 
-#> [12] "Sphingolipid metabolism"
+ora |> dplyr::filter(p.adjust<0.05) |> data.frame() |> dplyr::pull("Description")
+#> [1] "p53 signaling pathway"                
+#> [2] "Pathogenic Escherichia coli infection"
+#> [3] "PI3K-Akt signaling pathway"           
+#> [4] "ECM-receptor interaction"             
+#> [5] "Small cell lung cancer"               
+#> [6] "Lipid and atherosclerosis"            
+#> [7] "Hepatocellular carcinoma"             
+#> [8] "Influenza A"
 enrichplot::dotplot(ora, showCategory=20)
 ```
 
@@ -56,7 +52,7 @@ We use the function in `biotextgraph` to make a summarized visualization of text
 ```r
 check <- refseq(converted, genePlot=TRUE,
                 filterByGO=TRUE, keyType="ENTREZID", autoThresh=FALSE)
-#> Input genes: 534
+#> Input genes: 168
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> `filterByGO` option enabled. Filtering by GO terms ...
@@ -76,7 +72,7 @@ enr_genes <- ora@result %>% data.frame() %>%
 
 no_enr <- converted[!(converted %in% enr_genes)]
 length(no_enr)
-#> [1] 472
+#> [1] 135
 ```
 
 This time, we enable the `filterByGO` option along with `ngram=2`, which produces 2-gram visualization.
@@ -91,7 +87,7 @@ check_noenr_WGO <- refseq(no_enr,
     autoThresh=FALSE,
     corThresh=0.1,
     docsum=TRUE)
-#> Input genes: 472
+#> Input genes: 135
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> `filterByGO` option enabled. Filtering by GO terms ...
