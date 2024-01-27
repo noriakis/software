@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2023-12-02"
+date: "2024-01-27"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -70,12 +70,23 @@ If named numeric vector is provided, continuous scale will be used.
 ```r
 ## Highlight genes in the pathway, and overlay raw map.
 vecs <- c(-2,2) |> setNames(c("CDKN2A", "CDC45"))
-highlight_entities("hsa04110", vecs) + 
+cs <- highlight_entities("hsa04110", vecs) + 
     scale_fill_viridis(name="LFC")
+cs
 ```
 
 <img src="index_files/figure-html/ggkegg3-1.png" width="100%" style="display: block; margin: auto;" />
 
+The plot using the original KEGG image can be saved via the `ggkeggsave` using the original dimension. The function is the wrapper of `ggsave`.
+
+
+```r
+ggkeggsave(filename="test.png", cs, dpi=300)
+knitr::include_graphics("test.png")
+```
+
+<img src="test.png" width="100%" style="display: block; margin: auto;" />
+
 ## Bugs and errors
 
-If you find bugs or errors such as parsing errors, please kindly report them to [Issues](https://github.com/noriakis/ggkegg/issues), or make a [pull request](https://github.com/noriakis/ggkegg/pulls), or report it directly to [e-mail](nori@hgc.jp).
+If you find bugs, suggestions, or errors such as parsing errors, please kindly report them to [Issues](https://github.com/noriakis/ggkegg/issues), or make a [pull request](https://github.com/noriakis/ggkegg/pulls), or report it directly to [e-mail](nori@hgc.jp).
