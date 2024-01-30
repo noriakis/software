@@ -496,7 +496,10 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Scale for size is already present.</span></span>
 <span><span class="co">#&gt; Adding another scale for size, which will replace the</span></span>
 <span><span class="co">#&gt; existing scale.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotWC</a></span><span class="op">(</span><span class="va">geneplotWC</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotWC</a></span><span class="op">(</span><span class="va">geneplotWC</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in wordcloud_boxes(data_points =</span></span>
+<span><span class="co">#&gt; points_valid_first, boxes = boxes, : One word could not fit</span></span>
+<span><span class="co">#&gt; on page. It has been removed.</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/assoc_wc-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 </div>
@@ -523,12 +526,12 @@ The <code>enrich</code> option can be specified for <code>'kegg'</code> or <code
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Multiscale bootstrap... Done.</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.4</span></span>
+<span><span class="co">#&gt; threshold = 0.3</span></span>
 <span><span class="va">abtag2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">pubmed</a></span><span class="op">(</span>redo<span class="op">=</span><span class="va">abtag</span>, tag<span class="op">=</span><span class="st">"cor"</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    plotType<span class="op">=</span><span class="st">"network"</span>, corThresh<span class="op">=</span><span class="fl">0.2</span>, pre<span class="op">=</span><span class="cn">TRUE</span>, apiKey<span class="op">=</span><span class="va">apiKey</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Using previous pvclust resultsIgnoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.302</span></span>
+<span><span class="co">#&gt; threshold = 0.201</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotNet</a></span><span class="op">(</span><span class="va">abtag2</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/pubmed_wc_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If only the gene symbols are to be plotted, specify <code>onlyGene=TRUE</code>.</p>
@@ -586,7 +589,7 @@ To overcome this, the <code>perQuery</code> option can be specified to search th
 <span>    corThresh<span class="op">=</span><span class="fl">0.2</span>, numWords<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Resuming from the previous results</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.4</span></span>
+<span><span class="co">#&gt; threshold = 0.3</span></span>
 <span></span>
 <span><span class="co">## Not having meaningful overlaps</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,</span>
@@ -731,7 +734,7 @@ Filter words using ORA threshold and frequency threshold by setting <code>ora=TR
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/oranet-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>After obtaining the ORA results, one can plot volcano-plot like plot for the results using <code>plotORA</code> function.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/">ggrepel</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/plotORA.html">plotORA</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/oraplot-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
@@ -898,108 +901,108 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"./blockwiseModule.rda"</span><span class="op">)</span></span>
 <span><span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseqWGCNA.html">refseqWGCNA</a></span><span class="op">(</span><span class="va">bwmod</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Processing a total of 17 clusters</span></span>
-<span><span class="co">#&gt; Input genes: 621</span></span>
-<span><span class="co">#&gt;   Converted input genes: 534</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.1</span></span>
-<span><span class="co">#&gt; Input genes: 2192</span></span>
-<span><span class="co">#&gt;   Converted input genes: 2017</span></span>
+<span><span class="co">#&gt; Input genes: 1066</span></span>
+<span><span class="co">#&gt;   Converted input genes: 883</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0</span></span>
-<span><span class="co">#&gt; Input genes: 12943</span></span>
-<span><span class="co">#&gt;   Converted input genes: 9875</span></span>
+<span><span class="co">#&gt; Input genes: 2396</span></span>
+<span><span class="co">#&gt;   Converted input genes: 2200</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0</span></span>
-<span><span class="co">#&gt; Input genes: 5534</span></span>
-<span><span class="co">#&gt;   Converted input genes: 4644</span></span>
+<span><span class="co">#&gt; Input genes: 12526</span></span>
+<span><span class="co">#&gt;   Converted input genes: 9520</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0</span></span>
-<span><span class="co">#&gt; Input genes: 653</span></span>
-<span><span class="co">#&gt;   Converted input genes: 533</span></span>
+<span><span class="co">#&gt; Input genes: 5586</span></span>
+<span><span class="co">#&gt;   Converted input genes: 4603</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0</span></span>
+<span><span class="co">#&gt; Input genes: 181</span></span>
+<span><span class="co">#&gt;   Converted input genes: 168</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Input genes: 379</span></span>
+<span><span class="co">#&gt;   Converted input genes: 338</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.1</span></span>
-<span><span class="co">#&gt; Input genes: 591</span></span>
-<span><span class="co">#&gt;   Converted input genes: 471</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.1</span></span>
-<span><span class="co">#&gt; Input genes: 740</span></span>
-<span><span class="co">#&gt;   Converted input genes: 577</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.104</span></span>
-<span><span class="co">#&gt; Input genes: 89</span></span>
-<span><span class="co">#&gt;   Converted input genes: 87</span></span>
+<span><span class="co">#&gt; Input genes: 774</span></span>
+<span><span class="co">#&gt;   Converted input genes: 624</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.103</span></span>
-<span><span class="co">#&gt; Input genes: 43</span></span>
-<span><span class="co">#&gt;   Converted input genes: 40</span></span>
+<span><span class="co">#&gt; Input genes: 147</span></span>
+<span><span class="co">#&gt;   Converted input genes: 125</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Input genes: 87</span></span>
+<span><span class="co">#&gt;   Converted input genes: 85</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.201</span></span>
+<span><span class="co">#&gt; Input genes: 94</span></span>
+<span><span class="co">#&gt;   Converted input genes: 92</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.102</span></span>
+<span><span class="co">#&gt; Input genes: 113</span></span>
+<span><span class="co">#&gt;   Converted input genes: 105</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Input genes: 83</span></span>
+<span><span class="co">#&gt;   Converted input genes: 77</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.101</span></span>
+<span><span class="co">#&gt; Input genes: 233</span></span>
+<span><span class="co">#&gt;   Converted input genes: 143</span></span>
+<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
+<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
+<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
+<span><span class="co">#&gt; threshold = 0.301</span></span>
+<span><span class="co">#&gt; Input genes: 68</span></span>
+<span><span class="co">#&gt;   Converted input genes: 68</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
-<span><span class="co">#&gt; Input genes: 39</span></span>
-<span><span class="co">#&gt;   Converted input genes: 37</span></span>
+<span><span class="co">#&gt; Input genes: 45</span></span>
+<span><span class="co">#&gt;   Converted input genes: 45</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.107</span></span>
-<span><span class="co">#&gt; Input genes: 43</span></span>
-<span><span class="co">#&gt;   Converted input genes: 42</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.308</span></span>
-<span><span class="co">#&gt; Input genes: 41</span></span>
-<span><span class="co">#&gt;   Converted input genes: 40</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.304</span></span>
-<span><span class="co">#&gt; Input genes: 42</span></span>
-<span><span class="co">#&gt;   Converted input genes: 40</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.203</span></span>
-<span><span class="co">#&gt; Input genes: 40</span></span>
-<span><span class="co">#&gt;   Converted input genes: 33</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.317</span></span>
-<span><span class="co">#&gt; Input genes: 112</span></span>
-<span><span class="co">#&gt;   Converted input genes: 65</span></span>
-<span><span class="co">#&gt; Filter based on GeneSummary</span></span>
-<span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.507</span></span>
-<span><span class="co">#&gt; Input genes: 38</span></span>
-<span><span class="co">#&gt;   Converted input genes: 38</span></span>
+<span><span class="co">#&gt; threshold = 0</span></span>
+<span><span class="co">#&gt; Input genes: 86</span></span>
+<span><span class="co">#&gt;   Converted input genes: 47</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
 <span><span class="co">#&gt; threshold = 0.2</span></span>
-<span><span class="co">#&gt; Input genes: 139</span></span>
-<span><span class="co">#&gt;   Converted input genes: 58</span></span>
+<span><span class="co">#&gt; Input genes: 36</span></span>
+<span><span class="co">#&gt;   Converted input genes: 10</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
-<span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.641</span></span>
+<span><span class="co">#&gt; Error in cor(x = c(`2024` = 1, `70nt` = 1, antisense = 1, base = 1, capped = 1,  : </span></span>
+<span><span class="co">#&gt;    'x' to 'y' の両方を与えるか、行列形の 'x' を与えてください</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 17</span></span>
 <span><span class="va">test</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">net</span> <span class="op">+</span> <span class="va">test</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">net</span></span></code></pre></div>
@@ -1019,38 +1022,38 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="co">#&gt; DataFrame with 1000 rows and 6 columns</span></span>
 <span><span class="co">#&gt;                  baseMean log2FoldChange     lfcSE</span></span>
 <span><span class="co">#&gt;                 &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt; ENSG00000134910   3.16673       3.572763  2.602389</span></span>
-<span><span class="co">#&gt; ENSG00000271702  87.50429       0.814435  0.567199</span></span>
-<span><span class="co">#&gt; ENSG00000232764  34.91165      -0.363162  1.028768</span></span>
-<span><span class="co">#&gt; ENSG00000266610  28.31646      -1.030830  0.930566</span></span>
-<span><span class="co">#&gt; ENSG00000121351   4.91200       1.596583  2.121517</span></span>
+<span><span class="co">#&gt; ENSG00000134910  97.63262      0.4012165  0.590665</span></span>
+<span><span class="co">#&gt; ENSG00000271702 124.63639     -0.1418781  0.534301</span></span>
+<span><span class="co">#&gt; ENSG00000232764  16.19411     -0.0897691  1.091411</span></span>
+<span><span class="co">#&gt; ENSG00000266610   8.07371      1.1957371  1.544164</span></span>
+<span><span class="co">#&gt; ENSG00000121351  15.65760      2.6122457  1.111090</span></span>
 <span><span class="co">#&gt; ...                   ...            ...       ...</span></span>
-<span><span class="co">#&gt; ENSG00000067560   9.49148      -0.855989  1.415795</span></span>
-<span><span class="co">#&gt; ENSG00000207714   6.25054       4.638946  2.257904</span></span>
-<span><span class="co">#&gt; ENSG00000184990 110.10187       0.260800  0.557908</span></span>
-<span><span class="co">#&gt; ENSG00000223548   2.65850       2.162898  2.478842</span></span>
-<span><span class="co">#&gt; ENSG00000169976  20.11864       0.530915  0.950035</span></span>
-<span><span class="co">#&gt;                      stat    pvalue      padj</span></span>
-<span><span class="co">#&gt;                 &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
-<span><span class="co">#&gt; ENSG00000134910  1.372878  0.169790  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000271702  1.435889  0.151034  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000232764 -0.353007  0.724083  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000266610 -1.107745  0.267972  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000121351  0.752567  0.451710  0.999199</span></span>
-<span><span class="co">#&gt; ...                   ...       ...       ...</span></span>
-<span><span class="co">#&gt; ENSG00000067560 -0.604600 0.5454451  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000207714  2.054536 0.0399238  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000184990  0.467461 0.6401702  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000223548  0.872544 0.3829118  0.999199</span></span>
-<span><span class="co">#&gt; ENSG00000169976  0.558837 0.5762731  0.999199</span></span>
+<span><span class="co">#&gt; ENSG00000067560 42.896981       1.121355  0.714727</span></span>
+<span><span class="co">#&gt; ENSG00000207714 51.816409      -0.465278  0.779906</span></span>
+<span><span class="co">#&gt; ENSG00000184990  0.000000             NA        NA</span></span>
+<span><span class="co">#&gt; ENSG00000223548  1.470284       2.310007  3.391088</span></span>
+<span><span class="co">#&gt; ENSG00000169976  0.241556      -1.436990  4.996511</span></span>
+<span><span class="co">#&gt;                       stat    pvalue      padj</span></span>
+<span><span class="co">#&gt;                  &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;</span></span>
+<span><span class="co">#&gt; ENSG00000134910  0.6792623 0.4969717  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000271702 -0.2655395 0.7905939  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000232764 -0.0822504 0.9344476  0.999381</span></span>
+<span><span class="co">#&gt; ENSG00000266610  0.7743587 0.4387187  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000121351  2.3510657 0.0187197  0.999297</span></span>
+<span><span class="co">#&gt; ...                    ...       ...       ...</span></span>
+<span><span class="co">#&gt; ENSG00000067560   1.568928  0.116665  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000207714  -0.596582  0.550786  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000184990         NA        NA        NA</span></span>
+<span><span class="co">#&gt; ENSG00000223548   0.681199  0.495745  0.999297</span></span>
+<span><span class="co">#&gt; ENSG00000169976  -0.287599  0.773654  0.999297</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/refseqDESeq2.html">refseqDESeq2</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">log2FoldChange</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotNet</a></span><span class="op">(</span>asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Input genes: 57</span></span>
-<span><span class="co">#&gt;   Converted input genes: 57</span></span>
+<span><span class="co">#&gt; Input genes: 67</span></span>
+<span><span class="co">#&gt;   Converted input genes: 69</span></span>
 <span><span class="co">#&gt; Filter based on GeneSummary</span></span>
 <span><span class="co">#&gt; Filtered 77 words (frequency and/or tfidf)</span></span>
 <span><span class="co">#&gt; Ignoring corThresh, automatically determine the value</span></span>
-<span><span class="co">#&gt; threshold = 0.3</span></span></code></pre></div>
+<span><span class="co">#&gt; threshold = 0.1</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-basic_usage_of_biotextgraph_files/figure-html/refseqdeseq2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="split-by-ea" class="section level2" number="2.12">
@@ -1320,14 +1323,14 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="co">#&gt;  [1] ggkegg_1.1.7          testthat_3.1.10      </span></span>
 <span><span class="co">#&gt;  [3] XML_3.99-0.15         tidygraph_1.2.3      </span></span>
 <span><span class="co">#&gt;  [5] ggfx_1.0.1            igraph_1.5.1         </span></span>
-<span><span class="co">#&gt;  [7] GetoptLong_1.0.5      ggrepel_0.9.4        </span></span>
-<span><span class="co">#&gt;  [9] dplyr_1.1.2           dendextend_1.17.1    </span></span>
+<span><span class="co">#&gt;  [7] GetoptLong_1.0.5      ggrepel_0.9.5        </span></span>
+<span><span class="co">#&gt;  [9] dplyr_1.1.4           dendextend_1.17.1    </span></span>
 <span><span class="co">#&gt; [11] clusterProfiler_4.8.3 ReactomePA_1.44.0    </span></span>
 <span><span class="co">#&gt; [13] RColorBrewer_1.1-3    ggraph_2.1.0         </span></span>
 <span><span class="co">#&gt; [15] org.Hs.eg.db_3.18.0   AnnotationDbi_1.64.1 </span></span>
 <span><span class="co">#&gt; [17] IRanges_2.34.1        S4Vectors_0.38.1     </span></span>
 <span><span class="co">#&gt; [19] Biobase_2.60.0        BiocGenerics_0.46.0  </span></span>
-<span><span class="co">#&gt; [21] biotextgraph_0.99.0   ggplot2_3.4.2        </span></span>
+<span><span class="co">#&gt; [21] biotextgraph_0.99.0   ggplot2_3.4.4        </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
 <span><span class="co">#&gt;   [1] splines_4.3.0           later_1.3.1            </span></span>
@@ -1383,7 +1386,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="co">#&gt; [101] brio_1.1.3              shadowtext_0.1.2       </span></span>
 <span><span class="co">#&gt; [103] htmltools_0.5.6         profvis_0.3.8          </span></span>
 <span><span class="co">#&gt; [105] sysfonts_0.8.8          bookdown_0.36          </span></span>
-<span><span class="co">#&gt; [107] fgsea_1.26.0            scales_1.2.1           </span></span>
+<span><span class="co">#&gt; [107] fgsea_1.26.0            scales_1.3.0           </span></span>
 <span><span class="co">#&gt; [109] png_0.1-8               wordcloud_2.6          </span></span>
 <span><span class="co">#&gt; [111] ggfun_0.1.3             ggdendro_0.1.23        </span></span>
 <span><span class="co">#&gt; [113] knitr_1.43              rstudioapi_0.15.0      </span></span>
@@ -1394,7 +1397,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="co">#&gt; [123] miniUI_0.1.1.1          parallel_4.3.0         </span></span>
 <span><span class="co">#&gt; [125] HDO.db_0.99.1           desc_1.4.2             </span></span>
 <span><span class="co">#&gt; [127] pillar_1.9.0            grid_4.3.0             </span></span>
-<span><span class="co">#&gt; [129] vctrs_0.6.3             urlchecker_1.0.1       </span></span>
+<span><span class="co">#&gt; [129] vctrs_0.6.5             urlchecker_1.0.1       </span></span>
 <span><span class="co">#&gt; [131] slam_0.1-50             promises_1.2.1         </span></span>
 <span><span class="co">#&gt; [133] dbplyr_2.3.3            xtable_1.8-4           </span></span>
 <span><span class="co">#&gt; [135] evaluate_0.21           magick_2.8.1           </span></span>
@@ -1406,7 +1409,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <span><span class="co">#&gt; [147] BiocParallel_1.34.2     munsell_0.5.0          </span></span>
 <span><span class="co">#&gt; [149] Biostrings_2.68.1       lazyeval_0.2.2         </span></span>
 <span><span class="co">#&gt; [151] devtools_2.4.5          GOSemSim_2.26.1        </span></span>
-<span><span class="co">#&gt; [153] Matrix_1.6-3            patchwork_1.1.3        </span></span>
+<span><span class="co">#&gt; [153] Matrix_1.6-3            patchwork_1.2.0        </span></span>
 <span><span class="co">#&gt; [155] bit64_4.0.5             KEGGREST_1.40.1        </span></span>
 <span><span class="co">#&gt; [157] shiny_1.7.4.1           highr_0.10             </span></span>
 <span><span class="co">#&gt; [159] gridtext_0.1.5          memoise_2.0.1          </span></span>
@@ -1462,7 +1465,7 @@ Specify which layout algorithm to choose in <code>igraph</code>. This can be als
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2024-01-20.</p>
+    <p>"<strong>biotextgraph</strong>" was written by Noriaki Sato. It was last built on 2024-01-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

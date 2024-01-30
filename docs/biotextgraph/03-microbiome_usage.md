@@ -498,28 +498,28 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
     useWGCNA=FALSE, spacer=0.05,
     horiz=FALSE, wcScale=5)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.401
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.201
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.7
+#> threshold = 0.3
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.3
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.202
+#> threshold = 0.201
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.601
+#> threshold = 0.3
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.2
+#> threshold = 0.101
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.6
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> border is set to FALSE as useggfx is not NULL
 scaled <- micro + scale_y_continuous(expand=c(0,6))
@@ -565,7 +565,7 @@ sessionInfo()
 #> other attached packages:
 #> [1] ggfx_1.0.1          RColorBrewer_1.1-3 
 #> [3] ggraph_2.1.0        biotextgraph_0.99.0
-#> [5] ggplot2_3.4.2      
+#> [5] ggplot2_3.4.4      
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] ggdendro_0.1.23         rstudioapi_0.15.0      
@@ -574,7 +574,7 @@ sessionInfo()
 #>   [7] farver_2.1.1            rmarkdown_2.23         
 #>   [9] ragg_1.2.5              GlobalOptions_0.1.2    
 #>  [11] fs_1.6.3                zlibbioc_1.46.0        
-#>  [13] vctrs_0.6.3             memoise_2.0.1          
+#>  [13] vctrs_0.6.5             memoise_2.0.1          
 #>  [15] cyjShiny_1.0.42         RCurl_1.98-1.13        
 #>  [17] base64enc_0.1-3         htmltools_0.5.6        
 #>  [19] curl_5.0.1              cellranger_1.1.0       
@@ -586,7 +586,7 @@ sessionInfo()
 #>  [31] pkgconfig_2.0.3         R6_2.5.1               
 #>  [33] fastmap_1.1.1           GenomeInfoDbData_1.2.10
 #>  [35] shiny_1.7.4.1           digest_0.6.33          
-#>  [37] colorspace_2.1-0        patchwork_1.1.3        
+#>  [37] colorspace_2.1-0        patchwork_1.2.0        
 #>  [39] AnnotationDbi_1.64.1    S4Vectors_0.38.1       
 #>  [41] textshaping_0.3.6       RSQLite_2.3.3          
 #>  [43] org.Hs.eg.db_3.18.0     filelock_1.0.2         
@@ -609,9 +609,9 @@ sessionInfo()
 #>  [77] xml2_1.3.5              utf8_1.2.3             
 #>  [79] XVector_0.40.0          BiocGenerics_0.46.0    
 #>  [81] stringr_1.5.0           markdown_1.11          
-#>  [83] ggrepel_0.9.4           pillar_1.9.0           
+#>  [83] ggrepel_0.9.5           pillar_1.9.0           
 #>  [85] yulab.utils_0.1.0       later_1.3.1            
-#>  [87] dplyr_1.1.2             tweenr_2.0.2           
+#>  [87] dplyr_1.1.4             tweenr_2.0.2           
 #>  [89] BiocFileCache_2.8.0     lattice_0.21-8         
 #>  [91] bit_4.0.5               tidyselect_1.2.0       
 #>  [93] phylogram_2.1.0         tm_0.7-11              
@@ -633,7 +633,7 @@ sessionInfo()
 #> [125] parallel_4.3.0          ellipsis_0.3.2         
 #> [127] blob_1.2.4              bitops_1.0-7           
 #> [129] viridisLite_0.4.2       slam_0.1-50            
-#> [131] scales_1.2.1            purrr_1.0.2            
+#> [131] scales_1.3.0            purrr_1.0.2            
 #> [133] crayon_1.5.2            GetoptLong_1.0.5       
 #> [135] rlang_1.1.1             cowplot_1.1.1          
 #> [137] KEGGREST_1.40.1

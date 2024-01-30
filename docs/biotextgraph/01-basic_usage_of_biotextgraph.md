@@ -471,6 +471,9 @@ geneplotWC <- refseq(inpSymbol,
 #> Adding another scale for size, which will replace the
 #> existing scale.
 plotWC(geneplotWC, asis=TRUE)
+#> Warning in wordcloud_boxes(data_points =
+#> points_valid_first, boxes = boxes, : One word could not fit
+#> on page. It has been removed.
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/assoc_wc-1.png" width="100%" style="display: block; margin: auto;" />
@@ -507,12 +510,12 @@ abtag <- pubmed(redo=ab, tag="cor", cl=snow::makeCluster(10), apiKey=apiKey)
 #> Resuming from the previous results
 #> Multiscale bootstrap... Done.
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.4
+#> threshold = 0.3
 abtag2 <- pubmed(redo=abtag, tag="cor", genePlot=TRUE,
     plotType="network", corThresh=0.2, pre=TRUE, apiKey=apiKey)
 #> Resuming from the previous results
 #> Using previous pvclust resultsIgnoring corThresh, automatically determine the value
-#> threshold = 0.302
+#> threshold = 0.201
 plotNet(abtag2, asis=TRUE)
 ```
 
@@ -583,7 +586,7 @@ net3 <- pubmed(redo=ab, plotType="network",
     corThresh=0.2, numWords=20)
 #> Resuming from the previous results
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.4
+#> threshold = 0.3
 
 ## Not having meaningful overlaps
 compareWordNet(list(net1, net2),
@@ -952,108 +955,108 @@ Some input types can be used to conveniently perform text mining. `refseqWGCNA` 
 load("./blockwiseModule.rda")
 test <- refseqWGCNA(bwmod)
 #> Processing a total of 17 clusters
-#> Input genes: 621
-#>   Converted input genes: 534
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.1
-#> Input genes: 2192
-#>   Converted input genes: 2017
+#> Input genes: 1066
+#>   Converted input genes: 883
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
-#> Input genes: 12943
-#>   Converted input genes: 9875
+#> Input genes: 2396
+#>   Converted input genes: 2200
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
-#> Input genes: 5534
-#>   Converted input genes: 4644
+#> Input genes: 12526
+#>   Converted input genes: 9520
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
-#> Input genes: 653
-#>   Converted input genes: 533
+#> Input genes: 5586
+#>   Converted input genes: 4603
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0
+#> Input genes: 181
+#>   Converted input genes: 168
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
+#> Input genes: 379
+#>   Converted input genes: 338
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.1
-#> Input genes: 591
-#>   Converted input genes: 471
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.1
-#> Input genes: 740
-#>   Converted input genes: 577
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.104
-#> Input genes: 89
-#>   Converted input genes: 87
+#> Input genes: 774
+#>   Converted input genes: 624
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.103
-#> Input genes: 43
-#>   Converted input genes: 40
+#> Input genes: 147
+#>   Converted input genes: 125
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
+#> Input genes: 87
+#>   Converted input genes: 85
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.201
+#> Input genes: 94
+#>   Converted input genes: 92
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.102
+#> Input genes: 113
+#>   Converted input genes: 105
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
+#> Input genes: 83
+#>   Converted input genes: 77
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.101
+#> Input genes: 233
+#>   Converted input genes: 143
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.301
+#> Input genes: 68
+#>   Converted input genes: 68
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2
-#> Input genes: 39
-#>   Converted input genes: 37
+#> Input genes: 45
+#>   Converted input genes: 45
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.107
-#> Input genes: 43
-#>   Converted input genes: 42
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.308
-#> Input genes: 41
-#>   Converted input genes: 40
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.304
-#> Input genes: 42
-#>   Converted input genes: 40
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.203
-#> Input genes: 40
-#>   Converted input genes: 33
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.317
-#> Input genes: 112
-#>   Converted input genes: 65
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.507
-#> Input genes: 38
-#>   Converted input genes: 38
+#> threshold = 0
+#> Input genes: 86
+#>   Converted input genes: 47
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.2
-#> Input genes: 139
-#>   Converted input genes: 58
+#> Input genes: 36
+#>   Converted input genes: 10
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.641
+#> Error in cor(x = c(`2024` = 1, `70nt` = 1, antisense = 1, base = 1, capped = 1,  : 
+#>    'x' to 'y' の両方を与えるか、行列形の 'x' を与えてください
 length(test)
 #> [1] 17
 test[[1]]@net + test[[2]]@net
@@ -1078,38 +1081,38 @@ res
 #> DataFrame with 1000 rows and 6 columns
 #>                  baseMean log2FoldChange     lfcSE
 #>                 <numeric>      <numeric> <numeric>
-#> ENSG00000134910   3.16673       3.572763  2.602389
-#> ENSG00000271702  87.50429       0.814435  0.567199
-#> ENSG00000232764  34.91165      -0.363162  1.028768
-#> ENSG00000266610  28.31646      -1.030830  0.930566
-#> ENSG00000121351   4.91200       1.596583  2.121517
+#> ENSG00000134910  97.63262      0.4012165  0.590665
+#> ENSG00000271702 124.63639     -0.1418781  0.534301
+#> ENSG00000232764  16.19411     -0.0897691  1.091411
+#> ENSG00000266610   8.07371      1.1957371  1.544164
+#> ENSG00000121351  15.65760      2.6122457  1.111090
 #> ...                   ...            ...       ...
-#> ENSG00000067560   9.49148      -0.855989  1.415795
-#> ENSG00000207714   6.25054       4.638946  2.257904
-#> ENSG00000184990 110.10187       0.260800  0.557908
-#> ENSG00000223548   2.65850       2.162898  2.478842
-#> ENSG00000169976  20.11864       0.530915  0.950035
-#>                      stat    pvalue      padj
-#>                 <numeric> <numeric> <numeric>
-#> ENSG00000134910  1.372878  0.169790  0.999199
-#> ENSG00000271702  1.435889  0.151034  0.999199
-#> ENSG00000232764 -0.353007  0.724083  0.999199
-#> ENSG00000266610 -1.107745  0.267972  0.999199
-#> ENSG00000121351  0.752567  0.451710  0.999199
-#> ...                   ...       ...       ...
-#> ENSG00000067560 -0.604600 0.5454451  0.999199
-#> ENSG00000207714  2.054536 0.0399238  0.999199
-#> ENSG00000184990  0.467461 0.6401702  0.999199
-#> ENSG00000223548  0.872544 0.3829118  0.999199
-#> ENSG00000169976  0.558837 0.5762731  0.999199
+#> ENSG00000067560 42.896981       1.121355  0.714727
+#> ENSG00000207714 51.816409      -0.465278  0.779906
+#> ENSG00000184990  0.000000             NA        NA
+#> ENSG00000223548  1.470284       2.310007  3.391088
+#> ENSG00000169976  0.241556      -1.436990  4.996511
+#>                       stat    pvalue      padj
+#>                  <numeric> <numeric> <numeric>
+#> ENSG00000134910  0.6792623 0.4969717  0.999297
+#> ENSG00000271702 -0.2655395 0.7905939  0.999297
+#> ENSG00000232764 -0.0822504 0.9344476  0.999381
+#> ENSG00000266610  0.7743587 0.4387187  0.999297
+#> ENSG00000121351  2.3510657 0.0187197  0.999297
+#> ...                    ...       ...       ...
+#> ENSG00000067560   1.568928  0.116665  0.999297
+#> ENSG00000207714  -0.596582  0.550786  0.999297
+#> ENSG00000184990         NA        NA        NA
+#> ENSG00000223548   0.681199  0.495745  0.999297
+#> ENSG00000169976  -0.287599  0.773654  0.999297
 
 refseqDESeq2(res, log2FoldChange>2) |> plotNet(asis=TRUE)
-#> Input genes: 57
-#>   Converted input genes: 57
+#> Input genes: 67
+#>   Converted input genes: 69
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
+#> threshold = 0.1
 ```
 
 <img src="01-basic_usage_of_biotextgraph_files/figure-html/refseqdeseq2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -1384,14 +1387,14 @@ sessionInfo()
 #>  [1] ggkegg_1.1.7          testthat_3.1.10      
 #>  [3] XML_3.99-0.15         tidygraph_1.2.3      
 #>  [5] ggfx_1.0.1            igraph_1.5.1         
-#>  [7] GetoptLong_1.0.5      ggrepel_0.9.4        
-#>  [9] dplyr_1.1.2           dendextend_1.17.1    
+#>  [7] GetoptLong_1.0.5      ggrepel_0.9.5        
+#>  [9] dplyr_1.1.4           dendextend_1.17.1    
 #> [11] clusterProfiler_4.8.3 ReactomePA_1.44.0    
 #> [13] RColorBrewer_1.1-3    ggraph_2.1.0         
 #> [15] org.Hs.eg.db_3.18.0   AnnotationDbi_1.64.1 
 #> [17] IRanges_2.34.1        S4Vectors_0.38.1     
 #> [19] Biobase_2.60.0        BiocGenerics_0.46.0  
-#> [21] biotextgraph_0.99.0   ggplot2_3.4.2        
+#> [21] biotextgraph_0.99.0   ggplot2_3.4.4        
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] splines_4.3.0           later_1.3.1            
@@ -1447,7 +1450,7 @@ sessionInfo()
 #> [101] brio_1.1.3              shadowtext_0.1.2       
 #> [103] htmltools_0.5.6         profvis_0.3.8          
 #> [105] sysfonts_0.8.8          bookdown_0.36          
-#> [107] fgsea_1.26.0            scales_1.2.1           
+#> [107] fgsea_1.26.0            scales_1.3.0           
 #> [109] png_0.1-8               wordcloud_2.6          
 #> [111] ggfun_0.1.3             ggdendro_0.1.23        
 #> [113] knitr_1.43              rstudioapi_0.15.0      
@@ -1458,7 +1461,7 @@ sessionInfo()
 #> [123] miniUI_0.1.1.1          parallel_4.3.0         
 #> [125] HDO.db_0.99.1           desc_1.4.2             
 #> [127] pillar_1.9.0            grid_4.3.0             
-#> [129] vctrs_0.6.3             urlchecker_1.0.1       
+#> [129] vctrs_0.6.5             urlchecker_1.0.1       
 #> [131] slam_0.1-50             promises_1.2.1         
 #> [133] dbplyr_2.3.3            xtable_1.8-4           
 #> [135] evaluate_0.21           magick_2.8.1           
@@ -1470,7 +1473,7 @@ sessionInfo()
 #> [147] BiocParallel_1.34.2     munsell_0.5.0          
 #> [149] Biostrings_2.68.1       lazyeval_0.2.2         
 #> [151] devtools_2.4.5          GOSemSim_2.26.1        
-#> [153] Matrix_1.6-3            patchwork_1.1.3        
+#> [153] Matrix_1.6-3            patchwork_1.2.0        
 #> [155] bit64_4.0.5             KEGGREST_1.40.1        
 #> [157] shiny_1.7.4.1           highr_0.10             
 #> [159] gridtext_0.1.5          memoise_2.0.1          

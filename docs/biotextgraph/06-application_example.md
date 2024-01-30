@@ -302,7 +302,7 @@ sessionInfo()
 #>  [7] AnnotationDbi_1.64.1  IRanges_2.34.1       
 #>  [9] S4Vectors_0.38.1      Biobase_2.60.0       
 #> [11] BiocGenerics_0.46.0   biotextgraph_0.99.0  
-#> [13] ggplot2_3.4.2        
+#> [13] ggplot2_3.4.4        
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] RColorBrewer_1.1-3      ggdendro_0.1.23        
@@ -310,7 +310,7 @@ sessionInfo()
 #>   [5] pvclust_2.2-0           magrittr_2.0.3         
 #>   [7] farver_2.1.1            rmarkdown_2.23         
 #>   [9] GlobalOptions_0.1.2     fs_1.6.3               
-#>  [11] zlibbioc_1.46.0         vctrs_0.6.3            
+#>  [11] zlibbioc_1.46.0         vctrs_0.6.5            
 #>  [13] memoise_2.0.1           cyjShiny_1.0.42        
 #>  [15] RCurl_1.98-1.13         ggtree_3.8.2           
 #>  [17] base64enc_0.1-3         htmltools_0.5.6        
@@ -324,7 +324,7 @@ sessionInfo()
 #>  [33] GenomeInfoDbData_1.2.10 shiny_1.7.4.1          
 #>  [35] aplot_0.2.2             enrichplot_1.20.3      
 #>  [37] digest_0.6.33           colorspace_2.1-0       
-#>  [39] patchwork_1.1.3         RSQLite_2.3.3          
+#>  [39] patchwork_1.2.0         RSQLite_2.3.3          
 #>  [41] labeling_0.4.2          fansi_1.0.4            
 #>  [43] httr_1.4.6              polyclip_1.10-6        
 #>  [45] compiler_4.3.0          downloader_0.4         
@@ -346,10 +346,10 @@ sessionInfo()
 #>  [77] bugsigdbr_1.8.1         data.table_1.14.8      
 #>  [79] tidygraph_1.2.3         xml2_1.3.5             
 #>  [81] utf8_1.2.3              XVector_0.40.0         
-#>  [83] stringr_1.5.0           ggrepel_0.9.4          
+#>  [83] stringr_1.5.0           ggrepel_0.9.5          
 #>  [85] pillar_1.9.0            yulab.utils_0.1.0      
 #>  [87] later_1.3.1             splines_4.3.0          
-#>  [89] dplyr_1.1.2             tweenr_2.0.2           
+#>  [89] dplyr_1.1.4             tweenr_2.0.2           
 #>  [91] treeio_1.24.3           lattice_0.21-8         
 #>  [93] bit_4.0.5               tidyselect_1.2.0       
 #>  [95] GO.db_3.17.0            tm_0.7-11              
@@ -371,7 +371,7 @@ sessionInfo()
 #> [127] blob_1.2.4              DOSE_3.26.2            
 #> [129] bitops_1.0-7            tidytree_0.4.5         
 #> [131] viridisLite_0.4.2       slam_0.1-50            
-#> [133] scales_1.2.1            purrr_1.0.2            
+#> [133] scales_1.3.0            purrr_1.0.2            
 #> [135] crayon_1.5.2            GetoptLong_1.0.5       
 #> [137] rlang_1.1.1             cowplot_1.1.1          
 #> [139] fastmatch_1.1-4         KEGGREST_1.40.1
