@@ -43,3 +43,4 @@ preprocessing
 plotting
 notes
 parsing-of-reactions-in-the-pathway
+interpolation-in-the-raster-image

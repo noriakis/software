@@ -393,6 +393,7 @@ gg
 
 <img src="01-pathway_files/figure-html/raster-1.png" width="100%" style="display: block; margin: auto;" />
 
+
 You can use your favorite geoms to annotate KEGG map combining the functions.
 
 
@@ -412,6 +413,24 @@ gg
 ```
 
 <img src="01-pathway_files/figure-html/raster2-1.png" width="100%" style="display: block; margin: auto;" />
+
+Text can be overridden by specifying rectangular geom after the raw map.
+
+
+```r
+## Use graphics_name but show only the first ID
+g <- pathway("ko00640",group_rect_nudge=0)
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  overlay_raw_map()+
+  geom_node_rect(fill="white",aes(filter=type=="ortholog"), color="black")+
+  geom_node_text(aes(
+      label=graphics_name %>% strsplit(",") %>% sapply("[", 1) %>% strsplit("\\.") %>% sapply("[", 1),
+      filter=type=="ortholog"),size=2)+
+  theme_void()
+gg
+```
+
+<img src="01-pathway_files/figure-html/raster3-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Group of nodes

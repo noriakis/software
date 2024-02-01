@@ -51,3 +51,20 @@ reac2 |> activate(edges) |> data.frame() |>
 #> 2 #000000 cpd:C00606 cpd:C09306
 ```
 
+
+## Interpolation in the raster image
+
+The `annotation_custom` is used in `overlay_raw_map`. The `interpolate` option can be specified.
+
+
+```r
+ggraph(pathway("hsa04110"), layout="manual", x=x, y=y) + overlay_raw_map(interpolate=TRUE) + theme_void()
+```
+
+<img src="05-notes_files/figure-html/intp1-1.png" width="100%" style="display: block; margin: auto;" />
+
+```r
+ggraph(pathway("hsa04110"), layout="manual", x=x, y=y) + overlay_raw_map(interpolate=FALSE) + theme_void()
+```
+
+<img src="05-notes_files/figure-html/intp1-2.png" width="100%" style="display: block; margin: auto;" />

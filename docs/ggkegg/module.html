@@ -67,7 +67,7 @@
 <span class="header-section-number">3</span> Module<a class="anchor" aria-label="anchor" href="#module"><i class="fas fa-link"></i></a>
 </h1>
 <p>Module information can be obtained and parsed. Parsing <code>DEFINITION</code> and <code>REACTION</code> is supported. For the definition, first the function breaks down the definition to blocks, and make graphical representation using <code>ggraph</code> and <code>tbl_graph</code> or text itself using <code>geom_text</code> and <code>geom_rect</code>. By calling <code>module</code> function, <code>kegg_module</code> class object is created.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
@@ -77,7 +77,7 @@
 <span><span class="co">#&gt; Pentose phosphate pathway (Pentose phosphate cycle)</span></span></code></pre></div>
 <p>The <code>module</code> function creates an object of the <code>kegg_module</code> class, which stores the parsed information of reactions and definitions in its internal slots. By providing this <code>kegg_module</code> object to various functions, it is possible to execute various operations related to the module.</p>
 <p>Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span></span>
 <span><span class="co">## Obtain reaction graph</span></span>
@@ -109,7 +109,7 @@
 <span class="header-section-number">3.1</span> Module definition in graph<a class="anchor" aria-label="anchor" href="#module-definition-in-graph"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can visualize the module definition in the graph. This will make grouping nodes and nodes leading to the nodes connected with <code>AND</code> argument (‘+’ and ’ ’), and connect the definition. In the example below, the wrapper function plot_module_blocks() visualizes the definitions of each module. Red represents AND relationships, while other relationships (such as compound or OR) are expressed as edge labels.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00009"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/obtain_sequential_module_definition.html">obtain_sequential_module_definition</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## return tbl_graph</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/plot_module_blocks.html">plot_module_blocks</a></span><span class="op">(</span><span class="op">)</span> <span class="co">## wrapper function</span></span></code></pre></div>
@@ -120,7 +120,7 @@
 <span class="header-section-number">3.2</span> Module definition in text<a class="anchor" aria-label="anchor" href="#module-definition-in-text"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can also visualize the module definition in text.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00004"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_text.html">module_text</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## return data.frame</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/plot_module_text.html">plot_module_text</a></span><span class="op">(</span><span class="op">)</span> <span class="co">## wrapper function</span></span></code></pre></div>
@@ -131,13 +131,13 @@
 <span class="header-section-number">3.3</span> Module completeness<a class="anchor" aria-label="anchor" href="#module-completeness"><i class="fas fa-link"></i></a>
 </h2>
 <p>Given a vector of interesting KOs, module completeness can be calculated using boolean expression.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00009"</span><span class="op">)</span></span>
 <span><span class="va">query</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/attr.html">attr</a></span><span class="op">(</span><span class="va">mod</span>, <span class="st">"definition_components"</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">":"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="st">"["</span>,<span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">query</span></span>
-<span><span class="co">#&gt; [1] "K01681" "K25801" "K00030" "K00382" "K00240"</span></span>
+<span><span class="co">#&gt; [1] "K01678" "K00026" "K18859" "K01616" "K00244"</span></span>
 <span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_completeness.html">module_completeness</a></span><span class="op">(</span><span class="va">query</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -185,13 +185,13 @@ FALSE
 2
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:right;">
-0.5000000
+0.0000000
 </td>
 <td style="text-align:left;">
-TRUE
+FALSE
 </td>
 </tr>
 <tr>
@@ -202,13 +202,13 @@ TRUE
 2
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:right;">
-0.5000000
+0.0000000
 </td>
 <td style="text-align:left;">
-TRUE
+FALSE
 </td>
 </tr>
 <tr>
@@ -270,10 +270,10 @@ FALSE
 4
 </td>
 <td style="text-align:right;">
-0
+1
 </td>
 <td style="text-align:right;">
-0.0000000
+0.2500000
 </td>
 <td style="text-align:left;">
 FALSE
@@ -287,13 +287,13 @@ FALSE
 4
 </td>
 <td style="text-align:right;">
-0
+1
 </td>
 <td style="text-align:right;">
-0.0000000
+0.2500000
 </td>
 <td style="text-align:left;">
-FALSE
+TRUE
 </td>
 </tr>
 </tbody>
@@ -303,7 +303,7 @@ FALSE
 <span class="header-section-number">3.3.1</span> Assessing module completeness across multiple microbial genomes<a class="anchor" aria-label="anchor" href="#assessing-module-completeness-across-multiple-microbial-genomes"><i class="fas fa-link"></i></a>
 </h3>
 <p>For instance, we can assess completeness from KOs inferred from multiple species genome. Here, we mapped EC numbers available in the annotation file in <code>MIDAS</code> pipeline, which is obtained from PATRIC server, to KOs and calculate completeness for randomly obtained species.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Load pre-computed KOs, and recursively perform completeness calculation.</span></span>
 <span><span class="va">mf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"../"</span><span class="op">)</span></span>
 <span><span class="va">mf</span> <span class="op">&lt;-</span> <span class="va">mf</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/startsWith.html">startsWith</a></span><span class="op">(</span><span class="va">mf</span>, <span class="st">"M"</span><span class="op">)</span><span class="op">]</span></span>
@@ -330,7 +330,7 @@ FALSE
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>We will next visualize the results using <code>ComplexHeatmap</code> and <code>simplifyEnrichment</code>. We will plot the word cloud of module description alongside heatmap by <code>simplifyEnrichment</code>, for determined clusters.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Make data.frame</span></span>
@@ -355,7 +355,7 @@ FALSE
 <span>  <span class="va">maps</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">moddesc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">V1</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">gene_list</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">V2</span></span>
 <span>  <span class="va">annotList</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span>  <span class="va">maps</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">col_fun</span> <span class="op">=</span> <span class="fu">circlize</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html">colorRamp2</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>                               <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"blue"</span><span class="op">)</span>, <span class="st">"white"</span>, <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/muted.html">muted</a></span><span class="op">(</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -384,7 +384,7 @@ FALSE
 <h2>
 <span class="header-section-number">3.4</span> Module abundance and pathway abundance calculation<a class="anchor" aria-label="anchor" href="#module-abundance-and-pathway-abundance-calculation"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">vec</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K00234"</span>,<span class="st">"K01676"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_abundance.html">module_abundance</a></span><span class="op">(</span><span class="st">"M00009"</span>, <span class="va">vec</span><span class="op">)</span></span>
@@ -395,7 +395,7 @@ FALSE
 <span class="header-section-number">3.5</span> Visualize the result of <code>enricher</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enricher"><i class="fas fa-link"></i></a>
 </h2>
 <p>If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship, <code>ggkegg</code> function accepts the results and plot text-based or network-based graph where KOs are highlighted.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocFileCache</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required package: dbplyr</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -463,7 +463,7 @@ FALSE
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-01-27.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
