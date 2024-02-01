@@ -21,7 +21,7 @@ split-by-ea
 metacyc
 the-other-usage-for-microbiome-related-data
 disease
-section
+enzymes
 metabolites
 interactive
 pathway-information

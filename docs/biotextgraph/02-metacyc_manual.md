@@ -18,7 +18,7 @@ library(ggraph)
 candidateSpecies <- c("Staphylococcus aureus","Escherichia coli")
 
 ## Downloaded pathway description file
-file <- "metacyc/24.5/data/pathways.dat"
+file <- "../../metacyc/24.5/data/pathways.dat"
 
 input <- parseMetaCycPathway(file, candidateSpecies)
 head(input, n=1) |> dplyr::select(!text) |> kableExtra::kable()
@@ -217,37 +217,35 @@ Includes BioCyc (TM) pathway/genome databases under license from SRI Internation
 
 ```r
 sessionInfo()
-#> R version 4.3.0 (2023-04-21)
-#> Platform: x86_64-pc-linux-gnu (64-bit)
-#> Running under: CentOS Linux 7 (Core)
+#> R version 4.3.1 (2023-06-16 ucrt)
+#> Platform: x86_64-w64-mingw32/x64 (64-bit)
+#> Running under: Windows 11 x64 (build 22621)
 #> 
 #> Matrix products: default
-#> BLAS:   /usr/local/package/r/4.3.0/lib64/R/lib/libRblas.so 
-#> LAPACK: /usr/local/package/r/4.3.0/lib64/R/lib/libRlapack.so;  LAPACK version 3.11.0
+#> 
 #> 
 #> locale:
-#>  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
-#>  [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    
-#>  [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   
-#>  [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 
-#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-#> [11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       
+#> [1] LC_COLLATE=Japanese_Japan.utf8 
+#> [2] LC_CTYPE=Japanese_Japan.utf8   
+#> [3] LC_MONETARY=Japanese_Japan.utf8
+#> [4] LC_NUMERIC=C                   
+#> [5] LC_TIME=Japanese_Japan.utf8    
 #> 
 #> time zone: Asia/Tokyo
-#> tzcode source: system (glibc)
+#> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets 
 #> [6] methods   base     
 #> 
 #> loaded via a namespace (and not attached):
-#>  [1] digest_0.6.33     R6_2.5.1          bookdown_0.36    
+#>  [1] digest_0.6.33     R6_2.5.1          bookdown_0.35    
 #>  [4] fastmap_1.1.1     xfun_0.40         cachem_1.0.8     
-#>  [7] knitr_1.43        memoise_2.0.1     htmltools_0.5.6  
-#> [10] rmarkdown_2.23    xml2_1.3.5        cli_3.6.1        
+#>  [7] knitr_1.44        memoise_2.0.1     htmltools_0.5.6  
+#> [10] rmarkdown_2.25    xml2_1.3.5        cli_3.6.1        
 #> [13] downlit_0.4.3     sass_0.4.7        withr_2.5.0      
-#> [16] jquerylib_0.1.4   compiler_4.3.0    rstudioapi_0.15.0
-#> [19] tools_4.3.0       evaluate_0.21     bslib_0.5.1      
+#> [16] jquerylib_0.1.4   compiler_4.3.1    rstudioapi_0.15.0
+#> [19] tools_4.3.1       evaluate_0.21     bslib_0.5.1      
 #> [22] yaml_2.3.7        fs_1.6.3          jsonlite_1.8.7   
 #> [25] rlang_1.1.1
 ```

@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH 49c6dd8 DN-- 3 2 -- 
+#> IGRAPH d4c252e DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from 49c6dd8 (vertex names):
+#> + edges from d4c252e (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -211,16 +211,10 @@ geneList
 #> [4] "ENSG00000175595" "ENSG00000134899" "ENSG00000225830"
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL", wcScale=50)
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette YlOrBr is 9
-#> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette BuGn is 9
-#> Returning the palette you asked for with that many colors
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Accent is 8
-#> Returning the palette you asked for with that many colors
-#> Warning in dir.create(paste0(dir)): 'network'
-#> はすでに存在します
+#> Warning in dir.create(paste0(dir)): 'network' already
+#> exists
 #> Warning in dir.create(paste0(dir, "/images")):
-#> 'network/images' はすでに存在します
+#> 'network\images' already exists
 #> Input genes: 12
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
@@ -255,8 +249,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL", wcScale=50)
 #> Adding another scale for size, which will replace the
 #> existing scale.
 #> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : One word could not fit
-#> on page. It has been removed.
+#> points_valid_first, boxes = boxes, : Some words could not
+#> fit on page. They have been removed.
 ```
 
 # Annotating gene cluster dendrogram
@@ -680,6 +674,8 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Pastel1 is 9
+#> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
@@ -709,15 +705,12 @@ plotEigengeneNetworksWithWords(MEs, modColors, useWC=TRUE, candidateNodes=c("ME2
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.304
-#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette PuBu is 9
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9
 #> Returning the palette you asked for with that many colors
 #> Scale for size is already present.
 #> Adding another scale for size, which will replace the
 #> existing scale.
 #> border is set to FALSE as useggfx is not NULL
-#> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : One word could not fit
-#> on page. It has been removed.
 ```
 
 <img src="04-custom-usage_files/figure-html/decoword-2.png" width="100%" style="display: block; margin: auto;" />
@@ -747,29 +740,29 @@ plotEigengeneNetworksWithWords(MEs,useWC=TRUE,
 #> Bootstrap (r = 1.29)... Done.
 #> Bootstrap (r = 1.4)... Done.
 #> Input genes: 5822
-#>   Converted input genes: 4803
+#>   Converted input genes: 4793
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
 #> Input genes: 15534
-#>   Converted input genes: 12199
+#>   Converted input genes: 12187
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
 #> Input genes: 1926
-#>   Converted input genes: 1554
+#>   Converted input genes: 1558
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0
 #> Input genes: 860
-#>   Converted input genes: 671
+#>   Converted input genes: 673
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.1
+#> threshold = 0.102
 #> Input genes: 275
 #>   Converted input genes: 260
 #> Filter based on GeneSummary
@@ -800,55 +793,46 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
                 split=TRUE, calc="mean",
                 keyType="ENTREZID")
 #> Finding query in 20 clusters ...
-#> Input genes: 301
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 70
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 92
+#> Input genes: 247
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 37
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 97
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 193
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 32
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 137
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 18
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 156
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 108
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 5
+#> Input genes: 59
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 47
+#> Input genes: 69
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 108
+#> Input genes: 3
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 50
+#> Input genes: 65
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 8
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 79
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 212
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 42
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 31
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 192
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 62
-#> Filter based on GeneSummary
-#> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 53
+#> Input genes: 225
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 30
@@ -857,7 +841,16 @@ frq <- findTerm(query, listOfGenes[sample(length(listOfGenes), 20)],
 #> Input genes: 117
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
-#> Input genes: 97
+#> Input genes: 34
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 50
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 63
+#> Filter based on GeneSummary
+#> Filtered 77 words (frequency and/or tfidf)
+#> Input genes: 512
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),
@@ -892,13 +885,13 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 12526
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 9520
+#>   Converted input genes: 9512
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 5586
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 4603
+#>   Converted input genes: 4595
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 94
@@ -928,7 +921,7 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 68
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 68
+#>   Converted input genes: 67
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 45
@@ -940,25 +933,25 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 36
 #> 'select()' returned 1:1 mapping between keys and
 #> columns
-#>   Converted input genes: 10
+#>   Converted input genes: 9
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 2396
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 2200
+#>   Converted input genes: 2199
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 1066
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 883
+#>   Converted input genes: 885
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 774
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 624
+#>   Converted input genes: 626
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 379
@@ -970,7 +963,7 @@ frq <- findTerm(query, listOfGenes,
 #> Input genes: 233
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 143
+#>   Converted input genes: 141
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 181
@@ -980,15 +973,15 @@ frq <- findTerm(query, listOfGenes,
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 147
-#> 'select()' returned 1:1 mapping between keys and
+#> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 125
+#>   Converted input genes: 126
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 #> Input genes: 113
 #> 'select()' returned 1:many mapping between keys and
 #> columns
-#>   Converted input genes: 105
+#>   Converted input genes: 104
 #> Filter based on GeneSummary
 #> Filtered 77 words (frequency and/or tfidf)
 plt <- data.frame(t(data.frame(frq, check.names=FALSE)),

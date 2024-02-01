@@ -57,7 +57,7 @@ data.table(updf) |> head()
 
 ```r
 candidateSpecies <- c("Escherichia coli")
-file <- "metacyc/24.5/data/pathways.dat"
+file <- "../../metacyc/24.5/data/pathways.dat"
 metacyc <- parseMetaCycPathway(file, candidateSpecies, withTax=TRUE, clear=TRUE)
 metacyc |> head()
 #>   pathwayID

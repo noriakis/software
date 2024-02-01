@@ -233,8 +233,7 @@ plotNet(net4, asis=TRUE)
 
 <img src="03-microbiome_usage_files/figure-html/no_curate-1.png" width="100%" style="display: block; margin: auto;" />
 
-## 
-Enzymes
+## Enzymes
 
 For microbiome analysis, it is often the case that investigating coded enzymes is important. Using `enzyme` function and `getUPtax` function, the queried species or genus can be linked to possible interaction with enzymes using following databases. The downloaded file path should be specified to the function like below to link the queried taxonomy and enzymes. Specifically, enzymes listed in `enzyme.dat` are searched, and corresponding UniProt identifiers are obtained, followed by mapping using `speclist.txt`. This way, the links to microbe - textual information - enzyme can be plotted. 
 
@@ -381,9 +380,9 @@ Annotating the dendrogram (or cladogram) of taxonomy is possible by the `plotEig
 
 
 ```r
-
+set.seed(1)
 ## Read pathway description
-file <- "metacyc/24.5/data/pathways.dat"
+file <- "../../metacyc/24.5/data/pathways.dat"
 input <- parseMetaCycPathway(file,
                               candSp="all",
                               withTax=TRUE,
@@ -498,28 +497,28 @@ micro <- plotEigengeneNetworksWithWords(NA, sampled,
     useWGCNA=FALSE, spacer=0.05,
     horiz=FALSE, wcScale=5)
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.2
-#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
-#> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
+#> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.201
+#> threshold = 0.1
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.3
+#> threshold = 0.5
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
 #> threshold = 0.101
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> Ignoring corThresh, automatically determine the value
-#> threshold = 0.6
+#> threshold = 0.2
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 1
+#> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
+#> Ignoring corThresh, automatically determine the value
+#> threshold = 0.2
 #> Including columns pathwayID and commonName and species and taxonomicRange and spConverted to link with query
 #> border is set to FALSE as useggfx is not NULL
 scaled <- micro + scale_y_continuous(expand=c(0,6))
@@ -528,35 +527,33 @@ scaled <- micro + scale_y_continuous(expand=c(0,6))
 micro
 ```
 
-<img src="03-microbiome_usage_files/figure-html/plotDendroWord-1.svg" width="100%" style="display: block; margin: auto;" />
+<img src="03-microbiome_usage_files/figure-html/plotDendroWord-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 scaled
 ```
 
-<img src="03-microbiome_usage_files/figure-html/plotDendroWord-2.svg" width="100%" style="display: block; margin: auto;" />
+<img src="03-microbiome_usage_files/figure-html/plotDendroWord-2.png" width="100%" style="display: block; margin: auto;" />
 
 
 ```r
 sessionInfo()
-#> R version 4.3.0 (2023-04-21)
-#> Platform: x86_64-pc-linux-gnu (64-bit)
-#> Running under: CentOS Linux 7 (Core)
+#> R version 4.3.1 (2023-06-16 ucrt)
+#> Platform: x86_64-w64-mingw32/x64 (64-bit)
+#> Running under: Windows 11 x64 (build 22621)
 #> 
 #> Matrix products: default
-#> BLAS:   /usr/local/package/r/4.3.0/lib64/R/lib/libRblas.so 
-#> LAPACK: /usr/local/package/r/4.3.0/lib64/R/lib/libRlapack.so;  LAPACK version 3.11.0
+#> 
 #> 
 #> locale:
-#>  [1] LC_CTYPE=ja_JP.UTF-8       LC_NUMERIC=C              
-#>  [3] LC_TIME=ja_JP.UTF-8        LC_COLLATE=ja_JP.UTF-8    
-#>  [5] LC_MONETARY=ja_JP.UTF-8    LC_MESSAGES=ja_JP.UTF-8   
-#>  [7] LC_PAPER=ja_JP.UTF-8       LC_NAME=C                 
-#>  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-#> [11] LC_MEASUREMENT=ja_JP.UTF-8 LC_IDENTIFICATION=C       
+#> [1] LC_COLLATE=Japanese_Japan.utf8 
+#> [2] LC_CTYPE=Japanese_Japan.utf8   
+#> [3] LC_MONETARY=Japanese_Japan.utf8
+#> [4] LC_NUMERIC=C                   
+#> [5] LC_TIME=Japanese_Japan.utf8    
 #> 
 #> time zone: Asia/Tokyo
-#> tzcode source: system (glibc)
+#> tzcode source: internal
 #> 
 #> attached base packages:
 #> [1] stats     graphics  grDevices utils     datasets 
@@ -564,20 +561,20 @@ sessionInfo()
 #> 
 #> other attached packages:
 #> [1] ggfx_1.0.1          RColorBrewer_1.1-3 
-#> [3] ggraph_2.1.0        biotextgraph_0.99.0
+#> [3] ggraph_2.1.0.9000   biotextgraph_0.99.0
 #> [5] ggplot2_3.4.4      
 #> 
 #> loaded via a namespace (and not attached):
 #>   [1] ggdendro_0.1.23         rstudioapi_0.15.0      
 #>   [3] jsonlite_1.8.7          pvclust_2.2-0          
-#>   [5] magrittr_2.0.3          magick_2.8.1           
-#>   [7] farver_2.1.1            rmarkdown_2.23         
+#>   [5] magrittr_2.0.3          magick_2.7.5           
+#>   [7] farver_2.1.1            rmarkdown_2.25         
 #>   [9] ragg_1.2.5              GlobalOptions_0.1.2    
-#>  [11] fs_1.6.3                zlibbioc_1.46.0        
+#>  [11] fs_1.6.3                zlibbioc_1.47.0        
 #>  [13] vctrs_0.6.5             memoise_2.0.1          
-#>  [15] cyjShiny_1.0.42         RCurl_1.98-1.13        
+#>  [15] cyjShiny_1.0.42         RCurl_1.98-1.12        
 #>  [17] base64enc_0.1-3         htmltools_0.5.6        
-#>  [19] curl_5.0.1              cellranger_1.1.0       
+#>  [19] curl_5.0.2              cellranger_1.1.0       
 #>  [21] gridGraphics_0.5-1      sass_0.4.7             
 #>  [23] GeneSummary_0.99.6      bslib_0.5.1            
 #>  [25] htmlwidgets_1.6.2       cachem_1.0.8           
@@ -585,56 +582,56 @@ sessionInfo()
 #>  [29] mime_0.12               lifecycle_1.0.3        
 #>  [31] pkgconfig_2.0.3         R6_2.5.1               
 #>  [33] fastmap_1.1.1           GenomeInfoDbData_1.2.10
-#>  [35] shiny_1.7.4.1           digest_0.6.33          
+#>  [35] shiny_1.7.5             digest_0.6.33          
 #>  [37] colorspace_2.1-0        patchwork_1.2.0        
-#>  [39] AnnotationDbi_1.64.1    S4Vectors_0.38.1       
-#>  [41] textshaping_0.3.6       RSQLite_2.3.3          
-#>  [43] org.Hs.eg.db_3.18.0     filelock_1.0.2         
-#>  [45] labeling_0.4.2          fansi_1.0.4            
-#>  [47] httr_1.4.6              polyclip_1.10-6        
-#>  [49] compiler_4.3.0          bit64_4.0.5            
+#>  [39] AnnotationDbi_1.63.2    S4Vectors_0.38.1       
+#>  [41] textshaping_0.3.6       RSQLite_2.3.1          
+#>  [43] org.Hs.eg.db_3.17.0     filelock_1.0.2         
+#>  [45] labeling_0.4.3          fansi_1.0.4            
+#>  [47] httr_1.4.7              polyclip_1.10-4        
+#>  [49] compiler_4.3.1          bit64_4.0.5            
 #>  [51] withr_2.5.0             viridis_0.6.4          
 #>  [53] DBI_1.1.3               dendextend_1.17.1      
 #>  [55] highr_0.10              ggforce_0.4.1          
-#>  [57] MASS_7.3-58.4           ISOcodes_2022.09.29    
-#>  [59] rjson_0.2.21            tools_4.3.0            
+#>  [57] MASS_7.3-60             ISOcodes_2022.09.29    
+#>  [59] rjson_0.2.21            tools_4.3.1            
 #>  [61] ape_5.7-1               stopwords_2.3          
 #>  [63] rentrez_1.2.3           httpuv_1.6.11          
-#>  [65] glue_1.6.2              nlme_3.1-162           
+#>  [65] glue_1.6.2              nlme_3.1-163           
 #>  [67] promises_1.2.1          gridtext_0.1.5         
-#>  [69] grid_4.3.0              shadowtext_0.1.2       
-#>  [71] generics_0.1.3          gtable_0.3.3           
+#>  [69] grid_4.3.1              shadowtext_0.1.2       
+#>  [71] generics_0.1.3          gtable_0.3.4           
 #>  [73] tidyr_1.3.0             bugsigdbr_1.8.1        
 #>  [75] data.table_1.14.8       tidygraph_1.2.3        
 #>  [77] xml2_1.3.5              utf8_1.2.3             
-#>  [79] XVector_0.40.0          BiocGenerics_0.46.0    
-#>  [81] stringr_1.5.0           markdown_1.11          
+#>  [79] XVector_0.41.1          BiocGenerics_0.47.0    
+#>  [81] stringr_1.5.0           markdown_1.8           
 #>  [83] ggrepel_0.9.5           pillar_1.9.0           
 #>  [85] yulab.utils_0.1.0       later_1.3.1            
 #>  [87] dplyr_1.1.4             tweenr_2.0.2           
-#>  [89] BiocFileCache_2.8.0     lattice_0.21-8         
+#>  [89] BiocFileCache_2.9.1     lattice_0.21-8         
 #>  [91] bit_4.0.5               tidyselect_1.2.0       
 #>  [93] phylogram_2.1.0         tm_0.7-11              
-#>  [95] Biostrings_2.68.1       downlit_0.4.3          
-#>  [97] knitr_1.43              gridExtra_2.3          
-#>  [99] NLP_0.2-1               bookdown_0.36          
-#> [101] IRanges_2.34.1          stats4_4.3.0           
-#> [103] xfun_0.40               graphlayouts_1.0.2     
-#> [105] Biobase_2.60.0          stringi_1.7.12         
+#>  [95] Biostrings_2.69.2       downlit_0.4.3          
+#>  [97] knitr_1.44              gridExtra_2.3          
+#>  [99] NLP_0.2-1               bookdown_0.35          
+#> [101] IRanges_2.35.2          stats4_4.3.1           
+#> [103] xfun_0.40               graphlayouts_1.0.0     
+#> [105] Biobase_2.61.0          stringi_1.7.12         
 #> [107] yaml_2.3.7              evaluate_0.21          
 #> [109] ggwordcloud_0.6.0       wordcloud_2.6          
-#> [111] tibble_3.2.1            graph_1.80.0           
+#> [111] tibble_3.2.1            graph_1.79.1           
 #> [113] ggplotify_0.1.2         cli_3.6.1              
 #> [115] systemfonts_1.0.4       xtable_1.8-4           
 #> [117] munsell_0.5.0           jquerylib_0.1.4        
-#> [119] Rcpp_1.0.11             GenomeInfoDb_1.36.4    
+#> [119] Rcpp_1.0.11             GenomeInfoDb_1.37.4    
 #> [121] readxl_1.4.3            dbplyr_2.3.3           
-#> [123] png_0.1-8               XML_3.99-0.15          
-#> [125] parallel_4.3.0          ellipsis_0.3.2         
+#> [123] png_0.1-8               XML_3.99-0.14          
+#> [125] parallel_4.3.1          ellipsis_0.3.2         
 #> [127] blob_1.2.4              bitops_1.0-7           
 #> [129] viridisLite_0.4.2       slam_0.1-50            
 #> [131] scales_1.3.0            purrr_1.0.2            
 #> [133] crayon_1.5.2            GetoptLong_1.0.5       
 #> [135] rlang_1.1.1             cowplot_1.1.1          
-#> [137] KEGGREST_1.40.1
+#> [137] KEGGREST_1.41.0
 ```
