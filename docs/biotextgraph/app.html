@@ -91,7 +91,7 @@
 <h3>
 <span class="header-section-number">9.2.1</span> Load the necessary packages and genes<a class="anchor" aria-label="anchor" href="#load-the-necessary-packages-and-genes"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -100,7 +100,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"sysdata.rda"</span>, package <span class="op">=</span> <span class="st">"biotextgraph"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>For the omics analysis involving transcript or genes, we would not obtain a list containing the single gene type such as ERCC genes shown in the basic usage example. In almost all the cases, the gene comes from various biological pathways like obtained in the analysis mentioned in the above section. Here, we introduce an example using the example cluster of WGCNA analysis obtained from the transcriptomic dataset investigating bladder cancer (<a href="https://doi.org/10.1038/s41556-019-0361-y">Chen et al. 2019</a>). The gene set contains 621 genes.</p>
 <p>First, we perform over-representation analysis on the gene set (KEGG) to grasp the biological functions of these genes.</p>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu">clusterProfiler</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/bitr.html">bitr</a></span><span class="op">(</span><span class="va">exampleWGCNAcluster</span>,</span>
 <span>    fromType<span class="op">=</span><span class="st">"ENSEMBL"</span>, toType<span class="op">=</span><span class="st">"ENTREZID"</span>,</span>
 <span>    OrgDb<span class="op">=</span><span class="st">"org.Hs.eg.db"</span><span class="op">)</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span>
@@ -117,7 +117,7 @@
 <span><span class="fu">enrichplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html">dotplot</a></span><span class="op">(</span><span class="va">ora</span>, showCategory<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_files/figure-html/aa_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>We use the function in <code>biotextgraph</code> to make a summarized visualization of textual information, along with associated genes. As for the input reaching to a hundred of genes, there is an option <code>filterByGO</code> term, which filters the text mining results to those used in GO terms. This is useful for limiting the visualization to biologically-relevant terms.</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">check</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">refseq</a></span><span class="op">(</span><span class="va">converted</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>                filterByGO<span class="op">=</span><span class="cn">TRUE</span>, keyType<span class="op">=</span><span class="st">"ENTREZID"</span>, autoThresh<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 168</span></span>
@@ -127,7 +127,7 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotNet</a></span><span class="op">(</span><span class="va">check</span>, asis<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_files/figure-html/aa_btg-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Some genes are not related to the significantly enriched pathway, and one would like to inspect the biological function of these genes.</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Extraction of non-related genes</span></span>
 <span><span class="va">enr_genes</span> <span class="op">&lt;-</span> <span class="va">ora</span><span class="op">@</span><span class="va">result</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">p.adjust</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">geneID</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -137,7 +137,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">no_enr</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 135</span></span></code></pre></div>
 <p>This time, we enable the <code>filterByGO</code> option along with <code>ngram=2</code>, which produces 2-gram visualization.</p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">check_noenr_WGO</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">refseq</a></span><span class="op">(</span><span class="va">no_enr</span>,</span>
 <span>    layout<span class="op">=</span><span class="st">"nicely"</span>,</span>
 <span>    ngram<span class="op">=</span><span class="fl">2</span>,</span>
@@ -164,7 +164,7 @@
 <h3>
 <span class="header-section-number">9.3.1</span> Load the necessary packages and genes<a class="anchor" aria-label="anchor" href="#load-the-necessary-packages-and-genes-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">biotextgraph</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
@@ -248,7 +248,7 @@
 </h3>
 <p>First, we perform enrichment analysis using ReactomePA.
 From the enrichment analysis results, the cluster is related to transcriptional regulation by TP53.</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Convert to ENTREZID</span></span>
 <span><span class="va">entre</span> <span class="op">&lt;-</span> <span class="fu">AnnotationDbi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">select</a></span><span class="op">(</span><span class="va">org.Hs.eg.db</span>, keytype<span class="op">=</span><span class="st">"SYMBOL"</span>,</span>
 <span>                               keys <span class="op">=</span> <span class="va">degs</span>, columns <span class="op">=</span> <span class="st">"ENTREZID"</span><span class="op">)</span><span class="op">$</span><span class="va">ENTREZID</span></span>
@@ -270,7 +270,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <span><span class="co">#&gt; [13] "TP53 Regulates Transcription of Cell Death Genes"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/cnetplot.html">cnetplot</a></span><span class="op">(</span><span class="va">pway</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_files/figure-html/ea-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Genes involved in significant pathways</span></span>
 <span><span class="va">excheck</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">sigpway</span><span class="op">$</span><span class="va">geneID</span>,</span>
@@ -288,7 +288,7 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <span class="header-section-number">9.3.3</span> Text mining the gene summaries<a class="anchor" aria-label="anchor" href="#text-mining-the-gene-summaries"><i class="fas fa-link"></i></a>
 </h3>
 <p>Next we perform the plain function producing a correlation network, with showing the top-genes related to high-frequency words in the text in RefSeq summary. We make two networks, those related to significantly enriched pathways and those not related to the significant pathways.</p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">refseq</a></span><span class="op">(</span><span class="va">excheck</span>, colorText<span class="op">=</span><span class="cn">TRUE</span>, genePlot<span class="op">=</span><span class="cn">TRUE</span>, numWords<span class="op">=</span><span class="fl">50</span>, docsum<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Input genes: 57</span></span>
 <span><span class="co">#&gt;   Converted input genes: 32</span></span>
@@ -312,12 +312,12 @@ From the enrichment analysis results, the cluster is related to transcriptional 
 <span class="header-section-number">9.3.4</span> Combine and inspect merged network<a class="anchor" aria-label="anchor" href="#combine-and-inspect-merged-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>These networks can be combined to find intersections and differences, from textual perspective. We can see from the results that the genes related to non-enriched pathways could be associated with the membrane transport and adhesion, while genes in the enriched pathways have textual information resembling to those in curated biological databases (such as DNA damage response and tumor suppression).</p>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/compareWordNet.html">compareWordNet</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">net1</span>, <span class="va">net2</span><span class="op">)</span>,</span>
 <span>               titles<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Enrich"</span>,<span class="st">"No_Enrich"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/biotextgraph/man/generalf.html">plotNet</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-application_example_files/figure-html/combineapp-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; R version 4.3.1 (2023-06-16 ucrt)</span></span>
 <span><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>

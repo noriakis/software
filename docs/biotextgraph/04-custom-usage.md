@@ -188,9 +188,9 @@ geneList <- list("ME1"=mod$colors[mod$colors==1] |> names(),
      "ME2"=mod$colors[mod$colors==2] |> names(),
      "ME3"=mod$colors[mod$colors==3] |> names())
 g
-#> IGRAPH d4c252e DN-- 3 2 -- 
+#> IGRAPH 7dedebd DN-- 3 2 -- 
 #> + attr: name (v/c)
-#> + edges from d4c252e (vertex names):
+#> + edges from 7dedebd (vertex names):
 #> [1] ME1->ME2 ME1->ME3
 geneList
 #> $ME1
@@ -211,6 +211,10 @@ geneList
 #> [4] "ENSG00000175595" "ENSG00000134899" "ENSG00000225830"
 #> [7] "ENSG00000049167"
 exportWCNetwork(g,geneList,keyType="ENSEMBL", wcScale=50)
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Oranges is 9
+#> Returning the palette you asked for with that many colors
+#> Warning in brewer.pal(10, sample(row.names(RColorBrewer::brewer.pal.info), : n too large, allowed maximum for palette Blues is 9
+#> Returning the palette you asked for with that many colors
 #> Warning in dir.create(paste0(dir)): 'network' already
 #> exists
 #> Warning in dir.create(paste0(dir, "/images")):
@@ -249,8 +253,8 @@ exportWCNetwork(g,geneList,keyType="ENSEMBL", wcScale=50)
 #> Adding another scale for size, which will replace the
 #> existing scale.
 #> Warning in wordcloud_boxes(data_points =
-#> points_valid_first, boxes = boxes, : Some words could not
-#> fit on page. They have been removed.
+#> points_valid_first, boxes = boxes, : One word could not fit
+#> on page. It has been removed.
 ```
 
 # Annotating gene cluster dendrogram
