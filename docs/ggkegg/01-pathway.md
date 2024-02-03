@@ -432,6 +432,23 @@ gg
 
 <img src="01-pathway_files/figure-html/raster3-1.png" width="100%" style="display: block; margin: auto;" />
 
+The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the `high_res` option in `overlay_raw_map` which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2.
+
+
+```r
+g <- pathway("ko00640")
+gg <- ggraph(g, layout="manual", x=x, y=y)+
+  overlay_raw_map(high_res=TRUE)+
+  geom_node_rect(fill="white",
+  	  aes(xmin=xmin*2, xmax=xmax*2, ymin=ymin*2, ymax=ymax*2, filter=type=="ortholog"), color="black")+
+  geom_node_text(aes(
+      label=graphics_name %>% strsplit(",") %>% sapply("[", 1) %>% strsplit("\\.") %>% sapply("[", 1),
+      filter=type=="ortholog"),size=4)+
+  theme_void()
+gg
+```
+
+<img src="01-pathway_files/figure-html/raster4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Group of nodes
 

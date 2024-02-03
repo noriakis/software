@@ -55,6 +55,7 @@
 <li><a class="" href="network.html"><span class="header-section-number">4</span> Network</a></li>
 <li><a class="" href="usecases.html"><span class="header-section-number">5</span> Usecases</a></li>
 <li><a class="active" href="notes.html"><span class="header-section-number">6</span> Notes</a></li>
+<li><a class="" href="saving-the-resulting-image.html"><span class="header-section-number">7</span> Saving the resulting image</a></li>
 </ul>
 
         <div class="book-extra">
@@ -71,12 +72,12 @@
 <span class="header-section-number">6.1</span> Parsing of reactions in the pathway<a class="anchor" aria-label="anchor" href="#parsing-of-reactions-in-the-pathway"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the <code>devel</code> branch of <code>ggkegg</code>, the KGML of the following reactions (<a href="https://www.genome.jp/entry/R00863">https://www.genome.jp/entry/R00863</a>) in <code>ko00270</code> are parsed in the below format by default.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb83-1"><a href="notes.html#cb83-1" tabindex="-1"></a>&lt;<span class="kw">reaction</span><span class="ot"> id=</span><span class="st">"237"</span><span class="ot"> name=</span><span class="st">"rn:R00863"</span><span class="ot"> type=</span><span class="st">"irreversible"</span>&gt;</span>
-<span id="cb83-2"><a href="notes.html#cb83-2" tabindex="-1"></a>    &lt;<span class="kw">substrate</span><span class="ot"> id=</span><span class="st">"183"</span><span class="ot"> name=</span><span class="st">"cpd:C00606"</span>/&gt;</span>
-<span id="cb83-3"><a href="notes.html#cb83-3" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"238"</span><span class="ot"> name=</span><span class="st">"cpd:C00041"</span>/&gt;</span>
-<span id="cb83-4"><a href="notes.html#cb83-4" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"236"</span><span class="ot"> name=</span><span class="st">"cpd:C09306"</span>/&gt;</span>
-<span id="cb83-5"><a href="notes.html#cb83-5" tabindex="-1"></a>&lt;/<span class="kw">reaction</span>&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb84-1"><a href="notes.html#cb84-1" tabindex="-1"></a>&lt;<span class="kw">reaction</span><span class="ot"> id=</span><span class="st">"237"</span><span class="ot"> name=</span><span class="st">"rn:R00863"</span><span class="ot"> type=</span><span class="st">"irreversible"</span>&gt;</span>
+<span id="cb84-2"><a href="notes.html#cb84-2" tabindex="-1"></a>    &lt;<span class="kw">substrate</span><span class="ot"> id=</span><span class="st">"183"</span><span class="ot"> name=</span><span class="st">"cpd:C00606"</span>/&gt;</span>
+<span id="cb84-3"><a href="notes.html#cb84-3" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"238"</span><span class="ot"> name=</span><span class="st">"cpd:C00041"</span>/&gt;</span>
+<span id="cb84-4"><a href="notes.html#cb84-4" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"236"</span><span class="ot"> name=</span><span class="st">"cpd:C09306"</span>/&gt;</span>
+<span id="cb84-5"><a href="notes.html#cb84-5" tabindex="-1"></a>&lt;/<span class="kw">reaction</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="va">reac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span></span>
 <span><span class="va">reac</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">reaction</span><span class="op">==</span><span class="st">"rn:R00863"</span><span class="op">)</span></span>
@@ -89,7 +90,7 @@
 <span><span class="co">#&gt; 2 rn:R00863         237    ko00270</span></span>
 <span><span class="co">#&gt; 3 rn:R00863         237    ko00270</span></span></code></pre></div>
 <p>These edges correspond to the relationship between compound <code>substrate</code> or <code>product</code> and <code>reaction (orthology)</code> nodes. These edges are kept for the conversion in <code>process_reaction</code>, where <code>substrate</code> and <code>product</code> are directly connected by edges.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reac2</span> <span class="op">&lt;-</span> <span class="va">reac</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_reaction.html">process_reaction</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">node_df</span> <span class="op">&lt;-</span> <span class="va">reac2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">reac2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -110,10 +111,10 @@
 <span class="header-section-number">6.2</span> Interpolation in the raster image<a class="anchor" aria-label="anchor" href="#interpolation-in-the-raster-image"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code>annotation_custom</code> is used in <code>overlay_raw_map</code>. The <code>interpolate</code> option can be specified.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>interpolate<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-notes_files/figure-html/intp1-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>interpolate<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-notes_files/figure-html/intp1-2.png" width="100%" style="display: block; margin: auto;"></div>
 
@@ -121,7 +122,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="usecases.html"><span class="header-section-number">5</span> Usecases</a></div>
-<div class="empty"></div>
+<div class="next"><a href="saving-the-resulting-image.html"><span class="header-section-number">7</span> Saving the resulting image</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -144,7 +145,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-01.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

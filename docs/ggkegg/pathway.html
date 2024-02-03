@@ -55,6 +55,7 @@
 <li><a class="" href="network.html"><span class="header-section-number">4</span> Network</a></li>
 <li><a class="" href="usecases.html"><span class="header-section-number">5</span> Usecases</a></li>
 <li><a class="" href="notes.html"><span class="header-section-number">6</span> Notes</a></li>
+<li><a class="" href="saving-the-resulting-image.html"><span class="header-section-number">7</span> Saving the resulting image</a></li>
 </ul>
 
         <div class="book-extra">
@@ -424,13 +425,26 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/raster3-1.png" width="100%" style="display: block; margin: auto;"></div>
+<p>The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the <code>high_res</code> option in <code>overlay_raw_map</code> which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2.</p>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00640"</span><span class="op">)</span></span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>high_res<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_rect.html">geom_node_rect</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"white"</span>,</span>
+<span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin<span class="op">=</span><span class="va">xmin</span><span class="op">*</span><span class="fl">2</span>, xmax<span class="op">=</span><span class="va">xmax</span><span class="op">*</span><span class="fl">2</span>, ymin<span class="op">=</span><span class="va">ymin</span><span class="op">*</span><span class="fl">2</span>, ymax<span class="op">=</span><span class="va">ymax</span><span class="op">*</span><span class="fl">2</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>      label<span class="op">=</span><span class="va">graphics_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">","</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="st">"["</span>, <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">"\\."</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="st">"["</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>      filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span>,size<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">gg</span></span></code></pre></div>
+<div class="inline-figure"><img src="01-pathway_files/figure-html/raster4-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="group-of-nodes" class="section level2" number="2.7">
 <h2>
 <span class="header-section-number">2.7</span> Group of nodes<a class="anchor" aria-label="anchor" href="#group-of-nodes"><i class="fas fa-link"></i></a>
 </h2>
 <p>The groups are specified in the KGML with type=“group”. The pathway function adds edges linking the group ID and component ID, allowing the visualization of groups in the layout other than those specified in the KGML. The edges mentioned are specified with the type <code>in_group</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa03460"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>conv<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/convert_id.html">convert_id</a></span><span class="op">(</span><span class="st">"hsa"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/delete_vertex_attr.html">delete_vertex_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"x"</span><span class="op">)</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/delete_vertex_attr.html">delete_vertex_attr</a></span><span class="op">(</span><span class="va">g</span>, <span class="st">"y"</span><span class="op">)</span></span>
@@ -448,7 +462,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span class="header-section-number">2.8</span> Combining multiple pathways in their native layouts<a class="anchor" aria-label="anchor" href="#combining-multiple-pathways-in-their-native-layouts"><i class="fas fa-link"></i></a>
 </h2>
 <p>Combining multiple pathways using their native layouts is possible by mutating the nodes’ positions or contracting multiple graphs.</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Mutate X position for the first graph</span></span>
 <span><span class="va">g1</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00640"</span><span class="op">)</span></span>
@@ -473,7 +487,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>                                                    collapse<span class="op">=</span><span class="st">","</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>         subtype_name<span class="op">=</span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_vec</a></span><span class="op">(</span><span class="va">.orig_data</span>, </span>
 <span>                                 <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">subtype_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Highlight the cpd:C00024 node for normal-joined, and contracted graph by name</span></span>
 <span><span class="co">## Blue color indicates occurrence in both pathway</span></span>
 <span></span>
@@ -491,7 +505,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>                                 highlight_color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/combine_plot-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Contracted</span></span>
 <span><span class="va">newg</span> <span class="op">|&gt;</span> </span>
@@ -515,7 +529,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span class="header-section-number">2.8.1</span> <code>multi_pathway_native</code><a class="anchor" aria-label="anchor" href="#multi_pathway_native"><i class="fas fa-link"></i></a>
 </h3>
 <p>By employing the <code>multi_pathway_native</code> function, one can array multiple native KGML layouts on a panel. In conjunction with <code>to_contracted</code>, it becomes feasible to examine the relationships of genes across various pathways.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hsa04110"</span>,<span class="st">"hsa03460"</span><span class="op">)</span></span>
 <span><span class="va">multig</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/multi_pathway_native.html">multi_pathway_native</a></span><span class="op">(</span><span class="va">pathways</span>, row_num<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -535,7 +549,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span class="header-section-number">2.9</span> Visualize the result of <code>enrichKEGG</code> and <code>gseKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg-and-gsekegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>The library can directly visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> will have boolean value whether the investigated gene is in pathway or not. By piping a <code>enrichResult</code> class object and <code>pathway_number</code> to <code>ggkegg</code>, <code>enrich_attribute</code> will be included in the resulting graph. Highlight <code>enrich_attribute</code> in the resulting graph. For a quick inspection, <code>rawMap</code> function can be used for simply producing highlighted graph with overlaid KEGG raw map.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">'DOSE'</span><span class="op">)</span></span>
 <span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -561,7 +575,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>                    expand<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">## Quick inspection</span></span>
@@ -569,20 +583,20 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p><code>rawMap</code> can accept multiple <code>enrichResult</code> class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in <code>fill_color</code>. Also, you should specify pathway ID for multiple enrichment results.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> </span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">deres</span>, <span class="va">deres</span>, <span class="va">deres</span><span class="op">)</span>, fill_color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"blue"</span><span class="op">)</span>, pid<span class="op">=</span><span class="st">"hsa04110"</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p><code>rawMap</code> also accepts <code>gseaResult</code> class, although it may be useful for assigning numeric values such as log2 fold changes directly.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">"DOSE"</span><span class="op">)</span></span>
 <span><span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseKEGG.html">gseKEGG</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="va">kk</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The same can be done for the numeric values using <code>rawValue</code>. You can control your favorite color gradient using <code>scale_fill_gradient2</code>. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as <a href="https://github.com/teunbrand/ggh4x"><code>ggh4x</code></a>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawValue.html">rawValue</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>, <span class="st">"hsa04110"</span>, auto_add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/cp_value-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -592,7 +606,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span class="header-section-number">2.10</span> Using multiple scales when highlighting multiple values in pathway<a class="anchor" aria-label="anchor" href="#using-multiple-scales-when-highlighting-multiple-values-in-pathway"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>ggh4x</code>, you can plot the multiple values in its own scale using <code><a href="https://teunbrand.github.io/ggh4x/reference/scale_fill_multi.html">scale_fill_multi()</a></code>. It is used in the package <code>plotKEGGPathway</code> in <code>stana</code> package for intra-species diversity analysis. For usage in the function, please refer to <a href="https://github.com/teunbrand/ggh4x"><code>ggh4x</code></a> site and <a href="https://github.com/noriakis/stana/blob/main/R/plotKEGGPathway.R">the code</a>.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/teunbrand/ggh4x">ggh4x</a></span><span class="op">)</span></span>
 <span><span class="va">test</span> <span class="op">&lt;-</span> <span class="va">geneList</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"hsa:"</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span><span class="op">)</span></span>
@@ -662,7 +676,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-01.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

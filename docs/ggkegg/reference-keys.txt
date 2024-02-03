@@ -44,3 +44,6 @@ plotting
 notes
 parsing-of-reactions-in-the-pathway
 interpolation-in-the-raster-image
+saving-the-resulting-image
+ggkeggsave
+output_overlay_image
