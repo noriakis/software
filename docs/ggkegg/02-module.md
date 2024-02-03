@@ -88,7 +88,7 @@ query <- sample(attr(mod, "definition_components"), 5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K00241" "K00382" "K00174" "K00116" "K00240"
+#> [1] "K25801" "K00030" "K00175" "K01647" "K00239"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -108,9 +108,9 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K01647,K05942) </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> (K01681,K01682) </td>
@@ -122,15 +122,15 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K00031,K00030) </td>
    <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0 </td>
-   <td style="text-align:right;"> 0.0000000 </td>
-   <td style="text-align:left;"> FALSE </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.5000000 </td>
+   <td style="text-align:left;"> TRUE </td>
   </tr>
   <tr>
    <td style="text-align:left;"> ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) </td>
    <td style="text-align:right;"> 8 </td>
-   <td style="text-align:right;"> 2 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.1250000 </td>
    <td style="text-align:left;"> FALSE </td>
   </tr>
   <tr>
@@ -157,9 +157,9 @@ mod |>
   <tr>
    <td style="text-align:left;"> (K00026,K00025,K00024,K00116) </td>
    <td style="text-align:right;"> 4 </td>
-   <td style="text-align:right;"> 1 </td>
-   <td style="text-align:right;"> 0.2500000 </td>
-   <td style="text-align:left;"> TRUE </td>
+   <td style="text-align:right;"> 0 </td>
+   <td style="text-align:right;"> 0.0000000 </td>
+   <td style="text-align:left;"> FALSE </td>
   </tr>
 </tbody>
 </table>
@@ -281,7 +281,7 @@ library(BiocFileCache)
 #> 
 #>     ident, sql
 library(clusterProfiler)
-#> clusterProfiler v4.9.3  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> clusterProfiler v4.9.5  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
 #> If you use clusterProfiler in published research, please cite:
 #> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141

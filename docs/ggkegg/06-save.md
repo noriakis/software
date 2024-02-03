@@ -11,8 +11,7 @@ This section describes how one can save the resulting custom plot for the public
 The `ggkeggsave` function is prepared, which respects the original dimension of the image.
 The function is intended for the ggplot with the `overlay_raw_map` layer.
 On `overlay_raw_map`, one can control whether the interpolation is performed by `interpolate` option.
-In some instances, `interpolate=TRUE` makes blurry images and by default it is disabled.
-
+In some instances, `interpolate=TRUE` makes blurry images, and please try to disable the interpolation in that case.
 
 
 ```r
