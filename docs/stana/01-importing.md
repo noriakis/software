@@ -1,13 +1,15 @@
-# Importing
+# Importing and filtering
 
 `stana` is aimed to import the metagenotyping results of various pipelines.
-The package is designed primarily for `MIDAS` and `MIDAS2`, which outputs the 
-gene copy numbers by default. Note that the slot name `snps` here refers to just the variable, and not to reflect the actual meaning.
+The package is designed to handle some types of the metagenotyping software such as `MIDAS` and `MIDAS2`, which outputs the 
+gene copy numbers by default. Note that the slot name `snps` here refers to just the variable, and not to reflect the actual meaning. The species ID in `stana` object is interpreted as **character**.
 
 
 ```r
 library(stana)
 ```
+
+Along with specifying which directory to load, the grouping variables should be set to stana object. By default, named list of groups is used (categorical). The `cl` argument in the functions and `cl` slot corresponds to this information. Additionally, the metadata in ordinaly data.frame can be set by `setMetadata`. The row names or `id` column should represent the sample names.
 
 ## MIDAS
 
@@ -22,8 +24,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-42b8a78b0e0b30a1dc59" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-42b8a78b0e0b30a1dc59">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8635d10534f1a103e9e9" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-8635d10534f1a103e9e9">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -43,17 +45,22 @@ stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis
 #> Overall, 1 species met criteria in SNPs
 #> Overall, 1 species met criteria in genes
 stana
-#> Type: MIDAS1
-#> Directory: ../merge_midas1/
-#> Species number: 1
-#> Loaded SNV table: 1
-#> Loaded gene table (copynum): 1
-#> 13.9 Mb
+#> # A stana: MIDAS1
+#> # Loaded directory: ../merge_midas1/
+#> # Species number: 1
+#> # Group info (list): HC/R
+#> # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318
+#> # Loaded gene table: 1 ID: Bacteroides_uniformis_57318
+#> # Size: 14586224 B
 ```
 
 ## MIDAS2
 
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
+
+::: rmdwarning
+For `MIDAS2`, the function assumes the default database of UHGG or GTDB is used.
+:::
 
 
 ```r
@@ -80,36 +87,28 @@ We can check stats of how many samples are profiled for each species, by `only_s
 ```r
 stana <- loadMIDAS2("../merge_uhgg", only_stat=TRUE, cl=hd_meta)
 stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
-#> # A tibble: 6 × 3
+#> # A tibble: 6 × 4
 #> # Groups:   species_id [6]
-#>   species_id group     n
-#>   <chr>      <chr> <int>
-#> 1 101346     HC       12
-#> 2 102438     HC       10
-#> 3 101378     HC        9
-#> 4 102478     HC        9
-#> 5 102492     HC        8
-#> 6 100044     HC        7
+#>   species_id group     n species_description           
+#>   <chr>      <chr> <int> <chr>                         
+#> 1 101346     HC       12 s__KS41 sp003584895           
+#> 2 102438     HC       10 s__Synechococcus_C sp001632165
+#> 3 101378     HC        9 s__CAG-873 sp002490635        
+#> 4 102478     HC        9 s__Clostridium_A leptum       
+#> 5 102492     HC        8 s__Thalassospira lucentensis_A
+#> 6 100044     HC        7 s__Helicobacter pylori_BU
 ```
 As the long output is expected, only one species is loaded here. 
 
 
 ```r
 stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
-#> SNPS
 #>   100002
 #>     Number of snps: 2058
 #>     Number of samples: 5
-#>       Number of samples in HC: 1
-#>       Number of samples in R: 4
-#>       Not passed the filter
-#> Genes
 #>   100002
 #>     Number of genes: 23427
 #>     Number of samples: 7
-#>       Number of samples in HC: 1
-#>       Number of samples in R: 6
-#>       Not passed the filter
 ```
 
 The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified to load the SNV summary and SNV info per species, which is default to `TRUE`.
@@ -139,8 +138,7 @@ getSlot(stana, "snps")[["100002"]] |> head()
 #> gnl|Prokka|UHGG000004_1|11940|G          0
 #> gnl|Prokka|UHGG000004_1|11970|C          0
 getSlot(stana, "freqTableSnps") |> head()
-#>        species HC R
-#> 100002  100002  1 4
+#> data frame with 0 columns and 0 rows
 ```
 
 For ID conversion, the metadata accompanied with the default database can be used.
@@ -206,31 +204,30 @@ The taxonomy table can be loaded with providing to `taxtbl` argument.
 
 ```r
 loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg")
-#> SNPS
 #>   100002
 #>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
 #>     Number of snps: 2058
 #>     Number of samples: 5
-#>       Number of samples in HC: 1
-#>       Number of samples in R: 4
-#>       Not passed the filter
-#> Genes
 #>   100002
 #>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
 #>     Number of genes: 23427
 #>     Number of samples: 7
-#>       Number of samples in HC: 1
-#>       Number of samples in R: 6
-#>       Not passed the filter
-#> Type: MIDAS2
-#> Directory: ../merge_uhgg
-#> Species number: 1
-#> Filter type: group, number: 2, proportion: 0.8
-#> Loaded SNV table: 1
-#>   Species cleared SNV filter: 0
-#> Loaded gene table (copynum): 1
-#>   Species cleared gene filter: 0
-#> 4.2 Mb
+#> # A stana: MIDAS2
+#> # Database: uhgg
+#> # Loaded directory: ../merge_uhgg
+#> # Species number: 1
+#> # Group info (list): HC/R
+#> # Loaded SNV table: 1 ID: 100002
+#> # Loaded gene table: 1 ID: 100002
+#> # Size: 4525192 B
+#> # 
+#> # SNV description
+#> # A tibble: 2 × 3
+#> # Groups:   group [2]
+#>   group species_id                                         n
+#>   <chr> <chr>                                          <int>
+#> 1 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…     1
+#> 2 R     d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…     4
 ```
 
 The coverage for each species per sample is plotted by `plotCoverage`.
@@ -301,11 +298,11 @@ instr <- loadInStrain("../inStrain_out", instr_chk, skip_pool=FALSE) ## Load MAF
 #>   Dimension of pooled SNV table for species: 2359827
 #> Calculating MAF
 instr
-#> Type: InStrain
-#> Directory: ../inStrain_out
-#> Species number: 1
-#> Loaded SNV table: 1
-#> 77.7 Mb
+#> # A stana: InStrain
+#> # Loaded directory: ../inStrain_out
+#> # Species number: 1
+#> # Loaded SNV table: 1 ID: GUT_GENOME142015
+#> # Size: 81502904 B
 ```
 
 ## metaSNV
@@ -319,3 +316,119 @@ meta <- loadmetaSNV("../metasnv_sample_out")
 #>   Loading refGenome2clus
 #>   Loading refGenome3clus
 ```
+
+## Manual
+
+The loading of the manually created data.frame is possible by `snv` and `gene` function. The metagenotyping results produced by the other software can be loaded with this function, although some statistics should be inserted manually. This accepts the named list of data.frame.
+
+
+```r
+man <- snv(list("manual"=head(getSlot(meta, "snps")[[1]])))
+man
+#> # A stana: manual
+#> # Loaded directory: 
+#> # Species number: 1
+#> # Loaded SNV table: 1 ID: manual
+#> # Size: 49432 B
+```
+
+### Conversion to MAF matrix
+
+Some metagenotype data comes with TSV with the number of allele count with long or wide format.
+The package offers some functions to convert these to MAF matrix.
+
+
+```r
+df1 <- data.frame(rbind(
+  c("SPID1","SP1_NZ_GG770218.1_131457", "G", "A", "7", "2"),
+  c("SPID1","SP1_NZ_GG770218.1_131458", "C", "T", "2", "5"),
+  c("SPID2","SP2_NZ.1_131459", "A", "T", "7", "13"),
+  c("SPID2","SP2_NZ.1_131470", "A", "T", "12", "2")
+))
+
+head(df1)
+#>      X1                       X2 X3 X4 X5 X6
+#> 1 SPID1 SP1_NZ_GG770218.1_131457  G  A  7  2
+#> 2 SPID1 SP1_NZ_GG770218.1_131458  C  T  2  5
+#> 3 SPID2          SP2_NZ.1_131459  A  T  7 13
+#> 4 SPID2          SP2_NZ.1_131470  A  T 12  2
+
+convertWideToMaf(df1)[[1]]
+#> $SPID1
+#>                                maf
+#> SP1_NZ_GG770218.1_131457 0.2222222
+#> SP1_NZ_GG770218.1_131458 0.2857143
+#> 
+#> $SPID2
+#>                       maf
+#> SP2_NZ.1_131459 0.3500000
+#> SP2_NZ.1_131470 0.1428571
+
+
+
+df2 <- data.frame(rbind(
+  c("SPID3","SP3_AZ.1_131457", "G", "A", "7", "2"),
+  c("SPID3","SP3_AZ.1_131458", "C", "T", "2", "5"),
+  c("SPID1","SP1_NZ_GG770218.1_131457", "A", "T", "7", "13"),
+  c("SPID1","SP1_NZ_GG770218.1_131458", "A", "T", "12", "2")
+))
+```
+
+They can be merged to make stana object by `combineMaf()` function.
+
+
+
+```r
+mafs <- list("sample1"=convertWideToMaf(df1), "sample2"=convertWideToMaf(df2))
+stana <- combineMaf(mafs)
+stana
+#> # A stana: manual
+#> # Loaded directory: 
+#> # Species number: 0
+#> # Loaded SNV table: 3 ID: SPID1
+#> # Size: 23368 B
+getSlot(stana, "snpsSummary")
+#> data frame with 0 columns and 0 rows
+
+## If needed, SNV-level statistics should be set to stana
+# stana <- setSlot(stana, "snpsInfo", list("SPID1"=spid1_statistics))
+```
+
+This object can be used with the subsequent downstream analysis. The function can be useful in importing the metagenotyping software such as `GT-Pro`.
+
+## Filtering by species ID
+
+The `check` method applied to `stana` object can check the samples or species met the specific criteria.
+
+
+```r
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg")
+#>   100002
+#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>     Number of snps: 2058
+#>     Number of samples: 5
+#>   100002
+#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>     Number of genes: 23427
+#>     Number of samples: 7
+filt <- stana %>% check(mean_coverage > 4)
+head(filt)
+#> # A tibble: 6 × 3
+#>   species_id     n species_description                      
+#>        <int> <int> <chr>                                    
+#> 1     100002     5 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+#> 2     100003    15 d__Bacteria;p__Bacteroidota;c__Bacteroid…
+#> 3     100022     7 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+#> 4     100036     3 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+#> 5     100039     2 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+#> 6     100041     3 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+```
+
+Subsequently, `filter` method can be used to subset the stana object for interesting species.
+
+
+```r
+stana <- stana %>% filter(unique(filt$species_id))
+```
+
+Most of the functions in stana is designed to perform the analysis in all the species within stana object unless specified, so the filtering beforehand with grouping variables is important (such as number of samples profiled per group).

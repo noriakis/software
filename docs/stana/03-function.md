@@ -1,6 +1,6 @@
 # Functional annotation {#function}
 
-For functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for `MIDAS` and `MIDAS2`, which profile gene copy numbers within species by default.
+For metabolic functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY and the other databases in KEGG. However, the other options such as the enzyme commision numbers can be accepted.
 
 
 ```r
@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fdeb32f3ef9e503ac93a" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-fdeb32f3ef9e503ac93a">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2135e2e56bc339349abb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2135e2e56bc339349abb">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH a0ddfaf UN-- 4 2 -- 
+#> IGRAPH f4a6a79 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from a0ddfaf (vertex names):
+#> + edges from f4a6a79 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c23d63325c82e1032632" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c23d63325c82e1032632">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5c109bd09757e7b39360" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5c109bd09757e7b39360">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH a20d19a UN-- 21 922 -- 
+#> IGRAPH f5c81c9 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from a20d19a (vertex names):
+#> + edges from f5c81c9 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -267,22 +267,14 @@ load("../hd_meta.rda")
 taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
                      header=1, row.names=1, check.names = FALSE)
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346"), taxtbl=taxtbl, db="uhgg")
-#> SNPS
 #>   101346
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
 #>     Number of snps: 70178
 #>     Number of samples: 28
-#>       Number of samples in HC: 12
-#>       Number of samples in R: 16
-#>       Passed the filter
-#> Genes
 #>   101346
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
 #>     Number of genes: 120158
 #>     Number of samples: 31
-#>       Number of samples in HC: 13
-#>       Number of samples in R: 18
-#>       Passed the filter
 ```
 
 We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
@@ -332,36 +324,22 @@ load("../hd_meta.rda")
 taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
                      header=1, row.names=1, check.names = FALSE)
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346","102438"), taxtbl=taxtbl, db="uhgg")
-#> SNPS
 #>   101346
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
 #>     Number of snps: 70178
 #>     Number of samples: 28
-#>       Number of samples in HC: 12
-#>       Number of samples in R: 16
-#>       Passed the filter
 #>   102438
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis
 #>     Number of snps: 18102
 #>     Number of samples: 28
-#>       Number of samples in HC: 10
-#>       Number of samples in R: 18
-#>       Passed the filter
-#> Genes
 #>   101346
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
 #>     Number of genes: 120158
 #>     Number of samples: 31
-#>       Number of samples in HC: 13
-#>       Number of samples in R: 18
-#>       Passed the filter
 #>   102438
 #>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis
 #>     Number of genes: 47046
 #>     Number of samples: 29
-#>       Number of samples in HC: 11
-#>       Number of samples in R: 18
-#>       Passed the filter
 ```
 
 Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
@@ -459,8 +437,23 @@ gg <- plotKEGGPathway(stana, c("101346","102438"),
 #> 101346: HC / R
 #> 102438: HC / R
 #> Point mode enabled
+#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 51 rows.
+#> ℹ Did you mean to use `annotate()`?
+#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 47 rows.
+#> ℹ Did you mean to use `annotate()`?
 gg
 #> $ko00270
 ```
 
 <img src="03-function_files/figure-html/pathway_point-1.png" width="672" />
+
+
+## Setting the manual annotation
+
+Using `setMap` function, one can set stana object a named data frame of mapping file between gene and gene families.
+In this case, the data.frame should be two column layouts, and the first column corresponds to gene ID and the second column corresponds to the gene family IDs.
+
+
+```r
+stana <- setMap(stana, "101346", data.frame(c("geneID1","geneID2"), c("K00001","K00002")))
+```
