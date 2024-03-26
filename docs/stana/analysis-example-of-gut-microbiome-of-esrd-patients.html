@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Analysis example of gut microbiome of ESRD patients | stana</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
+<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Analysis example of gut microbiome of ESRD patients | stana">
+<meta property="og:type" content="book">
+<meta property="og:description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Analysis example of gut microbiome of ESRD patients | stana">
+<meta name="twitter:description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">stana</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="importing-and-filtering.html"><span class="header-section-number">2</span> Importing and filtering</a></li>
+<li><a class="" href="statistial-analysis.html"><span class="header-section-number">3</span> Statistial analysis</a></li>
+<li><a class="" href="function.html"><span class="header-section-number">4</span> Functional annotation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">5</span> Visualization</a></li>
+<li><a class="" href="interactive-inspection.html"><span class="header-section-number">6</span> Interactive inspection</a></li>
+<li><a class="active" href="analysis-example-of-gut-microbiome-of-esrd-patients.html"><span class="header-section-number">7</span> Analysis example of gut microbiome of ESRD patients</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/noriakis/stana">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="analysis-example-of-gut-microbiome-of-esrd-patients" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Analysis example of gut microbiome of ESRD patients<a class="anchor" aria-label="anchor" href="#analysis-example-of-gut-microbiome-of-esrd-patients"><i class="fas fa-link"></i></a>
+</h1>
+<p>We examine the dataset investigating the gut microbiome of ESRD patients (<a href="https://doi.org/10.1186/s13059-023-03056-y">Zhang et al. 2023</a>) using <code>stana</code>. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we investigate one of the profiled species, <code>Faecalicatena gnavus</code> genotyping results.</p>
+<p>Load the MIDAS2 merge results to stana object with setting the clinical grouping.</p>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../clinical/HDSubset/metadata.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>, header<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="va">meta</span><span class="op">$</span><span class="va">Run</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">Group</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">hd</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">hd</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/lapply.html">lapply</a></span><span class="op">(</span><span class="va">cl</span>, <span class="va">unname</span><span class="op">)</span></span>
+<span><span class="va">cand_species</span> <span class="op">&lt;-</span> <span class="st">"101380"</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../clinical/HDSubset"</span>, candSp<span class="op">=</span><span class="va">cand_species</span>, cl<span class="op">=</span><span class="va">cl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   101380</span></span>
+<span><span class="co">#&gt;     Number of snps: 26540</span></span>
+<span><span class="co">#&gt;     Number of samples: 102</span></span>
+<span><span class="co">#&gt;   101380</span></span>
+<span><span class="co">#&gt;     Number of genes: 59925</span></span>
+<span><span class="co">#&gt;     Number of samples: 124</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/changeColors.html">changeColors</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>,<span class="st">"gold"</span>,<span class="st">"tomato"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">stana</span></span>
+<span><span class="co">#&gt; # A stana: MIDAS2</span></span>
+<span><span class="co">#&gt; # Database: uhgg</span></span>
+<span><span class="co">#&gt; # Loaded directory: ../clinical/HDSubset</span></span>
+<span><span class="co">#&gt; # Species number: 1</span></span>
+<span><span class="co">#&gt; # Group info (list): CKD/HC/HD</span></span>
+<span><span class="co">#&gt; # Loaded SNV table: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Loaded gene table: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Size: 108700560 B</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # SNV description</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt; # Groups:   group [3]</span></span>
+<span><span class="co">#&gt;   group species_id                                         n</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                                          &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36</span></span>
+<span><span class="co">#&gt; 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24</span></span>
+<span><span class="co">#&gt; 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42</span></span></code></pre></div>
+<p>Get a brief overview of SNVs.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotSNVInfo.html">plotSNVInfo</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/app2-1.png" width="672"></div>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotSNVSummary.html">plotSNVSummary</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/app2-2.png" width="672"></div>
+<p>Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by <code>consensusSeq</code> function. It can be accessed by <code>getFasta</code> function.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/consensusSeq.html">consensusSeq</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Beginning calling for 101380</span></span>
+<span><span class="co">#&gt;   Site number: 26540</span></span>
+<span><span class="co">#&gt;   Profiled samples: 102</span></span>
+<span><span class="co">#&gt;   Included samples: 102</span></span>
+<span><span class="fu">getFasta</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; 102 sequences with 24641 character and 24559 different site patterns.</span></span>
+<span><span class="co">#&gt; The states are a c g t</span></span></code></pre></div>
+<p>Based on the MSA, the phylogenetic tree can be inferred by <code>inferAndPlotTree</code>. Inferring function can be specified by <code>treeFun</code> and is default to <code>upgma</code> function in phangorn, but can be stated the other functions. The tree plot shows the cladogram by default, but can be overridden by <code>branch.length</code> argument passed to <code>ggtree</code>.</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/inferAndPlotTree.html">inferAndPlotTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"fasta"</span>, treeFun<span class="op">=</span><span class="st">"FastTree"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; File already exists!</span></span>
+<span><span class="co">#&gt; Tree file already exists!</span></span>
+<span><span class="fu">getTree</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Phylogenetic tree with 102 tips and 100 internal nodes.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Tip labels:</span></span>
+<span><span class="co">#&gt;   ERR11865846, ERR11865866, ERR11865898, ERR11865921, ERR11865925, ERR11865952, ...</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Unrooted; includes branch lengths.</span></span>
+<span><span class="fu">getTreePlot</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/app4-1.png" width="672"></div>
+<p>Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"tree"</span>, pcoa<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # Performing adonis in 101380 target is tree</span></span>
+<span><span class="co">#&gt; Warning in att$heading[2] &lt;- deparse(match.call(),</span></span>
+<span><span class="co">#&gt; width.cutoff = 500L): number of items to replace is not a</span></span>
+<span><span class="co">#&gt; multiple of replacement length</span></span>
+<span><span class="co">#&gt; #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.027</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/app5-1.png" width="672"></div>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">getAdonis</span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
+<span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
+<span><span class="co">#&gt; Permutation: free</span></span>
+<span><span class="co">#&gt; Number of permutations: 999</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", </span></span>
+<span><span class="co">#&gt;           Df SumOfSqs      R2      F Pr(&gt;F)  </span></span>
+<span><span class="co">#&gt; group      2   0.2860 0.05176 2.7021  0.027 *</span></span>
+<span><span class="co">#&gt; Residual  99   5.2391 0.94824                </span></span>
+<span><span class="co">#&gt; Total    101   5.5251 1.00000                </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  </span></span>
+<span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<p>Also, this time, using the minor allele frequency itself, the NMF is performed. As the SNV matrix contains zero depth cells (information is not available), the corresponding cell is replaced with <code>NA</code>. For NMF with missing value, <code>NNLM</code> implementation of NMF is used. The rank was chosen based on the cross validation approach by randomly inserting the <code>NA</code> to the matrix (not to the zero depth position).</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## This only returns the test statistics, we perform 5 times with different seed</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/linxihui/NNLM">NNLM</a></span><span class="op">)</span></span>
+<span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span>  <span class="va">test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/NMF.html">NMF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"snps"</span>, estimate<span class="op">=</span><span class="cn">TRUE</span>, estimate_range<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, nnlm_flag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="va">tmp</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">test</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # NNLM flag enabled, the cross-validation error matrix only will be returned.</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # NNLM flag enabled, the cross-validation error matrix only will be returned.</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # NNLM flag enabled, the cross-validation error matrix only will be returned.</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # NNLM flag enabled, the cross-validation error matrix only will be returned.</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # NNLM flag enabled, the cross-validation error matrix only will be returned.</span></span>
+<span></span>
+<span><span class="co">## X-axis is rank and y-axis is MSE.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">6</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.03</span>, <span class="fl">0.07</span><span class="op">)</span>, xlab <span class="op">=</span> <span class="st">"Rank"</span>, ylab <span class="op">=</span> <span class="st">"MSE"</span><span class="op">)</span></span>
+<span><span class="va">cols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"steelblue"</span>,<span class="st">"pink"</span>,<span class="st">"gold"</span>,<span class="st">"limegreen"</span><span class="op">)</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">e</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">tmp</span><span class="op">[[</span><span class="va">e</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, type<span class="op">=</span><span class="st">"b"</span>, col<span class="op">=</span><span class="va">cols</span><span class="op">[</span><span class="va">e</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/hd6-1.png" width="672"></div>
+<p>We choose rank of 3 for the SNV MAF matrix.</p>
+<p>Using this rank, the NMF is performed and the resulting coefficient mixture matrix is extracted and plotted by the function. This suggests that some factors have higher abundances in HD patients while some lower.</p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/NMF.html">NMF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"snps"</span>, rank<span class="op">=</span><span class="fl">3</span>, nnlm_flag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: snps, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 26540</span></span>
+<span><span class="co">#&gt; # Original samples: 102</span></span>
+<span><span class="co">#&gt; # Rank 3</span></span>
+<span><span class="co">#&gt; Mean relative abundances: 0.2072903 0.5629668 0.2297429 </span></span>
+<span><span class="co">#&gt; Present feature per strain: 14433 17823 23678</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, by<span class="op">=</span><span class="st">"coef"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/hd7-1.png" width="672"></div>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co">## By stacked bar plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotStackedBarPlot.html">plotStackedBarPlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, by<span class="op">=</span><span class="st">"coef"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"steelblue"</span>,<span class="st">"gold"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Using sample, group as id variables</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="06-analysis_files/figure-html/hd7-2.png" width="672">
+We can directly examine the functional implications by using the same approach in KO table.
+First we calculate KO abundances based on eggNOG-mapper annotation.</div>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>,</span>
+<span>                       annotList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101380"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101380_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/calcGF.html">calcGF</a></span><span class="op">(</span><span class="va">stana</span>, candSp<span class="op">=</span><span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
+<p>We assume that two strain exists across the samples and specify the rank of two in KO example.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/NMF.html">NMF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"KO"</span>, rank<span class="op">=</span><span class="fl">2</span>, nnlm_flag<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # NMF started 101380, target: KO, method: NNLM::nnmf</span></span>
+<span><span class="co">#&gt; # Original features: 2568</span></span>
+<span><span class="co">#&gt; # Original samples: 124</span></span>
+<span><span class="co">#&gt; # Rank 2</span></span>
+<span><span class="co">#&gt; Mean relative abundances: 0.5826988 0.4173012 </span></span>
+<span><span class="co">#&gt; Present feature per strain: 2231 2394</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, by<span class="op">=</span><span class="st">"coef"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/hd9-1.png" width="672"></div>
+<p>Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/">ggrepel</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'ggrepel' was built under R version 4.3.2</span></span>
+<span><span class="va">pw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/pathwayWithFactor.html">pathwayWithFactor</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, change_name<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>    mat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"NMF"</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">W</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">colnames</a></span><span class="op">(</span><span class="va">pw</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"2"</span><span class="op">)</span></span>
+<span><span class="va">pw</span><span class="op">[[</span><span class="st">"name"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">pw</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pw</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">pw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, y<span class="op">=</span><span class="va">pw</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span><span class="op">)</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"1"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula = 'y ~</span></span>
+<span><span class="co">#&gt; x'</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 228 unlabeled data points (too many</span></span>
+<span><span class="co">#&gt; overlaps). Consider increasing max.overlaps</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/app9-1.png" width="768"></div>
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="va">pw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">pw</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">fc</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">pw</span><span class="op">[[</span><span class="st">"name"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">nms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">fc</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">fc</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>, decreasing<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">pw</span><span class="op">[</span><span class="va">nms</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<p><img src="06-analysis_files/figure-html/app9-2.png" width="768">
+Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use <code>plotKEGGPathway</code>. The returned object is ggplot object and the users can modify the visualization by stacking the layers).</p>
+<p>The left-side is abundance for factor 1 and right side is factor 2.</p>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value</span></span>
+<span><span class="co"># kegg &lt;- plotKEGGPathway(stana, cand_species,</span></span>
+<span><span class="co">#                         pathway_id="ko00270",</span></span>
+<span><span class="co">#                         statMethod="mod.t")</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pp</span> <span class="op">&lt;-</span> <span class="fu">ggkegg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span> <span class="op"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">%N&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>        f1<span class="op">=</span><span class="fu">ggkegg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/node_numeric.html">node_numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"NMF"</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">W</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>        f2<span class="op">=</span><span class="fu">ggkegg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/node_numeric.html">node_numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"NMF"</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">W</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">pp</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_rect.html">geom_node_rect</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">f1</span>, xmin<span class="op">=</span><span class="va">xmin</span>, xmax<span class="op">=</span><span class="va">x</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_rect.html">geom_node_rect</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">f2</span>, xmin<span class="op">=</span><span class="va">x</span>, xmax<span class="op">=</span><span class="va">xmax</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span><span class="op">(</span>low<span class="op">=</span><span class="st">"blue"</span>,high<span class="op">=</span><span class="st">"pink"</span>, name<span class="op">=</span><span class="st">"abundance"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="06-analysis_files/figure-html/ggkegg-1.png" width="672"></div>
+<p>In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis (<a href="https://doi.org/10.1093/ndt/13.3.656">Loehrer et al. 1998.</a>). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.</p>
+<p>Finally, the results can be exported to the interactive inspection by <code>exportInteractive</code> function.</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/exportInteractive.html">exportInteractive</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in dir.create(paste0(out, "/data")): '.\data'</span></span>
+<span><span class="co">#&gt; already exists</span></span>
+<span><span class="co">#&gt; Tree number: 1, KO (or gene) number: 1</span></span>
+<span><span class="co">#&gt; Exporting ...</span></span>
+<span><span class="co">#&gt; # A stana: MIDAS2</span></span>
+<span><span class="co">#&gt; # Database: uhgg</span></span>
+<span><span class="co">#&gt; # Loaded directory: ../clinical/HDSubset</span></span>
+<span><span class="co">#&gt; # Species number: 1</span></span>
+<span><span class="co">#&gt; # Group info (list): CKD/HC/HD</span></span>
+<span><span class="co">#&gt; # Loaded SNV table: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Loaded gene table: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Loaded KO table: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Inferred fasta: 1 ID: 101380</span></span>
+<span><span class="co">#&gt; # Size: 125114608 B</span></span>
+<span><span class="co">#&gt; # </span></span>
+<span><span class="co">#&gt; # SNV description</span></span>
+<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
+<span><span class="co">#&gt; # Groups:   group [3]</span></span>
+<span><span class="co">#&gt;   group species_id                                         n</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                                          &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36</span></span>
+<span><span class="co">#&gt; 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24</span></span>
+<span><span class="co">#&gt; 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42</span></span></code></pre></div>
+
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="interactive-inspection.html"><span class="header-section-number">6</span> Interactive inspection</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#analysis-example-of-gut-microbiome-of-esrd-patients"><span class="header-section-number">7</span> Analysis example of gut microbiome of ESRD patients</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/noriakis/stana/blob/master/06-analysis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/noriakis/stana/edit/master/06-analysis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-26.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>

@@ -1,113 +1,73 @@
-# Analysis example
+# Analysis example of gut microbiome of ESRD patients
 
-We demonstrate the analysis of metagenotyping results using `stana`. We use the gut microbiome data of Crohn's disease patients from the publication by He et al. ([He et al. 2017](https://doi.org/10.1093/gigascience/gix050)). Here, we investigate the genotyping results of MIDAS2, specifically *Bacteroides dorei* as the species has been reported to play a role in the disease through gut microbiome.
+We examine the dataset investigating the gut microbiome of ESRD patients ([Zhang et al. 2023](https://doi.org/10.1186/s13059-023-03056-y)) using `stana`. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we investigate one of the profiled species, `Faecalicatena gnavus` genotyping results.
 
-First we load the MIDAS2 results specifying merged MIDAS2 directory, with specifying which species to load and which database was used.
-
-## SNV analysis
+Load the MIDAS2 merge results to stana object with setting the clinical grouping.
 
 
 ```r
-library(stana)
 library(dplyr)
+library(stana)
 
-## Make grouping list using SRA run table
-meta <- read.table("../clinical/CrohnSubset/metadata.tsv", sep="\t", header=1)
-pd <- meta$Run %>% setNames(meta$diganosis)
-cl <- split(pd, names(pd))
+meta <- read.table("../clinical/HDSubset/metadata.tsv", sep="\t", header=1)
+hd <- meta$Run %>% setNames(meta$Group)
+cl <- split(hd, names(hd))
 cl <- lapply(cl, unname)
-cl
-#> $CD
-#>  [1] "ERR1620255" "ERR1620256" "ERR1620257" "ERR1620258"
-#>  [5] "ERR1620259" "ERR1620260" "ERR1620261" "ERR1620262"
-#>  [9] "ERR1620263" "ERR1620264" "ERR1620265" "ERR1620266"
-#> [13] "ERR1620267" "ERR1620268" "ERR1620269" "ERR1620270"
-#> [17] "ERR1620271" "ERR1620272" "ERR1620273" "ERR1620274"
-#> [21] "ERR1620275" "ERR1620276" "ERR1620278" "ERR1620279"
-#> [25] "ERR1620280" "ERR1620281" "ERR1620282" "ERR1620283"
-#> [29] "ERR1620284" "ERR1620285" "ERR1620286" "ERR1620287"
-#> [33] "ERR1620288" "ERR1620289" "ERR1620290" "ERR1620291"
-#> [37] "ERR1620292" "ERR1620293" "ERR1620294" "ERR1620295"
-#> [41] "ERR1620296" "ERR1620297" "ERR1620298" "ERR1620299"
-#> [45] "ERR1620300" "ERR1620301" "ERR1620302" "ERR1620303"
-#> [49] "ERR1620304" "ERR1620305" "ERR1620306" "ERR1620307"
-#> [53] "ERR1620308" "ERR1620309" "ERR1620313" "ERR1620314"
-#> [57] "ERR1620315" "ERR1620316" "ERR1620317" "ERR1620318"
-#> [61] "ERR1620319" "ERR1620320" "ERR1620321"
-#> 
-#> $Control
-#>  [1] "ERR1620322" "ERR1620323" "ERR1620324" "ERR1620325"
-#>  [5] "ERR1620326" "ERR1620327" "ERR1620328" "ERR1620329"
-#>  [9] "ERR1620330" "ERR1620331" "ERR1620332" "ERR1620333"
-#> [13] "ERR1620334" "ERR1620335" "ERR1620336" "ERR1620337"
-#> [17] "ERR1620338" "ERR1620339" "ERR1620340" "ERR1620341"
-#> [21] "ERR1620342" "ERR1620343" "ERR1620344" "ERR1620346"
-#> [25] "ERR1620347" "ERR1620348" "ERR1620349" "ERR1620350"
-#> [29] "ERR1620351" "ERR1620352" "ERR1620353" "ERR1620355"
-#> [33] "ERR1620356" "ERR1620357" "ERR1620358" "ERR1620359"
-#> [37] "ERR1620360" "ERR1620361" "ERR1620362" "ERR1620363"
-#> [41] "ERR1620364" "ERR1620365" "ERR1620366" "ERR1620367"
-#> [45] "ERR1620368" "ERR1620369" "ERR1620370" "ERR1620371"
-#> [49] "ERR1620372" "ERR1620373" "ERR1620374" "ERR1620375"
-#> [53] "ERR1620376" "ERR1620377"
-
-## Load the B. dorei profile
-cand_species <- "102478"
-stana <- loadMIDAS2("../clinical/CrohnSubset", candSp=cand_species, cl=cl, db="uhgg")
-#>   102478
-#>     Number of snps: 80029
-#>     Number of samples: 98
-#>   102478
-#>     Number of genes: 208821
-#>     Number of samples: 99
+cand_species <- "101380"
+stana <- loadMIDAS2("../clinical/HDSubset", candSp=cand_species, cl=cl, db="uhgg")
+#>   101380
+#>     Number of snps: 26540
+#>     Number of samples: 102
+#>   101380
+#>     Number of genes: 59925
+#>     Number of samples: 124
+stana <- changeColors(stana, c("steelblue","gold","tomato"))
 stana
 #> # A stana: MIDAS2
 #> # Database: uhgg
-#> # Loaded directory: ../clinical/CrohnSubset
+#> # Loaded directory: ../clinical/HDSubset
 #> # Species number: 1
-#> # Group info (list): CD/Control
-#> # Loaded SNV table: 1 ID: 102478
-#> # Loaded gene table: 1 ID: 102478
-#> # Size: 310904480 B
+#> # Group info (list): CKD/HC/HD
+#> # Loaded SNV table: 1 ID: 101380
+#> # Loaded gene table: 1 ID: 101380
+#> # Size: 108700560 B
 #> # 
 #> # SNV description
 #> # A tibble: 3 × 3
 #> # Groups:   group [3]
-#>   group   species_id                                       n
-#>   <chr>   <chr>                                        <int>
-#> 1 CD      d__Bacteria;p__Bacteroidota;c__Bacteroidia;…    44
-#> 2 Control d__Bacteria;p__Bacteroidota;c__Bacteroidia;…    50
-#> 3 <NA>    d__Bacteria;p__Bacteroidota;c__Bacteroidia;…     4
+#>   group species_id                                         n
+#>   <chr> <chr>                                          <int>
+#> 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36
+#> 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24
+#> 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42
 ```
 Get a brief overview of SNVs.
 
 
 ```r
-## The level contains NA
-stana <- stana <- stana::changeColors(stana, c("tomato","steelblue","gold"))
-
 plotSNVInfo(stana, cand_species)
 ```
 
 <img src="06-analysis_files/figure-html/app2-1.png" width="672" />
 
 ```r
-plotSNVSummary(stana, cand_species)
+plotSNVSummary(stana, cand_species) +
+    scale_y_log10()
 ```
 
 <img src="06-analysis_files/figure-html/app2-2.png" width="672" />
 
-Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function. It can be accessed by `getFasta` function. This time, we filter the samples with `mean_coverage`.
+Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function. It can be accessed by `getFasta` function.
 
 
 ```r
-stana <- consensusSeq(stana, cand_species, argList=list("mean_depth"=20))
-#> Beginning calling for 102478
-#>   Site number: 80029
-#>   Profiled samples: 98
-#>   Included samples: 82
+stana <- consensusSeq(stana, cand_species)
+#> Beginning calling for 101380
+#>   Site number: 26540
+#>   Profiled samples: 102
+#>   Included samples: 102
 getFasta(stana)[[cand_species]]
-#> 82 sequences with 72042 character and 30516 different site patterns.
+#> 102 sequences with 24641 character and 24559 different site patterns.
 #> The states are a c g t
 ```
 
@@ -115,81 +75,158 @@ Based on the MSA, the phylogenetic tree can be inferred by `inferAndPlotTree`. I
 
 
 ```r
-stana <- inferAndPlotTree(stana, cand_species, target="fasta", treeFun="upgma")
+stana <- inferAndPlotTree(stana, cand_species, target="fasta", treeFun="FastTree")
+#> File already exists!
+#> Tree file already exists!
 getTree(stana)[[cand_species]]
 #> 
-#> Phylogenetic tree with 82 tips and 81 internal nodes.
+#> Phylogenetic tree with 102 tips and 100 internal nodes.
 #> 
 #> Tip labels:
-#>   ERR1620255, ERR1620256, ERR1620257, ERR1620258, ERR1620260, ERR1620264, ...
+#>   ERR11865846, ERR11865866, ERR11865898, ERR11865921, ERR11865925, ERR11865952, ...
 #> 
-#> Rooted; includes branch lengths.
+#> Unrooted; includes branch lengths.
 getTreePlot(stana)[[cand_species]]
 ```
 
 <img src="06-analysis_files/figure-html/app4-1.png" width="672" />
 
-Using cophenetic distance matrix from tree, the PERMANOVA is performed. Note that `doAdonis` can accept the other distance matrices of samples such as those calculated from gene copy numbers.
+Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.
 
 
 ```r
-stana <- doAdonis(stana, cand_species, target="tree")
-#> Performing adonis in 102478
+stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
+#> # Performing adonis in 101380 target is tree
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#>   F: 1.55515904503209, R2: 0.0200522965097537, Pr: 0.287
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.027
+```
+
+<img src="06-analysis_files/figure-html/app5-1.png" width="672" />
+
+```r
 getAdonis(stana)[[cand_species]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
 #> Permutation: free
 #> Number of permutations: 999
 #> 
-#> adonis2(formula = d ~ gr, na.action = function (object, ...) 
-#>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1    2.029 0.02005 1.5552  0.287
-#> Residual 76   99.147 0.97995              
-#> Total    77  101.176 1.00000
+#> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
+#>           Df SumOfSqs      R2      F Pr(>F)  
+#> group      2   0.2860 0.05176 2.7021  0.027 *
+#> Residual  99   5.2391 0.94824                
+#> Total    101   5.5251 1.00000                
+#> ---
+#> Signif. codes:  
+#> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-## Gene copy number analysis
-
-The gene annotation is obtained by eggNOG-mapper, and the resulting file can be set by `setAnnotation` function.
+Also, this time, using the minor allele frequency itself, the NMF is performed. As the SNV matrix contains zero depth cells (information is not available), the corresponding cell is replaced with `NA`. For NMF with missing value, `NNLM` implementation of NMF is used. The rank was chosen based on the cross validation approach by randomly inserting the `NA` to the matrix (not to the zero depth position).
 
 
 ```r
-stana <- setAnnotation(stana, annotList=list("102478"="../clinical/CrohnSubset/102478_eggnog_out.emapper.annotations"))
+## This only returns the test statistics, we perform 5 times with different seed
+library(NNLM)
+tmp <- list()
+for (i in seq_len(5)) {
+  set.seed(i)
+  test <- NMF(stana, cand_species, target="snps", estimate=TRUE, estimate_range=1:6, nnlm_flag=TRUE)
+  tmp[[i]] <- test
+}
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
+
+## X-axis is rank and y-axis is MSE.
+plot(-1, xlim = c(1,6), ylim = c(0.03, 0.07), xlab = "Rank", ylab = "MSE")
+cols <- c("tomato","steelblue","pink","gold","limegreen")
+for (e in seq_along(tmp)) {
+  lines(tmp[[e]][1,], type="b", col=cols[e])
+}
 ```
-Aggregate the gene copy numbers to KEGG ORTHOLOGY (gene family) level.
+
+<img src="06-analysis_files/figure-html/hd6-1.png" width="672" />
+
+We choose rank of 3 for the SNV MAF matrix.
+
+Using this rank, the NMF is performed and the resulting coefficient mixture matrix is extracted and plotted by the function. This suggests that some factors have higher abundances in HD patients while some lower.
 
 
 ```r
-stana <- calcKO(stana, cand_species)
+stana <- NMF(stana, cand_species, target="snps", rank=3, nnlm_flag=TRUE)
+#> # NMF started 101380, target: snps, method: NNLM::nnmf
+#> # Original features: 26540
+#> # Original samples: 102
+#> # Rank 3
+#> Mean relative abundances: 0.2072903 0.5629668 0.2297429 
+#> Present feature per strain: 14433 17823 23678
+plotAbundanceWithinSpecies(stana, cand_species, tss=TRUE, by="coef")
 ```
-Perform NMF on KO abundance tables with the rank of two assuming two factors are within the species.
+
+<img src="06-analysis_files/figure-html/hd7-1.png" width="672" />
+
+```r
+
+## By stacked bar plot
+plotStackedBarPlot(stana, cand_species, by="coef")+
+  scale_fill_manual(values=c("tomato","steelblue","gold"))
+#> Using sample, group as id variables
+```
+
+<img src="06-analysis_files/figure-html/hd7-2.png" width="672" />
+We can directly examine the functional implications by using the same approach in KO table.
+First we calculate KO abundances based on eggNOG-mapper annotation.
 
 
 ```r
-stana <- NMF(stana, cand_species, rank=2)
-#> Original features: 3570 
-#> Original samples: 99 
-#> Filtered features: 3570 
-#> Filtered samples: 99 
-#> Rank 2 
-#> Mean relative abundances: 0.8978259 0.1021741 
-#> Present feature per strain: 3535 2957
-plotAbundanceWithinSpecies(stana, cand_species)
+stana <- setAnnotation(stana,
+                       annotList=list("101380"="../annotations_uhgg/101380_eggnog_out.emapper.annotations"))
+stana <- calcGF(stana, candSp=cand_species)
+```
+We assume that two strain exists across the samples and specify the rank of two in KO example.
+
+
+```r
+set.seed(1)
+stana <- NMF(stana, cand_species, target="KO", rank=2, nnlm_flag=TRUE)
+#> # NMF started 101380, target: KO, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Rank 2
+#> Mean relative abundances: 0.5826988 0.4173012 
+#> Present feature per strain: 2231 2394
+plotAbundanceWithinSpecies(stana, cand_species, tss=TRUE, by="coef")
 ```
 
-<img src="06-analysis_files/figure-html/app8-1.png" width="672" />
+<img src="06-analysis_files/figure-html/hd9-1.png" width="672" />
 
-Using these information to inspect how these two factors have different metabolic functions.
+Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.
 
 
 ```r
 library(ggrepel)
 #> Warning: package 'ggrepel' was built under R version 4.3.2
-pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE))
+pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
+	mat = getSlot(stana, "NMF")[[cand_species]]$W))
+colnames(pw) <- c("1","2")
 pw[["name"]] <- row.names(pw)
 ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
     geom_point()+
@@ -198,69 +235,82 @@ ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
     cowplot::theme_cowplot()
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~
 #> x'
-#> Warning: ggrepel: 296 unlabeled data points (too many
+#> Warning: ggrepel: 228 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
-<img src="06-analysis_files/figure-html/app9-1.png" width="672" />
+<img src="06-analysis_files/figure-html/app9-1.png" width="768" />
 
 ```r
 
 fc <- pw[,1] - pw[,2]
 names(fc) <- pw[["name"]]
-nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(20))
+nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
 
 library(pheatmap)
 pheatmap(pw[nms, 1:2])
 ```
 
-<img src="06-analysis_files/figure-html/app9-2.png" width="672" />
+<img src="06-analysis_files/figure-html/app9-2.png" width="768" />
+Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use `plotKEGGPathway`. The returned object is ggplot object and the users can modify the visualization by stacking the layers).
 
-
-The Boruta function can be used to identify those genes distinguishing two conditions (CD vs Control).
+The left-side is abundance for factor 1 and right side is factor 2.
 
 
 ```r
-library(Boruta)
-bor <- doBoruta(stana, cand_species, target="kos")
-#> Using grouping from the slot
-#> Feature number: 3570
-#> Performing Boruta
-conf <- names(bor$boruta$finalDecision[bor$boruta$finalDecision=="Confirmed"])
+## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value
+# kegg <- plotKEGGPathway(stana, cand_species,
+#                         pathway_id="ko00270",
+#                         statMethod="mod.t")
 
-library(BiocFileCache)
-#> Loading required package: dbplyr
-#> 
-#> Attaching package: 'dbplyr'
-#> The following objects are masked from 'package:dplyr':
-#> 
-#>     ident, sql
-bfc <- BiocFileCache()
-url <- bfcrpath(bfc,"https://rest.kegg.jp/list/ko")
-readr::read_delim(url, col_names = FALSE) %>%
-    mutate(X1=paste0("ko:",X1)) %>%
-    filter(X1 %in% conf)
-#> Rows: 26323 Columns: 2
-#> ── Column specification ────────────────────────────────────
-#> Delimiter: "\t"
-#> chr (2): X1, X2
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> # A tibble: 69 × 2
-#>    X1        X2                                             
-#>    <chr>     <chr>                                          
-#>  1 ko:K00005 gldA; glycerol dehydrogenase [EC:1.1.1.6]      
-#>  2 ko:K00008 SORD, gutB; L-iditol 2-dehydrogenase [EC:1.1.1…
-#>  3 ko:K00390 cysH; phosphoadenosine phosphosulfate reductas…
-#>  4 ko:K00433 cpo; non-heme chloroperoxidase [EC:1.11.1.10]  
-#>  5 ko:K00632 fadA, fadI; acetyl-CoA acyltransferase [EC:2.3…
-#>  6 ko:K00981 E2.7.7.41, CDS1, CDS2, cdsA; phosphatidate cyt…
-#>  7 ko:K01182 IMA, malL; oligo-1,6-glucosidase [EC:3.2.1.10] 
-#>  8 ko:K01226 treC; trehalose-6-phosphate hydrolase [EC:3.2.…
-#>  9 ko:K01267 DNPEP; aspartyl aminopeptidase [EC:3.4.11.21]  
-#> 10 ko:K01439 dapE; succinyl-diaminopimelate desuccinylase […
-#> # ℹ 59 more rows
+library(ggkegg)
+library(tidygraph)
+
+pp <- ggkegg::pathway("ko00270") %N>% 
+    mutate(
+    	f1=ggkegg::node_numeric(getSlot(stana, "NMF")[[cand_species]]$W[,1]),
+    	f2=ggkegg::node_numeric(getSlot(stana, "NMF")[[cand_species]]$W[,2])
+    )
+
+ggraph(pp, layout="manual", x=x, y=y)+
+    geom_node_rect(aes(fill=f1, xmin=xmin, xmax=x, filter=type=="ortholog"))+
+    geom_node_rect(aes(fill=f2, xmin=x, xmax=xmax, filter=type=="ortholog"))+
+    scale_fill_gradient(low="blue",high="pink", name="abundance")+
+    overlay_raw_map() +
+    theme_void()
 ```
 
+<img src="06-analysis_files/figure-html/ggkegg-1.png" width="672" />
 
+In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
+
+
+Finally, the results can be exported to the interactive inspection by `exportInteractive` function.
+
+
+```r
+exportInteractive(stana)
+#> Warning in dir.create(paste0(out, "/data")): '.\data'
+#> already exists
+#> Tree number: 1, KO (or gene) number: 1
+#> Exporting ...
+#> # A stana: MIDAS2
+#> # Database: uhgg
+#> # Loaded directory: ../clinical/HDSubset
+#> # Species number: 1
+#> # Group info (list): CKD/HC/HD
+#> # Loaded SNV table: 1 ID: 101380
+#> # Loaded gene table: 1 ID: 101380
+#> # Loaded KO table: 1 ID: 101380
+#> # Inferred fasta: 1 ID: 101380
+#> # Size: 125114608 B
+#> # 
+#> # SNV description
+#> # A tibble: 3 × 3
+#> # Groups:   group [3]
+#>   group species_id                                         n
+#>   <chr> <chr>                                          <int>
+#> 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36
+#> 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24
+#> 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42
+```

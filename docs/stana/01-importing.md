@@ -24,8 +24,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8635d10534f1a103e9e9" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8635d10534f1a103e9e9">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d54eb5cc40cf7722b32f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d54eb5cc40cf7722b32f">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -51,7 +51,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318
 #> # Loaded gene table: 1 ID: Bacteroides_uniformis_57318
-#> # Size: 14586224 B
+#> # Size: 14586384 B
 ```
 
 ## MIDAS2
@@ -219,7 +219,7 @@ loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: 100002
 #> # Loaded gene table: 1 ID: 100002
-#> # Size: 4525192 B
+#> # Size: 4525352 B
 #> # 
 #> # SNV description
 #> # A tibble: 2 × 3
@@ -302,7 +302,7 @@ instr
 #> # Loaded directory: ../inStrain_out
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: GUT_GENOME142015
-#> # Size: 81502904 B
+#> # Size: 81503064 B
 ```
 
 ## metaSNV
@@ -329,7 +329,7 @@ man
 #> # Loaded directory: 
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: manual
-#> # Size: 49432 B
+#> # Size: 49592 B
 ```
 
 ### Conversion to MAF matrix
@@ -386,7 +386,7 @@ stana
 #> # Loaded directory: 
 #> # Species number: 0
 #> # Loaded SNV table: 3 ID: SPID1
-#> # Size: 23368 B
+#> # Size: 23528 B
 getSlot(stana, "snpsSummary")
 #> data frame with 0 columns and 0 rows
 

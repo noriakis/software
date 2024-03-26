@@ -154,15 +154,18 @@ library(NMF)
 #> The following objects are masked from 'package:igraph':
 #> 
 #>     algorithm, compare
-stana <- NMF(stana, "100003", target="genes", estimate=TRUE)
-#> Original features: 21806 
-#> Original samples: 16 
-#> Filtered features: 21806 
-#> Filtered samples: 16 
+stana <- NMF(stana, "100003", estimate=TRUE)
+#> # NMF started 100003, target: KO, method: snmf/r
+#> # Original features: 20
+#> # Original samples: 16
+#> # Filtered features:20
+#> # Filtered samples:16
+#> Warning in cor(d.consensus, d.coph, method = "pearson"):
+#> the standard deviation is zero
 #> Chosen rank: 3 
-#> Rank 3 
-#> Mean relative abundances: 0.7205298 0.1216617 0.1578085 
-#> Present feature per strain: 20546 11671 14235
+#> # Rank 3
+#> Mean relative abundances: 0.3596474 0.5337184 0.1066343 
+#> Present feature per strain: 17 13 8
 getSlot(stana, "nmf")
 #> NULL
 ```
@@ -172,13 +175,14 @@ The users can specify the rank.
 
 ```r
 stana <- NMF(stana, "100003", rank=3)
-#> Original features: 20 
-#> Original samples: 16 
-#> Filtered features: 20 
-#> Filtered samples: 16 
-#> Rank 3 
-#> Mean relative abundances: 0.0625 0.7745108 0.1629892 
-#> Present feature per strain: 7 18 9
+#> # NMF started 100003, target: KO, method: snmf/r
+#> # Original features: 20
+#> # Original samples: 16
+#> # Filtered features:20
+#> # Filtered samples:16
+#> # Rank 3
+#> Mean relative abundances: 0.3596474 0.5337184 0.1066343 
+#> Present feature per strain: 17 13 8
 getSlot(stana, "nmf")
 #> NULL
 ```
@@ -198,13 +202,13 @@ The data can be obtained using `return_data`.
 
 ```r
 plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE) %>% head()
-#>            1         2         3  group
-#> ERR1711593 0 0.7235181 0.2764819 Group1
-#> ERR1711594 0 1.0000000 0.0000000 Group1
-#> ERR1711596 0 1.0000000 0.0000000 Group1
-#> ERR1711598 0 1.0000000 0.0000000 Group1
-#> ERR1711599 0 0.0000000 1.0000000 Group1
-#> ERR1711602 0 0.5397880 0.4602120 Group1
+#>                     1          2 3  group
+#> ERR1711593 0.09999230 0.90000770 0 Group1
+#> ERR1711594 0.08356061 0.91643939 0 Group1
+#> ERR1711596 0.90190382 0.09809618 0 Group1
+#> ERR1711598 0.25081071 0.74918929 0 Group1
+#> ERR1711599 1.00000000 0.00000000 0 Group1
+#> ERR1711602 0.71294732 0.28705268 0 Group1
 ```
 
 The basis corresponds to the factor to feature matrix. This represents functional implications if the KO abundance tables are used for the NMF. This information can be parsed to matrix of KEGG PATHWAY information using `pathwayWithFactor`.
@@ -239,23 +243,31 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 ```r
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
-#> Performing adonis in 100003
-#> Warning in att$heading[2] <- deparse(match.call(),
-#> width.cutoff = 500L): number of items to replace is not a
-#> multiple of replacement length
-#>   F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.723
+#> # Performing adonis in 100003 target is tree
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.703
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
 #> Permutation: free
 #> Number of permutations: 999
 #> 
-#> adonis2(formula = d ~ gr, na.action = function (object, ...) 
+#> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> gr        1  0.15557 0.07404 0.7196  0.723
+#> group     1  0.15557 0.07404 0.7196  0.703
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
+The corresponding principal coordinate analysis plot using distance matrix can be drawn by specifying `pcoa`. The relative eigenvalues are plotted.
+
+
+```r
+stana <- doAdonis(stana, specs = "100003", target="genes", pcoa=TRUE)
+#> # Performing adonis in 100003 target is genes
+#> #  F: 0.920180437832296, R2: 0.0616735462192564, Pr: 0.735
+```
+
+<img src="02-statistcal_files/figure-html/permanova2-1.png" width="672" />
+
 
 ## Comparing gene copy numbers
 
@@ -302,14 +314,14 @@ brres <- doBoruta(stana, "100003")
 #> Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 42.10037 secs.
+#> Boruta performed 99 iterations in 27.80678 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  15 attributes confirmed important: UHGG006336_00186,
-#> UHGG025024_01181, UHGG044133_01185, UHGG061776_01340,
-#> UHGG096197_00528 and 10 more;
-#>  21791 attributes confirmed unimportant:
+#>  7 attributes confirmed important: UHGG000008_01798,
+#> UHGG060667_01243, UHGG158704_01078, UHGG165724_01001,
+#> UHGG215309_01728 and 2 more;
+#>  21799 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21786 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21794 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.

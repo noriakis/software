@@ -27,7 +27,7 @@ exportInteractive(stana)
 #> # Loaded SNV table: 1 ID: 100003
 #> # Loaded gene table: 1 ID: 100003
 #> # Loaded KO table: 1 ID: 100003
-#> # Size: 7623472 B
+#> # Size: 7623632 B
 #> # 
 #> # SNV description
 #> # A tibble: 2 × 3

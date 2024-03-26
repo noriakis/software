@@ -24,6 +24,7 @@ draw-the-network-1
 heatmap-of-the-gene-copy-numbers-with-functional-annotations
 midas-1
 midas2-1
+aggregate-the-gene-copy-numbers-based-on-the-annotations
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
 visualizing-differences-per-species
@@ -41,6 +42,4 @@ visualization-of-phylogenetic-tree
 visualization-of-functional-analysis-results
 visualization-of-instrain-results
 interactive-inspection
-analysis-example
-snv-analysis
-gene-copy-number-analysis
+analysis-example-of-gut-microbiome-of-esrd-patients

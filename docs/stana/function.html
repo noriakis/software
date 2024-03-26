@@ -53,7 +53,7 @@
 <li><a class="active" href="function.html"><span class="header-section-number">4</span> Functional annotation</a></li>
 <li><a class="" href="visualization.html"><span class="header-section-number">5</span> Visualization</a></li>
 <li><a class="" href="interactive-inspection.html"><span class="header-section-number">6</span> Interactive inspection</a></li>
-<li><a class="" href="analysis-example.html"><span class="header-section-number">7</span> Analysis example</a></li>
+<li><a class="" href="analysis-example-of-gut-microbiome-of-esrd-patients.html"><span class="header-section-number">7</span> Analysis example of gut microbiome of ESRD patients</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,7 +66,7 @@
 <span class="header-section-number">4</span> Functional annotation<a class="anchor" aria-label="anchor" href="#function"><i class="fas fa-link"></i></a>
 </h1>
 <p>For metabolic functional profiling, several functions are prepared in <code>stana</code>. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY and the other databases in KEGG. However, the other options such as the enzyme commision numbers can be accepted.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
 <div id="parsing-patric-results" class="section level2" number="4.1">
@@ -74,7 +74,7 @@
 <span class="header-section-number">4.1</span> Parsing <code>PATRIC</code> results<a class="anchor" aria-label="anchor" href="#parsing-patric-results"><i class="fas fa-link"></i></a>
 </h2>
 <p>Use <code>checkPATRIC</code> function to obtain information related to <code>PATRIC</code> functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses <code>BiocFileCache()</code> to cache the obtained results from API.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"test"</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../test_genes.txt"</span><span class="op">)</span><span class="op">$</span><span class="va">V1</span><span class="op">)</span></span>
 <span><span class="va">genes</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $test</span></span>
@@ -104,13 +104,13 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2135e2e56bc339349abb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-2135e2e56bc339349abb">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1f30c82626b61f542c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a1f30c82626b61f542c8">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawPATRIC.html">drawPATRIC</a></span><span class="op">(</span><span class="va">genes</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Obtaining annotations of 3 genomes</span></span>
 <span><span class="co">#&gt;   Obtaining information on 1280701.3</span></span>
@@ -153,9 +153,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH f4a6a79 UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH beae8e1 UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from f4a6a79 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from beae8e1 (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -171,17 +171,17 @@
 You should perform the annotation to genes using <a href="http://eggnog-mapper.embl.de/">the server</a> or the software.
 Specify IDs you want to obtain to <code>ret</code>, such as “KEGG_ko” and “KEGG_Pathway”.
 The annotation can be used with the other functions.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5c109bd09757e7b39360" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5c109bd09757e7b39360">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-601c3248fcddf9dc8aaa" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-601c3248fcddf9dc8aaa">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>You can draw the relationships between IDs by <code>drawEGGNOG</code>.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>            candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
 <span>            geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
@@ -200,9 +200,9 @@ The annotation can be used with the other functions.</p>
 <span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
 <span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH f5c81c9 UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH bfd0e4e UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from f5c81c9 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from bfd0e4e (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
@@ -227,7 +227,7 @@ The annotation can be used with the other functions.</p>
 <span class="header-section-number">4.3.1</span> <code>MIDAS</code><a class="anchor" aria-label="anchor" href="#midas-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>For <code>MIDAS</code>, the function automatically query API of <code>PATRIC</code> server using the gene names. As the gene number is large typically, one can filter the genes by options <code>filter_zero_frac</code>, <code>filter_max_frac</code> and <code>filter_max_value</code>. However, one should perform own filtering beforehand and provide the matrix to <code>mat</code>. If <code>mat</code> is specified, other filtering options will be ignored.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/simplifyEnrichment">simplifyEnrichment</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
@@ -302,7 +302,7 @@ The annotation can be used with the other functions.</p>
 <span class="header-section-number">4.3.2</span> <code>MIDAS2</code><a class="anchor" aria-label="anchor" href="#midas2-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>For <code>MIDAS2</code>, the users should provide eggNOG annotation on <code>eggNOG</code> slot of stana object. <code>fnc</code> argument accepts <code>KEGG_Pathway</code> or <code>KEGG_Module</code> available in eggNOG annotation. The function queries <code>KEGG REST API</code> to obtain pathway and module description.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
 <span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -317,11 +317,11 @@ The annotation can be used with the other functions.</p>
 <span><span class="co">#&gt;     Number of samples: 31</span></span></code></pre></div>
 <p>We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 This can be done by <code>setAnnotation</code> function.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>You can set <code>removeAdditional</code> argument to filter words that are to be displayed.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/simplifyEnrichment">simplifyEnrichment</a></span><span class="op">)</span></span>
 <span></span>
@@ -338,21 +338,87 @@ This can be done by <code>setAnnotation</code> function.</p>
 <div class="inline-figure"><img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672"></div>
 </div>
 </div>
-<div id="kgeg-pathway-and-kegg-orthology" class="section level2" number="4.4">
+<div id="aggregate-the-gene-copy-numbers-based-on-the-annotations" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">4.4</span> KGEG PATHWAY and KEGG ORTHOLOGY<a class="anchor" aria-label="anchor" href="#kgeg-pathway-and-kegg-orthology"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Aggregate the gene copy numbers based on the annotations<a class="anchor" aria-label="anchor" href="#aggregate-the-gene-copy-numbers-based-on-the-annotations"><i class="fas fa-link"></i></a>
 </h2>
-<div id="visualization-of-kegg-pathway" class="section level3" number="4.4.1">
+<p><code>calcGF</code> function can aggregate the gene copy numbers based on the annotation (eggNOG) or the manually set annotation.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Default to use eggNOG annotation, and the user can specify which gene family to summarize</span></span>
+<span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/calcGF.html">calcGF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"101346"</span>, column<span class="op">=</span><span class="st">"EC"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"kos"</span><span class="op">)</span><span class="op">[[</span><span class="st">"101346"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           ERR9492489 ERR9492490 ERR9492491 ERR9492492</span></span>
+<span><span class="co">#&gt; 3.6.4.12   39.173924  95.450865  52.767661  46.882936</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.000000   0.841116   0.278746   0.000000</span></span>
+<span><span class="co">#&gt; 3.2.1.14    1.198363   5.697443   2.435163   0.298239</span></span>
+<span><span class="co">#&gt; 4.2.2.23    1.586967   8.950180   3.871217   0.326971</span></span>
+<span><span class="co">#&gt; 2.7.11.1    7.415218  17.180451  17.557883  12.640404</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.000000   0.000000   0.000000   0.000000</span></span>
+<span><span class="co">#&gt;           ERR9492493 ERR9492494 ERR9492495 ERR9492496</span></span>
+<span><span class="co">#&gt; 3.6.4.12  109.030709  38.157274  61.418044  32.840106</span></span>
+<span><span class="co">#&gt; 3.4.24.40   2.289508   0.000000   0.000000   0.000000</span></span>
+<span><span class="co">#&gt; 3.2.1.14    4.716068   0.565635   3.950550   0.842613</span></span>
+<span><span class="co">#&gt; 4.2.2.23    2.222589   2.685389   1.223989   0.547461</span></span>
+<span><span class="co">#&gt; 2.7.11.1   13.093117  16.668716   9.321875   3.957696</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.309415   0.000000   0.000000   0.000000</span></span>
+<span><span class="co">#&gt;           ERR9492497 ERR9492498 ERR9492499 ERR9492500</span></span>
+<span><span class="co">#&gt; 3.6.4.12   75.977012  28.210277  61.693399  36.666227</span></span>
+<span><span class="co">#&gt; 3.4.24.40   1.190823   0.117354   0.276488   0.000000</span></span>
+<span><span class="co">#&gt; 3.2.1.14    3.989812   0.833608   2.955427   1.241877</span></span>
+<span><span class="co">#&gt; 4.2.2.23    2.361721   0.534308   2.707128   0.000000</span></span>
+<span><span class="co">#&gt; 2.7.11.1   24.343595   8.375070  15.225822   9.506420</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.399345   0.000000   0.334459   0.000000</span></span>
+<span><span class="co">#&gt;           ERR9492501 ERR9492503 ERR9492504 ERR9492505</span></span>
+<span><span class="co">#&gt; 3.6.4.12   48.993525  58.889647  41.316522  44.670327</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.605779   0.000000   1.281429   0.431620</span></span>
+<span><span class="co">#&gt; 3.2.1.14    6.470900   2.073627   1.787648   1.916355</span></span>
+<span><span class="co">#&gt; 4.2.2.23    6.066784   3.795593   0.000000   1.875545</span></span>
+<span><span class="co">#&gt; 2.7.11.1   21.694552  19.085136  15.225251  12.040248</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.328735   0.210771   0.000000   0.133266</span></span>
+<span><span class="co">#&gt;           ERR9492507 ERR9492509 ERR9492510 ERR9492511</span></span>
+<span><span class="co">#&gt; 3.6.4.12   30.414200  94.222205  67.033382  45.280463</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.000000   0.000000   0.582293   0.050622</span></span>
+<span><span class="co">#&gt; 3.2.1.14    0.113379   9.611853   3.004519   0.816464</span></span>
+<span><span class="co">#&gt; 4.2.2.23    5.876491   9.608170   6.104285   0.227825</span></span>
+<span><span class="co">#&gt; 2.7.11.1   15.459505  48.563617  16.882499   6.723153</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.000000   0.330640   0.000000   0.209655</span></span>
+<span><span class="co">#&gt;           ERR9492512 ERR9492513 ERR9492514 ERR9492515</span></span>
+<span><span class="co">#&gt; 3.6.4.12   37.248780  92.564239  44.501316  33.343923</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.000000   0.699384   0.809852   0.000000</span></span>
+<span><span class="co">#&gt; 3.2.1.14    2.928634   3.767824   1.008637   0.391071</span></span>
+<span><span class="co">#&gt; 4.2.2.23    0.200991   2.143717   0.000000   2.435797</span></span>
+<span><span class="co">#&gt; 2.7.11.1   13.147839  19.027770  17.290957   8.964407</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.000000   0.000000   0.000000   0.000000</span></span>
+<span><span class="co">#&gt;           ERR9492519 ERR9492521 ERR9492522 ERR9492523</span></span>
+<span><span class="co">#&gt; 3.6.4.12  123.352975  19.992745 113.496963  73.578048</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.612824   0.044187   0.000000   0.289869</span></span>
+<span><span class="co">#&gt; 3.2.1.14    2.685511   0.555955   4.377865   4.203646</span></span>
+<span><span class="co">#&gt; 4.2.2.23    7.924792   2.183619   8.216322   2.000771</span></span>
+<span><span class="co">#&gt; 2.7.11.1   21.618306  16.281798  27.935448   8.713224</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.745864   0.064679   0.000000   0.270559</span></span>
+<span><span class="co">#&gt;           ERR9492525 ERR9492526 ERR9492528</span></span>
+<span><span class="co">#&gt; 3.6.4.12   22.958707  64.120946  37.810981</span></span>
+<span><span class="co">#&gt; 3.4.24.40   0.048448   0.548795   0.000000</span></span>
+<span><span class="co">#&gt; 3.2.1.14    0.671990   4.579498   2.684535</span></span>
+<span><span class="co">#&gt; 4.2.2.23    2.174417   9.497381   3.574399</span></span>
+<span><span class="co">#&gt; 2.7.11.1    3.474492  16.346382  10.342824</span></span>
+<span><span class="co">#&gt; 3.1.3.90    0.147197   0.000000   0.000000</span></span></code></pre></div>
+</div>
+<div id="kgeg-pathway-and-kegg-orthology" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> KGEG PATHWAY and KEGG ORTHOLOGY<a class="anchor" aria-label="anchor" href="#kgeg-pathway-and-kegg-orthology"><i class="fas fa-link"></i></a>
+</h2>
+<div id="visualization-of-kegg-pathway" class="section level3" number="4.5.1">
 <h3>
-<span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY<a class="anchor" aria-label="anchor" href="#visualization-of-kegg-pathway"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.1</span> Visualization of KEGG PATHWAY<a class="anchor" aria-label="anchor" href="#visualization-of-kegg-pathway"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>KEGG PATHWAY</code> is frequently used to characterize metabolic function of microbiome. Utilizing <a href="https://github.com/noriakis/ggkegg"><code>ggkegg</code></a>, the information of intra-species diversity, particulary gene copy number differences, can be reflected onto <code>KEGG PATHWAY</code>. It needs <code>genes</code> slot filled, and some annotations files, typically <code>eggNOG-mapper v2</code>, are needed.</p>
-<div id="visualizing-differences-per-species" class="section level4" number="4.4.1.1">
+<div id="visualizing-differences-per-species" class="section level4" number="4.5.1.1">
 <h4>
-<span class="header-section-number">4.4.1.1</span> Visualizing differences per species<a class="anchor" aria-label="anchor" href="#visualizing-differences-per-species"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.1.1</span> Visualizing differences per species<a class="anchor" aria-label="anchor" href="#visualizing-differences-per-species"><i class="fas fa-link"></i></a>
 </h4>
 <p>Load the profile for multiple species.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">taxtbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../metadata_uhgg.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>,</span>
 <span>                     header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -375,13 +441,13 @@ This can be done by <code>setAnnotation</code> function.</p>
 <span><span class="co">#&gt;     Number of samples: 29</span></span></code></pre></div>
 <p>Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 This way, the <code>plotKEGGPathway</code> function automatically calculates the abundance by user-defined method.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set the annotation file</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101346"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101346_eggnog_out.emapper.annotations"</span>,</span>
 <span>    <span class="st">"102438"</span><span class="op">=</span><span class="st">"../annotations_uhgg/102438_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>plotKEGGPathway can be run by providing stana object, species (when multiple species, rectangular nodes will be split),
 and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate metabolism for example. As for the large annotation table, the calculation takes time and you can provide pre-calculated KO table in <code>kos</code> slot of stana object, or specify <code>only_ko = TRUE</code> to first return KO table.</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, only_ko<span class="op">=</span><span class="cn">TRUE</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
@@ -391,7 +457,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/onescale-1.png" width="672"></div>
 <p>By default, the scale is same. If you install <code>ggh4x</code>, multiple scales can be added, by specifying <code>multi_scale</code> argument.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>, pathway_id<span class="op">=</span><span class="st">"ko00620"</span>, multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
 <span><span class="co">#&gt; Using pre-computed KO table</span></span>
@@ -400,7 +466,7 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/multscale-1.png" width="672"></div>
 <p>You can provide multiple pathway IDs to pathway_id, which returns a list of plot.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
 <span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,</span>
 <span>                      multi_scale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -414,12 +480,12 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <p>In this way, differences in orthologies in the pathway across multiple species can be readily captured.</p>
 </div>
 </div>
-<div id="visualizing-calculated-values-across-species" class="section level3" number="4.4.2">
+<div id="visualizing-calculated-values-across-species" class="section level3" number="4.5.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Visualizing calculated values across species<a class="anchor" aria-label="anchor" href="#visualizing-calculated-values-across-species"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.2</span> Visualizing calculated values across species<a class="anchor" aria-label="anchor" href="#visualizing-calculated-values-across-species"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you want to see the sum values across species, you can set option <code>summarize=TRUE</code>. This way, the KO values across specified species are summed, and compared between groups, then plotted.</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
 <span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span>,<span class="st">"ko00620"</span><span class="op">)</span>,</span>
 <span>                      summarize<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -430,13 +496,13 @@ and pathway ID to visualize. Here, we visualize <code>ko00620</code>, Pyruvate m
 <span><span class="va">gg2</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/pathway_SUM-1.png" width="672"></div>
 </div>
-<div id="show-which-species-have-the-kos" class="section level3" number="4.4.3">
+<div id="show-which-species-have-the-kos" class="section level3" number="4.5.3">
 <h3>
-<span class="header-section-number">4.4.3</span> Show which species have the KOs<a class="anchor" aria-label="anchor" href="#show-which-species-have-the-kos"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5.3</span> Show which species have the KOs<a class="anchor" aria-label="anchor" href="#show-which-species-have-the-kos"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you specify <code>point_mode=TRUE</code>, the function plot points on the KOs on the pathways
 based on whether the specified species have the corresponding KOs annotated.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotKEGGPathway.html">plotKEGGPathway</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span>,</span>
 <span>                      pathway_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span>,</span>
 <span>                      sp_colors<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>,<span class="st">"red"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"101346"</span>,<span class="st">"102438"</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -455,13 +521,13 @@ based on whether the specified species have the corresponding KOs annotated.</p>
 <div class="inline-figure"><img src="03-function_files/figure-html/pathway_point-1.png" width="672"></div>
 </div>
 </div>
-<div id="setting-the-manual-annotation" class="section level2" number="4.5">
+<div id="setting-the-manual-annotation" class="section level2" number="4.6">
 <h2>
-<span class="header-section-number">4.5</span> Setting the manual annotation<a class="anchor" aria-label="anchor" href="#setting-the-manual-annotation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.6</span> Setting the manual annotation<a class="anchor" aria-label="anchor" href="#setting-the-manual-annotation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>setMap</code> function, one can set stana object a named data frame of mapping file between gene and gene families.
 In this case, the data.frame should be two column layouts, and the first column corresponds to gene ID and the second column corresponds to the gene family IDs.</p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setMap.html">setMap</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"101346"</span>, <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geneID1"</span>,<span class="st">"geneID2"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"K00001"</span>,<span class="st">"K00002"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 
 </div>
@@ -485,14 +551,15 @@ In this case, the data.frame should be two column layouts, and the first column 
 <li><a class="nav-link" href="#midas2-1"><span class="header-section-number">4.3.2</span> MIDAS2</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#aggregate-the-gene-copy-numbers-based-on-the-annotations"><span class="header-section-number">4.4</span> Aggregate the gene copy numbers based on the annotations</a></li>
 <li>
-<a class="nav-link" href="#kgeg-pathway-and-kegg-orthology"><span class="header-section-number">4.4</span> KGEG PATHWAY and KEGG ORTHOLOGY</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#visualization-of-kegg-pathway"><span class="header-section-number">4.4.1</span> Visualization of KEGG PATHWAY</a></li>
-<li><a class="nav-link" href="#visualizing-calculated-values-across-species"><span class="header-section-number">4.4.2</span> Visualizing calculated values across species</a></li>
-<li><a class="nav-link" href="#show-which-species-have-the-kos"><span class="header-section-number">4.4.3</span> Show which species have the KOs</a></li>
+<a class="nav-link" href="#kgeg-pathway-and-kegg-orthology"><span class="header-section-number">4.5</span> KGEG PATHWAY and KEGG ORTHOLOGY</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#visualization-of-kegg-pathway"><span class="header-section-number">4.5.1</span> Visualization of KEGG PATHWAY</a></li>
+<li><a class="nav-link" href="#visualizing-calculated-values-across-species"><span class="header-section-number">4.5.2</span> Visualizing calculated values across species</a></li>
+<li><a class="nav-link" href="#show-which-species-have-the-kos"><span class="header-section-number">4.5.3</span> Show which species have the KOs</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#setting-the-manual-annotation"><span class="header-section-number">4.5</span> Setting the manual annotation</a></li>
+<li><a class="nav-link" href="#setting-the-manual-annotation"><span class="header-section-number">4.6</span> Setting the manual annotation</a></li>
 </ul>
 
       <div class="book-extra">
@@ -510,7 +577,7 @@ In this case, the data.frame should be two column layouts, and the first column 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-23.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-26.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

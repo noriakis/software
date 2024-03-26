@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2135e2e56bc339349abb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-2135e2e56bc339349abb">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a1f30c82626b61f542c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a1f30c82626b61f542c8">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH f4a6a79 UN-- 4 2 -- 
+#> IGRAPH beae8e1 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from f4a6a79 (vertex names):
+#> + edges from beae8e1 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5c109bd09757e7b39360" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5c109bd09757e7b39360">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-601c3248fcddf9dc8aaa" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-601c3248fcddf9dc8aaa">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH f5c81c9 UN-- 21 922 -- 
+#> IGRAPH bfd0e4e UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from f5c81c9 (vertex names):
+#> + edges from bfd0e4e (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -307,6 +307,72 @@ plotHeatmap(stana, "101346",
 
 <img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
 
+## Aggregate the gene copy numbers based on the annotations
+
+`calcGF` function can aggregate the gene copy numbers based on the annotation (eggNOG) or the manually set annotation.
+
+
+```r
+## Default to use eggNOG annotation, and the user can specify which gene family to summarize
+stana <- calcGF(stana, "101346", column="EC")
+getSlot(stana, "kos")[["101346"]] %>% head()
+#>           ERR9492489 ERR9492490 ERR9492491 ERR9492492
+#> 3.6.4.12   39.173924  95.450865  52.767661  46.882936
+#> 3.4.24.40   0.000000   0.841116   0.278746   0.000000
+#> 3.2.1.14    1.198363   5.697443   2.435163   0.298239
+#> 4.2.2.23    1.586967   8.950180   3.871217   0.326971
+#> 2.7.11.1    7.415218  17.180451  17.557883  12.640404
+#> 3.1.3.90    0.000000   0.000000   0.000000   0.000000
+#>           ERR9492493 ERR9492494 ERR9492495 ERR9492496
+#> 3.6.4.12  109.030709  38.157274  61.418044  32.840106
+#> 3.4.24.40   2.289508   0.000000   0.000000   0.000000
+#> 3.2.1.14    4.716068   0.565635   3.950550   0.842613
+#> 4.2.2.23    2.222589   2.685389   1.223989   0.547461
+#> 2.7.11.1   13.093117  16.668716   9.321875   3.957696
+#> 3.1.3.90    0.309415   0.000000   0.000000   0.000000
+#>           ERR9492497 ERR9492498 ERR9492499 ERR9492500
+#> 3.6.4.12   75.977012  28.210277  61.693399  36.666227
+#> 3.4.24.40   1.190823   0.117354   0.276488   0.000000
+#> 3.2.1.14    3.989812   0.833608   2.955427   1.241877
+#> 4.2.2.23    2.361721   0.534308   2.707128   0.000000
+#> 2.7.11.1   24.343595   8.375070  15.225822   9.506420
+#> 3.1.3.90    0.399345   0.000000   0.334459   0.000000
+#>           ERR9492501 ERR9492503 ERR9492504 ERR9492505
+#> 3.6.4.12   48.993525  58.889647  41.316522  44.670327
+#> 3.4.24.40   0.605779   0.000000   1.281429   0.431620
+#> 3.2.1.14    6.470900   2.073627   1.787648   1.916355
+#> 4.2.2.23    6.066784   3.795593   0.000000   1.875545
+#> 2.7.11.1   21.694552  19.085136  15.225251  12.040248
+#> 3.1.3.90    0.328735   0.210771   0.000000   0.133266
+#>           ERR9492507 ERR9492509 ERR9492510 ERR9492511
+#> 3.6.4.12   30.414200  94.222205  67.033382  45.280463
+#> 3.4.24.40   0.000000   0.000000   0.582293   0.050622
+#> 3.2.1.14    0.113379   9.611853   3.004519   0.816464
+#> 4.2.2.23    5.876491   9.608170   6.104285   0.227825
+#> 2.7.11.1   15.459505  48.563617  16.882499   6.723153
+#> 3.1.3.90    0.000000   0.330640   0.000000   0.209655
+#>           ERR9492512 ERR9492513 ERR9492514 ERR9492515
+#> 3.6.4.12   37.248780  92.564239  44.501316  33.343923
+#> 3.4.24.40   0.000000   0.699384   0.809852   0.000000
+#> 3.2.1.14    2.928634   3.767824   1.008637   0.391071
+#> 4.2.2.23    0.200991   2.143717   0.000000   2.435797
+#> 2.7.11.1   13.147839  19.027770  17.290957   8.964407
+#> 3.1.3.90    0.000000   0.000000   0.000000   0.000000
+#>           ERR9492519 ERR9492521 ERR9492522 ERR9492523
+#> 3.6.4.12  123.352975  19.992745 113.496963  73.578048
+#> 3.4.24.40   0.612824   0.044187   0.000000   0.289869
+#> 3.2.1.14    2.685511   0.555955   4.377865   4.203646
+#> 4.2.2.23    7.924792   2.183619   8.216322   2.000771
+#> 2.7.11.1   21.618306  16.281798  27.935448   8.713224
+#> 3.1.3.90    0.745864   0.064679   0.000000   0.270559
+#>           ERR9492525 ERR9492526 ERR9492528
+#> 3.6.4.12   22.958707  64.120946  37.810981
+#> 3.4.24.40   0.048448   0.548795   0.000000
+#> 3.2.1.14    0.671990   4.579498   2.684535
+#> 4.2.2.23    2.174417   9.497381   3.574399
+#> 2.7.11.1    3.474492  16.346382  10.342824
+#> 3.1.3.90    0.147197   0.000000   0.000000
+```
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY
 
