@@ -100,7 +100,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.027
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.041
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -114,7 +114,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.027 *
+#> group      2   0.2860 0.05176 2.7021  0.041 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -223,19 +223,18 @@ Using these two factors, we summarize KO abundance information to KEGG PATHWAY i
 
 ```r
 library(ggrepel)
-#> Warning: package 'ggrepel' was built under R version 4.3.2
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
 colnames(pw) <- c("1","2")
 pw[["name"]] <- row.names(pw)
+pw[["size"]] <- (pw[,1] + pw[,2])/2
 ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
-    geom_point()+
-    geom_text_repel(aes(label=name), bg.colour="white")+
-    geom_smooth()+xlab("1")+ylab("2")+
+    geom_point(aes(size=size))+
+    geom_text_repel(aes(label=name, size=size), bg.colour="white")+
+    geom_smooth(method=lm, se=TRUE)+xlab("1")+ylab("2")+
     cowplot::theme_cowplot()
-#> `geom_smooth()` using method = 'loess' and formula = 'y ~
-#> x'
-#> Warning: ggrepel: 228 unlabeled data points (too many
+#> `geom_smooth()` using formula = 'y ~ x'
+#> Warning: ggrepel: 225 unlabeled data points (too many
 #> overlaps). Consider increasing max.overlaps
 ```
 
