@@ -71,17 +71,18 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span></code></pre></div>
 <p>Along with specifying which directory to load, the grouping variables should be set to stana object. By default, named list of groups is used (categorical). The <code>cl</code> argument in the functions and <code>cl</code> slot corresponds to this information. Additionally, the metadata in ordinaly data.frame can be set by <code>setMetadata</code>. The row names or <code>id</code> column should represent the sample names.</p>
+<p>If species IDs are not specified, all the species in the directory will be loaded, which consumes many times and memory if the sample number is large.</p>
 <div id="midas" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> MIDAS<a class="anchor" aria-label="anchor" href="#midas"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> <code>MIDAS</code><a class="anchor" aria-label="anchor" href="#midas"><i class="fas fa-link"></i></a>
 </h2>
 <p>For <code>MIDAS</code>, <code>loadMIDAS</code> function can be used to import the output of <code>merge</code> command. In <code>MIDAS</code> and <code>MIDAS2</code> examples, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients (<a href="https://doi.org/10.3389/fcimb.2022.904284">Shi et al. 2022</a>). <code>hd_meta</code> includes named list of grouping. First we would like to see how many samples were profiled in the species.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-f66fa965d080e92e37d1" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f66fa965d080e92e37d1">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-266fdc4db6102e427a00" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-266fdc4db6102e427a00">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
@@ -102,11 +103,11 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: Bacteroides_uniformis_57318</span></span>
-<span><span class="co">#&gt; # Size: 14586384 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 14586544 B</span></span></code></pre></div>
 </div>
 <div id="midas2" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">2.2</span> MIDAS2<a class="anchor" aria-label="anchor" href="#midas2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> <code>MIDAS2</code><a class="anchor" aria-label="anchor" href="#midas2"><i class="fas fa-link"></i></a>
 </h2>
 <p>For <code>MIDAS2</code>, <code>loadMIDAS2</code> function can be used to import the output of <code>merge</code> command.</p>
 <div class="rmdwarning">
@@ -249,7 +250,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: 100002</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 100002</span></span>
-<span><span class="co">#&gt; # Size: 4525352 B</span></span>
+<span><span class="co">#&gt; # Size: 4525512 B</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # SNV description</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
@@ -265,7 +266,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 </div>
 <div id="instrain" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> inStrain<a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> <code>inStrain</code><a class="anchor" aria-label="anchor" href="#instrain"><i class="fas fa-link"></i></a>
 </h2>
 <p>For inStrain, we need <code>compare</code> command output, after <code>profile</code> command. First we would like to know which species are profiled. <code>just_species</code> option only list species in the table. Here, we load an example dataset profiled by <code>inStrain</code>, using the default database described in their original tutorial. For <code>inStrain</code>, loading all the SNV tables is often impossible, we must specify <code>candidate_species</code> for investigation.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -322,7 +323,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: ../inStrain_out</span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: GUT_GENOME142015</span></span>
-<span><span class="co">#&gt; # Size: 81503064 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 81503224 B</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
@@ -347,7 +348,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: manual</span></span>
-<span><span class="co">#&gt; # Size: 49592 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 49752 B</span></span></code></pre></div>
 <div id="conversion-to-maf-matrix" class="section level3" number="2.5.1">
 <h3>
 <span class="header-section-number">2.5.1</span> Conversion to MAF matrix<a class="anchor" aria-label="anchor" href="#conversion-to-maf-matrix"><i class="fas fa-link"></i></a>
@@ -397,12 +398,38 @@ The package offers some functions to convert these to MAF matrix.</p>
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 0</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 3 ID: SPID1</span></span>
-<span><span class="co">#&gt; # Size: 23528 B</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsSummary"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; data frame with 0 columns and 0 rows</span></span>
+<span><span class="co">#&gt; # Size: 23688 B</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt;                           major_allele minor_allele</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_131457             G            A</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_131458             T            C</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_1314571            T            A</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_1314581            A            T</span></span>
+<span><span class="co">#&gt;                           species_id sample_name</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_131457       SPID1     sample1</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_131458       SPID1     sample1</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_1314571      SPID1     sample2</span></span>
+<span><span class="co">#&gt; SP1_NZ_GG770218.1_1314581      SPID1     sample2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt;                 major_allele minor_allele species_id</span></span>
+<span><span class="co">#&gt; SP2_NZ.1_131459            T            A      SPID2</span></span>
+<span><span class="co">#&gt; SP2_NZ.1_131470            A            T      SPID2</span></span>
+<span><span class="co">#&gt;                 sample_name</span></span>
+<span><span class="co">#&gt; SP2_NZ.1_131459     sample1</span></span>
+<span><span class="co">#&gt; SP2_NZ.1_131470     sample1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt;                 major_allele minor_allele species_id</span></span>
+<span><span class="co">#&gt; SP3_AZ.1_131457            G            A      SPID3</span></span>
+<span><span class="co">#&gt; SP3_AZ.1_131458            T            C      SPID3</span></span>
+<span><span class="co">#&gt;                 sample_name</span></span>
+<span><span class="co">#&gt; SP3_AZ.1_131457     sample2</span></span>
+<span><span class="co">#&gt; SP3_AZ.1_131458     sample2</span></span>
 <span></span>
 <span><span class="co">## If needed, SNV-level statistics should be set to stana</span></span>
-<span><span class="co"># stana &lt;- setSlot(stana, "snpsInfo", list("SPID1"=spid1_statistics))</span></span></code></pre></div>
+<span><span class="co"># stana &lt;- setSlot(stana, "snpsSummary", summary_df)</span></span></code></pre></div>
 <p>This object can be used with the subsequent downstream analysis. The function can be useful in importing the metagenotyping software such as <code>GT-Pro</code>.</p>
 </div>
 </div>
@@ -422,20 +449,29 @@ The package offers some functions to convert these to MAF matrix.</p>
 <span><span class="co">#&gt;     Number of genes: 23427</span></span>
 <span><span class="co">#&gt;     Number of samples: 7</span></span>
 <span><span class="va">filt</span> <span class="op">&lt;-</span> <span class="va">stana</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/check.html">check</a></span><span class="op">(</span><span class="va">mean_coverage</span> <span class="op">&gt;</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">filt</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">filt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
 <span><span class="co">#&gt;   species_id     n species_description                      </span></span>
 <span><span class="co">#&gt;        &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                    </span></span>
-<span><span class="co">#&gt; 1     100002     5 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span>
-<span><span class="co">#&gt; 2     100003    15 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
-<span><span class="co">#&gt; 3     100022     7 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span>
-<span><span class="co">#&gt; 4     100036     3 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span>
-<span><span class="co">#&gt; 5     100039     2 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span>
-<span><span class="co">#&gt; 6     100041     3 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span></code></pre></div>
+<span><span class="co">#&gt; 1     102478    31 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
+<span><span class="co">#&gt; 2     101346    28 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
+<span><span class="co">#&gt; 3     102438    28 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
+<span><span class="co">#&gt; 4     100074    21 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
+<span><span class="co">#&gt; 5     100044    20 d__Bacteria;p__Bacteroidota;c__Bacteroid…</span></span>
+<span><span class="co">#&gt; 6     101338    19 d__Bacteria;p__Firmicutes_A;c__Clostridi…</span></span></code></pre></div>
 <p>Subsequently, <code>filter</code> method can be used to subset the stana object for interesting species.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="va">stana</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">filt</span><span class="op">$</span><span class="va">species_id</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Most of the functions in stana is designed to perform the analysis in all the species within stana object unless specified, so the filtering beforehand with grouping variables is important (such as number of samples profiled per group).</p>
+</div>
+<div id="filtering-the-site-ids-for-the-snv" class="section level2" number="2.7">
+<h2>
+<span class="header-section-number">2.7</span> Filtering the site IDs for the SNV<a class="anchor" aria-label="anchor" href="#filtering-the-site-ids-for-the-snv"><i class="fas fa-link"></i></a>
+</h2>
+<p>The users can preset the SNV ID used for the downstream calculation to the <code>includeSNVID</code> slot in the stana object. When this information is used, the function raises the message that it is using the IDs.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/siteFilter.html">siteFilter</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/pkg/stana/man/getID.html">getID</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">site_type</span><span class="op">==</span><span class="st">"4D"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # total of 650 obtained from 2058</span></span></code></pre></div>
 
 </div>
 </div>
@@ -454,6 +490,7 @@ The package offers some functions to convert these to MAF matrix.</p>
 <a class="nav-link" href="#manual"><span class="header-section-number">2.5</span> Manual</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#conversion-to-maf-matrix"><span class="header-section-number">2.5.1</span> Conversion to MAF matrix</a></li></ul>
 </li>
 <li><a class="nav-link" href="#filtering-by-species-id"><span class="header-section-number">2.6</span> Filtering by species ID</a></li>
+<li><a class="nav-link" href="#filtering-the-site-ids-for-the-snv"><span class="header-section-number">2.7</span> Filtering the site IDs for the SNV</a></li>
 </ul>
 
       <div class="book-extra">
@@ -471,7 +508,7 @@ The package offers some functions to convert these to MAF matrix.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-27.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

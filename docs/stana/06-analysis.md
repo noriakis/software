@@ -30,7 +30,7 @@ stana
 #> # Group info (list): CKD/HC/HD
 #> # Loaded SNV table: 1 ID: 101380
 #> # Loaded gene table: 1 ID: 101380
-#> # Size: 108700560 B
+#> # Size: 108700720 B
 #> # 
 #> # SNV description
 #> # A tibble: 3 × 3
@@ -62,8 +62,8 @@ Based on the SNV and the related statistics of SNV, the consensus multiple seque
 
 ```r
 stana <- consensusSeq(stana, cand_species)
-#> Beginning calling for 101380
-#>   Site number: 26540
+#> # Beginning calling for 101380
+#> # Original Site number: 26540
 #>   Profiled samples: 102
 #>   Included samples: 102
 getFasta(stana)[[cand_species]]
@@ -100,7 +100,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.041
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.021
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -114,7 +114,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.041 *
+#> group      2   0.2860 0.05176 2.7021  0.021 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -122,78 +122,7 @@ getAdonis(stana)[[cand_species]]
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Also, this time, using the minor allele frequency itself, the NMF is performed. As the SNV matrix contains zero depth cells (information is not available), the corresponding cell is replaced with `NA`. For NMF with missing value, `NNLM` implementation of NMF is used. The rank was chosen based on the cross validation approach by randomly inserting the `NA` to the matrix (not to the zero depth position).
-
-
-```r
-## This only returns the test statistics, we perform 5 times with different seed
-library(NNLM)
-tmp <- list()
-for (i in seq_len(5)) {
-  set.seed(i)
-  test <- NMF(stana, cand_species, target="snps", estimate=TRUE, estimate_range=1:6, nnlm_flag=TRUE)
-  tmp[[i]] <- test
-}
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # NNLM flag enabled, the cross-validation error matrix only will be returned.
-
-## X-axis is rank and y-axis is MSE.
-plot(-1, xlim = c(1,6), ylim = c(0.03, 0.07), xlab = "Rank", ylab = "MSE")
-cols <- c("tomato","steelblue","pink","gold","limegreen")
-for (e in seq_along(tmp)) {
-  lines(tmp[[e]][1,], type="b", col=cols[e])
-}
-```
-
-<img src="06-analysis_files/figure-html/hd6-1.png" width="672" />
-
-We choose rank of 3 for the SNV MAF matrix.
-
-Using this rank, the NMF is performed and the resulting coefficient mixture matrix is extracted and plotted by the function. This suggests that some factors have higher abundances in HD patients while some lower.
-
-
-```r
-stana <- NMF(stana, cand_species, target="snps", rank=3, nnlm_flag=TRUE)
-#> # NMF started 101380, target: snps, method: NNLM::nnmf
-#> # Original features: 26540
-#> # Original samples: 102
-#> # Rank 3
-#> Mean relative abundances: 0.2072903 0.5629668 0.2297429 
-#> Present feature per strain: 14433 17823 23678
-plotAbundanceWithinSpecies(stana, cand_species, tss=TRUE, by="coef")
-```
-
-<img src="06-analysis_files/figure-html/hd7-1.png" width="672" />
-
-```r
-
-## By stacked bar plot
-plotStackedBarPlot(stana, cand_species, by="coef")+
-  scale_fill_manual(values=c("tomato","steelblue","gold"))
-#> Using sample, group as id variables
-```
-
-<img src="06-analysis_files/figure-html/hd7-2.png" width="672" />
-We can directly examine the functional implications by using the same approach in KO table.
-First we calculate KO abundances based on eggNOG-mapper annotation.
+Based on the results, assuming there are multiple factors within the species, we can directly examine their estimated abundances and the functional implications by using the NMF approach in KO table. First we calculate KO abundances based on eggNOG-mapper annotation.
 
 
 ```r
@@ -201,22 +130,100 @@ stana <- setAnnotation(stana,
                        annotList=list("101380"="../annotations_uhgg/101380_eggnog_out.emapper.annotations"))
 stana <- calcGF(stana, candSp=cand_species)
 ```
-We assume that two strain exists across the samples and specify the rank of two in KO example.
+
+Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`).
+
+
+```r
+library(NNLM)
+cvl <- list()
+for (i in seq_len(5)) {
+  cvl[[i]] <- NMF(stana, cand_species, nnlm_flag=TRUE,
+                  nnlm_args=list("loss"="mse"),
+                  estimate=TRUE, tss=TRUE)[1,]
+}
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Performing TSS
+#> # Filtered features: 2568
+#> # Filtered samples: 124
+#> # NNLM flag enabled, the error matrix only will be returned.
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Performing TSS
+#> # Filtered features: 2568
+#> # Filtered samples: 124
+#> # NNLM flag enabled, the error matrix only will be returned.
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Performing TSS
+#> # Filtered features: 2568
+#> # Filtered samples: 124
+#> # NNLM flag enabled, the error matrix only will be returned.
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Performing TSS
+#> # Filtered features: 2568
+#> # Filtered samples: 124
+#> # NNLM flag enabled, the error matrix only will be returned.
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
+#> # Original features: 2568
+#> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Performing TSS
+#> # Filtered features: 2568
+#> # Filtered samples: 124
+#> # NNLM flag enabled, the error matrix only will be returned.
+do.call(rbind, cvl) %>% data.frame() %>% mutate(group=1:5) %>%
+  tidyr::pivot_longer(1:6) %>% ggplot(aes(x=factor(group), y=value),)+
+  geom_boxplot() + cowplot::theme_cowplot() + xlab("rank")
+```
+
+<img src="06-analysis_files/figure-html/hd7-1.png" width="672" />
+
+Based on the information, the factor number of two is selected.
 
 
 ```r
 set.seed(1)
-stana <- NMF(stana, cand_species, target="KO", rank=2, nnlm_flag=TRUE)
-#> # NMF started 101380, target: KO, method: NNLM::nnmf
+stana <- NMF(stana, cand_species, rank=2,
+	nnlm_flag=TRUE, nnlm_args=list("loss"="mse"))
+#> # NMF started 101380, target: kos, method: NNLM::nnmf
 #> # Original features: 2568
 #> # Original samples: 124
+#> # Original matrix NA: NA
+#> # Original matrix zero: 0.487
+#> # Filtered features: 2568
+#> # Filtered samples: 124
 #> # Rank 2
 #> Mean relative abundances: 0.5826988 0.4173012 
-#> Present feature per strain: 2231 2394
-plotAbundanceWithinSpecies(stana, cand_species, tss=TRUE, by="coef")
+#> Present feature per factor: 2231 2394
+
+## Plot the results
+plotAbundanceWithinSpecies(stana, cand_species, by="coef")
 ```
 
 <img src="06-analysis_files/figure-html/hd9-1.png" width="672" />
+
+```r
+plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c("tomato","gold"))
+#> Using sample, group as id variables
+```
+
+<img src="06-analysis_files/figure-html/hd9-2.png" width="672" />
 
 Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.
 
@@ -242,6 +249,7 @@ ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
 
 ```r
 
+## Sort by absolute difference
 fc <- pw[,1] - pw[,2]
 names(fc) <- pw[["name"]]
 nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
@@ -271,17 +279,19 @@ pp <- ggkegg::pathway("ko00270") %N>%
     	f2=ggkegg::node_numeric(getSlot(stana, "NMF")[[cand_species]]$W[,2])
     )
 
-ggraph(pp, layout="manual", x=x, y=y)+
+gg <- ggraph(pp, layout="manual", x=x, y=y)+
     geom_node_rect(aes(fill=f1, xmin=xmin, xmax=x, filter=type=="ortholog"))+
     geom_node_rect(aes(fill=f2, xmin=x, xmax=xmax, filter=type=="ortholog"))+
     scale_fill_gradient(low="blue",high="pink", name="abundance")+
     overlay_raw_map() +
+    stamp("ko:K00789")+
     theme_void()
+gg
 ```
 
 <img src="06-analysis_files/figure-html/ggkegg-1.png" width="672" />
 
-In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
+In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
 
 
 Finally, the results can be exported to the interactive inspection by `exportInteractive` function.
@@ -302,7 +312,7 @@ exportInteractive(stana)
 #> # Loaded gene table: 1 ID: 101380
 #> # Loaded KO table: 1 ID: 101380
 #> # Inferred fasta: 1 ID: 101380
-#> # Size: 125114608 B
+#> # Size: 125114992 B
 #> # 
 #> # SNV description
 #> # A tibble: 3 × 3

@@ -9,6 +9,7 @@ metasnv
 manual
 conversion-to-maf-matrix
 filtering-by-species-id
+filtering-the-site-ids-for-the-snv
 statistial-analysis
 cons
 nonnegative-matrix-factorization
@@ -23,7 +24,7 @@ parsing-eggnog-mapper-v2-results
 draw-the-network-1
 heatmap-of-the-gene-copy-numbers-with-functional-annotations
 midas-1
-midas2-1
+the-other-types
 aggregate-the-gene-copy-numbers-based-on-the-annotations
 kgeg-pathway-and-kegg-orthology
 visualization-of-kegg-pathway
@@ -31,11 +32,14 @@ visualizing-differences-per-species
 visualizing-calculated-values-across-species
 show-which-species-have-the-kos
 setting-the-manual-annotation
+pathwaywithfactor
 visualization
 plotsnvsummary-and-plotsnvinfo
 plotmaf
+plotmaf-1
 plotcoverage
 plotpca
+plotdist
 plotcirclize
 visualization-of-gene-copy-numbers
 visualization-of-phylogenetic-tree

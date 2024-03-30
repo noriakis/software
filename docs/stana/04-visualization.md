@@ -44,6 +44,21 @@ plotMAF(stana, "102478", row.names(getSlot(stana, "snpsInfo")[[1]])[1])
 
 <img src="04-visualization_files/figure-html/pm-1.png" width="672" />
 
+## `plotMAF`
+
+This functions plots the histogram of MAF for the candidate species.
+
+
+```r
+plotMAFHist(stana, "102478")
+#> `stat_bin()` using `bins = 30`. Pick better value with
+#> `binwidth`.
+#> Warning: Removed 96409 rows containing non-finite outside the scale
+#> range (`stat_bin()`).
+```
+
+<img src="04-visualization_files/figure-html/pmh-1.png" width="672" />
+
 ## `plotCoverage`
 
 This function plots the coverage of the canddiate species across the group.
@@ -72,6 +87,36 @@ plotPCA(mt, species=getID(mt)[1])
 
 <img src="04-visualization_files/figure-html/plotpca-1.png" width="672" />
 
+## `plotDist`
+
+Plot the heatmap of distance matrix with grouping variables using `pheatmap`.
+
+
+```r
+library(pheatmap)
+#> 
+#> Attaching package: 'pheatmap'
+#> The following object is masked from 'package:ComplexHeatmap':
+#> 
+#>     pheatmap
+plotDist(stana, "102478", target="snps")
+#> # Performing dist in 102478 target is snps
+```
+
+<img src="04-visualization_files/figure-html/plotDist-1.png" width="672" />
+
+Plot using the subset of the SNV.
+
+
+```r
+stana <- siteFilter(stana, "102478", site_type=="4D")
+#> # total of 27533 obtained from 77431
+plotDist(stana, "102478", target="snps")
+#> # Performing dist in 102478 target is snps
+#> # The set SNV ID information (27533) is used.
+```
+
+<img src="04-visualization_files/figure-html/plotDist2-1.png" width="672" />
 
 ## `plotCirclize`
 
@@ -157,6 +202,8 @@ plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 ```
 
 <img src="04-visualization_files/figure-html/gab2-1.png" width="672" />
+
+
 
 ## Visualization of phylogenetic tree
 

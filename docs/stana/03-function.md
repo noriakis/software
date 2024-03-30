@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d02bd6a8bea5629c15e7" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d02bd6a8bea5629c15e7">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7982b40f2c0f8eaf0b51" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7982b40f2c0f8eaf0b51">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH a4b38ba UN-- 4 2 -- 
+#> IGRAPH 90321df UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from a4b38ba (vertex names):
+#> + edges from 90321df (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3236157a02de49f748ce" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3236157a02de49f748ce">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-33eb41b3426b02e150a5" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-33eb41b3426b02e150a5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH a60b813 UN-- 21 922 -- 
+#> IGRAPH 913ec37 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from a60b813 (vertex names):
+#> + edges from 913ec37 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -201,8 +201,8 @@ stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis
 #> Overall, 1 species met criteria in SNPs
 #> Overall, 1 species met criteria in genes
 plotHeatmap(stana, "Bacteroides_uniformis_57318",filter_max_value = 2,filter_max_frac = 0)
-#> In resulting matrix, max: 1.99955229433902, min: 0
-#> Dimension: 4911, 29
+#> # In resulting matrix, max: 1.99955229433902 min: 0
+#> # Dimension: 4911 29
 #> Obtaining gene information from PATRIC server
 #> Obtaining annotations of 7 genomes
 #>   Obtaining information on 1235787.3
@@ -257,9 +257,9 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",filter_max_value = 2,filter_max
 <img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="672" />
 
 
-### `MIDAS2`
+### The other types
 
-For `MIDAS2`, the users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
+The users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
 
 
 ```r
@@ -299,13 +299,30 @@ plotHeatmap(stana, "101346",
     filter_zero_frac = 0.5,
     filter_max_frac = 0,
     filter_max_value = 5)
-#> In resulting matrix, max: 4.999739, min: 0
-#> Dimension: 3501, 31
-#> MIDAS2, looking for the annotation file by eggNOG-mapper v2
-#> Loading annotation
+#> # In resulting matrix, max: 4.999739 min: 0
+#> # Dimension: 3501 31
+#> # Looking for the annotation file by eggNOG-mapper v2
+#> # Loading annotation
 ```
 
 <img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
+
+The gene IDs can be subset by providing the IDs to the `geneID` option.
+
+
+```r
+gid <- sample(getGeneID(stana, "101346"), 100)
+plotHeatmap(stana, "101346",
+    fnc="KEGG_Module",
+    removeAdditional=c("cycle","pathway"), geneID=gid)
+#> # In resulting matrix, max: 24.030286 min: 0
+#> # Dimension: 100 31
+#> # Looking for the annotation file by eggNOG-mapper v2
+#> # Loading annotation
+```
+
+<img src="03-function_files/figure-html/heat3-1.png" width="672" />
+
 
 ## Aggregate the gene copy numbers based on the annotations
 
@@ -375,6 +392,7 @@ getSlot(stana, "kos")[["101346"]] %>% head()
 ```
 
 ## KGEG PATHWAY and KEGG ORTHOLOGY
+
 
 ### Visualization of KEGG PATHWAY
 
@@ -523,3 +541,74 @@ In this case, the data.frame should be two column layouts, and the first column 
 ```r
 stana <- setMap(stana, "101346", data.frame(c("geneID1","geneID2"), c("K00001","K00002")))
 ```
+
+
+### `pathwayWithFactor`
+
+The KO abundances can be aggregated to KEGG PATHWAY abundance by `pathwayWithFactor`.
+By default, the function uses the KO matrix from `NMF` slot. `mat` can be specified for the other matrices.
+
+
+
+```r
+## Row.names: KO, colnames: Samples
+ch <- getSlot(stana, "kos")[["101346"]]
+head(pathwayWithFactor(stana, "101346", summarize=mean, mat=ch))
+#>              ERR9492489 ERR9492490 ERR9492491 ERR9492492
+#> path:ko00010 0.03877215 0.13322643 0.04001532 0.06391891
+#> path:ko00020 0.03425545 0.12828687 0.03985006 0.07768581
+#> path:ko00030 0.04703528 0.13909857 0.06912219 0.04676925
+#> path:ko00040 0.04000612 0.17272473 0.06849944 0.05096996
+#> path:ko00051 0.05214005 0.07052621 0.06382708 0.03420876
+#> path:ko00052 0.06397950 0.07191146 0.04914795 0.03673800
+#>              ERR9492493 ERR9492494 ERR9492495 ERR9492496
+#> path:ko00010 0.09384163 0.05637166 0.06068150 0.02861835
+#> path:ko00020 0.08709860 0.06347143 0.08655160 0.02838112
+#> path:ko00030 0.09236281 0.06725684 0.09888781 0.06070932
+#> path:ko00040 0.09423838 0.09310127 0.09308659 0.04017714
+#> path:ko00051 0.05898339 0.06181811 0.05094572 0.04122640
+#> path:ko00052 0.06410715 0.05452204 0.14107086 0.03358680
+#>              ERR9492497 ERR9492498 ERR9492499 ERR9492500
+#> path:ko00010 0.08451250 0.03267193 0.09284024 0.06000493
+#> path:ko00020 0.06743175 0.02951531 0.09662457 0.05163185
+#> path:ko00030 0.11954092 0.04752626 0.09501196 0.12192500
+#> path:ko00040 0.09575037 0.04763954 0.09862459 0.05061098
+#> path:ko00051 0.08917651 0.04097972 0.09009920 0.09712665
+#> path:ko00052 0.10890301 0.03198491 0.04649193 0.08376906
+#>              ERR9492501 ERR9492503 ERR9492504 ERR9492505
+#> path:ko00010 0.06353951 0.07530207 0.07413198 0.03851865
+#> path:ko00020 0.06736760 0.05907952 0.08066299 0.03291251
+#> path:ko00030 0.08062611 0.10059762 0.09074628 0.06140277
+#> path:ko00040 0.05230380 0.10797610 0.05192520 0.04096908
+#> path:ko00051 0.07521150 0.06162177 0.06966618 0.03856838
+#> path:ko00052 0.07510973 0.05448280 0.08440857 0.05159773
+#>              ERR9492507 ERR9492509 ERR9492510 ERR9492511
+#> path:ko00010 0.04408184  0.1101960 0.06831861 0.04457377
+#> path:ko00020 0.03055716  0.1122648 0.05686148 0.03786649
+#> path:ko00030 0.05901192  0.2060442 0.07937786 0.06227169
+#> path:ko00040 0.04993012  0.1811532 0.12112892 0.06357970
+#> path:ko00051 0.03501170  0.1072305 0.09978821 0.04688276
+#> path:ko00052 0.03050457  0.1082022 0.09676729 0.05031496
+#>              ERR9492512 ERR9492513 ERR9492514 ERR9492515
+#> path:ko00010 0.05663017 0.11421784 0.08596117 0.03688230
+#> path:ko00020 0.04904705 0.09192427 0.07901509 0.04271306
+#> path:ko00030 0.07407402 0.10263472 0.11231495 0.04835473
+#> path:ko00040 0.04686250 0.10666516 0.07078609 0.05789550
+#> path:ko00051 0.04646515 0.10730369 0.07973031 0.03461777
+#> path:ko00052 0.05438493 0.07782405 0.09124815 0.04582225
+#>              ERR9492519 ERR9492521 ERR9492522 ERR9492523
+#> path:ko00010  0.2020544 0.03199985 0.11593241 0.06408050
+#> path:ko00020  0.1902600 0.02793804 0.16804823 0.07081124
+#> path:ko00030  0.1585779 0.05154594 0.11458300 0.06178188
+#> path:ko00040  0.1028053 0.04093270 0.13291912 0.07091612
+#> path:ko00051  0.1608883 0.03638188 0.25908852 0.04935026
+#> path:ko00052  0.1023709 0.02991019 0.07093243 0.05402583
+#>              ERR9492525 ERR9492526 ERR9492528
+#> path:ko00010 0.02762329 0.07007589 0.05262720
+#> path:ko00020 0.02638546 0.05562837 0.04079618
+#> path:ko00030 0.04034426 0.08332154 0.09070246
+#> path:ko00040 0.02860687 0.09845644 0.06750199
+#> path:ko00051 0.03293917 0.08427063 0.06058627
+#> path:ko00052 0.04860460 0.08358931 0.05641848
+```
+
