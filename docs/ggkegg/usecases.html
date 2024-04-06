@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 Usecases | ggkegg</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Usecases | ggkegg">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 5 Usecases | ggkegg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-J7N3J5H0G4"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -193,23 +193,27 @@
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed acyclic multigraph with 40 components</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 134 × 23</span></span>
-<span><span class="co">#&gt;   name        type  reaction graphics_name     x     y width</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 hsa:1029    gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
-<span><span class="co">#&gt; 2 hsa:51343   gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
-<span><span class="co">#&gt; 3 hsa:4171 h… gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
-<span><span class="co">#&gt; 4 hsa:23594 … gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
-<span><span class="co">#&gt; 5 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
-<span><span class="co">#&gt; 6 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
-<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # Node Data: 134 × 23 (active)</span></span>
+<span><span class="co">#&gt;    name       type  reaction graphics_name     x     y width</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 hsa:1029   gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
+<span><span class="co">#&gt;  2 hsa:51343  gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
+<span><span class="co">#&gt;  3 hsa:4171 … gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
+<span><span class="co">#&gt;  4 hsa:23594… gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
+<span><span class="co">#&gt;  5 hsa:10393… gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
+<span><span class="co">#&gt;  6 hsa:10393… gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
+<span><span class="co">#&gt;  7 hsa:6500 … gene  &lt;NA&gt;     SKP1, EMC19,…   188  -613    46</span></span>
+<span><span class="co">#&gt;  8 hsa:6500 … gene  &lt;NA&gt;     SKP1, EMC19,…   432  -285    46</span></span>
+<span><span class="co">#&gt;  9 hsa:983    gene  &lt;NA&gt;     CDK1, CDC2, …   780  -562    46</span></span>
+<span><span class="co">#&gt; 10 hsa:701    gene  &lt;NA&gt;     BUB1B, BUB1b…   873  -392    46</span></span>
+<span><span class="co">#&gt; # ℹ 124 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 16 more variables: height &lt;dbl&gt;, fgcolor &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;, coords &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;, ymax &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   orig.id &lt;chr&gt;, pathway_id &lt;chr&gt;, deseq2 &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, lfc &lt;dbl&gt;, num &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 157 × 6</span></span>
+<span><span class="co">#&gt; # Edge Data: 157 × 6</span></span>
 <span><span class="co">#&gt;    from    to type  subtype_name    subtype_value pathway_id</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;     </span></span>
 <span><span class="co">#&gt; 1   118    39 GErel expression      --&gt;           hsa04110  </span></span>
@@ -230,16 +234,20 @@
 <span><span class="co">#&gt; #</span></span>
 <span><span class="co">#&gt; # A directed acyclic multigraph with 40 components</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 134 × 48</span></span>
-<span><span class="co">#&gt;   name        type  reaction graphics_name     x     y width</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 hsa:1029    gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
-<span><span class="co">#&gt; 2 hsa:51343   gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
-<span><span class="co">#&gt; 3 hsa:4171 h… gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
-<span><span class="co">#&gt; 4 hsa:23594 … gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
-<span><span class="co">#&gt; 5 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
-<span><span class="co">#&gt; 6 hsa:10393 … gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
-<span><span class="co">#&gt; # ℹ 128 more rows</span></span>
+<span><span class="co">#&gt; # Node Data: 134 × 48 (active)</span></span>
+<span><span class="co">#&gt;    name       type  reaction graphics_name     x     y width</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 hsa:1029   gene  &lt;NA&gt;     CDKN2A, ARF,…   532  -218    46</span></span>
+<span><span class="co">#&gt;  2 hsa:51343  gene  &lt;NA&gt;     FZR1, CDC20C…   981  -630    46</span></span>
+<span><span class="co">#&gt;  3 hsa:4171 … gene  &lt;NA&gt;     MCM2, BM28, …   553  -681    46</span></span>
+<span><span class="co">#&gt;  4 hsa:23594… gene  &lt;NA&gt;     ORC6, ORC6L.…   494  -681    46</span></span>
+<span><span class="co">#&gt;  5 hsa:10393… gene  &lt;NA&gt;     ANAPC10, APC…   981  -392    46</span></span>
+<span><span class="co">#&gt;  6 hsa:10393… gene  &lt;NA&gt;     ANAPC10, APC…   981  -613    46</span></span>
+<span><span class="co">#&gt;  7 hsa:6500 … gene  &lt;NA&gt;     SKP1, EMC19,…   188  -613    46</span></span>
+<span><span class="co">#&gt;  8 hsa:6500 … gene  &lt;NA&gt;     SKP1, EMC19,…   432  -285    46</span></span>
+<span><span class="co">#&gt;  9 hsa:983    gene  &lt;NA&gt;     CDK1, CDC2, …   780  -562    46</span></span>
+<span><span class="co">#&gt; 10 hsa:701    gene  &lt;NA&gt;     BUB1B, BUB1b…   873  -392    46</span></span>
+<span><span class="co">#&gt; # ℹ 124 more rows</span></span>
 <span><span class="co">#&gt; # ℹ 41 more variables: height &lt;dbl&gt;, fgcolor &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   bgcolor &lt;chr&gt;, graphics_type &lt;chr&gt;, coords &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   xmin &lt;dbl&gt;, xmax &lt;dbl&gt;, ymin &lt;dbl&gt;, ymax &lt;dbl&gt;,</span></span>
@@ -247,7 +255,7 @@
 <span><span class="co">#&gt; #   padj &lt;dbl&gt;, converted_name &lt;chr&gt;, lfc &lt;dbl&gt;,</span></span>
 <span><span class="co">#&gt; #   SRR14509882 &lt;dbl&gt;, SRR14509883 &lt;dbl&gt;, …</span></span>
 <span><span class="co">#&gt; #</span></span>
-<span><span class="co">#&gt; # A tibble: 157 × 34</span></span>
+<span><span class="co">#&gt; # Edge Data: 157 × 34</span></span>
 <span><span class="co">#&gt;    from    to type  subtype_name    subtype_value pathway_id</span></span>
 <span><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;         &lt;chr&gt;     </span></span>
 <span><span class="co">#&gt; 1   118    39 GErel expression      --&gt;           hsa04110  </span></span>
@@ -426,7 +434,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">deg</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>Here, we additionally assign graph-based clustering results to the graph, and we scale the size of the nodes so that the nodes can be visualized by scatterpie.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">walktrap</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/cluster_walktrap.html">walktrap.community</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">walktrap</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/walktrap.community.html">walktrap.community</a></span><span class="op">(</span><span class="va">g2_2</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span></span>
 <span></span>
 <span><span class="co">## Scale the node size</span></span>
 <span><span class="va">sizeMin</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
@@ -1127,7 +1135,7 @@ Among these, for the present study, we perform enrichment analysis on the marker
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-03.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-04-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

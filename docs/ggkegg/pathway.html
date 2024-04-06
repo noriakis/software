@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 Pathway | ggkegg</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Pathway | ggkegg">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 Pathway | ggkegg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-J7N3J5H0G4"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -81,13 +81,13 @@ The <code>pathway</code> function is a core function that downloads and parses K
 <h2>
 <span class="header-section-number">2.1</span> Example visualization<a class="anchor" aria-label="anchor" href="#example-visualization"><i class="fas fa-link"></i></a>
 </h2>
-<p>This example first fetches <code>eco00270</code> and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the <code>igraph</code> object.</p>
+<p>This example first fetches <code>eco00270</code> and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the <code>igraph</code> object. The resulting graph can be plotted by <code>ggraph</code>, with specifying visualization of various types of information in KEGG PATHWAY in each layer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/ggkegg.html">ggkegg</a></span><span class="op">(</span>pid<span class="op">=</span><span class="st">"eco00270"</span>,</span>
 <span>            convert_org <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pathway"</span>,<span class="st">"eco"</span><span class="op">)</span>,</span>
 <span>            delete_zero_degree <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>            return_igraph <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"stress"</span><span class="op">)</span> </span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"fr"</span><span class="op">)</span> </span>
 <span><span class="va">gg</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">type</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "map"      "compound" "gene"</span></span>
 <span><span class="va">gg</span> <span class="op">+</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_diagonal.html">geom_edge_diagonal</a></span><span class="op">(</span></span>
@@ -425,10 +425,10 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="01-pathway_files/figure-html/raster3-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the <code>high_res</code> option in <code>overlay_raw_map</code> which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2.</p>
+<p>The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the <code>high_res</code> option in <code>overlay_raw_map</code> which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2 for <code>geom_node_rect</code> and x and y for <code>geom_node_text</code>.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00640"</span><span class="op">)</span></span>
-<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="va">g</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span><span class="op">*</span><span class="fl">2</span>, y<span class="op">=</span><span class="va">y</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>high_res<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_rect.html">geom_node_rect</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">"white"</span>,</span>
 <span>      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xmin<span class="op">=</span><span class="va">xmin</span><span class="op">*</span><span class="fl">2</span>, xmax<span class="op">=</span><span class="va">xmax</span><span class="op">*</span><span class="fl">2</span>, ymin<span class="op">=</span><span class="va">ymin</span><span class="op">*</span><span class="fl">2</span>, ymax<span class="op">=</span><span class="va">ymax</span><span class="op">*</span><span class="fl">2</span>, filter<span class="op">=</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"black"</span><span class="op">)</span><span class="op">+</span></span>
@@ -676,7 +676,7 @@ we can write as follows using <code>highligh_set_edges</code> and <code>highligh
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-02-03.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-04-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

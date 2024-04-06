@@ -18,7 +18,7 @@ library(tidygraph)
 
 ## Example visualization
 
-This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the `igraph` object.
+This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the `igraph` object. The resulting graph can be plotted by `ggraph`, with specifying visualization of various types of information in KEGG PATHWAY in each layer.
 
 
 ```r
@@ -26,7 +26,7 @@ g <- ggkegg(pid="eco00270",
             convert_org = c("pathway","eco"),
             delete_zero_degree = TRUE,
             return_igraph = TRUE)
-gg <- ggraph(g, layout="stress") 
+gg <- ggraph(g, layout="fr") 
 gg$data$type |> unique()
 #> [1] "map"      "compound" "gene"
 gg + geom_edge_diagonal(
@@ -432,12 +432,12 @@ gg
 
 <img src="01-pathway_files/figure-html/raster3-1.png" width="100%" style="display: block; margin: auto;" />
 
-The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the `high_res` option in `overlay_raw_map` which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2.
+The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the `high_res` option in `overlay_raw_map` which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2 for `geom_node_rect` and x and y for `geom_node_text`.
 
 
 ```r
 g <- pathway("ko00640")
-gg <- ggraph(g, layout="manual", x=x, y=y)+
+gg <- ggraph(g, layout="manual", x=x*2, y=y*2)+
   overlay_raw_map(high_res=TRUE)+
   geom_node_rect(fill="white",
   	  aes(xmin=xmin*2, xmax=xmax*2, ymin=ymin*2, ymax=ymax*2, filter=type=="ortholog"), color="black")+

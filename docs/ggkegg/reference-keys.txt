@@ -42,6 +42,7 @@ customizing-global-map-visualization
 preprocessing
 plotting
 notes
+stamp-function
 parsing-of-reactions-in-the-pathway
 interpolation-in-the-raster-image
 saving-the-resulting-image

@@ -142,23 +142,27 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 23
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
+#> # Node Data: 134 × 23 (active)
+#>    name       type  reaction graphics_name     x     y width
+#>    <chr>      <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
+#>  1 hsa:1029   gene  <NA>     CDKN2A, ARF,…   532  -218    46
+#>  2 hsa:51343  gene  <NA>     FZR1, CDC20C…   981  -630    46
+#>  3 hsa:4171 … gene  <NA>     MCM2, BM28, …   553  -681    46
+#>  4 hsa:23594… gene  <NA>     ORC6, ORC6L.…   494  -681    46
+#>  5 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -392    46
+#>  6 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -613    46
+#>  7 hsa:6500 … gene  <NA>     SKP1, EMC19,…   188  -613    46
+#>  8 hsa:6500 … gene  <NA>     SKP1, EMC19,…   432  -285    46
+#>  9 hsa:983    gene  <NA>     CDK1, CDC2, …   780  -562    46
+#> 10 hsa:701    gene  <NA>     BUB1B, BUB1b…   873  -392    46
+#> # ℹ 124 more rows
 #> # ℹ 16 more variables: height <dbl>, fgcolor <chr>,
 #> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
 #> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
 #> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
 #> #   padj <dbl>, converted_name <chr>, lfc <dbl>, num <dbl>
 #> #
-#> # A tibble: 157 × 6
+#> # Edge Data: 157 × 6
 #>    from    to type  subtype_name    subtype_value pathway_id
 #>   <int> <int> <chr> <chr>           <chr>         <chr>     
 #> 1   118    39 GErel expression      -->           hsa04110  
@@ -181,16 +185,20 @@ new_g
 #> #
 #> # A directed acyclic multigraph with 40 components
 #> #
-#> # A tibble: 134 × 48
-#>   name        type  reaction graphics_name     x     y width
-#>   <chr>       <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
-#> 1 hsa:1029    gene  <NA>     CDKN2A, ARF,…   532  -218    46
-#> 2 hsa:51343   gene  <NA>     FZR1, CDC20C…   981  -630    46
-#> 3 hsa:4171 h… gene  <NA>     MCM2, BM28, …   553  -681    46
-#> 4 hsa:23594 … gene  <NA>     ORC6, ORC6L.…   494  -681    46
-#> 5 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -392    46
-#> 6 hsa:10393 … gene  <NA>     ANAPC10, APC…   981  -613    46
-#> # ℹ 128 more rows
+#> # Node Data: 134 × 48 (active)
+#>    name       type  reaction graphics_name     x     y width
+#>    <chr>      <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
+#>  1 hsa:1029   gene  <NA>     CDKN2A, ARF,…   532  -218    46
+#>  2 hsa:51343  gene  <NA>     FZR1, CDC20C…   981  -630    46
+#>  3 hsa:4171 … gene  <NA>     MCM2, BM28, …   553  -681    46
+#>  4 hsa:23594… gene  <NA>     ORC6, ORC6L.…   494  -681    46
+#>  5 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -392    46
+#>  6 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -613    46
+#>  7 hsa:6500 … gene  <NA>     SKP1, EMC19,…   188  -613    46
+#>  8 hsa:6500 … gene  <NA>     SKP1, EMC19,…   432  -285    46
+#>  9 hsa:983    gene  <NA>     CDK1, CDC2, …   780  -562    46
+#> 10 hsa:701    gene  <NA>     BUB1B, BUB1b…   873  -392    46
+#> # ℹ 124 more rows
 #> # ℹ 41 more variables: height <dbl>, fgcolor <chr>,
 #> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
 #> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
@@ -198,7 +206,7 @@ new_g
 #> #   padj <dbl>, converted_name <chr>, lfc <dbl>,
 #> #   SRR14509882 <dbl>, SRR14509883 <dbl>, …
 #> #
-#> # A tibble: 157 × 34
+#> # Edge Data: 157 × 34
 #>    from    to type  subtype_name    subtype_value pathway_id
 #>   <int> <int> <chr> <chr>           <chr>         <chr>     
 #> 1   118    39 GErel expression      -->           hsa04110  

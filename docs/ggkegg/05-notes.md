@@ -4,6 +4,22 @@
 
 # Notes
 
+## Stamp function
+
+The `stamp` function can be used to highlight the nodes with colored rectangles.
+
+
+```r
+library(ggkegg)
+ggraph(pathway("ko00270"), layout="manual", x=x, y=y)+
+    geom_node_rect()+
+    stamp("ko:K00789")+
+    theme_minimal()
+```
+
+<img src="05-notes_files/figure-html/stamp-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## Parsing of reactions in the pathway
 
 In the `devel` branch of `ggkegg`, the KGML of the following reactions ([https://www.genome.jp/entry/R00863](https://www.genome.jp/entry/R00863)) in `ko00270` are parsed in the below format by default.
