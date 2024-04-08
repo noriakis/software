@@ -10,6 +10,7 @@ manual
 conversion-to-maf-matrix
 filtering-by-species-id
 filtering-the-site-ids-for-the-snv
+printing-the-profile-information
 statistial-analysis
 cons
 nonnegative-matrix-factorization
@@ -33,10 +34,11 @@ visualizing-calculated-values-across-species
 show-which-species-have-the-kos
 setting-the-manual-annotation
 pathwaywithfactor
+gsea
 visualization
 plotsnvsummary-and-plotsnvinfo
 plotmaf
-plotmaf-1
+plotmafhist
 plotcoverage
 plotpca
 plotdist

@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7982b40f2c0f8eaf0b51" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-7982b40f2c0f8eaf0b51">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0920b66ae64ac850f310" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0920b66ae64ac850f310">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 90321df UN-- 4 2 -- 
+#> IGRAPH 987cb91 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 90321df (vertex names):
+#> + edges from 987cb91 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-33eb41b3426b02e150a5" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-33eb41b3426b02e150a5">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1e4b045b26fd6734043c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1e4b045b26fd6734043c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 913ec37 UN-- 21 922 -- 
+#> IGRAPH 99bbe5e UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 913ec37 (vertex names):
+#> + edges from 99bbe5e (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -264,15 +264,13 @@ The users should provide eggNOG annotation on `eggNOG` slot of stana object. `fn
 
 ```r
 load("../hd_meta.rda")
-taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
-                     header=1, row.names=1, check.names = FALSE)
-stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346"), taxtbl=taxtbl, db="uhgg")
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346"), db="uhgg")
 #>   101346
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>   g__Bacteroides;s__Bacteroides uniformis
 #>     Number of snps: 70178
 #>     Number of samples: 28
 #>   101346
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>   g__Bacteroides;s__Bacteroides uniformis
 #>     Number of genes: 120158
 #>     Number of samples: 31
 ```
@@ -405,23 +403,21 @@ Load the profile for multiple species.
 
 ```r
 load("../hd_meta.rda")
-taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
-                     header=1, row.names=1, check.names = FALSE)
-stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346","102438"), taxtbl=taxtbl, db="uhgg")
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346","102438"), db="uhgg")
 #>   101346
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>   g__Bacteroides;s__Bacteroides uniformis
 #>     Number of snps: 70178
 #>     Number of samples: 28
 #>   102438
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis
+#>   g__Parabacteroides;s__Parabacteroides distasonis
 #>     Number of snps: 18102
 #>     Number of samples: 28
 #>   101346
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Bacteroidaceae;g__Bacteroides;s__Bacteroides uniformis
+#>   g__Bacteroides;s__Bacteroides uniformis
 #>     Number of genes: 120158
 #>     Number of samples: 31
 #>   102438
-#>   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Tannerellaceae;g__Parabacteroides;s__Parabacteroides distasonis
+#>   g__Parabacteroides;s__Parabacteroides distasonis
 #>     Number of genes: 47046
 #>     Number of samples: 29
 ```
@@ -543,7 +539,7 @@ stana <- setMap(stana, "101346", data.frame(c("geneID1","geneID2"), c("K00001","
 ```
 
 
-### `pathwayWithFactor`
+## `pathwayWithFactor`
 
 The KO abundances can be aggregated to KEGG PATHWAY abundance by `pathwayWithFactor`.
 By default, the function uses the KO matrix from `NMF` slot. `mat` can be specified for the other matrices.
@@ -612,3 +608,35 @@ head(pathwayWithFactor(stana, "101346", summarize=mean, mat=ch))
 #> path:ko00052 0.04860460 0.08358931 0.05641848
 ```
 
+
+## GSEA
+
+The gene set enrichment analysis based on the background KEGG PATHWAY information is possible if the KO abundances are used. `doGSEA` function performs `GSEA` on the gene copy number table based on the grouping variable set in the `stana` object. The background set is obtained by KEGG REST API. The `gsea` slot is filled with the function.
+
+
+```r
+library(clusterProfiler)
+#> clusterProfiler v4.9.5  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> 
+#> If you use clusterProfiler in published research, please cite:
+#> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
+#> 
+#> Attaching package: 'clusterProfiler'
+#> The following object is masked from 'package:stana':
+#> 
+#>     filter
+#> The following object is masked from 'package:igraph':
+#> 
+#>     simplify
+#> The following object is masked from 'package:stats':
+#> 
+#>     filter
+stana <- doGSEA(stana, "101346")
+#> HC / R
+#> preparing geneSet collections...
+#> GSEA analysis...
+#> Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize, gseaParam, : There are ties in the preranked stats (4.77% of the list).
+#> The order of those tied genes will be arbitrary, which may produce unexpected results.
+#> leading edge analysis...
+#> done...
+```

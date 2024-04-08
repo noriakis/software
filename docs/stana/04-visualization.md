@@ -17,9 +17,11 @@ These functions can be used to plot the information related to SNV, which can be
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 #>   102478
+#>   s__Clostridium_A leptum
 #>     Number of snps: 77431
 #>     Number of samples: 31
 #>   102478
+#>   s__Clostridium_A leptum
 #>     Number of genes: 150996
 #>     Number of samples: 32
 plotSNVSummary(stana, "102478")
@@ -35,7 +37,7 @@ plotSNVInfo(stana, "102478")
 
 ## `plotMAF`
 
-This functions plots the boxplot of MAF between groups.
+This functions plots the boxplot of MAF at a single position between groups.
 
 
 ```r
@@ -44,7 +46,7 @@ plotMAF(stana, "102478", row.names(getSlot(stana, "snpsInfo")[[1]])[1])
 
 <img src="04-visualization_files/figure-html/pm-1.png" width="672" />
 
-## `plotMAF`
+## `plotMAFHist`
 
 This functions plots the histogram of MAF for the candidate species.
 
@@ -183,9 +185,11 @@ The violin plot of gene copy numbers can be plotted by `plotGenes`.
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 #>   102478
+#>   s__Clostridium_A leptum
 #>     Number of snps: 77431
 #>     Number of samples: 31
 #>   102478
+#>   s__Clostridium_A leptum
 #>     Number of genes: 150996
 #>     Number of samples: 32
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))

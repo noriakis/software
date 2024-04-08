@@ -16,9 +16,11 @@ cl <- lapply(cl, unname)
 cand_species <- "101380"
 stana <- loadMIDAS2("../clinical/HDSubset", candSp=cand_species, cl=cl, db="uhgg")
 #>   101380
+#>   g__Faecalicatena;s__Faecalicatena gnavus
 #>     Number of snps: 26540
 #>     Number of samples: 102
 #>   101380
+#>   g__Faecalicatena;s__Faecalicatena gnavus
 #>     Number of genes: 59925
 #>     Number of samples: 124
 stana <- changeColors(stana, c("steelblue","gold","tomato"))
@@ -30,16 +32,7 @@ stana
 #> # Group info (list): CKD/HC/HD
 #> # Loaded SNV table: 1 ID: 101380
 #> # Loaded gene table: 1 ID: 101380
-#> # Size: 108700720 B
-#> # 
-#> # SNV description
-#> # A tibble: 3 × 3
-#> # Groups:   group [3]
-#>   group species_id                                         n
-#>   <chr> <chr>                                          <int>
-#> 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36
-#> 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24
-#> 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42
+#> # Size: 108701376 B
 ```
 Get a brief overview of SNVs.
 
@@ -100,7 +93,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.021
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.031
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -114,7 +107,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.021 *
+#> group      2   0.2860 0.05176 2.7021  0.031 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -131,7 +124,7 @@ stana <- setAnnotation(stana,
 stana <- calcGF(stana, candSp=cand_species)
 ```
 
-Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`).
+Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`) with replacing 30% of the data to `NA`.
 
 
 ```r
@@ -187,8 +180,9 @@ for (i in seq_len(5)) {
 #> # Filtered features: 2568
 #> # Filtered samples: 124
 #> # NNLM flag enabled, the error matrix only will be returned.
-do.call(rbind, cvl) %>% data.frame() %>% mutate(group=1:5) %>%
-  tidyr::pivot_longer(1:6) %>% ggplot(aes(x=factor(group), y=value),)+
+
+do.call(rbind, cvl) %>% data.frame(check.names=FALSE) %>% mutate(group=1:5) %>%
+  tidyr::pivot_longer(1:6) %>% ggplot(aes(x=name, y=value))+
   geom_boxplot() + cowplot::theme_cowplot() + xlab("rank")
 ```
 
@@ -230,6 +224,7 @@ Using these two factors, we summarize KO abundance information to KEGG PATHWAY i
 
 ```r
 library(ggrepel)
+#> Warning: package 'ggrepel' was built under R version 4.3.2
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
 colnames(pw) <- c("1","2")
@@ -261,7 +256,7 @@ pheatmap(pw[nms, 1:2])
 <img src="06-analysis_files/figure-html/app9-2.png" width="768" />
 Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use `plotKEGGPathway`. The returned object is ggplot object and the users can modify the visualization by stacking the layers).
 
-The left-side is abundance for factor 1 and right side is factor 2.
+The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.
 
 
 ```r
@@ -294,7 +289,7 @@ gg
 In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
 
 
-Finally, the results can be exported to the interactive inspection by `exportInteractive` function.
+Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing with the other researchers.
 
 
 ```r
@@ -312,14 +307,5 @@ exportInteractive(stana)
 #> # Loaded gene table: 1 ID: 101380
 #> # Loaded KO table: 1 ID: 101380
 #> # Inferred fasta: 1 ID: 101380
-#> # Size: 125114992 B
-#> # 
-#> # SNV description
-#> # A tibble: 3 × 3
-#> # Groups:   group [3]
-#>   group species_id                                         n
-#>   <chr> <chr>                                          <int>
-#> 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36
-#> 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24
-#> 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42
+#> # Size: 125115648 B
 ```

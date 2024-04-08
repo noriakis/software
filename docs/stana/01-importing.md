@@ -26,8 +26,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-266fdc4db6102e427a00" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-266fdc4db6102e427a00">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5a24ff58ff236b3e3fdb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-5a24ff58ff236b3e3fdb">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -61,8 +61,13 @@ stana
 For `MIDAS2`, `loadMIDAS2` function can be used to import the output of `merge` command.
 
 ::: rmdwarning
-For `MIDAS2`, the function assumes the default database of UHGG or GTDB is used.
+For `MIDAS2`, the function assumes the default database of UHGG or GTDB is used. For the other custom databases, use `snv` and `gene` function described in this documentation.
 :::
+
+::: rmdwarning
+For `MIDAS2`, the [`lz4`](https://github.com/lz4/lz4) binary must be in PATH to correctly load the data.
+:::
+
 
 
 ```r
@@ -89,16 +94,16 @@ We can check stats of how many samples are profiled for each species, by `only_s
 ```r
 stana <- loadMIDAS2("../merge_uhgg", only_stat=TRUE, cl=hd_meta)
 stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
-#> # A tibble: 6 × 4
+#> # A tibble: 6 × 5
 #> # Groups:   species_id [6]
-#>   species_id group     n species_description           
-#>   <chr>      <chr> <int> <chr>                         
-#> 1 101346     HC       12 s__KS41 sp003584895           
-#> 2 102438     HC       10 s__Synechococcus_C sp001632165
-#> 3 101378     HC        9 s__CAG-873 sp002490635        
-#> 4 102478     HC        9 s__Clostridium_A leptum       
-#> 5 102492     HC        8 s__Thalassospira lucentensis_A
-#> 6 100044     HC        7 s__Helicobacter pylori_BU
+#>   species_id group     n species_name    species_description
+#>   <chr>      <chr> <int> <chr>           <chr>              
+#> 1 101346     HC       12 s__KS41 sp0035… s__KS41 sp003584895
+#> 2 102438     HC       10 s__Synechococc… s__Synechococcus_C…
+#> 3 101378     HC        9 s__CAG-873 sp0… s__CAG-873 sp00249…
+#> 4 102478     HC        9 s__Clostridium… s__Clostridium_A l…
+#> 5 102492     HC        8 s__Thalassospi… s__Thalassospira l…
+#> 6 100044     HC        7 s__Helicobacte… s__Helicobacter py…
 ```
 As the long output is expected, only one species is loaded here. 
 
@@ -106,9 +111,11 @@ As the long output is expected, only one species is loaded here.
 ```r
 stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
 #>   100002
+#>   s__Staphylococcus aureus
 #>     Number of snps: 2058
 #>     Number of samples: 5
 #>   100002
+#>   s__Staphylococcus aureus
 #>     Number of genes: 23427
 #>     Number of samples: 7
 ```
@@ -143,94 +150,7 @@ getSlot(stana, "freqTableSnps") |> head()
 #> data frame with 0 columns and 0 rows
 ```
 
-For ID conversion, the metadata accompanied with the default database can be used.
-
-
-```r
-taxtbl <- read.table("../metadata_uhgg.tsv", sep="\t",
-                     header=1, row.names=1, check.names = FALSE)
-taxtbl |> head()
-#>          representative MGnify_accession species_closest
-#> 100001 GUT_GENOME000001  MGYG-HGUT-00001          100049
-#> 100002 GUT_GENOME000004  MGYG-HGUT-00002          100201
-#> 100003 GUT_GENOME000008  MGYG-HGUT-00003          103279
-#> 100004 GUT_GENOME000010  MGYG-HGUT-00004          103876
-#> 100005 GUT_GENOME000017  MGYG-HGUT-00005          101623
-#> 100006 GUT_GENOME000020  MGYG-HGUT-00006          100011
-#>        ani_closest gtpro_kmer_counts phyeco_marker_counts
-#> 100001    83.35600                NA                   15
-#> 100002    84.86955             29822                   15
-#> 100003    93.41555              1115                   15
-#> 100004    78.17620                NA                   15
-#> 100005    85.84275                NA                   15
-#> 100006    93.07075                NA                   15
-#>        phyeco_pass_ratio pangene_counts genome_counts
-#> 100001                 1           4893             4
-#> 100002                 1         147601           358
-#> 100003                 1         113409          1178
-#> 100004                 1          12599            24
-#> 100005                 1           5488             2
-#> 100006                 1           2656             1
-#>        Genome_type  Length N_contigs    N50 GC_content
-#> 100001     Isolate 3219614       137  47258      28.26
-#> 100002     Isolate 4433090       100 109266      42.60
-#> 100003     Isolate 3229507        35 158570      58.52
-#> 100004     Isolate 3698872       105  90296      54.19
-#> 100005     Isolate 3930422        32 350032      28.59
-#> 100006     Isolate 2822523        36 121380      32.65
-#>        Completeness Contamination
-#> 100001        98.59          0.70
-#> 100002        99.37          0.00
-#> 100003       100.00          0.00
-#> 100004        98.66          0.22
-#> 100005        99.30          0.00
-#> 100006        99.26          1.39
-#>                                                                                                                                                Lineage
-#> 100001                                 d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Peptostreptococcales;f__Peptostreptococcaceae;g__GCA-900066495;s__
-#> 100002                            d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
-#> 100003                                   d__Bacteria;p__Bacteroidota;c__Bacteroidia;o__Bacteroidales;f__Rikenellaceae;g__Alistipes;s__Alistipes shahii
-#> 100004                   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Oscillospirales;f__Ruminococcaceae;g__Anaerotruncus;s__Anaerotruncus colihominis
-#> 100005 d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Peptostreptococcales;f__Peptostreptococcaceae;g__Terrisporobacter;s__Terrisporobacter glycolicus_A
-#> 100006                       d__Bacteria;p__Firmicutes;c__Bacilli;o__Staphylococcales;f__Staphylococcaceae;g__Staphylococcus;s__Staphylococcus xylosus
-#>        Continent
-#> 100001    Europe
-#> 100002    Europe
-#> 100003    Europe
-#> 100004    Europe
-#> 100005    Europe
-#> 100006    Europe
-```
-
-The taxonomy table can be loaded with providing to `taxtbl` argument.
-
-
-```r
-loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg")
-#>   100002
-#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
-#>     Number of snps: 2058
-#>     Number of samples: 5
-#>   100002
-#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
-#>     Number of genes: 23427
-#>     Number of samples: 7
-#> # A stana: MIDAS2
-#> # Database: uhgg
-#> # Loaded directory: ../merge_uhgg
-#> # Species number: 1
-#> # Group info (list): HC/R
-#> # Loaded SNV table: 1 ID: 100002
-#> # Loaded gene table: 1 ID: 100002
-#> # Size: 4525512 B
-#> # 
-#> # SNV description
-#> # A tibble: 2 × 3
-#> # Groups:   group [2]
-#>   group species_id                                         n
-#>   <chr> <chr>                                          <int>
-#> 1 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…     1
-#> 2 R     d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…     4
-```
+By default, the taxonomy ID will be converted using the default MIDAS2 database information.
 
 The coverage for each species per sample is plotted by `plotCoverage`.
 
@@ -430,13 +350,13 @@ The `check` method applied to `stana` object can check the samples or species me
 
 
 ```r
-stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", taxtbl=taxtbl, db="uhgg")
+stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", db="uhgg")
 #>   100002
-#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>   g__Blautia_A;s__Blautia_A sp900066165
 #>     Number of snps: 2058
 #>     Number of samples: 5
 #>   100002
-#>   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__Lachnospirales;f__Lachnospiraceae;g__Blautia_A;s__Blautia_A sp900066165
+#>   g__Blautia_A;s__Blautia_A sp900066165
 #>     Number of genes: 23427
 #>     Number of samples: 7
 filt <- stana %>% check(mean_coverage > 4)
@@ -444,12 +364,12 @@ head(filt %>% dplyr::arrange(dplyr::desc(n)))
 #> # A tibble: 6 × 3
 #>   species_id     n species_description                      
 #>        <int> <int> <chr>                                    
-#> 1     102478    31 d__Bacteria;p__Bacteroidota;c__Bacteroid…
-#> 2     101346    28 d__Bacteria;p__Bacteroidota;c__Bacteroid…
-#> 3     102438    28 d__Bacteria;p__Bacteroidota;c__Bacteroid…
-#> 4     100074    21 d__Bacteria;p__Bacteroidota;c__Bacteroid…
-#> 5     100044    20 d__Bacteria;p__Bacteroidota;c__Bacteroid…
-#> 6     101338    19 d__Bacteria;p__Firmicutes_A;c__Clostridi…
+#> 1     102478    31 g__Bacteroides_B;s__Bacteroides_B dorei  
+#> 2     101346    28 g__Bacteroides;s__Bacteroides uniformis  
+#> 3     102438    28 g__Parabacteroides;s__Parabacteroides di…
+#> 4     100074    21 g__Alistipes;s__Alistipes onderdonkii    
+#> 5     100044    20 g__Parabacteroides;s__Parabacteroides me…
+#> 6     101338    19 g__Blautia_A;s__Blautia_A wexlerae
 ```
 
 Subsequently, `filter` method can be used to subset the stana object for interesting species.
@@ -470,4 +390,36 @@ The users can preset the SNV ID used for the downstream calculation to the `incl
 ```r
 stana <- siteFilter(stana, getID(stana)[1], site_type=="4D")
 #> # total of 650 obtained from 2058
+## Downstream functions use the filtered site IDs
+```
+
+## Printing the profile information
+
+By `show` or `print` method, the summary of stana object is outputted.
+Also, `summary` method can be used to inspect the grouping information per species.
+
+
+```r
+stana
+#> # A stana: MIDAS2
+#> # Database: uhgg
+#> # Loaded directory: ../merge_uhgg
+#> # Species number: 1
+#> # Group info (list): HC/R
+#> # Loaded SNV table: 182 ID: NA
+#> # Loaded gene table: 1 ID: 100002
+#> # Size: 4304640 B
+summary(stana)
+#> # 
+#> # SNV description
+#> # A tibble: 0 × 3
+#> # Groups:   group [0]
+#> # ℹ 3 variables: group <chr>, species_id <chr>, n <int>
+#> # Gene description
+#> # A tibble: 2 × 3
+#> # Groups:   group [2]
+#>   group species_id                                n
+#>   <chr> <chr>                                 <int>
+#> 1 HC    g__Blautia_A;s__Blautia_A sp900066165     1
+#> 2 R     g__Blautia_A;s__Blautia_A sp900066165     6
 ```

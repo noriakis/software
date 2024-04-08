@@ -28,14 +28,6 @@ exportInteractive(stana)
 #> # Loaded gene table: 1 ID: 100003
 #> # Loaded KO table: 1 ID: 100003
 #> # Size: 7623792 B
-#> # 
-#> # SNV description
-#> # A tibble: 2 × 3
-#> # Groups:   group [2]
-#>   group  species_id                                        n
-#>   <chr>  <chr>                                         <int>
-#> 1 Group1 d__Bacteria;p__Bacteroidota;c__Bacteroidia;o…     4
-#> 2 Group2 d__Bacteria;p__Bacteroidota;c__Bacteroidia;o…     7
 ```
 
 The example of resulting interactive application can be found [here](TBU).

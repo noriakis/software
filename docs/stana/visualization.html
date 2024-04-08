@@ -78,9 +78,11 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"102478"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   102478</span></span>
+<span><span class="co">#&gt;   s__Clostridium_A leptum</span></span>
 <span><span class="co">#&gt;     Number of snps: 77431</span></span>
 <span><span class="co">#&gt;     Number of samples: 31</span></span>
 <span><span class="co">#&gt;   102478</span></span>
+<span><span class="co">#&gt;   s__Clostridium_A leptum</span></span>
 <span><span class="co">#&gt;     Number of genes: 150996</span></span>
 <span><span class="co">#&gt;     Number of samples: 32</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotSNVSummary.html">plotSNVSummary</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"102478"</span><span class="op">)</span></span></code></pre></div>
@@ -93,14 +95,14 @@
 <h2>
 <span class="header-section-number">5.2</span> <code>plotMAF</code><a class="anchor" aria-label="anchor" href="#plotmaf"><i class="fas fa-link"></i></a>
 </h2>
-<p>This functions plots the boxplot of MAF between groups.</p>
+<p>This functions plots the boxplot of MAF at a single position between groups.</p>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotMAF.html">plotMAF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"102478"</span>, <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="04-visualization_files/figure-html/pm-1.png" width="672"></div>
 </div>
-<div id="plotmaf-1" class="section level2" number="5.3">
+<div id="plotmafhist" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">5.3</span> <code>plotMAF</code><a class="anchor" aria-label="anchor" href="#plotmaf-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> <code>plotMAFHist</code><a class="anchor" aria-label="anchor" href="#plotmafhist"><i class="fas fa-link"></i></a>
 </h2>
 <p>This functions plots the histogram of MAF for the candidate species.</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
@@ -221,9 +223,11 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../merge_uhgg"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"102478"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   102478</span></span>
+<span><span class="co">#&gt;   s__Clostridium_A leptum</span></span>
 <span><span class="co">#&gt;     Number of snps: 77431</span></span>
 <span><span class="co">#&gt;     Number of samples: 31</span></span>
 <span><span class="co">#&gt;   102478</span></span>
+<span><span class="co">#&gt;   s__Clostridium_A leptum</span></span>
 <span><span class="co">#&gt;     Number of genes: 150996</span></span>
 <span><span class="co">#&gt;     Number of samples: 32</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"102478"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"UHGG000186_00531"</span>,<span class="st">"UHGG000186_00521"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -271,7 +275,7 @@
 <li><a class="nav-link" href="#visualization"><span class="header-section-number">5</span> Visualization</a></li>
 <li><a class="nav-link" href="#plotsnvsummary-and-plotsnvinfo"><span class="header-section-number">5.1</span> plotSNVSummary and plotSNVInfo</a></li>
 <li><a class="nav-link" href="#plotmaf"><span class="header-section-number">5.2</span> plotMAF</a></li>
-<li><a class="nav-link" href="#plotmaf-1"><span class="header-section-number">5.3</span> plotMAF</a></li>
+<li><a class="nav-link" href="#plotmafhist"><span class="header-section-number">5.3</span> plotMAFHist</a></li>
 <li><a class="nav-link" href="#plotcoverage"><span class="header-section-number">5.4</span> plotCoverage</a></li>
 <li><a class="nav-link" href="#plotpca"><span class="header-section-number">5.5</span> plotPCA</a></li>
 <li><a class="nav-link" href="#plotdist"><span class="header-section-number">5.6</span> plotDist</a></li>
@@ -297,7 +301,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-30.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

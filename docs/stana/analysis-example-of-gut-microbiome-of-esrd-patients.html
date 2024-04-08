@@ -78,9 +78,11 @@
 <span><span class="va">cand_species</span> <span class="op">&lt;-</span> <span class="st">"101380"</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS2.html">loadMIDAS2</a></span><span class="op">(</span><span class="st">"../clinical/HDSubset"</span>, candSp<span class="op">=</span><span class="va">cand_species</span>, cl<span class="op">=</span><span class="va">cl</span>, db<span class="op">=</span><span class="st">"uhgg"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   101380</span></span>
+<span><span class="co">#&gt;   g__Faecalicatena;s__Faecalicatena gnavus</span></span>
 <span><span class="co">#&gt;     Number of snps: 26540</span></span>
 <span><span class="co">#&gt;     Number of samples: 102</span></span>
 <span><span class="co">#&gt;   101380</span></span>
+<span><span class="co">#&gt;   g__Faecalicatena;s__Faecalicatena gnavus</span></span>
 <span><span class="co">#&gt;     Number of genes: 59925</span></span>
 <span><span class="co">#&gt;     Number of samples: 124</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/changeColors.html">changeColors</a></span><span class="op">(</span><span class="va">stana</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"steelblue"</span>,<span class="st">"gold"</span>,<span class="st">"tomato"</span><span class="op">)</span><span class="op">)</span></span>
@@ -92,16 +94,7 @@
 <span><span class="co">#&gt; # Group info (list): CKD/HC/HD</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: 101380</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 101380</span></span>
-<span><span class="co">#&gt; # Size: 108700720 B</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # SNV description</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
-<span><span class="co">#&gt; # Groups:   group [3]</span></span>
-<span><span class="co">#&gt;   group species_id                                         n</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                                          &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36</span></span>
-<span><span class="co">#&gt; 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24</span></span>
-<span><span class="co">#&gt; 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 108701376 B</span></span></code></pre></div>
 <p>Get a brief overview of SNVs.</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotSNVInfo.html">plotSNVInfo</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
@@ -142,7 +135,7 @@
 <span><span class="co">#&gt; Warning in att$heading[2] &lt;- deparse(match.call(),</span></span>
 <span><span class="co">#&gt; width.cutoff = 500L): number of items to replace is not a</span></span>
 <span><span class="co">#&gt; multiple of replacement length</span></span>
-<span><span class="co">#&gt; #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.021</span></span></code></pre></div>
+<span><span class="co">#&gt; #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.031</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/app5-1.png" width="672"></div>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getAdonis.html">getAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
@@ -153,7 +146,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", </span></span>
 <span><span class="co">#&gt;           Df SumOfSqs      R2      F Pr(&gt;F)  </span></span>
-<span><span class="co">#&gt; group      2   0.2860 0.05176 2.7021  0.021 *</span></span>
+<span><span class="co">#&gt; group      2   0.2860 0.05176 2.7021  0.031 *</span></span>
 <span><span class="co">#&gt; Residual  99   5.2391 0.94824                </span></span>
 <span><span class="co">#&gt; Total    101   5.5251 1.00000                </span></span>
 <span><span class="co">#&gt; ---</span></span>
@@ -164,7 +157,7 @@
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>,</span>
 <span>                       annotList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101380"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101380_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/calcGF.html">calcGF</a></span><span class="op">(</span><span class="va">stana</span>, candSp<span class="op">=</span><span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
-<p>Subsequently, using the cross-validation approach replacing random variables to <code>NA</code>, we estimate the rank based on the KO tables. The function in <code>NNLM</code> is used to compute the loss (<code>mse</code>).</p>
+<p>Subsequently, using the cross-validation approach replacing random variables to <code>NA</code>, we estimate the rank based on the KO tables. The function in <code>NNLM</code> is used to compute the loss (<code>mse</code>) with replacing 30% of the data to <code>NA</code>.</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/linxihui/NNLM">NNLM</a></span><span class="op">)</span></span>
 <span><span class="va">cvl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -218,8 +211,9 @@
 <span><span class="co">#&gt; # Filtered features: 2568</span></span>
 <span><span class="co">#&gt; # Filtered samples: 124</span></span>
 <span><span class="co">#&gt; # NNLM flag enabled, the error matrix only will be returned.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">cvl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">group</span><span class="op">)</span>, y<span class="op">=</span><span class="va">value</span><span class="op">)</span>,<span class="op">)</span><span class="op">+</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">cvl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>check.names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">name</span>, y<span class="op">=</span><span class="va">value</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"rank"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/hd7-1.png" width="672"></div>
 <p>Based on the information, the factor number of two is selected.</p>
@@ -247,7 +241,8 @@
 <div class="inline-figure"><img src="06-analysis_files/figure-html/hd9-2.png" width="672"></div>
 <p>Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/">ggrepel</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'ggrepel' was built under R version 4.3.2</span></span>
 <span><span class="va">pw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/pathwayWithFactor.html">pathwayWithFactor</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, change_name<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    mat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"NMF"</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">W</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">colnames</a></span><span class="op">(</span><span class="va">pw</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1"</span>,<span class="st">"2"</span><span class="op">)</span></span>
@@ -255,7 +250,7 @@
 <span><span class="va">pw</span><span class="op">[[</span><span class="st">"size"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">pw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">pw</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">2</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">pw</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">pw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, y<span class="op">=</span><span class="va">pw</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>size<span class="op">=</span><span class="va">size</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggrepel/man/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, size<span class="op">=</span><span class="va">size</span><span class="op">)</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggrepel.slowkow.com/reference/geom_text_repel.html">geom_text_repel</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">name</span>, size<span class="op">=</span><span class="va">size</span><span class="op">)</span>, bg.colour<span class="op">=</span><span class="st">"white"</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="va">lm</span>, se<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"1"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; `geom_smooth()` using formula = 'y ~ x'</span></span>
@@ -273,7 +268,7 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="va">pw</span><span class="op">[</span><span class="va">nms</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p><img src="06-analysis_files/figure-html/app9-2.png" width="768">
 Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use <code>plotKEGGPathway</code>. The returned object is ggplot object and the users can modify the visualization by stacking the layers).</p>
-<p>The left-side is abundance for factor 1 and right side is factor 2.</p>
+<p>The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.</p>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value</span></span>
 <span><span class="co"># kegg &lt;- plotKEGGPathway(stana, cand_species,</span></span>
@@ -299,7 +294,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="va">gg</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/ggkegg-1.png" width="672"></div>
 <p>In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis (<a href="https://doi.org/10.1093/ndt/13.3.656">Loehrer et al. 1998.</a>). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.</p>
-<p>Finally, the results can be exported to the interactive inspection by <code>exportInteractive</code> function.</p>
+<p>Finally, the results can be exported to the interactive inspection by <code>exportInteractive</code> function for the sharing with the other researchers.</p>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/exportInteractive.html">exportInteractive</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in dir.create(paste0(out, "/data")): '.\data'</span></span>
@@ -315,16 +310,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 101380</span></span>
 <span><span class="co">#&gt; # Loaded KO table: 1 ID: 101380</span></span>
 <span><span class="co">#&gt; # Inferred fasta: 1 ID: 101380</span></span>
-<span><span class="co">#&gt; # Size: 125114992 B</span></span>
-<span><span class="co">#&gt; # </span></span>
-<span><span class="co">#&gt; # SNV description</span></span>
-<span><span class="co">#&gt; # A tibble: 3 × 3</span></span>
-<span><span class="co">#&gt; # Groups:   group [3]</span></span>
-<span><span class="co">#&gt;   group species_id                                         n</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                                          &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 CKD   d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    36</span></span>
-<span><span class="co">#&gt; 2 HC    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    24</span></span>
-<span><span class="co">#&gt; 3 HD    d__Bacteria;p__Firmicutes_A;c__Clostridia;o__…    42</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 125115648 B</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
@@ -349,7 +335,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-03-30.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
