@@ -81,8 +81,8 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5a24ff58ff236b3e3fdb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-5a24ff58ff236b3e3fdb">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-4fa87d7c4f8f6a60bc7c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-4fa87d7c4f8f6a60bc7c">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
@@ -103,7 +103,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: Bacteroides_uniformis_57318</span></span>
-<span><span class="co">#&gt; # Size: 14586544 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 14586704 B</span></span></code></pre></div>
 </div>
 <div id="midas2" class="section level2" number="2.2">
 <h2>
@@ -248,7 +248,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: ../inStrain_out</span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: GUT_GENOME142015</span></span>
-<span><span class="co">#&gt; # Size: 81503224 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 81503384 B</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
@@ -273,7 +273,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: manual</span></span>
-<span><span class="co">#&gt; # Size: 49752 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 49912 B</span></span></code></pre></div>
 <div id="conversion-to-maf-matrix" class="section level3" number="2.5.1">
 <h3>
 <span class="header-section-number">2.5.1</span> Conversion to MAF matrix<a class="anchor" aria-label="anchor" href="#conversion-to-maf-matrix"><i class="fas fa-link"></i></a>
@@ -323,7 +323,7 @@ The package offers some functions to convert these to MAF matrix.</p>
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 0</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 3 ID: SPID1</span></span>
-<span><span class="co">#&gt; # Size: 23688 B</span></span>
+<span><span class="co">#&gt; # Size: 23848 B</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt;                           major_allele minor_allele</span></span>
@@ -414,7 +414,7 @@ Also, <code>summary</code> method can be used to inspect the grouping informatio
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 182 ID: NA</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 100002</span></span>
-<span><span class="co">#&gt; # Size: 4304640 B</span></span>
+<span><span class="co">#&gt; # Size: 4304800 B</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/summary.html">summary</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # SNV description</span></span>
@@ -465,7 +465,7 @@ Also, <code>summary</code> method can be used to inspect the grouping informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-08.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

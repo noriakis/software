@@ -32,7 +32,7 @@ stana
 #> # Group info (list): CKD/HC/HD
 #> # Loaded SNV table: 1 ID: 101380
 #> # Loaded gene table: 1 ID: 101380
-#> # Size: 108701376 B
+#> # Size: 108701536 B
 ```
 Get a brief overview of SNVs.
 
@@ -93,7 +93,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.031
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.029
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -107,7 +107,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.031 *
+#> group      2   0.2860 0.05176 2.7021  0.029 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -289,6 +289,110 @@ gg
 In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
 
 
+The other species information is also interesting and here we load the other five species. With the HD or other binary grouping information.
+
+
+```r
+meta <- read.table("../clinical/HDSubset/metadata.tsv", sep="\t", header=1)
+hd <- meta$Run %>% setNames(meta$HDorNot)
+cl <- split(hd, names(hd))
+cl <- lapply(cl, unname)
+cands <- c("102545","101380","101338","102478","101337")
+stana <- loadMIDAS2("../clinical/HDSubset", candSp=cands, cl=cl, db="uhgg")
+#>   101337
+#>   g__Bacteroides;s__Bacteroides fragilis
+#>     Number of snps: 24483
+#>     Number of samples: 83
+#>   101338
+#>   g__Blautia_A;s__Blautia_A wexlerae
+#>     Number of snps: 24297
+#>     Number of samples: 162
+#>   101380
+#>   g__Faecalicatena;s__Faecalicatena gnavus
+#>     Number of snps: 26540
+#>     Number of samples: 102
+#>   102478
+#>   g__Bacteroides_B;s__Bacteroides_B dorei
+#>     Number of snps: 77057
+#>     Number of samples: 216
+#>   102545
+#>   g__Faecalibacterium;s__Faecalibacterium prausnitzii_G
+#>     Number of snps: 9443
+#>     Number of samples: 111
+#>   101337
+#>   g__Bacteroides;s__Bacteroides fragilis
+#>     Number of genes: 56742
+#>     Number of samples: 94
+#>   101338
+#>   g__Blautia_A;s__Blautia_A wexlerae
+#>     Number of genes: 138535
+#>     Number of samples: 197
+#>   101380
+#>   g__Faecalicatena;s__Faecalicatena gnavus
+#>     Number of genes: 59925
+#>     Number of samples: 124
+#>   102478
+#>   g__Bacteroides_B;s__Bacteroides_B dorei
+#>     Number of genes: 244846
+#>     Number of samples: 230
+#>   102545
+#>   g__Faecalibacterium;s__Faecalibacterium prausnitzii_G
+#>     Number of genes: 75257
+#>     Number of samples: 137
+stana
+#> # A stana: MIDAS2
+#> # Database: uhgg
+#> # Loaded directory: ../clinical/HDSubset
+#> # Species number: 5
+#> # Group info (list): False/True
+#> # Loaded SNV table: 5 ID: 101337
+#> # Loaded gene table: 5 ID: 101337
+#> # Size: 1287108048 B
+```
+
+
+Subsequently, we perform GSEA on all the species by `doGSEA` function.
+
+
+```r
+## Set annotation for genes to KOs
+stana <- setAnnotation(stana,
+                       annotList=list("102545"="../annotations_uhgg/102545_eggnog_out.emapper.annotations",
+                                      "101380"="../annotations_uhgg/101380_eggnog_out.emapper.annotations",
+                                      "101338"="../annotations_uhgg/101338_eggnog_out.emapper.annotations",
+                                      "102478"="../annotations_uhgg/102478_eggnog_out.emapper.annotations",
+                                      "101337"="../annotations_uhgg/101337_eggnog_out.emapper.annotations"))
+library(clusterProfiler)
+for (cs in cands) {
+  cat(cs, "\n")
+  stana <- doGSEA(stana, candSp=cs)
+}
+#> 102545 
+#> False / True 
+#> KO abundance not found, calculating based on annotation ...
+#> 101380 
+#> False / True 
+#> KO abundance not found, calculating based on annotation ...
+#> 101338 
+#> False / True 
+#> KO abundance not found, calculating based on annotation ...
+#> 102478 
+#> False / True 
+#> KO abundance not found, calculating based on annotation ...
+#> 101337 
+#> False / True 
+#> KO abundance not found, calculating based on annotation ...
+```
+
+plot the result for inter-species differences with statistically significant pathways.
+
+
+```r
+plotGSEA(stana, padjThreshold=0.1)
+```
+
+<img src="06-analysis_files/figure-html/app13-1.png" width="672" />
+
 Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing with the other researchers.
 
 
@@ -296,16 +400,20 @@ Finally, the results can be exported to the interactive inspection by `exportInt
 exportInteractive(stana)
 #> Warning in dir.create(paste0(out, "/data")): '.\data'
 #> already exists
-#> Tree number: 1, KO (or gene) number: 1
+#> No tree for 101337
+#> No tree for 101338
+#> No tree for 101380
+#> No tree for 102478
+#> No tree for 102545
+#> Tree number: 0, KO (or gene) number: 5
 #> Exporting ...
 #> # A stana: MIDAS2
 #> # Database: uhgg
 #> # Loaded directory: ../clinical/HDSubset
-#> # Species number: 1
-#> # Group info (list): CKD/HC/HD
-#> # Loaded SNV table: 1 ID: 101380
-#> # Loaded gene table: 1 ID: 101380
-#> # Loaded KO table: 1 ID: 101380
-#> # Inferred fasta: 1 ID: 101380
-#> # Size: 125115648 B
+#> # Species number: 5
+#> # Group info (list): False/True
+#> # Loaded SNV table: 5 ID: 101337
+#> # Loaded gene table: 5 ID: 101337
+#> # Loaded KO table: 5 ID: 102545
+#> # Size: 1310031856 B
 ```
