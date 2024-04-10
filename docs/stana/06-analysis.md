@@ -57,8 +57,8 @@ Based on the SNV and the related statistics of SNV, the consensus multiple seque
 stana <- consensusSeq(stana, cand_species)
 #> # Beginning calling for 101380
 #> # Original Site number: 26540
-#>   Profiled samples: 102
-#>   Included samples: 102
+#> #  Profiled samples: 102
+#> #  Included samples: 102
 getFasta(stana)[[cand_species]]
 #> 102 sequences with 24641 character and 24559 different site patterns.
 #> The states are a c g t
@@ -93,7 +93,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.029
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.024
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -107,7 +107,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.029 *
+#> group      2   0.2860 0.05176 2.7021  0.024 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -224,7 +224,6 @@ Using these two factors, we summarize KO abundance information to KEGG PATHWAY i
 
 ```r
 library(ggrepel)
-#> Warning: package 'ggrepel' was built under R version 4.3.2
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
 colnames(pw) <- c("1","2")
@@ -250,6 +249,7 @@ names(fc) <- pw[["name"]]
 nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
 
 library(pheatmap)
+#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pw[nms, 1:2])
 ```
 

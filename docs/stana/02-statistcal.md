@@ -24,8 +24,8 @@ The consensus sequence calling can be performed using SNV matrix. For `MIDAS` an
 stana <- consensusSeqMIDAS2(stana, species="100003", verbose=FALSE)
 #> # Beginning calling for 100003
 #> # Original Site number: 5019
-#>   Profiled samples: 11
-#>   Included samples: 11
+#> #  Profiled samples: 11
+#> #  Included samples: 11
 
 ## Tree estimation and visualization by `phangorn` and `ggtree`
 dm <- dist.ml(getSlot(stana, "fastaList")[["100003"]])
@@ -48,8 +48,8 @@ stana <- stana |>
     consensusSeq(argList=list(site_prev=0.8))
 #> # Beginning calling for 100003
 #> # Original Site number: 5019
-#>   Profiled samples: 11
-#>   Included samples: 11
+#> #  Profiled samples: 11
+#> #  Included samples: 11
 getFasta(stana)[[1]]
 #> 11 sequences with 4214 character and 2782 different site patterns.
 #> The states are a c g t
@@ -63,8 +63,8 @@ mat <- stana |>
     consensusSeq(argList=list(site_prev=0.8, return_mat=TRUE))
 #> # Beginning calling for 100003
 #> # Original Site number: 5019
-#>   Profiled samples: 11
-#>   Included samples: 11
+#> #  Profiled samples: 11
+#> #  Included samples: 11
 mat |> dim()
 #> [1]   11 4214
 ```
@@ -111,8 +111,8 @@ stana <- stana |>
   inferAndPlotTree(meta=c("treatment","marker"))
 #> # Beginning calling for 100003
 #> # Original Site number: 5019
-#>   Profiled samples: 11
-#>   Included samples: 11
+#> #  Profiled samples: 11
+#> #  Included samples: 11
 getFasta(stana)[[1]]
 #> 11 sequences with 896 character and 625 different site patterns.
 #> The states are a c g t
@@ -128,6 +128,47 @@ getSlot(stana, "treePlotList")[[1]]
 ```
 
 <img src="02-statistcal_files/figure-html/tree_fruit-1.png" width="960" />
+
+The `site_list` is supported for the usecase such as calling limited to the certain gene regions. The below example calls the MSA in specific gene ID and output plot by `ggmsa`.
+
+
+```r
+## get snpsInfo slot and filter to variants in specific gene IDs
+cand_ids <- stana::getSlot(stana, "snpsInfo")[["100003"]] %>%
+    dplyr::filter(gene_id=="UHGG000008_01913") %>%
+    row.names()
+
+## Call sequence
+stana <- consensusSeqMIDAS2(stana, "100003", site_list=cand_ids)
+#> # Beginning calling for 100003
+#> # Original Site number: 5019
+#> #  Profiled samples: 11
+#> #  Included samples: 11
+#> # site_list specified: 22
+
+## Plot
+if (requireNamespace("ggmsa")) {
+    library(ggmsa)
+    phangorn::write.phyDat(getFasta(stana)[["100003"]],
+                           "test.fasta", format="fasta")
+    ggmsa::ggmsa("test.fasta",seq_name = TRUE)+ ggmsa::geom_seqlogo()
+}
+#> Loading required namespace: ggmsa
+#> Registered S3 methods overwritten by 'ggalt':
+#>   method                  from   
+#>   grid.draw.absoluteGrob  ggplot2
+#>   grobHeight.absoluteGrob ggplot2
+#>   grobWidth.absoluteGrob  ggplot2
+#>   grobX.absoluteGrob      ggplot2
+#>   grobY.absoluteGrob      ggplot2
+#> ggmsa v1.8.0  Document: http://yulab-smu.top/ggmsa/
+#> 
+#> If you use ggmsa in published research, please cite:
+#> L Zhou, T Feng, S Xu, F Gao, TT Lam, Q Wang, T Wu, H Huang, L Zhan, L Li, Y Guan, Z Dai*, G Yu* ggmsa: a visual exploration tool for multiple sequence alignment and associated data. Briefings in Bioinformatics. DOI:10.1093/bib/bbac222
+```
+
+<img src="02-statistcal_files/figure-html/sitelist-1.png" width="960" />
+
 
 ## Nonnegative matrix factorization
 
@@ -146,6 +187,7 @@ library(NMF)
 #> Warning: package 'NMF' was built under R version 4.3.3
 #> Loading required package: registry
 #> Loading required package: rngtools
+#> Warning: package 'rngtools' was built under R version 4.3.3
 #> Loading required package: cluster
 #> NMF - BioConductor layer [OK] | Shared memory capabilities [NO: windows] | Cores 2/2
 #> 
@@ -167,11 +209,6 @@ stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # Filtered samples: 16
 #> Warning in cor(d.consensus, d.coph, method = "pearson"):
 #> the standard deviation is zero
-#> Timing stopped at: 1.73 0 3.37
-#> Warning in (function (...) : NAs were produced due to errors in some of the runs:
-#> 	-#5[r=5] -> NMF::nmf - 1/30 fit(s) threw an error.
-#> # Error(s) thrown:
-#> NA
 #> Chosen rank: 4 
 #> # Rank 4
 #> Warning in nmf_snmf(beta = 0.01, A = y, x = x, version =
@@ -217,7 +254,7 @@ getSlot(stana, "NMF")
 #>   Iterations: 100 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.05    0.00    0.05
+#>      0.05    0.00    0.07
 ```
 
 The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
@@ -248,6 +285,7 @@ The basis corresponds to the factor to feature matrix. This represents functiona
 
 ```r
 library(pheatmap)
+#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
 ```
 
@@ -276,7 +314,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.686
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.689
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -285,7 +323,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> group     1  0.15557 0.07404 0.7196  0.686
+#> group     1  0.15557 0.07404 0.7196  0.689
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -296,7 +334,7 @@ The corresponding principal coordinate analysis plot using distance matrix can b
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.572
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.58
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="672" />
@@ -340,21 +378,23 @@ dim(getSlot(stanacomb, "genes")[["100003"]])
 
 ```r
 library(Boruta)
+#> Warning: package 'Boruta' was built under R version 4.3.3
 brres <- doBoruta(stana, "100003")
 #> # Using grouping from the slot: Group1/Group2
 #> # If needed, please provide preprocessed matrix to `mat`
 #> # Feature number: 21806
 #> # Performing Boruta
+#> Warning in Boruta::TentativeRoughFix(rf): There are no
+#> Tentative attributes! Returning original object.
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 26.78266 secs.
-#> Tentatives roughfixed over the last 99 iterations.
-#>  11 attributes confirmed important: UHGG025024_01181,
-#> UHGG032322_01036, UHGG046098_01842, UHGG060667_01243,
-#> UHGG061776_01338 and 6 more;
-#>  21795 attributes confirmed unimportant:
+#> Boruta performed 99 iterations in 30.38444 secs.
+#>  6 attributes confirmed important: UHGG060667_01243,
+#> UHGG061776_01338, UHGG158704_01078, UHGG190699_01344,
+#> UHGG215309_01728 and 1 more;
+#>  21800 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21790 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21795 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.

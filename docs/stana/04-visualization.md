@@ -55,8 +55,8 @@ This functions plots the histogram of MAF for the candidate species.
 plotMAFHist(stana, "102478")
 #> `stat_bin()` using `bins = 30`. Pick better value with
 #> `binwidth`.
-#> Warning: Removed 96409 rows containing non-finite outside the scale
-#> range (`stat_bin()`).
+#> Warning: Removed 96409 rows containing non-finite values
+#> (`stat_bin()`).
 ```
 
 <img src="04-visualization_files/figure-html/pmh-1.png" width="672" />
@@ -96,6 +96,7 @@ Plot the heatmap of distance matrix with grouping variables using `pheatmap`.
 
 ```r
 library(pheatmap)
+#> Warning: package 'pheatmap' was built under R version 4.3.3
 #> 
 #> Attaching package: 'pheatmap'
 #> The following object is masked from 'package:ComplexHeatmap':
@@ -127,8 +128,9 @@ This function can be used to circlize plot, which can link the information relat
 
 ```r
 library(circlize)
+#> Warning: package 'circlize' was built under R version 4.3.3
 #> ========================================
-#> circlize version 0.4.15
+#> circlize version 0.4.16
 #> CRAN page: https://cran.r-project.org/package=circlize
 #> Github page: https://github.com/jokergoo/circlize
 #> Documentation: https://jokergoo.github.io/circlize_book/book/

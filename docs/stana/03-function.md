@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-758d0d923fafe44cc649" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-758d0d923fafe44cc649">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1616a4df30efa33746a6" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1616a4df30efa33746a6">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH c818451 UN-- 4 2 -- 
+#> IGRAPH 1b96c70 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from c818451 (vertex names):
+#> + edges from 1b96c70 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8e49b85e5bdba1d0e9fb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8e49b85e5bdba1d0e9fb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-fd19adb8b00070defbf1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fd19adb8b00070defbf1">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH c95b78b UN-- 21 922 -- 
+#> IGRAPH 1c8f1ae UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from c95b78b (vertex names):
+#> + edges from 1c8f1ae (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -517,10 +517,6 @@ gg <- plotKEGGPathway(stana, c("101346","102438"),
 #> 101346: HC / R
 #> 102438: HC / R
 #> Point mode enabled
-#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 51 rows.
-#> ℹ Did you mean to use `annotate()`?
-#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 47 rows.
-#> ℹ Did you mean to use `annotate()`?
 gg
 #> $ko00270
 ```

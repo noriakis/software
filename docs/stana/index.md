@@ -1,7 +1,7 @@
 --- 
 title: "stana"
 author: "Noriaki Sato"
-date: "2024-04-09"
+date: "2024-04-10"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
