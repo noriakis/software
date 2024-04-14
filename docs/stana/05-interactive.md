@@ -30,5 +30,3 @@ exportInteractive(stana, notRun=TRUE)
 #> # Loaded KO table: 1 ID: 100003
 #> # Size: 882912 B
 ```
-
-The example of resulting interactive application can be found [here](https://nsato.shinyapps.io/metagenotype_test).
