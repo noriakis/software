@@ -26,8 +26,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-11df02fbcd8013dc7a10" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-11df02fbcd8013dc7a10">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b1ea1a22eb78f59701a3" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-b1ea1a22eb78f59701a3">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -53,7 +53,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318
 #> # Loaded gene table: 1 ID: Bacteroides_uniformis_57318
-#> # Size: 14586704 B
+#> # Size: 14586864 B
 ```
 
 ## `MIDAS2`
@@ -224,7 +224,7 @@ instr
 #> # Loaded directory: ../inStrain_out
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: GUT_GENOME142015
-#> # Size: 81503384 B
+#> # Size: 81503544 B
 ```
 
 ## metaSNV
@@ -241,7 +241,7 @@ meta <- loadmetaSNV("../metasnv_sample_out")
 
 ## Manual
 
-The loading of the manually created data.frame is possible by `snv` and `gene` function. The metagenotyping results produced by the other software can be loaded with this function, although some statistics should be inserted manually. This accepts the named list of data.frame.
+The loading of the manually created data.frame is possible by `snv`, `gene`, `GF` functions, each prepared for SNV, gene copy numbers, and gene family abundance tables. The metagenotyping results produced by the other software can be loaded with this function, although some statistics should be inserted manually. These functions accepts the named list of data.frame. If the software like `HUMAnN3` is used to profile the functional implications from metagenomic reads, the subset stratified output can also be used for `GF` function.
 
 
 ```r
@@ -251,8 +251,23 @@ man
 #> # Loaded directory: 
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: manual
-#> # Size: 49912 B
+#> # Size: 50072 B
 ```
+
+
+
+```r
+## HUMAnN merged profile
+df <- read.table("humann_merged_ko_eval_45.txt", sep="\t", header=1, row.names=1, check.names=FALSE, comment.char = "")
+stana <- fromHumann(df)
+stana
+#> # A stana: manual
+#> # Loaded directory: 
+#> # Species number: 344
+#> # Loaded KO table: 344 ID: g__Bifidobacterium.s__Bifidobacterium_longum
+#> # Size: 37921952 B
+```
+
 
 ### Conversion to MAF matrix
 
@@ -308,7 +323,7 @@ stana
 #> # Loaded directory: 
 #> # Species number: 0
 #> # Loaded SNV table: 3 ID: SPID1
-#> # Size: 23848 B
+#> # Size: 24008 B
 getSlot(stana, "snpsInfo")
 #> [[1]]
 #>                           major_allele minor_allele
@@ -408,7 +423,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 182 ID: NA
 #> # Loaded gene table: 1 ID: 100002
-#> # Size: 4304800 B
+#> # Size: 4305288 B
 summary(stana)
 #> # 
 #> # SNV description

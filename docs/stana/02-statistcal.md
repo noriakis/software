@@ -165,6 +165,8 @@ if (requireNamespace("ggmsa")) {
 #> 
 #> If you use ggmsa in published research, please cite:
 #> L Zhou, T Feng, S Xu, F Gao, TT Lam, Q Wang, T Wu, H Huang, L Zhan, L Li, Y Guan, Z Dai*, G Yu* ggmsa: a visual exploration tool for multiple sequence alignment and associated data. Briefings in Bioinformatics. DOI:10.1093/bib/bbac222
+#> Warning: No shared levels found between `names(values)` of the
+#> manual scale and the data's fill values.
 ```
 
 <img src="02-statistcal_files/figure-html/sitelist-1.png" width="960" />
@@ -187,7 +189,6 @@ library(NMF)
 #> Warning: package 'NMF' was built under R version 4.3.3
 #> Loading required package: registry
 #> Loading required package: rngtools
-#> Warning: package 'rngtools' was built under R version 4.3.3
 #> Loading required package: cluster
 #> NMF - BioConductor layer [OK] | Shared memory capabilities [NO: windows] | Cores 2/2
 #> 
@@ -203,20 +204,16 @@ stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # Original features: 20
 #> # Original samples: 16
 #> # Original matrix NA: NA
-#> # Original matrix zero: 0.659
+#> # Original matrix zero: 0.781
 #> # Selecting KL loss
 #> # Filtered features: 20
 #> # Filtered samples: 16
 #> Warning in cor(d.consensus, d.coph, method = "pearson"):
 #> the standard deviation is zero
-#> Chosen rank: 4 
-#> # Rank 4
-#> Warning in nmf_snmf(beta = 0.01, A = y, x = x, version =
-#> "R", verbose = FALSE): NMF::snmf - Too many restarts due to
-#> too big 'beta' value [Computation stopped after the 9th
-#> restart]
-#> Mean relative abundances: 0.3307952 0.4457982 0.2234066 0 
-#> Present feature per factor: 12 20 20 12
+#> Chosen rank: 3 
+#> # Rank 3
+#> Mean relative abundances: 0.4506259 0.3696346 0.1797395 
+#> Present feature per factor: 18 14 13
 getSlot(stana, "nmf")
 #> NULL
 ```
@@ -229,13 +226,13 @@ stana <- NMF(stana, "100003", rank=3, beta=0.001)
 #> # Original features: 20
 #> # Original samples: 16
 #> # Original matrix NA: NA
-#> # Original matrix zero: 0.659
+#> # Original matrix zero: 0.781
 #> # Selecting KL loss
 #> # Filtered features: 20
 #> # Filtered samples: 16
 #> # Rank 3
-#> Mean relative abundances: 0.4464854 0.2489392 0.3045754 
-#> Present feature per factor: 16 13 11
+#> Mean relative abundances: 0.4391153 0.3652978 0.1955869 
+#> Present feature per factor: 15 11 12
 getSlot(stana, "NMF")
 #> $`100003`
 #> <Object of class: NMFfit>
@@ -249,12 +246,12 @@ getSlot(stana, "NMF")
 #>   seed:  random 
 #>   RNG: 10403L, 624L, ..., -1119848976L [a0b56536ecb759f07f21b4b252fb5db8]
 #>   distance metric:  <function> 
-#>   residuals:  15.967 
+#>   residuals:  5.628987 
 #>   parameters: beta=0.001 
-#>   Iterations: 100 
+#>   Iterations: 65 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.05    0.00    0.07
+#>      0.09    0.00    0.10
 ```
 
 The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
@@ -271,13 +268,13 @@ The data can be obtained using `return_data`.
 
 ```r
 plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE) %>% head()
-#>                    1         2         3  group
-#> ERR1711593 0.2018576 0.0000000 0.7981424 Group1
-#> ERR1711594 0.2568975 0.2644210 0.4786815 Group1
-#> ERR1711596 0.7708334 0.2291666 0.0000000 Group1
-#> ERR1711598 0.9735364 0.0264636 0.0000000 Group1
-#> ERR1711599 0.0000000 0.5539269 0.4460731 Group1
-#> ERR1711602 0.0000000 0.6022663 0.3977337 Group1
+#>                     1          2         3  group
+#> ERR1711593 0.98582990 0.01417010 0.0000000 Group1
+#> ERR1711594 0.85247014 0.14752986 0.0000000 Group1
+#> ERR1711596 0.19498362 0.04848823 0.7565282 Group1
+#> ERR1711598 0.17024848 0.22117519 0.6085763 Group1
+#> ERR1711599 0.00000000 1.00000000 0.0000000 Group1
+#> ERR1711602 0.01749079 0.98250921 0.0000000 Group1
 ```
 
 The basis corresponds to the factor to feature matrix. This represents functional implications if the KO or gene copy number tables are used for the NMF. This information can be parsed to matrix of KEGG PATHWAY information using `pathwayWithFactor`.
@@ -285,7 +282,6 @@ The basis corresponds to the factor to feature matrix. This represents functiona
 
 ```r
 library(pheatmap)
-#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
 ```
 
@@ -314,7 +310,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.689
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.677
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -323,7 +319,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> group     1  0.15557 0.07404 0.7196  0.689
+#> group     1  0.15557 0.07404 0.7196  0.677
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -334,7 +330,7 @@ The corresponding principal coordinate analysis plot using distance matrix can b
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.58
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.566
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="672" />
@@ -378,23 +374,21 @@ dim(getSlot(stanacomb, "genes")[["100003"]])
 
 ```r
 library(Boruta)
-#> Warning: package 'Boruta' was built under R version 4.3.3
 brres <- doBoruta(stana, "100003")
 #> # Using grouping from the slot: Group1/Group2
 #> # If needed, please provide preprocessed matrix to `mat`
 #> # Feature number: 21806
 #> # Performing Boruta
-#> Warning in Boruta::TentativeRoughFix(rf): There are no
-#> Tentative attributes! Returning original object.
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 30.38444 secs.
-#>  6 attributes confirmed important: UHGG060667_01243,
-#> UHGG061776_01338, UHGG158704_01078, UHGG190699_01344,
-#> UHGG215309_01728 and 1 more;
-#>  21800 attributes confirmed unimportant:
+#> Boruta performed 99 iterations in 51.85858 secs.
+#> Tentatives roughfixed over the last 99 iterations.
+#>  14 attributes confirmed important: UHGG000008_01494,
+#> UHGG000008_01647, UHGG017442_00914, UHGG044133_01184,
+#> UHGG061776_01339 and 9 more;
+#>  21792 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21795 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21787 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.

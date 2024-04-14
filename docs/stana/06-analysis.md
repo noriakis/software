@@ -32,7 +32,7 @@ stana
 #> # Group info (list): CKD/HC/HD
 #> # Loaded SNV table: 1 ID: 101380
 #> # Loaded gene table: 1 ID: 101380
-#> # Size: 108701536 B
+#> # Size: 108702024 B
 ```
 Get a brief overview of SNVs.
 
@@ -93,7 +93,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.024
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.02
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -107,7 +107,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.024 *
+#> group      2   0.2860 0.05176 2.7021   0.02 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
@@ -224,6 +224,7 @@ Using these two factors, we summarize KO abundance information to KEGG PATHWAY i
 
 ```r
 library(ggrepel)
+#> Warning: package 'ggrepel' was built under R version 4.3.2
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
 colnames(pw) <- c("1","2")
@@ -249,7 +250,6 @@ names(fc) <- pw[["name"]]
 nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
 
 library(pheatmap)
-#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pw[nms, 1:2])
 ```
 
@@ -347,7 +347,7 @@ stana
 #> # Group info (list): False/True
 #> # Loaded SNV table: 5 ID: 101337
 #> # Loaded gene table: 5 ID: 101337
-#> # Size: 1287108048 B
+#> # Size: 1287109240 B
 ```
 
 
@@ -397,23 +397,22 @@ Finally, the results can be exported to the interactive inspection by `exportInt
 
 
 ```r
-exportInteractive(stana)
+exportInteractive(stana, notRun=TRUE)
 #> Warning in dir.create(paste0(out, "/data")): '.\data'
 #> already exists
-#> No tree for 101337
-#> No tree for 101338
-#> No tree for 101380
-#> No tree for 102478
-#> No tree for 102545
-#> Tree number: 0, KO (or gene) number: 5
-#> Exporting ...
+#> # No tree for 101337
+#> # No tree for 101338
+#> # No tree for 101380
+#> # No tree for 102478
+#> # No tree for 102545
+#> # Tree number: 0 KO (or gene) number: 5
+#> # Exporting ...
 #> # A stana: MIDAS2
 #> # Database: uhgg
 #> # Loaded directory: ../clinical/HDSubset
 #> # Species number: 5
 #> # Group info (list): False/True
-#> # Loaded SNV table: 5 ID: 101337
-#> # Loaded gene table: 5 ID: 101337
+#> # Group column (DF): label/group
 #> # Loaded KO table: 5 ID: 102545
-#> # Size: 1310031856 B
+#> # Size: 146094192 B
 ```
