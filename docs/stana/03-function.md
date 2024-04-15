@@ -47,8 +47,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cbb5ea0020948f825d9d" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-cbb5ea0020948f825d9d">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6e0f0539a7c0b1d0129f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-6e0f0539a7c0b1d0129f">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,9 +100,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH d504d16 UN-- 4 2 -- 
+#> IGRAPH e29ac13 UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from d504d16 (vertex names):
+#> + edges from e29ac13 (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -127,8 +127,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c99023dcdbfff2253e35" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c99023dcdbfff2253e35">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-640b67b626038016be2c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-640b67b626038016be2c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +156,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH d64ac38 UN-- 21 922 -- 
+#> IGRAPH e3de8ba UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from d64ac38 (vertex names):
+#> + edges from e3de8ba (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -200,7 +200,8 @@ stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis
 #>     Bacteroides_uniformis_57318 cleared filtering threshold in genes
 #> Overall, 1 species met criteria in SNPs
 #> Overall, 1 species met criteria in genes
-plotHeatmap(stana, "Bacteroides_uniformis_57318",filter_max_value = 2,filter_max_frac = 0)
+plotHeatmap(stana, "Bacteroides_uniformis_57318",
+    filter_max_value = 2, filter_max_frac = 0)
 #> # In resulting matrix, max: 1.99955229433902 min: 0
 #> # Dimension: 4911 29
 #> Obtaining gene information from PATRIC server
@@ -305,22 +306,19 @@ plotHeatmap(stana, "101346",
 
 <img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
 
-The gene IDs can be subset by providing the IDs to the `geneID` option.
+The gene IDs can be subset by providing the IDs to the `geneID` option. If `variable` is set to other than zero, the genes with top-{`variable`} variable features were subset to be used in the heatmap visualization.
 
 
 ```r
-gid <- sample(getGeneID(stana, "101346"), 100)
-plotHeatmap(stana, "101346",
-    fnc="KEGG_Module",
-    removeAdditional=c("cycle","pathway"), geneID=gid)
-#> # In resulting matrix, max: 24.030286 min: 0
-#> # Dimension: 100 31
+## Subset to top-100 variable genes
+plotHeatmap(stana, "101346", variable=100)
+#> # In resulting matrix, max: 49.729167 min: 0
+#> # Dimension: 18808 31
 #> # Looking for the annotation file by eggNOG-mapper v2
 #> # Loading annotation
 ```
 
-<img src="03-function_files/figure-html/heat3-1.png" width="672" />
-
+<img src="03-function_files/figure-html/heat4-1.png" width="672" />
 
 ## Aggregate the gene copy numbers based on the annotations
 

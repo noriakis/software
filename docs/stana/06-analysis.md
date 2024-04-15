@@ -93,7 +93,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> Warning in att$heading[2] <- deparse(match.call(),
 #> width.cutoff = 500L): number of items to replace is not a
 #> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.02
+#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.026
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="672" />
@@ -107,7 +107,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
 #>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021   0.02 *
+#> group      2   0.2860 0.05176 2.7021  0.026 *
 #> Residual  99   5.2391 0.94824                
 #> Total    101   5.5251 1.00000                
 #> ---
