@@ -1,3 +1,6 @@
+
+
+
 # Functional annotation {#function}
 
 For metabolic functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY and the other databases in KEGG. However, the other options such as the enzyme commision numbers can be accepted.
@@ -47,8 +50,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6e0f0539a7c0b1d0129f" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-6e0f0539a7c0b1d0129f">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-fc59af99c33ce7f003b2" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-fc59af99c33ce7f003b2">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -100,16 +103,16 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH e29ac13 UN-- 4 2 -- 
+#> IGRAPH 1dc1adf UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from e29ac13 (vertex names):
+#> + edges from 1dc1adf (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
 #> $test$PLOT
 ```
 
-<img src="03-function_files/figure-html/drawpat-1.png" width="672" />
+<img src="03-function_files/figure-html/drawpat-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Parsing `eggNOG-mapper v2` results
 
@@ -127,8 +130,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-640b67b626038016be2c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-640b67b626038016be2c">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-dcc0bda81fd10992faec" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-dcc0bda81fd10992faec">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -156,9 +159,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH e3de8ba UN-- 21 922 -- 
+#> IGRAPH 1ea6d1e UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from e3de8ba (vertex names):
+#> + edges from 1ea6d1e (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -172,7 +175,7 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> $plot
 ```
 
-<img src="03-function_files/figure-html/drawEGGNOG-1.png" width="672" />
+<img src="03-function_files/figure-html/drawEGGNOG-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Heatmap of the gene copy numbers with functional annotations
@@ -255,7 +258,7 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",
 #>   total of 1053 annotation obtained after removal of duplication
 ```
 
-<img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="672" />
+<img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ### The other types
@@ -304,7 +307,7 @@ plotHeatmap(stana, "101346",
 #> # Loading annotation
 ```
 
-<img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="672" />
+<img src="03-function_files/figure-html/MIDAS2_heatmap-1.png" width="100%" style="display: block; margin: auto;" />
 
 The gene IDs can be subset by providing the IDs to the `geneID` option. If `variable` is set to other than zero, the genes with top-{`variable`} variable features were subset to be used in the heatmap visualization.
 
@@ -318,7 +321,7 @@ plotHeatmap(stana, "101346", variable=100)
 #> # Loading annotation
 ```
 
-<img src="03-function_files/figure-html/heat4-1.png" width="672" />
+<img src="03-function_files/figure-html/heat4-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Aggregate the gene copy numbers based on the annotations
 
@@ -445,7 +448,7 @@ gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_s
 gg
 ```
 
-<img src="03-function_files/figure-html/onescale-1.png" width="672" />
+<img src="03-function_files/figure-html/onescale-1.png" width="100%" style="display: block; margin: auto;" />
 
 By default, the scale is same. If you install `ggh4x`, multiple scales can be added, by specifying `multi_scale` argument.
 
@@ -460,7 +463,7 @@ gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_s
 gg
 ```
 
-<img src="03-function_files/figure-html/multscale-1.png" width="672" />
+<img src="03-function_files/figure-html/multscale-1.png" width="100%" style="display: block; margin: auto;" />
 
 You can provide multiple pathway IDs to pathway_id, which returns a list of plot.
 
@@ -477,7 +480,7 @@ gg2 <- patchwork::wrap_plots(gg)
 gg2
 ```
 
-<img src="03-function_files/figure-html/pathway-1.png" width="672" />
+<img src="03-function_files/figure-html/pathway-1.png" width="100%" style="display: block; margin: auto;" />
 
 In this way, differences in orthologies in the pathway across multiple species can be readily captured.
 
@@ -497,7 +500,7 @@ gg2 <- patchwork::wrap_plots(gg)
 gg2
 ```
 
-<img src="03-function_files/figure-html/pathway_SUM-1.png" width="672" />
+<img src="03-function_files/figure-html/pathway_SUM-1.png" width="100%" style="display: block; margin: auto;" />
 
 ### Show which species have the KOs
 
@@ -515,15 +518,11 @@ gg <- plotKEGGPathway(stana, c("101346","102438"),
 #> 101346: HC / R
 #> 102438: HC / R
 #> Point mode enabled
-#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 51 rows.
-#> ℹ Did you mean to use `annotate()`?
-#> Warning in geom_node_point(aes(fill = "transparent"), x = nds_tmp$tmp_x, : All aesthetics have length 1, but the data has 47 rows.
-#> ℹ Did you mean to use `annotate()`?
 gg
 #> $ko00270
 ```
 
-<img src="03-function_files/figure-html/pathway_point-1.png" width="672" />
+<img src="03-function_files/figure-html/pathway_point-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## Setting the manual annotation
@@ -630,4 +629,4 @@ library(dplyr);library(tidygraph);library(ggraph)
 plotGSEA(list(stana, stana), padjThreshold=0.2, layout="fr")
 ```
 
-<img src="03-function_files/figure-html/gsea2-1.png" width="672" />
+<img src="03-function_files/figure-html/gsea2-1.png" width="100%" style="display: block; margin: auto;" />

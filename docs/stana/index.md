@@ -1,13 +1,16 @@
 --- 
 title: "stana"
 author: "Noriaki Sato"
-date: "2024-04-15"
+date: "2024-04-16"
 site: bookdown::bookdown_site
 documentclass: book
 description: |
   The documentation for the R package stana. stana is aimed for the analysis of intra-species diversity.
 biblio-style: apalike
 ---
+
+
+
 
 # About
 

@@ -1,3 +1,6 @@
+
+
+
 # Analysis example of gut microbiome of ESRD patients
 
 We examine the dataset investigating the gut microbiome of ESRD patients ([Zhang et al. 2023](https://doi.org/10.1186/s13059-023-03056-y)) using `stana`. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we investigate one of the profiled species, `Faecalicatena gnavus` genotyping results.
@@ -41,14 +44,14 @@ Get a brief overview of SNVs.
 plotSNVInfo(stana, cand_species)
 ```
 
-<img src="06-analysis_files/figure-html/app2-1.png" width="672" />
+<img src="06-analysis_files/figure-html/app2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 plotSNVSummary(stana, cand_species) +
     scale_y_log10()
 ```
 
-<img src="06-analysis_files/figure-html/app2-2.png" width="672" />
+<img src="06-analysis_files/figure-html/app2-2.png" width="100%" style="display: block; margin: auto;" />
 
 Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function. It can be accessed by `getFasta` function.
 
@@ -82,7 +85,7 @@ getTree(stana)[[cand_species]]
 getTreePlot(stana)[[cand_species]]
 ```
 
-<img src="06-analysis_files/figure-html/app4-1.png" width="672" />
+<img src="06-analysis_files/figure-html/app4-1.png" width="100%" style="display: block; margin: auto;" />
 
 Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.
 
@@ -96,7 +99,7 @@ stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.026
 ```
 
-<img src="06-analysis_files/figure-html/app5-1.png" width="672" />
+<img src="06-analysis_files/figure-html/app5-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 getAdonis(stana)[[cand_species]]
@@ -186,7 +189,7 @@ do.call(rbind, cvl) %>% data.frame(check.names=FALSE) %>% mutate(group=1:5) %>%
   geom_boxplot() + cowplot::theme_cowplot() + xlab("rank")
 ```
 
-<img src="06-analysis_files/figure-html/hd7-1.png" width="672" />
+<img src="06-analysis_files/figure-html/hd7-1.png" width="100%" style="display: block; margin: auto;" />
 
 Based on the information, the factor number of two is selected.
 
@@ -210,21 +213,20 @@ stana <- NMF(stana, cand_species, rank=2,
 plotAbundanceWithinSpecies(stana, cand_species, by="coef")
 ```
 
-<img src="06-analysis_files/figure-html/hd9-1.png" width="672" />
+<img src="06-analysis_files/figure-html/hd9-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c("tomato","gold"))
 #> Using sample, group as id variables
 ```
 
-<img src="06-analysis_files/figure-html/hd9-2.png" width="672" />
+<img src="06-analysis_files/figure-html/hd9-2.png" width="100%" style="display: block; margin: auto;" />
 
 Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.
 
 
 ```r
 library(ggrepel)
-#> Warning: package 'ggrepel' was built under R version 4.3.2
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
 colnames(pw) <- c("1","2")
@@ -240,7 +242,7 @@ ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
 #> overlaps). Consider increasing max.overlaps
 ```
 
-<img src="06-analysis_files/figure-html/app9-1.png" width="768" />
+<img src="06-analysis_files/figure-html/app9-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 
@@ -250,10 +252,11 @@ names(fc) <- pw[["name"]]
 nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
 
 library(pheatmap)
+#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pw[nms, 1:2])
 ```
 
-<img src="06-analysis_files/figure-html/app9-2.png" width="768" />
+<img src="06-analysis_files/figure-html/app9-2.png" width="100%" style="display: block; margin: auto;" />
 Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use `plotKEGGPathway`. The returned object is ggplot object and the users can modify the visualization by stacking the layers).
 
 The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.
@@ -284,7 +287,7 @@ gg <- ggraph(pp, layout="manual", x=x, y=y)+
 gg
 ```
 
-<img src="06-analysis_files/figure-html/ggkegg-1.png" width="672" />
+<img src="06-analysis_files/figure-html/ggkegg-1.png" width="100%" style="display: block; margin: auto;" />
 
 In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
 
@@ -391,7 +394,7 @@ plot the result for inter-species differences with statistically significant pat
 plotGSEA(stana, padjThreshold=0.1)
 ```
 
-<img src="06-analysis_files/figure-html/app13-1.png" width="672" />
+<img src="06-analysis_files/figure-html/app13-1.png" width="100%" style="display: block; margin: auto;" />
 
 Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing with the other researchers.
 

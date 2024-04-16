@@ -1,3 +1,6 @@
+
+
+
 # Visualization
 
 `stana` offers visualization functions that can interpret the profiled data.
@@ -27,13 +30,13 @@ stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 plotSNVSummary(stana, "102478")
 ```
 
-<img src="04-visualization_files/figure-html/p-1.png" width="672" />
+<img src="04-visualization_files/figure-html/p-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 plotSNVInfo(stana, "102478")
 ```
 
-<img src="04-visualization_files/figure-html/p-2.png" width="672" />
+<img src="04-visualization_files/figure-html/p-2.png" width="100%" style="display: block; margin: auto;" />
 
 ## `plotMAF`
 
@@ -44,7 +47,7 @@ This functions plots the boxplot of MAF at a single position between groups.
 plotMAF(stana, "102478", row.names(getSlot(stana, "snpsInfo")[[1]])[1])
 ```
 
-<img src="04-visualization_files/figure-html/pm-1.png" width="672" />
+<img src="04-visualization_files/figure-html/pm-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## `plotMAFHist`
 
@@ -55,11 +58,11 @@ This functions plots the histogram of MAF for the candidate species.
 plotMAFHist(stana, "102478")
 #> `stat_bin()` using `bins = 30`. Pick better value with
 #> `binwidth`.
-#> Warning: Removed 96409 rows containing non-finite outside the scale
-#> range (`stat_bin()`).
+#> Warning: Removed 96409 rows containing non-finite values
+#> (`stat_bin()`).
 ```
 
-<img src="04-visualization_files/figure-html/pmh-1.png" width="672" />
+<img src="04-visualization_files/figure-html/pmh-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## `plotCoverage`
 
@@ -70,7 +73,7 @@ This function plots the coverage of the canddiate species across the group.
 plotCoverage(stana, "102478")
 ```
 
-<img src="04-visualization_files/figure-html/pc-1.png" width="672" />
+<img src="04-visualization_files/figure-html/pc-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 ## `plotPCA`
@@ -87,7 +90,7 @@ plotPCA(mt, species=getID(mt)[1])
 #> $refGenome1clus
 ```
 
-<img src="04-visualization_files/figure-html/plotpca-1.png" width="672" />
+<img src="04-visualization_files/figure-html/plotpca-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## `plotDist`
 
@@ -96,6 +99,7 @@ Plot the heatmap of distance matrix with grouping variables using `pheatmap`.
 
 ```r
 library(pheatmap)
+#> Warning: package 'pheatmap' was built under R version 4.3.3
 #> 
 #> Attaching package: 'pheatmap'
 #> The following object is masked from 'package:ComplexHeatmap':
@@ -105,7 +109,7 @@ plotDist(stana, "102478", target="snps")
 #> # Performing dist in 102478 target is snps
 ```
 
-<img src="04-visualization_files/figure-html/plotDist-1.png" width="672" />
+<img src="04-visualization_files/figure-html/plotDist-1.png" width="100%" style="display: block; margin: auto;" />
 
 Plot using the subset of the SNV.
 
@@ -118,7 +122,7 @@ plotDist(stana, "102478", target="snps")
 #> # The set SNV ID information (27533) is used.
 ```
 
-<img src="04-visualization_files/figure-html/plotDist2-1.png" width="672" />
+<img src="04-visualization_files/figure-html/plotDist2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## `plotCirclize`
 
@@ -127,8 +131,9 @@ This function can be used to circlize plot, which can link the information relat
 
 ```r
 library(circlize)
+#> Warning: package 'circlize' was built under R version 4.3.3
 #> ========================================
-#> circlize version 0.4.15
+#> circlize version 0.4.16
 #> CRAN page: https://cran.r-project.org/package=circlize
 #> Github page: https://github.com/jokergoo/circlize
 #> Documentation: https://jokergoo.github.io/circlize_book/book/
@@ -174,7 +179,7 @@ plotCirclize(stana, "102478", genomeId="UHGG143505", thresh_snp_gene = 150)
 #> 'UHGG143505_03685', track '1'.
 ```
 
-<img src="04-visualization_files/figure-html/plotcirc-1.png" width="672" />
+<img src="04-visualization_files/figure-html/plotcirc-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Visualization of gene copy numbers
 
@@ -195,7 +200,7 @@ stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 ```
 
-<img src="04-visualization_files/figure-html/gab-1.png" width="672" />
+<img src="04-visualization_files/figure-html/gab-1.png" width="100%" style="display: block; margin: auto;" />
 
 Default color mapping can be changed by `changeColors`.
 
@@ -205,7 +210,7 @@ stana <- changeColors(stana, c("blue","red"))
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 ```
 
-<img src="04-visualization_files/figure-html/gab2-1.png" width="672" />
+<img src="04-visualization_files/figure-html/gab2-1.png" width="100%" style="display: block; margin: auto;" />
 
 
 
@@ -228,10 +233,10 @@ instr <- loadInStrain("../inStrain_out", instr_chk)
 genomeHeatmap(instr, instr_chk, column = "popANI", heatmapArgs = list(show_column_name=FALSE))
 ```
 
-<img src="04-visualization_files/figure-html/heatmaps_instrain-1.png" width="672" />
+<img src="04-visualization_files/figure-html/heatmaps_instrain-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
 strainClusterHeatmap(instr, instr_chk, heatmapArgs = list(show_column_name=FALSE))
 ```
 
-<img src="04-visualization_files/figure-html/heatmaps_instrain-2.png" width="672" />
+<img src="04-visualization_files/figure-html/heatmaps_instrain-2.png" width="100%" style="display: block; margin: auto;" />
