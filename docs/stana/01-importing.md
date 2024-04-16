@@ -28,8 +28,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e381762dba4d51a37a44" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e381762dba4d51a37a44">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-497241ac618e48a72bfc" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-497241ac618e48a72bfc">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -423,15 +423,18 @@ stana
 #> # Loaded directory: ../merge_uhgg
 #> # Species number: 1
 #> # Group info (list): HC/R
-#> # Loaded SNV table: 182 ID: NA
+#> # Loaded SNV table: 1 ID: 100002
 #> # Loaded gene table: 1 ID: 100002
-#> # Size: 4305288 B
+#> # Size: 4591640 B
 summary(stana)
 #> # 
 #> # SNV description
-#> # A tibble: 0 × 3
-#> # Groups:   group [0]
-#> # ℹ 3 variables: group <chr>, species_id <chr>, n <int>
+#> # A tibble: 2 × 3
+#> # Groups:   group [2]
+#>   group species_id                                n
+#>   <chr> <chr>                                 <int>
+#> 1 HC    g__Blautia_A;s__Blautia_A sp900066165     1
+#> 2 R     g__Blautia_A;s__Blautia_A sp900066165     4
 #> # Gene description
 #> # A tibble: 2 × 3
 #> # Groups:   group [2]

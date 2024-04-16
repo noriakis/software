@@ -212,7 +212,7 @@ stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # Filtered samples: 16
 #> Warning in cor(d.consensus, d.coph, method = "pearson"):
 #> the standard deviation is zero
-#> Chosen rank: 3 
+#> # Chosen rank:3
 #> # Rank 3
 #> Mean relative abundances: 0.4506259 0.3696346 0.1797395 
 #> Present feature per factor: 18 14 13
@@ -253,7 +253,7 @@ getSlot(stana, "NMF")
 #>   Iterations: 65 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.05    0.00    0.03
+#>      0.11    0.02    0.14
 ```
 
 The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
@@ -313,7 +313,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.72
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.692
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -322,7 +322,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> group     1  0.15557 0.07404 0.7196   0.72
+#> group     1  0.15557 0.07404 0.7196  0.692
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -333,7 +333,7 @@ The corresponding principal coordinate analysis plot using distance matrix can b
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.545
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.559
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -385,14 +385,14 @@ brres <- doBoruta(stana, "100003")
 #> # Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 29.93056 secs.
+#> Boruta performed 99 iterations in 36.22904 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  12 attributes confirmed important: UHGG000008_01290,
-#> UHGG000008_01798, UHGG035311_01086, UHGG060667_01243,
-#> UHGG061776_01338 and 7 more;
-#>  21794 attributes confirmed unimportant:
+#>  9 attributes confirmed important: UHGG000008_01798,
+#> UHGG044133_01185, UHGG060667_01243, UHGG158704_01078,
+#> UHGG166041_01167 and 4 more;
+#>  21797 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21789 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21792 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.

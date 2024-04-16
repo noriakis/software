@@ -81,8 +81,8 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e381762dba4d51a37a44" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e381762dba4d51a37a44">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-497241ac618e48a72bfc" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-497241ac618e48a72bfc">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
@@ -422,15 +422,18 @@ Also, <code>summary</code> method can be used to inspect the grouping informatio
 <span><span class="co">#&gt; # Loaded directory: ../merge_uhgg</span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
-<span><span class="co">#&gt; # Loaded SNV table: 182 ID: NA</span></span>
+<span><span class="co">#&gt; # Loaded SNV table: 1 ID: 100002</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 100002</span></span>
-<span><span class="co">#&gt; # Size: 4305288 B</span></span>
+<span><span class="co">#&gt; # Size: 4591640 B</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/summary.html">summary</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # SNV description</span></span>
-<span><span class="co">#&gt; # A tibble: 0 × 3</span></span>
-<span><span class="co">#&gt; # Groups:   group [0]</span></span>
-<span><span class="co">#&gt; # ℹ 3 variables: group &lt;chr&gt;, species_id &lt;chr&gt;, n &lt;int&gt;</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
+<span><span class="co">#&gt; # Groups:   group [2]</span></span>
+<span><span class="co">#&gt;   group species_id                                n</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                                 &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 HC    g__Blautia_A;s__Blautia_A sp900066165     1</span></span>
+<span><span class="co">#&gt; 2 R     g__Blautia_A;s__Blautia_A sp900066165     4</span></span>
 <span><span class="co">#&gt; # Gene description</span></span>
 <span><span class="co">#&gt; # A tibble: 2 × 3</span></span>
 <span><span class="co">#&gt; # Groups:   group [2]</span></span>
