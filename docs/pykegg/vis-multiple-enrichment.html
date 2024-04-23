@@ -1,0 +1,1126 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Visuailzing multiple enrichment analysis results &#8212; pykegg 0.1 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=e1a75a79"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vis-multiple-enrichment';</script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within pykegg 0.1 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Drawing KEGG global and overview map" href="drawing-global-map.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pykegg 0.1 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API Reference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Example analysis</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="example_analysis.html">Notebooks</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pykegg-intro.html">Simple example using pykegg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pykegg-parallel-edges.html">Visualization of parallel edges using plotnine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="single-cell-example.html">Single-cell transcriptomics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-with-pydeseq2.html">Example usage with PyDESeq2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drawing-global-map.html">Drawing KEGG global and overview map</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Visuailzing multiple enrichment analysis results</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/vis-multiple-enrichment.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Visuailzing multiple enrichment analysis results</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Visuailzing-multiple-enrichment-analysis-results">
+<h1>Visuailzing multiple enrichment analysis results<a class="headerlink" href="#Visuailzing-multiple-enrichment-analysis-results" title="Link to this heading">#</a></h1>
+<p>Utilizing GSEApy, we present an example of visualizing the outcomes of multiple enrichment analyses. Here, we employ a dataset from a study that examined transcriptomic alterations induced by BK polyomavirus infection in renal tubular epithelial cells (<a class="reference external" href="https://doi.org/10.1128/mbio.02354-19">Assetta et al. 2019</a>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import gseapy
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pickle as pkl
+
+from pydeseq2.dds import DeseqDataSet
+from pydeseq2.ds import DeseqStats
+from pydeseq2.utils import load_example_data
+
+import warnings
+warnings.filterwarnings(&#39;ignore&#39;)
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+count_df = pd.read_csv(&quot;PRJNA560236_count.txt&quot;, sep=&quot;\t&quot;).T
+count_df.head()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A1BG</th>
+      <th>A1BG-AS1</th>
+      <th>A1CF</th>
+      <th>A2M</th>
+      <th>A2M-AS1</th>
+      <th>A2ML1</th>
+      <th>A2MP1</th>
+      <th>A3GALT2</th>
+      <th>A4GALT</th>
+      <th>A4GNT</th>
+      <th>...</th>
+      <th>ZWILCH</th>
+      <th>ZWINT</th>
+      <th>ZXDA</th>
+      <th>ZXDB</th>
+      <th>ZXDC</th>
+      <th>ZYG11A</th>
+      <th>ZYG11B</th>
+      <th>ZYX</th>
+      <th>ZZEF1</th>
+      <th>ZZZ3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SRR9967595</th>
+      <td>20</td>
+      <td>81</td>
+      <td>1</td>
+      <td>0</td>
+      <td>22</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>669</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1055</td>
+      <td>1034</td>
+      <td>295</td>
+      <td>363</td>
+      <td>1053</td>
+      <td>96</td>
+      <td>2297</td>
+      <td>2381</td>
+      <td>1801</td>
+      <td>2806</td>
+    </tr>
+    <tr>
+      <th>SRR9967596</th>
+      <td>27</td>
+      <td>80</td>
+      <td>1</td>
+      <td>1</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>504</td>
+      <td>0</td>
+      <td>...</td>
+      <td>901</td>
+      <td>1023</td>
+      <td>299</td>
+      <td>293</td>
+      <td>868</td>
+      <td>80</td>
+      <td>1998</td>
+      <td>2238</td>
+      <td>1521</td>
+      <td>2481</td>
+    </tr>
+    <tr>
+      <th>SRR9967597</th>
+      <td>15</td>
+      <td>82</td>
+      <td>0</td>
+      <td>3</td>
+      <td>18</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>513</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1307</td>
+      <td>1564</td>
+      <td>257</td>
+      <td>409</td>
+      <td>1040</td>
+      <td>84</td>
+      <td>2527</td>
+      <td>1895</td>
+      <td>1939</td>
+      <td>2901</td>
+    </tr>
+    <tr>
+      <th>SRR9967598</th>
+      <td>9</td>
+      <td>44</td>
+      <td>1</td>
+      <td>1</td>
+      <td>7</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>488</td>
+      <td>0</td>
+      <td>...</td>
+      <td>978</td>
+      <td>1779</td>
+      <td>66</td>
+      <td>123</td>
+      <td>612</td>
+      <td>108</td>
+      <td>1072</td>
+      <td>858</td>
+      <td>1228</td>
+      <td>1927</td>
+    </tr>
+    <tr>
+      <th>SRR9967599</th>
+      <td>23</td>
+      <td>77</td>
+      <td>0</td>
+      <td>2</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>721</td>
+      <td>1</td>
+      <td>...</td>
+      <td>1650</td>
+      <td>2778</td>
+      <td>135</td>
+      <td>183</td>
+      <td>855</td>
+      <td>121</td>
+      <td>1769</td>
+      <td>1016</td>
+      <td>1484</td>
+      <td>2843</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 29744 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>clinical_df = pd.read_csv(&quot;SraRunTable_PRJNA560236.txt&quot;, sep=&quot;,&quot;)
+clinical_df.index = clinical_df.Run
+clinical_df.index.name = None
+candidate = clinical_df[clinical_df[&quot;time_point&quot;]==&quot;at 6 days post infection&quot;].index
+candidate = list(set(candidate) &amp; set(count_df.index))
+clinical_df.head()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Run</th>
+      <th>Assay Type</th>
+      <th>AvgSpotLen</th>
+      <th>BioProject</th>
+      <th>BioSample</th>
+      <th>cell_source</th>
+      <th>Cell_type</th>
+      <th>Center Name</th>
+      <th>Consent</th>
+      <th>DATASTORE filetype</th>
+      <th>...</th>
+      <th>MBytes</th>
+      <th>Organism</th>
+      <th>Platform</th>
+      <th>ReleaseDate</th>
+      <th>sample_acc</th>
+      <th>Sample Name</th>
+      <th>source_name</th>
+      <th>SRA Study</th>
+      <th>time_point</th>
+      <th>treatment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SRR9967595</th>
+      <td>SRR9967595</td>
+      <td>RNA-Seq</td>
+      <td>100</td>
+      <td>PRJNA560236</td>
+      <td>SAMN12572476</td>
+      <td>13 months old female</td>
+      <td>Primary Human Renal Epithelial Cells (ATCC)</td>
+      <td>GEO</td>
+      <td>public</td>
+      <td>fastq,sra</td>
+      <td>...</td>
+      <td>2404</td>
+      <td>Homo sapiens</td>
+      <td>ILLUMINA</td>
+      <td>2019-08-15T00:00:00Z</td>
+      <td>SRS5268041</td>
+      <td>GSM4034946</td>
+      <td>BK infected cells at 3 days post infection</td>
+      <td>SRP218354</td>
+      <td>at 3 days post infection</td>
+      <td>BK polyomavirus (BKPyV)</td>
+    </tr>
+    <tr>
+      <th>SRR9967596</th>
+      <td>SRR9967596</td>
+      <td>RNA-Seq</td>
+      <td>100</td>
+      <td>PRJNA560236</td>
+      <td>SAMN12572509</td>
+      <td>13 months old female</td>
+      <td>Primary Human Renal Epithelial Cells (ATCC)</td>
+      <td>GEO</td>
+      <td>public</td>
+      <td>fastq,sra</td>
+      <td>...</td>
+      <td>1997</td>
+      <td>Homo sapiens</td>
+      <td>ILLUMINA</td>
+      <td>2019-08-15T00:00:00Z</td>
+      <td>SRS5268042</td>
+      <td>GSM4034947</td>
+      <td>BK infected cells at 3 days post infection</td>
+      <td>SRP218354</td>
+      <td>at 3 days post infection</td>
+      <td>BK polyomavirus (BKPyV)</td>
+    </tr>
+    <tr>
+      <th>SRR9967597</th>
+      <td>SRR9967597</td>
+      <td>RNA-Seq</td>
+      <td>100</td>
+      <td>PRJNA560236</td>
+      <td>SAMN12572508</td>
+      <td>13 months old female</td>
+      <td>Primary Human Renal Epithelial Cells (ATCC)</td>
+      <td>GEO</td>
+      <td>public</td>
+      <td>fastq,sra</td>
+      <td>...</td>
+      <td>2375</td>
+      <td>Homo sapiens</td>
+      <td>ILLUMINA</td>
+      <td>2019-08-15T00:00:00Z</td>
+      <td>SRS5268043</td>
+      <td>GSM4034948</td>
+      <td>BK infected cells at 3 days post infection</td>
+      <td>SRP218354</td>
+      <td>at 3 days post infection</td>
+      <td>BK polyomavirus (BKPyV)</td>
+    </tr>
+    <tr>
+      <th>SRR9967598</th>
+      <td>SRR9967598</td>
+      <td>RNA-Seq</td>
+      <td>100</td>
+      <td>PRJNA560236</td>
+      <td>SAMN12572507</td>
+      <td>13 months old female</td>
+      <td>Primary Human Renal Epithelial Cells (ATCC)</td>
+      <td>GEO</td>
+      <td>public</td>
+      <td>fastq,sra</td>
+      <td>...</td>
+      <td>1921</td>
+      <td>Homo sapiens</td>
+      <td>ILLUMINA</td>
+      <td>2019-08-15T00:00:00Z</td>
+      <td>SRS5268044</td>
+      <td>GSM4034949</td>
+      <td>BK infected cells at 6 days post infection</td>
+      <td>SRP218354</td>
+      <td>at 6 days post infection</td>
+      <td>BK polyomavirus (BKPyV)</td>
+    </tr>
+    <tr>
+      <th>SRR9967599</th>
+      <td>SRR9967599</td>
+      <td>RNA-Seq</td>
+      <td>100</td>
+      <td>PRJNA560236</td>
+      <td>SAMN12572506</td>
+      <td>13 months old female</td>
+      <td>Primary Human Renal Epithelial Cells (ATCC)</td>
+      <td>GEO</td>
+      <td>public</td>
+      <td>fastq,sra</td>
+      <td>...</td>
+      <td>2676</td>
+      <td>Homo sapiens</td>
+      <td>ILLUMINA</td>
+      <td>2019-08-15T00:00:00Z</td>
+      <td>SRS5268045</td>
+      <td>GSM4034950</td>
+      <td>BK infected cells at 6 days post infection</td>
+      <td>SRP218354</td>
+      <td>at 6 days post infection</td>
+      <td>BK polyomavirus (BKPyV)</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 29 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dds = DeseqDataSet(
+    counts=count_df.loc[candidate,:],
+    clinical=clinical_df.loc[candidate,:],
+    design_factors=&quot;treatment&quot;,
+    refit_cooks=True,
+    n_cpus=8,
+)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dds.fit_size_factors()
+dds.fit_genewise_dispersions()
+dds.fit_dispersion_trend()
+dds.fit_dispersion_prior()
+dds.fit_MAP_dispersions()
+dds.fit_LFC()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fitting size factors...
+... done in 0.02 seconds.
+
+Fitting dispersions...
+... done in 10.25 seconds.
+
+Fitting dispersion trend curve...
+... done in 11.86 seconds.
+
+Fitting MAP dispersions...
+... done in 10.26 seconds.
+
+Fitting LFCs...
+... done in 3.59 seconds.
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dds.calculate_cooks()
+if dds.refit_cooks:
+    # Replace outlier counts
+    dds.refit()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Refitting 0 outliers.
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stat_res = DeseqStats(dds, alpha=0.05,contrast=[&quot;treatment&quot;,&quot;BK polyomavirus (BKPyV)&quot;,&quot;none (uninfected)&quot;])
+stat_res.run_wald_test()
+if stat_res.cooks_filter:
+    stat_res._cooks_filtering()
+stat_res.p_values
+if stat_res.independent_filter:
+    stat_res._independent_filtering()
+else:
+    stat_res._p_value_adjustment()
+stat_res.summary()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running Wald tests...
+... done in 4.53 seconds.
+
+Log2 fold change &amp; Wald test p-value: treatment BK polyomavirus (BKPyV) vs none (uninfected)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>baseMean</th>
+      <th>log2FoldChange</th>
+      <th>lfcSE</th>
+      <th>stat</th>
+      <th>pvalue</th>
+      <th>padj</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A1BG</th>
+      <td>15.356750</td>
+      <td>0.019922</td>
+      <td>0.380606</td>
+      <td>0.052344</td>
+      <td>9.582549e-01</td>
+      <td>0.974228</td>
+    </tr>
+    <tr>
+      <th>A1BG-AS1</th>
+      <td>79.427946</td>
+      <td>-0.747451</td>
+      <td>0.292659</td>
+      <td>-2.554004</td>
+      <td>1.064922e-02</td>
+      <td>0.032686</td>
+    </tr>
+    <tr>
+      <th>A1CF</th>
+      <td>0.685369</td>
+      <td>-1.268784</td>
+      <td>1.636031</td>
+      <td>-0.775526</td>
+      <td>4.380292e-01</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>A2M</th>
+      <td>0.968656</td>
+      <td>0.189368</td>
+      <td>1.209550</td>
+      <td>0.156561</td>
+      <td>8.755908e-01</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>A2M-AS1</th>
+      <td>12.146683</td>
+      <td>-1.006216</td>
+      <td>0.439510</td>
+      <td>-2.289404</td>
+      <td>2.205589e-02</td>
+      <td>0.059017</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>ZYG11A</th>
+      <td>84.048757</td>
+      <td>1.337741</td>
+      <td>0.262999</td>
+      <td>5.086480</td>
+      <td>3.647705e-07</td>
+      <td>0.000004</td>
+    </tr>
+    <tr>
+      <th>ZYG11B</th>
+      <td>1863.055526</td>
+      <td>-0.436978</td>
+      <td>0.184829</td>
+      <td>-2.364225</td>
+      <td>1.806783e-02</td>
+      <td>0.050254</td>
+    </tr>
+    <tr>
+      <th>ZYX</th>
+      <td>1102.044658</td>
+      <td>-0.545409</td>
+      <td>0.301693</td>
+      <td>-1.807829</td>
+      <td>7.063307e-02</td>
+      <td>0.147662</td>
+    </tr>
+    <tr>
+      <th>ZZEF1</th>
+      <td>1504.948093</td>
+      <td>-0.016638</td>
+      <td>0.169712</td>
+      <td>-0.098035</td>
+      <td>9.219047e-01</td>
+      <td>0.951360</td>
+    </tr>
+    <tr>
+      <th>ZZZ3</th>
+      <td>2551.864972</td>
+      <td>0.034200</td>
+      <td>0.137628</td>
+      <td>0.248499</td>
+      <td>8.037484e-01</td>
+      <td>0.872939</td>
+    </tr>
+  </tbody>
+</table>
+<p>29744 rows × 6 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>stat_res_summary = stat_res.results_df
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sig_genes_up = list(stat_res_summary[(stat_res_summary.padj&lt;0.05) &amp; (stat_res_summary.log2FoldChange&gt;0)].index)
+sig_genes_down = list(stat_res_summary[(stat_res_summary.padj&lt;0.05) &amp; (stat_res_summary.log2FoldChange&lt;0)].index)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>enr_res_up = gseapy.enrichr(gene_list=sig_genes_up,
+                     organism=&#39;Human&#39;,
+                     gene_sets=&#39;KEGG_2021_Human&#39;,
+                     cutoff = 0.05)
+enr_res_down = gseapy.enrichr(gene_list=sig_genes_down,
+                     organism=&#39;Human&#39;,
+                     gene_sets=&#39;KEGG_2021_Human&#39;,
+                     cutoff = 0.05)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>gseapy.barplot(enr_res_up.res2d)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;$- \\log_{10}$ (Adjusted P-value)&#39;&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/vis-multiple-enrichment_12_1.png" src="_images/vis-multiple-enrichment_12_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import requests_cache
+import pykegg
+from PIL import Image
+## Cache all the downloaded files
+requests_cache.install_cache(&#39;pykegg_cache&#39;)
+
+## Single result
+Image.fromarray(pykegg.visualize_gseapy(enr_res_up,
+                                 colors=[&quot;#ff0000&quot;],
+                                 pathway_name=&quot;p53 signaling pathway&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="_images/vis-multiple-enrichment_13_0.png" src="_images/vis-multiple-enrichment_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>## Multiple results
+Image.fromarray(pykegg.visualize_gseapy([enr_res_up, enr_res_down],
+                                 colors=[&quot;#ff0000&quot;, &quot;#0000ff&quot;],
+                                 pathway_name=&quot;p53 signaling pathway&quot;))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="_images/vis-multiple-enrichment_14_0.png" src="_images/vis-multiple-enrichment_14_0.png" />
+</div>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="drawing-global-map.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Drawing KEGG global and overview map</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Noriaki Sato
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Noriaki Sato.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
