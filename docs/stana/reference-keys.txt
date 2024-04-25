@@ -32,6 +32,7 @@ visualization-of-kegg-pathway
 visualizing-differences-per-species
 visualizing-calculated-values-across-species
 show-which-species-have-the-kos
+ranking-the-components-in-the-graph
 setting-the-manual-annotation
 pathwaywithfactor
 gsea

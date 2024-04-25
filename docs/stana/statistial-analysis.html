@@ -88,8 +88,8 @@
 <span><span class="co">#&gt; #  Included samples: 11</span></span>
 <span></span>
 <span><span class="co">## Tree estimation and visualization by `phangorn` and `ggtree`</span></span>
-<span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phangorn/man/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"fastaList"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/phangorn/man/NJ.html">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span></span>
+<span><span class="va">dm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/dist.hamming.html">dist.ml</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"fastaList"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/NJ.html">NJ</a></span><span class="op">(</span><span class="va">dm</span><span class="op">)</span></span>
 <span><span class="va">tre</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytree/man/groupOTU.html">groupOTU</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"cl"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">tp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggtree/man/ggtree.html">ggtree</a></span><span class="op">(</span><span class="va">tre</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">.data</span><span class="op">$</span><span class="va">group</span><span class="op">)</span>,</span>
 <span>             layout<span class="op">=</span><span class="st">'circular'</span><span class="op">)</span> <span class="op">+</span></span>
@@ -171,8 +171,8 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <p>The <code>site_list</code> is supported for the usecase such as calling limited to the certain gene regions. The below example calls the MSA in specific gene ID and output plot by <code>ggmsa</code>.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## get snpsInfo slot and filter to variants in specific gene IDs</span></span>
-<span><span class="va">cand_ids</span> <span class="op">&lt;-</span> <span class="fu">stana</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_id</span><span class="op">==</span><span class="st">"UHGG000008_01913"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span></span>
+<span><span class="va">cand_ids</span> <span class="op">&lt;-</span> <span class="fu">stana</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">gene_id</span><span class="op">==</span><span class="st">"UHGG000008_01913"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co">## Call sequence</span></span>
@@ -186,7 +186,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">## Plot</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"ggmsa"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://doi.org/10.1093/bib/bbac222(paper)">ggmsa</a></span><span class="op">)</span></span>
-<span>    <span class="fu">phangorn</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/phangorn/man/read.phyDat.html">write.phyDat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getFasta.html">getFasta</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>    <span class="fu">phangorn</span><span class="fu">::</span><span class="fu"><a href="https://klausvigo.github.io/phangorn/reference/read.phyDat.html">write.phyDat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getFasta.html">getFasta</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span>,</span>
 <span>                           <span class="st">"test.fasta"</span>, format<span class="op">=</span><span class="st">"fasta"</span><span class="op">)</span></span>
 <span>    <span class="fu">ggmsa</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggmsa/man/ggmsa.html">ggmsa</a></span><span class="op">(</span><span class="st">"test.fasta"</span>,seq_name <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span> <span class="fu">ggmsa</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggmsa/man/geom_seqlogo.html">geom_seqlogo</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -277,14 +277,14 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt;   Iterations: 65 </span></span>
 <span><span class="co">#&gt;   Timing:</span></span>
 <span><span class="co">#&gt;      user  system elapsed </span></span>
-<span><span class="co">#&gt;      0.11    0.02    0.14</span></span></code></pre></div>
+<span><span class="co">#&gt;      0.05    0.00    0.07</span></span></code></pre></div>
 <p>The resulting stana object can be used with the other function. <code>plotAbundanceWithinSpecies</code> plots the (relative) abundances per sample using the grouping criteria in stana object.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/nmf3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The data can be obtained using <code>return_data</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, return_data<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, return_data<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                     1          2         3  group</span></span>
 <span><span class="co">#&gt; ERR1711593 0.98582990 0.01417010 0.0000000 Group1</span></span>
 <span><span class="co">#&gt; ERR1711594 0.85247014 0.14752986 0.0000000 Group1</span></span>
@@ -316,7 +316,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setTree.html">setTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">tre</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Performing adonis in 100003 target is tree</span></span>
-<span><span class="co">#&gt; #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.692</span></span>
+<span><span class="co">#&gt; #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.693</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getAdonis.html">getAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
@@ -325,7 +325,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))</span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; group     1  0.15557 0.07404 0.7196  0.692</span></span>
+<span><span class="co">#&gt; group     1  0.15557 0.07404 0.7196  0.693</span></span>
 <span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
 <span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
 <p>The corresponding principal coordinate analysis plot using distance matrix can be drawn by specifying <code>pcoa</code>. The relative eigenvalues are plotted.</p>
@@ -333,7 +333,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>,</span>
 <span>    target<span class="op">=</span><span class="st">"genes"</span>, pcoa<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Performing adonis in 100003 target is genes</span></span>
-<span><span class="co">#&gt; #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.559</span></span></code></pre></div>
+<span><span class="co">#&gt; #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.56</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="comparing-gene-copy-numbers" class="section level2" number="3.4">
@@ -380,21 +380,21 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt; # Performing Boruta</span></span>
 <span><span class="va">brres</span></span>
 <span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 99 iterations in 36.22904 secs.</span></span>
+<span><span class="co">#&gt; Boruta performed 99 iterations in 1.064494 mins.</span></span>
 <span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">#&gt;  9 attributes confirmed important: UHGG000008_01798,</span></span>
-<span><span class="co">#&gt; UHGG044133_01185, UHGG060667_01243, UHGG158704_01078,</span></span>
-<span><span class="co">#&gt; UHGG166041_01167 and 4 more;</span></span>
+<span><span class="co">#&gt;  9 attributes confirmed important: UHGG060667_01243,</span></span>
+<span><span class="co">#&gt; UHGG125567_01861, UHGG137907_01984, UHGG158704_01078,</span></span>
+<span><span class="co">#&gt; UHGG164130_01107 and 4 more;</span></span>
 <span><span class="co">#&gt;  21797 attributes confirmed unimportant:</span></span>
 <span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
 <span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21792 more;</span></span></code></pre></div>
 <p>Further, we visualize the copy numbers of important genes confirmed between the group.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">confirmed_genes</span> <span class="op">&lt;-</span> <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">confirmed_genes</span> <span class="op">&lt;-</span> <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGenes.html">plotGenes</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">confirmed_genes</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">geneID</span>,scales<span class="op">=</span><span class="st">"free_y"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cowplot/man/panel_border.html">panel_border</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/panel_border.html">panel_border</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/vis-1.png" width="100%" style="display: block; margin: auto;"></div>
 
 </div>
@@ -429,7 +429,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-16.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-04-25.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
