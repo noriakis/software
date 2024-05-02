@@ -56,10 +56,6 @@ This functions plots the histogram of MAF for the candidate species.
 
 ```r
 plotMAFHist(stana, "102478")
-#> `stat_bin()` using `bins = 30`. Pick better value with
-#> `binwidth`.
-#> Warning: Removed 96409 rows containing non-finite values
-#> (`stat_bin()`).
 ```
 
 <img src="04-visualization_files/figure-html/pmh-1.png" width="100%" style="display: block; margin: auto;" />
@@ -99,12 +95,6 @@ Plot the heatmap of distance matrix with grouping variables using `pheatmap`.
 
 ```r
 library(pheatmap)
-#> Warning: package 'pheatmap' was built under R version 4.3.3
-#> 
-#> Attaching package: 'pheatmap'
-#> The following object is masked from 'package:ComplexHeatmap':
-#> 
-#>     pheatmap
 plotDist(stana, "102478", target="snps")
 #> # Performing dist in 102478 target is snps
 ```
@@ -131,25 +121,6 @@ This function can be used to circlize plot, which can link the information relat
 
 ```r
 library(circlize)
-#> Warning: package 'circlize' was built under R version 4.3.3
-#> ========================================
-#> circlize version 0.4.16
-#> CRAN page: https://cran.r-project.org/package=circlize
-#> Github page: https://github.com/jokergoo/circlize
-#> Documentation: https://jokergoo.github.io/circlize_book/book/
-#> 
-#> If you use it in published research, please cite:
-#> Gu, Z. circlize implements and enhances circular visualization
-#>   in R. Bioinformatics 2014.
-#> 
-#> This message can be suppressed by:
-#>   suppressPackageStartupMessages(library(circlize))
-#> ========================================
-#> 
-#> Attaching package: 'circlize'
-#> The following object is masked from 'package:igraph':
-#> 
-#>     degree
 plotCirclize(stana, "102478", genomeId="UHGG143505", thresh_snp_gene = 150)
 #> Type is MIDAS2
 #> Features not provided, default to sample_counts
@@ -157,26 +128,6 @@ plotCirclize(stana, "102478", genomeId="UHGG143505", thresh_snp_gene = 150)
 #>   UHGG143505_1: 179 - 5439351, number of position: 77431
 #> Genome ID: UHGG143505
 #> Included position: 987
-#> Note: 1 point is out of plotting region in sector
-#> 'UHGG143505_00169', track '1'.
-#> Note: 16 points are out of plotting region in sector
-#> 'UHGG143505_00169', track '1'.
-#> Note: 1 point is out of plotting region in sector
-#> 'UHGG143505_01855', track '1'.
-#> Note: 16 points are out of plotting region in sector
-#> 'UHGG143505_01855', track '1'.
-#> Note: 1 point is out of plotting region in sector
-#> 'UHGG143505_01894', track '1'.
-#> Note: 16 points are out of plotting region in sector
-#> 'UHGG143505_01894', track '1'.
-#> Note: 1 point is out of plotting region in sector
-#> 'UHGG143505_02021', track '1'.
-#> Note: 16 points are out of plotting region in sector
-#> 'UHGG143505_02021', track '1'.
-#> Note: 1 point is out of plotting region in sector
-#> 'UHGG143505_03685', track '1'.
-#> Note: 16 points are out of plotting region in sector
-#> 'UHGG143505_03685', track '1'.
 ```
 
 <img src="04-visualization_files/figure-html/plotcirc-1.png" width="100%" style="display: block; margin: auto;" />
@@ -198,6 +149,7 @@ stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 #>     Number of genes: 150996
 #>     Number of samples: 32
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
+#> [1] "#F1A340" "#998EC3"
 ```
 
 <img src="04-visualization_files/figure-html/gab-1.png" width="100%" style="display: block; margin: auto;" />
@@ -208,6 +160,7 @@ Default color mapping can be changed by `changeColors`.
 ```r
 stana <- changeColors(stana, c("blue","red"))
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
+#> [1] "blue" "red"
 ```
 
 <img src="04-visualization_files/figure-html/gab2-1.png" width="100%" style="display: block; margin: auto;" />

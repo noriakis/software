@@ -47,23 +47,22 @@ plotSNVInfo(stana, cand_species)
 <img src="06-analysis_files/figure-html/app2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ```r
-plotSNVSummary(stana, cand_species) +
-    scale_y_log10()
+plotSNVSummary(stana, cand_species, perSample=TRUE)
 ```
 
 <img src="06-analysis_files/figure-html/app2-2.png" width="100%" style="display: block; margin: auto;" />
 
-Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function. It can be accessed by `getFasta` function.
+Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function with the relatively stringent parameters. It can be accessed by `getFasta` function.
 
 
 ```r
-stana <- consensusSeq(stana, cand_species)
+stana <- consensusSeq(stana, cand_species, argList=list(site_prev=0.95, mean_depth=10))
 #> # Beginning calling for 101380
 #> # Original Site number: 26540
 #> #  Profiled samples: 102
-#> #  Included samples: 102
+#> #  Included samples: 75
 getFasta(stana)[[cand_species]]
-#> 102 sequences with 24641 character and 24559 different site patterns.
+#> 75 sequences with 24157 character and 20999 different site patterns.
 #> The states are a c g t
 ```
 
@@ -71,15 +70,18 @@ Based on the MSA, the phylogenetic tree can be inferred by `inferAndPlotTree`. I
 
 
 ```r
+library(phangorn)
 stana <- inferAndPlotTree(stana, cand_species, target="fasta", treeFun="FastTree")
-#> File already exists!
-#> Tree file already exists!
+#> # File already exists! Removing the file ...
+#> # Tree file already exists! Overwriting ...
 getTree(stana)[[cand_species]]
 #> 
-#> Phylogenetic tree with 102 tips and 100 internal nodes.
+#> Phylogenetic tree with 75 tips and 73 internal nodes.
 #> 
 #> Tip labels:
-#>   ERR11865846, ERR11865866, ERR11865898, ERR11865921, ERR11865925, ERR11865952, ...
+#>   ERR11866308, ERR11869411, ERR11866252, ERR11869407, ERR11869309, ERR11869389, ...
+#> Node labels:
+#>   , 1.000, 0.983, 1.000, 0.985, 1.000, ...
 #> 
 #> Unrooted; includes branch lengths.
 getTreePlot(stana)[[cand_species]]
@@ -93,10 +95,7 @@ Using cophenetic distance matrix from tree, the PERMANOVA is performed and the p
 ```r
 stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
 #> # Performing adonis in 101380 target is tree
-#> Warning in att$heading[2] <- deparse(match.call(),
-#> width.cutoff = 500L): number of items to replace is not a
-#> multiple of replacement length
-#> #  F: 2.70213130791564, R2: 0.0517628541251898, Pr: 0.033
+#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.002
 ```
 
 <img src="06-analysis_files/figure-html/app5-1.png" width="100%" style="display: block; margin: auto;" />
@@ -108,11 +107,11 @@ getAdonis(stana)[[cand_species]]
 #> Permutation: free
 #> Number of permutations: 999
 #> 
-#> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", 
-#>           Df SumOfSqs      R2      F Pr(>F)  
-#> group      2   0.2860 0.05176 2.7021  0.033 *
-#> Residual  99   5.2391 0.94824                
-#> Total    101   5.5251 1.00000                
+#> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "HC", "CKD", "HC", "HD", "HC", "HD", "HD", "CKD", "CKD", "HC", "CKD", "CKD", "HD", "HD", "HC", "HD", "CKD", "CKD", "CKD", "CKD", "HD", "HC", "HD", "HD", "HC", "CKD", "HD", "HD", "CKD", "HD", "HD", "HD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "CKD", "CKD", "CKD", "HD", "HC", "HC", "HC", "HD", "CKD", "HD", "HD", "HC", "CKD", "CKD", "HD", "CKD", "CKD", "CKD", "CKD", "HC", "HC", "CKD", "HC", "CKD", "CKD", "CKD", "HC", "HC", 
+#>          Df SumOfSqs      R2     F Pr(>F)   
+#> group     2   0.5698 0.09811 3.916  0.002 **
+#> Residual 72   5.2383 0.90189                
+#> Total    74   5.8081 1.00000                
 #> ---
 #> Signif. codes:  
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -195,7 +194,6 @@ Based on the information, the factor number of two is selected.
 
 
 ```r
-set.seed(1)
 stana <- NMF(stana, cand_species, rank=2,
 	nnlm_flag=TRUE, nnlm_args=list("loss"="mse"))
 #> # NMF started 101380, target: kos, method: NNLM::nnmf
@@ -206,8 +204,8 @@ stana <- NMF(stana, cand_species, rank=2,
 #> # Filtered features: 2568
 #> # Filtered samples: 124
 #> # Rank 2
-#> Mean relative abundances: 0.5826988 0.4173012 
-#> Present feature per factor: 2231 2394
+#> Mean relative abundances: 0.6192738 0.3807262 
+#> Present feature per factor: 2240 2382
 
 ## Plot the results
 plotAbundanceWithinSpecies(stana, cand_species, by="coef")
@@ -217,7 +215,6 @@ plotAbundanceWithinSpecies(stana, cand_species, by="coef")
 
 ```r
 plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c("tomato","gold"))
-#> Using sample, group as id variables
 ```
 
 <img src="06-analysis_files/figure-html/hd9-2.png" width="100%" style="display: block; margin: auto;" />
@@ -237,9 +234,6 @@ ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
     geom_text_repel(aes(label=name, size=size), bg.colour="white")+
     geom_smooth(method=lm, se=TRUE)+xlab("1")+ylab("2")+
     cowplot::theme_cowplot()
-#> `geom_smooth()` using formula = 'y ~ x'
-#> Warning: ggrepel: 225 unlabeled data points (too many
-#> overlaps). Consider increasing max.overlaps
 ```
 
 <img src="06-analysis_files/figure-html/app9-1.png" width="100%" style="display: block; margin: auto;" />
@@ -252,7 +246,6 @@ names(fc) <- pw[["name"]]
 nms <- names(sort(abs(fc[!is.infinite(fc)]), decreasing=TRUE) %>% head(40))
 
 library(pheatmap)
-#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pw[nms, 1:2])
 ```
 
@@ -289,8 +282,55 @@ gg
 
 <img src="06-analysis_files/figure-html/ggkegg-1.png" width="100%" style="display: block; margin: auto;" />
 
-In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)). The results suggest the library and function can link the intra-species diversity and clinical factors in the R environment.
+In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis ([Loehrer et al. 1998.](https://doi.org/10.1093/ndt/13.3.656)).
 
+We further examine whether these pathway changes can be attributed to changes in the data obtained from aligning the reads to the representative genome sequences. First we obtain all the KO in the pathway using `ggkegg`.
+
+
+```r
+library(tidygraph)
+library(dplyr)
+kos <- ggkegg::pathway("ko00270") %N>%
+  filter(type=="ortholog") %>% dplyr::pull(name) %>%
+  strsplit(" ") %>% unlist() %>% unique()
+```
+
+Add the copy numbers of KOs to the metadata. Note that `how` argument can be specified how to combine the multiple IDs.
+
+
+```r
+row.names(meta) <- meta$Run
+stana <- setMetadata(stana, meta)
+stana <- addGeneAbundance(stana, cand_species, IDs=kos, newCol = "gene", how = sum, convert=NULL)
+```
+
+Performs the adonis based on metadata, including the pathway abundance and grouping information in model formula.
+
+
+```r
+set.seed(11)
+stana <- doAdonis(stana, cand_species, target="tree",
+         useMeta=TRUE,
+         formula="d ~ gene + Group")
+#> # Performing adonis in 101380 target is tree
+#> # Printing raw adonis results ...
+#> Permutation test for adonis under reduced model
+#> Terms added sequentially (first to last)
+#> Permutation: free
+#> Number of permutations: 999
+#> 
+#> adonis2(formula = d ~ gene + Group, data = structure(list(Run = c("ERR11866308", "ERR11869411", "ERR11866252", "ERR11869407", "ERR11869309", "ERR11869389", "ERR11869249", "ERR11869021", "ERR11866391", "ERR11866506", "ERR11869428", "ERR11865921", "ERR11866099", "ERR11869026", "ERR11869362", "ERR11870913", "ERR11869188", "ERR11866124", "ERR11865952", "ERR11865925", "ERR11868983", "ERR11869379", "ERR11869391", "ERR11869266", "ERR11869293", "ERR11869451", "ERR11866385", "ERR11869342", "ERR11869285", 
+#>          Df SumOfSqs      R2      F Pr(>F)   
+#> gene      1   0.1906 0.03282 2.6856  0.045 * 
+#> Group     2   0.5774 0.09942 4.0672  0.006 **
+#> Residual 71   5.0400 0.86776                 
+#> Total    74   5.8081 1.00000                 
+#> ---
+#> Signif. codes:  
+#> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+The results suggest the abundances of the pathway and the distance based on phylogenetic inferred from MAF matrix could be related and worth investigating for the experimental validation. This analysis suggests the library and function can link the intra-species diversity and clinical factors in the R environment.
 
 The other species information is also interesting and here we load the other five species. With the HD or other binary grouping information.
 
@@ -396,13 +436,11 @@ plotGSEA(stana, padjThreshold=0.1)
 
 <img src="06-analysis_files/figure-html/app13-1.png" width="100%" style="display: block; margin: auto;" />
 
-Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing with the other researchers.
+Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing the findings with the other researchers.
 
 
 ```r
 exportInteractive(stana, notRun=TRUE)
-#> Warning in dir.create(paste0(out, "/data")): '.\data'
-#> already exists
 #> # No tree for 101337
 #> # No tree for 101338
 #> # No tree for 101380
@@ -410,7 +448,6 @@ exportInteractive(stana, notRun=TRUE)
 #> # No tree for 102545
 #> # Tree number: 0 KO (or gene) number: 5
 #> # Exporting ...
-#> Loading required namespace: shiny
 #> # A stana: MIDAS2
 #> # Database: uhgg
 #> # Loaded directory: ../clinical/HDSubset

@@ -13,7 +13,7 @@ library(ComplexHeatmap)
 
 ## Parsing `PATRIC` results
 
-Use `checkPATRIC` function to obtain information related to `PATRIC` functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses `BiocFileCache()` to cache the obtained results from API.
+If the gene IDs in the gene matrix stored in the stana object is PATRIC ID, we can use `checkPATRIC` function to obtain information related to `PATRIC` functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses `BiocFileCache()` to cache the obtained results from API.
 
 
 ```r
@@ -50,8 +50,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-d66caa2cfd191c8cc4fd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-d66caa2cfd191c8cc4fd">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1586375116690cb9f170" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1586375116690cb9f170">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -103,9 +103,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 996aea2 UN-- 4 2 -- 
+#> IGRAPH 5cb3b6b UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 996aea2 (vertex names):
+#> + edges from 5cb3b6b (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -116,7 +116,7 @@ drawPATRIC(genes)
 
 ## Parsing `eggNOG-mapper v2` results
 
-Use `checkEGGNOG` function to read the output of eggNOG-mapper v2. 
+If the genes are not annotated, one can use annotation software and produces an assignment file. We can use `checkEGGNOG` function to read the output of eggNOG-mapper v2. 
 You should perform the annotation to genes using [the server](http://eggnog-mapper.embl.de/) or the software.
 Specify IDs you want to obtain to `ret`, such as "KEGG_ko" and "KEGG_Pathway".
 The annotation can be used with the other functions.
@@ -130,8 +130,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-946960826b41e6431308" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-946960826b41e6431308">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-aa1f295b5612127b88c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-aa1f295b5612127b88c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -159,9 +159,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
 #> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
 #> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 9a59840 UN-- 21 922 -- 
+#> IGRAPH 5dd4a68 UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 9a59840 (vertex names):
+#> + edges from 5dd4a68 (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -530,17 +530,6 @@ By using calculated statistics of gene family (in this case, KO), one can rank t
 
 ```r
 library(tidygraph)
-#> 
-#> Attaching package: 'tidygraph'
-#> The following object is masked from 'package:stana':
-#> 
-#>     filter
-#> The following object is masked from 'package:igraph':
-#> 
-#>     groups
-#> The following object is masked from 'package:stats':
-#> 
-#>     filter
 rankComponents(stana, pid="ko00270", candSp="102438")
 #> # Using pre-computed KO table
 #> # HC / R

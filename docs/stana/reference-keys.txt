@@ -10,10 +10,11 @@ manual
 conversion-to-maf-matrix
 filtering-by-species-id
 filtering-the-site-ids-for-the-snv
+manually-set-site-ids
 printing-the-profile-information
 statistial-analysis
 cons
-nonnegative-matrix-factorization
+nmf
 permanova
 comparing-gene-copy-numbers
 aggregating-gene-copy-numbers

@@ -16,7 +16,7 @@ load(system.file("extdata", "sysdata.rda", package = "stana"))
 
 ## Consensus sequence calling {#cons}
 
-The consensus sequence calling can be performed using SNV matrix. For `MIDAS` and `MIDAS2` output, it can filter the confident positions as the software provides various statistics of SNVs. The implementation is based on `call_consensus.py` script available in `MIDAS`. Here we use pair-wise distances of sequences calculated by `dist.ml` in the default amino acid model (`JC69`), and performs neighbor-joining tree estimation by `NJ`.
+The consensus sequence calling can be performed using SNV MAF matrix (or the matrix converted from the allelic counts). It can filter the confident and user-defined positions and output the multiple sequence alignment in `fastaList` slot. The `MIDAS` and `MIDAS2` output provides various statistics of SNVs that can be used for the filtering. The implementation is similar to that in `MIDAS`. Here we use pair-wise distances of sequences calculated by `dist.ml` in the default amino acid model (`JC69`), and performs neighbor-joining tree estimation by `NJ`.
 
 
 
@@ -73,7 +73,7 @@ mat |> dim()
 ```
 
 You can use the MSA stored in `fastaList` slot to infer the phylogenetic tree of your choices.
-The `plotTree` function can be used to internally infer and plot the tree based on grouping.
+The `inferAndPlotTree` function can be used to internally infer and plot the tree based on grouping.
 `dist_method` is set to `dist.ml` by default, and you can pass arguments to the function by `tree_args`.
 
 
@@ -156,28 +156,16 @@ if (requireNamespace("ggmsa")) {
                            "test.fasta", format="fasta")
     ggmsa::ggmsa("test.fasta",seq_name = TRUE)+ ggmsa::geom_seqlogo()
 }
-#> Loading required namespace: ggmsa
-#> Registered S3 methods overwritten by 'ggalt':
-#>   method                  from   
-#>   grid.draw.absoluteGrob  ggplot2
-#>   grobHeight.absoluteGrob ggplot2
-#>   grobWidth.absoluteGrob  ggplot2
-#>   grobX.absoluteGrob      ggplot2
-#>   grobY.absoluteGrob      ggplot2
-#> ggmsa v1.8.0  Document: http://yulab-smu.top/ggmsa/
-#> 
-#> If you use ggmsa in published research, please cite:
-#> L Zhou, T Feng, S Xu, F Gao, TT Lam, Q Wang, T Wu, H Huang, L Zhan, L Li, Y Guan, Z Dai*, G Yu* ggmsa: a visual exploration tool for multiple sequence alignment and associated data. Briefings in Bioinformatics. DOI:10.1093/bib/bbac222
 ```
 
 <img src="02-statistcal_files/figure-html/sitelist-1.png" width="100%" style="display: block; margin: auto;" />
 
 
-## Nonnegative matrix factorization
+## Nonnegative matrix factorization {#nmf}
 
-The loaded or calculated matrix can be used for the nonnegative matrix factorization (NMF) for the unsupervised identifications of factors within species. This calculates factor x sample and sample to feature matrix, and possibly finds the pattern for the within-species diversity. The results can be summarized by the functions such as `plotAbundanceWithinSpecies`. The function uses the R package `NMF`, which implements a variety of algorithms and the rank selection method.
+The loaded or calculated matrix can be used for the nonnegative matrix factorization (NMF) for the unsupervised identifications of factors within species. This calculates factor x sample and sample to feature matrix, and possibly finds the pattern for the within-species diversity. The results can be summarized by the functions such as `plotAbundanceWithinSpecies`.
 
-The input can be SNV, gene, or gene family (KO) abundance table. The matrix can contain `NA` or `-1` (zero depth at the position), so filtering should be performed. The `NMF::nmf` function or `NNLM::nnmf` function can be used for this purpose. By default, `estimate` is set to FALSE but if set to `TRUE`, it performs the estimation of rank within `estimate_range`. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient.
+The input can be SNV, gene, or gene family (KO) abundance table. The matrix can contain `NA` or `-1` (zero depth at the position), so filtering should be performed. The `NMF::nmf` function or `NNLM::nnmf` function can be used for this purpose. By default, `estimate` is set to FALSE but if set to `TRUE`, it performs the estimation of rank within `estimate_range`. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient when the function uses the R package `NMF`, but the package implements a variety of algorithms and the rank selection method. Also, if `NNLM`, the rank selection based on cross-validation by randomly assigning the NA in the cell in the matrix, is performed.
 
 The function outputs the related statistics like the proportion of NA or zero value, the relative abundances of factors after the estimation, or the features presented in each factor.
 
@@ -187,20 +175,6 @@ The method is set to `snmf/r` by default in `NMF`. For the larger matrix, the `N
 
 ```r
 library(NMF)
-#> Warning: package 'NMF' was built under R version 4.3.3
-#> Loading required package: registry
-#> Loading required package: rngtools
-#> Warning: package 'rngtools' was built under R version 4.3.3
-#> Loading required package: cluster
-#> NMF - BioConductor layer [OK] | Shared memory capabilities [NO: windows] | Cores 2/2
-#> 
-#> Attaching package: 'NMF'
-#> The following object is masked from 'package:ape':
-#> 
-#>     consensus
-#> The following objects are masked from 'package:igraph':
-#> 
-#>     algorithm, compare
 stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # NMF started 100003, target: kos, method: snmf/r
 #> # Original features: 20
@@ -210,8 +184,6 @@ stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # Selecting KL loss
 #> # Filtered features: 20
 #> # Filtered samples: 16
-#> Warning in cor(d.consensus, d.coph, method = "pearson"):
-#> the standard deviation is zero
 #> # Chosen rank:3
 #> # Rank 3
 #> Mean relative abundances: 0.4506259 0.3696346 0.1797395 
@@ -253,7 +225,7 @@ getSlot(stana, "NMF")
 #>   Iterations: 65 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.05    0.00    0.07
+#>      0.07    0.00    0.07
 ```
 
 The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
@@ -284,7 +256,6 @@ The basis corresponds to the factor to feature matrix. This represents functiona
 
 ```r
 library(pheatmap)
-#> Warning: package 'pheatmap' was built under R version 4.3.3
 pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
 ```
 
@@ -306,14 +277,14 @@ getTreePlot(stana)
 
 ## PERMANOVA
 
-Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene copy numbers, or tree-based distance between the specified group. When the `target="tree"` is specified, tree shuold be in `treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`, and the default is set to `manhattan`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
+Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene (gene family) copy numbers, or tree-based distance between the specified group. When the `target="tree"` is specified, tree shuold be in `treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`, and the default is set to `manhattan`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
 
 
 ```r
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.693
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.703
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -322,7 +293,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> group     1  0.15557 0.07404 0.7196  0.693
+#> group     1  0.15557 0.07404 0.7196  0.703
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -333,10 +304,35 @@ The corresponding principal coordinate analysis plot using distance matrix can b
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.56
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.549
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;" />
+
+By default, the function uses grouping variable in `cl` slot. For more complex modeling, the slot `meta` can be populated by the data frame of samples by `setMetadata` like the example below. To use metadata, `useMeta` option should be specified with the formula argument.
+
+
+```r
+stana <- doAdonis(stana, specs = "100003",
+    target="genes", useMeta=TRUE, formula = "d ~ .")
+#> # Performing adonis in 100003 target is genes
+#> # Printing raw adonis results ...
+#> No residual component
+#> 
+#> adonis2(formula = d ~ ., data = structure(list(`1` = c(0.985829902295573, 0.852470142666385, 0.194983622925863, 0.1702484777323, 0, 0.01749079304296, 0.169551265957738, 1, 0.774981822424855, 0, 0, 1, 0.145056521442649, 0.894711680596164, 0.725364565076885, 0.0951555820116268), `2` = c(0.0141700977044264, 0.147529857333615, 0.0484882264088995, 0.221175192027691, 1, 0.98250920695704, 0.830448734042262, 0, 0, 0.911065650363313, 0, 0, 0.693043447598221, 0.0456195965920271, 0.274635434923115, 0.67607988474988
+#>          Df  SumOfSqs R2 F Pr(>F)
+#> Model    15 501125509  1         
+#> Residual  0         0  0         
+#> Total    15 501125509  1
+getAdonis(stana)[["100003"]]
+#> No residual component
+#> 
+#> adonis2(formula = d ~ ., data = structure(list(`1` = c(0.985829902295573, 0.852470142666385, 0.194983622925863, 0.1702484777323, 0, 0.01749079304296, 0.169551265957738, 1, 0.774981822424855, 0, 0, 1, 0.145056521442649, 0.894711680596164, 0.725364565076885, 0.0951555820116268), `2` = c(0.0141700977044264, 0.147529857333615, 0.0484882264088995, 0.221175192027691, 1, 0.98250920695704, 0.830448734042262, 0, 0, 0.911065650363313, 0, 0, 0.693043447598221, 0.0456195965920271, 0.274635434923115, 0.67607988474988
+#>          Df  SumOfSqs R2 F Pr(>F)
+#> Model    15 501125509  1         
+#> Residual  0         0  0         
+#> Total    15 501125509  1
+```
 
 
 ## Comparing gene copy numbers
@@ -346,7 +342,7 @@ If you have `genes` slot filled in the stana object, gene copy numbers can be co
 
 ```r
 res <- compareGenes(stana, "100003")
-#> Testing total of 21806
+#> # Testing total of 21806
 res[["UHGG000008_01733"]]
 #> 
 #> 	Exact Wilcoxon rank sum test
@@ -377,7 +373,6 @@ dim(getSlot(stanacomb, "genes")[["100003"]])
 
 ```r
 library(Boruta)
-#> Warning: package 'Boruta' was built under R version 4.3.3
 brres <- doBoruta(stana, "100003")
 #> # Using grouping from the slot: Group1/Group2
 #> # If needed, please provide preprocessed matrix to `mat`
@@ -385,14 +380,14 @@ brres <- doBoruta(stana, "100003")
 #> # Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 1.064494 mins.
+#> Boruta performed 99 iterations in 53.41703 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  9 attributes confirmed important: UHGG060667_01243,
-#> UHGG125567_01861, UHGG137907_01984, UHGG158704_01078,
-#> UHGG164130_01107 and 4 more;
-#>  21797 attributes confirmed unimportant:
+#>  7 attributes confirmed important: UHGG000008_01798,
+#> UHGG006336_00186, UHGG060667_01243, UHGG061776_01338,
+#> UHGG158704_01078 and 2 more;
+#>  21799 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21792 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21794 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.
@@ -404,6 +399,7 @@ plotGenes(stana, "100003", confirmed_genes)+
   ggplot2::facet_wrap(.~geneID,scales="free_y")+
   cowplot::theme_cowplot() +
   cowplot::panel_border()
+#> [1] "#F1A340" "#998EC3"
 ```
 
 <img src="02-statistcal_files/figure-html/vis-1.png" width="100%" style="display: block; margin: auto;" />

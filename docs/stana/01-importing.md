@@ -28,8 +28,8 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-f52bfcf2ad75eefaa2c3" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f52bfcf2ad75eefaa2c3">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-74d7a5126d7c2f8e03fd" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-74d7a5126d7c2f8e03fd">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
@@ -410,6 +410,16 @@ stana <- siteFilter(stana, getID(stana)[1], site_type=="4D")
 ## Downstream functions use the filtered site IDs
 ```
 
+### Manually set site IDs
+
+If you know the candidate SNV IDs beforehand (e.g. examining Prokka annotation), you can set site IDs manually by `setSNVID` function.
+
+
+```r
+stana <- setSNVID(stana, getID(stana)[1], getSNVID(stana, getID(stana)[1])[1:5])
+## Downstream functions use the site IDs
+```
+
 ## Printing the profile information
 
 By `show` or `print` method, the summary of stana object is outputted.
@@ -425,7 +435,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: 100002
 #> # Loaded gene table: 1 ID: 100002
-#> # Size: 4591640 B
+#> # Size: 4527176 B
 summary(stana)
 #> # 
 #> # SNV description

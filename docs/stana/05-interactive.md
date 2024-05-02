@@ -18,12 +18,9 @@ Specifying `notRun` to TRUE will not run the application.
 ```r
 ## Default to export to the current directory
 exportInteractive(stana, notRun=TRUE)
-#> Warning in dir.create(paste0(out, "/data")): '.\data'
-#> already exists
 #> # No tree for 100003
 #> # Tree number: 0 KO (or gene) number: 1
 #> # Exporting ...
-#> Loading required namespace: shiny
 #> # A stana: MIDAS2
 #> # Database: uhgg
 #> # Loaded directory: midas2_sample_merge_uhgg
