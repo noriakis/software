@@ -5,7 +5,7 @@
 Module information can be obtained and parsed. Parsing `DEFINITION` and `REACTION` is supported. For the definition, first the function breaks down the definition to blocks, and make graphical representation using `ggraph` and `tbl_graph` or text itself using `geom_text` and `geom_rect`. By calling `module` function, `kegg_module` class object is created.
 
 
-```r
+``` r
 library(ggkegg)
 library(tidygraph)
 library(dplyr)
@@ -20,7 +20,7 @@ The `module` function creates an object of the `kegg_module` class, which stores
 Visualizing the reactions in the module. Please report any reaction that cannot be properly parsed this way.
 
 
-```r
+``` r
 library(igraph)
 mod <- module("M00004")
 ## Obtain reaction graph
@@ -56,7 +56,7 @@ We can visualize the module definition in the graph. This will make grouping nod
 
 
 
-```r
+``` r
 module("M00009") |>
   obtain_sequential_module_definition() |> ## return tbl_graph
   plot_module_blocks() ## wrapper function
@@ -69,7 +69,7 @@ module("M00009") |>
 We can also visualize the module definition in text.
 
 
-```r
+``` r
 module("M00004") |>
   module_text() |> ## return data.frame
   plot_module_text() ## wrapper function
@@ -82,13 +82,16 @@ module("M00004") |>
 Given a vector of interesting KOs, module completeness can be calculated using boolean expression.
 
 
-```r
+``` r
 mod <- module("M00009")
 query <- sample(attr(mod, "definition_components"), 5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K01678" "K00164" "K00244" "K00240" "K00241"
+#> [1] "K00031" "K00241" "K01678" "K00236" "K00030"
+```
+
+``` r
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -96,16 +99,16 @@ mod |>
 
 
 
-|block                                                                                                          | all_num| present_num| ratio|complete |
-|:--------------------------------------------------------------------------------------------------------------|-------:|-----------:|-----:|:--------|
-|(K01647,K05942)                                                                                                |       2|           0| 0.000|FALSE    |
-|(K01681,K01682)                                                                                                |       2|           0| 0.000|FALSE    |
-|(K00031,K00030)                                                                                                |       2|           0| 0.000|FALSE    |
-|((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176)                                                    |       8|           1| 0.125|FALSE    |
-|(K01902+K01903,K01899+K01900,K18118)                                                                           |       5|           0| 0.000|FALSE    |
-|(K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) |      15|           3| 0.200|FALSE    |
-|(K01676,K01679,K01677+K01678)                                                                                  |       4|           1| 0.250|FALSE    |
-|(K00026,K00025,K00024,K00116)                                                                                  |       4|           0| 0.000|FALSE    |
+|block                                                                                                          | all_num| present_num|     ratio|complete |
+|:--------------------------------------------------------------------------------------------------------------|-------:|-----------:|---------:|:--------|
+|(K01647,K05942)                                                                                                |       2|           0| 0.0000000|FALSE    |
+|(K01681,K01682)                                                                                                |       2|           0| 0.0000000|FALSE    |
+|(K00031,K00030)                                                                                                |       2|           2| 1.0000000|TRUE     |
+|((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176)                                                    |       8|           0| 0.0000000|FALSE    |
+|(K01902+K01903,K01899+K01900,K18118)                                                                           |       5|           0| 0.0000000|FALSE    |
+|(K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) |      15|           2| 0.1333333|FALSE    |
+|(K01676,K01679,K01677+K01678)                                                                                  |       4|           1| 0.2500000|FALSE    |
+|(K00026,K00025,K00024,K00116)                                                                                  |       4|           0| 0.0000000|FALSE    |
 
 
 
@@ -145,7 +148,7 @@ suppressMessages(
 We will next visualize the results using `ComplexHeatmap` and `simplifyEnrichment`. We will plot the word cloud of module description alongside heatmap by `simplifyEnrichment`, for determined clusters.
 
 
-```r
+``` r
 library(ComplexHeatmap)
 
 ## Make data.frame
@@ -173,7 +176,7 @@ for (i in names(gene_list)) {
 ```
 
 
-```r
+``` r
 
 col_fun = circlize::colorRamp2(c(0, 0.5, 1),
                                c(scales::muted("blue"), "white", scales::muted("red")))
@@ -203,7 +206,7 @@ ht1
 ## Module abundance and pathway abundance calculation
 
 
-```r
+``` r
 vec <- c(0.1, 0.5)
 names(vec) <- c("K00234","K01676")
 module_abundance("M00009", vec)
@@ -215,7 +218,7 @@ module_abundance("M00009", vec)
 If you performed some experiments involving KEGG Orthology, and performed enrichment analysis on KO to module relationship, `ggkegg` function accepts the results and plot text-based or network-based graph where KOs are highlighted.
 
 
-```r
+``` r
 library(BiocFileCache)
 #> Loading required package: dbplyr
 #> 
@@ -223,11 +226,18 @@ library(BiocFileCache)
 #> The following objects are masked from 'package:dplyr':
 #> 
 #>     ident, sql
+```
+
+``` r
 library(clusterProfiler)
-#> clusterProfiler v4.10.0  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> clusterProfiler v4.12.2 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
 #> 
-#> If you use clusterProfiler in published research, please cite:
-#> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
+#> Please cite:
+#> 
+#> Guangchuang Yu, Li-Gen Wang, Yanyan Han and Qing-Yu
+#> He. clusterProfiler: an R package for comparing
+#> biological themes among gene clusters. OMICS: A
+#> Journal of Integrative Biology 2012, 16(5):284-287
 #> 
 #> Attaching package: 'clusterProfiler'
 #> The following object is masked from 'package:igraph':
@@ -236,6 +246,9 @@ library(clusterProfiler)
 #> The following object is masked from 'package:stats':
 #> 
 #>     filter
+```
+
+``` r
 
 ## Download and cache KO to module relationship
 url <- paste0("https://rest.kegg.jp/link/ko/module")

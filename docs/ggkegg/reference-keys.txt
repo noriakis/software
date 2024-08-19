@@ -4,6 +4,7 @@ pathway
 example-visualization
 geom_node_rect
 assigning-colors-to-nodes
+multi
 geom_node_shadowtext
 global-maps
 highlighting-set-of-nodes-and-edges
@@ -43,6 +44,7 @@ preprocessing
 plotting
 notes
 stamp-function
+parsing-of-the-module-definition
 parsing-of-reactions-in-the-pathway
 interpolation-in-the-raster-image
 saving-the-resulting-image

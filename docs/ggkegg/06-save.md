@@ -14,7 +14,7 @@ On `overlay_raw_map`, one can control whether the interpolation is performed by 
 In some instances, `interpolate=TRUE` makes blurry images, and please try to disable the interpolation in that case.
 
 
-```r
+``` r
 library(ggkegg)
 library(ggh4x)
 g <- pathway("hsa04130")
@@ -47,7 +47,7 @@ The legend insides the main panel.
 
 
 
-```r
+``` r
 g <- pathway("hsa04130")
 gg <- ggraph(g, layout="manual", x=x, y=y)+
     geom_node_rect(aes(fill=x, filter=type=="gene"))+
@@ -55,6 +55,9 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
     theme(legend.position=c(0.9, 0.2))
 output_overlay_image(gg, use_cache=TRUE, with_legend=TRUE,  out="test2.png")
 #> [1] "test2.png"
+```
+
+``` r
 knitr::include_graphics("test2.png")
 ```
 
@@ -64,7 +67,7 @@ The legend outside the main panel (`with_legend_image=TRUE`).
 
 
 
-```r
+``` r
 g <- pathway("hsa04130")
 gg <- ggraph(g, layout="manual", x=x, y=y)+
     geom_node_rect(aes(fill1=x, filter=type=="gene"))+
@@ -78,6 +81,9 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
     theme_void()
 output_overlay_image(gg, use_cache=TRUE, with_legend_image=TRUE, out="test3.png")
 #> [1] "test3.png"
+```
+
+``` r
 knitr::include_graphics("test3.png")
 ```
 
@@ -87,7 +93,7 @@ Using high resolution (2x) images (should multiply the x* and y* positions, and 
 
 
 
-```r
+``` r
 g <- pathway("hsa04130")
 gg <- ggraph(g, layout="manual", x=x, y=y)+
     geom_node_rect(aes(fill1=x, xmin=xmin*2, xmax=xmax*2, ymin=ymin*2, ymax=ymax*2, filter=type=="gene"))+
@@ -103,6 +109,9 @@ output_overlay_image(gg, high_res=TRUE, use_cache=TRUE, with_legend_image=TRUE,
 	res=100, legend_space=100,
 	out="test4.png")
 #> [1] "test4.png"
+```
+
+``` r
 knitr::include_graphics("test4.png")
 ```
 

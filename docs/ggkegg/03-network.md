@@ -6,7 +6,7 @@ It is also possible to parse the KEGG NETWORK and plot it as a network in the sa
 
 
 
-```r
+``` r
 library(ggkegg)
 library(tidygraph)
 library(dplyr)
@@ -21,7 +21,7 @@ kne
 Here is an example of obtaining multiple networks, merging them with graph_join, and plotting them using the `plot_kegg_network` wrapper function. The `network_graph` function is a function that generates a graph from a string. It is possible to specify `definition` or `expanded` as the `type` to generate the graph.
 
 
-```r
+``` r
 kne <- network("N00385")  ## HCMV
 kne2 <- network("N00366") ## HPV
 one <- kne |> network_graph()
@@ -48,6 +48,9 @@ two
 #> 2     2     3 -|    reference
 #> 3     3     4 ->    reference
 #> # ℹ 2 more rows
+```
+
+``` r
 graph_join(one, two, by="name") |> plot_kegg_network()
 ```
 
@@ -56,7 +59,7 @@ graph_join(one, two, by="name") |> plot_kegg_network()
 By using `ggforce`, it is possible to draw multiple graphs showing which genes belong to which network.
 
 
-```r
+``` r
 kne3 <- network("N00485") ## EBV
 kne4 <- network("N00030") ## EGF-EGFR-RAS-PI3K
 three <- kne3 |> network_graph()
@@ -76,6 +79,6 @@ net + scale_fill_manual(values=viridis::plasma(4), name="ID")
 
 <img src="03-network_files/figure-html/network_mult_combine-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 ## Better to plot points and edges after the hull
 ```

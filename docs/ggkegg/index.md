@@ -1,7 +1,7 @@
 ---
 title: "ggkegg"
 author: "Noriaki Sato"
-date: "2024-04-06"
+date: "2024-08-19"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]
@@ -22,7 +22,7 @@ csl: chicago-fullnote-bibliography.csl
 :::
 
 
-```r
+``` r
 # devtools::install_github("noriakis/ggkegg")
 library(ggkegg)
 ```
@@ -30,7 +30,7 @@ library(ggkegg)
 One of the main aims of `ggkegg` is manupilating KEGG information in tidy ways using `tidygraph`, and offers the customized visualization of KEGG information including KEGG PATHWAY, MODULE, and NETWORK.
 
 
-```r
+``` r
 library(dplyr)
 library(tidygraph)
 pathway("hsa04110") |> ## Obtain and parse the KEGG pathway
@@ -57,7 +57,7 @@ pathway("hsa04110") |> ## Obtain and parse the KEGG pathway
 Some convenient functions are prepared, like highlighting genes in the pathway.
 
 
-```r
+``` r
 ## Highlight genes in the pathway, and overlay raw map.
 highlight_entities("hsa04110", "CDKN2A")
 ```
@@ -67,7 +67,7 @@ highlight_entities("hsa04110", "CDKN2A")
 If named numeric vector is provided, continuous scale will be used.
 
 
-```r
+``` r
 ## Highlight genes in the pathway, and overlay raw map.
 vecs <- c(-2,2) |> setNames(c("CDKN2A", "CDC45"))
 cs <- highlight_entities("hsa04110", vecs) + 
@@ -80,7 +80,7 @@ cs
 The plot using the original KEGG image can be saved via the `ggkeggsave` using the original dimension. The function is the wrapper of `ggsave`.
 
 
-```r
+``` r
 ggkeggsave(filename="test.png", cs, dpi=300)
 knitr::include_graphics("test.png")
 ```

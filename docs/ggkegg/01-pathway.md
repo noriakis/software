@@ -6,7 +6,7 @@ Providing `ggkegg` a pathway ID, it fetches information, parse them and make `gg
 The `pathway` function is a core function that downloads and parses KGML files. If the file already exists in the current working directory, it will not be downloaded again. The function also extracts reactions that are included in the pathway as edges. If there are nodes represented by `type=line`, the function converts these nodes to edges based on their `coords`. This conversion is carried out by the `process_line` function.
 
 
-```r
+``` r
 library(ggkegg)
 library(ggfx)
 library(ggraph)
@@ -21,7 +21,7 @@ library(tidygraph)
 This example first fetches `eco00270` and parse the information, convert the pathway and eco identifiers, delete zero degree nodes and returns the `igraph` object. The resulting graph can be plotted by `ggraph`, with specifying visualization of various types of information in KEGG PATHWAY in each layer.
 
 
-```r
+``` r
 g <- ggkegg(pid="eco00270",
             convert_org = c("pathway","eco"),
             delete_zero_degree = TRUE,
@@ -29,6 +29,9 @@ g <- ggkegg(pid="eco00270",
 gg <- ggraph(g, layout="fr") 
 gg$data$type |> unique()
 #> [1] "map"      "compound" "gene"
+```
+
+``` r
 gg + geom_edge_diagonal(
   aes(color=subtype_name,
       filter=type!="maplink"))+
@@ -65,7 +68,7 @@ This package also provides the `geom_node_rect` function, which allows drawing r
 You can set diffent and multiple colors on nodes using `geom_node_rect`. This application is useful when visualizing factors such as log2 fold change among multiple conditions.
 
 
-```r
+``` r
 g <- pathway("ko00520")
 V(g)$color_one <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set1"))(length(V(g)))
 V(g)$color_two <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set2"))(length(V(g)))
@@ -87,7 +90,7 @@ ggraph(g, x=x, y=y) +
 It is possible to specify any number of groups.
 
 
-```r
+``` r
 V(g)$color_one <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set1"))(length(V(g)))
 V(g)$color_two <- colorRampPalette(RColorBrewer::brewer.pal(5,"Set2"))(length(V(g)))
 V(g)$color_three <- colorRampPalette(RColorBrewer::brewer.pal(5,"PuOr"))(length(V(g)))
@@ -112,6 +115,21 @@ ggraph(g, x=x, y=y) +
 
 <img src="01-pathway_files/figure-html/assign_color2-1.png" width="100%" style="display: block; margin: auto;" />
 
+### Multiple colors in the node data {#multi}
+
+The above visualization can be made by a function `geom_node_rect_multi`. This accepts the node column name specifying the color.
+
+
+``` r
+g %N>% filter(type=="ortholog") %>%
+    ggraph(x=x, y=y) +
+        geom_node_rect_multi(color_one, color_two, color_three) +
+        theme_void()
+```
+
+<img src="01-pathway_files/figure-html/assign_color3-1.png" width="100%" style="display: block; margin: auto;" />
+
+
 ## `geom_node_shadowtext`
 
 Plot the shadowtext at the `x` and `y` position without enabling `repel=TRUE` in `geom_node_text`.
@@ -122,7 +140,7 @@ Plot the shadowtext at the `x` and `y` position without enabling `repel=TRUE` in
 For global maps, `process_line` function, which makes nodes and edges based on `coords` attributes in KGML, is prepared. However, we cannot obtain and parse directed relationship (`substrate` to `product`, `reversible` or `irreversible`) based on `coords`. If you would like to retain these relationships, `process_reaction` function is prepared.
 
 
-```r
+``` r
 
 pathway("ko01200") |> 
     process_reaction() |>
@@ -153,7 +171,7 @@ involved in `M00002`, and show the corresponding compound names in the map,
 we can write as follows using `highligh_set_edges` and `highlight_set_nodes`.
 
 
-```r
+``` r
 pathway("ko01230") |> 
     process_line() |>
     activate(nodes) |>
@@ -381,7 +399,7 @@ ed-st
 Using `magick`, you can overlay the original KEGG pathway image on the graph you made (or add components on the original image). The package provides overlay_raw_map function, which allows mapping a raster image onto the graph by specifying the pathway ID and the color to be made transparent.
 
 
-```r
+``` r
 g <- pathway("ko00640",group_rect_nudge=0) ## Obtain pathway graph (don't show grouping rect)
 gg <- ggraph(g, layout="manual", x=x, y=y)+
   geom_node_point(aes(filter=type=="compound"), color="blue", size=2)+
@@ -397,7 +415,7 @@ gg
 You can use your favorite geoms to annotate KEGG map combining the functions.
 
 
-```r
+``` r
 m <- module("M00013")
 reactions_in_module <- attr(m, "reaction_components")
 g <- g |> mutate(mod=highlight_set_nodes(reactions_in_module, how="all"))
@@ -417,7 +435,7 @@ gg
 Text can be overridden by specifying rectangular geom after the raw map.
 
 
-```r
+``` r
 ## Use graphics_name but show only the first ID
 g <- pathway("ko00640",group_rect_nudge=0)
 gg <- ggraph(g, layout="manual", x=x, y=y)+
@@ -435,7 +453,7 @@ gg
 The reference pathway image have a version with higher resolution provided by KEGG REST API. The image can be used by enabling the `high_res` option in `overlay_raw_map` which is disabled by default. In this case, you must adjust the position of xmin, ymin, xmax and ymax by the multiplication by 2 for `geom_node_rect` and x and y for `geom_node_text`.
 
 
-```r
+``` r
 g <- pathway("ko00640")
 gg <- ggraph(g, layout="manual", x=x*2, y=y*2)+
   overlay_raw_map(high_res=TRUE)+
@@ -503,7 +521,7 @@ newg <- joined_raw |>
 ```
 
 
-```r
+``` r
 ## Highlight the cpd:C00024 node for normal-joined, and contracted graph by name
 ## Blue color indicates occurrence in both pathway
 
@@ -524,7 +542,7 @@ joined_name |> morph(to_contracted, name) |>
 
 <img src="01-pathway_files/figure-html/combine_plot-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 
 ## Contracted
 newg |> 
@@ -551,7 +569,7 @@ ggraph(layout="manual", x=x, y=y) +
 By employing the `multi_pathway_native` function, one can array multiple native KGML layouts on a panel. In conjunction with `to_contracted`, it becomes feasible to examine the relationships of genes across various pathways.
 
 
-```r
+``` r
 pathways <- c("hsa04110","hsa03460")
 multig <- multi_pathway_native(pathways, row_num=2)
 
@@ -573,7 +591,7 @@ multig |>
 The library can directly visualize the functional enrichment analysis result using `enrichKEGG` from `clusterProfiler`. The `enrich_attribute` will have boolean value whether the investigated gene is in pathway or not. By piping a `enrichResult` class object and `pathway_number` to `ggkegg`, `enrich_attribute` will be included in the resulting graph. Highlight `enrich_attribute` in the resulting graph. For a quick inspection, `rawMap` function can be used for simply producing highlighted graph with overlaid KEGG raw map.
 
 
-```r
+``` r
 data(geneList, package='DOSE')
 de <- names(geneList)[1:100]
 enrichKEGG(de, pvalueCutoff=0.01) |>
@@ -602,7 +620,7 @@ enrichKEGG(de, pvalueCutoff=0.01) |>
 
 <img src="01-pathway_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 
 
 ## Quick inspection
@@ -615,7 +633,7 @@ res
 `rawMap` can accept multiple `enrichResult` class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in `fill_color`. Also, you should specify pathway ID for multiple enrichment results.
 
 
-```r
+``` r
 deres <- enrichKEGG(de, pvalueCutoff=0.01) 
 res <- rawMap(list(deres, deres, deres), fill_color=c("red","green","blue"), pid="hsa04110")
 res
@@ -626,7 +644,7 @@ res
 `rawMap` also accepts `gseaResult` class, although it may be useful for assigning numeric values such as log2 fold changes directly.
 
 
-```r
+``` r
 data(geneList, package="DOSE")
 kk <- gseKEGG(geneList)
 res <- rawMap(kk)
@@ -638,7 +656,7 @@ res
 The same can be done for the numeric values using `rawValue`. You can control your favorite color gradient using `scale_fill_gradient2`. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as [`ggh4x`](https://github.com/teunbrand/ggh4x).
 
 
-```r
+``` r
 res <- rawValue(geneList[1:100], "hsa04110", auto_add=TRUE)
 res
 ```
@@ -651,7 +669,7 @@ res
 Using `ggh4x`, you can plot the multiple values in its own scale using `scale_fill_multi()`. It is used in the package `plotKEGGPathway` in `stana` package for intra-species diversity analysis. For usage in the function, please refer to [`ggh4x`](https://github.com/teunbrand/ggh4x) site and [the code](https://github.com/noriakis/stana/blob/main/R/plotKEGGPathway.R).
 
 
-```r
+``` r
 library(ggh4x)
 test <- geneList[1:100]
 names(test) <- paste0("hsa:",names(test))

@@ -12,7 +12,7 @@ By providing the results of the DESeq2 package, which is often used for transcri
 Here, we use a RNA-Seq dataset that analyzed the transcriptome changes in human urothelial cells infected with BK polyomavirus ([Baker et al. 2022](https://doi.org/10.1038/s41388-022-02235-8)). The raw sequences obtained from Sequence Read Archive were processed by [nf-core](https://nf-co.re/rnaseq), and subsequently analyzed using `tximport`, `salmon` and `DESeq2`.
 
 
-```r
+``` r
 library(ggkegg)
 library(DESeq2)
 library(org.Hs.eg.db)
@@ -21,7 +21,7 @@ library(dplyr)
 
 
 
-```r
+``` r
 ## The file stores DESeq() result on transcriptomic dataset deposited by Baker et al. 2022.
 load("uro.deseq.res.rda") 
 res
@@ -37,6 +37,9 @@ res
 #>   SRR14509907
 #> colData names(27): Assay.Type AvgSpotLen ...
 #>   viral_infection replaceable
+```
+
+``` r
 vinf <- results(res, contrast=c("viral_infection","BKPyV (Dunlop) MOI=1","No infection"))
 
 ## LFC
@@ -56,7 +59,7 @@ ggraph(g, layout="manual", x=x, y=y) +
 
 <img src="04-usecases_files/figure-html/deseq2-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 
 ## Adjusted p-values
 ggraph(g, layout="manual", x=x, y=y) + 
@@ -74,7 +77,7 @@ ggraph(g, layout="manual", x=x, y=y) +
 ### using `ggfx` to further customize the visualization
 
 
-```r
+``` r
 ## Highlighting differentially expressed genes at adjusted p-values < 0.05 with coloring of adjusted p-values on raw KEGG map
 gg <- ggraph(g, layout="manual", x=x, y=y)+
   geom_node_rect(aes(fill=padj, filter=type=="gene"))+
@@ -92,7 +95,7 @@ gg
 You can use your favorite geoms in `ggplot2` and their extensions to add information. In this example, We add log2 fold changes as contour using [`geomtextpath`](https://github.com/AllanCameron/geomtextpath), and customized the font using [`Monocraft`](https://github.com/IdreesInc/Monocraft/).
 
 
-```r
+``` r
 g <- g |> mutate(lfc=assign_deseq2(vinf, column="log2FoldChange"))
 
 ## Make contour data
@@ -133,7 +136,7 @@ gg
 Numerical values can be reflected in node or edge tables, utilizing either the `node_numeric` or `edge_numeric` functions. The input can be a named vector or a tibble containing id and value columns.
 
 
-```r
+``` r
 vec <- 1
 names(vec) <- c("hsa:51343")
 new_g <- g |> mutate(num=node_numeric(vec))
@@ -177,7 +180,7 @@ If you want to reflect an expression matrix in a graph, the `edge_matrix` and `n
 https://doi.org/10.1186/s12859-020-03692-2)).
 
 
-```r
+``` r
 mat <- assay(vst(res))
 new_g <- g |> edge_matrix(mat) |> node_matrix(mat)
 new_g
@@ -226,7 +229,7 @@ new_g
 The same effect of `edge_matrix` can be obtained by `edge_numeric_sum`, using named numeric vector as input. This function adds edge values based on node values. The below example shows combining LFCs to edges. This is different behaviour from `edge_numeric`.
 
 
-```r
+``` r
 
 ## Numeric vector (name is SYMBOL)
 vinflfc <- vinf$log2FoldChange |> setNames(row.names(vinf))
@@ -263,7 +266,7 @@ g |>
 You can visualize the results of multiple enrichment analyses. Similar to using the `ggkegg` function with the `enrichResult` class, there is an `append_cp` function that can be used within the `mutate` function. By providing an `enrichResult` object to this function, if the pathway being visualized is present in the result, the gene information within the pathway can be reflected in the graph. In this example, in addition to the changes in urothelial cells mentioned above, changes in renal proximal tubular epithelial cells are being compared ([Assetta et al. 2016](https://doi.org/10.1128/mbio.00903-16)).
 
 
-```r
+``` r
 
 ## These are RDAs storing DEGs
 load("degListRPTEC.rda")
@@ -302,7 +305,7 @@ ggraph(g1, layout="manual", x=x, y=y) +
 We can combine multiple plots combining `rawMap` by `patchwork`.
 
 
-```r
+``` r
 library(patchwork)
 comb <- rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"), pid="hsa04110") + 
 rawMap(list(ekuro, ekrptec), fill_color=c("tomato","tomato"),
@@ -315,7 +318,7 @@ comb
 The example below applies a similar reflection to the Raw KEGG map and highlights genes that show statistically significant changes under both conditions using `ggfx` in yellow outer glow, with composing `dotplot` produced by clusterProfiler for the enrichment results by `patchwork`.
 
 
-```r
+``` r
 right <- (dotplot(ekuro) + ggtitle("Urothelial")) /
 (dotplot(ekrptec) + ggtitle("RPTECs"))
 
@@ -351,7 +354,7 @@ gg2
 In addition to native layouts, it is sometimes useful to show the interesting genes e.g. DEGs across multiple pathways. Here, we use [`scatterpie`](https://github.com/GuangchuangYu/scatterpie) library for visualization of multiple enrichment analysis results across multiple pathways.
 
 
-```r
+``` r
 library(scatterpie)
 ## Obtain enrichment analysis results
 entrezid <- uroUp |>
@@ -373,7 +376,7 @@ pathways
 We obtain multiple pathway data (the function returns the native coordinates but we ignore them).
 
 
-```r
+``` r
 
 g1 <- multi_pathway_native(pathways, row_num=1)
 g2 <- g1 |> mutate(new_name=
@@ -408,7 +411,7 @@ g2_2 <- g2_2 |>  activate(nodes) |>
 Here, we additionally assign graph-based clustering results to the graph, and we scale the size of the nodes so that the nodes can be visualized by scatterpie.
 
 
-```r
+``` r
 V(g2_2)$walktrap <- igraph::walktrap.community(g2_2)$membership
 
 ## Scale the node size
@@ -434,7 +437,7 @@ graphdata <- g3$data
 Finally, we use `geom_scatterpie` for the visualization. The background scatterpie indicates whether the genes are in the pathways, and the foreground indicates whether the gene is differentially expressed in multiple datasets. We highlight the genes which were differentially expressed in both datasets by gold colour.
 
 
-```r
+``` r
 g4 <- g3+
   ggforce::geom_mark_rect(aes(x=x, y=y, group=walktrap),color="grey")+
   geom_scatterpie(aes(x=x, y=y, r=size+0.1),
@@ -520,7 +523,7 @@ joined |>
 You can directly project the inferred network onto the raw PATHWAY map, which enables direct comparison of the knowledge of curated database and inferred network from your own dataset.
 
 
-```r
+``` r
 raws <- joined |> 
   ggraph(x=x, y=y) +
   geom_edge_link(width=0.5,aes(filter=!is.na(strength),
@@ -541,7 +544,7 @@ raws
 This package can also be applied to single-cell analysis. As an example, consider mapping marker genes between clusters onto KEGG pathways and plotting them together with reduced dimension plots. Here, we use the `Seurat` package. We conduct a fundamental analysis.
 
 
-```r
+``` r
 library(Seurat)
 library(dplyr)
 # dir = "../filtered_gene_bc_matrices/hg19"
@@ -565,7 +568,7 @@ Subsequently, we plot the results of dimensionality reduction by PCA.
 Among these, for the present study, we perform enrichment analysis on the marker genes of clusters 1 and 5.
 
 
-```r
+``` r
 library(clusterProfiler)
 
 ## Directly access slots in Seurat
@@ -599,7 +602,7 @@ mk5_enrich <- enrichKEGG(marker_5)
 Obtain the color information from `ggplot2` and obtain pathway using `ggkegg`. Here, we selected `Osteoclast differentiation (hsa04380)`, nodes are colored by `ggfx` according to the colors in the reduced dimension plot, and markers in both cluster are colored by the specified color (`tomato`). This facilitates the linkage between pathway information, such as KEGG, and single-cell analysis data, enabling the creation of intuitive and comprehensible visual representations.
 
 
-```r
+``` r
 ## Make color map
 built <- ggplot_build(dd)$data[[1]]
 cols <- built$colour
@@ -624,7 +627,7 @@ gg+dd+plot_layout(widths=c(0.6,0.4))
 We can inspect marker genes in multiple pathways to better understand the role of marker genes.
 
 
-```r
+``` r
 library(clusterProfiler)
 library(org.Hs.eg.db)
 
@@ -716,7 +719,7 @@ final
 For nodes in which they are enriched in multiple clusters, we can plot barplot for numeric values. The referenced codes are [here](https://stackoverflow.com/questions/36063043/how-to-plot-barchart-onto-ggplot2-map) by inscaven.
 
 
-```r
+``` r
 
 ## Assign lfc to graph
 mark_4 <- clusterProfiler::bitr((markers |> filter(cluster=="4" & p_val_adj < 1e-50) |>
@@ -798,7 +801,7 @@ final_bar
 By iterating the above codes, we can plot all the clusters' quantitative data on plot. Although it is preferred to use ggplot2 mapping to produce the legend, here we obtain the legend from reduced dimension plot.
 
 
-```r
+``` r
 g1 <- pathway("hsa04612") 
 for (cluster_num in seq_len(9)) {
     cluster_num <- as.character(cluster_num - 1)
@@ -814,7 +817,7 @@ for (cluster_num in seq_len(9)) {
 Make `ggplotGrob()`.
 
 
-```r
+``` r
 
 subset_df <- g1 |> activate(nodes) |> data.frame() |>
     dplyr::select(orig.id, paste0("marker",seq_len(9)-1,"lfc"), x, y, xmin, xmax, ymin, ymax) |>
@@ -858,7 +861,7 @@ for (i in subset_df$orig.id |> unique()) {
 Obtain legend and modify.
 
 
-```r
+``` r
 ## Take scplot legend, make it rectangle
 ## Make pseudo plot
 dd2 <- ggplot(pcas) +
@@ -878,7 +881,7 @@ ggplotify::as.ggplot(legendGrob)
 
 
 
-```r
+``` r
 
 ## Make dummy legend by `fill`
 graph_tmp <- ggraph(g1, layout="manual", x=x, y=y)+
@@ -908,7 +911,7 @@ ggplotify::as.ggplot(overlaidGtable)
 One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`.
 
 
-```r
+``` r
 load("../lfcs.rda") ## Storing named vector of KOs storing LFCs and significant KOs
 load("../func_cat.rda") ## Functional categories for hex values in ko01100
 
@@ -917,9 +920,15 @@ lfcs |> head()
 #> -0.2955686 -0.4803597 -0.3052872  0.9327130  1.0954976 
 #>  ko:K00087 
 #>  0.8713860
+```
+
+``` r
 signame |> head()
 #> [1] "ko:K00013" "ko:K00018" "ko:K00031" "ko:K00042"
 #> [5] "ko:K00065" "ko:K00087"
+```
+
+``` r
 func_cat |> head()
 #> # A tibble: 6 × 3
 #>   hex     class                                        top  
@@ -930,6 +939,9 @@ func_cat |> head()
 #> 4 #FF8080 Metabolism; Nucleotide metabolism            Puri…
 #> 5 #6C63F6 Metabolism; Carbohydrate metabolism          Glyc…
 #> 6 #FFCC66 Metabolism; Amino acid metabolism            Bios…
+```
+
+``` r
 
 ## Named vector for Assigning functional category 
 hex <- func_cat$hex |> setNames(func_cat$hex)
@@ -937,6 +949,9 @@ class <- func_cat$class |> setNames(func_cat$hex)
 hex |> head()
 #>   #B3B3E6   #F06292   #FFB3CC   #FF8080   #6C63F6   #FFCC66 
 #> "#B3B3E6" "#F06292" "#FFB3CC" "#FF8080" "#6C63F6" "#FFCC66"
+```
+
+``` r
 class |> head()
 #>                                                   #B3B3E6 
 #>                     "Metabolism; Carbohydrate metabolism" 
@@ -957,7 +972,7 @@ class |> head()
 We obtained `tbl_graph` of ko01100, and process the graph. First, we append edges corresponding to inter-compound relationships. Although most of the reactions are reversible and by default adds two edges in `process_reaction`, we specify `single_edge=TRUE` here for visualization. Also, converting compound ID and KO ID and append attributes to graph. 
 
 
-```r
+``` r
 g <- ggkegg::pathway("ko01100")
 g <- g |> process_reaction(single_edge=TRUE)
 g <- g |> mutate(x=NULL, y=NULL)
@@ -969,7 +984,7 @@ g <- g |> activate(edges) |> mutate(kon=convert_id("ko",edge=TRUE))
 Next we append values such as KOs and degrees to graph. In addition, here we append additional attribute, like which species have the enzymes, to the graph. This type of information can be obtained from stratified output of `HUMAnN3`.
 
 
-```r
+``` r
 g2 <- g |> activate(edges) |> 
   mutate(kolfc=edge_numeric(lfcs), ## Pre-computed LFCs
          siglgl=.data$name %in% signame) |> ## Whether the KO is significant
@@ -985,7 +1000,7 @@ g2 <- g |> activate(edges) |>
 We next check overall classes of these KOs based on ko01100, and the class with the highest number of KOs was Carbohydrate metabolism.
 
 
-```r
+``` r
 class_table <- (g |> activate(edges) |>
   mutate(siglgl=name %in% signame) |>
   filter(siglgl) |>
@@ -1024,7 +1039,7 @@ class_table
 We first visualize overall global map using the default values in `ko01100` and calculated degree.
 
 
-```r
+``` r
 ggraph(g2, layout="fr")+
   geom_edge_link0(aes(color=I(fgcolor)), width=0.1)+
   geom_node_point(aes(fill=I(fgcolor), size=Degree), color="black", shape=21)+
@@ -1036,7 +1051,7 @@ ggraph(g2, layout="fr")+
 We can apply various geoms to components in KEGG PATHWAY for the effective visualization. In this example, we highlighted significant edges (KOs) colored by their LFCs by `ggfx`, point size corresponding to degree in the network, and we showed edge label of significant KO names. KO names were colored by `Species` attributes. This time we set this to `Escherichia coli` and `Others`.
 
 
-```r
+``` r
 ggraph(g2, layout="fr") +
   geom_edge_diagonal(color="grey50", width=0.1)+ ## Base edge
   ggfx::with_outer_glow(
@@ -1072,7 +1087,7 @@ ggraph(g2, layout="fr") +
 If we want to investigate the specific class, subset by HEX value in graph.
 
 
-```r
+``` r
 
 ## Subset and do the same thing
 g2 |>
