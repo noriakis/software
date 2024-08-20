@@ -174,6 +174,48 @@ new_g
 #> # ℹ 154 more rows
 ```
 
+If you have the named vector of symbol, it might be preferred that you use `graphics_name` column of the parsed pathway.
+In this case, specify name and separator.
+
+
+``` r
+vec <- 1.5
+names(vec) <- c("CDKN2A")
+new_g <- g |> mutate(num=node_numeric(vec, name="graphics_name", sep=", "))
+new_g
+#> # A tbl_graph: 134 nodes and 157 edges
+#> #
+#> # A directed acyclic multigraph with 40 components
+#> #
+#> # Node Data: 134 × 23 (active)
+#>    name       type  reaction graphics_name     x     y width
+#>    <chr>      <chr> <chr>    <chr>         <dbl> <dbl> <dbl>
+#>  1 hsa:1029   gene  <NA>     CDKN2A, ARF,…   532  -218    46
+#>  2 hsa:51343  gene  <NA>     FZR1, CDC20C…   981  -630    46
+#>  3 hsa:4171 … gene  <NA>     MCM2, BM28, …   553  -681    46
+#>  4 hsa:23594… gene  <NA>     ORC6, ORC6L.…   494  -681    46
+#>  5 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -392    46
+#>  6 hsa:10393… gene  <NA>     ANAPC10, APC…   981  -613    46
+#>  7 hsa:6500 … gene  <NA>     SKP1, EMC19,…   188  -613    46
+#>  8 hsa:6500 … gene  <NA>     SKP1, EMC19,…   432  -285    46
+#>  9 hsa:983    gene  <NA>     CDK1, CDC2, …   780  -562    46
+#> 10 hsa:701    gene  <NA>     BUB1B, BUB1b…   873  -392    46
+#> # ℹ 124 more rows
+#> # ℹ 16 more variables: height <dbl>, fgcolor <chr>,
+#> #   bgcolor <chr>, graphics_type <chr>, coords <chr>,
+#> #   xmin <dbl>, xmax <dbl>, ymin <dbl>, ymax <dbl>,
+#> #   orig.id <chr>, pathway_id <chr>, deseq2 <dbl>,
+#> #   padj <dbl>, converted_name <chr>, lfc <dbl>, num <dbl>
+#> #
+#> # Edge Data: 157 × 6
+#>    from    to type  subtype_name    subtype_value pathway_id
+#>   <int> <int> <chr> <chr>           <chr>         <chr>     
+#> 1   118    39 GErel expression      -->           hsa04110  
+#> 2    50    61 PPrel inhibition      --|           hsa04110  
+#> 3    50    61 PPrel phosphorylation +p            hsa04110  
+#> # ℹ 154 more rows
+```
+
 ### Integrating matrix to `tbl_graph`
 
 If you want to reflect an expression matrix in a graph, the `edge_matrix` and `node_matrix` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `edge_matrix` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
