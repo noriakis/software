@@ -7,7 +7,7 @@
 <title>Chapter 7 Analysis example of gut microbiome of ESRD patients | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Analysis example of gut microbiome of ESRD patients | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
@@ -16,12 +16,13 @@
 <meta name="twitter:description" content="We examine the dataset investigating the gut microbiome of ESRD patients (Zhang et al. 2023) using stana. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.33/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -66,7 +67,7 @@
 <span class="header-section-number">7</span> Analysis example of gut microbiome of ESRD patients<a class="anchor" aria-label="anchor" href="#analysis-example-of-gut-microbiome-of-esrd-patients"><i class="fas fa-link"></i></a>
 </h1>
 <p>We examine the dataset investigating the gut microbiome of ESRD patients (<a href="https://doi.org/10.1186/s13059-023-03056-y">Zhang et al. 2023</a>) using <code>stana</code>. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we investigate one of the profiled species, <code>Faecalicatena gnavus</code> genotyping results.</p>
-<p>Load the MIDAS2 merge results to stana object with setting the clinical grouping.</p>
+<p>Load the MIDAS2 merge results to stana object with setting the clinical grouping. The used metagenotyping data and metadata is found at <a href="https://w5po.myqnapcloud.com/share.cgi?ssid=9346fc2fc21e4534a9e5181527108cfa#9346fc2fc21e4534a9e5181527108cfa">this link</a>. Also, the Rprof results describing the memory and time usage is available at the same link.</p>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
@@ -94,7 +95,7 @@
 <span><span class="co">#&gt; # Group info (list): CKD/HC/HD</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: 101380</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 101380</span></span>
-<span><span class="co">#&gt; # Size: 108702024 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 108.702024 MB</span></span></code></pre></div>
 <p>Get a brief overview of SNVs.</p>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotSNVInfo.html">plotSNVInfo</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
@@ -132,12 +133,10 @@
 <div class="inline-figure"><img src="06-analysis_files/figure-html/app4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"tree"</span>, pcoa<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Performing adonis in 101380 target is tree</span></span>
-<span><span class="co">#&gt; #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.002</span></span></code></pre></div>
-<div class="inline-figure"><img src="06-analysis_files/figure-html/app5-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getAdonis.html">getAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.006</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getAdonis.html">getAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Terms added sequentially (first to last)</span></span>
 <span><span class="co">#&gt; Permutation: free</span></span>
@@ -145,19 +144,19 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "HC", "CKD", "HC", "HD", "HC", "HD", "HD", "CKD", "CKD", "HC", "CKD", "CKD", "HD", "HD", "HC", "HD", "CKD", "CKD", "CKD", "CKD", "HD", "HC", "HD", "HD", "HC", "CKD", "HD", "HD", "CKD", "HD", "HD", "HD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "CKD", "CKD", "CKD", "HD", "HC", "HC", "HC", "HD", "CKD", "HD", "HD", "HC", "CKD", "CKD", "HD", "CKD", "CKD", "CKD", "CKD", "HC", "HC", "CKD", "HC", "CKD", "CKD", "CKD", "HC", "HC", </span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2     F Pr(&gt;F)   </span></span>
-<span><span class="co">#&gt; group     2   0.5698 0.09811 3.916  0.002 **</span></span>
+<span><span class="co">#&gt; group     2   0.5698 0.09811 3.916  0.006 **</span></span>
 <span><span class="co">#&gt; Residual 72   5.2383 0.90189                </span></span>
 <span><span class="co">#&gt; Total    74   5.8081 1.00000                </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  </span></span>
 <span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>Based on the results, assuming there are multiple factors within the species, we can directly examine their estimated abundances and the functional implications by using the NMF approach in KO table. First we calculate KO abundances based on eggNOG-mapper annotation.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>,</span>
 <span>                       annotList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"101380"</span><span class="op">=</span><span class="st">"../annotations_uhgg/101380_eggnog_out.emapper.annotations"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/calcGF.html">calcGF</a></span><span class="op">(</span><span class="va">stana</span>, candSp<span class="op">=</span><span class="va">cand_species</span><span class="op">)</span></span></code></pre></div>
 <p>Subsequently, using the cross-validation approach replacing random variables to <code>NA</code>, we estimate the rank based on the KO tables. The function in <code>NNLM</code> is used to compute the loss (<code>mse</code>) with replacing 30% of the data to <code>NA</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/linxihui/NNLM">NNLM</a></span><span class="op">)</span></span>
 <span><span class="va">cvl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -216,7 +215,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"rank"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/hd7-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Based on the information, the factor number of two is selected.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/NMF.html">NMF</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, rank<span class="op">=</span><span class="fl">2</span>,</span>
 <span>    nnlm_flag<span class="op">=</span><span class="cn">TRUE</span>, nnlm_args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"loss"</span><span class="op">=</span><span class="st">"mse"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # NMF started 101380, target: kos, method: NNLM::nnmf</span></span>
@@ -227,17 +226,17 @@
 <span><span class="co">#&gt; # Filtered features: 2568</span></span>
 <span><span class="co">#&gt; # Filtered samples: 124</span></span>
 <span><span class="co">#&gt; # Rank 2</span></span>
-<span><span class="co">#&gt; Mean relative abundances: 0.6192738 0.3807262 </span></span>
-<span><span class="co">#&gt; Present feature per factor: 2240 2382</span></span>
+<span><span class="co">#&gt; Mean relative abundances: 0.9151446 0.08485539 </span></span>
+<span><span class="co">#&gt; Present feature per factor: 2561 1458</span></span>
 <span></span>
 <span><span class="co">## Plot the results</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, by<span class="op">=</span><span class="st">"coef"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/hd9-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotStackedBarPlot.html">plotStackedBarPlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, by<span class="op">=</span><span class="st">"coef"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tomato"</span>,<span class="st">"gold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/hd9-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/">ggrepel</a></span><span class="op">)</span></span>
 <span><span class="va">pw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/pathwayWithFactor.html">pathwayWithFactor</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, change_name<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>    mat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"NMF"</span><span class="op">)</span><span class="op">[[</span><span class="va">cand_species</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">W</span><span class="op">)</span><span class="op">)</span></span>
@@ -250,7 +249,7 @@
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method<span class="op">=</span><span class="va">lm</span>, se<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"1"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/app9-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co">## Sort by absolute difference</span></span>
 <span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="va">pw</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">pw</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span></span>
@@ -262,7 +261,7 @@
 <p><img src="06-analysis_files/figure-html/app9-2.png" width="100%" style="display: block; margin: auto;">
 Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use <code>plotKEGGPathway</code>. The returned object is ggplot object and the users can modify the visualization by stacking the layers).</p>
 <p>The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value</span></span>
 <span><span class="co"># kegg &lt;- plotKEGGPathway(stana, cand_species,</span></span>
 <span><span class="co">#                         pathway_id="ko00270",</span></span>
@@ -288,19 +287,19 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <div class="inline-figure"><img src="06-analysis_files/figure-html/ggkegg-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>In this map, we can find interesting findings like one of the enzymes AdoMet synthetase (2.5.1.6, indicated in red rectangle), is enriched in the factor 2, and the factor 2 is elevated in HD. The corresponding enzyme is reported to be in relation to the hemodialysis (<a href="https://doi.org/10.1093/ndt/13.3.656">Loehrer et al. 1998.</a>).</p>
 <p>We further examine whether these pathway changes can be attributed to changes in the data obtained from aligning the reads to the representative genome sequences. First we obtain all the KO in the pathway using <code>ggkegg</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidygraph.data-imaginist.com">tidygraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">kos</span> <span class="op">&lt;-</span> <span class="fu">ggkegg</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span> <span class="op"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">%N&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">type</span><span class="op">==</span><span class="st">"ortholog"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="st">" "</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/unique.html">unique</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Add the copy numbers of KOs to the metadata. Note that <code>how</code> argument can be specified how to combine the multiple IDs.</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">meta</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">meta</span><span class="op">$</span><span class="va">Run</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setMetadata.html">setMetadata</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">meta</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/addGeneAbundance.html">addGeneAbundance</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, IDs<span class="op">=</span><span class="va">kos</span>, newCol <span class="op">=</span> <span class="st">"gene"</span>, how <span class="op">=</span> <span class="va">sum</span>, convert<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p>Performs the adonis based on metadata, including the pathway abundance and grouping information in model formula.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">11</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">cand_species</span>, target<span class="op">=</span><span class="st">"tree"</span>,</span>
 <span>         useMeta<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -323,7 +322,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="co">#&gt; 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The results suggest the abundances of the pathway and the distance based on phylogenetic inferred from MAF matrix could be related and worth investigating for the experimental validation. This analysis suggests the library and function can link the intra-species diversity and clinical factors in the R environment.</p>
 <p>The other species information is also interesting and here we load the other five species. With the HD or other binary grouping information.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"../clinical/HDSubset/metadata.tsv"</span>, sep<span class="op">=</span><span class="st">"\t"</span>, header<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">hd</span> <span class="op">&lt;-</span> <span class="va">meta</span><span class="op">$</span><span class="va">Run</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html">setNames</a></span><span class="op">(</span><span class="va">meta</span><span class="op">$</span><span class="va">HDorNot</span><span class="op">)</span></span>
 <span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/split.html">split</a></span><span class="op">(</span><span class="va">hd</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">hd</span><span class="op">)</span><span class="op">)</span></span>
@@ -378,9 +377,9 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="co">#&gt; # Group info (list): False/True</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 5 ID: 101337</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 5 ID: 101337</span></span>
-<span><span class="co">#&gt; # Size: 1287109240 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 1287.10924 MB</span></span></code></pre></div>
 <p>Subsequently, we perform GSEA on all the species by <code>doGSEA</code> function.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Set annotation for genes to KOs</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setAnnotation.html">setAnnotation</a></span><span class="op">(</span><span class="va">stana</span>,</span>
 <span>                       annotList<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"102545"</span><span class="op">=</span><span class="st">"../annotations_uhgg/102545_eggnog_out.emapper.annotations"</span>,</span>
@@ -409,11 +408,11 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="co">#&gt; False / True </span></span>
 <span><span class="co">#&gt; KO abundance not found, calculating based on annotation ...</span></span></code></pre></div>
 <p>plot the result for inter-species differences with statistically significant pathways.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotGSEA.html">plotGSEA</a></span><span class="op">(</span><span class="va">stana</span>, padjThreshold<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="06-analysis_files/figure-html/app13-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>Finally, the results can be exported to the interactive inspection by <code>exportInteractive</code> function for the sharing the findings with the other researchers.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/exportInteractive.html">exportInteractive</a></span><span class="op">(</span><span class="va">stana</span>, notRun<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # No tree for 101337</span></span>
 <span><span class="co">#&gt; # No tree for 101338</span></span>
@@ -429,7 +428,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <span><span class="co">#&gt; # Group info (list): False/True</span></span>
 <span><span class="co">#&gt; # Group column (DF): label/group</span></span>
 <span><span class="co">#&gt; # Loaded KO table: 5 ID: 102545</span></span>
-<span><span class="co">#&gt; # Size: 146094192 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 146.094192 MB</span></span></code></pre></div>
 
 </div>
   <div class="chapter-nav">
@@ -454,7 +453,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-05-02.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

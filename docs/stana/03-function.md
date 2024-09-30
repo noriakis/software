@@ -6,7 +6,7 @@
 For metabolic functional profiling, several functions are prepared in `stana`. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY and the other databases in KEGG. However, the other options such as the enzyme commision numbers can be accepted.
 
 
-```r
+``` r
 library(stana)
 library(ComplexHeatmap)
 ```
@@ -16,7 +16,7 @@ library(ComplexHeatmap)
 If the gene IDs in the gene matrix stored in the stana object is PATRIC ID, we can use `checkPATRIC` function to obtain information related to `PATRIC` functional annotation. The function accepts the input of named list of genes, and returns functional annotation results. The function uses `BiocFileCache()` to cache the obtained results from API.
 
 
-```r
+``` r
 genes <- list("test"=read.table("../test_genes.txt")$V1)
 genes |> head()
 #> $test
@@ -50,8 +50,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1586375116690cb9f170" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1586375116690cb9f170">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c2a685f210e2cdbfdf1c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c2a685f210e2cdbfdf1c">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -60,7 +60,7 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 You can draw the graph of obtained results depicting enzyme to KEGG PATHWAY relationship.
 
 
-```r
+``` r
 drawPATRIC(genes)
 #> Obtaining annotations of 3 genomes
 #>   Obtaining information on 1280701.3
@@ -103,9 +103,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 5cb3b6b UN-- 4 2 -- 
+#> IGRAPH 48b8d3f UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 5cb3b6b (vertex names):
+#> + edges from 48b8d3f (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -122,7 +122,7 @@ Specify IDs you want to obtain to `ret`, such as "KEGG_ko" and "KEGG_Pathway".
 The annotation can be used with the other functions.
 
 
-```r
+``` r
 tib <- checkEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
     ret="KEGG_ko")
 tib |> head() |> DT::datatable()
@@ -130,8 +130,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-aa1f295b5612127b88c8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-aa1f295b5612127b88c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1b91881f27ffd21fb9eb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1b91881f27ffd21fb9eb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -140,28 +140,14 @@ tib |> head() |> DT::datatable()
 You can draw the relationships between IDs by `drawEGGNOG`.
 
 
-```r
+``` r
 drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
             candPlot = c("KEGG_ko","KEGG_Pathway"),
             geneIDs = tib$ID |> head(100))
-#> # A tibble: 4,287 × 3
-#>    ID                    name          value                
-#>    <chr>                 <chr>         <chr>                
-#>  1 GCF_002846775.1_00408 seed_ortholog 1690.BPSG_1412       
-#>  2 GCF_002846775.1_00408 eggNOG_OGs    COG0304@1|root       
-#>  3 GCF_002846775.1_00408 eggNOG_OGs    COG0331@1|root       
-#>  4 GCF_002846775.1_00408 eggNOG_OGs    COG2030@1|root       
-#>  5 GCF_002846775.1_00408 eggNOG_OGs    COG4981@1|root       
-#>  6 GCF_002846775.1_00408 eggNOG_OGs    COG0304@2|Bacteria   
-#>  7 GCF_002846775.1_00408 eggNOG_OGs    COG0331@2|Bacteria   
-#>  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   
-#>  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   
-#> 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…
-#> # ℹ 4,277 more rows
 #> $graph
-#> IGRAPH 5dd4a68 UN-- 21 922 -- 
+#> IGRAPH 49da38b UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 5dd4a68 (vertex names):
+#> + edges from 49da38b (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -187,7 +173,7 @@ You can inspect the overview of functional differences using gene copy numbers a
 For `MIDAS`, the function automatically query API of `PATRIC` server using the gene names. As the gene number is large typically, one can filter the genes by options `filter_zero_frac`, `filter_max_frac` and `filter_max_value`. However, one should perform own filtering beforehand and provide the matrix to `mat`. If `mat` is specified, other filtering options will be ignored.
 
 
-```r
+``` r
 library(ComplexHeatmap)
 library(simplifyEnrichment)
 load("../hd_meta.rda")
@@ -217,45 +203,45 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",
 #>   Obtaining information on 997889.3
 #>   Obtaining information on 997890.3
 #> Checking results on cluster 1
-#>   total of 273 annotation obtained
+#>   total of 174 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 261 annotation obtained after removal of duplication
+#>   total of 173 annotation obtained after removal of duplication
 #> Checking results on cluster 2
-#>   total of 334 annotation obtained
+#>   total of 339 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 329 annotation obtained after removal of duplication
+#>   total of 331 annotation obtained after removal of duplication
 #> Checking results on cluster 3
-#>   total of 693 annotation obtained
+#>   total of 1101 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 662 annotation obtained after removal of duplication
+#>   total of 1064 annotation obtained after removal of duplication
 #> Checking results on cluster 4
-#>   total of 175 annotation obtained
+#>   total of 859 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 174 annotation obtained after removal of duplication
+#>   total of 828 annotation obtained after removal of duplication
 #> Checking results on cluster 5
-#>   total of 310 annotation obtained
+#>   total of 946 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 303 annotation obtained after removal of duplication
+#>   total of 915 annotation obtained after removal of duplication
 #> Checking results on cluster 6
-#>   total of 898 annotation obtained
+#>   total of 573 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 868 annotation obtained after removal of duplication
+#>   total of 551 annotation obtained after removal of duplication
 #> Checking results on cluster 7
-#>   total of 521 annotation obtained
+#>   total of 703 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 503 annotation obtained after removal of duplication
+#>   total of 672 annotation obtained after removal of duplication
 #> Checking results on cluster 8
-#>   total of 701 annotation obtained
+#>   total of 628 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 675 annotation obtained after removal of duplication
+#>   total of 612 annotation obtained after removal of duplication
 #> Checking results on cluster 9
-#>   total of 1140 annotation obtained
+#>   total of 300 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 1105 annotation obtained after removal of duplication
+#>   total of 293 annotation obtained after removal of duplication
 #> Checking results on cluster 10
-#>   total of 1090 annotation obtained
+#>   total of 541 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 1053 annotation obtained after removal of duplication
+#>   total of 520 annotation obtained after removal of duplication
 ```
 
 <img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="100%" style="display: block; margin: auto;" />
@@ -266,7 +252,7 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",
 The users should provide eggNOG annotation on `eggNOG` slot of stana object. `fnc` argument accepts `KEGG_Pathway` or `KEGG_Module` available in eggNOG annotation. The function queries `KEGG REST API` to obtain pathway and module description.
 
 
-```r
+``` r
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346"), db="uhgg")
 #>   101346
@@ -283,7 +269,7 @@ We set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
 This can be done by `setAnnotation` function.
 
 
-```r
+``` r
 ## Set the annotation file
 stana <- setAnnotation(stana, list("101346"="../annotations_uhgg/101346_eggnog_out.emapper.annotations"))
 ```
@@ -291,7 +277,7 @@ stana <- setAnnotation(stana, list("101346"="../annotations_uhgg/101346_eggnog_o
 You can set `removeAdditional` argument to filter words that are to be displayed.
 
 
-```r
+``` r
 library(ComplexHeatmap)
 library(simplifyEnrichment)
 
@@ -312,7 +298,7 @@ plotHeatmap(stana, "101346",
 The gene IDs can be subset by providing the IDs to the `geneID` option. If `variable` is set to other than zero, the genes with top-{`variable`} variable features were subset to be used in the heatmap visualization.
 
 
-```r
+``` r
 ## Subset to top-100 variable genes
 plotHeatmap(stana, "101346", variable=100)
 #> # In resulting matrix, max: 49.729167 min: 0
@@ -328,7 +314,7 @@ plotHeatmap(stana, "101346", variable=100)
 `calcGF` function can aggregate the gene copy numbers based on the annotation (eggNOG) or the manually set annotation.
 
 
-```r
+``` r
 ## Default to use eggNOG annotation, and the user can specify which gene family to summarize
 stana <- calcGF(stana, "101346", column="EC")
 getSlot(stana, "kos")[["101346"]] %>% head()
@@ -401,7 +387,7 @@ getSlot(stana, "kos")[["101346"]] %>% head()
 Load the profile for multiple species.
 
 
-```r
+``` r
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346","102438"), db="uhgg")
 #>   101346
@@ -426,7 +412,7 @@ Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana ob
 This way, the `plotKEGGPathway` function automatically calculates the abundance by user-defined method.
 
 
-```r
+``` r
 ## Set the annotation file
 stana <- setAnnotation(stana, list("101346"="../annotations_uhgg/101346_eggnog_out.emapper.annotations",
     "102438"="../annotations_uhgg/102438_eggnog_out.emapper.annotations"))
@@ -437,7 +423,7 @@ and pathway ID to visualize. Here, we visualize `ko00620`, Pyruvate metabolism f
 
 
 
-```r
+``` r
 stana <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", only_ko=TRUE, multi_scale=FALSE)
 gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_scale=FALSE)
 #> Using pre-computed KO table
@@ -453,7 +439,7 @@ By default, the scale is same. If you install `ggh4x`, multiple scales can be ad
 
 
 
-```r
+``` r
 gg <- plotKEGGPathway(stana, c("101346","102438"), pathway_id="ko00620", multi_scale=TRUE)
 #> Using pre-computed KO table
 #> Using pre-computed KO table
@@ -467,7 +453,7 @@ gg
 You can provide multiple pathway IDs to pathway_id, which returns a list of plot.
 
 
-```r
+``` r
 gg <- plotKEGGPathway(stana, c("101346","102438"),
                       pathway_id=c("ko00270","ko00620"),
                       multi_scale=TRUE)
@@ -488,7 +474,7 @@ In this way, differences in orthologies in the pathway across multiple species c
 If you want to see the sum values across species, you can set option `summarize=TRUE`. This way, the KO values across specified species are summed, and compared between groups, then plotted.
 
 
-```r
+``` r
 gg <- plotKEGGPathway(stana, c("101346","102438"),
                       pathway_id=c("ko00270","ko00620"),
                       summarize=TRUE)
@@ -507,7 +493,7 @@ If you specify `point_mode=TRUE`, the function plot points on the KOs on the pat
 based on whether the specified species have the corresponding KOs annotated.
 
 
-```r
+``` r
 gg <- plotKEGGPathway(stana, c("101346","102438"),
                       pathway_id=c("ko00270"),
                       sp_colors=c("blue","red") |> setNames(c("101346","102438")),
@@ -528,7 +514,7 @@ gg
 By using calculated statistics of gene family (in this case, KO), one can rank the compounds catalyzed by these enzymes using graph information. Specify the candidate species ID and pathway ID and the function automatically calculates the values.
 
 
-```r
+``` r
 library(tidygraph)
 rankComponents(stana, pid="ko00270", candSp="102438")
 #> # Using pre-computed KO table
@@ -557,7 +543,7 @@ Using `setMap` function, one can set stana object a named data frame of mapping 
 In this case, the data.frame should be two column layouts, and the first column corresponds to gene ID and the second column corresponds to the gene family IDs.
 
 
-```r
+``` r
 stana <- setMap(stana, "101346", data.frame(c("geneID1","geneID2"), c("K00001","K00002")))
 ```
 
@@ -569,7 +555,7 @@ By default, the function uses the KO matrix from `NMF` slot. `mat` can be specif
 
 
 
-```r
+``` r
 ## Row.names: KO, colnames: Samples
 ch <- getSlot(stana, "kos")[["101346"]]
 head(pathwayWithFactor(stana, "101346", summarize=mean, mat=ch))
@@ -641,7 +627,7 @@ Note that background gene set contains the human disease category and the result
 :::
 
 
-```r
+``` r
 library(clusterProfiler)
 stana <- doGSEA(stana, "101346")
 #> HC / R
@@ -650,7 +636,7 @@ stana <- doGSEA(stana, "101346")
 `plotGSEA` function can be used to draw a network representation of species ID and differential pathway at the specified threshold. List of multiple `stana` objects can be passed to the  function, which helps interpret the inter-dataset (like diseases) differences of intra-species diversity. This function returns the plot by default, but `return_graph` can be set to TRUE to return only the tbl_graph object. Also, layout can be specified by `layout` argument.
 
 
-```r
+``` r
 library(dplyr);library(tidygraph);library(ggraph)
 plotGSEA(list(stana, stana), padjThreshold=0.2, layout="fr")
 ```

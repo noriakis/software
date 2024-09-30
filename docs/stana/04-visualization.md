@@ -6,7 +6,7 @@
 `stana` offers visualization functions that can interpret the profiled data.
 
 
-```r
+``` r
 library(stana)
 library(ComplexHeatmap)
 ```
@@ -16,7 +16,7 @@ library(ComplexHeatmap)
 These functions can be used to plot the information related to SNV, which can be used to inspect the overview of profiled SNVs.
 
 
-```r
+``` r
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 #>   102478
@@ -32,7 +32,7 @@ plotSNVSummary(stana, "102478")
 
 <img src="04-visualization_files/figure-html/p-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 plotSNVInfo(stana, "102478")
 ```
 
@@ -43,7 +43,7 @@ plotSNVInfo(stana, "102478")
 This functions plots the boxplot of MAF at a single position between groups.
 
 
-```r
+``` r
 plotMAF(stana, "102478", row.names(getSlot(stana, "snpsInfo")[[1]])[1])
 ```
 
@@ -54,7 +54,7 @@ plotMAF(stana, "102478", row.names(getSlot(stana, "snpsInfo")[[1]])[1])
 This functions plots the histogram of MAF for the candidate species.
 
 
-```r
+``` r
 plotMAFHist(stana, "102478")
 ```
 
@@ -65,7 +65,7 @@ plotMAFHist(stana, "102478")
 This function plots the coverage of the canddiate species across the group.
 
 
-```r
+``` r
 plotCoverage(stana, "102478")
 ```
 
@@ -77,7 +77,7 @@ plotCoverage(stana, "102478")
 You can plot principal component analysis results using `prcomp` by `plotPCA` function across grouping specified. If no group is specified, `No_Group` label is assigned to all the samples.
 
 
-```r
+``` r
 mt <- loadmetaSNV("../metasnv_sample_out/",just_species = TRUE)
 mt <- loadmetaSNV("../metasnv_sample_out/", candSp=mt[1])
 #>   Loading refGenome1clus
@@ -93,7 +93,7 @@ plotPCA(mt, species=getID(mt)[1])
 Plot the heatmap of distance matrix with grouping variables using `pheatmap`.
 
 
-```r
+``` r
 library(pheatmap)
 plotDist(stana, "102478", target="snps")
 #> # Performing dist in 102478 target is snps
@@ -104,7 +104,7 @@ plotDist(stana, "102478", target="snps")
 Plot using the subset of the SNV.
 
 
-```r
+``` r
 stana <- siteFilter(stana, "102478", site_type=="4D")
 #> # total of 27533 obtained from 77431
 plotDist(stana, "102478", target="snps")
@@ -119,7 +119,7 @@ plotDist(stana, "102478", target="snps")
 This function can be used to circlize plot, which can link the information related to MAF or SNV with gene copy number analysis. The function needs the `snpsInfo` slot filled with the data having `genome_id`, `gene_id` and `position` column. For MIDAS2 and inStrain, the packge automatically infers the `genome_id`.
 
 
-```r
+``` r
 library(circlize)
 plotCirclize(stana, "102478", genomeId="UHGG143505", thresh_snp_gene = 150)
 #> Type is MIDAS2
@@ -137,7 +137,7 @@ plotCirclize(stana, "102478", genomeId="UHGG143505", thresh_snp_gene = 150)
 The violin plot of gene copy numbers can be plotted by `plotGenes`.
 
 
-```r
+``` r
 load("../hd_meta.rda")
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="102478")
 #>   102478
@@ -157,7 +157,7 @@ plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 Default color mapping can be changed by `changeColors`.
 
 
-```r
+``` r
 stana <- changeColors(stana, c("blue","red"))
 plotGenes(stana, "102478", c("UHGG000186_00531","UHGG000186_00521"))
 #> [1] "blue" "red"
@@ -180,7 +180,7 @@ See \@ref(function) for the functions like `plotHeatmap` and `plotKEGGPathway`.
 For the specific software, the imported `inStrain` `compare` profiles can be visualized. The loaded genome-wide comparison table and strain cluster table can be visualized using `genomeHeatmap` and `strainClusterHeatmap` by `ComplexHeatmap`. For `genomeHeatmap`, typically population ANI or consensus ANI are plotted, but all the columns listed in `genomeWide_compare.tsv` can be plotted. The parameters to be passed to `Heatmap` can be specified with `heatmapArgs`. If cluster information (`getCl(stana)`) is available or `cl` is specified, the columns will be split to present the grouping. Please refer to the documentation of [`inStrain`](https://instrain.readthedocs.io/en/latest/important_concepts.html) for `popANI` and `conANI`.
 
 
-```r
+``` r
 instr_chk <- "GUT_GENOME142015"
 instr <- loadInStrain("../inStrain_out", instr_chk)
 genomeHeatmap(instr, instr_chk, column = "popANI", heatmapArgs = list(show_column_name=FALSE))
@@ -188,7 +188,7 @@ genomeHeatmap(instr, instr_chk, column = "popANI", heatmapArgs = list(show_colum
 
 <img src="04-visualization_files/figure-html/heatmaps_instrain-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 strainClusterHeatmap(instr, instr_chk, heatmapArgs = list(show_column_name=FALSE))
 ```
 

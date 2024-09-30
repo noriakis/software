@@ -5,10 +5,10 @@
 
 We examine the dataset investigating the gut microbiome of ESRD patients ([Zhang et al. 2023](https://doi.org/10.1186/s13059-023-03056-y)) using `stana`. The SNV was profiled by MIDAS2 pipeline, and loaded to stana object. This time, we investigate one of the profiled species, `Faecalicatena gnavus` genotyping results.
 
-Load the MIDAS2 merge results to stana object with setting the clinical grouping.
+Load the MIDAS2 merge results to stana object with setting the clinical grouping. The used metagenotyping data and metadata is found at [this link](https://w5po.myqnapcloud.com/share.cgi?ssid=9346fc2fc21e4534a9e5181527108cfa#9346fc2fc21e4534a9e5181527108cfa). Also, the Rprof results describing the memory and time usage is available at the same link.
 
 
-```r
+``` r
 library(dplyr)
 library(stana)
 
@@ -35,18 +35,18 @@ stana
 #> # Group info (list): CKD/HC/HD
 #> # Loaded SNV table: 1 ID: 101380
 #> # Loaded gene table: 1 ID: 101380
-#> # Size: 108702024 B
+#> # Size: 108.702024 MB
 ```
 Get a brief overview of SNVs.
 
 
-```r
+``` r
 plotSNVInfo(stana, cand_species)
 ```
 
 <img src="06-analysis_files/figure-html/app2-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 plotSNVSummary(stana, cand_species, perSample=TRUE)
 ```
 
@@ -55,7 +55,7 @@ plotSNVSummary(stana, cand_species, perSample=TRUE)
 Based on the SNV and the related statistics of SNV, the consensus multiple sequence alignment is made by `consensusSeq` function with the relatively stringent parameters. It can be accessed by `getFasta` function.
 
 
-```r
+``` r
 stana <- consensusSeq(stana, cand_species, argList=list(site_prev=0.95, mean_depth=10))
 #> # Beginning calling for 101380
 #> # Original Site number: 26540
@@ -69,7 +69,7 @@ getFasta(stana)[[cand_species]]
 Based on the MSA, the phylogenetic tree can be inferred by `inferAndPlotTree`. Inferring function can be specified by `treeFun` and is default to `upgma` function in phangorn, but can be stated the other functions. The tree plot shows the cladogram by default, but can be overridden by `branch.length` argument passed to `ggtree`.
 
 
-```r
+``` r
 library(phangorn)
 stana <- inferAndPlotTree(stana, cand_species, target="fasta", treeFun="FastTree")
 #> # File already exists! Removing the file ...
@@ -92,15 +92,10 @@ getTreePlot(stana)[[cand_species]]
 Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.
 
 
-```r
-stana <- doAdonis(stana, cand_species, target="tree", pcoa=TRUE)
+``` r
+stana <- doAdonis(stana, cand_species, target="tree")
 #> # Performing adonis in 101380 target is tree
-#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.002
-```
-
-<img src="06-analysis_files/figure-html/app5-1.png" width="100%" style="display: block; margin: auto;" />
-
-```r
+#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.006
 getAdonis(stana)[[cand_species]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -109,7 +104,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "HC", "CKD", "HC", "HD", "HC", "HD", "HD", "CKD", "CKD", "HC", "CKD", "CKD", "HD", "HD", "HC", "HD", "CKD", "CKD", "CKD", "CKD", "HD", "HC", "HD", "HD", "HC", "CKD", "HD", "HD", "CKD", "HD", "HD", "HD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "CKD", "CKD", "CKD", "HD", "HC", "HC", "HC", "HD", "CKD", "HD", "HD", "HC", "CKD", "CKD", "HD", "CKD", "CKD", "CKD", "CKD", "HC", "HC", "CKD", "HC", "CKD", "CKD", "CKD", "HC", "HC", 
 #>          Df SumOfSqs      R2     F Pr(>F)   
-#> group     2   0.5698 0.09811 3.916  0.002 **
+#> group     2   0.5698 0.09811 3.916  0.006 **
 #> Residual 72   5.2383 0.90189                
 #> Total    74   5.8081 1.00000                
 #> ---
@@ -120,7 +115,7 @@ getAdonis(stana)[[cand_species]]
 Based on the results, assuming there are multiple factors within the species, we can directly examine their estimated abundances and the functional implications by using the NMF approach in KO table. First we calculate KO abundances based on eggNOG-mapper annotation.
 
 
-```r
+``` r
 stana <- setAnnotation(stana,
                        annotList=list("101380"="../annotations_uhgg/101380_eggnog_out.emapper.annotations"))
 stana <- calcGF(stana, candSp=cand_species)
@@ -129,7 +124,7 @@ stana <- calcGF(stana, candSp=cand_species)
 Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`) with replacing 30% of the data to `NA`.
 
 
-```r
+``` r
 library(NNLM)
 cvl <- list()
 for (i in seq_len(5)) {
@@ -193,7 +188,7 @@ do.call(rbind, cvl) %>% data.frame(check.names=FALSE) %>% mutate(group=1:5) %>%
 Based on the information, the factor number of two is selected.
 
 
-```r
+``` r
 stana <- NMF(stana, cand_species, rank=2,
 	nnlm_flag=TRUE, nnlm_args=list("loss"="mse"))
 #> # NMF started 101380, target: kos, method: NNLM::nnmf
@@ -204,8 +199,8 @@ stana <- NMF(stana, cand_species, rank=2,
 #> # Filtered features: 2568
 #> # Filtered samples: 124
 #> # Rank 2
-#> Mean relative abundances: 0.6192738 0.3807262 
-#> Present feature per factor: 2240 2382
+#> Mean relative abundances: 0.9151446 0.08485539 
+#> Present feature per factor: 2561 1458
 
 ## Plot the results
 plotAbundanceWithinSpecies(stana, cand_species, by="coef")
@@ -213,7 +208,7 @@ plotAbundanceWithinSpecies(stana, cand_species, by="coef")
 
 <img src="06-analysis_files/figure-html/hd9-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c("tomato","gold"))
 ```
 
@@ -222,7 +217,7 @@ plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c(
 Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.
 
 
-```r
+``` r
 library(ggrepel)
 pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
 	mat = getSlot(stana, "NMF")[[cand_species]]$W))
@@ -238,7 +233,7 @@ ggplot(pw, aes(x=pw[,1], y=pw[,2]))+
 
 <img src="06-analysis_files/figure-html/app9-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 
 ## Sort by absolute difference
 fc <- pw[,1] - pw[,2]
@@ -255,7 +250,7 @@ Of these, cysteine and methionine metabolism pathway is interesting as the pathw
 The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.
 
 
-```r
+``` r
 ## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value
 # kegg <- plotKEGGPathway(stana, cand_species,
 #                         pathway_id="ko00270",
@@ -287,7 +282,7 @@ In this map, we can find interesting findings like one of the enzymes AdoMet syn
 We further examine whether these pathway changes can be attributed to changes in the data obtained from aligning the reads to the representative genome sequences. First we obtain all the KO in the pathway using `ggkegg`.
 
 
-```r
+``` r
 library(tidygraph)
 library(dplyr)
 kos <- ggkegg::pathway("ko00270") %N>%
@@ -298,7 +293,7 @@ kos <- ggkegg::pathway("ko00270") %N>%
 Add the copy numbers of KOs to the metadata. Note that `how` argument can be specified how to combine the multiple IDs.
 
 
-```r
+``` r
 row.names(meta) <- meta$Run
 stana <- setMetadata(stana, meta)
 stana <- addGeneAbundance(stana, cand_species, IDs=kos, newCol = "gene", how = sum, convert=NULL)
@@ -307,7 +302,7 @@ stana <- addGeneAbundance(stana, cand_species, IDs=kos, newCol = "gene", how = s
 Performs the adonis based on metadata, including the pathway abundance and grouping information in model formula.
 
 
-```r
+``` r
 set.seed(11)
 stana <- doAdonis(stana, cand_species, target="tree",
          useMeta=TRUE,
@@ -335,7 +330,7 @@ The results suggest the abundances of the pathway and the distance based on phyl
 The other species information is also interesting and here we load the other five species. With the HD or other binary grouping information.
 
 
-```r
+``` r
 meta <- read.table("../clinical/HDSubset/metadata.tsv", sep="\t", header=1)
 hd <- meta$Run %>% setNames(meta$HDorNot)
 cl <- split(hd, names(hd))
@@ -390,7 +385,7 @@ stana
 #> # Group info (list): False/True
 #> # Loaded SNV table: 5 ID: 101337
 #> # Loaded gene table: 5 ID: 101337
-#> # Size: 1287109240 B
+#> # Size: 1287.10924 MB
 ```
 
 
@@ -430,7 +425,7 @@ for (cs in cands) {
 plot the result for inter-species differences with statistically significant pathways.
 
 
-```r
+``` r
 plotGSEA(stana, padjThreshold=0.1)
 ```
 
@@ -439,7 +434,7 @@ plotGSEA(stana, padjThreshold=0.1)
 Finally, the results can be exported to the interactive inspection by `exportInteractive` function for the sharing the findings with the other researchers.
 
 
-```r
+``` r
 exportInteractive(stana, notRun=TRUE)
 #> # No tree for 101337
 #> # No tree for 101338
@@ -455,5 +450,5 @@ exportInteractive(stana, notRun=TRUE)
 #> # Group info (list): False/True
 #> # Group column (DF): label/group
 #> # Loaded KO table: 5 ID: 102545
-#> # Size: 146094192 B
+#> # Size: 146.094192 MB
 ```

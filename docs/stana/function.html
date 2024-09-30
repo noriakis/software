@@ -7,7 +7,7 @@
 <title>Chapter 4 Functional annotation | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content="For metabolic functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Functional annotation | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content="For metabolic functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY...">
@@ -16,12 +16,13 @@
 <meta name="twitter:description" content="For metabolic functional profiling, several functions are prepared in stana. Note that these functions are primarily designed for KEGG ORTHOLOGY which can be subsequently linked to KEGG PATHWAY...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.33/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -104,8 +105,8 @@
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
 <span><span class="co">#&gt;   total of 2 annotation obtained after removal of duplication</span></span>
 <span><span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">DF</span>, options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>scrollX<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1586375116690cb9f170" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1586375116690cb9f170">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-c2a685f210e2cdbfdf1c" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-c2a685f210e2cdbfdf1c">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network" class="section level3" number="4.1.1">
 <h3>
 <span class="header-section-number">4.1.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network"><i class="fas fa-link"></i></a>
 </h3>
@@ -153,9 +154,9 @@
 <span><span class="co">#&gt;                                   1 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $test$GRAPH</span></span>
-<span><span class="co">#&gt; IGRAPH 5cb3b6b UN-- 4 2 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 48b8d3f UN-- 4 2 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c)</span></span>
-<span><span class="co">#&gt; + edges from 5cb3b6b (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 48b8d3f (vertex names):</span></span>
 <span><span class="co">#&gt; [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis</span></span>
 <span><span class="co">#&gt; [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -175,8 +176,8 @@ The annotation can be used with the other functions.</p>
 <code class="sourceCode R"><span><span class="va">tib</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/checkEGGNOG.html">checkEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>    ret<span class="op">=</span><span class="st">"KEGG_ko"</span><span class="op">)</span></span>
 <span><span class="va">tib</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-aa1f295b5612127b88c8" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-aa1f295b5612127b88c8">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
+<div class="datatables html-widget html-fill-item" id="htmlwidget-1b91881f27ffd21fb9eb" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-1b91881f27ffd21fb9eb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><div id="draw-the-network-1" class="section level3" number="4.2.1">
 <h3>
 <span class="header-section-number">4.2.1</span> Draw the network<a class="anchor" aria-label="anchor" href="#draw-the-network-1"><i class="fas fa-link"></i></a>
 </h3>
@@ -185,24 +186,10 @@ The annotation can be used with the other functions.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/drawEGGNOG.html">drawEGGNOG</a></span><span class="op">(</span><span class="st">"../annotations_gtdb/100224_eggnog_out.emapper.annotations"</span>,</span>
 <span>            candPlot <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"KEGG_ko"</span>,<span class="st">"KEGG_Pathway"</span><span class="op">)</span>,</span>
 <span>            geneIDs <span class="op">=</span> <span class="va">tib</span><span class="op">$</span><span class="va">ID</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4,287 × 3</span></span>
-<span><span class="co">#&gt;    ID                    name          value                </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;         &lt;chr&gt;                </span></span>
-<span><span class="co">#&gt;  1 GCF_002846775.1_00408 seed_ortholog 1690.BPSG_1412       </span></span>
-<span><span class="co">#&gt;  2 GCF_002846775.1_00408 eggNOG_OGs    COG0304@1|root       </span></span>
-<span><span class="co">#&gt;  3 GCF_002846775.1_00408 eggNOG_OGs    COG0331@1|root       </span></span>
-<span><span class="co">#&gt;  4 GCF_002846775.1_00408 eggNOG_OGs    COG2030@1|root       </span></span>
-<span><span class="co">#&gt;  5 GCF_002846775.1_00408 eggNOG_OGs    COG4981@1|root       </span></span>
-<span><span class="co">#&gt;  6 GCF_002846775.1_00408 eggNOG_OGs    COG0304@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  7 GCF_002846775.1_00408 eggNOG_OGs    COG0331@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  8 GCF_002846775.1_00408 eggNOG_OGs    COG2030@2|Bacteria   </span></span>
-<span><span class="co">#&gt;  9 GCF_002846775.1_00408 eggNOG_OGs    COG4981@2|Bacteria   </span></span>
-<span><span class="co">#&gt; 10 GCF_002846775.1_00408 eggNOG_OGs    2GIY4@201174|Actinob…</span></span>
-<span><span class="co">#&gt; # ℹ 4,277 more rows</span></span>
 <span><span class="co">#&gt; $graph</span></span>
-<span><span class="co">#&gt; IGRAPH 5dd4a68 UN-- 21 922 -- </span></span>
+<span><span class="co">#&gt; IGRAPH 49da38b UN-- 21 922 -- </span></span>
 <span><span class="co">#&gt; + attr: name (v/c), category (v/c), size (v/n)</span></span>
-<span><span class="co">#&gt; + edges from 5dd4a68 (vertex names):</span></span>
+<span><span class="co">#&gt; + edges from 49da38b (vertex names):</span></span>
 <span><span class="co">#&gt;  [1] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
 <span><span class="co">#&gt;  [3] ko:K11533--ko01212 ko:K11533--ko04931</span></span>
 <span><span class="co">#&gt;  [5] ko:K11533--ko00061 ko:K11533--ko01100</span></span>
@@ -257,45 +244,45 @@ The annotation can be used with the other functions.</p>
 <span><span class="co">#&gt;   Obtaining information on 997889.3</span></span>
 <span><span class="co">#&gt;   Obtaining information on 997890.3</span></span>
 <span><span class="co">#&gt; Checking results on cluster 1</span></span>
-<span><span class="co">#&gt;   total of 273 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 174 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 261 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 173 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 2</span></span>
-<span><span class="co">#&gt;   total of 334 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 339 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 329 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 331 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 3</span></span>
-<span><span class="co">#&gt;   total of 693 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 1101 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 662 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 1064 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 4</span></span>
-<span><span class="co">#&gt;   total of 175 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 859 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 174 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 828 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 5</span></span>
-<span><span class="co">#&gt;   total of 310 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 946 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 303 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 915 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 6</span></span>
-<span><span class="co">#&gt;   total of 898 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 573 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 868 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 551 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 7</span></span>
-<span><span class="co">#&gt;   total of 521 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 703 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 503 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 672 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 8</span></span>
-<span><span class="co">#&gt;   total of 701 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 628 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 675 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 612 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 9</span></span>
-<span><span class="co">#&gt;   total of 1140 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 300 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 1105 annotation obtained after removal of duplication</span></span>
+<span><span class="co">#&gt;   total of 293 annotation obtained after removal of duplication</span></span>
 <span><span class="co">#&gt; Checking results on cluster 10</span></span>
-<span><span class="co">#&gt;   total of 1090 annotation obtained</span></span>
+<span><span class="co">#&gt;   total of 541 annotation obtained</span></span>
 <span><span class="co">#&gt;   remove duplicate based on pathway_name</span></span>
-<span><span class="co">#&gt;   total of 1053 annotation obtained after removal of duplication</span></span></code></pre></div>
+<span><span class="co">#&gt;   total of 520 annotation obtained after removal of duplication</span></span></code></pre></div>
 <div class="inline-figure"><img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="100%" style="display: block; margin: auto;"></div>
 </div>
 <div id="the-other-types" class="section level3" number="4.3.2">
@@ -693,7 +680,7 @@ By default, the function uses the KO matrix from <code>NMF</code> slot. <code>ma
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-05-02.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

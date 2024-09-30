@@ -6,10 +6,11 @@
 `stana` provides functions to perform statistical analysis on the metagenotyping results based on loaded data.
 
 
-```r
+``` r
 library(stana)
 library(phangorn)
 library(ggtree)
+library(ggstar)
 ## Examine sample object
 load(system.file("extdata", "sysdata.rda", package = "stana"))
 ```
@@ -20,7 +21,7 @@ The consensus sequence calling can be performed using SNV MAF matrix (or the mat
 
 
 
-```r
+``` r
 
 ## The consensusSeq* is prepared, but consensusSeq function can automatically 
 ## choose which functions to use
@@ -46,7 +47,7 @@ tp
 The sequences are stored as `phyDat` class object in `fastaList` slot, the list with the species ID as name.
 
 
-```r
+``` r
 stana <- stana |>
     consensusSeq(argList=list(site_prev=0.8))
 #> # Beginning calling for 100003
@@ -61,7 +62,7 @@ getFasta(stana)[[1]]
 Matrix of characters can be returned by `return_mat=TRUE`. This does not return stana object.
 
 
-```r
+``` r
 mat <- stana |>
     consensusSeq(argList=list(site_prev=0.8, return_mat=TRUE))
 #> # Beginning calling for 100003
@@ -77,7 +78,7 @@ The `inferAndPlotTree` function can be used to internally infer and plot the tre
 `dist_method` is set to `dist.ml` by default, and you can pass arguments to the function by `tree_args`.
 
 
-```r
+``` r
 library(phangorn)
 stana <- inferAndPlotTree(stana, dist_method="dist.hamming", tree_args=list(exclude="all"))
 getTree(stana)[[1]]
@@ -95,7 +96,7 @@ You should set `data.frame` containing covariates to stana object by `setMetadat
 
 
 
-```r
+``` r
 ## Make example metadata
 samples <- getSlot(stana, "snps")[["100003"]] |> colnames()
 metadata <- data.frame(
@@ -135,7 +136,7 @@ getSlot(stana, "treePlotList")[[1]]
 The `site_list` is supported for the usecase such as calling limited to the certain gene regions. The below example calls the MSA in specific gene ID and output plot by `ggmsa`.
 
 
-```r
+``` r
 ## get snpsInfo slot and filter to variants in specific gene IDs
 cand_ids <- stana::getSlot(stana, "snpsInfo")[["100003"]] %>%
     dplyr::filter(gene_id=="UHGG000008_01913") %>%
@@ -173,7 +174,7 @@ The method is set to `snmf/r` by default in `NMF`. For the larger matrix, the `N
 
 
 
-```r
+``` r
 library(NMF)
 stana <- NMF(stana, "100003", estimate=TRUE)[[1]]
 #> # NMF started 100003, target: kos, method: snmf/r
@@ -194,7 +195,7 @@ getSlot(stana, "nmf")
 The users can specify the rank. The `NMF` slot stores the list of `NMF` results (or `NNLM` results) per species.
 
 
-```r
+``` r
 stana <- NMF(stana, "100003", rank=3, beta=0.001)
 #> # NMF started 100003, target: kos, method: snmf/r
 #> # Original features: 20
@@ -225,13 +226,13 @@ getSlot(stana, "NMF")
 #>   Iterations: 65 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.07    0.00    0.07
+#>      0.03    0.00    0.05
 ```
 
 The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
 
 
-```r
+``` r
 plotAbundanceWithinSpecies(stana, "100003", tss=TRUE)
 ```
 
@@ -240,7 +241,7 @@ plotAbundanceWithinSpecies(stana, "100003", tss=TRUE)
 The data can be obtained using `return_data`.
 
 
-```r
+``` r
 plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE) %>% head()
 #>                     1          2         3  group
 #> ERR1711593 0.98582990 0.01417010 0.0000000 Group1
@@ -254,7 +255,7 @@ plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE) %>% head
 The basis corresponds to the factor to feature matrix. This represents functional implications if the KO or gene copy number tables are used for the NMF. This information can be parsed to matrix of KEGG PATHWAY information using `pathwayWithFactor`.
 
 
-```r
+``` r
 library(pheatmap)
 pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
 ```
@@ -264,7 +265,7 @@ pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
 These information can be further combined with the other functions in `stana`, like plotting factor abundances along with the tree inferred from consensus sequence alignment, linking allele frequency information and gene copy number data.
 
 
-```r
+``` r
 ab <- plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE)
 stana <- setMetadata(stana, ab)
 stana <- inferAndPlotTree(stana, "100003", meta=colnames(ab))
@@ -280,11 +281,11 @@ getTreePlot(stana)
 Using `adonis2` function in `vegan`, one can compare distance matrix based on SNV frequency or gene (gene family) copy numbers, or tree-based distance between the specified group. When the `target="tree"` is specified, tree shuold be in `treeList`, with the species name as the key. The `ape::cophenetic.phylo()` is used to calculate distance between tips based on branch length. Distance method can be chosen from `dist` function in `stats`, and the default is set to `manhattan`. You can specify `distArg` to pass the arguments to `dist`. Also, the distance calculated directly from sequences can be used. In this case, `target='fasta'` should be chosen, and the function to calculate distance should be provided to `AAfunc` argument.
 
 
-```r
+``` r
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.703
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.708
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Terms added sequentially (first to last)
@@ -293,18 +294,18 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> group     1  0.15557 0.07404 0.7196  0.703
+#> group     1  0.15557 0.07404 0.7196  0.708
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
 The corresponding principal coordinate analysis plot using distance matrix can be drawn by specifying `pcoa`. The relative eigenvalues are plotted.
 
 
-```r
+``` r
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.549
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.545
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -312,7 +313,7 @@ stana <- doAdonis(stana, specs = "100003",
 By default, the function uses grouping variable in `cl` slot. For more complex modeling, the slot `meta` can be populated by the data frame of samples by `setMetadata` like the example below. To use metadata, `useMeta` option should be specified with the formula argument.
 
 
-```r
+``` r
 stana <- doAdonis(stana, specs = "100003",
     target="genes", useMeta=TRUE, formula = "d ~ .")
 #> # Performing adonis in 100003 target is genes
@@ -340,7 +341,7 @@ getAdonis(stana)[["100003"]]
 If you have `genes` slot filled in the stana object, gene copy numbers can be compared one by one using exact Wilcoxon rank-sum test using `wilcox.exact` in `exactRankTests` computing exact conditional p-values. Note that p-values are not adjusted for multiple comparisons made.
 
 
-```r
+``` r
 res <- compareGenes(stana, "100003")
 #> # Testing total of 21806
 res[["UHGG000008_01733"]]
@@ -357,7 +358,7 @@ res[["UHGG000008_01733"]]
 The gene abundances across multiple stana object can be aggregated. This returns the new stana object where the gene abundances are combined.
 
 
-```r
+``` r
 ## This returns new stana object
 stanacomb <- combineGenes(list(stana, stana), species="100003")
 #> Common genes: 21806
@@ -371,7 +372,7 @@ dim(getSlot(stanacomb, "genes")[["100003"]])
 `Boruta` algorithm can be run on matrices to obtain important marker (SNV position or gene) for distinguishing between group by `doBoruta` function. The function performs `Boruta` algorithm on specified data and returns the `Boruta` class result. By default, the function performs fixes to tentative input. To disable this, specify `doFix=FALSE`.
 
 
-```r
+``` r
 library(Boruta)
 brres <- doBoruta(stana, "100003")
 #> # Using grouping from the slot: Group1/Group2
@@ -380,20 +381,20 @@ brres <- doBoruta(stana, "100003")
 #> # Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 53.41703 secs.
+#> Boruta performed 99 iterations in 28.57647 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  7 attributes confirmed important: UHGG000008_01798,
-#> UHGG006336_00186, UHGG060667_01243, UHGG061776_01338,
-#> UHGG158704_01078 and 2 more;
-#>  21799 attributes confirmed unimportant:
+#>  13 attributes confirmed important: UHGG000008_01647,
+#> UHGG025024_01181, UHGG025024_01950, UHGG052054_01631,
+#> UHGG101119_00553 and 8 more;
+#>  21793 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21794 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21788 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.
 
 
-```r
+``` r
 confirmed_genes <- brres$boruta$finalDecision[brres$boruta$finalDecision=="Confirmed"] %>% names()
 plotGenes(stana, "100003", confirmed_genes)+
   ggplot2::facet_wrap(.~geneID,scales="free_y")+

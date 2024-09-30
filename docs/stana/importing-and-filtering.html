@@ -7,7 +7,7 @@
 <title>Chapter 2 Importing and filtering | stana</title>
 <meta name="author" content="Noriaki Sato">
 <meta name="description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed to handle some types of the metagenotyping software such as MIDAS and MIDAS2, which outputs the...">
-<meta name="generator" content="bookdown 0.35 with bs4_book()">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
 <meta property="og:title" content="Chapter 2 Importing and filtering | stana">
 <meta property="og:type" content="book">
 <meta property="og:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed to handle some types of the metagenotyping software such as MIDAS and MIDAS2, which outputs the...">
@@ -16,12 +16,13 @@
 <meta name="twitter:description" content="stana is aimed to import the metagenotyping results of various pipelines. The package is designed to handle some types of the metagenotyping software such as MIDAS and MIDAS2, which outputs the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.5.1/transition.js"></script><script src="libs/bs3compat-0.5.1/tabs.js"></script><script src="libs/bs3compat-0.5.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.2/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.29/datatables.js"></script><link href="libs/dt-core-1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.4/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.4/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.33/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -81,8 +82,8 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"../hd_meta.rda"</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, only_stat<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span><span class="op">$</span><span class="va">snps</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">DT</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/DT/man/datatable.html">datatable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-74d7a5126d7c2f8e03fd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-74d7a5126d7c2f8e03fd">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ccb80d49fddbd4fa65c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ccb80d49fddbd4fa65c8">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script><p>We will load the interesting species.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/loadMIDAS.html">loadMIDAS</a></span><span class="op">(</span><span class="st">"../merge_midas1/"</span>, cl<span class="op">=</span><span class="va">hd_meta</span>, candSp<span class="op">=</span><span class="st">"Bacteroides_uniformis_57318"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bacteroides_uniformis_57318</span></span>
@@ -103,7 +104,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: Bacteroides_uniformis_57318</span></span>
-<span><span class="co">#&gt; # Size: 14586864 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 14.586864 MB</span></span></code></pre></div>
 </div>
 <div id="midas2" class="section level2" number="2.2">
 <h2>
@@ -248,7 +249,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: ../inStrain_out</span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: GUT_GENOME142015</span></span>
-<span><span class="co">#&gt; # Size: 81503544 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 82.902808 MB</span></span></code></pre></div>
 </div>
 <div id="metasnv" class="section level2" number="2.4">
 <h2>
@@ -273,7 +274,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 1</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: manual</span></span>
-<span><span class="co">#&gt; # Size: 50072 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 0.050072 MB</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## HUMAnN merged profile</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"humann_merged_ko_eval_45.txt"</span>, sep<span class="op">=</span><span class="st">"\t"</span>, header<span class="op">=</span><span class="fl">1</span>, row.names<span class="op">=</span><span class="fl">1</span>, check.names<span class="op">=</span><span class="cn">FALSE</span>, comment.char <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span>
@@ -283,7 +284,7 @@ gene copy numbers by default. Note that the slot name <code>snps</code> here ref
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 344</span></span>
 <span><span class="co">#&gt; # Loaded KO table: 344 ID: g__Bifidobacterium.s__Bifidobacterium_longum</span></span>
-<span><span class="co">#&gt; # Size: 37921952 B</span></span></code></pre></div>
+<span><span class="co">#&gt; # Size: 37.921952 MB</span></span></code></pre></div>
 <div id="conversion-to-maf-matrix" class="section level3" number="2.5.1">
 <h3>
 <span class="header-section-number">2.5.1</span> Conversion to MAF matrix<a class="anchor" aria-label="anchor" href="#conversion-to-maf-matrix"><i class="fas fa-link"></i></a>
@@ -333,7 +334,7 @@ The package offers some functions to convert these to MAF matrix.</p>
 <span><span class="co">#&gt; # Loaded directory: </span></span>
 <span><span class="co">#&gt; # Species number: 0</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 3 ID: SPID1</span></span>
-<span><span class="co">#&gt; # Size: 24008 B</span></span>
+<span><span class="co">#&gt; # Size: 0.024008 MB</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getSlot.html">getSlot</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"snpsInfo"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt;                           major_allele minor_allele</span></span>
@@ -433,7 +434,7 @@ Also, <code>summary</code> method can be used to inspect the grouping informatio
 <span><span class="co">#&gt; # Group info (list): HC/R</span></span>
 <span><span class="co">#&gt; # Loaded SNV table: 1 ID: 100002</span></span>
 <span><span class="co">#&gt; # Loaded gene table: 1 ID: 100002</span></span>
-<span><span class="co">#&gt; # Size: 4527176 B</span></span>
+<span><span class="co">#&gt; # Size: 4.527176 MB</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/summary.html">summary</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # </span></span>
 <span><span class="co">#&gt; # SNV description</span></span>
@@ -489,7 +490,7 @@ Also, <code>summary</code> method can be used to inspect the grouping informatio
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-05-02.</p>
+    <p>"<strong>stana</strong>" was written by Noriaki Sato. It was last built on 2024-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

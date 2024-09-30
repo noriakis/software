@@ -6,7 +6,7 @@
 `stana` offers the interactive inspection of metagenotyping results for examining the intra-species diversity.
 
 
-```r
+``` r
 library(stana)
 load(system.file("extdata", "sysdata.rda", package = "stana"))
 ```
@@ -15,7 +15,7 @@ For this purpose, `exportInteractive()` function is prepared. This expects gene 
 Specifying `notRun` to TRUE will not run the application.
 
 
-```r
+``` r
 ## Default to export to the current directory
 exportInteractive(stana, notRun=TRUE)
 #> # No tree for 100003
@@ -28,5 +28,5 @@ exportInteractive(stana, notRun=TRUE)
 #> # Group info (list): Group1/Group2
 #> # Group column (DF): label/group
 #> # Loaded KO table: 1 ID: 100003
-#> # Size: 882912 B
+#> # Size: 0.882912 MB
 ```

@@ -7,7 +7,7 @@ The package is designed to handle some types of the metagenotyping software such
 gene copy numbers by default. Note that the slot name `snps` here refers to just the variable, and not to reflect the actual meaning. The species ID in `stana` object is interpreted as **character**.
 
 
-```r
+``` r
 library(stana)
 ```
 
@@ -20,7 +20,7 @@ If species IDs are not specified, all the species in the directory will be loade
 For `MIDAS`, `loadMIDAS` function can be used to import the output of `merge` command. In `MIDAS` and `MIDAS2` examples, we load the example dataset deposited by the study investigating gut microbiome of hemodialysis patients ([Shi et al. 2022](https://doi.org/10.3389/fcimb.2022.904284)). `hd_meta` includes named list of grouping. First we would like to see how many samples were profiled in the species.
 
 
-```r
+``` r
 load("../hd_meta.rda")
 stana <- loadMIDAS("../merge_midas1", cl=hd_meta, only_stat=TRUE)
 stana$snps |> head() |> DT::datatable()
@@ -28,14 +28,14 @@ stana$snps |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-74d7a5126d7c2f8e03fd" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-74d7a5126d7c2f8e03fd">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-ccb80d49fddbd4fa65c8" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ccb80d49fddbd4fa65c8">{"x":{"filter":"none","vertical":false,"data":[["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["Acidaminococcus_intestini_54097","Akkermansia_muciniphila_55290","Alistipes_finegoldii_56071","Alistipes_indistinctus_62207","Alistipes_onderdonkii_55464","Alistipes_putredinis_61533"],["1","3","3","0","7","7"],["5","8","5","1","14","9"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>HC<\/th>\n      <th>R<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"species","targets":1},{"name":"HC","targets":2},{"name":"R","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 We will load the interesting species.
 
 
-```r
+``` r
 stana <- loadMIDAS("../merge_midas1/", cl=hd_meta, candSp="Bacteroides_uniformis_57318")
 #> Bacteroides_uniformis_57318
 #>   Snps
@@ -55,7 +55,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: Bacteroides_uniformis_57318
 #> # Loaded gene table: 1 ID: Bacteroides_uniformis_57318
-#> # Size: 14586864 B
+#> # Size: 14.586864 MB
 ```
 
 ## `MIDAS2`
@@ -72,7 +72,7 @@ For `MIDAS2`, the [`lz4`](https://github.com/lz4/lz4) binary must be in PATH to 
 
 
 
-```r
+``` r
 load("../hd_meta.rda")
 hd_meta
 #> $HC
@@ -93,7 +93,7 @@ hd_meta
 We can check stats of how many samples are profiled for each species, by `only_stat`. This returns the list of tibbles with names `snps` and `genes`.
 
 
-```r
+``` r
 stana <- loadMIDAS2("../merge_uhgg", only_stat=TRUE, cl=hd_meta)
 stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
 #> # A tibble: 6 × 5
@@ -110,7 +110,7 @@ stana$snps |> dplyr::filter(group=="HC") |> dplyr::arrange(desc(n)) |> head()
 As the long output is expected, only one species is loaded here. 
 
 
-```r
+``` r
 stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
 #>   100002
 #>   s__Staphylococcus aureus
@@ -125,7 +125,7 @@ stana <- loadMIDAS2("../merge_uhgg", candSp="100002", cl=hd_meta)
 The data is profiled against UHGG. `loadSummary` and `loadInfo` can be specified to load the SNV summary and SNV info per species, which is default to `TRUE`.
 
 
-```r
+``` r
 getSlot(stana, "snps")[["100002"]] |> head()
 #>                                 ERR9492497 ERR9492515
 #> gnl|Prokka|UHGG000004_1|2901|A           1          1
@@ -157,7 +157,7 @@ By default, the taxonomy ID will be converted using the default MIDAS2 database 
 The coverage for each species per sample is plotted by `plotCoverage`.
 
 
-```r
+``` r
 plotCoverage(stana, "100002", pointSize=5)
 ```
 
@@ -168,7 +168,7 @@ plotCoverage(stana, "100002", pointSize=5)
 For inStrain, we need `compare` command output, after `profile` command. First we would like to know which species are profiled. `just_species` option only list species in the table. Here, we load an example dataset profiled by `inStrain`, using the default database described in their original tutorial. For `inStrain`, loading all the SNV tables is often impossible, we must specify `candidate_species` for investigation.
 
 
-```r
+``` r
 sp <- loadInStrain("../inStrain_out", just_species=TRUE)
 sp
 #>  [1] "GUT_GENOME000022" "GUT_GENOME000024"
@@ -210,7 +210,7 @@ sp
 This recalculates the minor allele frequency based on pooled SNV information (not on individual SNV information), thus takes a long time in case the number of profiled positions is large. We can set `cl` argument if needed.
 
 
-```r
+``` r
 instr_chk <- "GUT_GENOME142015"
 instr <- loadInStrain("../inStrain_out", instr_chk, skip_pool=FALSE) ## Load MAF table
 #> Loading allele count table
@@ -226,7 +226,7 @@ instr
 #> # Loaded directory: ../inStrain_out
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: GUT_GENOME142015
-#> # Size: 81503544 B
+#> # Size: 82.902808 MB
 ```
 
 ## metaSNV
@@ -234,7 +234,7 @@ instr
 For loading the output of `metaSNV`, `metaSNV.py` and `metaSNV_Filtering.py` are typically performed beforehand. You can use `just_species` to return species ID. Note that the `loadmetaSNV` is currently supported to load only the SNV profiles.
 
 
-```r
+``` r
 meta <- loadmetaSNV("../metasnv_sample_out")
 #>   Loading refGenome1clus
 #>   Loading refGenome2clus
@@ -246,19 +246,19 @@ meta <- loadmetaSNV("../metasnv_sample_out")
 The loading of the manually created data.frame is possible by `snv`, `gene`, `GF` functions, each prepared for SNV, gene copy numbers, and gene family abundance tables. The metagenotyping results produced by the other software can be loaded with this function, although some statistics should be inserted manually. These functions accepts the named list of data.frame. If the software like `HUMAnN3` is used to profile the functional implications from metagenomic reads, the subset stratified output can also be used for `GF` function.
 
 
-```r
+``` r
 man <- snv(list("manual"=head(getSlot(meta, "snps")[[1]])))
 man
 #> # A stana: manual
 #> # Loaded directory: 
 #> # Species number: 1
 #> # Loaded SNV table: 1 ID: manual
-#> # Size: 50072 B
+#> # Size: 0.050072 MB
 ```
 
 
 
-```r
+``` r
 ## HUMAnN merged profile
 df <- read.table("humann_merged_ko_eval_45.txt", sep="\t", header=1, row.names=1, check.names=FALSE, comment.char = "")
 stana <- fromHumann(df)
@@ -267,7 +267,7 @@ stana
 #> # Loaded directory: 
 #> # Species number: 344
 #> # Loaded KO table: 344 ID: g__Bifidobacterium.s__Bifidobacterium_longum
-#> # Size: 37921952 B
+#> # Size: 37.921952 MB
 ```
 
 
@@ -277,7 +277,7 @@ Some metagenotype data comes with TSV with the number of allele count with long 
 The package offers some functions to convert these to MAF matrix.
 
 
-```r
+``` r
 df1 <- data.frame(rbind(
   c("SPID1","SP1_NZ_GG770218.1_131457", "G", "A", "7", "2"),
   c("SPID1","SP1_NZ_GG770218.1_131458", "C", "T", "2", "5"),
@@ -317,7 +317,7 @@ They can be merged to make stana object by `combineMaf()` function.
 
 
 
-```r
+``` r
 mafs <- list("sample1"=convertWideToMaf(df1), "sample2"=convertWideToMaf(df2))
 stana <- combineMaf(mafs)
 stana
@@ -325,7 +325,7 @@ stana
 #> # Loaded directory: 
 #> # Species number: 0
 #> # Loaded SNV table: 3 ID: SPID1
-#> # Size: 24008 B
+#> # Size: 0.024008 MB
 getSlot(stana, "snpsInfo")
 #> [[1]]
 #>                           major_allele minor_allele
@@ -366,7 +366,7 @@ This object can be used with the subsequent downstream analysis. The function ca
 The `check` method applied to `stana` object can check the samples or species met the specific criteria.
 
 
-```r
+``` r
 stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp="100002", db="uhgg")
 #>   100002
 #>   g__Blautia_A;s__Blautia_A sp900066165
@@ -392,7 +392,7 @@ head(filt %>% dplyr::arrange(dplyr::desc(n)))
 Subsequently, `filter` method can be used to subset the stana object for interesting species.
 
 
-```r
+``` r
 stana <- stana %>% filter(unique(filt$species_id))
 ```
 
@@ -404,7 +404,7 @@ Most of the functions in stana is designed to perform the analysis in all the sp
 The users can preset the SNV ID used for the downstream calculation to the `includeSNVID` slot in the stana object. When this information is used, the function raises the message that it is using the IDs.
 
 
-```r
+``` r
 stana <- siteFilter(stana, getID(stana)[1], site_type=="4D")
 #> # total of 650 obtained from 2058
 ## Downstream functions use the filtered site IDs
@@ -415,7 +415,7 @@ stana <- siteFilter(stana, getID(stana)[1], site_type=="4D")
 If you know the candidate SNV IDs beforehand (e.g. examining Prokka annotation), you can set site IDs manually by `setSNVID` function.
 
 
-```r
+``` r
 stana <- setSNVID(stana, getID(stana)[1], getSNVID(stana, getID(stana)[1])[1:5])
 ## Downstream functions use the site IDs
 ```
@@ -426,7 +426,7 @@ By `show` or `print` method, the summary of stana object is outputted.
 Also, `summary` method can be used to inspect the grouping information per species.
 
 
-```r
+``` r
 stana
 #> # A stana: MIDAS2
 #> # Database: uhgg
@@ -435,7 +435,7 @@ stana
 #> # Group info (list): HC/R
 #> # Loaded SNV table: 1 ID: 100002
 #> # Loaded gene table: 1 ID: 100002
-#> # Size: 4527176 B
+#> # Size: 4.527176 MB
 summary(stana)
 #> # 
 #> # SNV description
