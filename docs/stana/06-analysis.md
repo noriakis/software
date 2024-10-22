@@ -95,16 +95,15 @@ Using cophenetic distance matrix from tree, the PERMANOVA is performed and the p
 ``` r
 stana <- doAdonis(stana, cand_species, target="tree")
 #> # Performing adonis in 101380 target is tree
-#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.006
+#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.008
 getAdonis(stana)[[cand_species]]
 #> Permutation test for adonis under reduced model
-#> Terms added sequentially (first to last)
 #> Permutation: free
 #> Number of permutations: 999
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "HC", "CKD", "HC", "HD", "HC", "HD", "HD", "CKD", "CKD", "HC", "CKD", "CKD", "HD", "HD", "HC", "HD", "CKD", "CKD", "CKD", "CKD", "HD", "HC", "HD", "HD", "HC", "CKD", "HD", "HD", "CKD", "HD", "HD", "HD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "CKD", "CKD", "CKD", "HD", "HC", "HC", "HC", "HD", "CKD", "HD", "HD", "HC", "CKD", "CKD", "HD", "CKD", "CKD", "CKD", "CKD", "HC", "HC", "CKD", "HC", "CKD", "CKD", "CKD", "HC", "HC", 
 #>          Df SumOfSqs      R2     F Pr(>F)   
-#> group     2   0.5698 0.09811 3.916  0.006 **
+#> Model     2   0.5698 0.09811 3.916  0.008 **
 #> Residual 72   5.2383 0.90189                
 #> Total    74   5.8081 1.00000                
 #> ---
@@ -112,7 +111,7 @@ getAdonis(stana)[[cand_species]]
 #> 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Based on the results, assuming there are multiple factors within the species, we can directly examine their estimated abundances and the functional implications by using the NMF approach in KO table. First we calculate KO abundances based on eggNOG-mapper annotation.
+Based on the results, assuming there are multiple factors within the species, we can directly examine their estimated profiles and the functional implications by using the NMF approach in KO table. First we calculate KO copy number based on eggNOG-mapper annotation.
 
 
 ``` r
@@ -199,8 +198,8 @@ stana <- NMF(stana, cand_species, rank=2,
 #> # Filtered features: 2568
 #> # Filtered samples: 124
 #> # Rank 2
-#> Mean relative abundances: 0.9151446 0.08485539 
-#> Present feature per factor: 2561 1458
+#> Mean relative abundances: 0.5835186 0.4164814 
+#> Present feature per factor: 2239 2378
 
 ## Plot the results
 plotAbundanceWithinSpecies(stana, cand_species, by="coef")
@@ -214,13 +213,16 @@ plotStackedBarPlot(stana, cand_species, by="coef") + scale_fill_manual(values=c(
 
 <img src="06-analysis_files/figure-html/hd9-2.png" width="100%" style="display: block; margin: auto;" />
 
-Using these two factors, we summarize KO abundance information to KEGG PATHWAY information, and plot the relationship between the pathway abundance within two factors by scatter plot and heatmap.
+Using these two factors, we summarize NMF information to KEGG PATHWAY information, and plot the relationship between the profiles within two factors by scatter plot and heatmap.
+
+
+
 
 
 ``` r
 library(ggrepel)
-pw <- data.frame(pathwayWithFactor(stana, cand_species, tss=TRUE, change_name=TRUE,
-	mat = getSlot(stana, "NMF")[[cand_species]]$W))
+pw <- data.frame(pathwayWithFactor(stana, cand_species,
+    change_name=TRUE, mat = Wmat, summarize=mean))
 colnames(pw) <- c("1","2")
 pw[["name"]] <- row.names(pw)
 pw[["size"]] <- (pw[,1] + pw[,2])/2
@@ -245,30 +247,28 @@ pheatmap(pw[nms, 1:2])
 ```
 
 <img src="06-analysis_files/figure-html/app9-2.png" width="100%" style="display: block; margin: auto;" />
-Of these, cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use `plotKEGGPathway`. The returned object is ggplot object and the users can modify the visualization by stacking the layers).
 
-The colors in the nodes of left-side is abundance for factor 1 and right side is factor 2.
+Cysteine and methionine metabolism pathway is interesting as the pathway is reported to be related to the species. The KEGG PATHWAY scheme of the pathway is plotted by ggkegg (For group comparison, use `plotKEGGPathway`. The returned object is ggplot object and the users can modify the visualization by stacking the layers).
+
+The colors in the nodes of left-side is profile for factor 1 and right side is factor 2.
+
+
 
 
 ``` r
-## Built-in `plotKEGGPathway` function. The statistics to be shown is moderated t-value
-# kegg <- plotKEGGPathway(stana, cand_species,
-#                         pathway_id="ko00270",
-#                         statMethod="mod.t")
-
 library(ggkegg)
 library(tidygraph)
 
 pp <- ggkegg::pathway("ko00270") %N>% 
     mutate(
-    	f1=ggkegg::node_numeric(getSlot(stana, "NMF")[[cand_species]]$W[,1]),
-    	f2=ggkegg::node_numeric(getSlot(stana, "NMF")[[cand_species]]$W[,2])
+    	f1=ggkegg::node_numeric(vis1),
+    	f2=ggkegg::node_numeric(vis2)
     )
 
 gg <- ggraph(pp, layout="manual", x=x, y=y)+
     geom_node_rect(aes(fill=f1, xmin=xmin, xmax=x, filter=type=="ortholog"))+
     geom_node_rect(aes(fill=f2, xmin=x, xmax=xmax, filter=type=="ortholog"))+
-    scale_fill_gradient(low="blue",high="pink", name="abundance")+
+    scale_fill_gradient(low="blue",high="pink", name="W")+
     overlay_raw_map() +
     stamp("ko:K00789")+
     theme_void()
@@ -310,14 +310,12 @@ stana <- doAdonis(stana, cand_species, target="tree",
 #> # Performing adonis in 101380 target is tree
 #> # Printing raw adonis results ...
 #> Permutation test for adonis under reduced model
-#> Terms added sequentially (first to last)
 #> Permutation: free
 #> Number of permutations: 999
 #> 
 #> adonis2(formula = d ~ gene + Group, data = structure(list(Run = c("ERR11866308", "ERR11869411", "ERR11866252", "ERR11869407", "ERR11869309", "ERR11869389", "ERR11869249", "ERR11869021", "ERR11866391", "ERR11866506", "ERR11869428", "ERR11865921", "ERR11866099", "ERR11869026", "ERR11869362", "ERR11870913", "ERR11869188", "ERR11866124", "ERR11865952", "ERR11865925", "ERR11868983", "ERR11869379", "ERR11869391", "ERR11869266", "ERR11869293", "ERR11869451", "ERR11866385", "ERR11869342", "ERR11869285", 
 #>          Df SumOfSqs      R2      F Pr(>F)   
-#> gene      1   0.1906 0.03282 2.6856  0.045 * 
-#> Group     2   0.5774 0.09942 4.0672  0.006 **
+#> Model     3   0.7681 0.13224 3.6066  0.004 **
 #> Residual 71   5.0400 0.86776                 
 #> Total    74   5.8081 1.00000                 
 #> ---

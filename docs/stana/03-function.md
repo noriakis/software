@@ -50,8 +50,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-c2a685f210e2cdbfdf1c" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c2a685f210e2cdbfdf1c">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-af325afa1344d0b3ee07" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-af325afa1344d0b3ee07">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -103,9 +103,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH 48b8d3f UN-- 4 2 -- 
+#> IGRAPH d36e63c UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from 48b8d3f (vertex names):
+#> + edges from d36e63c (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -130,8 +130,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-1b91881f27ffd21fb9eb" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-1b91881f27ffd21fb9eb">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-717340fc300d5bed6dfc" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-717340fc300d5bed6dfc">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -145,9 +145,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
             candPlot = c("KEGG_ko","KEGG_Pathway"),
             geneIDs = tib$ID |> head(100))
 #> $graph
-#> IGRAPH 49da38b UN-- 21 922 -- 
+#> IGRAPH d45acee UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from 49da38b (vertex names):
+#> + edges from d45acee (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -203,45 +203,45 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",
 #>   Obtaining information on 997889.3
 #>   Obtaining information on 997890.3
 #> Checking results on cluster 1
-#>   total of 174 annotation obtained
+#>   total of 1181 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 173 annotation obtained after removal of duplication
+#>   total of 1145 annotation obtained after removal of duplication
 #> Checking results on cluster 2
-#>   total of 339 annotation obtained
+#>   total of 702 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 331 annotation obtained after removal of duplication
+#>   total of 679 annotation obtained after removal of duplication
 #> Checking results on cluster 3
-#>   total of 1101 annotation obtained
+#>   total of 486 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 1064 annotation obtained after removal of duplication
+#>   total of 473 annotation obtained after removal of duplication
 #> Checking results on cluster 4
-#>   total of 859 annotation obtained
+#>   total of 175 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 828 annotation obtained after removal of duplication
+#>   total of 174 annotation obtained after removal of duplication
 #> Checking results on cluster 5
-#>   total of 946 annotation obtained
+#>   total of 233 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 915 annotation obtained after removal of duplication
+#>   total of 227 annotation obtained after removal of duplication
 #> Checking results on cluster 6
-#>   total of 573 annotation obtained
+#>   total of 997 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 551 annotation obtained after removal of duplication
+#>   total of 960 annotation obtained after removal of duplication
 #> Checking results on cluster 7
-#>   total of 703 annotation obtained
+#>   total of 472 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 672 annotation obtained after removal of duplication
+#>   total of 456 annotation obtained after removal of duplication
 #> Checking results on cluster 8
-#>   total of 628 annotation obtained
+#>   total of 939 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 612 annotation obtained after removal of duplication
+#>   total of 907 annotation obtained after removal of duplication
 #> Checking results on cluster 9
-#>   total of 300 annotation obtained
+#>   total of 374 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 293 annotation obtained after removal of duplication
+#>   total of 364 annotation obtained after removal of duplication
 #> Checking results on cluster 10
-#>   total of 541 annotation obtained
+#>   total of 552 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 520 annotation obtained after removal of duplication
+#>   total of 525 annotation obtained after removal of duplication
 ```
 
 <img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="100%" style="display: block; margin: auto;" />
