@@ -50,8 +50,8 @@ DT::datatable(res$test$DF, options = list(scrollX=TRUE))
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-af325afa1344d0b3ee07" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-af325afa1344d0b3ee07">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-cbf65d276ea073363184" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-cbf65d276ea073363184">{"x":{"filter":"none","vertical":false,"data":[["254","608"],["fig|1280701.3.peg.570","fig|1280701.3.peg.1186"],["4.2.1.51","2.1.1.37"],["Prephenate dehydratase","DNA (cytosine-5-)-methyltransferase"],[400,270],["Phenylalanine, tyrosine and tryptophan biosynthesis","Cysteine and methionine metabolism"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>patric_id<\/th>\n      <th>ec_number<\/th>\n      <th>ec_description<\/th>\n      <th>pathway_id<\/th>\n      <th>pathway_name<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"columnDefs":[{"className":"dt-right","targets":4},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"patric_id","targets":1},{"name":"ec_number","targets":2},{"name":"ec_description","targets":3},{"name":"pathway_id","targets":4},{"name":"pathway_name","targets":5}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -103,9 +103,9 @@ drawPATRIC(genes)
 #>                                   1 
 #> 
 #> $test$GRAPH
-#> IGRAPH d36e63c UN-- 4 2 -- 
+#> IGRAPH 18591ff UN-- 4 2 -- 
 #> + attr: name (v/c)
-#> + edges from d36e63c (vertex names):
+#> + edges from 18591ff (vertex names):
 #> [1] Prephenate dehydratase             --Phenylalanine, tyrosine and tryptophan biosynthesis
 #> [2] DNA (cytosine-5-)-methyltransferase--Cysteine and methionine metabolism                 
 #> 
@@ -130,8 +130,8 @@ tib |> head() |> DT::datatable()
 
 
 ```{=html}
-<div class="datatables html-widget html-fill-item" id="htmlwidget-717340fc300d5bed6dfc" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-717340fc300d5bed6dfc">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-d92ec52e6305e3540a40" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-d92ec52e6305e3540a40">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["GCF_002846775.1_00408","GCF_002846815.1_01743","GCF_004156145.1_01406","GCF_004155565.1_00557","GCF_004155645.1_00353","GCF_000800475.2_00338"],["KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko","KEGG_ko"],["ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533","ko:K11533"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>ID<\/th>\n      <th>name<\/th>\n      <th>value<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"ID","targets":1},{"name":"name","targets":2},{"name":"value","targets":3}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 ```
 
 
@@ -145,9 +145,9 @@ drawEGGNOG("../annotations_gtdb/100224_eggnog_out.emapper.annotations",
             candPlot = c("KEGG_ko","KEGG_Pathway"),
             geneIDs = tib$ID |> head(100))
 #> $graph
-#> IGRAPH d45acee UN-- 21 922 -- 
+#> IGRAPH 194655f UN-- 21 922 -- 
 #> + attr: name (v/c), category (v/c), size (v/n)
-#> + edges from d45acee (vertex names):
+#> + edges from 194655f (vertex names):
 #>  [1] ko:K11533--ko00061 ko:K11533--ko01100
 #>  [3] ko:K11533--ko01212 ko:K11533--ko04931
 #>  [5] ko:K11533--ko00061 ko:K11533--ko01100
@@ -203,45 +203,45 @@ plotHeatmap(stana, "Bacteroides_uniformis_57318",
 #>   Obtaining information on 997889.3
 #>   Obtaining information on 997890.3
 #> Checking results on cluster 1
-#>   total of 1181 annotation obtained
+#>   total of 557 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 1145 annotation obtained after removal of duplication
+#>   total of 534 annotation obtained after removal of duplication
 #> Checking results on cluster 2
-#>   total of 702 annotation obtained
+#>   total of 28 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 679 annotation obtained after removal of duplication
+#>   total of 28 annotation obtained after removal of duplication
 #> Checking results on cluster 3
-#>   total of 486 annotation obtained
+#>   total of 154 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 473 annotation obtained after removal of duplication
+#>   total of 153 annotation obtained after removal of duplication
 #> Checking results on cluster 4
-#>   total of 175 annotation obtained
+#>   total of 1445 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 174 annotation obtained after removal of duplication
+#>   total of 1403 annotation obtained after removal of duplication
 #> Checking results on cluster 5
-#>   total of 233 annotation obtained
+#>   total of 1015 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 227 annotation obtained after removal of duplication
+#>   total of 975 annotation obtained after removal of duplication
 #> Checking results on cluster 6
-#>   total of 997 annotation obtained
+#>   total of 371 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 960 annotation obtained after removal of duplication
+#>   total of 366 annotation obtained after removal of duplication
 #> Checking results on cluster 7
-#>   total of 472 annotation obtained
+#>   total of 346 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 456 annotation obtained after removal of duplication
+#>   total of 341 annotation obtained after removal of duplication
 #> Checking results on cluster 8
-#>   total of 939 annotation obtained
+#>   total of 279 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 907 annotation obtained after removal of duplication
+#>   total of 272 annotation obtained after removal of duplication
 #> Checking results on cluster 9
-#>   total of 374 annotation obtained
+#>   total of 1012 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 364 annotation obtained after removal of duplication
+#>   total of 971 annotation obtained after removal of duplication
 #> Checking results on cluster 10
-#>   total of 552 annotation obtained
+#>   total of 878 annotation obtained
 #>   remove duplicate based on pathway_name
-#>   total of 525 annotation obtained after removal of duplication
+#>   total of 844 annotation obtained after removal of duplication
 ```
 
 <img src="03-function_files/figure-html/MIDAS1_heatmap-1.png" width="100%" style="display: block; margin: auto;" />
@@ -409,7 +409,7 @@ stana <- loadMIDAS2("../merge_uhgg", cl=hd_meta, candSp=c("101346","102438"), db
 ```
 
 Next, we set the eggNOG-mapper v2 annotation file to the eggNOG slot of stana object.
-This way, the `plotKEGGPathway` function automatically calculates the abundance by user-defined method.
+This way, the `plotKEGGPathway` function automatically calculates the copy numbers by user-defined method.
 
 
 ``` r
@@ -550,7 +550,7 @@ stana <- setMap(stana, "101346", data.frame(c("geneID1","geneID2"), c("K00001","
 
 ## `pathwayWithFactor`
 
-The KO abundances can be aggregated to KEGG PATHWAY abundance by `pathwayWithFactor`.
+The KO copy numbers can be aggregated to KEGG PATHWAY profiles by `pathwayWithFactor`.
 By default, the function uses the KO matrix from `NMF` slot. `mat` can be specified for the other matrices.
 
 
@@ -620,7 +620,7 @@ head(pathwayWithFactor(stana, "101346", summarize=mean, mat=ch))
 
 ## GSEA
 
-The gene set enrichment analysis based on the background KEGG PATHWAY information is possible if the KO abundances are used. `doGSEA` function performs `GSEA` on the gene copy number table based on the grouping variable set in the `stana` object. The background set is obtained by KEGG REST API. The `gsea` slot is filled with the function.
+The gene set enrichment analysis based on the background KEGG PATHWAY information is possible if the KO copy numbers are used. `doGSEA` function performs `GSEA` on the gene copy number table based on the grouping variable set in the `stana` object. The background set is obtained by KEGG REST API. The `gsea` slot is filled with the function.
 
 ::: rmdwarning
 Note that background gene set contains the human disease category and the results should be taken care of with caution.

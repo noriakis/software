@@ -89,13 +89,13 @@ getTreePlot(stana)[[cand_species]]
 
 <img src="06-analysis_files/figure-html/app4-1.png" width="100%" style="display: block; margin: auto;" />
 
-Using cophenetic distance matrix from tree, the PERMANOVA is performed and the principal coordinate analysis plot based on the distance matrix is plotted.
+Using cophenetic distance matrix from tree, the PERMANOVA is performed.
 
 
 ``` r
 stana <- doAdonis(stana, cand_species, target="tree")
 #> # Performing adonis in 101380 target is tree
-#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.008
+#> #  F: 3.91604401661088, R2: 0.0981070171929171, Pr: 0.006
 getAdonis(stana)[[cand_species]]
 #> Permutation test for adonis under reduced model
 #> Permutation: free
@@ -103,7 +103,7 @@ getAdonis(stana)[[cand_species]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("CKD", "HC", "CKD", "HC", "HD", "HC", "HD", "HD", "CKD", "CKD", "HC", "CKD", "CKD", "HD", "HD", "HC", "HD", "CKD", "CKD", "CKD", "CKD", "HD", "HC", "HD", "HD", "HC", "CKD", "HD", "HD", "CKD", "HD", "HD", "HD", "CKD", "CKD", "HD", "HD", "HD", "HD", "HD", "HD", "HD", "CKD", "CKD", "CKD", "HD", "HC", "HC", "HC", "HD", "CKD", "HD", "HD", "HC", "CKD", "CKD", "HD", "CKD", "CKD", "CKD", "CKD", "HC", "HC", "CKD", "HC", "CKD", "CKD", "CKD", "HC", "HC", 
 #>          Df SumOfSqs      R2     F Pr(>F)   
-#> Model     2   0.5698 0.09811 3.916  0.008 **
+#> Model     2   0.5698 0.09811 3.916  0.006 **
 #> Residual 72   5.2383 0.90189                
 #> Total    74   5.8081 1.00000                
 #> ---
@@ -120,7 +120,7 @@ stana <- setAnnotation(stana,
 stana <- calcGF(stana, candSp=cand_species)
 ```
 
-Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`) with replacing 30% of the data to `NA`.
+Subsequently, using the cross-validation approach replacing random variables to `NA`, we estimate the rank based on the KO tables. The function in `NNLM` is used to compute the loss (`mse`) with replacing 30% of the data to `NA`. It is important to note that NMF may not be well-suited for data with properties like excessive zeros, and caution should be exercised.
 
 
 ``` r
@@ -198,8 +198,8 @@ stana <- NMF(stana, cand_species, rank=2,
 #> # Filtered features: 2568
 #> # Filtered samples: 124
 #> # Rank 2
-#> Mean relative abundances: 0.5835186 0.4164814 
-#> Present feature per factor: 2239 2378
+#> Mean relative abundances: 0.4586868 0.5413132 
+#> Present feature per factor: 2348 2261
 
 ## Plot the results
 plotAbundanceWithinSpecies(stana, cand_species, by="coef")

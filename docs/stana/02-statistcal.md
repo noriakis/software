@@ -166,9 +166,9 @@ if (requireNamespace("ggmsa")) {
 
 The loaded or calculated matrix can be used for the nonnegative matrix factorization (NMF) for the unsupervised identifications of factors within species. This calculates factor x sample and sample to feature matrix, and possibly finds the pattern for the within-species diversity. The results can be summarized by the functions such as `plotAbundanceWithinSpecies`.
 
-The input can be SNV, gene, or gene family (KO) abundance table. The matrix can contain `NA` or `-1` (zero depth at the position), so filtering should be performed. The `NMF::nmf` function or `NNLM::nnmf` function can be used for this purpose. By default, `estimate` is set to FALSE but if set to `TRUE`, it performs the estimation of rank within `estimate_range`. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient when the function uses the R package `NMF`, but the package implements a variety of algorithms and the rank selection method. Also, if `NNLM`, the rank selection based on cross-validation by randomly assigning the NA in the cell in the matrix, is performed.
+The input can be SNV, gene, or gene family (KO) copy number table. The matrix can contain `NA` or `-1` (zero depth at the position), so filtering should be performed. The `NMF::nmf` function or `NNLM::nnmf` function can be used for this purpose. By default, `estimate` is set to FALSE but if set to `TRUE`, it performs the estimation of rank within `estimate_range`. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient when the function uses the R package `NMF`, but the package implements a variety of algorithms and the rank selection method. Also, if `NNLM`, the rank selection based on cross-validation by randomly assigning the NA in the cell in the matrix, is performed.
 
-The function outputs the related statistics like the proportion of NA or zero value, the relative abundances of factors after the estimation, or the features presented in each factor.
+The function outputs the related statistics like the proportion of NA or zero value, the relative profiles of factors after the estimation, or the features presented in each factor.
 
 The method is set to `snmf/r` by default in `NMF`. For the larger matrix, the `NNML` function can be used for the faster computation by setting `nnlm_flag` to TRUE.
 
@@ -226,10 +226,10 @@ getSlot(stana, "NMF")
 #>   Iterations: 65 
 #>   Timing:
 #>      user  system elapsed 
-#>      0.05    0.00    0.03
+#>      0.05    0.00    0.05
 ```
 
-The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) abundances per sample using the grouping criteria in stana object.
+The resulting stana object can be used with the other function. `plotAbundanceWithinSpecies` plots the (relative) sample profiles per sample using the grouping criteria in stana object.
 
 
 ``` r
@@ -252,17 +252,17 @@ plotAbundanceWithinSpecies(stana, "100003", tss=TRUE, return_data=TRUE) %>% head
 #> ERR1711602 0.01749079 0.98250921 0.0000000 Group1
 ```
 
-The basis corresponds to the factor to feature matrix. This represents functional implications if the KO or gene copy number tables are used for the NMF. This information can be parsed to matrix of KEGG PATHWAY information using `pathwayWithFactor`.
+The basis corresponds to the factor to feature matrix. This can represent functional profiles if the KO or gene copy number tables are used for the NMF. This information can be summarized to matrix of KEGG PATHWAY information using `pathwayWithFactor`.
 
 
 ``` r
 library(pheatmap)
-pheatmap(pathwayWithFactor(stana, "100003", tss=TRUE))
+pheatmap(pathwayWithFactor(stana, "100003"))
 ```
 
 <img src="02-statistcal_files/figure-html/nmf5-1.png" width="100%" style="display: block; margin: auto;" />
 
-These information can be further combined with the other functions in `stana`, like plotting factor abundances along with the tree inferred from consensus sequence alignment, linking allele frequency information and gene copy number data.
+These information can be further combined with the other functions in `stana`, like plotting factor profiles along with the tree inferred from consensus sequence alignment, linking allele frequency information and gene copy number data.
 
 
 ``` r
@@ -275,6 +275,10 @@ getTreePlot(stana)
 
 <img src="02-statistcal_files/figure-html/nmf6-1.png" width="100%" style="display: block; margin: auto;" />
 
+### Scaling function for NNLM
+
+As same as `scale` function in [`NMF`](https://nmf.r-forge.r-project.org/scale.NMF.html), the helper function for `NNLM` resulting object is prepared (`scaler.NNLM`).
+
 
 ## PERMANOVA
 
@@ -285,7 +289,7 @@ Using `adonis2` function in `vegan`, one can compare distance matrix based on SN
 stana <- setTree(stana, "100003", tre)
 stana <- doAdonis(stana, specs = "100003", target="tree")
 #> # Performing adonis in 100003 target is tree
-#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.685
+#> #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.695
 getAdonis(stana)[["100003"]]
 #> Permutation test for adonis under reduced model
 #> Permutation: free
@@ -293,7 +297,7 @@ getAdonis(stana)[["100003"]]
 #> 
 #> adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))
 #>          Df SumOfSqs      R2      F Pr(>F)
-#> Model     1  0.15557 0.07404 0.7196  0.685
+#> Model     1  0.15557 0.07404 0.7196  0.695
 #> Residual  9  1.94558 0.92596              
 #> Total    10  2.10115 1.00000
 ```
@@ -304,7 +308,7 @@ The corresponding principal coordinate analysis plot using distance matrix can b
 stana <- doAdonis(stana, specs = "100003",
 	target="genes", pcoa=TRUE)
 #> # Performing adonis in 100003 target is genes
-#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.552
+#> #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.578
 ```
 
 <img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;" />
@@ -354,7 +358,7 @@ res[["UHGG000008_01733"]]
 
 ## Aggregating gene copy numbers
 
-The gene abundances across multiple stana object can be aggregated. This returns the new stana object where the gene abundances are combined.
+The gene copy numbers across multiple stana object can be aggregated. This returns the new stana object where the gene copy numbers are combined.
 
 
 ``` r
@@ -380,14 +384,14 @@ brres <- doBoruta(stana, "100003")
 #> # Performing Boruta
 brres
 #> $boruta
-#> Boruta performed 99 iterations in 27.20215 secs.
+#> Boruta performed 99 iterations in 27.66723 secs.
 #> Tentatives roughfixed over the last 99 iterations.
-#>  9 attributes confirmed important: UHGG004616_01682,
-#> UHGG025024_01181, UHGG061776_01338, UHGG158704_01078,
-#> UHGG164856_00510 and 4 more;
-#>  21797 attributes confirmed unimportant:
+#>  15 attributes confirmed important: UHGG000008_01798,
+#> UHGG004375_00184, UHGG025024_01181, UHGG061776_01339,
+#> UHGG155301_01986 and 10 more;
+#>  21791 attributes confirmed unimportant:
 #> UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,
-#> UHGG000008_00012, UHGG000008_00015 and 21792 more;
+#> UHGG000008_00012, UHGG000008_00015 and 21786 more;
 ```
 
 Further, we visualize the copy numbers of important genes confirmed between the group.

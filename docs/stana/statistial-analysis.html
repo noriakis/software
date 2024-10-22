@@ -199,8 +199,8 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span class="header-section-number">3.2</span> Nonnegative matrix factorization<a class="anchor" aria-label="anchor" href="#nmf"><i class="fas fa-link"></i></a>
 </h2>
 <p>The loaded or calculated matrix can be used for the nonnegative matrix factorization (NMF) for the unsupervised identifications of factors within species. This calculates factor x sample and sample to feature matrix, and possibly finds the pattern for the within-species diversity. The results can be summarized by the functions such as <code>plotAbundanceWithinSpecies</code>.</p>
-<p>The input can be SNV, gene, or gene family (KO) abundance table. The matrix can contain <code>NA</code> or <code>-1</code> (zero depth at the position), so filtering should be performed. The <code><a href="https://rdrr.io/pkg/NMF/man/nmf.html">NMF::nmf</a></code> function or <code><a href="https://rdrr.io/pkg/NNLM/man/nnmf.html">NNLM::nnmf</a></code> function can be used for this purpose. By default, <code>estimate</code> is set to FALSE but if set to <code>TRUE</code>, it performs the estimation of rank within <code>estimate_range</code>. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient when the function uses the R package <code>NMF</code>, but the package implements a variety of algorithms and the rank selection method. Also, if <code>NNLM</code>, the rank selection based on cross-validation by randomly assigning the NA in the cell in the matrix, is performed.</p>
-<p>The function outputs the related statistics like the proportion of NA or zero value, the relative abundances of factors after the estimation, or the features presented in each factor.</p>
+<p>The input can be SNV, gene, or gene family (KO) copy number table. The matrix can contain <code>NA</code> or <code>-1</code> (zero depth at the position), so filtering should be performed. The <code><a href="https://rdrr.io/pkg/NMF/man/nmf.html">NMF::nmf</a></code> function or <code><a href="https://rdrr.io/pkg/NNLM/man/nnmf.html">NNLM::nnmf</a></code> function can be used for this purpose. By default, <code>estimate</code> is set to FALSE but if set to <code>TRUE</code>, it performs the estimation of rank within <code>estimate_range</code>. This assumes that multiple subspecies are in the samples and is not applicable where only one subspecies should be present. It chooses the rank based on the cophenetic correlation coefficient when the function uses the R package <code>NMF</code>, but the package implements a variety of algorithms and the rank selection method. Also, if <code>NNLM</code>, the rank selection based on cross-validation by randomly assigning the NA in the cell in the matrix, is performed.</p>
+<p>The function outputs the related statistics like the proportion of NA or zero value, the relative profiles of factors after the estimation, or the features presented in each factor.</p>
 <p>The method is set to <code>snmf/r</code> by default in <code>NMF</code>. For the larger matrix, the <code>NNML</code> function can be used for the faster computation by setting <code>nnlm_flag</code> to TRUE.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://renozao.github.io/NMF/">NMF</a></span><span class="op">)</span></span>
@@ -251,8 +251,8 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt;   Iterations: 65 </span></span>
 <span><span class="co">#&gt;   Timing:</span></span>
 <span><span class="co">#&gt;      user  system elapsed </span></span>
-<span><span class="co">#&gt;      0.05    0.00    0.03</span></span></code></pre></div>
-<p>The resulting stana object can be used with the other function. <code>plotAbundanceWithinSpecies</code> plots the (relative) abundances per sample using the grouping criteria in stana object.</p>
+<span><span class="co">#&gt;      0.05    0.00    0.05</span></span></code></pre></div>
+<p>The resulting stana object can be used with the other function. <code>plotAbundanceWithinSpecies</code> plots the (relative) sample profiles per sample using the grouping criteria in stana object.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/nmf3-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -266,12 +266,12 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt; ERR1711598 0.17024848 0.22117519 0.6085763 Group1</span></span>
 <span><span class="co">#&gt; ERR1711599 0.00000000 1.00000000 0.0000000 Group1</span></span>
 <span><span class="co">#&gt; ERR1711602 0.01749079 0.98250921 0.0000000 Group1</span></span></code></pre></div>
-<p>The basis corresponds to the factor to feature matrix. This represents functional implications if the KO or gene copy number tables are used for the NMF. This information can be parsed to matrix of KEGG PATHWAY information using <code>pathwayWithFactor</code>.</p>
+<p>The basis corresponds to the factor to feature matrix. This can represent functional profiles if the KO or gene copy number tables are used for the NMF. This information can be summarized to matrix of KEGG PATHWAY information using <code>pathwayWithFactor</code>.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pheatmap</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/pathwayWithFactor.html">pathwayWithFactor</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/pheatmap/man/pheatmap.html">pheatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/pathwayWithFactor.html">pathwayWithFactor</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/nmf5-1.png" width="100%" style="display: block; margin: auto;"></div>
-<p>These information can be further combined with the other functions in <code>stana</code>, like plotting factor abundances along with the tree inferred from consensus sequence alignment, linking allele frequency information and gene copy number data.</p>
+<p>These information can be further combined with the other functions in <code>stana</code>, like plotting factor profiles along with the tree inferred from consensus sequence alignment, linking allele frequency information and gene copy number data.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/plotAbundanceWithinSpecies.html">plotAbundanceWithinSpecies</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, tss<span class="op">=</span><span class="cn">TRUE</span>, return_data<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setMetadata.html">setMetadata</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">ab</span><span class="op">)</span></span>
@@ -279,6 +279,12 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getTreePlot.html">getTreePlot</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $`100003`</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/nmf6-1.png" width="100%" style="display: block; margin: auto;"></div>
+<div id="scaling-function-for-nnlm" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> Scaling function for NNLM<a class="anchor" aria-label="anchor" href="#scaling-function-for-nnlm"><i class="fas fa-link"></i></a>
+</h3>
+<p>As same as <code>scale</code> function in <a href="https://nmf.r-forge.r-project.org/scale.NMF.html"><code>NMF</code></a>, the helper function for <code>NNLM</code> resulting object is prepared (<code>scaler.NNLM</code>).</p>
+</div>
 </div>
 <div id="permanova" class="section level2" number="3.3">
 <h2>
@@ -289,7 +295,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/setTree.html">setTree</a></span><span class="op">(</span><span class="va">stana</span>, <span class="st">"100003"</span>, <span class="va">tre</span><span class="op">)</span></span>
 <span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>, target<span class="op">=</span><span class="st">"tree"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Performing adonis in 100003 target is tree</span></span>
-<span><span class="co">#&gt; #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.685</span></span>
+<span><span class="co">#&gt; #  F: 0.719649945825046, R2: 0.0740407267582885, Pr: 0.695</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/stana/man/getAdonis.html">getAdonis</a></span><span class="op">(</span><span class="va">stana</span><span class="op">)</span><span class="op">[[</span><span class="st">"100003"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Permutation test for adonis under reduced model</span></span>
 <span><span class="co">#&gt; Permutation: free</span></span>
@@ -297,7 +303,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; adonis2(formula = d ~ ., data = structure(list(group = c("Group1", "Group1", "Group1", "Group1", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2", "Group2")), row.names = c("ERR1711593", "ERR1711594", "ERR1711596", "ERR1711598", "ERR1711603", "ERR1711605", "ERR1711606", "ERR1711609", "ERR1711611", "ERR1711612", "ERR1711618"), class = "data.frame"))</span></span>
 <span><span class="co">#&gt;          Df SumOfSqs      R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; Model     1  0.15557 0.07404 0.7196  0.685</span></span>
+<span><span class="co">#&gt; Model     1  0.15557 0.07404 0.7196  0.695</span></span>
 <span><span class="co">#&gt; Residual  9  1.94558 0.92596              </span></span>
 <span><span class="co">#&gt; Total    10  2.10115 1.00000</span></span></code></pre></div>
 <p>The corresponding principal coordinate analysis plot using distance matrix can be drawn by specifying <code>pcoa</code>. The relative eigenvalues are plotted.</p>
@@ -305,7 +311,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <code class="sourceCode R"><span><span class="va">stana</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/doAdonis.html">doAdonis</a></span><span class="op">(</span><span class="va">stana</span>, specs <span class="op">=</span> <span class="st">"100003"</span>,</span>
 <span>    target<span class="op">=</span><span class="st">"genes"</span>, pcoa<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Performing adonis in 100003 target is genes</span></span>
-<span><span class="co">#&gt; #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.552</span></span></code></pre></div>
+<span><span class="co">#&gt; #  F: 0.950009752773493, R2: 0.0635457614064265, Pr: 0.578</span></span></code></pre></div>
 <div class="inline-figure"><img src="02-statistcal_files/figure-html/permanova2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>By default, the function uses grouping variable in <code>cl</code> slot. For more complex modeling, the slot <code>meta</code> can be populated by the data frame of samples by <code>setMetadata</code> like the example below. To use metadata, <code>useMeta</code> option should be specified with the formula argument.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
@@ -349,7 +355,7 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <h2>
 <span class="header-section-number">3.5</span> Aggregating gene copy numbers<a class="anchor" aria-label="anchor" href="#aggregating-gene-copy-numbers"><i class="fas fa-link"></i></a>
 </h2>
-<p>The gene abundances across multiple stana object can be aggregated. This returns the new stana object where the gene abundances are combined.</p>
+<p>The gene copy numbers across multiple stana object can be aggregated. This returns the new stana object where the gene copy numbers are combined.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## This returns new stana object</span></span>
 <span><span class="va">stanacomb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stana/man/combineGenes.html">combineGenes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">stana</span>, <span class="va">stana</span><span class="op">)</span>, species<span class="op">=</span><span class="st">"100003"</span><span class="op">)</span></span>
@@ -372,14 +378,14 @@ You should set <code>data.frame</code> containing covariates to stana object by 
 <span><span class="co">#&gt; # Performing Boruta</span></span>
 <span><span class="va">brres</span></span>
 <span><span class="co">#&gt; $boruta</span></span>
-<span><span class="co">#&gt; Boruta performed 99 iterations in 27.20215 secs.</span></span>
+<span><span class="co">#&gt; Boruta performed 99 iterations in 27.66723 secs.</span></span>
 <span><span class="co">#&gt; Tentatives roughfixed over the last 99 iterations.</span></span>
-<span><span class="co">#&gt;  9 attributes confirmed important: UHGG004616_01682,</span></span>
-<span><span class="co">#&gt; UHGG025024_01181, UHGG061776_01338, UHGG158704_01078,</span></span>
-<span><span class="co">#&gt; UHGG164856_00510 and 4 more;</span></span>
-<span><span class="co">#&gt;  21797 attributes confirmed unimportant:</span></span>
+<span><span class="co">#&gt;  15 attributes confirmed important: UHGG000008_01798,</span></span>
+<span><span class="co">#&gt; UHGG004375_00184, UHGG025024_01181, UHGG061776_01339,</span></span>
+<span><span class="co">#&gt; UHGG155301_01986 and 10 more;</span></span>
+<span><span class="co">#&gt;  21791 attributes confirmed unimportant:</span></span>
 <span><span class="co">#&gt; UHGG000008_00008, UHGG000008_00009, UHGG000008_00010,</span></span>
-<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21792 more;</span></span></code></pre></div>
+<span><span class="co">#&gt; UHGG000008_00012, UHGG000008_00015 and 21786 more;</span></span></code></pre></div>
 <p>Further, we visualize the copy numbers of important genes confirmed between the group.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">confirmed_genes</span> <span class="op">&lt;-</span> <span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">[</span><span class="va">brres</span><span class="op">$</span><span class="va">boruta</span><span class="op">$</span><span class="va">finalDecision</span><span class="op">==</span><span class="st">"Confirmed"</span><span class="op">]</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -399,7 +405,9 @@ You should set <code>data.frame</code> containing covariates to stana object by 
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#statistial-analysis"><span class="header-section-number">3</span> Statistial analysis</a></li>
 <li><a class="nav-link" href="#cons"><span class="header-section-number">3.1</span> Consensus sequence calling</a></li>
-<li><a class="nav-link" href="#nmf"><span class="header-section-number">3.2</span> Nonnegative matrix factorization</a></li>
+<li>
+<a class="nav-link" href="#nmf"><span class="header-section-number">3.2</span> Nonnegative matrix factorization</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#scaling-function-for-nnlm"><span class="header-section-number">3.2.1</span> Scaling function for NNLM</a></li></ul>
+</li>
 <li><a class="nav-link" href="#permanova"><span class="header-section-number">3.3</span> PERMANOVA</a></li>
 <li><a class="nav-link" href="#comparing-gene-copy-numbers"><span class="header-section-number">3.4</span> Comparing gene copy numbers</a></li>
 <li><a class="nav-link" href="#aggregating-gene-copy-numbers"><span class="header-section-number">3.5</span> Aggregating gene copy numbers</a></li>

@@ -15,6 +15,7 @@ printing-the-profile-information
 statistial-analysis
 cons
 nmf
+scaling-function-for-nnlm
 permanova
 comparing-gene-copy-numbers
 aggregating-gene-copy-numbers
