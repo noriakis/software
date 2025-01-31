@@ -43,8 +43,8 @@ res
 vinf <- results(res, contrast=c("viral_infection","BKPyV (Dunlop) MOI=1","No infection"))
 
 ## LFC
-g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf),
-                                   padj=assign_deseq2(vinf, column="padj"),
+g <- pathway("hsa04110") |> mutate(deseq2=assign_deseq2(vinf, org_db=org.Hs.eg.db),
+                                   padj=assign_deseq2(vinf, column="padj", org_db=org.Hs.eg.db),
                                    converted_name=convert_id("hsa"))
 
 ggraph(g, layout="manual", x=x, y=y) + 
