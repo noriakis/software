@@ -950,7 +950,7 @@ ggplotify::as.ggplot(overlaidGtable)
 
 ## Customizing global map visualization
 
-One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`.
+One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`. The RDA files used can be found at [here](https://github.com/noriakis/misc/tree/main/ggkegg). Also, this example uses customized functions from `ggraph`, available from [here](https://github.com/noriakis/ggraph).
 
 
 ``` r
