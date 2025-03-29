@@ -37,7 +37,7 @@ analyzing-cluster-marker-genes-in-single-cell-transcriptomics
 example-for-composing-multiple-pathways
 barplot-for-numeric-values-on-raw-map
 barplot-across-all-the-clusters
-customizing-global-map-visualization
+global
 preprocessing
 plotting
 notes
@@ -45,6 +45,7 @@ stamp-function
 parsing-of-the-module-definition
 parsing-of-reactions-in-the-pathway
 interpolation-in-the-raster-image
+addreadable
 saving-the-resulting-image
 ggkeggsave
 output_overlay_image

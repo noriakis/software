@@ -12,7 +12,7 @@ library(tidygraph)
 library(dplyr)
 kne <- network("N00002")
 kne
-#> N00002
+#> N00002 
 #> BCR-ABL fusion kinase to RAS-ERK signaling pathway
 ```
 
@@ -48,9 +48,6 @@ two
 #> 2     2     3 -|    reference
 #> 3     3     4 ->    reference
 #> # ℹ 2 more rows
-```
-
-``` r
 graph_join(one, two, by="name") |> plot_kegg_network()
 ```
 

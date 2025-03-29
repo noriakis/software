@@ -43,9 +43,6 @@ defs[["1"]]
 #> $definition_ko_in_block
 #> $definition_ko_in_block[[1]]
 #> [1] "K00878"
-```
-
-``` r
 defs[["2"]]
 #> $definition_block
 #> [1] "((K00941 K00788),K14153,K21219)"
@@ -59,9 +56,6 @@ defs[["2"]]
 #> $definition_ko_in_block
 #> $definition_ko_in_block[[1]]
 #> [1] "K00941" "K00788" "K14153" "K21219"
-```
-
-``` r
 
 ## Extract definition 2
 mod |>
@@ -136,3 +130,21 @@ ggraph(pathway("hsa04110"), layout="manual", x=x, y=y) + overlay_raw_map(interpo
 ```
 
 <img src="05-notes_files/figure-html/intp1-2.png" width="100%" style="display: block; margin: auto;" />
+
+
+## `add_readable_edge_label` {#addreadable}
+
+The example in \@ref(global) uses customized ggraph function for highlighting edge labels. `add_readable_edge_label` can highlight the edge label by `shadowtext`. This layer must be inserted just after the layer with labels. `label_colour` argument in the mapping should specify which column in the edge to be used for coloring.
+
+
+``` r
+pathway("hsa03460") %>%
+    ggraph(layout="kk")+
+    geom_edge_link(aes(label=subtype_value,
+         label_colour=subtype_value), color="grey80")+
+    add_readable_edge_label(size=5)+
+    geom_node_point()+
+    theme_graph()
+```
+
+<img src="05-notes_files/figure-html/addreadable-1.png" width="100%" style="display: block; margin: auto;" />

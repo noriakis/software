@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 8 Analysis of GSEA results | ggkegg</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Analysis of GSEA results | ggkegg">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 8 Analysis of GSEA results | ggkegg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.7.0/transition.js"></script><script src="libs/bs3compat-0.7.0/tabs.js"></script><script src="libs/bs3compat-0.7.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-J7N3J5H0G4"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,7 +68,7 @@
 <h1>
 <span class="header-section-number">8</span> Analysis of GSEA results<a class="anchor" aria-label="anchor" href="#analysis-of-gsea-results"><i class="fas fa-link"></i></a>
 </h1>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggfx.data-imaginist.com">ggfx</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
@@ -82,7 +82,7 @@
 <span class="header-section-number">8.1</span> Visualize the result of <code>enrichKEGG</code> and <code>gseKEGG</code><a class="anchor" aria-label="anchor" href="#visualize-the-result-of-enrichkegg-and-gsekegg"><i class="fas fa-link"></i></a>
 </h2>
 <p>The library can directly visualize the functional enrichment analysis result using <code>enrichKEGG</code> from <code>clusterProfiler</code>. The <code>enrich_attribute</code> will have boolean value whether the investigated gene is in pathway or not. By piping a <code>enrichResult</code> class object and <code>pathway_number</code> to <code>ggkegg</code>, <code>enrich_attribute</code> will be included in the resulting graph. Highlight <code>enrich_attribute</code> in the resulting graph. For a quick inspection, <code>rawMap</code> function can be used for simply producing highlighted graph with overlaid KEGG raw map.</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">'DOSE'</span><span class="op">)</span></span>
 <span><span class="va">de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -108,7 +108,7 @@
 <span>                    expand<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_kegg-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
 <span><span class="co">## Quick inspection</span></span>
@@ -116,27 +116,27 @@
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_kegg-2.png" width="100%" style="display: block; margin: auto;"></div>
 <p><code>rawMap</code> can accept multiple <code>enrichResult</code> class objects, given by list. In this case, users can choose which color to highlight the components in the list by specifying multiple colors in <code>fill_color</code>. Also, you should specify pathway ID for multiple enrichment results.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> </span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">deres</span>, <span class="va">deres</span>, <span class="va">deres</span><span class="op">)</span>, fill_color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"blue"</span><span class="op">)</span>, pid<span class="op">=</span><span class="st">"hsa04110"</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_kegg_2-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>If the results are converted to readable format, you can specify name argument to the column name in node data.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">deres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/enrichKEGG.html">enrichKEGG</a></span><span class="op">(</span><span class="va">de</span>, pvalueCutoff<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span> </span>
 <span><span class="va">deres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/DOSE/man/setReadable.html">setReadable</a></span><span class="op">(</span><span class="va">deres</span>, <span class="va">org.Hs.eg.db</span>, <span class="st">"ENTREZID"</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">deres</span>, <span class="va">deres</span>, <span class="va">deres</span><span class="op">)</span>, fill_color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"green"</span>,<span class="st">"blue"</span><span class="op">)</span>, pid<span class="op">=</span><span class="st">"hsa04110"</span>, name<span class="op">=</span><span class="st">"graphics_name"</span>, sep<span class="op">=</span><span class="st">", "</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_kegg_3-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p><code>rawMap</code> also accepts <code>gseaResult</code> class, although it may be useful for assigning numeric values such as log2 fold changes directly.</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">geneList</span>, package<span class="op">=</span><span class="st">"DOSE"</span><span class="op">)</span></span>
 <span><span class="va">kk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/clusterProfiler/man/gseKEGG.html">gseKEGG</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">)</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawMap.html">rawMap</a></span><span class="op">(</span><span class="va">kk</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_kegg_4-1.png" width="100%" style="display: block; margin: auto;"></div>
 <p>The same can be done for the numeric values using <code>rawValue</code>. You can control your favorite color gradient using <code>scale_fill_gradient*</code>. Note if multiple named vectors were passed by a list, the same scale is used. It can be customized by adding the additional scales using the package such as <a href="https://github.com/teunbrand/ggh4x"><code>ggh4x</code></a>.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/rawValue.html">rawValue</a></span><span class="op">(</span><span class="va">geneList</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>, <span class="st">"hsa04110"</span>, auto_add<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">res</span></span></code></pre></div>
 <div class="inline-figure"><img src="07-gsea_files/figure-html/cp_value-1.png" width="100%" style="display: block; margin: auto;"></div>
@@ -146,7 +146,7 @@
 <span class="header-section-number">8.2</span> Using multiple scales when highlighting multiple values in pathway<a class="anchor" aria-label="anchor" href="#using-multiple-scales-when-highlighting-multiple-values-in-pathway"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using <code>ggh4x</code>, you can plot the multiple values in its own scale using <code><a href="https://teunbrand.github.io/ggh4x/reference/scale_fill_multi.html">scale_fill_multi()</a></code>. It is used in the package <code>plotKEGGPathway</code> in <code>stana</code> package for intra-species diversity analysis. For usage in the function, please refer to <a href="https://github.com/teunbrand/ggh4x"><code>ggh4x</code></a> site and <a href="https://github.com/noriakis/stana/blob/main/R/plotKEGGPathway.R">the code</a>.</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/teunbrand/ggh4x">ggh4x</a></span><span class="op">)</span></span>
 <span><span class="va">test</span> <span class="op">&lt;-</span> <span class="va">geneList</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"hsa:"</span>,<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">test</span><span class="op">)</span><span class="op">)</span></span>
@@ -204,7 +204,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-08-20.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2025-03-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -11,7 +11,7 @@ library(tidygraph)
 library(dplyr)
 mod <- module("M00004")
 mod
-#> M00004
+#> M00004 
 #> Pentose phosphate pathway (Pentose phosphate cycle)
 ```
 
@@ -88,10 +88,7 @@ query <- sample(attr(mod, "definition_components"), 5) |>
   strsplit(":") |>
   sapply("[",2)
 query
-#> [1] "K00164" "K05942" "K00658" "K00024" "K18860"
-```
-
-``` r
+#> [1] "K01900" "K00244" "K01902" "K01682" "K00164"
 mod |>
   module_completeness(query) |>
   kableExtra::kable()
@@ -101,14 +98,14 @@ mod |>
 
 |block                                                                                                          | all_num| present_num|     ratio|complete |
 |:--------------------------------------------------------------------------------------------------------------|-------:|-----------:|---------:|:--------|
-|(K01647,K05942)                                                                                                |       2|           1| 0.5000000|TRUE     |
-|(K01681,K01682)                                                                                                |       2|           0| 0.0000000|FALSE    |
+|(K01647,K05942)                                                                                                |       2|           0| 0.0000000|FALSE    |
+|(K01681,K01682)                                                                                                |       2|           1| 0.5000000|TRUE     |
 |(K00031,K00030)                                                                                                |       2|           0| 0.0000000|FALSE    |
-|((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176)                                                    |       8|           2| 0.2500000|FALSE    |
-|(K01902+K01903,K01899+K01900,K18118)                                                                           |       5|           0| 0.0000000|FALSE    |
+|((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176)                                                    |       8|           1| 0.1250000|FALSE    |
+|(K01902+K01903,K01899+K01900,K18118)                                                                           |       5|           2| 0.4000000|FALSE    |
 |(K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) |      15|           1| 0.0666667|FALSE    |
 |(K01676,K01679,K01677+K01678)                                                                                  |       4|           0| 0.0000000|FALSE    |
-|(K00026,K00025,K00024,K00116)                                                                                  |       4|           1| 0.2500000|TRUE     |
+|(K00026,K00025,K00024,K00116)                                                                                  |       4|           0| 0.0000000|FALSE    |
 
 
 
@@ -226,18 +223,11 @@ library(BiocFileCache)
 #> The following objects are masked from 'package:dplyr':
 #> 
 #>     ident, sql
-```
-
-``` r
 library(clusterProfiler)
-#> clusterProfiler v4.12.2 Learn more at https://yulab-smu.top/contribution-knowledge-mining/
+#> clusterProfiler v4.10.1  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
-#> Please cite:
-#> 
-#> Guangchuang Yu, Li-Gen Wang, Yanyan Han and Qing-Yu
-#> He. clusterProfiler: an R package for comparing
-#> biological themes among gene clusters. OMICS: A
-#> Journal of Integrative Biology 2012, 16(5):284-287
+#> If you use clusterProfiler in published research, please cite:
+#> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
 #> 
 #> Attaching package: 'clusterProfiler'
 #> The following object is masked from 'package:igraph':
@@ -246,9 +236,6 @@ library(clusterProfiler)
 #> The following object is masked from 'package:stats':
 #> 
 #>     filter
-```
-
-``` r
 
 ## Download and cache KO to module relationship
 url <- paste0("https://rest.kegg.jp/link/ko/module")

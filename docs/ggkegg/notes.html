@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 6 Notes | ggkegg</title>
 <meta name="author" content="Noriaki Sato">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Notes | ggkegg">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 6 Notes | ggkegg">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.7.0/transition.js"></script><script src="libs/bs3compat-0.7.0/tabs.js"></script><script src="libs/bs3compat-0.7.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-J7N3J5H0G4"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -73,7 +73,7 @@
 <span class="header-section-number">6.1</span> Stamp function<a class="anchor" aria-label="anchor" href="#stamp-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code>stamp</code> function can be used to highlight the nodes with colored rectangles.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span><span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/geom_node_rect.html">geom_node_rect</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
@@ -86,7 +86,7 @@
 <span class="header-section-number">6.2</span> Parsing of the module definition<a class="anchor" aria-label="anchor" href="#parsing-of-the-module-definition"><i class="fas fa-link"></i></a>
 </h2>
 <p>For module describing multiple lines of the definition (e.g. <code>M00897</code>), the <code>module</code> function tries to parse them separately. These definitions will be assigned the number (in <code>character</code> type).</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module.html">module</a></span><span class="op">(</span><span class="st">"M00899"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -103,9 +103,8 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $definition_ko_in_block</span></span>
 <span><span class="co">#&gt; $definition_ko_in_block[[1]]</span></span>
-<span><span class="co">#&gt; [1] "K00878"</span></span></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">defs</span><span class="op">[[</span><span class="st">"2"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "K00878"</span></span>
+<span><span class="va">defs</span><span class="op">[[</span><span class="st">"2"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; $definition_block</span></span>
 <span><span class="co">#&gt; [1] "((K00941 K00788),K14153,K21219)"</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -117,9 +116,8 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $definition_ko_in_block</span></span>
 <span><span class="co">#&gt; $definition_ko_in_block[[1]]</span></span>
-<span><span class="co">#&gt; [1] "K00941" "K00788" "K14153" "K21219"</span></span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [1] "K00941" "K00788" "K14153" "K21219"</span></span>
+<span></span>
 <span><span class="co">## Extract definition 2</span></span>
 <span><span class="va">mod</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/module_text.html">module_text</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co">## return data.frame</span></span>
@@ -131,12 +129,12 @@
 <span class="header-section-number">6.3</span> Parsing of reactions in the pathway<a class="anchor" aria-label="anchor" href="#parsing-of-reactions-in-the-pathway"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the <code>devel</code> branch of <code>ggkegg</code>, the KGML of the following reactions (<a href="https://www.genome.jp/entry/R00863">https://www.genome.jp/entry/R00863</a>) in <code>ko00270</code> are parsed in the below format by default.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb94-1"><a href="notes.html#cb94-1" tabindex="-1"></a>&lt;<span class="kw">reaction</span><span class="ot"> id=</span><span class="st">"237"</span><span class="ot"> name=</span><span class="st">"rn:R00863"</span><span class="ot"> type=</span><span class="st">"irreversible"</span>&gt;</span>
-<span id="cb94-2"><a href="notes.html#cb94-2" tabindex="-1"></a>    &lt;<span class="kw">substrate</span><span class="ot"> id=</span><span class="st">"183"</span><span class="ot"> name=</span><span class="st">"cpd:C00606"</span>/&gt;</span>
-<span id="cb94-3"><a href="notes.html#cb94-3" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"238"</span><span class="ot"> name=</span><span class="st">"cpd:C00041"</span>/&gt;</span>
-<span id="cb94-4"><a href="notes.html#cb94-4" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"236"</span><span class="ot"> name=</span><span class="st">"cpd:C09306"</span>/&gt;</span>
-<span id="cb94-5"><a href="notes.html#cb94-5" tabindex="-1"></a>&lt;/<span class="kw">reaction</span>&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb82-1"><a href="notes.html#cb82-1" tabindex="-1"></a>&lt;<span class="kw">reaction</span><span class="ot"> id=</span><span class="st">"237"</span><span class="ot"> name=</span><span class="st">"rn:R00863"</span><span class="ot"> type=</span><span class="st">"irreversible"</span>&gt;</span>
+<span id="cb82-2"><a href="notes.html#cb82-2" tabindex="-1"></a>    &lt;<span class="kw">substrate</span><span class="ot"> id=</span><span class="st">"183"</span><span class="ot"> name=</span><span class="st">"cpd:C00606"</span>/&gt;</span>
+<span id="cb82-3"><a href="notes.html#cb82-3" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"238"</span><span class="ot"> name=</span><span class="st">"cpd:C00041"</span>/&gt;</span>
+<span id="cb82-4"><a href="notes.html#cb82-4" tabindex="-1"></a>    &lt;<span class="kw">product</span><span class="ot"> id=</span><span class="st">"236"</span><span class="ot"> name=</span><span class="st">"cpd:C09306"</span>/&gt;</span>
+<span id="cb82-5"><a href="notes.html#cb82-5" tabindex="-1"></a>&lt;/<span class="kw">reaction</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/ggkegg">ggkegg</a></span><span class="op">)</span></span>
 <span><span class="va">reac</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"ko00270"</span><span class="op">)</span></span>
 <span><span class="va">reac</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">reaction</span><span class="op">==</span><span class="st">"rn:R00863"</span><span class="op">)</span></span>
@@ -149,7 +147,7 @@
 <span><span class="co">#&gt; 2 rn:R00863         237    ko00270</span></span>
 <span><span class="co">#&gt; 3 rn:R00863         237    ko00270</span></span></code></pre></div>
 <p>These edges correspond to the relationship between compound <code>substrate</code> or <code>product</code> and <code>reaction (orthology)</code> nodes. These edges are kept for the conversion in <code>process_reaction</code>, where <code>substrate</code> and <code>product</code> are directly connected by edges.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reac2</span> <span class="op">&lt;-</span> <span class="va">reac</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/process_reaction.html">process_reaction</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">node_df</span> <span class="op">&lt;-</span> <span class="va">reac2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">reac2</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/activate.html">activate</a></span><span class="op">(</span><span class="va">edges</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -170,12 +168,27 @@
 <span class="header-section-number">6.4</span> Interpolation in the raster image<a class="anchor" aria-label="anchor" href="#interpolation-in-the-raster-image"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <code>annotation_custom</code> is used in <code>overlay_raw_map</code>. The <code>interpolate</code> option can be specified.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>interpolate<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-notes_files/figure-html/intp1-1.png" width="100%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa04110"</span><span class="op">)</span>, layout<span class="op">=</span><span class="st">"manual"</span>, x<span class="op">=</span><span class="va">x</span>, y<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/overlay_raw_map.html">overlay_raw_map</a></span><span class="op">(</span>interpolate<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="05-notes_files/figure-html/intp1-2.png" width="100%" style="display: block; margin: auto;"></div>
+</div>
+<div id="addreadable" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> <code>add_readable_edge_label</code><a class="anchor" aria-label="anchor" href="#addreadable"><i class="fas fa-link"></i></a>
+</h2>
+<p>The example in <a href="usecases.html#global">5.6</a> uses customized ggraph function for highlighting edge labels. <code>add_readable_edge_label</code> can highlight the edge label by <code>shadowtext</code>. This layer must be inserted just after the layer with labels. <code>label_colour</code> argument in the mapping should specify which column in the edge to be used for coloring.</p>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/pathway.html">pathway</a></span><span class="op">(</span><span class="st">"hsa03460"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout<span class="op">=</span><span class="st">"kk"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label<span class="op">=</span><span class="va">subtype_value</span>,</span>
+<span>         label_colour<span class="op">=</span><span class="va">subtype_value</span><span class="op">)</span>, color<span class="op">=</span><span class="st">"grey80"</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/ggkegg/man/add_readable_edge_label.html">add_readable_edge_label</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/theme_graph.html">theme_graph</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-notes_files/figure-html/addreadable-1.png" width="100%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
@@ -190,6 +203,7 @@
 <li><a class="nav-link" href="#parsing-of-the-module-definition"><span class="header-section-number">6.2</span> Parsing of the module definition</a></li>
 <li><a class="nav-link" href="#parsing-of-reactions-in-the-pathway"><span class="header-section-number">6.3</span> Parsing of reactions in the pathway</a></li>
 <li><a class="nav-link" href="#interpolation-in-the-raster-image"><span class="header-section-number">6.4</span> Interpolation in the raster image</a></li>
+<li><a class="nav-link" href="#addreadable"><span class="header-section-number">6.5</span> add_readable_edge_label</a></li>
 </ul>
 
       <div class="book-extra">
@@ -206,7 +220,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2024-08-20.</p>
+    <p>"<strong>ggkegg</strong>" was written by Noriaki Sato. It was last built on 2025-03-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

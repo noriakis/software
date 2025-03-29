@@ -29,9 +29,6 @@ g <- ggkegg(pid="eco00270",
 gg <- ggraph(g, layout="fr") 
 gg$data$type |> unique()
 #> [1] "map"      "compound" "gene"
-```
-
-``` r
 gg + geom_edge_diagonal(
   aes(color=subtype_name,
       filter=type!="maplink"))+

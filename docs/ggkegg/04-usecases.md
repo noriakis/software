@@ -37,9 +37,6 @@ res
 #>   SRR14509907
 #> colData names(27): Assay.Type AvgSpotLen ...
 #>   viral_infection replaceable
-```
-
-``` r
 vinf <- results(res, contrast=c("viral_infection","BKPyV (Dunlop) MOI=1","No infection"))
 
 ## LFC
@@ -96,7 +93,7 @@ You can use your favorite geoms in `ggplot2` and their extensions to add informa
 
 
 ``` r
-g <- g |> mutate(lfc=assign_deseq2(vinf, column="log2FoldChange"))
+g <- g |> mutate(lfc=assign_deseq2(vinf, column="log2FoldChange", org_db=org.Hs.eg.db))
 
 ## Make contour data
 df <- g |> data.frame()
@@ -219,12 +216,13 @@ new_g
 ### Integrating matrix to `tbl_graph`
 
 If you want to reflect an expression matrix in a graph, the `edge_matrix` and `node_matrix` functions can be useful. By specifying a matrix and gene IDs, you can assign numeric values for each sample to the `tbl_graph`. `edge_matrix` assigns the sum of the two nodes connected by an edge, ignoring group nodes ([Adnan et al. 2020](
-https://doi.org/10.1186/s12859-020-03692-2)).
+https://doi.org/10.1186/s12859-020-03692-2)). The users should specify `org_db`.
 
 
 ``` r
 mat <- assay(vst(res))
-new_g <- g |> edge_matrix(mat) |> node_matrix(mat)
+new_g <- g |> edge_matrix(mat, org_db=org.Hs.eg.db) |> 
+    node_matrix(mat, org_db=org.Hs.eg.db)
 new_g
 #> # A tbl_graph: 134 nodes and 157 edges
 #> #
@@ -476,7 +474,7 @@ g3 <- ggraph(g2_2, layout="nicely")+
 graphdata <- g3$data
 ```
 
-Finally, we use `geom_scatterpie` for the visualization. The background scatterpie indicates whether the genes are in the pathways, and the foreground indicates whether the gene is differentially expressed in multiple datasets. We highlight the genes which were differentially expressed in both datasets by gold colour.
+Finally, we use `geom_scatterpie` for the visualization. The background scatterpie indicates whether the genes are in the pathways, and the foreground indicates whether the gene is differentially expressed in multiple datasets.
 
 
 ``` r
@@ -491,10 +489,10 @@ g4 <- g3+
                            color="transparent",
                            data=graphdata, legend_name="enrich",
                            cols=c("in_pathway_rptec","in_pathway_uro"))+
-  ggfx::with_outer_glow(geom_scatterpie(aes(x=x, y=y, r=size),
+  geom_scatterpie(aes(x=x, y=y, r=size),
                   color="transparent",
                   data=graphdata[graphdata$in_pathway_rptec & graphdata$in_pathway_uro,],
-                  cols=c("in_pathway_rptec","in_pathway_uro")), colour="gold", expand=3)+
+                  cols=c("in_pathway_rptec","in_pathway_uro"))+
   geom_node_point(shape=19, size=3, aes(filter=!in_pathway_uro & !in_pathway_rptec & type!="map"))+
   geom_node_shadowtext(aes(label=id, y=y-0.5), size=3, family="sans", bg.colour="white", colour="black")+
   theme_void()+coord_fixed()
@@ -676,20 +674,20 @@ library(org.Hs.eg.db)
 subset_lab <- label[label$Cell %in% c("1","4","5","6"),]
 dd <- ggplot(pcas) + 
   ggfx::with_outer_glow(geom_node_point(size=1,
-  	  aes(x=PC_1, y=PC_2, filter=group=="1", color=group)),
+      aes(x=PC_1, y=PC_2, filter=group=="1", color=group)),
                         colour="tomato", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1,
-  	  aes(x=PC_1, y=PC_2, filter=group=="5", color=group)),
+      aes(x=PC_1, y=PC_2, filter=group=="5", color=group)),
                         colour="tomato", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1,
-  	  aes(x=PC_1, y=PC_2, filter=group=="4", color=group)),
+      aes(x=PC_1, y=PC_2, filter=group=="4", color=group)),
                         colour="gold", expand=3)+
   ggfx::with_outer_glow(geom_node_point(size=1,
-  	  aes(x=PC_1, y=PC_2, filter=group=="6", color=group)),
+      aes(x=PC_1, y=PC_2, filter=group=="6", color=group)),
                         colour="gold", expand=3)+
   shadowtext::geom_shadowtext(x=subset_lab$meanX,
-  	  y=subset_lab$meanY, label=subset_lab$Cell,
-  	  data=subset_lab,
+      y=subset_lab$meanY, label=subset_lab$Cell,
+      data=subset_lab,
       bg.colour="white", colour="black")+
   theme_minimal()
 
@@ -898,6 +896,7 @@ for (i in subset_df$orig.id |> unique()) {
                                                            ymin=ymin, ymax=ymax)
     }
 }
+
 ```
 
 Obtain legend and modify.
@@ -948,7 +947,7 @@ ggplotify::as.ggplot(overlaidGtable)
 
 <img src="04-usecases_files/figure-html/legend2-1.png" width="100%" style="display: block; margin: auto;" />
 
-## Customizing global map visualization
+## Customizing global map visualization {#global}
 
 One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`. The RDA files used can be found at [here](https://github.com/noriakis/misc/tree/main/ggkegg). Also, this example uses customized functions from `ggraph`, available from [here](https://github.com/noriakis/ggraph).
 
@@ -962,15 +961,9 @@ lfcs |> head()
 #> -0.2955686 -0.4803597 -0.3052872  0.9327130  1.0954976 
 #>  ko:K00087 
 #>  0.8713860
-```
-
-``` r
 signame |> head()
 #> [1] "ko:K00013" "ko:K00018" "ko:K00031" "ko:K00042"
 #> [5] "ko:K00065" "ko:K00087"
-```
-
-``` r
 func_cat |> head()
 #> # A tibble: 6 × 3
 #>   hex     class                                        top  
@@ -981,9 +974,6 @@ func_cat |> head()
 #> 4 #FF8080 Metabolism; Nucleotide metabolism            Puri…
 #> 5 #6C63F6 Metabolism; Carbohydrate metabolism          Glyc…
 #> 6 #FFCC66 Metabolism; Amino acid metabolism            Bios…
-```
-
-``` r
 
 ## Named vector for Assigning functional category 
 hex <- func_cat$hex |> setNames(func_cat$hex)
@@ -991,9 +981,6 @@ class <- func_cat$class |> setNames(func_cat$hex)
 hex |> head()
 #>   #B3B3E6   #F06292   #FFB3CC   #FF8080   #6C63F6   #FFCC66 
 #> "#B3B3E6" "#F06292" "#FFB3CC" "#FF8080" "#6C63F6" "#FFCC66"
-```
-
-``` r
 class |> head()
 #>                                                   #B3B3E6 
 #>                     "Metabolism; Carbohydrate metabolism" 
@@ -1021,6 +1008,7 @@ g <- g |> mutate(x=NULL, y=NULL)
 g <- g |> activate(nodes) |> mutate(compn=convert_id("compound",
                                           first_arg_comma = FALSE))
 g <- g |> activate(edges) |> mutate(kon=convert_id("ko",edge=TRUE))
+
 ```
 
 Next we append values such as KOs and degrees to graph. In addition, here we append additional attribute, like which species have the enzymes, to the graph. This type of information can be obtained from stratified output of `HUMAnN3`.
@@ -1090,7 +1078,7 @@ ggraph(g2, layout="fr")+
 
 <img src="04-usecases_files/figure-html/glplot1-1.png" width="100%" style="display: block; margin: auto;" />
 
-We can apply various geoms to components in KEGG PATHWAY for the effective visualization. In this example, we highlighted significant edges (KOs) colored by their LFCs by `ggfx`, point size corresponding to degree in the network, and we showed edge label of significant KO names. KO names were colored by `Species` attributes. This time we set this to `Escherichia coli` and `Others`.
+We can apply various geoms to components in KEGG PATHWAY for the effective visualization. In this example, we highlighted significant edges (KOs) colored by their LFCs by `ggfx`, point size corresponding to degree in the network, and we showed edge label of significant KO names. KO names were colored by `Species` attributes. This time we set this to `Escherichia coli` and `Others`. The edge label highlighting can be performed by the internal function `add_readable_edge_label` (\@ref(addreadable)).
 
 
 ``` r
@@ -1110,15 +1098,15 @@ ggraph(g2, layout="fr") +
                   shape=21,
                   color="black")+ ## Node size set to degree
   scale_size(range=c(1,4))+
-  geom_edge_label_diagonal(aes(
-    label=kon,
-    label_colour=Species,
-    filter=siglgl
-  ),
-  angle_calc = "along",
-  label_size=2.5)+ ## Showing edge label, label color is Species attribute
-  scale_label_colour_manual(values=c("tomato","black"),
-                            name="Species")+ ## Scale color for edge label
+  # geom_edge_label_diagonal(aes(label=kon, label_colour=Species, filter=siglgl),
+  #     angle_calc = "along", label_size=2.5)+
+  # scale_label_colour_manual(values=c("tomato","black"), name="Species")+
+  ## This part (geom_edge_label_diagonal and scale_label_color_manual) 
+  ## tries to show the highlighted edge label,
+  ## but one can use `add_readable_edge_label` like commented lines below.
+  geom_edge_diagonal(aes(label=kon, label_colour=Species, filter=siglgl))+
+  add_readable_edge_label(size=2.5)+
+  scale_color_manual(values=c("tomato", "black"), name="Species")+
   scale_fill_manual(values=hex,labels=class,name="Class")+ ## Show legend based on HEX
   theme_graph()+
   guides(fill = guide_legend(override.aes = list(size=5))) ## Change legend point size
@@ -1146,9 +1134,7 @@ g2 |>
 ggraph(layout="fr") +
   geom_edge_diagonal(color="grey50", width=0.1)+ ## Base edge
   ggfx::with_outer_glow(
-    geom_edge_diagonal(aes(color=kolfc,filter=siglgl),
-                       angle_calc = "along",
-                       label_size=2.5),
+    geom_edge_diagonal(aes(color=kolfc,filter=siglgl)),
     colour="gold", expand=3
   )+
   scale_edge_color_gradient2(midpoint = 0, mid = "white",
@@ -1159,15 +1145,16 @@ ggraph(layout="fr") +
                   shape=21,
                   color="black")+
   scale_size(range=c(1,4))+
-  geom_edge_label_diagonal(aes(
-    label=kon,
-    label_colour=Species,
-    filter=siglgl
-  ),
-  angle_calc = "along",
-  label_size=2.5)+ ## Showing edge label
-  scale_label_colour_manual(values=c("tomato","black"),
-                            name="Species")+ ## Scale color for edge label
+  # geom_edge_label_diagonal(aes(label=kon, label_colour=Species, filter=siglgl),
+  #     angle_calc = "along",
+  #     label_size=2.5)+ 
+  # scale_label_colour_manual(values=c("tomato","black"), name="Species")+
+  ## This part (geom_edge_label_diagonal and scale_label_color_manual) 
+  ## tries to show the highlighted edge label,
+  ## but one can use `add_readable_edge_label` like commented lines below.
+  geom_edge_diagonal(aes(label=kon, label_colour=Species, filter=siglgl))+
+  add_readable_edge_label(size=2.5)+
+  scale_color_manual(values=c("tomato", "black"), name="Species")+
   geom_node_text(aes(label=stringr::str_wrap(subname,10,whitespace_only = FALSE)),
     repel=TRUE, bg.colour="white", size=2)+
   scale_fill_manual(values=hex,labels=class,name="Class")+

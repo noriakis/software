@@ -55,9 +55,6 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
     theme(legend.position=c(0.9, 0.2))
 output_overlay_image(gg, use_cache=TRUE, with_legend=TRUE,  out="test2.png")
 #> [1] "test2.png"
-```
-
-``` r
 knitr::include_graphics("test2.png")
 ```
 
@@ -81,9 +78,6 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
     theme_void()
 output_overlay_image(gg, use_cache=TRUE, with_legend_image=TRUE, out="test3.png")
 #> [1] "test3.png"
-```
-
-``` r
 knitr::include_graphics("test3.png")
 ```
 
@@ -109,9 +103,6 @@ output_overlay_image(gg, high_res=TRUE, use_cache=TRUE, with_legend_image=TRUE,
 	res=100, legend_space=100,
 	out="test4.png")
 #> [1] "test4.png"
-```
-
-``` r
 knitr::include_graphics("test4.png")
 ```
 
