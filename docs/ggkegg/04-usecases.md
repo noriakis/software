@@ -507,7 +507,7 @@ g4
 With this package, it is possible to project inferred networks such as gene regulatory networks or KO networks inferred by other software onto KEGG maps. The following is an example of projecting a subset of KO networks within a pathway inferred by CBNplot onto the reference map of the corresponding pathway using `MicrobiomeProfiler`. Of course, it is also possible to project networks created using other methods.
 
 
-```r
+``` r
 library(dplyr)
 library(igraph)
 library(tidygraph)
@@ -525,7 +525,7 @@ joined <- combine_with_bnlearn(pg, returnnet$str, returnnet$av)
 Plot the resulting map. In this example, the strength estimated by `CBNplot` is first displayed with colored edges, and then the edges of the reference graph are drawn in black on top of it. Also, edges included in both graphs are highlighted by yellow.
 
 
-```r
+``` r
 ## Summarize duplicate edges including `strength` attribute
 number <- joined |> activate(edges) |> data.frame() |> group_by(from,to) |>
   summarise(n=n(), incstr=sum(!is.na(strength)))
@@ -655,7 +655,8 @@ gg <- ggraph(g, layout="manual", x=x, y=y)+
     geom_node_rect(aes(filter=marker_1&marker_5), fill="tomato")+ ## Marker 1 & 5
     geom_node_rect(aes(filter=marker_1&!marker_5), fill=gr_cols["1"])+ ## Marker 1
     geom_node_rect(aes(filter=marker_5&!marker_1), fill=gr_cols["5"])+ ## Marker 5
-  overlay_raw_map("hsa04380", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+  overlay_raw_map("hsa04380", transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"),
+    use_cache=FALSE)+
   theme_void()
 gg+dd+plot_layout(widths=c(0.6,0.4))
 ```
@@ -670,21 +671,22 @@ We can inspect marker genes in multiple pathways to better understand the role o
 ``` r
 library(clusterProfiler)
 library(org.Hs.eg.db)
+expand <- 6
 
 subset_lab <- label[label$Cell %in% c("1","4","5","6"),]
 dd <- ggplot(pcas) + 
   ggfx::with_outer_glow(geom_node_point(size=1,
       aes(x=PC_1, y=PC_2, filter=group=="1", color=group)),
-                        colour="tomato", expand=3)+
+                        colour="tomato", expand=expand)+
   ggfx::with_outer_glow(geom_node_point(size=1,
       aes(x=PC_1, y=PC_2, filter=group=="5", color=group)),
-                        colour="tomato", expand=3)+
+                        colour="tomato", expand=expand)+
   ggfx::with_outer_glow(geom_node_point(size=1,
       aes(x=PC_1, y=PC_2, filter=group=="4", color=group)),
-                        colour="gold", expand=3)+
+                        colour="gold", expand=expand)+
   ggfx::with_outer_glow(geom_node_point(size=1,
       aes(x=PC_1, y=PC_2, filter=group=="6", color=group)),
-                        colour="gold", expand=3)+
+                        colour="gold", expand=expand)+
   shadowtext::geom_shadowtext(x=subset_lab$meanX,
       y=subset_lab$meanY, label=subset_lab$Cell,
       data=subset_lab,
@@ -711,13 +713,13 @@ gg1 <- ggraph(g1, layout="manual", x=x, y=y)+
   overlay_raw_map("hsa04612", transparent_colors = c("#FFFFFF", "#BFBFFF", "#BFFFBF"))+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_4&marker_6), fill="white"),
-    colour="gold")+
+    colour="gold", expand=expand)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_4&!marker_6), fill="white"),
-    colour=gr_cols["4"])+
+    colour=gr_cols["4"], expand=expand)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_6&!marker_4), fill="white"),
-    colour=gr_cols["6"], expand=3)+
+    colour=gr_cols["6"], expand=expand)+
   overlay_raw_map("hsa04612", transparent_colors = c("#B3B3B3", "#FFFFFF", "#BFBFFF", "#BFFFBF"))+
   theme_void()
 
@@ -727,17 +729,18 @@ gg2 <- ggraph(g2, layout="manual", x=x, y=y)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&marker_5),
                    fill="white"), ## Marker 1 & 5
-    colour="tomato")+
+    colour="tomato", expand=expand)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_1&!marker_5),
                    fill="white"), ## Marker 1
-    colour=gr_cols["1"])+
+    colour=gr_cols["1"], expand=expand)+
   ggfx::with_outer_glow(
     geom_node_rect(aes(filter=marker_5&!marker_1),
                    fill="white"), ## Marker 5
-    colour=gr_cols["5"])+
+    colour=gr_cols["5"], expand=expand)+
   overlay_raw_map("hsa04380",
-                  transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"))+
+                  transparent_colors = c("#cccccc","#FFFFFF","#BFBFFF","#BFFFBF"),
+                  use_cache=FALSE)+
   theme_void()
 left <-  (gg2 + ggtitle("Marker 1 and 5")) /
   (gg1 + ggtitle("Marker 4 and 6"))
@@ -747,7 +750,7 @@ final <- left + dd + plot_layout(design="
             AAAAACCC
             BBBBBCCC
             BBBBB###
-            ")
+")
 
 final
 ```
@@ -949,7 +952,7 @@ ggplotify::as.ggplot(overlaidGtable)
 
 ## Customizing global map visualization {#global}
 
-One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`. The RDA files used can be found at [here](https://github.com/noriakis/misc/tree/main/ggkegg). Also, this example uses customized functions from `ggraph`, available from [here](https://github.com/noriakis/ggraph).
+One advantage of using `ggkegg` is visualizing global maps effectively using the power of `ggplot2` and `ggraph`. Here, I present an example of visualizing log2 fold change values obtained from some microbiome experiments in global map. First, we load necessary data, which can be obtained from your dataset investigating KO, obtained from the pipeline such as `HUMAnN3`. The RDA files used can be found at the URL [here](https://github.com/noriakis/misc/tree/main/ggkegg). Also, this example can be reproduced by the customized functions from `ggraph`, available from [here](https://github.com/noriakis/ggraph).
 
 
 ``` r

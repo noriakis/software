@@ -199,7 +199,7 @@ pathway("ko01230") |>
 We show the example for highlighting `Metabolic pathways (ko01100)`, using `M00021` definition. `highlight_module` function accepts `kegg_module` class object and return the boolean of which edges are involved in reaction inside module and which nodes are compounds involved in the reaction. Please note that this does not produce exactly the same output as `KEGG mapper`. This adds new columns to the tbl_graph with `TRUE` for nodes and edges that meet the respective conditions.
 
 
-```r
+``` r
 g <- pathway("ko01100") |> 
   process_line() |>
   highlight_module(module("M00021")) |>
@@ -230,7 +230,7 @@ g |> ggraph(x=x, y=y) +
 Multiple modules involved in Cysteine and methionine metabolism, highlighting `M00017` by `ggforce`.
 
 
-```r
+``` r
 list_of_modules <- c("M00021","M00338","M00609","M00017","M00034","M00035","M00368")
 for (mm in list_of_modules) {
   g <- g |> highlight_module(module(mm))
@@ -257,7 +257,7 @@ geom_node_point(size=2, color="red",aes(filter=M00017|M00021|M00338|M00609|M0003
 When visualizing information about compounds, it is recommended to use `geom_node_text`, `ggrepel`, and `shadowtext`.
 
 
-```r
+``` r
 g |> ggraph(x=x, y=y) +
   geom_node_point(size=1, aes(color=I(fgcolor),
     filter=fgcolor!="none" & type!="line"))+
@@ -285,7 +285,7 @@ g |> ggraph(x=x, y=y) +
 If necessary, it is possible to visualize what information is included in the highlighted pathway and place it on the original map using the `annotation_custom` function. In this example, an annotation ggplot is first created and then converted to a grob using `ggplotify`. The grob is then drawn at any desired position.
 
 
-```r
+``` r
 
 annot <- g |>  ggraph(x=x, y=y)+
   with_outer_glow(
@@ -330,7 +330,7 @@ g |>
 It is also possible to highlight any desired edges or nodes. In this case, the `highlight_set_edges` and `highlight_set_nodes` functions are used within `mutate` to generate a new column containing a boolean indicating whether the specified IDs are included or not. We can highlight those nodes or edges in the desired geoms. When `how` is set to `all`, `TRUE` is returned only if all the IDs included in the query are included in the node. When `how` is set to `any`, `TRUE` is returned if any of the IDs included in the query are included in the node.
 
 
-```r
+``` r
 
 gg <- g |> activate(edges) |> 
   mutate(highlight=highlight_set_edges(c("ko:K00790","ko:K00789")))
@@ -346,7 +346,7 @@ gg |>
 An example of highlighting combined with the `graphhighlight`:
 
 
-```r
+``` r
 library(graphhighlight)
 g |> ggraph(x=x, y=y) +
   geom_edge_link(width=0.5, aes(color=I(fgcolor), filter=fgcolor!="none")) +
@@ -361,7 +361,7 @@ g |> ggraph(x=x, y=y) +
 When visualizing large maps such as global and overview maps, it is better to use `geom_edge_link0`, as described in the documentation of ggraph `geom_edge_*`. Moreover, for nodes, combining the scattermore package's `geom_scattermore` with ggraph's `StatFilter` allows for faster rendering.
 
 
-```r
+``` r
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
   scattermore::geom_scattermore(pointsize=1, stat=StatFilter,
@@ -371,10 +371,10 @@ ggraph(g, x=x, y=y) +geom_edge_link0(aes(color=I(fgcolor)))+
 
 <img src="01-pathway_files/figure-html/fastrender-1.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 ed <- Sys.time()
 ed-st
-#> Time difference of 0.4859622 secs
+#> Time difference of 1.296499 secs
 
 st <- Sys.time()
 ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
@@ -384,10 +384,10 @@ ggraph(g, x=x, y=y) +geom_edge_link(aes(color=I(fgcolor)))+
 
 <img src="01-pathway_files/figure-html/fastrender-2.png" width="100%" style="display: block; margin: auto;" />
 
-```r
+``` r
 ed <- Sys.time()
 ed-st
-#> Time difference of 19.0965 secs
+#> Time difference of 48.93137 secs
 ```
 
 
@@ -470,7 +470,7 @@ gg
 The groups are specified in the KGML with type="group". The pathway function adds edges linking the group ID and component ID, allowing the visualization of groups in the layout other than those specified in the KGML. The edges mentioned are specified with the type `in_group`.
 
 
-```r
+``` r
 g <- pathway("hsa03460") |> mutate(conv=convert_id("hsa"))
 g <- delete_vertex_attr(g, "x")
 g <- delete_vertex_attr(g, "y")
@@ -490,7 +490,7 @@ ggraph(g, layout = "nicely") +
 Combining multiple pathways using their native layouts is possible by mutating the nodes' positions or contracting multiple graphs.
 
 
-```r
+``` r
 
 ## Mutate X position for the first graph
 g1 <-pathway("ko00640")

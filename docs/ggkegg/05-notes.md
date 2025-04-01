@@ -82,15 +82,17 @@ In the `devel` branch of `ggkegg`, the KGML of the following reactions ([https:/
 ``` r
 library(ggkegg)
 reac <- pathway("ko00270")
-reac |> activate(edges) |> data.frame() |> filter(reaction=="rn:R00863")
+nname <- reac %N>% pull(name)
+reac %E>% data.frame() %>% filter(reaction=="rn:R00863") %>% 
+    mutate(fromn=nname[from], ton=nname[to])
 #>   from  to         type subtype_name subtype_value
 #> 1   91 128 irreversible    substrate          <NA>
 #> 2  128 129 irreversible      product          <NA>
 #> 3  128 127 irreversible      product          <NA>
-#>    reaction reaction_id pathway_id
-#> 1 rn:R00863         237    ko00270
-#> 2 rn:R00863         237    ko00270
-#> 3 rn:R00863         237    ko00270
+#>    reaction reaction_id pathway_id      fromn        ton
+#> 1 rn:R00863         237    ko00270 cpd:C00606  ko:K09758
+#> 2 rn:R00863         237    ko00270  ko:K09758 cpd:C00041
+#> 3 rn:R00863         237    ko00270  ko:K09758 cpd:C09306
 ```
 
 These edges correspond to the relationship between compound `substrate` or `product` and `reaction (orthology)` nodes. These edges are kept for the conversion in `process_reaction`, where `substrate` and `product` are directly connected by edges.
@@ -98,8 +100,8 @@ These edges correspond to the relationship between compound `substrate` or `prod
 
 ``` r
 reac2 <- reac |> process_reaction()
-node_df <- reac2 |> activate(nodes) |> data.frame()
-reac2 |> activate(edges) |> data.frame() |>
+node_df <- reac2 %N>% data.frame()
+reac2 %E>% data.frame() |>
     filter(reaction=="rn:R00863") |>
     mutate(from_name=node_df$name[from], to_name=node_df$name[to])
 #>   from  to         type subtype_name subtype_value
