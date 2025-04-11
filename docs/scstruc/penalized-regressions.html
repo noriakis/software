@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 3 Penalized regressions | scstruc: causal assessment of gene regulatory network using Bayesian network</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="description" content="Penalized regression is a type of regression analysis that includes a penalty term to prevent overfitting and improve the generalizability of the model. It is particularly useful when dealing with...">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Penalized regressions | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Penalized regression is a type of regression analysis that includes a penalty term to prevent overfitting and improve the generalizability of the model. It is particularly useful when dealing with...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 3 Penalized regressions | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta name="twitter:description" content="Penalized regression is a type of regression analysis that includes a penalty term to prevent overfitting and improve the generalizability of the model. It is particularly useful when dealing with...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">scstruc: causal assessment of gene regulatory network using Bayesian network</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="basic-usage-of-scstruc.html"><span class="header-section-number">2</span> Basic usage of scstruc</a></li>
+<li><a class="active" href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></li>
+<li><a class="" href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></li>
+<li><a class="" href="other-algorithms-and-software.html"><span class="header-section-number">5</span> Other algorithms and software</a></li>
+<li><a class="" href="evaluating-the-inferred-networks.html"><span class="header-section-number">6</span> Evaluating the inferred networks</a></li>
+<li><a class="" href="fitting-and-comparing-the-parameters.html"><span class="header-section-number">7</span> Fitting and comparing the parameters</a></li>
+<li><a class="" href="plot.html"><span class="header-section-number">8</span> Plotting functions</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="penalized-regressions" class="section level1" number="3">
+<h1>
+<span class="header-section-number">3</span> Penalized regressions<a class="anchor" aria-label="anchor" href="#penalized-regressions"><i class="fas fa-link"></i></a>
+</h1>
+<p>Penalized regression is a type of regression analysis that includes a penalty term to prevent overfitting and improve the generalizability of the model. It is particularly useful when dealing with high-dimensional data where the number of predictors is large compared to the number of observations. In terms of inference of GRN and BN structure learning, the penalized regression has been used successfully <span class="citation">(<a href="references.html#ref-schmidt_learning_2007">Schmidt, Niculescu-Mizil, and Murphy 2007</a>)</span>. The package implments the core algorithms for the use of penalization in the BN structure learning described below.</p>
+<div id="algorithms" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Algorithms<a class="anchor" aria-label="anchor" href="#algorithms"><i class="fas fa-link"></i></a>
+</h2>
+<div id="glmnet_bic-and-glmnet_cv" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> <code>glmnet_BIC</code> and <code>glmnet_CV</code><a class="anchor" aria-label="anchor" href="#glmnet_bic-and-glmnet_cv"><i class="fas fa-link"></i></a>
+</h3>
+<p>For L1 regularization (LASSO), the package uses the popular R library <code>glmnet</code>. The <code>glmnet_BIC</code> specified in the argument <code>algo</code> will select the lambda by the minimum BIC criteria, while the <code>glmnet_CV</code> choose the lambda based on cross validation with the specified fold numbers. <code>glmnetBICpath</code> returns the BIC path given the <code>data.frame</code> and the node name to be modeled. <code>plot</code> contains the BIC path plot, and <code>fit</code> contains the fitted object and <code>BIC</code> the lambda and BIC <code>data.frame</code>. The maximize function can be chosen by <code>maximize</code> argument in <code>algorithm.args</code> list. Greedy Equivalence Search can be performed via setting this argument to <code>ges</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scran</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bnlearn.com/">bnlearn</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/mockSCE.html">mockSCE</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html">logNormCounts</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="va">included_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Inference based on glmnet_CV and maximization by GES</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    algorithm<span class="op">=</span><span class="st">"glmnet_CV"</span>,</span>
+<span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"maximize"</span><span class="op">=</span><span class="st">"ges"</span><span class="op">)</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">gs</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Random/Generated Bayesian network</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0060][Gene_0069][Gene_0230][Gene_0281][Gene_0541]</span></span>
+<span><span class="co">#&gt;    [Gene_0606][Gene_0607][Gene_0659][Gene_0857][Gene_0969]</span></span>
+<span><span class="co">#&gt;    [Gene_0991][Gene_0992][Gene_1036][Gene_1060][Gene_1063]</span></span>
+<span><span class="co">#&gt;    [Gene_1065][Gene_1071][Gene_1195][Gene_1321][Gene_1322]</span></span>
+<span><span class="co">#&gt;    [Gene_1375][Gene_1430][Gene_1496][Gene_1724][Gene_1784]</span></span>
+<span><span class="co">#&gt;    [Gene_0645|Gene_0659:Gene_1071][Gene_1256|Gene_0060]</span></span>
+<span><span class="co">#&gt;    [Gene_1270|Gene_1195][Gene_1454|Gene_1195]</span></span>
+<span><span class="co">#&gt;    [Gene_0410|Gene_0645]</span></span>
+<span><span class="co">#&gt;   nodes:                                 30 </span></span>
+<span><span class="co">#&gt;   arcs:                                  6 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       6 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.47 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.40 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.20 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   generation algorithm:                  Empty</span></span>
+<span></span>
+<span><span class="co">## Visualization of glmnet_BIC criteria</span></span>
+<span><span class="co">## Just to obtain data to be used in the inference</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, returnData<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/glmnetBICpath.html">glmnetBICpath</a></span><span class="op">(</span><span class="va">gs</span><span class="op">$</span><span class="va">data</span>, <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/row_colnames.html">colnames</a></span><span class="op">(</span><span class="va">gs</span><span class="op">$</span><span class="va">data</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">[[</span><span class="st">"plot"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-penalized_files/figure-html/glmnet-1.png" width="50%" style="display: block; margin: auto;"></div>
+</div>
+<div id="mcp_cv-and-scad_cv" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> <code>MCP_CV</code> and <code>SCAD_CV</code><a class="anchor" aria-label="anchor" href="#mcp_cv-and-scad_cv"><i class="fas fa-link"></i></a>
+</h3>
+<p>Same as <code>glmnet_CV</code>, the library performs penalized regression baed on MCP and SCAD using <code>ncvreg</code> library.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://pbreheny.github.io/ncvreg/">ncvreg</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mcp.net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    algorithm<span class="op">=</span><span class="st">"MCP_CV"</span>, returnData<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">scad.net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    algorithm<span class="op">=</span><span class="st">"SCAD_CV"</span>, returnData<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Using the bnlearn function to compare two networks</span></span>
+<span><span class="fu">bnlearn</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/compare.html">compare</a></span><span class="op">(</span><span class="va">mcp.net</span>, <span class="va">scad.net</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $tp</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fp</span></span>
+<span><span class="co">#&gt; [1] 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $fn</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+</div>
+<div id="l0-regularized-regression" class="section level3" number="3.1.3">
+<h3>
+<span class="header-section-number">3.1.3</span> L0-regularized regression<a class="anchor" aria-label="anchor" href="#l0-regularized-regression"><i class="fas fa-link"></i></a>
+</h3>
+<p>Based on the <code>L0Learn</code>, the package performs structure learning based on L0-regularized regression. L0 regularization, also known as best subset selection, is a technique used to build simpler and more interpretable models by selecting only a small number of important variables. L0L1 and L0L2 regularization is a combination of L0, L1, and L2 regularization. For the details of L0-, L0L1-, or L0L2-regularized regression, please consult the original paper <span class="citation">(<a href="references.html#ref-hazimeh_l0learn_2023">Hazimeh, Mazumder, and Nonet 2023</a>)</span>.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">l0l2.net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    algorithm<span class="op">=</span><span class="st">"L0L2_CV"</span>, returnData<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">l0l2.net</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="02-penalized_files/figure-html/l0-1.png" width="50%" style="display: block; margin: auto;"></div>
+</div>
+<div id="ccdr-algorithm" class="section level3" number="3.1.4">
+<h3>
+<span class="header-section-number">3.1.4</span> <code>CCDr</code> algorithm<a class="anchor" aria-label="anchor" href="#ccdr-algorithm"><i class="fas fa-link"></i></a>
+</h3>
+<p>Generally, the CCDr algorithm is the fastest algorithm and learns the network for multiple lambdas. By default, the function chooses the network with the best BIC value among multiple lambdas. To supress this effect and obtain all networks, set <code>bestScore</code> to <code>FALSE</code> in the <code>algorithm.args</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/itsrainingdata/ccdrAlgorithm">ccdrAlgorithm</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/itsrainingdata/sparsebnUtils">sparsebnUtils</a></span><span class="op">)</span></span>
+<span><span class="va">ccdr.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    algorithm<span class="op">=</span><span class="st">"ccdr"</span>, changeSymbol<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>bestScore<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Setting `lambdas.length` to 10</span></span>
+<span><span class="co">#&gt; Returning the bn per lambda from result of ccdr.run</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">ccdr.res</span><span class="op">$</span><span class="va">net</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "14.1421356237309"  "8.47798757230114" </span></span>
+<span><span class="co">#&gt; [3] "5.08242002399425"  "3.04683075789017" </span></span>
+<span><span class="co">#&gt; [5] "1.82652705274248"  "1.09497420090059" </span></span>
+<span><span class="co">#&gt; [7] "0.656419787945471" "0.393513324471009"</span></span>
+<span><span class="va">ccdr.res</span><span class="op">$</span><span class="va">net</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Random/Generated Bayesian network</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0060][Gene_0069][Gene_0230][Gene_0281][Gene_0410]</span></span>
+<span><span class="co">#&gt;    [Gene_0541][Gene_0606][Gene_0607][Gene_0645][Gene_0659]</span></span>
+<span><span class="co">#&gt;    [Gene_0857][Gene_0969][Gene_0991][Gene_0992][Gene_1036]</span></span>
+<span><span class="co">#&gt;    [Gene_1060][Gene_1063][Gene_1065][Gene_1071][Gene_1195]</span></span>
+<span><span class="co">#&gt;    [Gene_1256][Gene_1270][Gene_1321][Gene_1322][Gene_1375]</span></span>
+<span><span class="co">#&gt;    [Gene_1430][Gene_1454][Gene_1496][Gene_1724][Gene_1784]</span></span>
+<span><span class="co">#&gt;   nodes:                                 30 </span></span>
+<span><span class="co">#&gt;   arcs:                                  0 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       0 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.00 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.00 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.00 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   generation algorithm:                  Empty</span></span></code></pre></div>
+<p>Therefore, the bootstrap-based inference can be performed very fast using CCDr algorithm. If bootstrapping is specified, the function performs learning the bootstrapped network for the multiple lambdas across all the replicates.</p>
+</div>
+<div id="precision-lasso" class="section level3" number="3.1.5">
+<h3>
+<span class="header-section-number">3.1.5</span> Precision lasso<a class="anchor" aria-label="anchor" href="#precision-lasso"><i class="fas fa-link"></i></a>
+</h3>
+<p>Precision Lasso combines the LASSO and the precision matrix into the regularization process. This approach is particularly useful in biological and genomics studies, where highly-correlated features often appear. We implmented precision lasso in R and the feature is provided by <code>plasso.fit</code> and <code>plasso.fit.single</code> using <code>RcppArmadillo</code>. The fixed lambda value should be specified.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pl.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>, algorithm<span class="op">=</span><span class="st">"plasso"</span>, changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="basic-usage-of-scstruc.html"><span class="header-section-number">2</span> Basic usage of scstruc</a></div>
+<div class="next"><a href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#penalized-regressions"><span class="header-section-number">3</span> Penalized regressions</a></li>
+<li>
+<a class="nav-link" href="#algorithms"><span class="header-section-number">3.1</span> Algorithms</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#glmnet_bic-and-glmnet_cv"><span class="header-section-number">3.1.1</span> glmnet_BIC and glmnet_CV</a></li>
+<li><a class="nav-link" href="#mcp_cv-and-scad_cv"><span class="header-section-number">3.1.2</span> MCP_CV and SCAD_CV</a></li>
+<li><a class="nav-link" href="#l0-regularized-regression"><span class="header-section-number">3.1.3</span> L0-regularized regression</a></li>
+<li><a class="nav-link" href="#ccdr-algorithm"><span class="header-section-number">3.1.4</span> CCDr algorithm</a></li>
+<li><a class="nav-link" href="#precision-lasso"><span class="header-section-number">3.1.5</span> Precision lasso</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Basic usage of scstruc | scstruc: causal assessment of gene regulatory network using Bayesian network</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="description" content="This part will present how to use the package for the inference of the network and evaluation. Basically, if you have the object storing (normalized) expression matrix, the primary function...">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Basic usage of scstruc | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This part will present how to use the package for the inference of the network and evaluation. Basically, if you have the object storing (normalized) expression matrix, the primary function...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Basic usage of scstruc | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta name="twitter:description" content="This part will present how to use the package for the inference of the network and evaluation. Basically, if you have the object storing (normalized) expression matrix, the primary function...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">scstruc: causal assessment of gene regulatory network using Bayesian network</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="active" href="basic-usage-of-scstruc.html"><span class="header-section-number">2</span> Basic usage of scstruc</a></li>
+<li><a class="" href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></li>
+<li><a class="" href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></li>
+<li><a class="" href="other-algorithms-and-software.html"><span class="header-section-number">5</span> Other algorithms and software</a></li>
+<li><a class="" href="evaluating-the-inferred-networks.html"><span class="header-section-number">6</span> Evaluating the inferred networks</a></li>
+<li><a class="" href="fitting-and-comparing-the-parameters.html"><span class="header-section-number">7</span> Fitting and comparing the parameters</a></li>
+<li><a class="" href="plot.html"><span class="header-section-number">8</span> Plotting functions</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="basic-usage-of-scstruc" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Basic usage of <code>scstruc</code><a class="anchor" aria-label="anchor" href="#basic-usage-of-scstruc"><i class="fas fa-link"></i></a>
+</h1>
+<p>This part will present how to use the package for the inference of the network and evaluation. Basically, if you have the object storing (normalized) expression matrix, the primary function <code>scstruc</code> can perform inference. We will use the mock data generated by <code>scran::mockSCE</code> function here.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">scran</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bnlearn.com/">bnlearn</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/mockSCE.html">mockSCE</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html">logNormCounts</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="va">sce</span></span>
+<span><span class="co">#&gt; class: SingleCellExperiment </span></span>
+<span><span class="co">#&gt; dim: 2000 200 </span></span>
+<span><span class="co">#&gt; metadata(0):</span></span>
+<span><span class="co">#&gt; assays(2): counts logcounts</span></span>
+<span><span class="co">#&gt; rownames(2000): Gene_0001 Gene_0002 ... Gene_1999</span></span>
+<span><span class="co">#&gt;   Gene_2000</span></span>
+<span><span class="co">#&gt; rowData names(0):</span></span>
+<span><span class="co">#&gt; colnames(200): Cell_001 Cell_002 ... Cell_199</span></span>
+<span><span class="co">#&gt;   Cell_200</span></span>
+<span><span class="co">#&gt; colData names(4): Mutation_Status Cell_Cycle</span></span>
+<span><span class="co">#&gt;   Treatment sizeFactor</span></span>
+<span><span class="co">#&gt; reducedDimNames(0):</span></span>
+<span><span class="co">#&gt; mainExpName: NULL</span></span>
+<span><span class="co">#&gt; altExpNames(1): Spikes</span></span></code></pre></div>
+<p>We obtain simulated data by <code>mockSCE</code> function in scuttle, and log-normalize the count with the default parameter.</p>
+<div id="bayesian-network" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Bayesian network<a class="anchor" aria-label="anchor" href="#bayesian-network"><i class="fas fa-link"></i></a>
+</h2>
+<p>Bayesian networks are probabilistic graphical models that represent a set of random variables <span class="math inline">\(X = \{X_1, \dots, X_N\}\)</span>, and their conditional dependencies using a directed acyclic graph (DAG). They are widely used in various domains, such as economics, medicine, decision-making, and for modeling complex relationships among variables such as transcriptomics data. In the package, we infer the relationships among genes, representing the transcriptional regulation between them.</p>
+<p>The graphical separation between nodes in G implies the conditional independence of the corresponding variables and leads to factorization:</p>
+<p><span class="math display">\[
+P(X \mid G; \theta) = \prod_{i=1}^{N} P(X_i \mid \pi_{X_i}; \theta_{X_i}) \quad \text{where } \pi_{X_i} = \{ \text{parents of } X_i \text{ in } G \}
+\]</span></p>
+<p>In the package, various algorithms are implemented tailored to account for the nature of SCT data, such as dropouts.</p>
+</div>
+<div id="preprocessing-of-single-cell-transcriptomics-data-and-preparation" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Preprocessing of single-cell transcriptomics data and preparation<a class="anchor" aria-label="anchor" href="#preprocessing-of-single-cell-transcriptomics-data-and-preparation"><i class="fas fa-link"></i></a>
+</h2>
+<p>To reduce computational burden and to obtain interpretable results, some preprocessing steps and the preparation is suggested.</p>
+<div id="coarse-graining-expression-data-metacell-expression" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Coarse-graining expression data (metacell expression)<a class="anchor" aria-label="anchor" href="#coarse-graining-expression-data-metacell-expression"><i class="fas fa-link"></i></a>
+</h3>
+<p>The package can use metacell approach to reduce the computational burden required to perform structure learning from SCT data. The package features <code>superCellMat</code> function using <code>SuperCell</code> package available in CRAN. It employs a cell aggregation approach to reduce dataset complexity while preserving key biological variability　<span class="citation">(<a href="references.html#ref-bilous_metacells_2022">Bilous et al. 2022</a>)</span>. This step is optional and one can use their untransformed data directly.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">SuperCell</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2000  200</span></span>
+<span><span class="fu">rowData</span><span class="op">(</span><span class="va">sce</span><span class="op">)</span><span class="op">[</span><span class="st">"ID"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/superCellMat.html">superCellMat</a></span><span class="op">(</span><span class="va">sce</span>, ID<span class="op">=</span><span class="st">"ID"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;    2000 20</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2000   20</span></span></code></pre></div>
+</div>
+<div id="obtaining-interesting-gene-identifiers" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Obtaining interesting gene identifiers<a class="anchor" aria-label="anchor" href="#obtaining-interesting-gene-identifiers"><i class="fas fa-link"></i></a>
+</h3>
+<p>For inference, we first subset to genes in the interesting biological pathway (such as ECM receptor interaction in the cells annotated as vascular endothelial cells). For this purpose, two functions are prepared. One is fetching gene identifiers from Gene Ontology, and another is from KEGG PATHWAY.</p>
+<div id="getgogenes" class="section level4" number="2.2.2.1">
+<h4>
+<span class="header-section-number">2.2.2.1</span> <code>getGOGenes</code><a class="anchor" aria-label="anchor" href="#getgogenes"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can obtain genes involved in gene ontology by using the identifier.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/getGOGenes.html">getGOGenes</a></span><span class="op">(</span><span class="st">"GO:0030198"</span>, orgDb<span class="op">=</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
+<span><span class="va">genes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "Abl1"    "Abl1"    "Abl2"    "Adamts1" "Adamts1"</span></span></code></pre></div>
+</div>
+<div id="getkeggpathwaygenes" class="section level4" number="2.2.2.2">
+<h4>
+<span class="header-section-number">2.2.2.2</span> <code>getKEGGPathwayGenes</code><a class="anchor" aria-label="anchor" href="#getkeggpathwaygenes"><i class="fas fa-link"></i></a>
+</h4>
+<p>We can obtain genes involved in KEGG PATHWAY by using the KEGG identifier with organism identifier. The below is obtaining genes involved in mTOR signaling pathway in <em>Mus musculus</em>. You need to specify organism database in order to correcrly convert the obtained identifiers.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/KEGGREST">KEGGREST</a></span><span class="op">)</span></span>
+<span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/getKEGGPathwayGenes.html">getKEGGPathwayGenes</a></span><span class="op">(</span><span class="st">"mmu04150"</span>, orgDb<span class="op">=</span><span class="va">org.Mm.eg.db</span><span class="op">)</span></span>
+<span><span class="va">genes</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "Prkaa1"  "Prkaa2"  "Atp6v1h" "Prr5"    "Braf"</span></span></code></pre></div>
+<p>You can pass these genes for the inference by <code>scstruc</code> function. Also, we published a package that estimates GRNs from omics data based on enrichment analysis results in the past, and the approach could be useful <span class="citation">(<a href="references.html#ref-sato_cbnplot_2022">Sato et al. 2022</a>)</span>.</p>
+</div>
+</div>
+</div>
+<div id="actual-structure-learning" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Actual structure learning<a class="anchor" aria-label="anchor" href="#actual-structure-learning"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>scstruc</code> function needs <code>SingleCellExperiment</code> object or those storing gene expression data. Also, gene list must be specified. In this analysis, randomly subset gene identifiers are used as input. <code>changeSymbol</code> argument here refers to the changing of the gene names of subset matrix to those specified in <code>symbolColumn</code> argument (default to <code>Symbol</code>). In this example, we do not have corresponding symbol and the argument is set to FALSE. Also, algorithm is set to <code>mmhc</code> by default, which performs max-min hill climbing approach.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">included_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>, changeSymbol<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gs</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "net"  "data"</span></span>
+<span><span class="va">gs</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Bayesian network learned via Hybrid methods</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0019][Gene_0061][Gene_0097][Gene_0099][Gene_0101]</span></span>
+<span><span class="co">#&gt;    [Gene_0108][Gene_0123][Gene_0198][Gene_0224][Gene_0239]</span></span>
+<span><span class="co">#&gt;    [Gene_0242][Gene_0290][Gene_0292][Gene_0322][Gene_0325]</span></span>
+<span><span class="co">#&gt;    [Gene_0332][Gene_0352][Gene_0354][Gene_0374][Gene_0418]</span></span>
+<span><span class="co">#&gt;    [Gene_0433][Gene_0451][Gene_0630][Gene_0642][Gene_0676]</span></span>
+<span><span class="co">#&gt;    [Gene_0744][Gene_0750][Gene_0795][Gene_0831][Gene_0900]</span></span>
+<span><span class="co">#&gt;    [Gene_1018][Gene_1024][Gene_1030][Gene_1048][Gene_1124]</span></span>
+<span><span class="co">#&gt;    [Gene_1144][Gene_1178][Gene_1180][Gene_1241][Gene_1273]</span></span>
+<span><span class="co">#&gt;    [Gene_1283][Gene_1316][Gene_1342][Gene_1512][Gene_1646]</span></span>
+<span><span class="co">#&gt;    [Gene_1672][Gene_1795][Gene_1889][Gene_1976]</span></span>
+<span><span class="co">#&gt;    [Gene_0238|Gene_0019:Gene_0795][Gene_0466|Gene_0224]</span></span>
+<span><span class="co">#&gt;    [Gene_0558|Gene_0322][Gene_0580|Gene_0332]</span></span>
+<span><span class="co">#&gt;    [Gene_0711|Gene_0433:Gene_0795:Gene_1273]</span></span>
+<span><span class="co">#&gt;    [Gene_0716|Gene_0676][Gene_0772|Gene_0354]</span></span>
+<span><span class="co">#&gt;    [Gene_0840|Gene_0642][Gene_0859|Gene_0744]</span></span>
+<span><span class="co">#&gt;    [Gene_0954|Gene_0642][Gene_0979|Gene_0325]</span></span>
+<span><span class="co">#&gt;    [Gene_0980|Gene_0433][Gene_1059|Gene_0290]</span></span>
+<span><span class="co">#&gt;    [Gene_1084|Gene_0101][Gene_1132|Gene_1030]</span></span>
+<span><span class="co">#&gt;    [Gene_1173|Gene_0097:Gene_1512][Gene_1310|Gene_0292]</span></span>
+<span><span class="co">#&gt;    [Gene_1360|Gene_1024][Gene_1372|Gene_1048]</span></span>
+<span><span class="co">#&gt;    [Gene_1384|Gene_0433][Gene_1483|Gene_1018:Gene_1273]</span></span>
+<span><span class="co">#&gt;    [Gene_1487|Gene_1030:Gene_1672][Gene_1509|Gene_0292]</span></span>
+<span><span class="co">#&gt;    [Gene_1542|Gene_1342][Gene_1642|Gene_1178:Gene_1241]</span></span>
+<span><span class="co">#&gt;    [Gene_1677|Gene_1180:Gene_1889][Gene_1739|Gene_0676]</span></span>
+<span><span class="co">#&gt;    [Gene_1751|Gene_1646][Gene_1775|Gene_1316]</span></span>
+<span><span class="co">#&gt;    [Gene_1855|Gene_0108][Gene_1859|Gene_0831:Gene_1144]</span></span>
+<span><span class="co">#&gt;    [Gene_1863|Gene_0630][Gene_1982|Gene_0061]</span></span>
+<span><span class="co">#&gt;    [Gene_0427|Gene_0108:Gene_1059][Gene_0792|Gene_1360]</span></span>
+<span><span class="co">#&gt;    [Gene_1257|Gene_1863][Gene_1262|Gene_0900:Gene_1855]</span></span>
+<span><span class="co">#&gt;    [Gene_1518|Gene_0451:Gene_1982][Gene_1519|Gene_1084]</span></span>
+<span><span class="co">#&gt;    [Gene_1653|Gene_0772][Gene_1804|Gene_1775]</span></span>
+<span><span class="co">#&gt;    [Gene_0048|Gene_0198:Gene_1804][Gene_0617|Gene_1257]</span></span>
+<span><span class="co">#&gt;    [Gene_0786|Gene_0427][Gene_1159|Gene_0792]</span></span>
+<span><span class="co">#&gt;    [Gene_1742|Gene_0792][Gene_0398|Gene_0786]</span></span>
+<span><span class="co">#&gt;    [Gene_0463|Gene_0786:Gene_1342]</span></span>
+<span><span class="co">#&gt;    [Gene_0490|Gene_0352:Gene_1159:Gene_1283]</span></span>
+<span><span class="co">#&gt;    [Gene_1140|Gene_1742][Gene_1991|Gene_1140]</span></span>
+<span><span class="co">#&gt;   nodes:                                 100 </span></span>
+<span><span class="co">#&gt;   arcs:                                  67 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       67 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           1.70 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            1.34 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.67 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   learning algorithm:                    </span></span>
+<span><span class="co">#&gt;                                         Max-Min Hill-Climbing </span></span>
+<span><span class="co">#&gt;   constraint-based method:               </span></span>
+<span><span class="co">#&gt;                                       Max-Min Parent Children </span></span>
+<span><span class="co">#&gt;   conditional independence test:         </span></span>
+<span><span class="co">#&gt;                                         Pearson's Correlation </span></span>
+<span><span class="co">#&gt;   score-based method:                    Hill-Climbing </span></span>
+<span><span class="co">#&gt;   score:                                 BIC (Gauss.) </span></span>
+<span><span class="co">#&gt;   alpha threshold:                       0.05 </span></span>
+<span><span class="co">#&gt;   penalization coefficient:              1.497866 </span></span>
+<span><span class="co">#&gt;   tests used in the learning procedure:  22042 </span></span>
+<span><span class="co">#&gt;   optimized:                             TRUE</span></span></code></pre></div>
+<p>By default, it returns the <code>bn</code> object from <code>bnlearn</code> and the actual data used for the inference. If <code>returnBn</code> is set to <code>FALSE</code>, the function returns the <code>tidygraph</code> object. These can be used for various downstream tasks, such as visualization, probabilistic reasoning, evaluation based on biological pathway information. The details including the use of various algorithms for learning is described in the following sections.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Introduction</a></div>
+<div class="next"><a href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-usage-of-scstruc"><span class="header-section-number">2</span> Basic usage of scstruc</a></li>
+<li><a class="nav-link" href="#bayesian-network"><span class="header-section-number">2.1</span> Bayesian network</a></li>
+<li>
+<a class="nav-link" href="#preprocessing-of-single-cell-transcriptomics-data-and-preparation"><span class="header-section-number">2.2</span> Preprocessing of single-cell transcriptomics data and preparation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#coarse-graining-expression-data-metacell-expression"><span class="header-section-number">2.2.1</span> Coarse-graining expression data (metacell expression)</a></li>
+<li><a class="nav-link" href="#obtaining-interesting-gene-identifiers"><span class="header-section-number">2.2.2</span> Obtaining interesting gene identifiers</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#actual-structure-learning"><span class="header-section-number">2.3</span> Actual structure learning</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-11.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
