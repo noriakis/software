@@ -17,6 +17,7 @@ ccdr-algorithm
 precision-lasso
 hurdle-model
 customized-score-for-hurdle-model
+add.dropout
 other-algorithms-and-software
 bootstrapping
 pidc

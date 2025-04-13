@@ -1,7 +1,7 @@
 --- 
 title: "scstruc: causal assessment of gene regulatory network using Bayesian network"
 author: "Noriaki Sato"
-date: "2025-04-11"
+date: "2025-04-13"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib, article.bib]

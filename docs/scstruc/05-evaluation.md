@@ -31,9 +31,9 @@ data.inference <- rbn(net, 50)
 infer <- hc(data.inference)
 metrics(bn.net(net), list("inferred"=infer))
 #>       algo referenceNode InferenceNode s0 edges SHD TP FP
-#> 1 inferred            46            46 70   106 112 29 41
-#>   FN       TPR Precision    Recall        F1  SID KL BIC
-#> 1 77 0.4142857 0.4142857 0.2735849 0.3295455 1061 NA  NA
+#> 1 inferred            46            46 70    94 101 31 39
+#>   FN       TPR Precision    Recall        F1 SID KL BIC
+#> 1 63 0.4428571 0.4428571 0.3297872 0.3780488 930 NA  NA
 ```
 
 `sid_sym` argument can choose whether to symmetrze the SID, and `SID.cran` can choose whether to use SID implemented in CRAN package `SID`.
@@ -45,37 +45,37 @@ This function accepts parameter-fitted network and sampling number, as well as t
 
 ``` r
 mf <- metricsFromFitted(net, 50, algos=c("glmnet_CV", "glmnet_BIC", "L0_CV"))
-#> glmnet_CV 12.1235988140106
-#> glmnet_BIC 0.902992010116577
+#> glmnet_CV 13.2823009490967
+#> glmnet_BIC 0.914937019348145
 #> L0_CV
-#> 10.8184690475464
-#> MMHC 0.001 0.118052959442139
-#> MMHC 0.005 0.0820488929748535
-#> MMHC 0.01 0.0785148143768311
-#> MMHC 0.05 0.0989677906036377
+#> 16.9690780639648
+#> MMHC 0.001 0.0871520042419434
+#> MMHC 0.005 0.0960419178009033
+#> MMHC 0.01 0.101830959320068
+#> MMHC 0.05 0.113605976104736
 #> Network computing finished
 head(mf$metrics)
-#>         algo s0 edges       KL       BIC SHD TP FP FN
-#> 1  glmnet_CV 70    59 12.58813 -2418.812  77 23 47 36
-#> 2 glmnet_BIC 70    39 16.74091 -2501.538  53 22 48 17
-#> 3      L0_CV 70    30 83.81795 -2993.413  74  8 62 22
-#> 4 mmhc_0.001 70    25 53.17069 -2829.217  59 12 58 13
-#> 5 mmhc_0.005 70    26 53.08280 -2826.306  59 13 57 13
-#> 6  mmhc_0.01 70    29 36.29393 -2710.490  58 15 55 14
+#>         algo s0 edges        KL       BIC SHD TP FP FN
+#> 1  glmnet_CV 70    61  9.108264 -2383.886  77 24 46 37
+#> 2 glmnet_BIC 70    40 25.149720 -2564.327  55 21 49 19
+#> 3      L0_CV 70    29 65.626731 -2873.020  66 13 57 16
+#> 4 mmhc_0.001 70    27 52.077067 -2777.016  59 15 55 12
+#> 5 mmhc_0.005 70    29 50.380866 -2749.557  57 17 53 12
+#> 6  mmhc_0.01 70    30 50.290256 -2745.181  57 18 52 12
 #>         TPR Precision    Recall        F1 SID PPI
-#> 1 0.3285714 0.3285714 0.3898305 0.3565891  NA  NA
-#> 2 0.3142857 0.3142857 0.5641026 0.4036697  NA  NA
-#> 3 0.1142857 0.1142857 0.2666667 0.1600000  NA  NA
-#> 4 0.1714286 0.1714286 0.4800000 0.2526316  NA  NA
-#> 5 0.1857143 0.1857143 0.5000000 0.2708333  NA  NA
-#> 6 0.2142857 0.2142857 0.5172414 0.3030303  NA  NA
+#> 1 0.3428571 0.3428571 0.3934426 0.3664122  NA  NA
+#> 2 0.3000000 0.3000000 0.5250000 0.3818182  NA  NA
+#> 3 0.1857143 0.1857143 0.4482759 0.2626263  NA  NA
+#> 4 0.2142857 0.2142857 0.5555556 0.3092784  NA  NA
+#> 5 0.2428571 0.2428571 0.5862069 0.3434343  NA  NA
+#> 6 0.2571429 0.2571429 0.6000000 0.3600000  NA  NA
 #>          time   BICnorm  N  p
-#> 1 12.12359881 0.9389295 50 46
-#> 2  0.90299201 0.8854144 50 46
-#> 3 10.81846905 0.5672219 50 46
-#> 4  0.11805296 0.6734400 50 46
-#> 5  0.08204889 0.6753229 50 46
-#> 6  0.07851481 0.7502440 50 46
+#> 1 13.28230095 0.9771489 50 46
+#> 2  0.91493702 0.8619632 50 46
+#> 3 16.96907806 0.6649074 50 46
+#> 4  0.08715200 0.7261924 50 46
+#> 5  0.09604192 0.7437208 50 46
+#> 6  0.10183096 0.7465141 50 46
 ```
 
 The results can be visualized in the usual way by using the library like `ggplot2`. We use here `plotthis` library for visualizing.

@@ -21,10 +21,10 @@ gs$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0013][Gene_0072][Gene_0347][Gene_0377][Gene_0516]
-#>    [Gene_0535][Gene_0633][Gene_0638][Gene_0708][Gene_0858]
-#>    [Gene_0860][Gene_0914][Gene_0932][Gene_0951][Gene_1079]
-#>    [Gene_1268][Gene_1586][Gene_1655][Gene_1905][Gene_1972]
+#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
+#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
+#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
+#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -52,10 +52,10 @@ gs.tabu$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0013][Gene_0072][Gene_0347][Gene_0377][Gene_0516]
-#>    [Gene_0535][Gene_0633][Gene_0638][Gene_0708][Gene_0858]
-#>    [Gene_0860][Gene_0914][Gene_0932][Gene_0951][Gene_1079]
-#>    [Gene_1268][Gene_1586][Gene_1655][Gene_1905][Gene_1972]
+#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
+#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
+#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
+#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -82,10 +82,10 @@ gs.ges$net
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0013][Gene_0072][Gene_0347][Gene_0377][Gene_0516]
-#>    [Gene_0535][Gene_0633][Gene_0638][Gene_0708][Gene_0858]
-#>    [Gene_0860][Gene_0914][Gene_0932][Gene_0951][Gene_1079]
-#>    [Gene_1268][Gene_1586][Gene_1655][Gene_1905][Gene_1972]
+#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
+#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
+#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
+#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -121,10 +121,10 @@ gs2$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0013][Gene_0072][Gene_0347][Gene_0377][Gene_0516]
-#>    [Gene_0535][Gene_0633][Gene_0638][Gene_0708][Gene_0858]
-#>    [Gene_0860][Gene_0914][Gene_0932][Gene_0951][Gene_1079]
-#>    [Gene_1268][Gene_1586][Gene_1655][Gene_1905][Gene_1972]
+#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
+#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
+#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
+#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -141,3 +141,25 @@ gs2$net
 ```
 
 As proposed in the `MAST` library, the cellular detection rate adjustment (CDR) can be performed in the scoring phase by `cdrAdjuetment` to `TRUE`. This applies inclusion of CDR term in the hurdle modeling and score maximizing phase.
+
+## `add.dropout`
+
+Like in the other SCT data simulator, the excessive zero in the matrix can be simulated by `add.dropout`. The function takes absolute expression values if any of the expression in the matrix is negative.
+
+
+``` r
+net <- readRDS("../arth150.rds")
+sim <- rbn(net, 100)
+table(sim == 0)
+#> 
+#> FALSE 
+#> 10700
+sim.do <- sim * add.dropout(sim)
+table(sim.do == 0)
+#> 
+#> FALSE  TRUE 
+#>  4385  6315
+```
+
+
+

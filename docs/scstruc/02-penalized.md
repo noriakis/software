@@ -30,21 +30,21 @@ gs$net
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0060][Gene_0069][Gene_0230][Gene_0281][Gene_0541]
-#>    [Gene_0606][Gene_0607][Gene_0659][Gene_0857][Gene_0969]
-#>    [Gene_0991][Gene_0992][Gene_1036][Gene_1060][Gene_1063]
-#>    [Gene_1065][Gene_1071][Gene_1195][Gene_1321][Gene_1322]
-#>    [Gene_1375][Gene_1430][Gene_1496][Gene_1724][Gene_1784]
-#>    [Gene_0645|Gene_0659:Gene_1071][Gene_1256|Gene_0060]
-#>    [Gene_1270|Gene_1195][Gene_1454|Gene_1195]
-#>    [Gene_0410|Gene_0645]
+#>    [Gene_0005][Gene_0007][Gene_0187][Gene_0197][Gene_0426]
+#>    [Gene_0458][Gene_0500][Gene_0522][Gene_0737][Gene_0811]
+#>    [Gene_0816][Gene_0898][Gene_1053][Gene_1150][Gene_1159]
+#>    [Gene_1166][Gene_1230][Gene_1287][Gene_1364][Gene_1397]
+#>    [Gene_1470][Gene_1475][Gene_1481][Gene_1510][Gene_1539]
+#>    [Gene_1640][Gene_0145|Gene_0426:Gene_1640]
+#>    [Gene_0203|Gene_0005][Gene_1246|Gene_0187]
+#>    [Gene_2000|Gene_1364]
 #>   nodes:                                 30 
-#>   arcs:                                  6 
+#>   arcs:                                  5 
 #>     undirected arcs:                     0 
-#>     directed arcs:                       6 
-#>   average markov blanket size:           0.47 
-#>   average neighbourhood size:            0.40 
-#>   average branching factor:              0.20 
+#>     directed arcs:                       5 
+#>   average markov blanket size:           0.40 
+#>   average neighbourhood size:            0.33 
+#>   average branching factor:              0.17 
 #> 
 #>   generation algorithm:                  Empty
 
@@ -78,13 +78,13 @@ scad.net <- scstruc(sce, included_genes,
 ## Using the bnlearn function to compare two networks
 bnlearn::compare(mcp.net, scad.net)
 #> $tp
-#> [1] 1
+#> [1] 2
 #> 
 #> $fp
-#> [1] 3
+#> [1] 1
 #> 
 #> $fn
-#> [1] 0
+#> [1] 3
 ```
 
 ### L0-regularized regression
@@ -118,25 +118,26 @@ names(ccdr.res$net)
 #> [1] "14.1421356237309"  "8.47798757230114" 
 #> [3] "5.08242002399425"  "3.04683075789017" 
 #> [5] "1.82652705274248"  "1.09497420090059" 
-#> [7] "0.656419787945471" "0.393513324471009"
+#> [7] "0.656419787945471"
 ccdr.res$net[[4]]
 #> 
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0060][Gene_0069][Gene_0230][Gene_0281][Gene_0410]
-#>    [Gene_0541][Gene_0606][Gene_0607][Gene_0645][Gene_0659]
-#>    [Gene_0857][Gene_0969][Gene_0991][Gene_0992][Gene_1036]
-#>    [Gene_1060][Gene_1063][Gene_1065][Gene_1071][Gene_1195]
-#>    [Gene_1256][Gene_1270][Gene_1321][Gene_1322][Gene_1375]
-#>    [Gene_1430][Gene_1454][Gene_1496][Gene_1724][Gene_1784]
+#>    [Gene_0005][Gene_0007][Gene_0145][Gene_0187][Gene_0197]
+#>    [Gene_0203][Gene_0458][Gene_0500][Gene_0522][Gene_0737]
+#>    [Gene_0811][Gene_0816][Gene_0898][Gene_1053][Gene_1150]
+#>    [Gene_1159][Gene_1166][Gene_1230][Gene_1246][Gene_1287]
+#>    [Gene_1364][Gene_1397][Gene_1470][Gene_1475][Gene_1481]
+#>    [Gene_1510][Gene_1539][Gene_1640][Gene_0426|Gene_0145]
+#>    [Gene_2000|Gene_1364]
 #>   nodes:                                 30 
-#>   arcs:                                  0 
+#>   arcs:                                  2 
 #>     undirected arcs:                     0 
-#>     directed arcs:                       0 
-#>   average markov blanket size:           0.00 
-#>   average neighbourhood size:            0.00 
-#>   average branching factor:              0.00 
+#>     directed arcs:                       2 
+#>   average markov blanket size:           0.13 
+#>   average neighbourhood size:            0.13 
+#>   average branching factor:              0.067 
 #> 
 #>   generation algorithm:                  Empty
 ```

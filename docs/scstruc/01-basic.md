@@ -60,10 +60,23 @@ dim(sce)
 #> [1] 2000  200
 rowData(sce)["ID"] <- row.names(sce)
 sce <- superCellMat(sce, ID="ID")
-#>    2000 20
+#>   SuperCell dimension: 2000 20
 dim(sce)
 #> [1] 2000   20
 ```
+
+The matrix (p x n, unlike the other functions in the package) can be supplied to the function as well.
+
+
+``` r
+eco <- readRDS("../ecoli70.rds")
+rawmat <- rbn(eco, 1000)
+cgmat <- superCellMat(t(rawmat), pca=FALSE)
+#>   SuperCell dimension: 46 100
+dim(cgmat)
+#> [1]  46 100
+```
+
 
 ### Obtaining interesting gene identifiers
 
@@ -111,50 +124,50 @@ gs$net
 #>   Bayesian network learned via Hybrid methods
 #> 
 #>   model:
-#>    [Gene_0019][Gene_0061][Gene_0097][Gene_0099][Gene_0101]
-#>    [Gene_0108][Gene_0123][Gene_0198][Gene_0224][Gene_0239]
-#>    [Gene_0242][Gene_0290][Gene_0292][Gene_0322][Gene_0325]
-#>    [Gene_0332][Gene_0352][Gene_0354][Gene_0374][Gene_0418]
-#>    [Gene_0433][Gene_0451][Gene_0630][Gene_0642][Gene_0676]
-#>    [Gene_0744][Gene_0750][Gene_0795][Gene_0831][Gene_0900]
-#>    [Gene_1018][Gene_1024][Gene_1030][Gene_1048][Gene_1124]
-#>    [Gene_1144][Gene_1178][Gene_1180][Gene_1241][Gene_1273]
-#>    [Gene_1283][Gene_1316][Gene_1342][Gene_1512][Gene_1646]
-#>    [Gene_1672][Gene_1795][Gene_1889][Gene_1976]
-#>    [Gene_0238|Gene_0019:Gene_0795][Gene_0466|Gene_0224]
-#>    [Gene_0558|Gene_0322][Gene_0580|Gene_0332]
-#>    [Gene_0711|Gene_0433:Gene_0795:Gene_1273]
-#>    [Gene_0716|Gene_0676][Gene_0772|Gene_0354]
-#>    [Gene_0840|Gene_0642][Gene_0859|Gene_0744]
-#>    [Gene_0954|Gene_0642][Gene_0979|Gene_0325]
-#>    [Gene_0980|Gene_0433][Gene_1059|Gene_0290]
-#>    [Gene_1084|Gene_0101][Gene_1132|Gene_1030]
-#>    [Gene_1173|Gene_0097:Gene_1512][Gene_1310|Gene_0292]
-#>    [Gene_1360|Gene_1024][Gene_1372|Gene_1048]
-#>    [Gene_1384|Gene_0433][Gene_1483|Gene_1018:Gene_1273]
-#>    [Gene_1487|Gene_1030:Gene_1672][Gene_1509|Gene_0292]
-#>    [Gene_1542|Gene_1342][Gene_1642|Gene_1178:Gene_1241]
-#>    [Gene_1677|Gene_1180:Gene_1889][Gene_1739|Gene_0676]
-#>    [Gene_1751|Gene_1646][Gene_1775|Gene_1316]
-#>    [Gene_1855|Gene_0108][Gene_1859|Gene_0831:Gene_1144]
-#>    [Gene_1863|Gene_0630][Gene_1982|Gene_0061]
-#>    [Gene_0427|Gene_0108:Gene_1059][Gene_0792|Gene_1360]
-#>    [Gene_1257|Gene_1863][Gene_1262|Gene_0900:Gene_1855]
-#>    [Gene_1518|Gene_0451:Gene_1982][Gene_1519|Gene_1084]
-#>    [Gene_1653|Gene_0772][Gene_1804|Gene_1775]
-#>    [Gene_0048|Gene_0198:Gene_1804][Gene_0617|Gene_1257]
-#>    [Gene_0786|Gene_0427][Gene_1159|Gene_0792]
-#>    [Gene_1742|Gene_0792][Gene_0398|Gene_0786]
-#>    [Gene_0463|Gene_0786:Gene_1342]
-#>    [Gene_0490|Gene_0352:Gene_1159:Gene_1283]
-#>    [Gene_1140|Gene_1742][Gene_1991|Gene_1140]
+#>    [Gene_0018][Gene_0021][Gene_0037][Gene_0047][Gene_0074]
+#>    [Gene_0090][Gene_0092][Gene_0110][Gene_0124][Gene_0145]
+#>    [Gene_0176][Gene_0232][Gene_0244][Gene_0249][Gene_0253]
+#>    [Gene_0267][Gene_0346][Gene_0432][Gene_0453][Gene_0468]
+#>    [Gene_0471][Gene_0512][Gene_0537][Gene_0543][Gene_0544]
+#>    [Gene_0554][Gene_0574][Gene_0617][Gene_0647][Gene_0725]
+#>    [Gene_0900][Gene_0946][Gene_1002][Gene_1095][Gene_1400]
+#>    [Gene_1401][Gene_1428][Gene_1473][Gene_1614][Gene_1673]
+#>    [Gene_1738][Gene_1770][Gene_1803][Gene_1807][Gene_1815]
+#>    [Gene_1860][Gene_1923][Gene_1972][Gene_0324|Gene_0018]
+#>    [Gene_0356|Gene_0092][Gene_0458|Gene_0176]
+#>    [Gene_0621|Gene_0512][Gene_0817|Gene_0647]
+#>    [Gene_0867|Gene_0725][Gene_0908|Gene_0037]
+#>    [Gene_0940|Gene_0617][Gene_0978|Gene_0554]
+#>    [Gene_1027|Gene_0074][Gene_1031|Gene_0471]
+#>    [Gene_1070|Gene_0468:Gene_0544:Gene_1400]
+#>    [Gene_1087|Gene_0090][Gene_1101|Gene_0725]
+#>    [Gene_1170|Gene_0047][Gene_1244|Gene_0253]
+#>    [Gene_1347|Gene_0267][Gene_1365|Gene_0110]
+#>    [Gene_1379|Gene_0512][Gene_1541|Gene_0453]
+#>    [Gene_1544|Gene_1401][Gene_1594|Gene_0574]
+#>    [Gene_1604|Gene_0018][Gene_1634|Gene_0453]
+#>    [Gene_1757|Gene_1095][Gene_1784|Gene_0074]
+#>    [Gene_1788|Gene_0543][Gene_1849|Gene_0090]
+#>    [Gene_1878|Gene_0574][Gene_1887|Gene_0544]
+#>    [Gene_1890|Gene_1473][Gene_1956|Gene_0176]
+#>    [Gene_0056|Gene_1788][Gene_0396|Gene_0940:Gene_1770]
+#>    [Gene_0455|Gene_1170:Gene_1972]
+#>    [Gene_0741|Gene_0232:Gene_1604][Gene_0879|Gene_1878]
+#>    [Gene_0920|Gene_1849][Gene_0955|Gene_1031]
+#>    [Gene_1034|Gene_1544][Gene_1414|Gene_0249:Gene_1379]
+#>    [Gene_1436|Gene_1347][Gene_1443|Gene_0021:Gene_0978]
+#>    [Gene_1668|Gene_1594][Gene_1689|Gene_1101]
+#>    [Gene_1822|Gene_0458][Gene_0076|Gene_1034]
+#>    [Gene_0311|Gene_0879:Gene_1087][Gene_0363|Gene_1668]
+#>    [Gene_1496|Gene_0455][Gene_1591|Gene_0920]
+#>    [Gene_0051|Gene_0076:Gene_1860]
 #>   nodes:                                 100 
-#>   arcs:                                  67 
+#>   arcs:                                  61 
 #>     undirected arcs:                     0 
-#>     directed arcs:                       67 
-#>   average markov blanket size:           1.70 
-#>   average neighbourhood size:            1.34 
-#>   average branching factor:              0.67 
+#>     directed arcs:                       61 
+#>   average markov blanket size:           1.42 
+#>   average neighbourhood size:            1.22 
+#>   average branching factor:              0.61 
 #> 
 #>   learning algorithm:                    
 #>                                         Max-Min Hill-Climbing 
@@ -166,7 +179,7 @@ gs$net
 #>   score:                                 BIC (Gauss.) 
 #>   alpha threshold:                       0.05 
 #>   penalization coefficient:              1.497866 
-#>   tests used in the learning procedure:  22042 
+#>   tests used in the learning procedure:  21744 
 #>   optimized:                             TRUE
 ```
 
