@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Other algorithms and software | scstruc: causal assessment of gene regulatory network using Bayesian network</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="description" content="5.1 Bootstrapping For obtaining the reliable network, we can use bootstrapping approach by randomly subsampling the data, infer the network from it, and average the bootstrapped networks. Most...">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Other algorithms and software | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Bootstrapping For obtaining the reliable network, we can use bootstrapping approach by randomly subsampling the data, infer the network from it, and average the bootstrapped networks. Most...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Other algorithms and software | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta name="twitter:description" content="5.1 Bootstrapping For obtaining the reliable network, we can use bootstrapping approach by randomly subsampling the data, infer the network from it, and average the bootstrapped networks. Most...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">scstruc: causal assessment of gene regulatory network using Bayesian network</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="basic-usage-of-scstruc.html"><span class="header-section-number">2</span> Basic usage of scstruc</a></li>
+<li><a class="" href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></li>
+<li><a class="" href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></li>
+<li><a class="active" href="other-algorithms-and-software.html"><span class="header-section-number">5</span> Other algorithms and software</a></li>
+<li><a class="" href="evaluating-the-inferred-networks.html"><span class="header-section-number">6</span> Evaluating the inferred networks</a></li>
+<li><a class="" href="fitting-and-comparing-the-parameters.html"><span class="header-section-number">7</span> Fitting and comparing the parameters</a></li>
+<li><a class="" href="plot.html"><span class="header-section-number">8</span> Plotting functions</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="other-algorithms-and-software" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Other algorithms and software<a class="anchor" aria-label="anchor" href="#other-algorithms-and-software"><i class="fas fa-link"></i></a>
+</h1>
+<div id="bootstrapping" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Bootstrapping<a class="anchor" aria-label="anchor" href="#bootstrapping"><i class="fas fa-link"></i></a>
+</h2>
+<p>For obtaining the reliable network, we can use bootstrapping approach by randomly subsampling the data, infer the network from it, and average the bootstrapped networks. Most algorithms can use bootstrapping by specifying <code>boot=TRUE</code>. For instance, to use bootstrapping for CCDr algorithm (which is fast), the example codes are shown below. Replication number can be specified by <code>R</code> and sampling number can be specified by <code>m</code> argument. In this way, <code>bn.strength</code> object will be returned as <code>net</code>.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/mockSCE.html">mockSCE</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html">logNormCounts</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="va">included_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span>, <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>, R<span class="op">=</span><span class="fl">30</span>,</span>
+<span>              changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"ccdr"</span>, boot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Bootstrapping specified</span></span>
+<span><span class="co">#&gt; Returning the list of bn.strength</span></span>
+<span></span>
+<span><span class="co">## It consists of strength from multiple lambdas</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gs</span><span class="op">$</span><span class="va">net</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        from        to strength direction</span></span>
+<span><span class="co">#&gt; 1 Gene_0268 Gene_0332        0         0</span></span>
+<span><span class="co">#&gt; 2 Gene_0268 Gene_0399        0         0</span></span>
+<span><span class="co">#&gt; 3 Gene_0268 Gene_0413        0         0</span></span>
+<span><span class="co">#&gt; 4 Gene_0268 Gene_0518        0         0</span></span>
+<span><span class="co">#&gt; 5 Gene_0268 Gene_0566        0         0</span></span>
+<span><span class="co">#&gt; 6 Gene_0268 Gene_0596        0         0</span></span></code></pre></div>
+</div>
+<div id="pidc" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> <code>PIDC</code><a class="anchor" aria-label="anchor" href="#pidc"><i class="fas fa-link"></i></a>
+</h2>
+<p>PIDC algorithm is based on information theory and leverages partial information decomposition (PID) to analyze and quantify the relationships between multiple variables <span class="citation">(<a href="references.html#ref-chan_gene_2017">Chan, Stumpf, and Babtie 2017</a>)</span>. <code>scstruc</code> uses the undirected network produced from <code>PIDC</code>, implemented in Julia. <code>JuliaCall</code> is used to call Julia from R, and the users should first set up the Julia environment. Also, the path to the main library (<a href="https://github.com/Tchanders/NetworkInference.jl">NetworkInference.jl</a>) should be specified to <code>NetworkInference_HOME</code> argument. The directed acyclic graph is then obtained based on the score maximization with the constraints produced by <code>PIDC</code>. The example code is shown as follows:</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/Non-Contradiction/JuliaCall">JuliaCall</a></span><span class="op">)</span></span>
+<span><span class="va">julia</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/JuliaCall/man/julia_setup.html">julia_setup</a></span><span class="op">(</span>JULIA_HOME <span class="op">=</span> <span class="st">"./Julia-1.10.5/bin"</span><span class="op">)</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>              changeSymbol<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>              algorithm<span class="op">=</span><span class="st">"pidc"</span>,</span>
+<span>              algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>NetworkInference_HOME<span class="op">=</span><span class="st">"./NetworkInference.jl"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gs</span><span class="op">$</span><span class="va">net</span></span></code></pre></div>
+<p>The bootstrapped-based inference can be also performed. In this case, the averaged network is obtained per <code>thresholds</code> parameters in <code>algorithm.args</code>. By default, the network is thresholded by <code>seq(0.1, 0.4, 0.1)</code>.</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>              changeSymbol<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>              algorithm<span class="op">=</span><span class="st">"pidc"</span>, boot<span class="op">=</span><span class="cn">TRUE</span>, R<span class="op">=</span><span class="fl">30</span>,</span>
+<span>              algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>NetworkInference_HOME<span class="op">=</span><span class="st">"./NetworkInference.jl"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gs</span><span class="op">$</span><span class="va">net</span></span></code></pre></div>
+<p>The maximization can be chosen from the scoring function available in <code>bnlearn</code> or Greedy Equivalence Search (<code>ges</code>), which can be specified by the parameter <code>maximize</code> in <code>algorithm.args</code>.</p>
+<p>Note that raw network output that is not scaled and thresholded is stored in the temporary directory.</p>
+</div>
+<div id="genie3" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> <code>GENIE3</code><a class="anchor" aria-label="anchor" href="#genie3"><i class="fas fa-link"></i></a>
+</h2>
+<p>GENIE3 is a widely used method for inferring directed interactions between genes based on an ensemble of regression trees. By specifying <code>genie3</code> in <code>algorithm</code>, the function performs <code>GENIE3</code> algorithm and subsequently threshold the arcs. Then, the function returns the list of the original results and the networks if the thresholded network is DAG.</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>              changeSymbol<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>              algorithm<span class="op">=</span><span class="st">"genie3"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gs</span><span class="op">$</span><span class="va">net</span><span class="op">$</span><span class="va">original</span><span class="op">)</span></span>
+<span><span class="co">#&gt;            Gene_0268  Gene_0332  Gene_0399  Gene_0413</span></span>
+<span><span class="co">#&gt; Gene_0268 0.00000000 0.04806280 0.03070923 0.02950172</span></span>
+<span><span class="co">#&gt; Gene_0332 0.03812961 0.00000000 0.02597613 0.02584433</span></span>
+<span><span class="co">#&gt; Gene_0399 0.02731085 0.02948143 0.00000000 0.02595806</span></span>
+<span><span class="co">#&gt; Gene_0413 0.02788775 0.02794079 0.02462729 0.00000000</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02786071 0.04559585 0.04388638 0.02711829</span></span>
+<span><span class="co">#&gt; Gene_0566 0.03400589 0.03555564 0.02683549 0.02723738</span></span>
+<span><span class="co">#&gt;            Gene_0518  Gene_0566  Gene_0596  Gene_0598</span></span>
+<span><span class="co">#&gt; Gene_0268 0.02667846 0.03775870 0.03543492 0.02975625</span></span>
+<span><span class="co">#&gt; Gene_0332 0.04566691 0.03769726 0.06203825 0.04807715</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03792178 0.03876648 0.04997654 0.03264433</span></span>
+<span><span class="co">#&gt; Gene_0413 0.02799680 0.02985924 0.03269626 0.03735218</span></span>
+<span><span class="co">#&gt; Gene_0518 0.00000000 0.03087539 0.03659631 0.03943075</span></span>
+<span><span class="co">#&gt; Gene_0566 0.03633175 0.00000000 0.02488180 0.03061393</span></span>
+<span><span class="co">#&gt;            Gene_0634  Gene_0649  Gene_0671  Gene_0696</span></span>
+<span><span class="co">#&gt; Gene_0268 0.03041270 0.02941533 0.02677473 0.03643082</span></span>
+<span><span class="co">#&gt; Gene_0332 0.02959120 0.02812892 0.02661490 0.02698970</span></span>
+<span><span class="co">#&gt; Gene_0399 0.04353496 0.03329067 0.02547989 0.03879671</span></span>
+<span><span class="co">#&gt; Gene_0413 0.02922098 0.03568671 0.02853269 0.02694774</span></span>
+<span><span class="co">#&gt; Gene_0518 0.03136156 0.02140210 0.03969633 0.02308859</span></span>
+<span><span class="co">#&gt; Gene_0566 0.03063246 0.02983986 0.03281514 0.03084788</span></span>
+<span><span class="co">#&gt;            Gene_0728  Gene_0737  Gene_0770  Gene_0795</span></span>
+<span><span class="co">#&gt; Gene_0268 0.03066103 0.03773379 0.02844980 0.02407317</span></span>
+<span><span class="co">#&gt; Gene_0332 0.03210181 0.03371274 0.02408368 0.02536610</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03298882 0.02472669 0.03035161 0.02891186</span></span>
+<span><span class="co">#&gt; Gene_0413 0.03720801 0.03131826 0.03122379 0.03656113</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02566118 0.05191985 0.02593010 0.07423479</span></span>
+<span><span class="co">#&gt; Gene_0566 0.03009736 0.02629928 0.02884896 0.03102382</span></span>
+<span><span class="co">#&gt;            Gene_0805  Gene_0868  Gene_0942  Gene_0945</span></span>
+<span><span class="co">#&gt; Gene_0268 0.04687927 0.03797992 0.02472566 0.03571946</span></span>
+<span><span class="co">#&gt; Gene_0332 0.02658287 0.02870913 0.02361332 0.02629898</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03164461 0.02950199 0.04783306 0.03902401</span></span>
+<span><span class="co">#&gt; Gene_0413 0.02725425 0.02521442 0.02443385 0.03326018</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02541573 0.02351137 0.02189042 0.03392706</span></span>
+<span><span class="co">#&gt; Gene_0566 0.02916401 0.04044313 0.03458140 0.03063736</span></span>
+<span><span class="co">#&gt;            Gene_0985  Gene_0995  Gene_1021  Gene_1085</span></span>
+<span><span class="co">#&gt; Gene_0268 0.03051196 0.02847305 0.03275989 0.03003508</span></span>
+<span><span class="co">#&gt; Gene_0332 0.03308601 0.03090671 0.02534707 0.03064466</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03071515 0.03178637 0.05252687 0.03137185</span></span>
+<span><span class="co">#&gt; Gene_0413 0.02803579 0.05766842 0.02553859 0.03277104</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02504285 0.04407958 0.02352920 0.03660910</span></span>
+<span><span class="co">#&gt; Gene_0566 0.03226340 0.03033738 0.02638007 0.03131746</span></span>
+<span><span class="co">#&gt;            Gene_1091  Gene_1152  Gene_1212  Gene_1303</span></span>
+<span><span class="co">#&gt; Gene_0268 0.02888809 0.02762018 0.07199049 0.04025052</span></span>
+<span><span class="co">#&gt; Gene_0332 0.03638740 0.02670459 0.02347369 0.02341440</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03672325 0.02925462 0.03168339 0.02866118</span></span>
+<span><span class="co">#&gt; Gene_0413 0.03474642 0.03967002 0.02910728 0.03573482</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02096500 0.02933942 0.02573424 0.02449710</span></span>
+<span><span class="co">#&gt; Gene_0566 0.02848721 0.02956891 0.02894976 0.02607299</span></span>
+<span><span class="co">#&gt;            Gene_1343  Gene_1404  Gene_1478  Gene_1493</span></span>
+<span><span class="co">#&gt; Gene_0268 0.03408796 0.02783098 0.03319151 0.02119563</span></span>
+<span><span class="co">#&gt; Gene_0332 0.02858623 0.02250102 0.04324024 0.02208566</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03249124 0.02671115 0.03251746 0.03009837</span></span>
+<span><span class="co">#&gt; Gene_0413 0.04176923 0.03338838 0.02985457 0.03398381</span></span>
+<span><span class="co">#&gt; Gene_0518 0.02491081 0.05369118 0.03898393 0.02688708</span></span>
+<span><span class="co">#&gt; Gene_0566 0.02576682 0.02669661 0.04282265 0.02293499</span></span>
+<span><span class="co">#&gt;            Gene_1504  Gene_1663  Gene_1701  Gene_1716</span></span>
+<span><span class="co">#&gt; Gene_0268 0.02620566 0.03591880 0.03497526 0.04206038</span></span>
+<span><span class="co">#&gt; Gene_0332 0.02059514 0.02900346 0.02181436 0.03954160</span></span>
+<span><span class="co">#&gt; Gene_0399 0.02555442 0.03104142 0.02362603 0.03148938</span></span>
+<span><span class="co">#&gt; Gene_0413 0.03201972 0.02857039 0.02521726 0.02862532</span></span>
+<span><span class="co">#&gt; Gene_0518 0.04494758 0.02299887 0.02005112 0.02731326</span></span>
+<span><span class="co">#&gt; Gene_0566 0.02265762 0.02990485 0.03274941 0.03050448</span></span>
+<span><span class="co">#&gt;            Gene_1761  Gene_1771  Gene_1926  Gene_1970</span></span>
+<span><span class="co">#&gt; Gene_0268 0.03795837 0.02962692 0.02862905 0.02906427</span></span>
+<span><span class="co">#&gt; Gene_0332 0.02384148 0.02770915 0.02613935 0.02820980</span></span>
+<span><span class="co">#&gt; Gene_0399 0.03462029 0.02537008 0.04733737 0.02784980</span></span>
+<span><span class="co">#&gt; Gene_0413 0.03817140 0.03378951 0.03289098 0.02656692</span></span>
+<span><span class="co">#&gt; Gene_0518 0.01999025 0.03072816 0.02638434 0.03204576</span></span>
+<span><span class="co">#&gt; Gene_0566 0.05504639 0.04605090 0.03006919 0.03185736</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></div>
+<div class="next"><a href="evaluating-the-inferred-networks.html"><span class="header-section-number">6</span> Evaluating the inferred networks</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#other-algorithms-and-software"><span class="header-section-number">5</span> Other algorithms and software</a></li>
+<li><a class="nav-link" href="#bootstrapping"><span class="header-section-number">5.1</span> Bootstrapping</a></li>
+<li><a class="nav-link" href="#pidc"><span class="header-section-number">5.2</span> PIDC</a></li>
+<li><a class="nav-link" href="#genie3"><span class="header-section-number">5.3</span> GENIE3</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-13.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

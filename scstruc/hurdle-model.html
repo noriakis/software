@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Hurdle model | scstruc: causal assessment of gene regulatory network using Bayesian network</title>
+<meta name="author" content="Noriaki Sato">
+<meta name="description" content="For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is...">
+<meta name="generator" content="bookdown 0.41 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Hurdle model | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta property="og:type" content="book">
+<meta property="og:description" content="For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Hurdle model | scstruc: causal assessment of gene regulatory network using Bayesian network">
+<meta name="twitter:description" content="For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">scstruc: causal assessment of gene regulatory network using Bayesian network</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="basic-usage-of-scstruc.html"><span class="header-section-number">2</span> Basic usage of scstruc</a></li>
+<li><a class="" href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></li>
+<li><a class="active" href="hurdle-model.html"><span class="header-section-number">4</span> Hurdle model</a></li>
+<li><a class="" href="other-algorithms-and-software.html"><span class="header-section-number">5</span> Other algorithms and software</a></li>
+<li><a class="" href="evaluating-the-inferred-networks.html"><span class="header-section-number">6</span> Evaluating the inferred networks</a></li>
+<li><a class="" href="fitting-and-comparing-the-parameters.html"><span class="header-section-number">7</span> Fitting and comparing the parameters</a></li>
+<li><a class="" href="plot.html"><span class="header-section-number">8</span> Plotting functions</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="hurdle-model" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Hurdle model<a class="anchor" aria-label="anchor" href="#hurdle-model"><i class="fas fa-link"></i></a>
+</h1>
+<p>For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is zero or not, and non-zero part separately.</p>
+<p>Based on the inferred network in <code>HurdleNormal</code>, which proposed the multivariate Hurdle model and grouped lasso to learn the undirected network <span class="citation">(<a href="references.html#ref-mcdavid_graphical_2019">McDavid et al. 2019</a>)</span>, the directed acyclic graph is inferred based on score maximization using the constraints. The undirected network is selected from multiple lambdas based on the BIC criteria implemented in <code>HurdleNormal</code>. For this function, <code>Hurdle</code> algorithm should be specified in <code>algorithm</code> argument in <code>scstruc</code>. By default, score will be <code>BIC</code> in <code>bnlearn</code>.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">HurdleNormal</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/mockSCE.html">mockSCE</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">sce</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scuttle/man/logNormCounts.html">logNormCounts</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span></span>
+<span><span class="va">included_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/Bimap-envirAPI.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">sce</span><span class="op">)</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">gs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"Hurdle"</span><span class="op">)</span></span>
+<span><span class="va">gs</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0167][Gene_0267][Gene_0328][Gene_0363][Gene_0383]</span></span>
+<span><span class="co">#&gt;    [Gene_0590][Gene_0727][Gene_1003][Gene_1102][Gene_1187]</span></span>
+<span><span class="co">#&gt;    [Gene_1224][Gene_1316][Gene_1366][Gene_1510][Gene_1564]</span></span>
+<span><span class="co">#&gt;    [Gene_1694][Gene_1757][Gene_1865][Gene_1871][Gene_1969]</span></span>
+<span><span class="co">#&gt;   nodes:                                 20 </span></span>
+<span><span class="co">#&gt;   arcs:                                  0 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       0 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.00 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.00 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.00 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   learning algorithm:                    Hill-Climbing </span></span>
+<span><span class="co">#&gt;   score:                                 BIC (Gauss.) </span></span>
+<span><span class="co">#&gt;   penalization coefficient:              2.649159 </span></span>
+<span><span class="co">#&gt;   tests used in the learning procedure:  0 </span></span>
+<span><span class="co">#&gt;   optimized:                             TRUE</span></span></code></pre></div>
+<p>The score maximization function can be set arbitrarily (<code>maximizeFun</code>), set to <code>hc</code> by default. Greedy Equivalence Search can be performed via setting <code>maximize</code> argument to <code>ges</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs.tabu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"Hurdle"</span>,</span>
+<span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>maximizeFun<span class="op">=</span><span class="fu">bnlearn</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/bnlearn/man/hc.html">tabu</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gs.tabu</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0167][Gene_0267][Gene_0328][Gene_0363][Gene_0383]</span></span>
+<span><span class="co">#&gt;    [Gene_0590][Gene_0727][Gene_1003][Gene_1102][Gene_1187]</span></span>
+<span><span class="co">#&gt;    [Gene_1224][Gene_1316][Gene_1366][Gene_1510][Gene_1564]</span></span>
+<span><span class="co">#&gt;    [Gene_1694][Gene_1757][Gene_1865][Gene_1871][Gene_1969]</span></span>
+<span><span class="co">#&gt;   nodes:                                 20 </span></span>
+<span><span class="co">#&gt;   arcs:                                  0 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       0 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.00 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.00 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.00 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   learning algorithm:                    Tabu Search </span></span>
+<span><span class="co">#&gt;   score:                                 BIC (Gauss.) </span></span>
+<span><span class="co">#&gt;   penalization coefficient:              2.649159 </span></span>
+<span><span class="co">#&gt;   tests used in the learning procedure:  0 </span></span>
+<span><span class="co">#&gt;   optimized:                             TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## This performs GES</span></span>
+<span><span class="va">gs.ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"Hurdle"</span>,</span>
+<span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>maximize<span class="op">=</span><span class="st">"ges"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gs.ges</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Random/Generated Bayesian network</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0167][Gene_0267][Gene_0328][Gene_0363][Gene_0383]</span></span>
+<span><span class="co">#&gt;    [Gene_0590][Gene_0727][Gene_1003][Gene_1102][Gene_1187]</span></span>
+<span><span class="co">#&gt;    [Gene_1224][Gene_1316][Gene_1366][Gene_1510][Gene_1564]</span></span>
+<span><span class="co">#&gt;    [Gene_1694][Gene_1757][Gene_1865][Gene_1871][Gene_1969]</span></span>
+<span><span class="co">#&gt;   nodes:                                 20 </span></span>
+<span><span class="co">#&gt;   arcs:                                  0 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       0 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.00 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.00 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.00 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   generation algorithm:                  Empty</span></span></code></pre></div>
+<div id="customized-score-for-hurdle-model" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Customized score for hurdle model<a class="anchor" aria-label="anchor" href="#customized-score-for-hurdle-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>Additional score can be specified by using <code>hurdle.bic</code> function in <code>algorithm.args</code> argument. The score is defined as the sum of BIC values from continuous and logistic regression part of the hurdle model. Let <span class="math inline">\(Y = [y_{ij}]\)</span> denote the log-normalized expression value of the gene i in subset cell j and <span class="math inline">\(Z = [z_{ij}]\)</span> a 0-1 indicator value of whether the gene expression is zero. The score is defined as:</p>
+<p><span class="math display">\[
+\text{logit}\left(\Pr(Z_{ij} = 1)\right) \sim \beta_i G_j,
+\]</span></p>
+<p><span class="math display">\[
+\Pr(Y_{ij} = y \mid Z_{ij} = 1) \sim N(\beta_i G_j, \sigma^2).
+\]</span></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gs2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
+<span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"Hurdle"</span>,</span>
+<span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"score"</span><span class="op">=</span><span class="va">hurdle.bic</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gs2</span><span class="op">$</span><span class="va">net</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   model:</span></span>
+<span><span class="co">#&gt;    [Gene_0167][Gene_0267][Gene_0328][Gene_0363][Gene_0383]</span></span>
+<span><span class="co">#&gt;    [Gene_0590][Gene_0727][Gene_1003][Gene_1102][Gene_1187]</span></span>
+<span><span class="co">#&gt;    [Gene_1224][Gene_1316][Gene_1366][Gene_1510][Gene_1564]</span></span>
+<span><span class="co">#&gt;    [Gene_1694][Gene_1757][Gene_1865][Gene_1871][Gene_1969]</span></span>
+<span><span class="co">#&gt;   nodes:                                 20 </span></span>
+<span><span class="co">#&gt;   arcs:                                  0 </span></span>
+<span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
+<span><span class="co">#&gt;     directed arcs:                       0 </span></span>
+<span><span class="co">#&gt;   average markov blanket size:           0.00 </span></span>
+<span><span class="co">#&gt;   average neighbourhood size:            0.00 </span></span>
+<span><span class="co">#&gt;   average branching factor:              0.00 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   learning algorithm:                    Hill-Climbing </span></span>
+<span><span class="co">#&gt;   score:                                 </span></span>
+<span><span class="co">#&gt;                                  User-Provided Score Function </span></span>
+<span><span class="co">#&gt;   tests used in the learning procedure:  0 </span></span>
+<span><span class="co">#&gt;   optimized:                             TRUE</span></span></code></pre></div>
+<p>As proposed in the <code>MAST</code> library, the cellular detection rate adjustment (CDR) can be performed in the scoring phase by <code>cdrAdjuetment</code> to <code>TRUE</code>. This applies inclusion of CDR term in the hurdle modeling and score maximizing phase.</p>
+</div>
+<div id="add.dropout" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> <code>add.dropout</code><a class="anchor" aria-label="anchor" href="#add.dropout"><i class="fas fa-link"></i></a>
+</h2>
+<p>Like in the other SCT data simulator, the excessive zero in the matrix can be simulated by <code>add.dropout</code>. The function takes absolute expression values if any of the expression in the matrix is negative.</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"../arth150.rds"</span><span class="op">)</span></span>
+<span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/rbn.html">rbn</a></span><span class="op">(</span><span class="va">net</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sim</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; FALSE </span></span>
+<span><span class="co">#&gt; 10700</span></span>
+<span><span class="va">sim.do</span> <span class="op">&lt;-</span> <span class="va">sim</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/add.dropout.html">add.dropout</a></span><span class="op">(</span><span class="va">sim</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sim.do</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; FALSE  TRUE </span></span>
+<span><span class="co">#&gt;  4372  6328</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="penalized-regressions.html"><span class="header-section-number">3</span> Penalized regressions</a></div>
+<div class="next"><a href="other-algorithms-and-software.html"><span class="header-section-number">5</span> Other algorithms and software</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hurdle-model"><span class="header-section-number">4</span> Hurdle model</a></li>
+<li><a class="nav-link" href="#customized-score-for-hurdle-model"><span class="header-section-number">4.1</span> Customized score for hurdle model</a></li>
+<li><a class="nav-link" href="#add.dropout"><span class="header-section-number">4.2</span> add.dropout</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-13.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
