@@ -115,9 +115,9 @@
 <span><span class="va">infer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/hc.html">hc</a></span><span class="op">(</span><span class="va">data.inference</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/metrics.html">metrics</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/bn.fit.html">bn.net</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"inferred"</span><span class="op">=</span><span class="va">infer</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;       algo referenceNode InferenceNode s0 edges SHD TP FP</span></span>
-<span><span class="co">#&gt; 1 inferred            46            46 70    94 101 31 39</span></span>
-<span><span class="co">#&gt;   FN       TPR Precision    Recall        F1 SID KL BIC</span></span>
-<span><span class="co">#&gt; 1 63 0.4428571 0.4428571 0.3297872 0.3780488 930 NA  NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 inferred            46            46 70    99 107 28 42</span></span>
+<span><span class="co">#&gt;   FN TPR Precision    Recall        F1 SID KL BIC</span></span>
+<span><span class="co">#&gt; 1 71 0.4       0.4 0.2828283 0.3313609 958 NA  NA</span></span></code></pre></div>
 <p><code>sid_sym</code> argument can choose whether to symmetrze the SID, and <code>SID.cran</code> can choose whether to use SID implemented in CRAN package <code>SID</code>.</p>
 </div>
 <div id="metricsfromfitted-function" class="section level3" number="6.1.2">
@@ -127,37 +127,37 @@
 <p>This function accepts parameter-fitted network and sampling number, as well as the algorithms to be used in the inference. Using <code>rbn</code> function in <code>bnlearn</code>, logic sampling is performed from fitted network. Here, we use <code>ECOLI70</code> network from <code>GeneNet</code> R package, sampling 50 observations from the network. The testing algorithms can be specifed by argument <code>algos</code>. For the special algorithms, the arguments with the same name are provided. The function has <code>return_data</code> and <code>return_net</code> argument, which returns the data used in the inference and inferred networks. By default, only the <code>metrics</code> is returned.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/metricsFromFitted.html">metricsFromFitted</a></span><span class="op">(</span><span class="va">net</span>, <span class="fl">50</span>, algos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"glmnet_CV"</span>, <span class="st">"glmnet_BIC"</span>, <span class="st">"L0_CV"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; glmnet_CV 13.2823009490967</span></span>
-<span><span class="co">#&gt; glmnet_BIC 0.914937019348145</span></span>
+<span><span class="co">#&gt; glmnet_CV 5.95810103416443</span></span>
+<span><span class="co">#&gt; glmnet_BIC 0.471029996871948</span></span>
 <span><span class="co">#&gt; L0_CV</span></span>
-<span><span class="co">#&gt; 16.9690780639648</span></span>
-<span><span class="co">#&gt; MMHC 0.001 0.0871520042419434</span></span>
-<span><span class="co">#&gt; MMHC 0.005 0.0960419178009033</span></span>
-<span><span class="co">#&gt; MMHC 0.01 0.101830959320068</span></span>
-<span><span class="co">#&gt; MMHC 0.05 0.113605976104736</span></span>
+<span><span class="co">#&gt; 5.5213348865509</span></span>
+<span><span class="co">#&gt; MMHC 0.001 0.0360720157623291</span></span>
+<span><span class="co">#&gt; MMHC 0.005 0.0354738235473633</span></span>
+<span><span class="co">#&gt; MMHC 0.01 0.0376400947570801</span></span>
+<span><span class="co">#&gt; MMHC 0.05 0.0452709197998047</span></span>
 <span><span class="co">#&gt; Network computing finished</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mf</span><span class="op">$</span><span class="va">metrics</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         algo s0 edges        KL       BIC SHD TP FP FN</span></span>
-<span><span class="co">#&gt; 1  glmnet_CV 70    61  9.108264 -2383.886  77 24 46 37</span></span>
-<span><span class="co">#&gt; 2 glmnet_BIC 70    40 25.149720 -2564.327  55 21 49 19</span></span>
-<span><span class="co">#&gt; 3      L0_CV 70    29 65.626731 -2873.020  66 13 57 16</span></span>
-<span><span class="co">#&gt; 4 mmhc_0.001 70    27 52.077067 -2777.016  59 15 55 12</span></span>
-<span><span class="co">#&gt; 5 mmhc_0.005 70    29 50.380866 -2749.557  57 17 53 12</span></span>
-<span><span class="co">#&gt; 6  mmhc_0.01 70    30 50.290256 -2745.181  57 18 52 12</span></span>
+<span><span class="co">#&gt; 1  glmnet_CV 70    68  5.145568 -2347.568  69 31 39 37</span></span>
+<span><span class="co">#&gt; 2 glmnet_BIC 70    38 14.594425 -2508.020  55 23 47 15</span></span>
+<span><span class="co">#&gt; 3      L0_CV 70    30 64.437907 -2893.720  67 13 57 17</span></span>
+<span><span class="co">#&gt; 4 mmhc_0.001 70    26 54.579934 -2797.366  59 15 55 11</span></span>
+<span><span class="co">#&gt; 5 mmhc_0.005 70    28 44.462021 -2747.934  60 16 54 12</span></span>
+<span><span class="co">#&gt; 6  mmhc_0.01 70    29 43.507040 -2728.172  59 17 53 12</span></span>
 <span><span class="co">#&gt;         TPR Precision    Recall        F1 SID PPI</span></span>
-<span><span class="co">#&gt; 1 0.3428571 0.3428571 0.3934426 0.3664122  NA  NA</span></span>
-<span><span class="co">#&gt; 2 0.3000000 0.3000000 0.5250000 0.3818182  NA  NA</span></span>
-<span><span class="co">#&gt; 3 0.1857143 0.1857143 0.4482759 0.2626263  NA  NA</span></span>
-<span><span class="co">#&gt; 4 0.2142857 0.2142857 0.5555556 0.3092784  NA  NA</span></span>
-<span><span class="co">#&gt; 5 0.2428571 0.2428571 0.5862069 0.3434343  NA  NA</span></span>
-<span><span class="co">#&gt; 6 0.2571429 0.2571429 0.6000000 0.3600000  NA  NA</span></span>
-<span><span class="co">#&gt;          time   BICnorm  N  p</span></span>
-<span><span class="co">#&gt; 1 13.28230095 0.9771489 50 46</span></span>
-<span><span class="co">#&gt; 2  0.91493702 0.8619632 50 46</span></span>
-<span><span class="co">#&gt; 3 16.96907806 0.6649074 50 46</span></span>
-<span><span class="co">#&gt; 4  0.08715200 0.7261924 50 46</span></span>
-<span><span class="co">#&gt; 5  0.09604192 0.7437208 50 46</span></span>
-<span><span class="co">#&gt; 6  0.10183096 0.7465141 50 46</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 0.4428571 0.4428571 0.4558824 0.4492754  NA  NA</span></span>
+<span><span class="co">#&gt; 2 0.3285714 0.3285714 0.6052632 0.4259259  NA  NA</span></span>
+<span><span class="co">#&gt; 3 0.1857143 0.1857143 0.4333333 0.2600000  NA  NA</span></span>
+<span><span class="co">#&gt; 4 0.2142857 0.2142857 0.5769231 0.3125000  NA  NA</span></span>
+<span><span class="co">#&gt; 5 0.2285714 0.2285714 0.5714286 0.3265306  NA  NA</span></span>
+<span><span class="co">#&gt; 6 0.2428571 0.2428571 0.5862069 0.3434343  NA  NA</span></span>
+<span><span class="co">#&gt;         time   BICnorm  N  p</span></span>
+<span><span class="co">#&gt; 1 5.95810103 1.0000000 50 46</span></span>
+<span><span class="co">#&gt; 2 0.47103000 0.8938548 50 46</span></span>
+<span><span class="co">#&gt; 3 5.52133489 0.6387000 50 46</span></span>
+<span><span class="co">#&gt; 4 0.03607202 0.7024417 50 46</span></span>
+<span><span class="co">#&gt; 5 0.03547382 0.7351427 50 46</span></span>
+<span><span class="co">#&gt; 6 0.03764009 0.7482163 50 46</span></span></code></pre></div>
 <p>The results can be visualized in the usual way by using the library like <code>ggplot2</code>. We use here <code>plotthis</code> library for visualizing.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pwwang/plotthis">plotthis</a></span><span class="op">)</span></span>
@@ -273,7 +273,96 @@
 <span><span class="co">#&gt;   .metric .estimator .estimate</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 pr_auc  binary         0.407</span></span></code></pre></div>
+<p>Accompanied <code>prc.plot</code> function is also prepared, which accepts the reference <code>bn</code> object and named list of strength and plots the PRC. Note that the weight (corresponding to edge confidence) column shuold be named as <code>strength</code> in this function.</p>
 <p>By combining these methods, it is possible to determine which network is most suitable for assessment.</p>
+</div>
+<div id="evaluation-based-on-sergio" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Evaluation based on <code>SERGIO</code><a class="anchor" aria-label="anchor" href="#evaluation-based-on-sergio"><i class="fas fa-link"></i></a>
+</h2>
+<div id="load-and-plot" class="section level3" number="6.4.1">
+<h3>
+<span class="header-section-number">6.4.1</span> Load and plot<a class="anchor" aria-label="anchor" href="#load-and-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>SERGIO</code>, a simulator of single-cell gene expression data, models the single-cell gene expression data based on the user-specified GRN. After cloning the repository, first load the GRN in the dataset. Then plot the loaded network using <code>plotNet</code>.</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span>;<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bnlearn.com/">bnlearn</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## De-noised_100G_9T_300cPerT_4_DS1</span></span>
+<span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"De-noised_100G_9T_300cPerT_4_DS1/gt_GRN.csv"</span>, header<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="va">gt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">`colnames&lt;-`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from"</span>,<span class="st">"to"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gt</span><span class="op">$</span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>,<span class="va">gt</span><span class="op">$</span><span class="va">from</span><span class="op">)</span></span>
+<span><span class="va">gt</span><span class="op">$</span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>,<span class="va">gt</span><span class="op">$</span><span class="va">to</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Consider the GRN as DAG</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/is_dag.html">is_dag</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="va">ref.bn.ds1</span> <span class="op">&lt;-</span> <span class="fu">bnlearn</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/modelstring.html">as.bn</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">ref.bn.ds1</span>, showText<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## De-noised_400G_9T_300cPerT_5_DS2</span></span>
+<span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"De-noised_400G_9T_300cPerT_5_DS2/gt_GRN.csv"</span>, header<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">gt</span> <span class="op">&lt;-</span> <span class="va">gt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">`colnames&lt;-`</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from"</span>,<span class="st">"to"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">gt</span><span class="op">$</span><span class="va">from</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>,<span class="va">gt</span><span class="op">$</span><span class="va">from</span><span class="op">)</span></span>
+<span><span class="va">gt</span><span class="op">$</span><span class="va">to</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>,<span class="va">gt</span><span class="op">$</span><span class="va">to</span><span class="op">)</span></span>
+<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="va">gt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Consider the GRN as DAG</span></span>
+<span><span class="fu"><a href="https://r.igraph.org/reference/is_dag.html">is_dag</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="va">ref.bn.ds2</span> <span class="op">&lt;-</span> <span class="fu">bnlearn</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/modelstring.html">as.bn</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
+<span><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/plotNet.html">plotNet</a></span><span class="op">(</span><span class="va">ref.bn.ds2</span>, showText<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="va">ds1</span> <span class="op">+</span> <span class="va">ds2</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-evaluation_files/figure-html/sergio.1-1.png" width="50%" style="display: block; margin: auto;"></div>
+</div>
+<div id="inference-and-evaluation" class="section level3" number="6.4.2">
+<h3>
+<span class="header-section-number">6.4.2</span> Inference and evaluation<a class="anchor" aria-label="anchor" href="#inference-and-evaluation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Load the expression data, and bootstrapped network is obtained using GES algorithm. The expression is coarse-grained beforehand. The performance metrics is calculated based on the functions in <code>scstruc</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## DS1</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"De-noised_100G_9T_300cPerT_4_DS1/simulated_noNoise_0.csv"</span>, row.names<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  100 2700</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"G"</span>,<span class="fu"><a href="https://rdrr.io/r/base/row.names.html">row.names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">scstruc</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/superCellMat.html">superCellMat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>, pca<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   SuperCell dimension: 100 270</span></span>
+<span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">ges.res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/pcalg.boot.html">pcalg.boot</a></span><span class="op">(</span><span class="va">input</span>, R<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/calc.auprc.html">calc.auprc</a></span><span class="op">(</span><span class="va">ref.bn.ds1</span>, <span class="va">ges.res</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span><span class="co">#&gt;   .metric .estimator .estimate</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 pr_auc  binary        0.0728</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/prc.plot.html">prc.plot</a></span><span class="op">(</span><span class="va">ref.bn.ds1</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"GES"</span><span class="op">=</span><span class="va">ges.res</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-evaluation_files/figure-html/sergio.2-1.png" width="50%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="adding-dropout-to-gbn" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> Adding dropout to GBN<a class="anchor" aria-label="anchor" href="#adding-dropout-to-gbn"><i class="fas fa-link"></i></a>
+</h2>
+<p>As another method to reproduce dropout in non-SCT data, the <code>add.dropout</code> function is provided. In this example, the function was applied to data sampled from a Gaussian Bayesian network, and the estimation accuracy was compared using the same inference methods.</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"ecoli70.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/rbn.html">rbn</a></span><span class="op">(</span><span class="va">net</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="va">dat2</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/add.dropout.html">add.dropout</a></span><span class="op">(</span><span class="va">dat</span>, q<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/pcalg.boot.html">pcalg.boot</a></span><span class="op">(</span><span class="va">dat</span>, R<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span>
+<span><span class="va">raw.2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/pcalg.boot.html">pcalg.boot</a></span><span class="op">(</span><span class="va">dat2</span>, R<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/prc.plot.html">prc.plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/bnlearn/man/bn.fit.html">bn.net</a></span><span class="op">(</span><span class="va">net</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"Raw"</span><span class="op">=</span><span class="va">raw</span>, <span class="st">"DO"</span><span class="op">=</span><span class="va">raw.2</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">cowplot</span><span class="fu">::</span><span class="fu"><a href="https://wilkelab.org/cowplot/reference/theme_cowplot.html">theme_cowplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="05-evaluation_files/figure-html/do.1-1.png" width="50%" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
@@ -297,6 +386,13 @@
 </ul>
 </li>
 <li><a class="nav-link" href="#auprc"><span class="header-section-number">6.3</span> AUPRC</a></li>
+<li>
+<a class="nav-link" href="#evaluation-based-on-sergio"><span class="header-section-number">6.4</span> Evaluation based on SERGIO</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-and-plot"><span class="header-section-number">6.4.1</span> Load and plot</a></li>
+<li><a class="nav-link" href="#inference-and-evaluation"><span class="header-section-number">6.4.2</span> Inference and evaluation</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#adding-dropout-to-gbn"><span class="header-section-number">6.5</span> Adding dropout to GBN</a></li>
 </ul>
 
       <div class="book-extra">
@@ -313,7 +409,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-13.</p>
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

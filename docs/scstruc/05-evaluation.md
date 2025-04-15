@@ -31,9 +31,9 @@ data.inference <- rbn(net, 50)
 infer <- hc(data.inference)
 metrics(bn.net(net), list("inferred"=infer))
 #>       algo referenceNode InferenceNode s0 edges SHD TP FP
-#> 1 inferred            46            46 70    94 101 31 39
-#>   FN       TPR Precision    Recall        F1 SID KL BIC
-#> 1 63 0.4428571 0.4428571 0.3297872 0.3780488 930 NA  NA
+#> 1 inferred            46            46 70    99 107 28 42
+#>   FN TPR Precision    Recall        F1 SID KL BIC
+#> 1 71 0.4       0.4 0.2828283 0.3313609 958 NA  NA
 ```
 
 `sid_sym` argument can choose whether to symmetrze the SID, and `SID.cran` can choose whether to use SID implemented in CRAN package `SID`.
@@ -45,37 +45,37 @@ This function accepts parameter-fitted network and sampling number, as well as t
 
 ``` r
 mf <- metricsFromFitted(net, 50, algos=c("glmnet_CV", "glmnet_BIC", "L0_CV"))
-#> glmnet_CV 13.2823009490967
-#> glmnet_BIC 0.914937019348145
+#> glmnet_CV 5.95810103416443
+#> glmnet_BIC 0.471029996871948
 #> L0_CV
-#> 16.9690780639648
-#> MMHC 0.001 0.0871520042419434
-#> MMHC 0.005 0.0960419178009033
-#> MMHC 0.01 0.101830959320068
-#> MMHC 0.05 0.113605976104736
+#> 5.5213348865509
+#> MMHC 0.001 0.0360720157623291
+#> MMHC 0.005 0.0354738235473633
+#> MMHC 0.01 0.0376400947570801
+#> MMHC 0.05 0.0452709197998047
 #> Network computing finished
 head(mf$metrics)
 #>         algo s0 edges        KL       BIC SHD TP FP FN
-#> 1  glmnet_CV 70    61  9.108264 -2383.886  77 24 46 37
-#> 2 glmnet_BIC 70    40 25.149720 -2564.327  55 21 49 19
-#> 3      L0_CV 70    29 65.626731 -2873.020  66 13 57 16
-#> 4 mmhc_0.001 70    27 52.077067 -2777.016  59 15 55 12
-#> 5 mmhc_0.005 70    29 50.380866 -2749.557  57 17 53 12
-#> 6  mmhc_0.01 70    30 50.290256 -2745.181  57 18 52 12
+#> 1  glmnet_CV 70    68  5.145568 -2347.568  69 31 39 37
+#> 2 glmnet_BIC 70    38 14.594425 -2508.020  55 23 47 15
+#> 3      L0_CV 70    30 64.437907 -2893.720  67 13 57 17
+#> 4 mmhc_0.001 70    26 54.579934 -2797.366  59 15 55 11
+#> 5 mmhc_0.005 70    28 44.462021 -2747.934  60 16 54 12
+#> 6  mmhc_0.01 70    29 43.507040 -2728.172  59 17 53 12
 #>         TPR Precision    Recall        F1 SID PPI
-#> 1 0.3428571 0.3428571 0.3934426 0.3664122  NA  NA
-#> 2 0.3000000 0.3000000 0.5250000 0.3818182  NA  NA
-#> 3 0.1857143 0.1857143 0.4482759 0.2626263  NA  NA
-#> 4 0.2142857 0.2142857 0.5555556 0.3092784  NA  NA
-#> 5 0.2428571 0.2428571 0.5862069 0.3434343  NA  NA
-#> 6 0.2571429 0.2571429 0.6000000 0.3600000  NA  NA
-#>          time   BICnorm  N  p
-#> 1 13.28230095 0.9771489 50 46
-#> 2  0.91493702 0.8619632 50 46
-#> 3 16.96907806 0.6649074 50 46
-#> 4  0.08715200 0.7261924 50 46
-#> 5  0.09604192 0.7437208 50 46
-#> 6  0.10183096 0.7465141 50 46
+#> 1 0.4428571 0.4428571 0.4558824 0.4492754  NA  NA
+#> 2 0.3285714 0.3285714 0.6052632 0.4259259  NA  NA
+#> 3 0.1857143 0.1857143 0.4333333 0.2600000  NA  NA
+#> 4 0.2142857 0.2142857 0.5769231 0.3125000  NA  NA
+#> 5 0.2285714 0.2285714 0.5714286 0.3265306  NA  NA
+#> 6 0.2428571 0.2428571 0.5862069 0.3434343  NA  NA
+#>         time   BICnorm  N  p
+#> 1 5.95810103 1.0000000 50 46
+#> 2 0.47103000 0.8938548 50 46
+#> 3 5.52133489 0.6387000 50 46
+#> 4 0.03607202 0.7024417 50 46
+#> 5 0.03547382 0.7351427 50 46
+#> 6 0.03764009 0.7482163 50 46
 ```
 
 The results can be visualized in the usual way by using the library like `ggplot2`. We use here `plotthis` library for visualizing.
@@ -209,5 +209,101 @@ calc.auprc(bn.net(net), infer)
 #> 1 pr_auc  binary         0.407
 ```
 
+Accompanied `prc.plot` function is also prepared, which accepts the reference `bn` object and named list of strength and plots the PRC. Note that the weight (corresponding to edge confidence) column shuold be named as `strength` in this function.
+
+
 By combining these methods, it is possible to determine which network is most suitable for assessment.
 
+
+## Evaluation based on `SERGIO`
+
+### Load and plot
+
+`SERGIO`, a simulator of single-cell gene expression data, models the single-cell gene expression data based on the user-specified GRN. After cloning the repository, first load the GRN in the dataset. Then plot the loaded network using `plotNet`.
+
+
+``` r
+library(scstruc)
+library(dplyr);library(igraph);library(bnlearn)
+
+## De-noised_100G_9T_300cPerT_4_DS1
+gt <- read.csv("De-noised_100G_9T_300cPerT_4_DS1/gt_GRN.csv", header=FALSE)
+gt <- gt %>% `colnames<-`(c("from","to"))
+gt$from <- paste0("G",gt$from)
+gt$to <- paste0("G",gt$to)
+g <- graph_from_data_frame(gt)
+
+### Consider the GRN as DAG
+is_dag(g)
+#> [1] TRUE
+ref.bn.ds1 <- bnlearn::as.bn(g)
+ds1 <- plotNet(ref.bn.ds1, showText=FALSE)
+
+## De-noised_400G_9T_300cPerT_5_DS2
+gt <- read.csv("De-noised_400G_9T_300cPerT_5_DS2/gt_GRN.csv", header=FALSE)
+gt <- gt %>% `colnames<-`(c("from","to"))
+gt$from <- paste0("G",gt$from)
+gt$to <- paste0("G",gt$to)
+g <- graph_from_data_frame(gt)
+
+### Consider the GRN as DAG
+is_dag(g)
+#> [1] TRUE
+ref.bn.ds2 <- bnlearn::as.bn(g)
+ds2 <- plotNet(ref.bn.ds2, showText=FALSE)
+
+library(patchwork)
+ds1 + ds2
+```
+
+<img src="05-evaluation_files/figure-html/sergio.1-1.png" width="50%" style="display: block; margin: auto;" />
+
+
+### Inference and evaluation
+
+Load the expression data, and bootstrapped network is obtained using GES algorithm. The expression is coarse-grained beforehand. The performance metrics is calculated based on the functions in `scstruc`.
+
+
+``` r
+## DS1
+df <- read.csv("De-noised_100G_9T_300cPerT_4_DS1/simulated_noNoise_0.csv", row.names=1)
+dim(df)
+#> [1]  100 2700
+row.names(df) <- paste0("G",row.names(df))
+df <- scstruc::superCellMat(as.matrix(df), pca=FALSE)
+#>   SuperCell dimension: 100 270
+input <- data.frame(t(as.matrix(df)))
+ges.res <- pcalg.boot(input, R=25)
+
+calc.auprc(ref.bn.ds1, ges.res)
+#> # A tibble: 1 × 3
+#>   .metric .estimator .estimate
+#>   <chr>   <chr>          <dbl>
+#> 1 pr_auc  binary        0.0728
+prc.plot(ref.bn.ds1, list("GES"=ges.res))+
+    cowplot::theme_cowplot()
+```
+
+<img src="05-evaluation_files/figure-html/sergio.2-1.png" width="50%" style="display: block; margin: auto;" />
+
+
+## Adding dropout to GBN
+
+As another method to reproduce dropout in non-SCT data, the `add.dropout` function is provided. In this example, the function was applied to data sampled from a Gaussian Bayesian network, and the estimation accuracy was compared using the same inference methods.
+
+
+``` r
+net <- readRDS("ecoli70.rds")
+
+dat <- rbn(net, 100)
+dat2 <- dat * add.dropout(dat, q=0.2)
+
+raw <- pcalg.boot(dat, R=25)
+raw.2 <- pcalg.boot(dat2, R=25)
+
+prc.plot(bn.net(net),
+    list("Raw"=raw, "DO"=raw.2))+
+    cowplot::theme_cowplot()
+```
+
+<img src="05-evaluation_files/figure-html/do.1-1.png" width="50%" style="display: block; margin: auto;" />

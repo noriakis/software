@@ -53,7 +53,7 @@ marks <- markerCoefs(sv, classif_label =  "Treatment", cell_column = NULL, sampl
 #> Performing Boruta algorithm ...
 marks
 #> [[1]]
-#> Boruta performed 10 iterations in 0.303138 secs.
+#> Boruta performed 10 iterations in 0.3576541 secs.
 #>  No attributes deemed important.
 #>  7 attributes confirmed unimportant:
 #> Gene_0017->Gene_0909, Gene_0017->Gene_1806,

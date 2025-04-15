@@ -30,6 +30,10 @@ evaluating-the-causal-validity
 obtaining-the-directed-acyclic-graphs-dags-for-the-evaluation
 intersection-validation-approach
 auprc
+evaluation-based-on-sergio
+load-and-plot
+inference-and-evaluation
+adding-dropout-to-gbn
 fitting-and-comparing-the-parameters
 strucvalues-function
 plotsubnet

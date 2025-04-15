@@ -30,21 +30,22 @@ gs$net
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0005][Gene_0007][Gene_0187][Gene_0197][Gene_0426]
-#>    [Gene_0458][Gene_0500][Gene_0522][Gene_0737][Gene_0811]
-#>    [Gene_0816][Gene_0898][Gene_1053][Gene_1150][Gene_1159]
-#>    [Gene_1166][Gene_1230][Gene_1287][Gene_1364][Gene_1397]
-#>    [Gene_1470][Gene_1475][Gene_1481][Gene_1510][Gene_1539]
-#>    [Gene_1640][Gene_0145|Gene_0426:Gene_1640]
-#>    [Gene_0203|Gene_0005][Gene_1246|Gene_0187]
-#>    [Gene_2000|Gene_1364]
+#>    [Gene_0023][Gene_0145][Gene_0156][Gene_0425][Gene_0544]
+#>    [Gene_0725][Gene_0814][Gene_0993][Gene_1085][Gene_1214]
+#>    [Gene_1267][Gene_1292][Gene_1330][Gene_1332][Gene_1375]
+#>    [Gene_1569][Gene_1683][Gene_1700][Gene_1744][Gene_1922]
+#>    [Gene_2000][Gene_0348|Gene_1085:Gene_1700]
+#>    [Gene_0863|Gene_0425][Gene_1091|Gene_0814]
+#>    [Gene_1520|Gene_0425][Gene_0118|Gene_0348]
+#>    [Gene_0887|Gene_0348][Gene_1921|Gene_0863:Gene_1700]
+#>    [Gene_0986|Gene_0887][Gene_1541|Gene_1921:Gene_2000]
 #>   nodes:                                 30 
-#>   arcs:                                  5 
+#>   arcs:                                  12 
 #>     undirected arcs:                     0 
-#>     directed arcs:                       5 
-#>   average markov blanket size:           0.40 
-#>   average neighbourhood size:            0.33 
-#>   average branching factor:              0.17 
+#>     directed arcs:                       12 
+#>   average markov blanket size:           1.00 
+#>   average neighbourhood size:            0.80 
+#>   average branching factor:              0.40 
 #> 
 #>   generation algorithm:                  Empty
 
@@ -78,13 +79,13 @@ scad.net <- scstruc(sce, included_genes,
 ## Using the bnlearn function to compare two networks
 bnlearn::compare(mcp.net, scad.net)
 #> $tp
-#> [1] 2
+#> [1] 6
 #> 
 #> $fp
-#> [1] 1
+#> [1] 4
 #> 
 #> $fn
-#> [1] 3
+#> [1] 0
 ```
 
 ### L0-regularized regression
@@ -118,19 +119,19 @@ names(ccdr.res$net)
 #> [1] "14.1421356237309"  "8.47798757230114" 
 #> [3] "5.08242002399425"  "3.04683075789017" 
 #> [5] "1.82652705274248"  "1.09497420090059" 
-#> [7] "0.656419787945471"
+#> [7] "0.656419787945471" "0.393513324471009"
 ccdr.res$net[[4]]
 #> 
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0005][Gene_0007][Gene_0145][Gene_0187][Gene_0197]
-#>    [Gene_0203][Gene_0458][Gene_0500][Gene_0522][Gene_0737]
-#>    [Gene_0811][Gene_0816][Gene_0898][Gene_1053][Gene_1150]
-#>    [Gene_1159][Gene_1166][Gene_1230][Gene_1246][Gene_1287]
-#>    [Gene_1364][Gene_1397][Gene_1470][Gene_1475][Gene_1481]
-#>    [Gene_1510][Gene_1539][Gene_1640][Gene_0426|Gene_0145]
-#>    [Gene_2000|Gene_1364]
+#>    [Gene_0023][Gene_0118][Gene_0145][Gene_0156][Gene_0425]
+#>    [Gene_0544][Gene_0725][Gene_0814][Gene_0887][Gene_0986]
+#>    [Gene_0993][Gene_1085][Gene_1091][Gene_1214][Gene_1267]
+#>    [Gene_1292][Gene_1330][Gene_1332][Gene_1375][Gene_1520]
+#>    [Gene_1541][Gene_1569][Gene_1683][Gene_1700][Gene_1744]
+#>    [Gene_1921][Gene_1922][Gene_2000][Gene_0348|Gene_0118]
+#>    [Gene_0863|Gene_0425]
 #>   nodes:                                 30 
 #>   arcs:                                  2 
 #>     undirected arcs:                     0 

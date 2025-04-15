@@ -2,9 +2,10 @@
 
 
 
-For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is zero or not, and non-zero part separately.
+For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is zero or not, and non-zero part separately. For this function, `Hurdle` algorithm should be specified in `algorithm` argument in `scstruc`.
 
-Based on the inferred network in `HurdleNormal`, which proposed the multivariate Hurdle model and grouped lasso to learn the undirected network [@mcdavid_graphical_2019], the directed acyclic graph is inferred based on score maximization using the constraints. The undirected network is selected from multiple lambdas based on the BIC criteria implemented in `HurdleNormal`. For this function, `Hurdle` algorithm should be specified in `algorithm` argument in `scstruc`. By default, score will be `BIC` in `bnlearn`.
+Based on the inferred network in `HurdleNormal`, which proposed the multivariate Hurdle model and grouped lasso to learn the undirected network [@mcdavid_graphical_2019], the directed acyclic graph is inferred based on score maximization using the constraints. By default, score will be `BIC` in `bnlearn`. The customized score is also introduced in this section. The first undirected network is selected from multiple lambdas based on the BIC criteria implemented in `HurdleNormal`.
+
 
 
 ``` r
@@ -21,10 +22,10 @@ gs$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
-#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
-#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
-#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
+#>    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]
+#>    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]
+#>    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]
+#>    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -52,10 +53,10 @@ gs.tabu$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
-#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
-#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
-#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
+#>    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]
+#>    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]
+#>    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]
+#>    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -73,7 +74,7 @@ gs.tabu$net
 
 
 ``` r
-## This performs GES
+## This performs GES as score-based learning
 gs.ges <- scstruc(sce, included_genes,
     changeSymbol=FALSE, algorithm="Hurdle",
     algorithm.args=list(maximize="ges"))
@@ -82,10 +83,10 @@ gs.ges$net
 #>   Random/Generated Bayesian network
 #> 
 #>   model:
-#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
-#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
-#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
-#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
+#>    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]
+#>    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]
+#>    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]
+#>    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -121,10 +122,10 @@ gs2$net
 #>   Bayesian network learned via Score-based methods
 #> 
 #>   model:
-#>    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]
-#>    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]
-#>    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]
-#>    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]
+#>    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]
+#>    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]
+#>    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]
+#>    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]
 #>   nodes:                                 20 
 #>   arcs:                                  0 
 #>     undirected arcs:                     0 
@@ -158,7 +159,7 @@ sim.do <- sim * add.dropout(sim)
 table(sim.do == 0)
 #> 
 #> FALSE  TRUE 
-#>  4385  6315
+#>  4361  6339
 ```
 
 

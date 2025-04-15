@@ -23,7 +23,7 @@ plotNet(gs$net)
 
 <img src="07-plotting_files/figure-html/plotNet1-1.png" width="65%" style="display: block; margin: auto;" />
 
-Optionally, `data` can be passed to fit the parameters and the function colors the edge using the fitted parameters. The nodes will be sized by their degrees. `degreeMode` argument can be specified for how the degree will be calculated.
+Optionally, `data` can be passed to fit the parameters and the function colors the edge using the fitted parameters. The nodes will be sized by their degrees. `degreeMode` argument can be specified for how the degree will be calculated. By default, `mode="all"` is specified.
 
 
 ## `plotAVN`

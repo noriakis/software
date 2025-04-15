@@ -85,8 +85,8 @@
 <h1>
 <span class="header-section-number">4</span> Hurdle model<a class="anchor" aria-label="anchor" href="#hurdle-model"><i class="fas fa-link"></i></a>
 </h1>
-<p>For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is zero or not, and non-zero part separately.</p>
-<p>Based on the inferred network in <code>HurdleNormal</code>, which proposed the multivariate Hurdle model and grouped lasso to learn the undirected network <span class="citation">(<a href="references.html#ref-mcdavid_graphical_2019">McDavid et al. 2019</a>)</span>, the directed acyclic graph is inferred based on score maximization using the constraints. The undirected network is selected from multiple lambdas based on the BIC criteria implemented in <code>HurdleNormal</code>. For this function, <code>Hurdle</code> algorithm should be specified in <code>algorithm</code> argument in <code>scstruc</code>. By default, score will be <code>BIC</code> in <code>bnlearn</code>.</p>
+<p>For handling the zero-inflated nature of the single-cell transcriptomics data, the use of the hurdle model is presented. The hurdle model is a two-part model that models whether the observation is zero or not, and non-zero part separately. For this function, <code>Hurdle</code> algorithm should be specified in <code>algorithm</code> argument in <code>scstruc</code>.</p>
+<p>Based on the inferred network in <code>HurdleNormal</code>, which proposed the multivariate Hurdle model and grouped lasso to learn the undirected network <span class="citation">(<a href="references.html#ref-mcdavid_graphical_2019">McDavid et al. 2019</a>)</span>, the directed acyclic graph is inferred based on score maximization using the constraints. By default, score will be <code>BIC</code> in <code>bnlearn</code>. The customized score is also introduced in this section. The first undirected network is selected from multiple lambdas based on the BIC criteria implemented in <code>HurdleNormal</code>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">HurdleNormal</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/noriakis/scstruc">scstruc</a></span><span class="op">)</span></span>
@@ -101,10 +101,10 @@
 <span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   model:</span></span>
-<span><span class="co">#&gt;    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]</span></span>
-<span><span class="co">#&gt;    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]</span></span>
-<span><span class="co">#&gt;    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]</span></span>
-<span><span class="co">#&gt;    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]</span></span>
+<span><span class="co">#&gt;    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]</span></span>
+<span><span class="co">#&gt;    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]</span></span>
+<span><span class="co">#&gt;    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]</span></span>
+<span><span class="co">#&gt;    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]</span></span>
 <span><span class="co">#&gt;   nodes:                                 20 </span></span>
 <span><span class="co">#&gt;   arcs:                                  0 </span></span>
 <span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
@@ -128,10 +128,10 @@
 <span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   model:</span></span>
-<span><span class="co">#&gt;    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]</span></span>
-<span><span class="co">#&gt;    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]</span></span>
-<span><span class="co">#&gt;    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]</span></span>
-<span><span class="co">#&gt;    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]</span></span>
+<span><span class="co">#&gt;    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]</span></span>
+<span><span class="co">#&gt;    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]</span></span>
+<span><span class="co">#&gt;    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]</span></span>
+<span><span class="co">#&gt;    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]</span></span>
 <span><span class="co">#&gt;   nodes:                                 20 </span></span>
 <span><span class="co">#&gt;   arcs:                                  0 </span></span>
 <span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
@@ -146,7 +146,7 @@
 <span><span class="co">#&gt;   tests used in the learning procedure:  0 </span></span>
 <span><span class="co">#&gt;   optimized:                             TRUE</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## This performs GES</span></span>
+<code class="sourceCode R"><span><span class="co">## This performs GES as score-based learning</span></span>
 <span><span class="va">gs.ges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/scstruc/man/scstruc.html">scstruc</a></span><span class="op">(</span><span class="va">sce</span>, <span class="va">included_genes</span>,</span>
 <span>    changeSymbol<span class="op">=</span><span class="cn">FALSE</span>, algorithm<span class="op">=</span><span class="st">"Hurdle"</span>,</span>
 <span>    algorithm.args<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>maximize<span class="op">=</span><span class="st">"ges"</span><span class="op">)</span><span class="op">)</span></span>
@@ -155,10 +155,10 @@
 <span><span class="co">#&gt;   Random/Generated Bayesian network</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   model:</span></span>
-<span><span class="co">#&gt;    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]</span></span>
-<span><span class="co">#&gt;    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]</span></span>
-<span><span class="co">#&gt;    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]</span></span>
-<span><span class="co">#&gt;    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]</span></span>
+<span><span class="co">#&gt;    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]</span></span>
+<span><span class="co">#&gt;    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]</span></span>
+<span><span class="co">#&gt;    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]</span></span>
+<span><span class="co">#&gt;    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]</span></span>
 <span><span class="co">#&gt;   nodes:                                 20 </span></span>
 <span><span class="co">#&gt;   arcs:                                  0 </span></span>
 <span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
@@ -188,10 +188,10 @@
 <span><span class="co">#&gt;   Bayesian network learned via Score-based methods</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   model:</span></span>
-<span><span class="co">#&gt;    [Gene_0088][Gene_0162][Gene_0275][Gene_0277][Gene_0311]</span></span>
-<span><span class="co">#&gt;    [Gene_0431][Gene_0509][Gene_0646][Gene_0806][Gene_0824]</span></span>
-<span><span class="co">#&gt;    [Gene_0899][Gene_0953][Gene_0976][Gene_1079][Gene_1385]</span></span>
-<span><span class="co">#&gt;    [Gene_1462][Gene_1493][Gene_1675][Gene_1739][Gene_1896]</span></span>
+<span><span class="co">#&gt;    [Gene_0182][Gene_0419][Gene_0475][Gene_0708][Gene_0742]</span></span>
+<span><span class="co">#&gt;    [Gene_0780][Gene_0795][Gene_0848][Gene_0921][Gene_0940]</span></span>
+<span><span class="co">#&gt;    [Gene_1003][Gene_1110][Gene_1194][Gene_1291][Gene_1555]</span></span>
+<span><span class="co">#&gt;    [Gene_1557][Gene_1609][Gene_1663][Gene_1808][Gene_1844]</span></span>
 <span><span class="co">#&gt;   nodes:                                 20 </span></span>
 <span><span class="co">#&gt;   arcs:                                  0 </span></span>
 <span><span class="co">#&gt;     undirected arcs:                     0 </span></span>
@@ -223,7 +223,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sim.do</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; FALSE  TRUE </span></span>
-<span><span class="co">#&gt;  4385  6315</span></span></code></pre></div>
+<span><span class="co">#&gt;  4361  6339</span></span></code></pre></div>
 
 </div>
 </div>
@@ -252,7 +252,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-13.</p>
+    <p>"<strong>scstruc: causal assessment of gene regulatory network using Bayesian network</strong>" was written by Noriaki Sato. It was last built on 2025-04-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
